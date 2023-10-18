@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js"></script>
+  <title>Haven of the Dead</title>
+</head>
+<body>
+  <div class="game-window">
+    <div class="monster-container">
+      <section id="monster-info">
+        <h3>MONSTER HEALTH</h3>
+        <progress id="monster-health" max="100" value="100">100%</progress>
+      </section>
+    </div>
+    <div class="left-content">
+      <div class="player-container">
+        <section id="player-info">
+          <h3>PLAYER HEALTH</h3>
+          <progress id="player-health" max="100" value="100">100%</progress>
+        </section>
+      </div>
+      <div class="controls-container">
+        <section id="controls">
+          <button id="attack-btn">ATTACK</button>
+          <button id="guard-btn">GUARD</button>
+          <button id="special-btn">SPECIAL</button>
+          <button id="heal-btn">HEAL<span id="potions">x3</span></button>
+        </section>
+      </div>
+      <div class="log-container">
+        <h3>LOG</h3>
+        <ul id="battle-log">
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
