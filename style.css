@@ -12,35 +12,43 @@ body {
 
 .monster-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   align-self: flex-end;
-  width: 30vw;
-  height: 10vh;
+  justify-content: center;
+  width: 33%;
+  height: 15vh;
   background-color: gray;
   padding: 20px;
 }
 
 #monster-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 }
 
-.left-content {
+#monster-info h3 {
+  margin-top: 0px;
+}
+
+#monster-info p {
+  font-size: 1rem;
+  margin-top: -5px;
+  margin-bottom: 1px;
+}
+
+
+.bottom-content {
   width: 100%;
   height: 20vh;
   border: 2px solid black;
   display: flex;
   justify-content: space-between;
+  align-items: stretch;
 }
 
-.player-container {
-  display: flex;
-  justify-content: center;
-  align-items: stretch; 
-  width: 30%;
+.player-container,
+.controls-container,
+.log-container {
+  flex: 1;
+  max-width: 33%;
   background-color: gray;
   padding: 20px;
 }
@@ -48,44 +56,70 @@ body {
 #player-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
+
+#player-info h3 {
+  margin-top: 0px;
+}
+
+#player-info p {
+  font-size: 1rem;
+  margin-top: -5px;
+  margin-bottom: 1px;
+}
+
+.player-stats, .monster-stats {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 
 .controls-container {
   display: flex;
-  justify-content: center;
-  align-items: stretch; 
-  width: auto;
+  flex-direction: column;
+  align-items: center;
   background-color: gray;
   padding: 20px;
 }
 
-#controls {
+
+.attack {
   display: flex;
   justify-content: center;
-  align-items: stretch; 
-  width: auto;
-  background-color: gray;
-  padding: 20px;
+  width: 100%;
+  height: 30%;
 }
 
-.log-container {
-  display: flex;
-  justify-content: center;
-  align-items: stretch; 
-  width: 30%;
-  background-color: gray;
-  padding: 20px; 
+.attack button {
+  width: 100%;
 }
+
+.other-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.other-buttons button {
+  width:50%;
+  height: 100%;
+}
+
+.log-container h3 {
+  margin-top: 0px;
+}
+
 
 progress {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  height: 0.8rem;
+  height: 0.5rem;
   color: #ff0062;
   border: 1px solid #ad0505;
+  border-radius: 10px;
 }
 
 progress[value]::-webkit-progress-bar,
