@@ -2,17 +2,33 @@
 //        Hero Variables
 // ===============================
 let baseAttack;
-let baseCritChance = 1.5 + dexterityCritIncrease;
-let baseMaxHealth;
-let maxHealth = baseMaxHealth + strengthBonusHealth;
+let playerMaxHealth;
+let specialCooldownCounter = 0;
+document.getElementById("specialCount").textContent = `Special`;
+
+function specialCooldownHandler() {
+    const special = document.getElementById("specialCount");
+    if (specialCooldownCounter > 0) {
+      specialCooldownCounter--;
+      specialBtn.disabled = true;
+      special.textContent = `Cooldown: ${specialCooldownCounter}`;
+    }
+  
+    if (specialCooldownCounter <= 0) {
+      specialBtn.disabled = false;
+      special.textContent = `Special`;
+    }
+  }
 
 // Strength
 let baseStrength; //add strength to bonus damage after random number
 let strengthBonusHealth = baseStrength * 10;
+let maxHealth = baseMaxHealth + strengthBonusHealth;
 
 // Dexterity
 let baseDexterity; // add deterity to guard protection after random number
 let dexterityCritIncrease = 0.3 * baseDexterity;
+let baseCritChance = 1.5 + dexterityCritIncrease;
 
 // Faith
 let baseFaith; // add faith to flee function after random number
@@ -25,7 +41,7 @@ let passiveAbility;
 // ===============================
 //        Hero: Paladin
 // ===============================
-let holySmiteTracker =0;
+let holySmiteTracker = 0;
 let radiantAuraTracker = 0;
 let paladin = {
     name: 'Holy Warrior Siggurd',
@@ -42,7 +58,7 @@ let paladin = {
 // Palading Special & Passive 
 function setPaladinStats() {
     baseAttack = paladin.attack;
-    baseMaxHealth = paladin.maxHealth;
+    playerMaxHealth = paladin.maxHealth;
     baseStrength = paladin.strength;
     baseDexterity = paladin.dexterity;
     baseFaith = paladin.faith;
@@ -50,8 +66,19 @@ function setPaladinStats() {
     passiveAbility = paladin.passive;
 }
 
-function paladinHolySmite() {}
-function paladinRadiantAura() {}
+function paladinHolySmite() {
+  attackHandler(2);
+//   console.log(currentMonsterHealth);
+//   console.log(monsterHealthBar.value);
+
+  isGameOver();
+  specialCooldownCounter = 4;
+  specialCooldownHandler();
+}
+
+function paladinRadiantAura() {
+    console.log('test');
+}
 
 
 // ===============================
@@ -71,8 +98,7 @@ let rogue = {
     passive: rogueEvasion()
 };
 
-// Palading Special & Passive 
-function setrogueStats() {
+function setRogueStats() {
     baseAttack = rogue.attack;
     baseMaxHealth = rogue.maxHealth;
     baseStrength = rogue.strength;
@@ -125,3 +151,5 @@ let availableBoons = [];
 // randomly choose a boon
 // discard chosen boon from list
 // apply boon to hero
+
+

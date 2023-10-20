@@ -4,22 +4,34 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles/modals.css"/>
+    <link rel="stylesheet" href="styles/style.css"/>
+    <script src="scripts/heroes.js" defer></script>
+    <script src="scripts/vendor.js" defer></script>
+    <script src="scripts/app.js" defer></script>
     <title>Haven of the Dead</title>
   </head>
   <body>
+    <div id="heroChoiceModal" class="hero-choice-modal">
+      <div class="hero-choice-modal-content">
+        <button id="siggurd">Holy Warrior Siggurd</button>
+      <button id="riven">Shadowcloak Riven</button>
+      <button id="liheth">Priestess Liheth</button>
+      </div>
+    </div>
     <div class="game-window">
       <div class="monster-container">
         <section id="monster-info">
-          <h3>Monster</h3>
+          <h3 id="monster-name">Monster 
+            <span id="skull-level"></span>
+          </h3>
           <!-- <p>Vitality:</p> -->
           <progress id="monster-health" max="100" value="100">100%</progress>
-          <div class="monster-stats">
+          <!-- <div class="monster-stats">
             <p>HP: 0</p>
             <p>STR: 0</p>
             <p>DEX: 0</p>
-          </div>
+          </div> -->
         </section>
       </div>
       <div class="bottom-content">
@@ -29,21 +41,21 @@
             <!-- <p>Vitality:</p> -->
             <progress id="player-health" max="100" value="100">100%</progress>
             <div class="player-stats">
-              <p>HP: 0</p>
-              <p>STR: 0</p>
-              <p>DEX: 0</p>
+              <p>Strength: 0</p>
+              <p>Dexterity: 0</p>
+              <p>Faith: 0</p>
             </div>
           </section>
         </div>
         <div class="controls-container">
           <div class="attack">
-            <button id="attack-btn">ATTACK</button>
+            <button id="attack-btn">Attack</button>
           </div>
           <div class="other-buttons">
-            <button id="guard-btn">GUARD</button>
-            <button id="special-btn">SPECIAL</button>
-            <button id="heal-btn">HEAL<span id="potions"> x3</span></button>
-            <button id="flee-btn">FLEE</button>
+            <button id="guard-btn">Guard</button>
+            <button id="special-btn"><span id="specialCount"></span></button>
+            <button id="potion-btn">Potion<span id="potionCount"></span></button>
+            <button id="flee-btn">Flee</button>
           </div>
         </div>
         <div class="log-container">
