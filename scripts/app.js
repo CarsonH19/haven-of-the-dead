@@ -32,7 +32,6 @@ let currentMonsterHealth = monsterMaxHealth;
 let monsterAttackValue = 10;
 
 let currentPlayerHealth;
-let playerAttackValue = 10;
 
 // ===============================
 //        Hero Variables
@@ -95,7 +94,7 @@ function increasePlayerHealth(healValue) {
 
 function playerAttackHandler(smite = 1) {
   // Player to Monster Attack
-  const playerToMonsterDamage = dealMonsterDamage(playerAttackValue) + baseStrength;
+  const playerToMonsterDamage = dealMonsterDamage(baseAttack) + baseStrength;
   const totalDamage = smite * playerToMonsterDamage
   monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
   currentMonsterHealth -= totalDamage;
@@ -327,8 +326,8 @@ function setRogueStats() {
 
 function rogueShadowStrike() {
   guardHandler();
-  monsterHealthBar.value = +monsterHealthBar.value - playerAttackValue;
-  currentMonsterHealth -= playerAttackValue;
+  monsterHealthBar.value = +monsterHealthBar.value - baseAttack;
+  currentMonsterHealth -= baseAttack;
   console.log(currentMonsterHealth);
   
   isGameOver();
