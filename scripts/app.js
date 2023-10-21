@@ -111,7 +111,7 @@ function attackHandler(bonus = 1) {
   // console.log(currentPlayerHealth);
   // console.log(playerHealthBar.value);
 
-  if (heroChoice === 'paladin'){
+  if (heroChoice === 'paladin') {
     paladinRadiantAura();
   }
 
@@ -156,12 +156,16 @@ function specialCooldownHandler() {
 function guardHandler() {
   const monsterToGuardDamage = calculateMonsterDamage();
   const damageBlocked = Math.round(Math.random() * monsterToGuardDamage);
-  playerHealthBar.value = +playerHealthBar.value - monsterToGuardDamage;
+  const damageTaken = monsterToGuardDamage - damageBlocked
 
-  currentPlayerHealth -= monsterToGuardDamage - damageBlocked;
-  console.log(monsterToGuardDamage);
-  console.log(damageBlocked);
-  console.log(currentPlayerHealth);
+  // Updating Player Health 
+  playerHealthBar.value = +playerHealthBar.value - damageTaken;
+  currentPlayerHealth -= damageTaken;
+
+  // console.log(`Damage Received: ${monsterToGuardDamage}`);
+  // console.log(`Damage Blocked: ${damageBlocked}`);
+  // console.log(`Current Player Health ${currentPlayerHealth}`);
+  // console.log(`Current Player Health Bar Value ${playerHealthBar.value}`);
 
   isGameOver();
   specialCooldownHandler();
@@ -313,8 +317,9 @@ function setRogueStats() {
 function rogueShadowStrike() {
   guardHandler();
   monsterHealthBar.value = +monsterHealthBar.value - playerAttackValue;
-  currentMonsterHealth -= -playerAttackValue;
-
+  currentMonsterHealth -= playerAttackValue;
+  console.log(currentMonsterHealth);
+  
   isGameOver();
   specialCooldownCounter = 3;
   specialCooldownHandler();
