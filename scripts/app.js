@@ -31,7 +31,7 @@ let monsterMaxHealth = 100;
 let currentMonsterHealth = monsterMaxHealth;
 let monsterAttackValue = 10;
 
-let currentPlayerHealth = 1;
+let currentPlayerHealth;
 let playerAttackValue = 10;
 
 // ===============================
@@ -95,13 +95,13 @@ function increasePlayerHealth(healValue) {
 
 function attackHandler(bonus = 1) {
   // Player to Monster
-  const playerToMonsterDamage = dealMonsterDamage(playerAttackValue);
+  const playerToMonsterDamage = dealMonsterDamage(playerAttackValue) + baseStrength;
   monsterHealthBar.value =
     +monsterHealthBar.value - bonus * playerToMonsterDamage;
-  currentMonsterHealth -= playerToMonsterDamage * bonus;
-  // console.log(playerToMonsterDamage);
-  // console.log(currentMonsterHealth);
-  // console.log(monsterHealthBar.value);
+  currentMonsterHealth -= bonus * playerToMonsterDamage;
+  console.log(playerToMonsterDamage);
+  console.log(currentMonsterHealth);
+  console.log(monsterHealthBar.value);
 
   // Monster to Player
   const monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
@@ -293,7 +293,13 @@ function setRogueStats() {
   passiveAbility = rogue.passive;
 }
 
-function rogueShadowStrike() {}
+function rogueShadowStrike() {
+  guardHandler();
+  const playerToMonsterDamage = dealMonsterDamage(playerAttackValue);
+  monsterHealthBar.value =
+    +monsterHealthBar.value - bonus * playerToMonsterDamage;
+  currentMonsterHealth -= playerToMonsterDamage * bonus;
+}
 function rogueEvasion() {}
 
 // ===============================
