@@ -312,10 +312,12 @@ function setRogueStats() {
 
 function rogueShadowStrike() {
   guardHandler();
-  const playerToMonsterDamage = dealMonsterDamage(playerAttackValue);
-  monsterHealthBar.value =
-    +monsterHealthBar.value - bonus * playerToMonsterDamage;
-  currentMonsterHealth -= playerToMonsterDamage * bonus;
+  monsterHealthBar.value = +monsterHealthBar.value - playerAttackValue;
+  currentMonsterHealth -= -playerAttackValue;
+
+  isGameOver();
+  specialCooldownCounter = 3;
+  specialCooldownHandler();
 }
 function rogueEvasion() {}
 
@@ -407,7 +409,15 @@ attackBtn.addEventListener("click", function () {
   attackHandler(1);
 });
 guardBtn.addEventListener("click", guardHandler);
-specialBtn.addEventListener("click", paladinHolySmite);
+specialBtn.addEventListener("click", () => {
+  if (heroChoice === 'paladin') {
+    paladinHolySmite();
+  } else if (heroChoice === 'rogue') {
+    rogueShadowStrike();
+  } else if (heroChoice === 'priestess') {
+    priestessGreaterPrayer();
+  }
+});
 // later create a new function that handles
 // the special ability checking which hero with an if statement,
 potionBtn.addEventListener("click", potionHandler);
