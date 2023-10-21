@@ -110,7 +110,6 @@ function playerAttackHandler(smite = 1) {
 
 function monsterAttackHandler() {
   let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
-  console.log(monsterToPlayerDamage);
   // Rogue Passive Ability Checker
   if (heroChoice === "rogue" && evasionTracker >= monsterToPlayerDamage) {
     monsterToPlayerDamage = 0;
@@ -119,9 +118,9 @@ function monsterAttackHandler() {
   playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
   currentPlayerHealth -= monsterToPlayerDamage;
 
-  console.log(monsterToPlayerDamage);
-  console.log(currentPlayerHealth);
-  console.log(playerHealthBar.value);
+  // console.log(monsterToPlayerDamage);
+  // console.log(currentPlayerHealth);
+  // console.log(playerHealthBar.value);
 }
 
 function dealPlayerDamage(damage) {
@@ -209,9 +208,8 @@ function potionHandler() {
   playerHealthBar.value += 20;
   currentPlayerHealth += 20;
 
-  const monsterToPlayerSpecialDamage = dealPlayerDamage(monsterAttackValue);
-  currentPlayerHealth -= monsterToPlayerSpecialDamage;
 
+  monsterAttackHandler();
   isGameOver();
   specialCooldownHandler();
   potionCounterHandler();
@@ -414,7 +412,12 @@ attackBtn.addEventListener("click", function () {
   playerAttackHandler(1);
   monsterAttackHandler();
 });
-guardBtn.addEventListener("click", guardHandler);
+
+guardBtn.addEventListener("click", () => {
+  guardHandler();
+  monsterAttackHandler();
+});
+
 specialBtn.addEventListener("click", () => {
   if (heroChoice === "paladin") {
     paladinHolySmite();
@@ -423,8 +426,13 @@ specialBtn.addEventListener("click", () => {
   } else if (heroChoice === "priestess") {
     priestessGreaterPrayer();
   }
+
 });
+
 // later create a new function that handles
 // the special ability checking which hero with an if statement,
-potionBtn.addEventListener("click", potionHandler);
+potionBtn.addEventListener("click", () => {
+  potionHandler();
+  monsterAttackHandler();
+});
 // fleeBtn.addEventListener('click', );
