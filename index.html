@@ -6,12 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/modals.css" />
     <link rel="stylesheet" href="styles/style.css" />
-    <!-- <script src="scripts/heroes.js" defer type="module"></script>
-    <script src="scripts/vendor.js" defer type="module"></script> -->
+    <script src="scripts/catacomb.js" defer></script>
     <script src="scripts/app.js" defer></script>
     <title>Haven of the Dead</title>
   </head>
   <body>
+    <!----------------- START GAME  ------------------->
+
+
+    <div>
+      <div></div>
+    </div>
+
+
+    <!----------------- CHOOSE YOUR HERO ------------------->
+    
     <div id="heroChoiceModal" class="hero-choice-modal">
       <div class="hero-choice-modal-content">
         <button id="siggurd">Holy Warrior Siggurd</button>
@@ -19,20 +28,19 @@
         <button id="liheth">Priestess Liheth</button>
       </div>
     </div>
+
+    <!----------------- MAIN GAME WINDOW  ------------------->
+
     <div class="game-window">
+      <h2 id="catacombRoomName">test</h2>
       <div class="monster-container">
         <section id="monster-info">
-          <h3 id="monster-name">
+          <h3 id="monster-name"> <span id="skull-level">(Skulls)</span>
             Monster
-            <span id="skull-level"></span>
           </h3>
-          <!-- <p>Vitality:</p> -->
+  
+
           <progress id="monster-health" max="100" value="100">100%</progress>
-          <!-- <div class="monster-stats">
-            <p>HP: 0</p>
-            <p>STR: 0</p>
-            <p>DEX: 0</p>
-          </div> -->
         </section>
       </div>
       <div class="bottom-content">

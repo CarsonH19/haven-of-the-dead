@@ -390,15 +390,20 @@ let availableBoons = [];
 // discard chosen boon from list
 // apply boon to hero
 
+
+// ===============================
+//       Monster Stat Block
+// ===============================
+
+function renderMonsterStatBlock(monster) {
+
+}
+
 // ===============================
 //       Choose Hero Modal
 // ===============================
 
-function openChooseHeroModal() {
-  document.getElementById("heroChoiceModal").style.display = "block";
-}
-
-openChooseHeroModal();
+document.getElementById("heroChoiceModal").style.display = "block";
 
 window.addEventListener("click", function (event) {
   const siggurd = document.getElementById("siggurd");
@@ -423,6 +428,8 @@ window.addEventListener("click", function (event) {
       setPriestessStats();
     }
   }
+  
+  getRandomRoom(catacombRooms);
 });
 
 adjustMonsterHealth(monsterMaxHealth);

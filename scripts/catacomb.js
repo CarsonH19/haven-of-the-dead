@@ -3,21 +3,35 @@
 // When a room is completed it is removed from the array.
 // If a player flees from the room it is not removed from the array.
 
+const roomNameElement = document.getElementById('catacombRoomName');
+
+function getRandomRoom(array) {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    enterRoom(array[randomIndex]);
+}
+
+function enterRoom(room) {
+    roomNameElement.textContent = room.roomName;
+
+    // renderMonsterStatBlock(room.contents.monsters);
+}
+
+
 let catacombRooms = [
     {
-        roomName: 'Bonevault',
+        roomName: "Bonevault",
         backgroundImage: null,
         music: null,
         contents: {
             monsters: [],
             npcs: null,
-            items: [bonemail],
-            consumables: [null],
+            items: [],
+            consumables: [],
             traps: null
         }
     },
     {
-        roomName: '',
+        roomName: "Gnawer's Nest",
         backgroundImage: null,
         music: null,
         contents: {
@@ -29,7 +43,7 @@ let catacombRooms = [
         }
     },
     {
-        roomName: '',
+        roomName: "Skull-lined Corridor",
         backgroundImage: null,
         music: null,
         contents: {
@@ -41,3 +55,4 @@ let catacombRooms = [
         }
     }
 ]
+
