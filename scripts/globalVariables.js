@@ -1,6 +1,6 @@
-// ===============================
-//        GeneralVariables
-// ===============================
+// // ===============================
+// //        GeneralVariables
+// // ===============================
 
 const monsterHealthBar = document.getElementById("monster-health");
 const playerHealthBar = document.getElementById("player-health");
