@@ -93,30 +93,40 @@ function increasePlayerHealth(healValue) {
 //            Attack
 // ===============================
 
-function attackHandler(smite = 1) {
-  // Player to Monster
+function playerAttackHandler(smite = 1) {
+  // Player to Monster Attack
   const playerToMonsterDamage = dealMonsterDamage(playerAttackValue) + baseStrength;
   const totalDamage = smite * playerToMonsterDamage
   monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
   currentMonsterHealth -= totalDamage;
-  console.log(playerToMonsterDamage);
-  console.log(currentMonsterHealth);
-  console.log(monsterHealthBar.value);
+  // console.log(playerToMonsterDamage);
+  // console.log(currentMonsterHealth);
+  // console.log(monsterHealthBar.value);
 
-  // Monster to Player
-  const monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
-  playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
-  currentPlayerHealth -= monsterToPlayerDamage;
-  // console.log(monsterToPlayerDamage);
-  // console.log(currentPlayerHealth);
-  // console.log(playerHealthBar.value);
+  // // Monster to Player Attack
+  // const monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
+  // playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
+  // currentPlayerHealth -= monsterToPlayerDamage;
+  // // console.log(monsterToPlayerDamage);
+  // // console.log(currentPlayerHealth);
+  // // console.log(playerHealthBar.value);
 
+  // Paladin Passive Ability Checker
   if (heroChoice === 'paladin') {
     paladinRadiantAura();
   }
 
   isGameOver();
   specialCooldownHandler();
+}
+
+function monsterAttackHandler() {
+  const monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
+  playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
+  currentPlayerHealth -= monsterToPlayerDamage;
+  // console.log(monsterToPlayerDamage);
+  // console.log(currentPlayerHealth);
+  // console.log(playerHealthBar.value);
 }
 
 function dealPlayerDamage(damage) {
@@ -266,7 +276,7 @@ function setPaladinStats() {
 }
 
 function paladinHolySmite() {
-  attackHandler(2);
+  playerAttackHandler(2);
   //   console.log(currentMonsterHealth);
   //   console.log(monsterHealthBar.value);
 
@@ -278,6 +288,7 @@ function paladinHolySmite() {
 function paladinRadiantAura() {
   if (currentMonsterHealth <= radiantAuraTracker) {
     currentMonsterHealth = 0;
+    monsterHealthBar.value = 0;
     console.log('Face your judgement!');
   }
 }
@@ -411,7 +422,8 @@ adjustMonsterHealth(monsterMaxHealth);
 // ===============================
 
 attackBtn.addEventListener("click", function () {
-  attackHandler(1);
+  playerAttackHandler(1);
+  monsterAttackHandler();
 });
 guardBtn.addEventListener("click", guardHandler);
 specialBtn.addEventListener("click", () => {
