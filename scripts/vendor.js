@@ -1,68 +1,38 @@
-const monsterHealthBar = document.getElementById('monster-health');
-const playerHealthBar = document.getElementById('player-health');
+// // ===============================
+// //        Imports & Exports
+// // ===============================
+// import { setPaladinStats, paladinHolySmite } from "./heroes.js";
+// import {
+//   guardHandler,
+//   potionHandler,
+//   attackBtn,
+//   guardBtn,
+//   fleeBtn,
+//   specialBtn,
+//   potionBtn,
+// } from "./app.js";
 
-const attackBtn = document.getElementById('attack-btn');
-const guardBtn = document.getElementById('guard-btn');
-const specialBtn = document.getElementById('special-btn');
-const potionBtn = document.getElementById('potion-btn');
-const fleeBtn = document.getElementById('flee-btn');
-
-
-function adjustPlayerHealthBar(maxLife) {
-  playerHealthBar.max = maxLife;
-  playerHealthBar.value = maxLife;
-}
-
-function adjustMonsterHealthBar(maxLife) {
-  monsterHealthBar.max = maxLife;
-  monsterHealthBar.value = maxLife;
-}
-
-function dealPlayerDamage(damage) {
-  const dealtDamage = Math.round(Math.random() * damage);
-  return dealtDamage;
-}
-
-function dealMonsterDamage(damage) {
-  const dealtDamage = Math.round(Math.random() * damage);
-  return dealtDamage;
-}
-
-function increasePlayerHealth(healValue) {
-  playerHealthBar.value = +playerHealthBar.value + healValue;
-}
-
-function resetGame(value) {
-  playerHealthBar.value = value;
-  monsterHealthBar.value = value;
-}
-
-
-
-// Opens modal to choose a hero
+// ===============================
+//       Choose Hero Modal
+// ===============================
 
 function openChooseHeroModal() {
-  document.getElementById('heroChoiceModal').style.display = 'block';
+  document.getElementById("heroChoiceModal").style.display = "block";
 }
 
 openChooseHeroModal();
 
-window.addEventListener('click', function(event) {
-  const siggurd = document.getElementById('siggurd');
-  const riven = document.getElementById('riven');
-  const liheth = document.getElementById('liheth');
 
-  if (event.target === siggurd || riven || lihet ) {
-      document.getElementById('heroChoiceModal').style.display = 'none';
-  }
 
-  if (event.target === siggurd) {
-    setPaladinStats();
-  } else if (event.target === riven) {
-    setRogueStats();
-  } else {
-    setPriestessStats();
-  }
+// Event Listeners & Imports
+// import {paladinHolySmite} from "./heroes";
+
+attackBtn.addEventListener("click", function () {
+  attackHandler(1);
 });
-
-
+guardBtn.addEventListener("click", guardHandler);
+specialBtn.addEventListener("click", paladinHolySmite);
+// later create a new function that handles
+// the special ability checking which hero with an if statement,
+potionBtn.addEventListener("click", potionHandler);
+// fleeBtn.addEventListener('click', );
