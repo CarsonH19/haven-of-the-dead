@@ -42,7 +42,7 @@ let baseHealth;
 let specialCooldownCounter = 0;
 
 // Strength
-let baseStrength; 
+let baseStrength;
 let strengthBonusHealth;
 let playerMaxHealth = baseHealth + strengthBonusHealth;
 
@@ -59,13 +59,12 @@ let findItemChance; // use when items are finished
 let specialAbility;
 let passiveAbility;
 
-
 // ===============================
 //             Health
 // ===============================
 
 function calculateStrengthBonusHealth() {
-  return baseStrength * 10
+  return baseStrength * 10;
 }
 
 function calculatePlayerMaxHealth() {
@@ -87,31 +86,21 @@ function increasePlayerHealth(healValue) {
   playerHealthBar.value = +playerHealthBar.value + healValue;
 }
 
-
 // ===============================
 //            Attack
 // ===============================
 
 function playerAttackHandler(smite = 1) {
-  // Player to Monster Attack
   const playerToMonsterDamage = dealMonsterDamage(baseAttack) + baseStrength;
-  const totalDamage = smite * playerToMonsterDamage
+  const totalDamage = smite * playerToMonsterDamage;
   monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
   currentMonsterHealth -= totalDamage;
   // console.log(playerToMonsterDamage);
   // console.log(currentMonsterHealth);
   // console.log(monsterHealthBar.value);
 
-  // // Monster to Player Attack
-  // const monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
-  // playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
-  // currentPlayerHealth -= monsterToPlayerDamage;
-  // // console.log(monsterToPlayerDamage);
-  // // console.log(currentPlayerHealth);
-  // // console.log(playerHealthBar.value);
-
   // Paladin Passive Ability Checker
-  if (heroChoice === 'paladin') {
+  if (heroChoice === "paladin") {
     paladinRadiantAura();
   }
 
@@ -120,12 +109,19 @@ function playerAttackHandler(smite = 1) {
 }
 
 function monsterAttackHandler() {
-  const monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
+  let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
+  console.log(monsterToPlayerDamage);
+  // Rogue Passive Ability Checker
+  if (heroChoice === "rogue" && evasionTracker >= monsterToPlayerDamage) {
+    monsterToPlayerDamage = 0;
+  }
+
   playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
   currentPlayerHealth -= monsterToPlayerDamage;
-  // console.log(monsterToPlayerDamage);
-  // console.log(currentPlayerHealth);
-  // console.log(playerHealthBar.value);
+
+  console.log(monsterToPlayerDamage);
+  console.log(currentPlayerHealth);
+  console.log(playerHealthBar.value);
 }
 
 function dealPlayerDamage(damage) {
@@ -165,9 +161,9 @@ function specialCooldownHandler() {
 function guardHandler() {
   const monsterToGuardDamage = calculateMonsterDamage();
   const damageBlocked = Math.round(Math.random() * monsterToGuardDamage);
-  const damageTaken = monsterToGuardDamage - damageBlocked
+  const damageTaken = monsterToGuardDamage - damageBlocked;
 
-  // Updating Player Health 
+  // Updating Player Health
   playerHealthBar.value = +playerHealthBar.value - damageTaken;
   currentPlayerHealth -= damageTaken;
 
@@ -257,7 +253,6 @@ let paladin = {
   dexterity: 0,
   faith: 1,
   special: paladinHolySmite,
-  passive: paladinRadiantAura,
 };
 
 function setPaladinStats() {
@@ -288,7 +283,7 @@ function paladinRadiantAura() {
   if (currentMonsterHealth <= radiantAuraTracker) {
     currentMonsterHealth = 0;
     monsterHealthBar.value = 0;
-    console.log('Face your judgement!');
+    console.log("Face your judgement!");
   }
 }
 
@@ -297,7 +292,7 @@ function paladinRadiantAura() {
 // ===============================
 
 let shadowStrikeTracker = 0;
-let evasionTracker = 0;
+let evasionTracker = 2;
 let rogue = {
   name: "Shadowcloak Riven",
   level: 1,
@@ -307,7 +302,6 @@ let rogue = {
   dexterity: 2,
   faith: 0,
   special: rogueShadowStrike,
-  passive: rogueEvasion,
 };
 
 function setRogueStats() {
@@ -317,7 +311,6 @@ function setRogueStats() {
   baseDexterity = rogue.dexterity;
   baseFaith = rogue.faith;
   specialAbility = rogue.special;
-  passiveAbility = rogue.passive;
 
   strengthBonusHealth = calculateStrengthBonusHealth();
   playerMaxHealth = calculatePlayerMaxHealth();
@@ -328,13 +321,13 @@ function rogueShadowStrike() {
   guardHandler();
   monsterHealthBar.value = +monsterHealthBar.value - baseAttack;
   currentMonsterHealth -= baseAttack;
-  console.log(currentMonsterHealth);
-  
+
   isGameOver();
   specialCooldownCounter = 3;
   specialCooldownHandler();
 }
-function rogueEvasion() {}
+
+// See monsterAttackHandler for Rouge Passive Ability
 
 // ===============================
 //        Hero: Priestess
@@ -361,8 +354,6 @@ function setPriestessStats() {
   baseDexterity = priestess.dexterity;
   baseFaith = priestess.faith;
   specialAbility = priestess.special;
-  passiveAbility = priestess.passive;
-  
 }
 
 function priestessGreaterPrayer() {}
@@ -401,20 +392,19 @@ window.addEventListener("click", function (event) {
     document.getElementById("heroChoiceModal").style.display = "none";
 
     if (event.target === siggurd) {
-      heroChoice = 'paladin';
+      heroChoice = "paladin";
       setPaladinStats();
     } else if (event.target === riven) {
-      heroChoice = 'rogue';
+      heroChoice = "rogue";
       setRogueStats();
     } else if (event.target === liheth) {
-      heroChoice = 'priestess';
+      heroChoice = "priestess";
       setPriestessStats();
     }
   }
 });
 
 adjustMonsterHealth(monsterMaxHealth);
-
 
 // ===============================
 //       Event Listeners
@@ -426,11 +416,11 @@ attackBtn.addEventListener("click", function () {
 });
 guardBtn.addEventListener("click", guardHandler);
 specialBtn.addEventListener("click", () => {
-  if (heroChoice === 'paladin') {
+  if (heroChoice === "paladin") {
     paladinHolySmite();
-  } else if (heroChoice === 'rogue') {
+  } else if (heroChoice === "rogue") {
     rogueShadowStrike();
-  } else if (heroChoice === 'priestess') {
+  } else if (heroChoice === "priestess") {
     priestessGreaterPrayer();
   }
 });
