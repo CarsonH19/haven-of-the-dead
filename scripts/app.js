@@ -267,6 +267,7 @@ function setPaladinStats() {
   specialAbility = paladin.special;
   passiveAbility = paladin.passive;
 
+  criticalDamage = calculateCritDamage();
   strengthBonusHealth = calculateStrengthBonusHealth();
   playerMaxHealth = calculatePlayerMaxHealth();
   setPlayerHealthBar(playerMaxHealth);
@@ -360,6 +361,11 @@ function setPriestessStats() {
   baseDexterity = priestess.dexterity;
   baseFaith = priestess.faith;
   specialAbility = priestess.special;
+
+  criticalDamage = calculateCritDamage();
+  strengthBonusHealth = calculateStrengthBonusHealth();
+  playerMaxHealth = calculatePlayerMaxHealth();
+  setPlayerHealthBar(playerMaxHealth);
 }
 
 function priestessGreaterPrayer() {}
