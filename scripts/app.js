@@ -93,12 +93,12 @@ function increasePlayerHealth(healValue) {
 //            Attack
 // ===============================
 
-function attackHandler(bonus = 1) {
+function attackHandler(smite = 1) {
   // Player to Monster
   const playerToMonsterDamage = dealMonsterDamage(playerAttackValue) + baseStrength;
-  monsterHealthBar.value =
-    +monsterHealthBar.value - bonus * playerToMonsterDamage;
-  currentMonsterHealth -= bonus * playerToMonsterDamage;
+  const totalDamage = smite * playerToMonsterDamage
+  monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
+  currentMonsterHealth -= totalDamage;
   console.log(playerToMonsterDamage);
   console.log(currentMonsterHealth);
   console.log(monsterHealthBar.value);
