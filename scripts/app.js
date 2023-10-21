@@ -43,7 +43,7 @@ let baseHealth;
 let specialCooldownCounter = 0;
 
 // Strength
-let baseStrength; //add strength to bonus damage after random number
+let baseStrength; 
 let strengthBonusHealth;
 let playerMaxHealth = baseHealth + strengthBonusHealth;
 
@@ -154,13 +154,26 @@ function specialCooldownHandler() {
 // ===============================
 
 function guardHandler() {
-  const monsterToGuardDamage = dealPlayerDamage(monsterAttackValue);
+  const monsterToGuardDamage = calculateMonsterDamage();
   const damageBlocked = Math.round(Math.random() * monsterToGuardDamage);
   playerHealthBar.value = +playerHealthBar.value - monsterToGuardDamage;
+
   currentPlayerHealth -= monsterToGuardDamage - damageBlocked;
+  console.log(monsterToGuardDamage);
+  console.log(damageBlocked);
+  console.log(currentPlayerHealth);
 
   isGameOver();
   specialCooldownHandler();
+}
+
+function calculateMonsterDamage() {
+  let damage = dealPlayerDamage(monsterAttackValue);
+  if (baseDexterity >= damage) {
+    return 0;
+  } else {
+    return damage - baseDexterity;
+  }
 }
 
 // ===============================
@@ -291,6 +304,10 @@ function setRogueStats() {
   baseFaith = rogue.faith;
   specialAbility = rogue.special;
   passiveAbility = rogue.passive;
+
+  strengthBonusHealth = calculateStrengthBonusHealth();
+  playerMaxHealth = calculatePlayerMaxHealth();
+  setPlayerHealthBar(playerMaxHealth);
 }
 
 function rogueShadowStrike() {
