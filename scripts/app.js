@@ -39,7 +39,7 @@ function calculatePlayerMaxHealth() {
 }
 
 // Dexterity
-let baseDexterity; 
+let baseDexterity;
 let dexterityCritIncrease = calculateDexCritIncrease();
 let baseCritModifier = 1.5 + calculateBaseCritModifier();
 let criticalDamage;
@@ -61,7 +61,6 @@ function calculateCritDamage() {
   console.log(Math.round(baseAttack * baseCritModifier));
   return Math.round(baseAttack * baseCritModifier);
 }
-
 
 // Faith
 let baseFaith; // add faith to flee function after random number
@@ -127,16 +126,22 @@ function monsterAttackHandler() {
   // console.log(playerHealthBar.value);
 }
 
+function dealMonsterDamage(damage) {
+  let dealtDamage = Math.round(Math.random() * damage);
+
+  if (heroChoice === "priestess"  && dealtDamage < burningDevotionTracker) {
+    dealtDamage = burningDevotionTracker;
+    console.log(dealtDamage);
+    console.log("Burn Baby Burn!");
+  }
+
+  return dealtDamage;
+}
+
 function dealPlayerDamage(damage) {
   const dealtDamage = Math.round(Math.random() * damage);
   return dealtDamage;
 }
-
-function dealMonsterDamage(damage) {
-  const dealtDamage = Math.round(Math.random() * damage);
-  return dealtDamage;
-}
-
 
 // ===============================
 //            Special
@@ -212,7 +217,6 @@ function potionCounterHandler() {
 function potionHandler() {
   playerHealthBar.value += 20;
   currentPlayerHealth += 20;
-
 
   monsterAttackHandler();
   isGameOver();
@@ -300,7 +304,7 @@ let evasionTracker = 2;
 let rogue = {
   name: "Shadowcloak Riven",
   level: 1,
-  attack: 12,
+  attack: 8,
   health: 100,
   strength: 1,
   dexterity: 2,
@@ -322,7 +326,6 @@ function setRogueStats() {
   setPlayerHealthBar(playerMaxHealth);
 }
 
-
 function rogueShadowStrike() {
   guardHandler();
 
@@ -334,24 +337,23 @@ function rogueShadowStrike() {
   specialCooldownHandler();
 }
 
-// See monsterAttackHandler for Rouge Passive Ability 
+// See monsterAttackHandler for Rouge Passive Ability
 
 // ===============================
 //        Hero: Priestess
 // ===============================
 
-let greaterPrayerTracker = 0;
-let guidingLightTracker = 0;
+let greaterPrayerTracker = 40;
+let burningDevotionTracker = 3;
 let priestess = {
   name: "Priestess Liheth",
   level: 1,
-  attack: 8,
+  attack: 12,
   health: 90,
   strength: 0,
   dexterity: 1,
   faith: 2,
   special: priestessGreaterPrayer,
-  passive: priestessGuidingLight,
 };
 
 function setPriestessStats() {
@@ -368,8 +370,15 @@ function setPriestessStats() {
   setPlayerHealthBar(playerMaxHealth);
 }
 
-function priestessGreaterPrayer() {}
-function priestessGuidingLight() {}
+function priestessGreaterPrayer() {
+  playerHealthBar.value += greaterPrayerTracker;
+  currentPlayerHealth += greaterPrayerTracker;
+
+  isGameOver();
+  specialCooldownHandler();
+}
+
+// See dealPlayerDamage for Priestess Passive Ability
 
 // ===============================
 //        Boons & Leveling
@@ -440,7 +449,6 @@ specialBtn.addEventListener("click", () => {
   } else if (heroChoice === "priestess") {
     priestessGreaterPrayer();
   }
-
 });
 
 // later create a new function that handles
