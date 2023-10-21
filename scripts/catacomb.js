@@ -23,7 +23,7 @@ let catacombRooms = [
         backgroundImage: null,
         music: null,
         contents: {
-            monsters: [],
+            monsters: [CRYPT_CRAWLER],
             npcs: null,
             items: [],
             consumables: [],
