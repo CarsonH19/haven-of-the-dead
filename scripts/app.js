@@ -249,8 +249,8 @@ function resetGame(value) {
 //        Hero: Paladin
 // ===============================
 
-let holySmiteTracker = 0;
-let radiantAuraTracker = 7;
+let holySmiteTracker = 2.0;
+let radiantAuraTracker = 5;
 let paladin = {
   name: "Holy Warrior Siggurd",
   level: 1,
@@ -269,7 +269,6 @@ function setPaladinStats() {
   baseDexterity = paladin.dexterity;
   baseFaith = paladin.faith;
   specialAbility = paladin.special;
-  passiveAbility = paladin.passive;
 
   criticalDamage = calculateCritDamage();
   strengthBonusHealth = calculateStrengthBonusHealth();
@@ -278,7 +277,7 @@ function setPaladinStats() {
 }
 
 function paladinHolySmite() {
-  playerAttackHandler(2);
+  playerAttackHandler(holySmiteTracker);
   //   console.log(currentMonsterHealth);
   //   console.log(monsterHealthBar.value);
 
@@ -375,6 +374,7 @@ function priestessGreaterPrayer() {
   currentPlayerHealth += greaterPrayerTracker;
 
   isGameOver();
+  specialCooldownCounter = 8;
   specialCooldownHandler();
 }
 
@@ -432,7 +432,7 @@ adjustMonsterHealth(monsterMaxHealth);
 // ===============================
 
 attackBtn.addEventListener("click", function () {
-  playerAttackHandler(1);
+  playerAttackHandler();
   monsterAttackHandler();
 });
 
