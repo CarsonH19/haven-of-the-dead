@@ -37,13 +37,13 @@ let playerAttackValue = 10;
 // ===============================
 //        Hero Variables
 // ===============================
-
-let baseAttack = null;
-let baseHealth = null;
+let heroChoice;
+let baseAttack;
+let baseHealth;
 let specialCooldownCounter = 0;
 
 // Strength
-let baseStrength = null; //add strength to bonus damage after random number
+let baseStrength; //add strength to bonus damage after random number
 let strengthBonusHealth;
 let playerMaxHealth = baseHealth + strengthBonusHealth;
 
@@ -53,12 +53,12 @@ let dexterityCritIncrease = 0.3 * baseDexterity;
 let baseCritChance = 1.5 + dexterityCritIncrease;
 
 // Faith
-let baseFaith = 0; // add faith to flee function after random number
-let findItemChance = 0; // use when items are finished
+let baseFaith; // add faith to flee function after random number
+let findItemChance; // use when items are finished
 
 // Special & Abilities
-let specialAbility = null;
-let passiveAbility = null;
+let specialAbility;
+let passiveAbility;
 
 
 // ===============================
@@ -99,9 +99,9 @@ function attackHandler(bonus = 1) {
   monsterHealthBar.value =
     +monsterHealthBar.value - bonus * playerToMonsterDamage;
   currentMonsterHealth -= playerToMonsterDamage * bonus;
-  console.log(playerToMonsterDamage);
-  console.log(currentMonsterHealth);
-  console.log(monsterHealthBar.value);
+  // console.log(playerToMonsterDamage);
+  // console.log(currentMonsterHealth);
+  // console.log(monsterHealthBar.value);
 
   // Monster to Player
   const monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
@@ -110,6 +110,10 @@ function attackHandler(bonus = 1) {
   // console.log(monsterToPlayerDamage);
   // console.log(currentPlayerHealth);
   // console.log(playerHealthBar.value);
+
+  if (heroChoice === 'paladin'){
+    paladinRadiantAura();
+  }
 
   isGameOver();
   specialCooldownHandler();
@@ -217,7 +221,7 @@ function resetGame(value) {
 // ===============================
 
 let holySmiteTracker = 0;
-let radiantAuraTracker = 0;
+let radiantAuraTracker = 7;
 let paladin = {
   name: "Holy Warrior Siggurd",
   level: 1,
@@ -255,7 +259,10 @@ function paladinHolySmite() {
 }
 
 function paladinRadiantAura() {
-  console.log("test");
+  if (currentMonsterHealth <= radiantAuraTracker) {
+    currentMonsterHealth = 0;
+    console.log('Face your judgement!');
+  }
 }
 
 // ===============================
@@ -354,10 +361,13 @@ window.addEventListener("click", function (event) {
     document.getElementById("heroChoiceModal").style.display = "none";
 
     if (event.target === siggurd) {
+      heroChoice = 'paladin';
       setPaladinStats();
     } else if (event.target === riven) {
+      heroChoice = 'rogue';
       setRogueStats();
     } else if (event.target === liheth) {
+      heroChoice = 'priestess';
       setPriestessStats();
     }
   }
