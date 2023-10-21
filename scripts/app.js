@@ -1,19 +1,3 @@
-// // ===============================
-// //        Imports & Exports
-// // ===============================
-// import { playerMaxHealth, setPaladinStats, setPriestessStats, setRogueStats } from "./heroes.js";
-
-// export {
-//   attackHandler,
-//   specialCooldownHandler,
-//   specialCooldownCounter,
-//   attackBtn,
-//   guardBtn,
-//   fleeBtn,
-//   specialBtn,
-//   potionBtn,
-// };
-
 // ===============================
 //        GeneralVariables
 // ===============================
@@ -46,10 +30,38 @@ let baseStrength;
 let strengthBonusHealth;
 let playerMaxHealth = baseHealth + strengthBonusHealth;
 
+function calculateStrengthBonusHealth() {
+  return baseStrength * 10;
+}
+
+function calculatePlayerMaxHealth() {
+  return baseHealth + strengthBonusHealth;
+}
+
 // Dexterity
-let baseDexterity; // add dexterity to guard protection after random number
-let dexterityCritIncrease = 0.3 * baseDexterity;
-let baseCritChance = 1.5 + dexterityCritIncrease;
+let baseDexterity; 
+let dexterityCritIncrease = calculateDexCritIncrease();
+let baseCritModifier = 1.5 + calculateBaseCritModifier();
+let criticalDamage;
+
+function calculateDexCritIncrease() {
+  return 0.3 * baseDexterity;
+}
+
+function calculateBaseCritModifier() {
+  return 1.5 + dexterityCritIncrease;
+}
+
+function calculateCritDamage() {
+  dexterityCritIncrease = calculateDexCritIncrease();
+  baseCritModifier = calculateBaseCritModifier();
+  console.log("baseAttack:", baseAttack);
+  console.log("dexterityCritIncrease:", dexterityCritIncrease);
+  console.log("baseCritModifier:", baseCritModifier);
+  console.log(Math.round(baseAttack * baseCritModifier));
+  return Math.round(baseAttack * baseCritModifier);
+}
+
 
 // Faith
 let baseFaith; // add faith to flee function after random number
@@ -62,14 +74,6 @@ let passiveAbility;
 // ===============================
 //             Health
 // ===============================
-
-function calculateStrengthBonusHealth() {
-  return baseStrength * 10;
-}
-
-function calculatePlayerMaxHealth() {
-  return baseHealth + strengthBonusHealth;
-}
 
 function setPlayerHealthBar(maxLife) {
   playerHealthBar.max = maxLife;
@@ -132,6 +136,7 @@ function dealMonsterDamage(damage) {
   const dealtDamage = Math.round(Math.random() * damage);
   return dealtDamage;
 }
+
 
 // ===============================
 //            Special
@@ -310,22 +315,25 @@ function setRogueStats() {
   baseFaith = rogue.faith;
   specialAbility = rogue.special;
 
+  criticalDamage = calculateCritDamage();
   strengthBonusHealth = calculateStrengthBonusHealth();
   playerMaxHealth = calculatePlayerMaxHealth();
   setPlayerHealthBar(playerMaxHealth);
 }
 
+
 function rogueShadowStrike() {
   guardHandler();
-  monsterHealthBar.value = +monsterHealthBar.value - baseAttack;
-  currentMonsterHealth -= baseAttack;
+
+  monsterHealthBar.value = +monsterHealthBar.value - criticalDamage;
+  currentMonsterHealth -= criticalDamage;
 
   isGameOver();
   specialCooldownCounter = 3;
   specialCooldownHandler();
 }
 
-// See monsterAttackHandler for Rouge Passive Ability
+// See monsterAttackHandler for Rouge Passive Ability 
 
 // ===============================
 //        Hero: Priestess
