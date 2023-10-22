@@ -70,7 +70,7 @@ function dealPlayerDamage(damage) {
 //            Special
 // ===============================
 
-document.getElementById("specialCount").textContent = `Special`;
+const specialText = document.getElementById("specialCount");
 
 function specialCooldownHandler() {
   const special = document.getElementById("specialCount");
@@ -122,7 +122,7 @@ function calculateMonsterDamage() {
 // ===============================
 
 let potionCounter = 3;
-document.getElementById("potionCount").textContent = ` x ${potionCounter}`;
+// document.getElementById("potionCount").textContent = ` x ${potionCounter}`;
 
 function potionCounterHandler() {
   const potions = document.getElementById("potionCount");
@@ -146,6 +146,22 @@ function potionHandler() {
   specialCooldownHandler();
   potionCounterHandler();
 }
+
+
+function specialCooldownHandler() {
+  const special = document.getElementById("specialCount");
+  if (specialCooldownCounter > 0) {
+    specialCooldownCounter--;
+    specialBtn.disabled = true;
+    special.textContent = `Cooldown: ${specialCooldownCounter}`;
+  }
+
+  if (specialCooldownCounter <= 0) {
+    specialBtn.disabled = false;
+    special.textContent = `Special`;
+  }
+}
+
 
 // ===============================
 //          Is Game Over?
@@ -319,34 +335,45 @@ let availableBoons = [];
 // ===============================
 
 document.getElementById("gameWindow").style.display = "none";
-document.getElementById("monsterContainer").style.display = "none";
+// document.getElementById("monsterContainer").style.display = "none";
 const bottomContent = document.querySelector(".bottom-content");
-const controlsContainer = document.querySelector('.controls-container');
+// const controlsContainer = document.querySelector('.controls-container');
 const playerContainer = document.querySelector('.player-container');
 
 function togglePlayerControls() {
-  if (currentRoom.contents.monsters.length > 0) {
-
-    controlsContainer.classList.add("controls-container");
-    controlsContainer.innerHTML = `
-          <div class="attack">
-            <button id="attack-btn">Attack</button>
-          </div>
-          <div class="other-buttons">
-            <button id="guard-btn">Guard</button>
-            <button id="special-btn"><span id="specialCount"></span></button>
-            <button id="potion-btn">
-                Potion<span id="potionCount"></span>
-            </button>
-            <button id="flee-btn">Flee</button>
-          </div>
-        `;
-    playerContainer.insertAdjacentElement("afterend", controlsContainer);
-  } 
-
-  if (controlsContainer.parentElement === bottomContent) {
-    bottomContent.removeChild(controlsContainer);
+  if (currentRoom.contents.monsters.length >= 0) {
+    attackBtn.disabled = false;
+    guardBtn.disabled = false;
+    specialBtn.disabled = false;
+    fleeBtn.disabled = false;
+  } else {
+    attackBtn.disabled = true;
+    guardBtn.disabled = true;
+    specialBtn.disabled = true;
+    fleeBtn.disabled = true;
   }
+  // if (currentRoom.contents.monsters.length >= 0) {
+  //   const controlsContainer = document.createElement('div');
+  //   controlsContainer.classList.add("controls-container");
+  //   controlsContainer.innerHTML = `
+  //         <div class="attack">
+  //           <button id="attack-btn">Attack</button>
+  //         </div>
+  //         <div class="other-buttons">
+  //           <button id="guard-btn">Guard</button>
+  //           <button id="special-btn"><span id="specialCount">Special</span></button>
+  //           <button id="potion-btn">
+  //               Potion<span id="potionCount"></span>
+  //           </button>
+  //           <button id="flee-btn">Flee</button>
+  //         </div>
+  //       `;
+  //   playerContainer.insertAdjacentElement("afterend", controlsContainer);
+  // } 
+
+  // if (controlsContainer.parentElement === bottomContent) {
+  //   bottomContent.removeChild(controlsContainer);
+  // }
 }
 
 // Adds the rooms name and checks if there are monsters there.
