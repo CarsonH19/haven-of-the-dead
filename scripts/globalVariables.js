@@ -55,10 +55,10 @@ function calculateBaseCritModifier() {
 function calculateCritDamage() {
   dexterityCritIncrease = calculateDexCritIncrease();
   baseCritModifier = calculateBaseCritModifier();
-  console.log("baseAttack:", baseAttack);
-  console.log("dexterityCritIncrease:", dexterityCritIncrease);
-  console.log("baseCritModifier:", baseCritModifier);
-  console.log(Math.round(baseAttack * baseCritModifier));
+  // console.log("baseAttack:", baseAttack);
+  // console.log("dexterityCritIncrease:", dexterityCritIncrease);
+  // console.log("baseCritModifier:", baseCritModifier);
+  // console.log(Math.round(baseAttack * baseCritModifier));
   return Math.round(baseAttack * baseCritModifier);
 }
 
