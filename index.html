@@ -47,9 +47,10 @@
 
     <!----------------- MAIN GAME WINDOW  ------------------->
 
-    <div id="gameWindow">
+    <div id="gameWindow" class="screen">
       <div class="game-window">
-        <h2 id="catacombRoomName"></h2>
+        <div class="top-content">
+          <h2 id="catacombRoomName"></h2>
         <div id="monsterContainer" class="monster-container">
           <section id="monster-info">
             <div class="monster-display">
@@ -58,6 +59,7 @@
             </div>
             <progress id="monster-health" max="100" value="100">100%</progress>
           </section>
+        </div>
         </div>
         <div class="bottom-content">
           <div class="player-container">

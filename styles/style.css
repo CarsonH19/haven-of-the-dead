@@ -1,30 +1,39 @@
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0px;
-  width: 100%;
-  height: 100%
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
 /* 
-========================
-     Game Window
-========================
-*/ 
+==========================================
+               Game Window
+==========================================
+*/
+
+
 
 .game-window {
-  height: 90vh;
-  margin: 40px;
-  padding: 20px;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 40px;
+  border: 3px solid black;
 }
 
 #catacombRoomName {
-  position: absolute;
-  top: 20px;
-  left: 20;
+ 
 }
 
 .monster-container {
@@ -38,7 +47,6 @@ body {
 }
 
 #monster-info {
-  width: 100%;
 }
 
 #monster-info h3 {
@@ -56,14 +64,17 @@ body {
   justify-content: space-between;
 }
 
+/* 
+==========================================
+          Bottom Content
+==========================================
+*/
 
 .bottom-content {
   width: 100%;
-  height: 20vh;
+  height: 20%;
   border: 2px solid black;
-  position: absolute;
   left: 0;
-  bottom: 50px;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
@@ -129,7 +140,6 @@ body {
 .other-buttons {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
 }
 
 .other-buttons button {
@@ -141,6 +151,11 @@ body {
   margin-top: 0px;
 }
 
+/* 
+==========================================
+             Health Bars
+==========================================
+*/
 
 progress {
   -webkit-appearance: none;
@@ -169,3 +184,52 @@ progress[value]::-moz-progress-bar {
   transition: all 0.2s ease-out;
 }
 
+/* 
+========================
+     Hero Choice Modal
+========================
+*/ 
+
+#startGameModal{
+  display: none;
+
+}
+
+#heroChoiceModal {
+  display: none;
+}
+
+#catacombEntranceModal{
+  display: none;
+}
+
+
+.modal {
+  position: fixed; /* Use fixed position */
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.hero-modal-content,
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  align-items: center;
+  background-color: #fefefe;
+  margin: 13vh auto; /*?!ADJUST FOR MOBILE?!*/
+  padding: 20px;
+  border: 3px solid #888;
+  border-radius: 10px;
+  width: 70%;
+  height: 60%;
+}
+
+.modal-content button {
+  width: 150px;
+  height: 50px;
+}
