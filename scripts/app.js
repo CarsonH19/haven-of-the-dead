@@ -158,6 +158,7 @@ function isGameOver() {
 
   if (currentMonsterHealth <= 0) {
     alert("You won!");
+    nextMonsterCheck();
   }
 
   return;

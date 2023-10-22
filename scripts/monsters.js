@@ -127,6 +127,7 @@ function renderMonsterStatBlock(monster) {
 function setMonsterHealth(maxLife) {
   monsterHealthBar.max = maxLife;
   monsterHealthBar.value = maxLife;
+  currentMonsterHealth = maxLife;
 }
 
 

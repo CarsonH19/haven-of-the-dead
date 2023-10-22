@@ -18,9 +18,14 @@
 }
 
 .hero-choice-modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 70%;
+  height: 60%;
 }
