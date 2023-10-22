@@ -48,6 +48,11 @@ body {
   margin-bottom: 1px;
 }
 
+.monster-display {
+  display: flex;
+  justify-content: space-between;
+}
+
 
 .bottom-content {
   width: 100%;
