@@ -78,11 +78,6 @@ function setPlayerHealthBar(maxLife) {
   currentPlayerHealth = maxLife;
 }
 
-function adjustMonsterHealth(maxLife) {
-  monsterHealthBar.max = maxLife;
-  monsterHealthBar.value = maxLife;
-}
-
 function increasePlayerHealth(healValue) {
   playerHealthBar.value = +playerHealthBar.value + healValue;
 }
@@ -127,7 +122,7 @@ function monsterAttackHandler() {
 function dealMonsterDamage(damage) {
   let dealtDamage = Math.round(Math.random() * damage);
 
-  if (heroChoice === "priestess"  && dealtDamage < burningDevotionTracker) {
+  if (heroChoice === "priestess" && dealtDamage < burningDevotionTracker) {
     dealtDamage = burningDevotionTracker;
     console.log(dealtDamage);
     console.log("Burn Baby Burn!");
@@ -390,55 +385,6 @@ let availableBoons = [];
 
 
 // ===============================
-//       Monster Stat Block
-// ===============================
-
-function monsterSkullLevel(level) {
-  switch (level) {
-    case 1:
-    monsterMaxHealth = 20;
-    monsterAttackValue = 3;
-    break;
-  case 2:
-    monsterMaxHealth = 30;
-    monsterAttackValue = 4;
-    break;
-  case 3:
-    monsterMaxHealth = 40;
-    monsterAttackValue = 5;
-    break;
-  case 4:
-    monsterMaxHealth = 50;
-    monsterAttackValue = 6;
-    break;
-  case 5:
-    monsterMaxHealth = 70;
-    monsterAttackValue = 8;
-    break;
-  case 6:
-    monsterMaxHealth = 90;
-    monsterAttackValue = 10;
-    break;
-  case 7:
-    monsterMaxHealth =110;
-    monsterAttackValue = 12;
-    break;
-  case 8:
-    monsterMaxHealth = 150;
-    monsterAttackValue = 15;
-    break;
-  case 9:
-    monsterMaxHealth = 200;
-    monsterAttackValue = 18
-    break;
-}
-  }
-
-function renderMonsterStatBlock(monster) {
-
-}
-
-// ===============================
 //       Choose Hero Modal
 // ===============================
 
@@ -472,7 +418,6 @@ window.addEventListener("click", function (event) {
   }
 });
 
-adjustMonsterHealth(monsterMaxHealth);
 
 // ===============================
 //       Event Listeners
