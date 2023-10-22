@@ -5,18 +5,6 @@
 
 const roomNameElement = document.getElementById('catacombRoomName');
 
-function getRandomRoom(array) {
-    const randomIndex = Math.floor(Math.random() * array.length);
-    enterRoom(array[randomIndex]);
-}
-
-function enterRoom(room) {
-    roomNameElement.textContent = room.roomName;
-
-    // renderMonsterStatBlock(room.contents.monsters);
-}
-
-
 let catacombRooms = [
     {
         roomName: "Bonevault",
@@ -35,7 +23,7 @@ let catacombRooms = [
         backgroundImage: null,
         music: null,
         contents: {
-            monsters: [],
+            monsters: [GNAWER],
             npcs: null,
             items: [],
             consumables: null,
@@ -47,7 +35,7 @@ let catacombRooms = [
         backgroundImage: null,
         music: null,
         contents: {
-            monsters: [],
+            monsters: [BONE_TITAN],
             npcs: null,
             items: [],
             consumables: null,
@@ -56,3 +44,13 @@ let catacombRooms = [
     }
 ]
 
+function getRandomRoom(array) {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    enterRoom(array[randomIndex]);
+}
+
+function enterRoom(room) {
+    roomNameElement.textContent = room.roomName;    
+    renderMonsterStatBlock(room.contents.monsters[0]);
+    // renderMonsterStatBlock(room.contents.monsters);
+}
