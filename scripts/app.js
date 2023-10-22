@@ -368,6 +368,7 @@ document.getElementById("startGameModal").style.display = "none";
 // ===============================
 //    Catacomb Entrance Modal
 // ===============================
+
 const catacombEntranceModal = document.getElementById("catacombEntranceModal");
 const greatCatacombsBtn = document.getElementById("greatCatacombsBtn");
 
@@ -468,9 +469,11 @@ potionBtn.addEventListener("click", () => {
 
 greatCatacombsBtn.addEventListener("click", () => {
   catacombEntranceModal.style.display = "none";
+  renderContinueButton();
 });
 
 continueButton.addEventListener('click', () => {
-  getRandomRoom();
+  getRandomRoom(catacombRooms);
+  renderCurrentRoom(currentRoom);
   continueButtonModal.style.display = 'none';
 });
