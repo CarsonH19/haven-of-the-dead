@@ -1,4 +1,4 @@
-const monsterNameElement = document.getElementById('monster-info');
+const monsterNameElement = document.getElementById('monster-name');
 
 
 const CRYPT_CRAWLER = {
@@ -119,14 +119,9 @@ function monsterSkullLevel(level) {
 
 
 function renderMonsterStatBlock(monster) {
-  console.log(monster);
-
-  monsterSkullLevel(monster.skulls);
-
   monsterNameElement.textContent = monster.name;
-  console.log(monster.name);
-  
-  setMonsterHealth(monsterMaxHealth);
+  monsterSkullLevel(monster.skulls);
+  setMonsterHealth(monsterMaxHealth);  
 }
 
 function setMonsterHealth(maxLife) {
