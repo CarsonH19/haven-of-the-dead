@@ -5,8 +5,22 @@
 
 const roomNameElement = document.getElementById("catacombRoomName");
 
-let currentRoom;
 let monsterIndex;
+
+const catacombEntrance = {
+  roomName: "Catacomb Entrance",
+  backgroundImage: null,
+  music: null,
+  contents: {
+    monsters: [],
+    npcs: null,
+    items: [],
+    consumables: [],
+    traps: null,
+  },
+};
+
+let currentRoom = catacombEntrance;
 
 let catacombRooms = [
   {
@@ -50,6 +64,9 @@ let catacombRooms = [
 function getRandomRoom(array) {
   const randomIndex = Math.floor(Math.random() * array.length);
   currentRoom = array[randomIndex];
+}
+
+function renderCurrentRoom(currentRoom) {
   roomNameElement.textContent = currentRoom.roomName;
 
   if (currentRoom.contents.monsters.length > 0) {
@@ -67,5 +84,5 @@ function nextMonsterCheck() {
   if (currentRoom.contents.monsters.length > 0) {
     startBattle(currentRoom);
     console.log("Another Monster!");
-  }
+  } 
 }
