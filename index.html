@@ -14,66 +14,79 @@
     <title>Haven of the Dead</title>
   </head>
   <body>
-    <!----------------- START GAME  ------------------->
+    <!----------------- START GAME MODAL ------------------->
 
-
-    <div>
-      <div></div>
+    <div id="startGameModal" class="modal">
+      <div class="modal-content">
+        
+      </div>
     </div>
 
 
-    <!----------------- CHOOSE YOUR HERO ------------------->
+    <!----------------- CHOOSE YOUR HERO MODAL ------------------->
     
-    <div id="heroChoiceModal" class="hero-choice-modal">
-      <div class="hero-choice-modal-content">
+    <div id="heroChoiceModal" class="modal">
+      <div class="modal-content">
         <button id="siggurd">Holy Warrior Siggurd</button>
         <button id="riven">Shadowcloak Riven</button>
         <button id="liheth">Priestess Liheth</button>
       </div>
     </div>
 
+     <!----------------- CATACOMB ENTRANCE MODAL  ------------------->
+
+     <div id="catacombEntranceModal" class="modal">
+      <div class="modal-content">
+        
+      </div>
+    </div>
+
+
+
     <!----------------- MAIN GAME WINDOW  ------------------->
 
-    <div class="game-window">
-      <h2 id="catacombRoomName">test</h2>
-      <div class="monster-container">
-        <section id="monster-info">
-          <div class="monster-display">
-            <h3 id="monster-name">Monster</h3>
-            <h3 id="skull-level"></h3> 
-          </div>
-          <progress id="monster-health" max="100" value="100">100%</progress>
-        </section>
-      </div>
-      <div class="bottom-content">
-        <div class="player-container">
-          <section id="player-info">
-            <h3>Hero</h3>
-            <!-- <p>Vitality:</p> -->
-            <progress id="player-health" max="100" value="100">100%</progress>
-            <div class="player-stats">
-              <p>Strength: 0</p>
-              <p>Dexterity: 0</p>
-              <p>Faith: 0</p>
+    <div id="gameWindow">
+      <div class="game-window">
+        <h2 id="catacombRoomName"></h2>
+        <div class="monster-container">
+          <section id="monster-info">
+            <div class="monster-display">
+              <h3 id="monster-name">Monster</h3>
+              <h3 id="skull-level"></h3> 
             </div>
+            <progress id="monster-health" max="100" value="100">100%</progress>
           </section>
         </div>
-        <div class="controls-container">
-          <div class="attack">
-            <button id="attack-btn">Attack</button>
+        <div class="bottom-content">
+          <div class="player-container">
+            <section id="player-info">
+              <h3>Hero</h3>
+              <!-- <p>Vitality:</p> -->
+              <progress id="player-health" max="100" value="100">100%</progress>
+              <div class="player-stats">
+                <p>Strength: 0</p>
+                <p>Dexterity: 0</p>
+                <p>Faith: 0</p>
+              </div>
+            </section>
           </div>
-          <div class="other-buttons">
-            <button id="guard-btn">Guard</button>
-            <button id="special-btn"><span id="specialCount"></span></button>
-            <button id="potion-btn">
-              Potion<span id="potionCount"></span>
-            </button>
-            <button id="flee-btn">Flee</button>
+          <div class="controls-container">
+            <div class="attack">
+              <button id="attack-btn">Attack</button>
+            </div>
+            <div class="other-buttons">
+              <button id="guard-btn">Guard</button>
+              <button id="special-btn"><span id="specialCount"></span></button>
+              <button id="potion-btn">
+                Potion<span id="potionCount"></span>
+              </button>
+              <button id="flee-btn">Flee</button>
+            </div>
           </div>
-        </div>
-        <div class="log-container">
-          <h3>Log</h3>
-          <ul id="battle-log"></ul>
+          <div class="log-container">
+            <h3>Log</h3>
+            <ul id="battle-log"></ul>
+          </div>
         </div>
       </div>
     </div>

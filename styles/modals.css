@@ -4,8 +4,21 @@
 ========================
 */ 
 
+#startGameModal{
+  display: none;
 
-.hero-choice-modal {
+}
+
+#heroChoiceModal {
+  display: none;
+}
+
+#catacombEntranceModal{
+  display: none;
+}
+
+
+.modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -17,7 +30,7 @@
   background-color: rgba(0,0,0,0.4);
 }
 
-.hero-choice-modal-content {
+.modal-content {
   display: flex;
   justify-content: center;
   align-items: center;

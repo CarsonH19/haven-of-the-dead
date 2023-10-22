@@ -316,6 +316,20 @@ let availableBoons = [];
 
 
 // ===============================
+//        Start Game Modal
+// ===============================
+document.getElementById("gameWindow").style.display = "none";
+
+document.getElementById("startGameModal").style.display = "none";
+
+// ===============================
+//    Catacomb Entrance Modal
+// ===============================
+const catacombEntranceModal = document.getElementById("catacombEntranceModal");
+
+
+
+// ===============================
 //       Choose Hero Modal
 // ===============================
 
@@ -336,17 +350,23 @@ window.addEventListener("click", function (event) {
     if (event.target === siggurd) {
       heroChoice = "paladin";
       setPaladinStats();
-      getRandomRoom(catacombRooms);
+      // getRandomRoom(catacombRooms);
     } else if (event.target === riven) {
       heroChoice = "rogue";
       setRogueStats();
-      getRandomRoom(catacombRooms);
+      // getRandomRoom(catacombRooms);
     } else if (event.target === liheth) {
       heroChoice = "priestess";
       setPriestessStats();
-      getRandomRoom(catacombRooms);
+      // getRandomRoom(catacombRooms);
     }
+    document.getElementById("gameWindow").style.display = "block";
   }
+
+  renderCurrentRoom(catacombEntrance);
+  setTimeout(function() {
+    catacombEntranceModal.style.display = "block";
+  }, 3000);
 });
 
 
