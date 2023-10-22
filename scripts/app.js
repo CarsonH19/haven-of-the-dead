@@ -322,6 +322,7 @@ document.getElementById("gameWindow").style.display = "none";
 document.getElementById("monsterContainer").style.display = "none";
 const bottomContent = document.querySelector(".bottom-content");
 const controlsContainer = document.querySelector('.controls-container');
+const playerContainer = document.querySelector('.player-container');
 
 function togglePlayerControls() {
   if (currentRoom.contents.monsters.length > 0) {
@@ -340,7 +341,7 @@ function togglePlayerControls() {
             <button id="flee-btn">Flee</button>
           </div>
         `;
-    bottomContent.insertAdjacentElement("afterend", controlsContainer);
+    playerContainer.insertAdjacentElement("afterend", controlsContainer);
   } 
 
   if (controlsContainer.parentElement === bottomContent) {
