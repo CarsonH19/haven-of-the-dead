@@ -314,11 +314,17 @@ let availableBoons = [];
 // discard chosen boon from list
 // apply boon to hero
 
+// ===============================
+//        Game Window
+// ===============================
+
+document.getElementById("gameWindow").style.display = "none";
+document.getElementById("monsterContainer").style.display = "none";
+
 
 // ===============================
 //        Start Game Modal
 // ===============================
-document.getElementById("gameWindow").style.display = "none";
 
 document.getElementById("startGameModal").style.display = "none";
 
@@ -326,16 +332,20 @@ document.getElementById("startGameModal").style.display = "none";
 //    Catacomb Entrance Modal
 // ===============================
 const catacombEntranceModal = document.getElementById("catacombEntranceModal");
+const greatCatacombsBtn = document.getElementById('greatCatacombsBtn');
 
 
+function closeCatacombsEntranceModal() {  
+  catacombEntranceModal.style.display = 'none';
+}
 
 // ===============================
 //       Choose Hero Modal
 // ===============================
+const heroChoiceModal = document.getElementById('heroChoiceModal');
+heroChoiceModal.style.display = "block";
 
-document.getElementById("heroChoiceModal").style.display = "block";
-
-window.addEventListener("click", function (event) {
+heroChoiceModal.addEventListener("click", function (event) {
   const siggurd = document.getElementById("siggurd");
   const riven = document.getElementById("riven");
   const liheth = document.getElementById("liheth");
@@ -360,15 +370,21 @@ window.addEventListener("click", function (event) {
       setPriestessStats();
       // getRandomRoom(catacombRooms);
     }
-    document.getElementById("gameWindow").style.display = "block";
-  }
 
-  renderCurrentRoom(catacombEntrance);
-  setTimeout(function() {
-    catacombEntranceModal.style.display = "block";
-  }, 3000);
+    document.getElementById("gameWindow").style.display = "flex";
+    renderCurrentRoom(catacombEntrance);
+    setTimeout(function() {
+      catacombEntranceModal.style.display = "block";
+    }, 3000);
+  }  
 });
 
+// ===============================
+//        Game Over Modal          
+// ===============================
+
+// make a modal that opens when you die
+// allow for play again option 
 
 // ===============================
 //       Event Listeners
@@ -401,3 +417,7 @@ potionBtn.addEventListener("click", () => {
   monsterAttackHandler();
 });
 // fleeBtn.addEventListener('click', );
+
+greatCatacombsBtn.addEventListener('click', () => {
+  catacombEntranceModal.style.display = 'none';
+});

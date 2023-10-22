@@ -20,7 +20,7 @@
 
 .modal {
   display: none;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   left: 0;
   top: 0;
@@ -30,7 +30,7 @@
   background-color: rgba(0,0,0,0.4);
 }
 
-.modal-content {
+.hero-modal-content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,4 +41,23 @@
   border: 1px solid #888;
   width: 70%;
   height: 60%;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 100px;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%;
+  height: 60%;
+}
+
+.modal-content button {
+  width: 150px;
+  height: 50px;
 }
