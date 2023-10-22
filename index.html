@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/modals.css" />
     <link rel="stylesheet" href="styles/style.css" />
     <script src="scripts/globalVariables.js" defer></script>
     <script src="scripts/items.js" defer></script>
@@ -18,13 +17,12 @@
 
     <div id="startGameModal" class="modal">
       <div class="modal-content">
-        
+        <button>Enter the Catacombs</button>
       </div>
     </div>
 
-
     <!----------------- CHOOSE YOUR HERO MODAL ------------------->
-    
+
     <div id="heroChoiceModal" class="modal">
       <div class="modal-content">
         <button id="siggurd">Holy Warrior Siggurd</button>
@@ -33,17 +31,28 @@
       </div>
     </div>
 
-     <!----------------- CATACOMB ENTRANCE MODAL  ------------------->
+    <!----------------- CATACOMB ENTRANCE MODAL  ------------------->
 
-     <div id="catacombEntranceModal" class="modal">
+    <div id="catacombEntranceModal" class="modal">
       <div class="modal-content">
         <h1>The Great Catacombs</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, consectetur earum vel quisquam ad similique eius et molestiae molestias aut obcaecati praesentium perferendis, facilis soluta magni quia commodi, sint dicta?</p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
+          consectetur earum vel quisquam ad similique eius et molestiae
+          molestias aut obcaecati praesentium perferendis, facilis soluta magni
+          quia commodi, sint dicta?
+        </p>
         <button id="greatCatacombsBtn">Continue</button>
       </div>
     </div>
 
+    <!----------------- CONTINUE BUTTON MODAL  ------------------->
 
+    <div id="continueButtonModal" class="modal">
+      <div class="modal-content">
+        <button id="continueButton">Continue</button>
+      </div>
+    </div>
 
     <!----------------- MAIN GAME WINDOW  ------------------->
 
@@ -51,15 +60,17 @@
       <div class="game-window">
         <div class="top-content">
           <h2 id="catacombRoomName"></h2>
-        <div id="monsterContainer" class="monster-container">
-          <section id="monster-info">
-            <div class="monster-display">
-              <h3 id="monster-name">Monster</h3>
-              <h3 id="skull-level"></h3> 
-            </div>
-            <progress id="monster-health" max="100" value="100">100%</progress>
-          </section>
-        </div>
+          <div id="monsterContainer" class="monster-container">
+            <section id="monster-info">
+              <div class="monster-display">
+                <h3 id="monster-name">Monster</h3>
+                <h3 id="skull-level"></h3>
+              </div>
+              <progress id="monster-health" max="100" value="100">
+                100%
+              </progress>
+            </section>
+          </div>
         </div>
         <div class="bottom-content">
           <div class="player-container">

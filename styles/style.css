@@ -32,10 +32,6 @@ body {
   border: 3px solid black;
 }
 
-#catacombRoomName {
- 
-}
-
 .monster-container {
   display: flex;
   align-self: flex-end;
@@ -46,8 +42,6 @@ body {
   padding: 20px;
 }
 
-#monster-info {
-}
 
 #monster-info h3 {
   margin-top: 0px;
@@ -185,24 +179,10 @@ progress[value]::-moz-progress-bar {
 }
 
 /* 
-========================
-     Hero Choice Modal
-========================
-*/ 
-
-#startGameModal{
-  display: none;
-
-}
-
-#heroChoiceModal {
-  display: none;
-}
-
-#catacombEntranceModal{
-  display: none;
-}
-
+==========================================
+                 Modals
+==========================================
+*/
 
 .modal {
   position: fixed; /* Use fixed position */
@@ -233,3 +213,39 @@ progress[value]::-moz-progress-bar {
   width: 150px;
   height: 50px;
 }
+
+
+/* Start Game Modal */
+#startGameModal {
+  display: none;
+}
+
+/* Hero Choice Modal */
+#heroChoiceModal {
+  display: none;
+}
+
+/* Catacomb Entrance Modal */
+#catacombEntranceModal {
+  display: none;
+}
+
+
+/* Continue Button Modal */
+#continueButtonModal {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+/* 
+==========================================
+             Health Bars
+==========================================
+*/

@@ -320,7 +320,44 @@ let availableBoons = [];
 
 document.getElementById("gameWindow").style.display = "none";
 document.getElementById("monsterContainer").style.display = "none";
+const bottomContent = document.querySelector(".bottom-content");
+const controlsContainer = document.querySelector('.controls-container');
 
+function togglePlayerControls() {
+  if (currentRoom.contents.monsters.length > 0) {
+
+    controlsContainer.classList.add("controls-container");
+    controlsContainer.innerHTML = `
+          <div class="attack">
+            <button id="attack-btn">Attack</button>
+          </div>
+          <div class="other-buttons">
+            <button id="guard-btn">Guard</button>
+            <button id="special-btn"><span id="specialCount"></span></button>
+            <button id="potion-btn">
+                Potion<span id="potionCount"></span>
+            </button>
+            <button id="flee-btn">Flee</button>
+          </div>
+        `;
+    bottomContent.insertAdjacentElement("afterend", controlsContainer);
+  } 
+
+  if (controlsContainer.parentElement === bottomContent) {
+    bottomContent.removeChild(controlsContainer);
+  }
+}
+
+// Adds the rooms name and checks if there are monsters there.
+function renderCurrentRoom(currentRoom) {
+  roomNameElement.textContent = currentRoom.roomName;
+
+  if (currentRoom.contents.monsters.length > 0) {
+    startBattle(currentRoom);
+  }
+
+  togglePlayerControls();
+}
 
 // ===============================
 //        Start Game Modal
@@ -332,17 +369,28 @@ document.getElementById("startGameModal").style.display = "none";
 //    Catacomb Entrance Modal
 // ===============================
 const catacombEntranceModal = document.getElementById("catacombEntranceModal");
-const greatCatacombsBtn = document.getElementById('greatCatacombsBtn');
+const greatCatacombsBtn = document.getElementById("greatCatacombsBtn");
 
-
-function closeCatacombsEntranceModal() {  
-  catacombEntranceModal.style.display = 'none';
+function closeCatacombsEntranceModal() {
+  catacombEntranceModal.style.display = "none";
 }
+
+// ===============================
+//      Continue Button Modal
+// ===============================
+
+const continueButtonModal = document.getElementById('continueButtonModal');
+const continueButton = document.getElementById('continueButton');
+
+function renderContinueButton() {
+  continueButtonModal.style.display = 'block';
+}
+
 
 // ===============================
 //       Choose Hero Modal
 // ===============================
-const heroChoiceModal = document.getElementById('heroChoiceModal');
+const heroChoiceModal = document.getElementById("heroChoiceModal");
 heroChoiceModal.style.display = "block";
 
 heroChoiceModal.addEventListener("click", function (event) {
@@ -373,18 +421,18 @@ heroChoiceModal.addEventListener("click", function (event) {
 
     document.getElementById("gameWindow").style.display = "flex";
     renderCurrentRoom(catacombEntrance);
-    setTimeout(function() {
+    setTimeout(function () {
       catacombEntranceModal.style.display = "block";
     }, 3000);
-  }  
+  }
 });
 
 // ===============================
-//        Game Over Modal          
+//        Game Over Modal
 // ===============================
 
 // make a modal that opens when you die
-// allow for play again option 
+// allow for play again option
 
 // ===============================
 //       Event Listeners
@@ -418,6 +466,11 @@ potionBtn.addEventListener("click", () => {
 });
 // fleeBtn.addEventListener('click', );
 
-greatCatacombsBtn.addEventListener('click', () => {
-  catacombEntranceModal.style.display = 'none';
+greatCatacombsBtn.addEventListener("click", () => {
+  catacombEntranceModal.style.display = "none";
+});
+
+continueButton.addEventListener('click', () => {
+  getRandomRoom();
+  continueButtonModal.style.display = 'none';
 });
