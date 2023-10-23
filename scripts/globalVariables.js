@@ -25,9 +25,11 @@ let currentPlayerHealth;
 //        Log Variables
 // ===============================
 
-const LOG_EVENT_MONSTER_ATTACK = 'MONSTER ATTACK'
-
-
+const LOG_EVENT_MONSTER_ATTACK = 'MONSTER ATTACK';
+const LOG_EVENT_PLAYER_ATTACK = 'PLAYER_ATTACK';
+const LOG_EVENT_PLAYER_CRITICAL = 'PLAYER CRITICAL ATTACK';
+const LOG_EVENT_SMITE = 'SMITE';
+const LOG_EVENT_SMITE_CRITICAL = 'SMITE';
 // ===============================
 //        Hero Variables
 // ===============================
