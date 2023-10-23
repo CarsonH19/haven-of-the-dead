@@ -170,6 +170,20 @@ function specialCooldownHandler() {
 }
 
 // ===============================
+//             Flee
+// ===============================
+function fleeHandler() {
+  const fleeChance = (Math.round(Math.random() * 10) + baseFaith)
+  console.log(fleeChance);
+  monsterAttackHandler();
+  if (fleeChance >= 10) {
+    console.log('Flee Successful');
+    getRandomRoom(catacombRooms);
+    renderCurrentRoom(currentRoom);
+  }
+}
+
+// ===============================
 //          Is Game Over?
 // ===============================
 
@@ -356,7 +370,6 @@ function togglePlayerControls() {
   }
 }
 
-// Adds the rooms name and checks if there are monsters there.
 function renderCurrentRoom(currentRoom) {
   roomNameElement.textContent = currentRoom.roomName;
 
@@ -367,6 +380,7 @@ function renderCurrentRoom(currentRoom) {
   }
 
   togglePlayerControls();
+  renderContinueButton();
 }
 
 // ===============================
@@ -479,7 +493,8 @@ specialBtn.addEventListener("click", () => {
 // later create a new function that handles
 // the special ability checking which hero with an if statement,
 potionBtn.addEventListener("click", potionHandler);
-// fleeBtn.addEventListener('click', );
+
+fleeBtn.addEventListener('click',fleeHandler);
 
 greatCatacombsBtn.addEventListener("click", () => {
   catacombEntranceModal.style.display = "none";
