@@ -150,11 +150,10 @@ function potionHandler() {
     monsterAttackHandler();
     isGameOver();
     specialCooldownHandler();
-  } 
+  }
 
   potionCounterHandler();
 }
-
 
 function specialCooldownHandler() {
   const special = document.getElementById("specialCount");
@@ -170,7 +169,6 @@ function specialCooldownHandler() {
   }
 }
 
-
 // ===============================
 //          Is Game Over?
 // ===============================
@@ -182,15 +180,10 @@ function isGameOver() {
 
   if (currentMonsterHealth <= 0) {
     alert("You won!");
-    nextMonsterCheck();
+    checkForMonsters();
   }
 
   return;
-}
-
-function resetGame(value) {
-  playerHealthBar.value = value;
-  monsterHealthBar.value = value;
 }
 
 // ===============================
@@ -345,7 +338,7 @@ let availableBoons = [];
 document.getElementById("gameWindow").style.display = "none";
 const bottomContent = document.querySelector(".bottom-content");
 // const controlsContainer = document.querySelector('.controls-container');
-const playerContainer = document.querySelector('.player-container');
+const playerContainer = document.querySelector(".player-container");
 
 function togglePlayerControls() {
   // attackBtn.classList.toggle('.toggle-btn');
@@ -370,7 +363,7 @@ function renderCurrentRoom(currentRoom) {
   if (currentRoom.contents.monsters.length > 0) {
     startBattle(currentRoom);
   } else {
-    monsterContainer.style.display = 'none';
+    monsterContainer.style.display = "none";
   }
 
   togglePlayerControls();
@@ -397,13 +390,20 @@ function closeCatacombsEntranceModal() {
 //      Continue Button Modal
 // ===============================
 
-const continueButtonModal = document.getElementById('continueButtonModal');
-const continueButton = document.getElementById('continueButton');
+const continueButtonModal = document.getElementById("continueButtonModal");
+const continueButton = document.getElementById("continueButton");
 
 function renderContinueButton() {
-  continueButtonModal.style.display = 'block';
+  if (
+    currentRoom !== catacombEntrance &&
+    currentRoom.contents.monsters.length === 0
+  ) {
+    console.log("renderContinueButton Called!");
+    continueButtonModal.style.display = "block";
+  } else {
+    continueButtonModal.style.display = "none";
+  }
 }
-
 
 // ===============================
 //       Choose Hero Modal
@@ -483,11 +483,11 @@ potionBtn.addEventListener("click", potionHandler);
 
 greatCatacombsBtn.addEventListener("click", () => {
   catacombEntranceModal.style.display = "none";
-  renderContinueButton();
+  continueButtonModal.style.display = "block";
 });
 
-continueButton.addEventListener('click', () => {
+continueButton.addEventListener("click", () => {
   getRandomRoom(catacombRooms);
   renderCurrentRoom(currentRoom);
-  continueButtonModal.style.display = 'none';
+  renderContinueButton();
 });

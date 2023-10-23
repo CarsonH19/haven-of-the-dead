@@ -105,7 +105,7 @@ function startBattle(room) {
   renderMonsterStatBlock(room.contents.monsters[0]);
 }
 
-function nextMonsterCheck() {
+function checkForMonsters() {
   currentRoom.contents.monsters.shift();
 
   if (currentRoom.contents.monsters.length > 0) {
