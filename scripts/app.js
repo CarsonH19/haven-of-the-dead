@@ -202,24 +202,6 @@ function fleeHandler() {
 }
 
 // ===============================
-//          Is Game Over?
-// ===============================
-
-function isGameOver() {
-  if (currentPlayerHealth <= 0) {
-    alert("You died!");
-  }
-
-  if (currentMonsterHealth <= 0) {
-    alert("You won!");
-    checkForMonsters();
-  }
-
-  return;
-}
-
-
-// ===============================
 //        Hero: Paladin
 // ===============================
 
@@ -365,6 +347,23 @@ let availableBoons = [];
 // apply boon to hero
 
 // ===============================
+//          Is Game Over?
+// ===============================
+
+function isGameOver() {
+  if (currentPlayerHealth <= 0) {
+    alert("You died!");
+  }
+
+  if (currentMonsterHealth <= 0) {
+    alert("You won!");
+    checkForMonsters();
+  }
+
+  return;
+}
+
+// ===============================
 //        Game Window
 // ===============================
 
@@ -469,12 +468,6 @@ heroChoiceModal.addEventListener("click", function (event) {
   }
 });
 
-// ===============================
-//        Game Over Modal
-// ===============================
-
-// make a modal that opens when you die
-// allow for play again option
 
 // ===============================
 //       Event Listeners
