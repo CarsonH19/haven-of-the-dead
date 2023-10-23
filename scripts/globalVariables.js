@@ -22,6 +22,13 @@ let monsterAttackValue = 10;
 let currentPlayerHealth;
 
 // ===============================
+//        Log Variables
+// ===============================
+
+const LOG_EVENT_MONSTER_ATTACK = 'MONSTER ATTACK'
+
+
+// ===============================
 //        Hero Variables
 // ===============================
 let heroChoice;

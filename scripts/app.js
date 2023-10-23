@@ -44,9 +44,14 @@ function monsterAttackHandler() {
   playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
   currentPlayerHealth -= monsterToPlayerDamage;
 
-  console.log(monsterToPlayerDamage);
-  console.log(currentPlayerHealth);
-  console.log(playerHealthBar.value);
+  // console.log(monsterToPlayerDamage);
+  // console.log(currentPlayerHealth);
+  // console.log(playerHealthBar.value);
+  writeToLog(
+    LOG_EVENT_MONSTER_ATTACK,
+    currentRoom.contents.monsters[0].name,
+    monsterToPlayerDamage
+  );
 }
 
 function dealMonsterDamage(damage) {
@@ -173,11 +178,11 @@ function specialCooldownHandler() {
 //             Flee
 // ===============================
 function fleeHandler() {
-  const fleeChance = (Math.round(Math.random() * 10) + baseFaith)
+  const fleeChance = Math.round(Math.random() * 10) + baseFaith;
   console.log(fleeChance);
   monsterAttackHandler();
   if (fleeChance >= 10) {
-    console.log('Flee Successful');
+    console.log("Flee Successful");
     getRandomRoom(catacombRooms);
     renderCurrentRoom(currentRoom);
   }
@@ -198,6 +203,21 @@ function isGameOver() {
   }
 
   return;
+}
+
+// ===============================
+//             Log
+// ===============================
+function writeToLog(event, name, value) {
+  const log = document.getElementById('log');
+  let newEntry = document.createElement('li');
+
+  switch (event) {
+    case LOG_EVENT_MONSTER_ATTACK:
+      newEntry.textContent = `The ${name} dealt ${value} damage to you!`;
+  }
+
+  log.insertBefore(newEntry, log.firstChild);
 }
 
 // ===============================
@@ -494,7 +514,7 @@ specialBtn.addEventListener("click", () => {
 // the special ability checking which hero with an if statement,
 potionBtn.addEventListener("click", potionHandler);
 
-fleeBtn.addEventListener('click',fleeHandler);
+fleeBtn.addEventListener("click", fleeHandler);
 
 greatCatacombsBtn.addEventListener("click", () => {
   catacombEntranceModal.style.display = "none";

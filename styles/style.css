@@ -71,7 +71,7 @@ body {
 
 .bottom-content {
   width: 100%;
-  height: 20%;
+  height: 25%;
   border: 2px solid black;
   left: 0;
   display: flex;
@@ -85,7 +85,7 @@ body {
   flex: 1;
   max-width: 33%;
   background-color: gray;
-  padding: 20px;
+  padding: 10px;
 }
 
 #player-info {
@@ -153,6 +153,30 @@ body {
 
 .log-container h3 {
   margin-top: 0px;
+}
+
+/* Log */
+.log-container {
+  overflow: auto;
+}
+
+.log-container h3 {
+  margin-bottom: 2px;
+  font-size: 1.0rem;
+}
+
+.log-container ul {
+  font-size: 0.8rem;
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+}
+.log-container ul li {
+  padding: 0px;
+  margin: 0px;
+  border-bottom: 1px dashed black;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 /* 
