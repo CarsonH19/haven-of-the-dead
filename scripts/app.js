@@ -90,8 +90,6 @@ function dealPlayerDamage(damage) {
 //            Special
 // ===============================
 
-const specialText = document.getElementById("specialCount");
-
 function specialCooldownHandler() {
   const special = document.getElementById("specialCount");
   if (specialCooldownCounter > 0) {
@@ -414,9 +412,6 @@ let availableBoons = [];
 // ===============================
 
 document.getElementById("gameWindow").style.display = "none";
-const bottomContent = document.querySelector(".bottom-content");
-// const controlsContainer = document.querySelector('.controls-container');
-const playerContainer = document.querySelector(".player-container");
 
 function togglePlayerControls() {
   // attackBtn.classList.toggle('.toggle-btn');
@@ -457,9 +452,6 @@ document.getElementById("startGameModal").style.display = "none";
 //    Catacomb Entrance Modal
 // ===============================
 
-const catacombEntranceModal = document.getElementById("catacombEntranceModal");
-const greatCatacombsBtn = document.getElementById("greatCatacombsBtn");
-
 function closeCatacombsEntranceModal() {
   catacombEntranceModal.style.display = "none";
 }
@@ -467,9 +459,6 @@ function closeCatacombsEntranceModal() {
 // ===============================
 //      Continue Button Modal
 // ===============================
-
-const continueButtonModal = document.getElementById("continueButtonModal");
-const continueButton = document.getElementById("continueButton");
 
 function renderContinueButton() {
   if (
@@ -486,7 +475,7 @@ function renderContinueButton() {
 // ===============================
 //       Choose Hero Modal
 // ===============================
-const heroChoiceModal = document.getElementById("heroChoiceModal");
+
 heroChoiceModal.style.display = "block";
 
 heroChoiceModal.addEventListener("click", function (event) {
@@ -560,8 +549,6 @@ specialBtn.addEventListener("click", () => {
   }
 });
 
-// later create a new function that handles
-// the special ability checking which hero with an if statement,
 potionBtn.addEventListener("click", potionHandler);
 
 fleeBtn.addEventListener("click", fleeHandler);

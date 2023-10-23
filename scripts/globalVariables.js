@@ -22,6 +22,39 @@ let monsterAttackValue = 10;
 let currentPlayerHealth;
 
 // ===============================
+//         Game Window
+// ===============================
+
+const bottomContent = document.querySelector(".bottom-content");
+const playerContainer = document.querySelector(".player-container");
+
+// ===============================
+//     Catacomb Entrance Modal
+// ===============================
+
+const catacombEntranceModal = document.getElementById("catacombEntranceModal");
+const greatCatacombsBtn = document.getElementById("greatCatacombsBtn");
+
+// ===============================
+//      Continue Button Modal
+// ===============================
+
+const continueButtonModal = document.getElementById("continueButtonModal");
+const continueButton = document.getElementById("continueButton");
+
+// ===============================
+//        Choose Hero Modal
+// ===============================
+
+const heroChoiceModal = document.getElementById("heroChoiceModal");
+
+// ===============================
+//            Special
+// ===============================
+
+const specialText = document.getElementById("specialCount");
+
+// ===============================
 //        Log Variables
 // ===============================
 
