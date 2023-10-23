@@ -487,6 +487,7 @@ greatCatacombsBtn.addEventListener("click", () => {
 });
 
 continueButton.addEventListener("click", () => {
+  removeCurrentRoom();
   getRandomRoom(catacombRooms);
   renderCurrentRoom(currentRoom);
   renderContinueButton();

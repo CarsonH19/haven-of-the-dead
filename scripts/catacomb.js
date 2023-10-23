@@ -4,6 +4,8 @@
 // If a player flees from the room it is not removed from the array.
 
 const roomNameElement = document.getElementById("catacombRoomName");
+let roomIndex;
+
 
 const catacombEntrance = {
   roomName: "Catacomb Entrance",
@@ -98,7 +100,8 @@ let catacombRooms = [
 // Gets a random index and sets currentRoom to that index.
 function getRandomRoom(array) {
   const randomIndex = Math.floor(Math.random() * array.length);
-  currentRoom = array[randomIndex];
+  roomIndex = randomIndex;
+  currentRoom = array[roomIndex];
 }
 
 function startBattle(room) {
@@ -114,5 +117,11 @@ function checkForMonsters() {
   } else {
     renderContinueButton();
     togglePlayerControls();
+  }
+}
+
+function removeCurrentRoom() {
+  if (currentRoom !== catacombEntrance) {
+    catacombRooms.splice(roomIndex, 1);
   }
 }
