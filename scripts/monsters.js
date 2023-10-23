@@ -120,6 +120,7 @@ function monsterSkullLevel(level) {
 
 
 function renderMonsterStatBlock(monster) {
+  monsterContainer.style.display = 'flex'
   monsterNameElement.textContent = monster.name;
   monsterSkullElement.textContent = monster.skulls;
   monsterSkullLevel(monster.skulls);

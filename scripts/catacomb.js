@@ -57,6 +57,42 @@ let catacombRooms = [
       traps: null,
     },
   },
+  {
+    roomName: "Sinister Sacristy",
+    backgroundImage: null,
+    music: null,
+    contents: {
+      monsters: [],
+      npcs: null,
+      items: [],
+      consumables: null,
+      traps: null,
+    },
+  },
+  {
+    roomName: "Malevolent Chapel",
+    backgroundImage: null,
+    music: null,
+    contents: {
+      monsters: [],
+      npcs: null,
+      items: [],
+      consumables: null,
+      traps: null,
+    },
+  },
+  {
+    roomName: "Veiled Crypt",
+    backgroundImage: null,
+    music: null,
+    contents: {
+      monsters: [],
+      npcs: null,
+      items: [],
+      consumables: null,
+      traps: null,
+    },
+  }
 ];
 
 // Gets a random index and sets currentRoom to that index.
@@ -77,5 +113,6 @@ function nextMonsterCheck() {
     console.log("Another Monster!");
   } else {
     renderContinueButton();
+    togglePlayerControls();
   }
 }

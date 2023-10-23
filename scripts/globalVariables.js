@@ -5,6 +5,10 @@
 const monsterHealthBar = document.getElementById("monster-health");
 const playerHealthBar = document.getElementById("player-health");
 
+const monsterContainer = document.getElementById('monsterContainer');
+monsterContainer.style.display = "none";
+
+
 const attackBtn = document.getElementById("attack-btn");
 const guardBtn = document.getElementById("guard-btn");
 const specialBtn = document.getElementById("special-btn");

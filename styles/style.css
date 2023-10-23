@@ -32,6 +32,11 @@ body {
   border: 3px solid black;
 }
 
+.top-content {
+  display: flex;
+  justify-content: space-between;
+}
+
 .monster-container {
   display: flex;
   align-self: flex-end;
@@ -112,7 +117,12 @@ body {
   background-color: gray;
   padding: 6px;
 }
-
+/* 
+.toggle-btn {
+  pointer-events:none;
+  opacity: 0.6; 
+  cursor: not-allowed; 
+} */
 
 .attack {
   display: flex;
@@ -236,11 +246,20 @@ progress[value]::-moz-progress-bar {
   display: none;
 }
 
+.continue-btn {
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0,0,0,0.4);
+}
 
 
-
-
-
+.continue-btn button {
+  width: 150px;
+  height: 50px;
+}
 
 
 
