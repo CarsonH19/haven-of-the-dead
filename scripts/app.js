@@ -428,8 +428,13 @@ function renderCurrentRoom(currentRoom) {
     monsterContainer.style.display = "none";
   }
 
-  if (currentRoom.contents.trap) {
-    renderTrap(currentRoom.contents.trap)
+  if (currentRoom.contents.traps) {
+    renderTrap(currentRoom.contents.traps)
+    writeToLog(
+      LOG_EVENT_TRAP_DESCRIPTION,
+      'you',
+      'danger'
+    )
   }
 
   togglePlayerControls();
@@ -459,7 +464,7 @@ function renderContinueButton() {
     currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
     !currentRoom.contents.traps &&
-    currentRoom.contents.npcs.length === 0
+    !currentRoom.contents.NPCs
   ) {
     console.log("renderContinueButton Called!");
     continueButtonModal.style.display = "block";
@@ -471,35 +476,31 @@ function renderContinueButton() {
 // ===============================
 //          Trap Modal
 // ===============================
-// trapModal.style.display = 'none';
 
-// function renderTrap(optionOne, optionTwo) {
-//   const trapOptionOne = document.getElementById('trap-btn-one');
-//   const trapOptionTwo = document.getElementById('trap-btn-two');
+trapModal.style.display = 'none';
+
+function renderTrap(trap) {
+
+  console.log("renderTrap Called!");
  
-//   if (currentRoom.contents.traps.length > 0) {
-//     console.log("renderTraps Called!");
-//     trapModal.style.display = "block";
-//   } else {
-//     trapModal.style.display = "none";
-//   }
+  trapModal.style.display = "block";
+ 
+  if (trap.optionOne === 'STRENGTH') {
+    trapButtonOne.textContent = 'Strength';
+  } else if (trap.optionOne === 'DEXTERITY') {
+    trapButtonOne.textContent = 'Dexterity'; 
+  } else {
+    trapButtonOne.textContent = 'Faith';
+  }
 
-//   if (optionOne === 'STRENGTH') {
-//     trapOptionOne.textContent = 'Strength';
-//   } else if (optionOne === 'DEXTERITY') {
-//     trapOptionOne.textContent = 'Dexterity'; 
-//   } else {
-//     trapOptionOne.textContent = 'Faith';
-//   }
-
-//   if (optionTwo === 'STRENGTH') {
-//       trapOptionTwo.textContent = 'Strength';
-//     } else if (optionTwo === 'DEXTERITY') {
-//       trapOptionTwo.textContent = 'Dexterity'; 
-//     } else {
-//       trapOptionTwo.textContent = 'Faith';
-//     }
-// }
+  if (trap.optionTwo === 'STRENGTH') {
+      trapButtonTwo.textContent = 'Strength';
+    } else if (trap.optionTwo === 'DEXTERITY') {
+      trapButtonTwo.textContent = 'Dexterity'; 
+    } else {
+      trapButtonTwo.textContent = 'Faith';
+    }
+}
 
 // ===============================
 //       Choose Hero Modal
@@ -522,15 +523,14 @@ heroChoiceModal.addEventListener("click", function (event) {
     if (event.target === siggurd) {
       heroChoice = "PALADIN";
       setPaladinStats();
-      // getRandomRoom(catacombRooms);
+
     } else if (event.target === riven) {
       heroChoice = "ROGUE";
       setRogueStats();
-      // getRandomRoom(catacombRooms);
+
     } else if (event.target === liheth) {
       heroChoice = "PRIESTESS";
       setPriestessStats();
-      // getRandomRoom(catacombRooms);
     }
 
     document.getElementById("gameWindow").style.display = "flex";
@@ -586,4 +586,25 @@ continueButton.addEventListener("click", () => {
   getRandomRoom(catacombRooms);
   renderCurrentRoom(currentRoom);
   renderContinueButton();
+});
+
+
+trapButtonOne.addEventListener("click", () => {
+  if (trapButtonOne.textContent === "Strength") {
+    trapHandler(baseStrength);
+  } else if (trapButtonOne.textContent === "Dexterity") {
+    trapHandler(baseDexterity);
+  } else {
+    trapHandler(baseFaith);
+  }
+});
+
+trapButtonTwo.addEventListener("click", () => {
+  if (trapButtonTwo.textContent === "Strength") {
+    trapHandler(baseStrength);
+  } else if (trapButtonTwo.textContent === "Dexterity") {
+    trapHandler(baseDexterity);
+  } else {
+    trapHandler(baseFaith);
+  }
 });

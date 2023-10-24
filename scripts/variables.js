@@ -47,8 +47,8 @@ const continueButton = document.getElementById("continueButton");
 // ===============================
 
 const trapModal = document.getElementById('trapModal');
-const trapButtonOne = document.getElementById('trap-btn-one');
-const trapButtonTwo = document.getElementById('trap-btn-two');
+const trapButtonOne = document.getElementById('trapButtonOne');
+const trapButtonTwo = document.getElementById('trapButtonTwo');
 
 // ===============================
 //        Choose Hero Modal
@@ -76,6 +76,11 @@ const LOG_EVENT_POTION = 'POTION';
 const LOG_EVENT_FLEE = 'FLEE'
 const LOG_EVENT_LEVEL = 'LEVEL UP'
 const LOG_EVENT_NEW_ROOM = 'NEW ROOM';
+
+const LOG_EVENT_TRAP_DESCRIPTION = 'TRAP DESCRIPTION';
+const LOG_EVENT_TRAP_PASS = 'TRAP PASS';
+const LOG_EVENT_TRAP_FAIL = 'TRAP FAIL';
+
 
 const LOG_EVENT_SMITE = 'SMITE';
 const LOG_EVENT_SMITE_CRITICAL = 'CRITICAL SMITE';
