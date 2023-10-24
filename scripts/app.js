@@ -27,21 +27,34 @@ function playerAttackHandler(smite = 1) {
       currentRoom.contents.monsters[0].name,
       totalDamage
     );
-  } else if(smite > 1) { 
+  } else if (smite > 1) { 
     totalDamage = playerToMonsterDamage * smite;
-
-  } else if(playerToMonsterDamage >= baseAttack) { 
-    totalDamage = playerToMonsterDamage * baseCritModifier;
-
+    writeToLog(
+      LOG_EVENT_SMITE,
+      currentRoom.contents.monsters[0].name,
+      totalDamage
+    );
+  } else if (playerToMonsterDamage >= baseAttack) { 
+    totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
+    writeToLog(
+      LOG_EVENT_PLAYER_CRITICAL,
+      currentRoom.contents.monsters[0].name,
+      totalDamage
+    );
   } else {
     totalDamage = playerToMonsterDamage;
+    writeToLog(
+      LOG_EVENT_PLAYER_ATTACK,
+      currentRoom.contents.monsters[0].name,
+      totalDamage
+    );
   }
 
   monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
   currentMonsterHealth -= totalDamage;
 
   // Paladin Passive Ability Checker
-  if (heroChoice === "paladin") {
+  if (heroChoice === "PALADIN") {
     paladinRadiantAura();
   }
 
@@ -51,16 +64,17 @@ function playerAttackHandler(smite = 1) {
 function monsterAttackHandler() {
   let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
   // Rogue Passive Ability Checker
-  if (heroChoice === "rogue" && evasionTracker >= monsterToPlayerDamage) {
+  if (heroChoice === "ROGUE" && evasionTracker >= monsterToPlayerDamage) {
     monsterToPlayerDamage = 0;
+    writeToLog(
+      LOG_EVENT_EVASION,
+      currentRoom.contents.monsters[0].name,
+      monsterToPlayerDamage
+    )
   }
 
   playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
   currentPlayerHealth -= monsterToPlayerDamage;
-
-  console.log(monsterToPlayerDamage);
-  console.log(currentPlayerHealth);
-  console.log(playerHealthBar.value);
 
   writeToLog(
     LOG_EVENT_MONSTER_ATTACK,
@@ -72,10 +86,13 @@ function monsterAttackHandler() {
 function dealMonsterDamage(damage) {
   let dealtDamage = Math.round(Math.random() * damage);
 
-  if (heroChoice === "priestess" && dealtDamage < burningDevotionTracker) {
+  if (heroChoice === "PRIESTESS" && dealtDamage < burningDevotionTracker) {
     dealtDamage = burningDevotionTracker;
-    console.log(dealtDamage);
-    console.log("Burn Baby Burn!");
+    writeToLog(
+      LOG_EVENT_BURNING_RADIANCE,
+      currentRoom.contents.monsters[0].name,
+      dealtDamage
+    )
   }
 
   return dealtDamage;
@@ -113,9 +130,14 @@ function guardHandler() {
   const damageBlocked = Math.round(Math.random() * monsterToGuardDamage);
   const damageTaken = monsterToGuardDamage - damageBlocked;
 
-  // Updating Player Health
   playerHealthBar.value = +playerHealthBar.value - damageTaken;
   currentPlayerHealth -= damageTaken;
+
+  writeToLog(
+    LOG_EVENT_GUARD,
+    currentRoom.contents.monsters[0].name,
+    damageBlocked
+  )
 
   // console.log(`Damage Received: ${monsterToGuardDamage}`);
   // console.log(`Damage Blocked: ${damageBlocked}`);
@@ -156,8 +178,8 @@ function potionCounterHandler() {
 }
 
 function potionHandler() {
-  playerHealthBar.value += 20;
-  currentPlayerHealth += 20;
+  playerHealthBar.value += potionHealValue;
+  currentPlayerHealth += potionHealValue;
 
   if (currentPlayerHealth > playerMaxHealth) {
     playerHealthBar.value = playerMaxHealth;
@@ -169,6 +191,12 @@ function potionHandler() {
     isGameOver();
     specialCooldownHandler();
   }
+
+  writeToLog(
+    LOG_EVENT_POTION,
+    'You',
+    potionHealValue
+  )
 
   potionCounterHandler();
 }
@@ -329,6 +357,12 @@ function priestessGreaterPrayer() {
   playerHealthBar.value += greaterPrayerTracker;
   currentPlayerHealth += greaterPrayerTracker;
 
+  writeToLog(
+    LOG_EVENT_GREATER_PRAYER,
+    'You',
+    greaterPrayerTracker
+  )
+  
   isGameOver();
   specialCooldownCounter = 8;
   specialCooldownHandler();
@@ -394,6 +428,10 @@ function renderCurrentRoom(currentRoom) {
     monsterContainer.style.display = "none";
   }
 
+  if (currentRoom.contents.trap) {
+    renderTrap(currentRoom.contents.trap)
+  }
+
   togglePlayerControls();
   renderContinueButton();
 }
@@ -419,7 +457,9 @@ function closeCatacombsEntranceModal() {
 function renderContinueButton() {
   if (
     currentRoom !== catacombEntrance &&
-    currentRoom.contents.monsters.length === 0
+    currentRoom.contents.monsters.length === 0 &&
+    !currentRoom.contents.traps &&
+    currentRoom.contents.npcs.length === 0
   ) {
     console.log("renderContinueButton Called!");
     continueButtonModal.style.display = "block";
@@ -427,6 +467,39 @@ function renderContinueButton() {
     continueButtonModal.style.display = "none";
   }
 }
+
+// ===============================
+//          Trap Modal
+// ===============================
+// trapModal.style.display = 'none';
+
+// function renderTrap(optionOne, optionTwo) {
+//   const trapOptionOne = document.getElementById('trap-btn-one');
+//   const trapOptionTwo = document.getElementById('trap-btn-two');
+ 
+//   if (currentRoom.contents.traps.length > 0) {
+//     console.log("renderTraps Called!");
+//     trapModal.style.display = "block";
+//   } else {
+//     trapModal.style.display = "none";
+//   }
+
+//   if (optionOne === 'STRENGTH') {
+//     trapOptionOne.textContent = 'Strength';
+//   } else if (optionOne === 'DEXTERITY') {
+//     trapOptionOne.textContent = 'Dexterity'; 
+//   } else {
+//     trapOptionOne.textContent = 'Faith';
+//   }
+
+//   if (optionTwo === 'STRENGTH') {
+//       trapOptionTwo.textContent = 'Strength';
+//     } else if (optionTwo === 'DEXTERITY') {
+//       trapOptionTwo.textContent = 'Dexterity'; 
+//     } else {
+//       trapOptionTwo.textContent = 'Faith';
+//     }
+// }
 
 // ===============================
 //       Choose Hero Modal
@@ -447,15 +520,15 @@ heroChoiceModal.addEventListener("click", function (event) {
     document.getElementById("heroChoiceModal").style.display = "none";
 
     if (event.target === siggurd) {
-      heroChoice = "paladin";
+      heroChoice = "PALADIN";
       setPaladinStats();
       // getRandomRoom(catacombRooms);
     } else if (event.target === riven) {
-      heroChoice = "rogue";
+      heroChoice = "ROGUE";
       setRogueStats();
       // getRandomRoom(catacombRooms);
     } else if (event.target === liheth) {
-      heroChoice = "priestess";
+      heroChoice = "PRIESTESS";
       setPriestessStats();
       // getRandomRoom(catacombRooms);
     }
@@ -490,11 +563,11 @@ guardBtn.addEventListener("click", () => {
 });
 
 specialBtn.addEventListener("click", () => {
-  if (heroChoice === "paladin") {
+  if (heroChoice === "PALADIN") {
     paladinHolySmite();
-  } else if (heroChoice === "rogue") {
+  } else if (heroChoice === "ROGUE") {
     rogueShadowStrike();
-  } else if (heroChoice === "priestess") {
+  } else if (heroChoice === "PRIESTESS") {
     priestessGreaterPrayer();
   }
 });

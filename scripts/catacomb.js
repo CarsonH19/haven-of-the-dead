@@ -92,7 +92,7 @@ let catacombRooms = [
       npcs: null,
       items: [],
       consumables: null,
-      traps: null,
+      traps: spikeTrap
     },
   }
 ];

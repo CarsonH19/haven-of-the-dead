@@ -285,8 +285,25 @@ progress[value]::-moz-progress-bar {
   height: 50px;
 }
 
+/* Trap Modal */
+#trap {
+  display: none;
+}
+
+.trap {
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0,0,0,0.4);
+}
 
 
+.trap-content button {
+  width: 150px;
+  height: 50px;
+}
 /* 
 ==========================================
              Health Bars

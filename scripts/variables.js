@@ -43,6 +43,14 @@ const continueButtonModal = document.getElementById("continueButtonModal");
 const continueButton = document.getElementById("continueButton");
 
 // ===============================
+//           Trap Modal
+// ===============================
+
+const trapModal = document.getElementById('trapModal');
+const trapButtonOne = document.getElementById('trap-btn-one');
+const trapButtonTwo = document.getElementById('trap-btn-two');
+
+// ===============================
 //        Choose Hero Modal
 // ===============================
 
@@ -57,6 +65,8 @@ const specialText = document.getElementById("specialCount");
 // ===============================
 //        Log Variables
 // ===============================
+
+const log = document.getElementById("log");
 
 const LOG_EVENT_MONSTER_ATTACK = 'MONSTER ATTACK';
 const LOG_EVENT_PLAYER_ATTACK = 'PLAYER_ATTACK';
@@ -85,6 +95,7 @@ const LOG_EVENT_BURNING_RADIANCE = 'BURNING RADIANCE'
 let heroChoice;
 let baseAttack;
 let baseHealth;
+let potionHealValue = 20;
 let specialCooldownCounter = 0;
 
 // Strength
