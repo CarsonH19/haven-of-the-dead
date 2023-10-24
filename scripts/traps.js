@@ -8,22 +8,22 @@ const spikeTrap = {
   failDamage: 30,
 };
 
-function trapHandler(attribute) {
+function trapHandler(baseStat, attribute) {
   let trap = currentRoom.contents.traps;
-  let randomNumber = (Math.floor(Math.random() * 10) + attribute);
+  let randomNumber = (Math.floor(Math.random() * 10) + baseStat);
 
   if (randomNumber > trap.passValue) {
     writeToLog(
       LOG_EVENT_TRAP_PASS,
-      'You',
-      'escape'
+      'you',
+      attribute // Dictates descriptive trap pass text. ${value}
     )
   } else {
     playerHealthBar.value -= trap.failDamage;
     currentPlayerHealth -= trap.failDamage;
     writeToLog(
       LOG_EVENT_TRAP_FAIL,
-      'You',
+      attribute, // Dictates descriptive trap fail text. ${name}
       trap.failDamage
     )
   }

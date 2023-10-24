@@ -814,13 +814,40 @@ function writeToLog(event, name, value) {
       }
       break;
     case LOG_EVENT_TRAP_PASS:
+      narration = Math.floor(Math.random() * 5);
       if (trap.name === 'Spike Trap') {
-        newEntry.textContent = `${name} ${value} the spikes unscathed!`
+        if (value === 'STRENGTH') {
+          if (narration === 1) {
+            newEntry.textContent = `"With a surge of raw power, you strain against the closing walls, muscles bulging. The spikes inch closer, but you hold them back, forcing the mechanism to yield."`
+          } else if (narration === 2) {
+            newEntry.textContent = `"Summoning every ounce of strength, you push against the encroaching spikes. They resist, but eventually give way to your determination, halting their advance."`
+          } else if (narration === 3) {
+            newEntry.textContent = `"The walls press in relentlessly, but you meet the challenge head-on. With a tremendous effort, you force them back, creating a precious gap to escape through."`
+          } else if (narration === 4) {
+            newEntry.textContent = `"With a powerful heave, you strain against the relentless walls of spikes, pushing them back with all your might. Your muscles burn, but the trap is thwarted, and you emerge victorious."`
+          } else {
+            newEntry.textContent = '"Gritting your teeth, you summon every ounce of strength within you and forcefully push the encroaching spikes back, leaving a narrow escape route in your wake."'
+          }
+        }
       }
       break;
+
     case LOG_EVENT_TRAP_FAIL:
+      narration = Math.floor(Math.random() * 5);
       if (trap.name === 'Spike Trap') {
-        newEntry.textContent = `${name}'re unable to escape the spikes and they pierce you! You take ${value} damage!`
+        if (name === 'STRENGTH') {
+          if (narration === 1) {
+            newEntry.textContent = `"Despite your best efforts, the spike walls continue to close in, and you are unable to summon the strength needed to push them back. The trap inflicts its painful toll upon you." You take ${value} damage.`;
+          } else if (narration === 2) {
+            newEntry.textContent = `"The walls of spikes continue their inexorable advance, and despite your determination, you are unable to halt their progress. The trap inflicts a painful, pinching injury." You take ${value} damage.`;
+          } else if (narration === 3) {
+            newEntry.textContent = `"The spikes close in, finding their mark, piercing through your defenses. Pain flares through your body." You take ${value} damage.`;
+          } else if (narration === 4) {
+            newEntry.textContent = `"Despite your efforts, the spikes find their mark, leaving you wounded and breathless." You take ${value} damage.`;
+          } else {
+            newEntry.textContent = `"The relentless spikes break through, leaving you with deep, painful wounds." You take ${value} damage`;
+          }
+        }
       }
       break;
   }

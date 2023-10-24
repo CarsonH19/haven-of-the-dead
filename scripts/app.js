@@ -591,20 +591,20 @@ continueButton.addEventListener("click", () => {
 
 trapButtonOne.addEventListener("click", () => {
   if (trapButtonOne.textContent === "Strength") {
-    trapHandler(baseStrength);
+    trapHandler(baseStrength, 'STRENGTH');
   } else if (trapButtonOne.textContent === "Dexterity") {
-    trapHandler(baseDexterity);
+    trapHandler(baseDexterity, 'DEXTERITY');
   } else {
-    trapHandler(baseFaith);
+    trapHandler(baseFaith, 'FAITH');
   }
 });
 
 trapButtonTwo.addEventListener("click", () => {
   if (trapButtonTwo.textContent === "Strength") {
-    trapHandler(baseStrength);
+    trapHandler(baseStrength, 'STRENGTH');
   } else if (trapButtonTwo.textContent === "Dexterity") {
-    trapHandler(baseDexterity);
+    trapHandler(baseDexterity, 'DEXTERITY');
   } else {
-    trapHandler(baseFaith);
+    trapHandler(baseFaith, 'FAITH');
   }
 });
