@@ -65,6 +65,19 @@ body {
 
 /* 
 ==========================================
+          Middle Content
+==========================================
+*/
+
+.middle-content {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+/* 
+==========================================
           Bottom Content
 ==========================================
 */
@@ -218,7 +231,7 @@ progress[value]::-moz-progress-bar {
 ==========================================
 */
 
-.modal {
+.modal, .inventory-modal {
   position: fixed; /* Use fixed position */
   z-index: 1;
   left: 0;
@@ -229,6 +242,7 @@ progress[value]::-moz-progress-bar {
 }
 
 .hero-modal-content,
+.inventory-modal-content,
 .modal-content {
   display: flex;
   flex-direction: column;
@@ -310,8 +324,8 @@ progress[value]::-moz-progress-bar {
   width: 150px;
   height: 50px;
 }
-/* 
-==========================================
-             Health Bars
-==========================================
-*/
+
+/* Inventory Modal */
+#inventoryModal {
+  display: none;
+}

@@ -27,14 +27,14 @@ function playerAttackHandler(smite = 1) {
       currentRoom.contents.monsters[0].name,
       totalDamage
     );
-  } else if (smite > 1) { 
+  } else if (smite > 1) {
     totalDamage = playerToMonsterDamage * smite;
     writeToLog(
       LOG_EVENT_SMITE,
       currentRoom.contents.monsters[0].name,
       totalDamage
     );
-  } else if (playerToMonsterDamage >= baseAttack) { 
+  } else if (playerToMonsterDamage >= baseAttack) {
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
     writeToLog(
       LOG_EVENT_PLAYER_CRITICAL,
@@ -70,7 +70,7 @@ function monsterAttackHandler() {
       LOG_EVENT_EVASION,
       currentRoom.contents.monsters[0].name,
       monsterToPlayerDamage
-    )
+    );
   }
 
   playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
@@ -92,7 +92,7 @@ function dealMonsterDamage(damage) {
       LOG_EVENT_BURNING_RADIANCE,
       currentRoom.contents.monsters[0].name,
       dealtDamage
-    )
+    );
   }
 
   return dealtDamage;
@@ -137,7 +137,7 @@ function guardHandler() {
     LOG_EVENT_GUARD,
     currentRoom.contents.monsters[0].name,
     damageBlocked
-  )
+  );
 
   // console.log(`Damage Received: ${monsterToGuardDamage}`);
   // console.log(`Damage Blocked: ${damageBlocked}`);
@@ -192,11 +192,7 @@ function potionHandler() {
     specialCooldownHandler();
   }
 
-  writeToLog(
-    LOG_EVENT_POTION,
-    'You',
-    potionHealValue
-  )
+  writeToLog(LOG_EVENT_POTION, "You", potionHealValue);
 
   potionCounterHandler();
 }
@@ -357,12 +353,8 @@ function priestessGreaterPrayer() {
   playerHealthBar.value += greaterPrayerTracker;
   currentPlayerHealth += greaterPrayerTracker;
 
-  writeToLog(
-    LOG_EVENT_GREATER_PRAYER,
-    'You',
-    greaterPrayerTracker
-  )
-  
+  writeToLog(LOG_EVENT_GREATER_PRAYER, "You", greaterPrayerTracker);
+
   isGameOver();
   specialCooldownCounter = 8;
   specialCooldownHandler();
@@ -418,11 +410,9 @@ heroChoiceModal.addEventListener("click", function (event) {
     if (event.target === siggurd) {
       heroChoice = "PALADIN";
       setPaladinStats();
-
     } else if (event.target === riven) {
       heroChoice = "ROGUE";
       setRogueStats();
-
     } else if (event.target === liheth) {
       heroChoice = "PRIESTESS";
       setPriestessStats();
@@ -436,28 +426,11 @@ heroChoiceModal.addEventListener("click", function (event) {
   }
 });
 
-
 // ===============================
 //          Game Window
 // ===============================
 
 document.getElementById("gameWindow").style.display = "none";
-
-function togglePlayerControls() {
-  // attackBtn.classList.toggle('.toggle-btn');
-
-  if (currentRoom.contents.monsters.length > 0) {
-    attackBtn.disabled = false;
-    guardBtn.disabled = false;
-    specialBtn.disabled = false;
-    fleeBtn.disabled = false;
-  } else {
-    attackBtn.disabled = true;
-    guardBtn.disabled = true;
-    specialBtn.disabled = true;
-    fleeBtn.disabled = true;
-  }
-}
 
 function renderCurrentRoom(currentRoom) {
   roomNameElement.textContent = currentRoom.roomName;
@@ -469,17 +442,33 @@ function renderCurrentRoom(currentRoom) {
   }
 
   if (currentRoom.contents.traps) {
-    renderTrap(currentRoom.contents.traps)
-    writeToLog(
-      LOG_EVENT_TRAP_DESCRIPTION,
-      'you',
-      'danger'
-    )
+    renderTrap(currentRoom.contents.traps);
+    writeToLog(LOG_EVENT_TRAP_DESCRIPTION, "you", "danger");
   }
 
   specialCooldownCounter = 0;
   specialCooldownHandler();
   togglePlayerControls();
+}
+
+function togglePlayerControls() {
+  if (currentRoom.contents.monsters.length > 0) {
+    attackBtn.disabled = false;
+    guardBtn.disabled = false;
+    specialBtn.disabled = false;
+    fleeBtn.disabled = false;
+  } else {
+    attackBtn.disabled = true;
+    guardBtn.disabled = true;
+    specialBtn.disabled = true;
+    fleeBtn.disabled = true;
+  }
+
+  if (currentRoom.contents.monsters.length > 0) {
+    inventoryButton.disabled = true;
+  } else {
+    inventoryButton.disabled = false;
+  }
 }
 
 // ===============================
@@ -496,19 +485,18 @@ function closeCatacombsEntranceModal() {
   catacombEntranceModal.style.display = "none";
 }
 
-
 // ===============================
 //      Room Summary Modal
 // ===============================
-const roomSummaryModal = document.getElementById('roomSummaryModal');
-const roomSummaryButton = document.getElementById('roomSummaryBtn');
+const roomSummaryModal = document.getElementById("roomSummaryModal");
+const roomSummaryButton = document.getElementById("roomSummaryBtn");
 
 function closeRoomSummaryModal() {
-  roomSummaryModal.style.display = 'none';
+  roomSummaryModal.style.display = "none";
 }
 
 function renderRoomSummaryModal() {
-  console.log('renderRoomSummaryModal was called!');
+  console.log("renderRoomSummaryModal was called!");
   if (
     currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
@@ -548,32 +536,45 @@ function renderContinueButton() {
 //          Trap Modal
 // ===============================
 
-trapModal.style.display = 'none';
+trapModal.style.display = "none";
 
 function renderTrap(trap) {
-
   console.log("renderTrap Called!");
- 
+
   trapModal.style.display = "block";
- 
-  if (trap.optionOne === 'STRENGTH') {
-    trapButtonOne.textContent = 'Strength';
-  } else if (trap.optionOne === 'DEXTERITY') {
-    trapButtonOne.textContent = 'Dexterity'; 
+
+  if (trap.optionOne === "STRENGTH") {
+    trapButtonOne.textContent = "Strength";
+  } else if (trap.optionOne === "DEXTERITY") {
+    trapButtonOne.textContent = "Dexterity";
   } else {
-    trapButtonOne.textContent = 'Faith';
+    trapButtonOne.textContent = "Faith";
   }
 
-  if (trap.optionTwo === 'STRENGTH') {
-      trapButtonTwo.textContent = 'Strength';
-    } else if (trap.optionTwo === 'DEXTERITY') {
-      trapButtonTwo.textContent = 'Dexterity'; 
-    } else {
-      trapButtonTwo.textContent = 'Faith';
-    }
+  if (trap.optionTwo === "STRENGTH") {
+    trapButtonTwo.textContent = "Strength";
+  } else if (trap.optionTwo === "DEXTERITY") {
+    trapButtonTwo.textContent = "Dexterity";
+  } else {
+    trapButtonTwo.textContent = "Faith";
+  }
 }
 
+// ===============================
+//            Inventory
+// ===============================
 
+const inventoryButton = document.getElementById("inventoryBtn");
+const inventoryModal = document.getElementById("inventoryModal");
+const closeInventoryButton = document.getElementById("closeInventoryBtn");
+
+function openInventoryHandler() {
+  inventoryModal.style.display = "block";
+}
+
+function closeInventoryHandler() {
+  inventoryModal.style.display = "none";
+}
 
 // ===============================
 //       Event Listeners
@@ -587,7 +588,6 @@ attackBtn.addEventListener("click", function () {
   } else {
     monsterAttackHandler();
   }
-  
 });
 
 guardBtn.addEventListener("click", () => {
@@ -614,7 +614,7 @@ greatCatacombsBtn.addEventListener("click", () => {
   continueButtonModal.style.display = "block";
 });
 
-roomSummaryButton.addEventListener('click', () => {
+roomSummaryButton.addEventListener("click", () => {
   closeRoomSummaryModal();
   renderContinueButton();
 });
@@ -626,23 +626,26 @@ continueButton.addEventListener("click", () => {
   closeContinueButton();
 });
 
-
 trapButtonOne.addEventListener("click", () => {
   if (trapButtonOne.textContent === "Strength") {
-    trapHandler(baseStrength, 'STRENGTH');
+    trapHandler(baseStrength, "STRENGTH");
   } else if (trapButtonOne.textContent === "Dexterity") {
-    trapHandler(baseDexterity, 'DEXTERITY');
+    trapHandler(baseDexterity, "DEXTERITY");
   } else {
-    trapHandler(baseFaith, 'FAITH');
+    trapHandler(baseFaith, "FAITH");
   }
 });
 
 trapButtonTwo.addEventListener("click", () => {
   if (trapButtonTwo.textContent === "Strength") {
-    trapHandler(baseStrength, 'STRENGTH');
+    trapHandler(baseStrength, "STRENGTH");
   } else if (trapButtonTwo.textContent === "Dexterity") {
-    trapHandler(baseDexterity, 'DEXTERITY');
+    trapHandler(baseDexterity, "DEXTERITY");
   } else {
-    trapHandler(baseFaith, 'FAITH');
+    trapHandler(baseFaith, "FAITH");
   }
 });
+
+inventoryButton.addEventListener("click", openInventoryHandler);
+
+closeInventoryButton.addEventListener("click", closeInventoryHandler);

@@ -48,9 +48,9 @@
       </div>
     </div>
 
-     <!----------------- ROOM SUMMARY MODAL  ------------------->
+    <!----------------- ROOM SUMMARY MODAL  ------------------->
 
-     <div id="roomSummaryModal" class="modal">
+    <div id="roomSummaryModal" class="modal">
       <div class="modal-content">
         <h1>Room Cleared!</h1>
         <p>
@@ -71,14 +71,29 @@
       </div>
     </div>
 
-      <!----------------- TRAP MODAL  ------------------->
+    <!----------------- TRAP MODAL  ------------------->
 
-      <div id="trapModal" class="trap">
-        <div class="trap-content">
-          <button id="trapButtonOne">Strength</button>
-          <button id="trapButtonTwo">Dexterity</button>
-        </div>
+    <div id="trapModal" class="trap">
+      <div class="trap-content">
+        <button id="trapButtonOne">Strength</button>
+        <button id="trapButtonTwo">Dexterity</button>
       </div>
+    </div>
+
+    <!----------------- INVENTORY MODAL  ------------------->
+
+    <div id="inventoryModal" class="inventory-modal">
+      <div class="inventory-modal-content">
+        <h1>Inventory</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
+          consectetur earum vel quisquam ad similique eius et molestiae
+          molestias aut obcaecati praesentium perferendis, facilis soluta magni
+          quia commodi, sint dicta?
+        </p>
+        <button id="closeInventoryBtn">Continue</button>
+      </div>
+    </div>
 
     <!----------------- MAIN GAME WINDOW  ------------------->
 
@@ -96,6 +111,11 @@
                 100%
               </progress>
             </section>
+          </div>
+        </div>
+        <div>
+          <div class="middle-content">
+            <button id="inventoryBtn">Inventory</button>
           </div>
         </div>
         <div class="bottom-content">
@@ -116,8 +136,12 @@
             </div>
             <div class="other-buttons">
               <button id="guard-btn" class="toggle-btn">Guard</button>
-              <button id="special-btn" class="toggle-btn"><span id="specialCount">Special</span></button>
-              <button id="potion-btn" class="toggle-btn">Potion<span id="potionCount"></span></button>
+              <button id="special-btn" class="toggle-btn">
+                <span id="specialCount">Special</span>
+              </button>
+              <button id="potion-btn" class="toggle-btn">
+                Potion<span id="potionCount"></span>
+              </button>
               <button id="flee-btn" class="toggle-btn">Flee</button>
             </div>
           </div>
