@@ -133,7 +133,19 @@ function setMonsterHealth(maxLife) {
   currentMonsterHealth = maxLife;
 }
 
+function startBattle(room) {
+  renderMonsterStatBlock(room.contents.monsters[0]);
+}
 
+function checkForMonsters() {
+  currentRoom.contents.monsters.shift();
 
-
-
+  if (currentRoom.contents.monsters.length > 0) {
+    startBattle(currentRoom);
+    console.log("Another Monster!");
+  } else {
+    console.log("renderRoomSummaryModal should be called");
+    renderRoomSummaryModal();
+    togglePlayerControls();
+  }
+}

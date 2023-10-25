@@ -398,7 +398,47 @@ function isGameOver() {
 }
 
 // ===============================
-//        Game Window
+//       Choose Hero Modal
+// ===============================
+
+heroChoiceModal.style.display = "block";
+
+heroChoiceModal.addEventListener("click", function (event) {
+  const siggurd = document.getElementById("siggurd");
+  const riven = document.getElementById("riven");
+  const liheth = document.getElementById("liheth");
+
+  if (
+    event.target === siggurd ||
+    event.target === riven ||
+    event.target === liheth
+  ) {
+    document.getElementById("heroChoiceModal").style.display = "none";
+
+    if (event.target === siggurd) {
+      heroChoice = "PALADIN";
+      setPaladinStats();
+
+    } else if (event.target === riven) {
+      heroChoice = "ROGUE";
+      setRogueStats();
+
+    } else if (event.target === liheth) {
+      heroChoice = "PRIESTESS";
+      setPriestessStats();
+    }
+
+    document.getElementById("gameWindow").style.display = "flex";
+    renderCurrentRoom(catacombEntrance);
+    setTimeout(function () {
+      catacombEntranceModal.style.display = "block";
+    }, 3000);
+  }
+});
+
+
+// ===============================
+//          Game Window
 // ===============================
 
 document.getElementById("gameWindow").style.display = "none";
@@ -440,7 +480,6 @@ function renderCurrentRoom(currentRoom) {
   specialCooldownCounter = 0;
   specialCooldownHandler();
   togglePlayerControls();
-  renderContinueButton();
 }
 
 // ===============================
@@ -457,9 +496,40 @@ function closeCatacombsEntranceModal() {
   catacombEntranceModal.style.display = "none";
 }
 
+
+// ===============================
+//      Room Summary Modal
+// ===============================
+const roomSummaryModal = document.getElementById('roomSummaryModal');
+const roomSummaryButton = document.getElementById('roomSummaryBtn');
+
+function closeRoomSummaryModal() {
+  roomSummaryModal.style.display = 'none';
+}
+
+function renderRoomSummaryModal() {
+  console.log('renderRoomSummaryModal was called!');
+  if (
+    currentRoom !== catacombEntrance &&
+    currentRoom.contents.monsters.length === 0 &&
+    !currentRoom.contents.traps &&
+    !currentRoom.contents.NPCs
+  ) {
+    setTimeout(function () {
+      roomSummaryModal.style.display = "block";
+    }, 2000);
+  } else {
+    roomSummaryModal.style.display = "none";
+  }
+}
+
 // ===============================
 //      Continue Button Modal
 // ===============================
+
+function closeContinueButton() {
+  continueButtonModal.style.display = "none";
+}
 
 function renderContinueButton() {
   if (
@@ -468,7 +538,6 @@ function renderContinueButton() {
     !currentRoom.contents.traps &&
     !currentRoom.contents.NPCs
   ) {
-    console.log("renderContinueButton Called!");
     continueButtonModal.style.display = "block";
   } else {
     continueButtonModal.style.display = "none";
@@ -504,44 +573,6 @@ function renderTrap(trap) {
     }
 }
 
-// ===============================
-//       Choose Hero Modal
-// ===============================
-
-heroChoiceModal.style.display = "block";
-
-heroChoiceModal.addEventListener("click", function (event) {
-  const siggurd = document.getElementById("siggurd");
-  const riven = document.getElementById("riven");
-  const liheth = document.getElementById("liheth");
-
-  if (
-    event.target === siggurd ||
-    event.target === riven ||
-    event.target === liheth
-  ) {
-    document.getElementById("heroChoiceModal").style.display = "none";
-
-    if (event.target === siggurd) {
-      heroChoice = "PALADIN";
-      setPaladinStats();
-
-    } else if (event.target === riven) {
-      heroChoice = "ROGUE";
-      setRogueStats();
-
-    } else if (event.target === liheth) {
-      heroChoice = "PRIESTESS";
-      setPriestessStats();
-    }
-
-    document.getElementById("gameWindow").style.display = "flex";
-    renderCurrentRoom(catacombEntrance);
-    setTimeout(function () {
-      catacombEntranceModal.style.display = "block";
-    }, 3000);
-  }
-});
 
 
 // ===============================
@@ -583,11 +614,16 @@ greatCatacombsBtn.addEventListener("click", () => {
   continueButtonModal.style.display = "block";
 });
 
+roomSummaryButton.addEventListener('click', () => {
+  closeRoomSummaryModal();
+  renderContinueButton();
+});
+
 continueButton.addEventListener("click", () => {
   removeCurrentRoom();
   getRandomRoom(catacombRooms);
   renderCurrentRoom(currentRoom);
-  renderContinueButton();
+  closeContinueButton();
 });
 
 

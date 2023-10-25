@@ -104,22 +104,6 @@ function getRandomRoom(array) {
   currentRoom = array[roomIndex];
 }
 
-function startBattle(room) {
-  renderMonsterStatBlock(room.contents.monsters[0]);
-}
-
-function checkForMonsters() {
-  currentRoom.contents.monsters.shift();
-
-  if (currentRoom.contents.monsters.length > 0) {
-    startBattle(currentRoom);
-    console.log("Another Monster!");
-  } else {
-    renderContinueButton();
-    togglePlayerControls();
-  }
-}
-
 function removeCurrentRoom() {
   if (currentRoom !== catacombEntrance) {
     catacombRooms.splice(roomIndex, 1);
