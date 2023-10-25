@@ -27,7 +27,7 @@ function trapHandler(baseStat, attribute) {
       trap.failDamage
     )
   }
-
+  console.log('Trap: ' + randomNumber);
   trapModal.style.display = 'none';
   currentRoom.contents.traps = null;
   renderContinueButton();

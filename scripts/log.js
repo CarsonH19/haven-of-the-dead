@@ -828,6 +828,19 @@ function writeToLog(event, name, value) {
           } else {
             newEntry.textContent = '"Gritting your teeth, you summon every ounce of strength within you and forcefully push the encroaching spikes back, leaving a narrow escape route in your wake."'
           }
+        } else if (value === 'DEXTERITY') {
+          if (narration === 1) {
+            newEntry.textContent = `“With swift reflexes, you sidestep the encroaching spikes, narrowly avoiding their deadly embrace.”`
+          } else if (narration === 2) {
+            newEntry.textContent = `“You move with lightning speed, narrowly evading the advancing spikes as they close in around you.”`
+          } else if (narration === 3) {
+            newEntry.textContent = `“Your nimble feet dance across the floor, narrowly avoiding the deadly spikes as they inch closer.”`
+          } else if (narration === 4) {
+            newEntry.textContent = `“You move with a breathless urgency, narrowly evading the closing spikes with split-second timing.”`
+          } else {
+            newEntry.textContent = `“In a display of acrobatic prowess, you somersault and twist, effortlessly evading the closing spikes.”`
+          }
+
         }
       }
       break;
@@ -846,6 +859,18 @@ function writeToLog(event, name, value) {
             newEntry.textContent = `"Despite your efforts, the spikes find their mark, leaving you wounded and breathless." You take ${value} damage.`;
           } else {
             newEntry.textContent = `"The relentless spikes break through, leaving you with deep, painful wounds." You take ${value} damage`;
+          }
+        } else if (name === 'DEXTERITY') {
+          if (narration === 1) {
+            newEntry.textContent = `“Despite your agile attempts, the spikes find their mark, leaving you wounded and breathless.” You take ${value} damage.`;
+          } else if (narration === 2) {
+            newEntry.textContent = `“You navigate the narrowing space with impressive agility, but the spikes outmatch even your lightning-fast reflexes. They strike, leaving you wounded.” You take ${value} damage.`;
+          } else if (narration === 3) {
+            newEntry.textContent = `“You come agonizingly close to evading the spikes, but they catch you at the last moment, leaving you with a series of painful scratches.” You take ${value} damage.`;
+          } else if (narration === 4) {
+            newEntry.textContent = `“You execute a series of deft maneuvers, but the spikes catch you on the edge of your escape. They graze you, leaving shallow wounds in their wake.” You take ${value} damage.`;
+          } else {
+            newEntry.textContent = `“Your movements are precise and calculated, but the spikes prove too swift. They strike, leaving you with painful wounds.” You take ${value} damage`;
           }
         }
       }

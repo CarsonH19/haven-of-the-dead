@@ -437,6 +437,8 @@ function renderCurrentRoom(currentRoom) {
     )
   }
 
+  specialCooldownCounter = 0;
+  specialCooldownHandler();
   togglePlayerControls();
   renderContinueButton();
 }
