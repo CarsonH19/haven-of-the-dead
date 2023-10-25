@@ -36,6 +36,12 @@ const catacombEntranceModal = document.getElementById("catacombEntranceModal");
 const greatCatacombsBtn = document.getElementById("greatCatacombsBtn");
 
 // ===============================
+//      Room Summary Modal
+// ===============================
+
+let roomSummaryInformation;
+
+// ===============================
 //      Continue Button Modal
 // ===============================
 

@@ -130,12 +130,6 @@ body {
   background-color: gray;
   padding: 6px;
 }
-/* 
-.toggle-btn {
-  pointer-events:none;
-  opacity: 0.6; 
-  cursor: not-allowed; 
-} */
 
 .attack {
   display: flex;
@@ -255,6 +249,7 @@ progress[value]::-moz-progress-bar {
   border-radius: 10px;
   width: 70%;
   height: 60%;
+  overflow: auto;
 }
 
 

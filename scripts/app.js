@@ -491,21 +491,23 @@ function closeCatacombsEntranceModal() {
 
 const roomSummaryModal = document.getElementById("roomSummaryModal");
 const roomSummaryButton = document.getElementById("roomSummaryBtn");
-const roomSummaryDescription = document.getElementById('roomSummaryDescription');
-const roomSummaryMonsters = document.getElementById('roomSummaryMonster');
-const roomSummaryItems = document.getElementById('roomSummaryItems');
-const roomSummaryNPCs = document.getElementById('roomSummaryNPCs');
-const roomSummaryTraps = document.getElementById('roomSummaryTraps');
-const roomSummaryExperience = document.getElementById('roomSummaryExperience');
-
-
-
 
 function closeRoomSummaryModal() {
   roomSummaryModal.style.display = "none";
 }
 
 function renderRoomSummaryModal() {
+  const roomSummaryDescription = document.getElementById(
+    "roomSummaryDescription"
+  );
+  const roomSummaryMonsters = document.getElementById("roomSummaryMonsters");
+  const roomSummaryItems = document.getElementById("roomSummaryItems");
+  const roomSummaryNPCs = document.getElementById("roomSummaryNPCs");
+  const roomSummaryTraps = document.getElementById("roomSummaryTraps");
+  const roomSummaryExperience = document.getElementById(
+    "roomSummaryExperience"
+  );
+
   if (
     currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
@@ -514,18 +516,85 @@ function renderRoomSummaryModal() {
   ) {
     setTimeout(function () {
       roomSummaryModal.style.display = "block";
-// Add Elements to each sections div using 
-// information from the roomSummaryInformation object.
+      let roomInfo = roomSummaryInformation.contents;
+
+      // Description
+      descriptionHeader = document.createElement("h4");
+      descriptionHeader.textContent = `${roomSummaryInformation.roomName}`;
+      roomSummaryDescription.appendChild(descriptionHeader);
+      descriptionText = document.createElement("p");
+      descriptionText.textContent = `${roomSummaryInformation.description}`;
+      roomSummaryDescription.appendChild(descriptionText);
+
+      // Monsters
+      if (roomInfo.monsters.length > 0) {
+        monstersHeader = document.createElement("h4");
+        monstersHeader.textContent = `Monsters Defeated`;
+        roomSummaryMonsters.appendChild(monstersHeader);
+        monstersList = document.createElement("ul");
+        roomSummaryMonsters.appendChild(monstersList);
+
+        for (let i = 0; i < roomInfo.monsters.length; i++) {
+          addMonsterToList = document.createElement("li");
+          addMonsterToList.textContent = roomInfo.monsters[i].name;
+          monstersList.appendChild(addMonsterToList);
+        }
+      }
+
+      // Items
+      if (roomInfo.items.length > 0) {
+        itemsHeader = document.createElement("h4");
+        itemsHeader.textContent = 'Items Found';
+        roomSummaryItems.appendChild(itemsHeader);
+        itemsList = document.createElement("ul");
+        roomSummaryItems.appendChild(itemsList);
+
+        for(let i = 0; i < roomInfo.items.length; i++) {
+          addItemToList = document.createElement('li');
+          addItemToList.textContent = roomInfo.items[i].name;
+          itemsList.appendChild(addItemToList);
+        }
+      }
+
+      // NPCs
+      if (roomInfo.NPCs) {
+        npcsHeader = document.createElement("h4");
+        npcsHeader.textContent = `${roomInfo.NPCs.name}`;
+        roomSummaryNPCs.appendChild(npcsHeader);
+        npcsText = document.createElement("p");
+        npcsText.textContent = `${roomInfo.NPCs.description}`;
+        roomSummaryNPCs.appendChild(npcsText);
+      }
+
+      // Traps
+      if (roomInfo.traps) {
+        trapsHeader = document.createElement("h4");
+        trapsHeader.textContent = `${roomInfo.traps.name}`;
+        roomSummaryTraps.appendChild(trapsHeader);
+        trapText = document.createElement("p");
+        trapText.textContent = `${roomInfo.traps.description}`;
+        roomSummaryTraps.appendChild(trapText);
+      }
+      // Experience
+      // experienceHeader = document.createElement('h4');
+      // experienceText = document.createElement('p');
     }, 2000);
   } else {
     roomSummaryModal.style.display = "none";
   }
-
-
 }
 
 function setRoomSummary() {
   roomSummaryInformation = JSON.parse(JSON.stringify(currentRoom));
+}
+
+function clearRoomSummaryModal() {
+  roomSummaryDescription.textContent = "";
+  roomSummaryMonsters.textContent = "";
+  roomSummaryItems.textContent = "";
+  roomSummaryNPCs.textContent = "";
+  roomSummaryTraps.textContent = "";
+  roomSummaryExperience.textContent = "";
 }
 
 // ===============================
@@ -537,6 +606,8 @@ function closeContinueButton() {
 }
 
 function renderContinueButton() {
+  continueButton.textContent = "Continue...";
+
   if (
     currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
@@ -629,11 +700,13 @@ fleeBtn.addEventListener("click", fleeHandler);
 greatCatacombsBtn.addEventListener("click", () => {
   catacombEntranceModal.style.display = "none";
   continueButtonModal.style.display = "block";
+  continueButton.textContent = "Enter the Catacombs";
 });
 
 roomSummaryButton.addEventListener("click", () => {
   closeRoomSummaryModal();
   renderContinueButton();
+  clearRoomSummaryModal();
 });
 
 continueButton.addEventListener("click", () => {
