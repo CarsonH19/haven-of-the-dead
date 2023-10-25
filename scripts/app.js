@@ -382,7 +382,6 @@ function isGameOver() {
   }
 
   if (currentMonsterHealth <= 0) {
-    alert("You won!");
     checkForMonsters();
   }
 
@@ -449,6 +448,7 @@ function renderCurrentRoom(currentRoom) {
   specialCooldownCounter = 0;
   specialCooldownHandler();
   togglePlayerControls();
+  setRoomSummary();
 }
 
 function togglePlayerControls() {
@@ -488,15 +488,24 @@ function closeCatacombsEntranceModal() {
 // ===============================
 //      Room Summary Modal
 // ===============================
+
 const roomSummaryModal = document.getElementById("roomSummaryModal");
 const roomSummaryButton = document.getElementById("roomSummaryBtn");
+const roomSummaryDescription = document.getElementById('roomSummaryDescription');
+const roomSummaryMonsters = document.getElementById('roomSummaryMonster');
+const roomSummaryItems = document.getElementById('roomSummaryItems');
+const roomSummaryNPCs = document.getElementById('roomSummaryNPCs');
+const roomSummaryTraps = document.getElementById('roomSummaryTraps');
+const roomSummaryExperience = document.getElementById('roomSummaryExperience');
+
+
+
 
 function closeRoomSummaryModal() {
   roomSummaryModal.style.display = "none";
 }
 
 function renderRoomSummaryModal() {
-  console.log("renderRoomSummaryModal was called!");
   if (
     currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
@@ -505,10 +514,18 @@ function renderRoomSummaryModal() {
   ) {
     setTimeout(function () {
       roomSummaryModal.style.display = "block";
+// Add Elements to each sections div using 
+// information from the roomSummaryInformation object.
     }, 2000);
   } else {
     roomSummaryModal.style.display = "none";
   }
+
+
+}
+
+function setRoomSummary() {
+  roomSummaryInformation = JSON.parse(JSON.stringify(currentRoom));
 }
 
 // ===============================
