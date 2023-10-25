@@ -324,3 +324,39 @@ progress[value]::-moz-progress-bar {
 #inventoryModal {
   display: none;
 }
+
+.inventory-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.inventory-left-side {
+  width: 30%
+}
+
+.attuned-box {
+  text-align: center;
+  border: 2px black solid;
+  height: 100%;
+
+}
+
+.inventory-right-side {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.magic-items-box {
+  text-align: center;
+  height: 50%;
+  border: 2px black solid;
+}
+
+.consumables-box {
+  text-align: center;
+  height: 50%;
+  border: 2px black solid;
+
+}
