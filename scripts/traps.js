@@ -11,6 +11,9 @@ const spikeTrap = {
 function trapHandler(baseStat, attribute) {
   let trap = currentRoom.contents.traps;
   let randomNumber = (Math.floor(Math.random() * 10) + baseStat);
+  console.log(randomNumber);
+  randomNumber = randomNumber + isItemAttuned(evertorch);
+  console.log(randomNumber);
 
   if (randomNumber > trap.passValue) {
     writeToLog(

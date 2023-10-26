@@ -31,7 +31,7 @@ let catacombRooms = [
     contents: {
       monsters: [CRYPT_CRAWLER, SKELETAL_SOLDIER, ARMORED_SKELETON],
       NPCs: null,
-      items: [],
+      items: [evertorch],
       consumables: [],
       traps: null,
     },
@@ -91,7 +91,7 @@ let catacombRooms = [
     contents: {
       monsters: [],
       NPCs: null,
-      items: [],
+      items: [evertorch],
       consumables: null,
       traps: spikeTrap
     },

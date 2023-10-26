@@ -544,13 +544,13 @@ function renderRoomSummaryModal() {
       // Items
       if (roomInfo.items.length > 0) {
         itemsHeader = document.createElement("h4");
-        itemsHeader.textContent = 'Items Found';
+        itemsHeader.textContent = "Items Found";
         roomSummaryItems.appendChild(itemsHeader);
         itemsList = document.createElement("ul");
         roomSummaryItems.appendChild(itemsList);
 
-        for(let i = 0; i < roomInfo.items.length; i++) {
-          addItemToList = document.createElement('li');
+        for (let i = 0; i < roomInfo.items.length; i++) {
+          addItemToList = document.createElement("li");
           addItemToList.textContent = roomInfo.items[i].name;
           itemsList.appendChild(addItemToList);
         }
@@ -581,6 +581,12 @@ function renderRoomSummaryModal() {
     }, 2000);
   } else {
     roomSummaryModal.style.display = "none";
+  }
+
+  if (currentRoom.contents.items.length > 0) {
+    for (let i = 0; i < currentRoom.contents.items.length; i++) {
+      addItemToInventory(currentRoom.contents.items[i]);
+    }
   }
 }
 
@@ -736,6 +742,9 @@ trapButtonTwo.addEventListener("click", () => {
   }
 });
 
-inventoryButton.addEventListener("click", openInventoryHandler);
+inventoryButton.addEventListener("click", () => {
+  renderInventory();
+  openInventoryHandler();
+});
 
 closeInventoryButton.addEventListener("click", closeInventoryHandler);

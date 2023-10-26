@@ -98,11 +98,10 @@ const LOG_EVENT_EVASION = 'EVASION';
 const LOG_EVENT_GREATER_PRAYER = 'GREATER PRAYER';
 const LOG_EVENT_BURNING_RADIANCE = 'BURNING RADIANCE'
 
-
-
 // ===============================
 //        Hero Variables
 // ===============================
+
 let heroChoice;
 let baseAttack;
 let baseHealth;
@@ -149,3 +148,8 @@ function calculateCritDamage() {
 // Faith
 let baseFaith; // add faith to flee function after random number
 let findItemChance; // use when items are finished
+
+// ===============================
+//      Inventory Variables
+// ===============================
+
