@@ -449,7 +449,7 @@ function renderCurrentRoom(currentRoom) {
 
   // Adds findItem() if not at the Catacomb Entrance.
   if (currentRoom !== catacombEntrance) {
-      findItems();
+    findItems();
   }
 
   specialCooldownCounter = 0;
@@ -471,18 +471,18 @@ function togglePlayerControls() {
     fleeBtn.disabled = true;
   }
 
-  if (currentRoom.contents.monsters.length > 0) {
-    inventoryButton.disabled = true;
-  } else {
-    inventoryButton.disabled = false;
-  }
-
-  if (currentRoom.contents.traps) {
+  if (
+    currentRoom.contents.monsters.length > 0 ||
+    trapModal.style.display === "block"
+  ) {
     inventoryButton.disabled = true;
     potionBtn.disabled = true;
   } else {
     inventoryButton.disabled = false;
+    potionBtn.disabled = false;
+
   }
+
 
 }
 
@@ -730,6 +730,7 @@ roomSummaryButton.addEventListener("click", () => {
   closeRoomSummaryModal();
   renderContinueButton();
   clearRoomSummaryModal();
+  togglePlayerControls();
 });
 
 continueButton.addEventListener("click", () => {
@@ -767,7 +768,7 @@ inventoryButton.addEventListener("click", () => {
 closeInventoryButton.addEventListener("click", () => {
   closeInventoryHandler();
   // Clears the inventory to avoid duplication.
+  slots = "";
   magicItemsBox.textContent = "";
   consumablesBox.textContent = "";
-
 });
