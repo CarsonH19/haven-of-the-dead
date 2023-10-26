@@ -3,25 +3,6 @@
 // When a room is completed it is removed from the array.
 // If a player flees from the room it is not removed from the array.
 
-const roomNameElement = document.getElementById("catacombRoomName");
-let roomIndex;
-
-
-const catacombEntrance = {
-  roomName: "Catacomb Entrance",
-  backgroundImage: null,
-  music: null,
-  contents: {
-    monsters: [],
-    NPCs: null,
-    items: [],
-    consumables: [],
-    traps: null,
-  },
-};
-
-let currentRoom = catacombEntrance;
-
 let catacombRooms = [
   {
     roomName: "Bonevault",
@@ -31,7 +12,7 @@ let catacombRooms = [
     contents: {
       monsters: [CRYPT_CRAWLER, SKELETAL_SOLDIER, ARMORED_SKELETON],
       NPCs: null,
-      items: [evertorch],
+      items: [],
       consumables: [],
       traps: null,
     },
@@ -91,7 +72,7 @@ let catacombRooms = [
     contents: {
       monsters: [],
       NPCs: null,
-      items: [evertorch],
+      items: [],
       consumables: null,
       traps: spikeTrap
     },

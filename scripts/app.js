@@ -434,15 +434,22 @@ document.getElementById("gameWindow").style.display = "none";
 function renderCurrentRoom(currentRoom) {
   roomNameElement.textContent = currentRoom.roomName;
 
+  // Renders monsters if there are monsters in the room.
   if (currentRoom.contents.monsters.length > 0) {
     startBattle(currentRoom);
   } else {
     monsterContainer.style.display = "none";
   }
 
+  // Renders Trap Modal if there is a trap in the room.
   if (currentRoom.contents.traps) {
     renderTrap(currentRoom.contents.traps);
     writeToLog(LOG_EVENT_TRAP_DESCRIPTION, "you", "danger");
+  }
+
+  // Adds findItem() if not at the Catacomb Entrance.
+  if (currentRoom !== catacombEntrance) {
+      findItems();
   }
 
   specialCooldownCounter = 0;
@@ -514,6 +521,7 @@ function renderRoomSummaryModal() {
     !currentRoom.contents.traps &&
     !currentRoom.contents.NPCs
   ) {
+    // Builds summary modal with currentRoom's contents.
     setTimeout(function () {
       roomSummaryModal.style.display = "block";
       let roomInfo = roomSummaryInformation.contents;
@@ -583,6 +591,7 @@ function renderRoomSummaryModal() {
     roomSummaryModal.style.display = "none";
   }
 
+  // Adds items in current room to inventory
   if (currentRoom.contents.items.length > 0) {
     for (let i = 0; i < currentRoom.contents.items.length; i++) {
       addItemToInventory(currentRoom.contents.items[i]);
@@ -747,4 +756,10 @@ inventoryButton.addEventListener("click", () => {
   openInventoryHandler();
 });
 
-closeInventoryButton.addEventListener("click", closeInventoryHandler);
+closeInventoryButton.addEventListener("click", () => {
+  closeInventoryHandler();
+  // Clears the inventory to avoid duplication.
+  magicItemsBox.textContent = "";
+  consumablesBox.textContent = "";
+
+});

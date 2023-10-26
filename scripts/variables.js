@@ -146,10 +146,26 @@ function calculateCritDamage() {
 }
 
 // Faith
-let baseFaith; // add faith to flee function after random number
-let findItemChance; // use when items are finished
+let baseFaith;
 
 // ===============================
-//      Inventory Variables
+//       Catacomb Variables
 // ===============================
 
+const roomNameElement = document.getElementById("catacombRoomName");
+let roomIndex;
+
+const catacombEntrance = {
+  roomName: "Catacomb Entrance",
+  backgroundImage: null,
+  music: null,
+  contents: {
+    monsters: [],
+    NPCs: null,
+    items: [],
+    consumables: [],
+    traps: null,
+  },
+};
+
+let currentRoom = catacombEntrance;

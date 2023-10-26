@@ -144,7 +144,6 @@ function checkForMonsters() {
     startBattle(currentRoom);
     console.log("Another Monster!");
   } else {
-    console.log("renderRoomSummaryModal should be called");
     renderRoomSummaryModal();
     togglePlayerControls();
   }
