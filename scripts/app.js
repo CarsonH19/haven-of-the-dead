@@ -476,6 +476,14 @@ function togglePlayerControls() {
   } else {
     inventoryButton.disabled = false;
   }
+
+  if (currentRoom.contents.traps) {
+    inventoryButton.disabled = true;
+    potionBtn.disabled = true;
+  } else {
+    inventoryButton.disabled = false;
+  }
+
 }
 
 // ===============================
