@@ -27,6 +27,8 @@ let currentPlayerHealth;
 
 const bottomContent = document.querySelector(".bottom-content");
 const playerContainer = document.querySelector(".player-container");
+const roomsCleared = document.getElementById('roomsCleared');
+let roomCounter = 0;
 
 // ===============================
 //     Catacomb Entrance Modal

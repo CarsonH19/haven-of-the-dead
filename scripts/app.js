@@ -452,6 +452,8 @@ function renderCurrentRoom(currentRoom) {
     findItems();
   }
 
+  
+
   specialCooldownCounter = 0;
   specialCooldownHandler();
   togglePlayerControls();
@@ -480,10 +482,12 @@ function togglePlayerControls() {
   } else {
     inventoryButton.disabled = false;
     potionBtn.disabled = false;
-
   }
+}
 
-
+function updateRoomsCleared() {
+  roomCounter++;
+  roomsCleared.textContent = `Rooms Cleared: ${roomCounter}`;
 }
 
 // ===============================
@@ -731,6 +735,7 @@ roomSummaryButton.addEventListener("click", () => {
   renderContinueButton();
   clearRoomSummaryModal();
   togglePlayerControls();
+  updateRoomsCleared();
 });
 
 continueButton.addEventListener("click", () => {
