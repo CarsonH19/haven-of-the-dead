@@ -8,8 +8,15 @@ function setPlayerHealthBar(maxLife) {
   currentPlayerHealth = maxLife;
 }
 
-function increasePlayerHealth(healValue) {
+function healPlayer(healValue) {
+
   playerHealthBar.value = +playerHealthBar.value + healValue;
+  currentPlayerHealth += healValue
+
+  if (currentPlayerHealth > playerMaxHealth) {
+    playerHealthBar.value = playerMaxHealth;
+    currentPlayerHealth = playerMaxHealth;
+  }
 }
 
 // ===============================
@@ -186,13 +193,7 @@ function potionCounterHandler() {
 }
 
 function potionHandler() {
-  playerHealthBar.value += potionHealValue;
-  currentPlayerHealth += potionHealValue;
-
-  if (currentPlayerHealth > playerMaxHealth) {
-    playerHealthBar.value = playerMaxHealth;
-    currentPlayerHealth = playerMaxHealth;
-  }
+  healPlayer(potionHealValue);
 
   writeToLog(LOG_EVENT_POTION, "You", potionHealValue);
 
@@ -204,11 +205,10 @@ function potionHandler() {
 // ===============================
 function fleeHandler() {
   let fleeChance = Math.round(Math.random() * 10) + baseFaith;
-  // console.log(fleeChance);
   fleeChance += isItemAttuned(RING_OF_THE_RODENT, 0);
-  // console.log(fleeChance);
   if (fleeChance >= 10) {
-    // console.log("Flee Successful");
+    console.log("Flee Successful");
+    // writeToLog() 
     getRandomRoom(catacombRooms);
     renderCurrentRoom(currentRoom);
   }
