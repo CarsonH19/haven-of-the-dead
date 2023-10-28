@@ -39,8 +39,7 @@ const FLASK_OF_LIGHT = {
   rarity: "COMMON",
   effect: "While attuned to this item ghosts are weakened by your presence.",
   function: () => {
-    if (
-      currentRoom.contents.monsters[0].type === 'GHOST') {
+    if (currentRoom.contents.monsters[0].type === "GHOST") {
       monsterMaxHealth = monsterMaxHealth - 15;
       monsterAttackValue = monsterAttackValue - 2;
       console.log(`Ghost Weakened!`);
@@ -183,13 +182,35 @@ const WRAITHBANE = {
   type: "MAGIC",
   rarity: "RARE",
   effect:
-    "While attuned to this item your attacks deal additional damage against ghosts.",
+    "While attuned to this item your attacks deal additional damage against undead spirits.",
   function: () => {
-    if (currentRoom.contents.monsters[0].type === "GHOST") {
+    if (
+      currentRoom.contents.monsters[0].name === SHADE ||
+      currentRoom.contents.monsters[0].name === HAUNTING_SPIRIT ||
+      currentRoom.contents.monsters[0].name === GRUDGE
+    ) {
       console.log(`+5 Damage to ghosts!`);
       return 5;
     } else {
       return 0;
+    }
+  },
+};
+
+const SUNSTONE = {
+  name: "Sunstone",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "While attuned to this item undead creatures take damage at the start of battle.",
+  function: () => {
+    if (currentRoom.contents.monsters[0].type === "UNDEAD") {
+      console.log(`The Sunstone deals 10 Damage!`);
+      currentMonsterHealth -= 10;
+      monsterHealthBar.value -= 10;
+    } else {
+      return;
     }
   },
 };
@@ -207,7 +228,7 @@ const WRAITHBANE = {
 //     function:
 //  }
 
-let attunedItems = [MIST_VEIL_CLOAK];
+let attunedItems = [];
 let inventoryItems = [];
 
 function isItemAttuned(item, defaultValue) {

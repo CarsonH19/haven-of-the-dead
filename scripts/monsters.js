@@ -10,74 +10,85 @@ const CRYPT_CRAWLER = {
 
 const DECREPIT_SKELETON = {
   name: 'Decrepit Skeleton',
+  type: 'UNDEAD',
   skulls: 1
 }
 
 const SKELETAL_SOLDIER = {
   name: 'Skeletal Soldier',
+  type: 'UNDEAD',
   skulls: 2
 }
 
 const ARMORED_SKELETON = {
   name: 'Armored Skeleton',
+  type: 'UNDEAD',
   skulls: 3
 }
 
 const BLAZING_SKELETON = {
   name: 'Blazing Skeleton',
+  type: 'UNDEAD',
   skulls: 3
 }
 
 const DRAUGR = {
   name: 'Draugr',
+  type: 'UNDEAD',
   skulls: 6
 }
 
 const BONE_TITAN = {
   name: 'Bone Titan',
+  type: 'UNDEAD',
   skulls: 7
 }
 
 const FLOOD_OF_BONES = {
   name: 'Flood of Bones',
+  type: 'UNDEAD',
   skulls: 8
 }
 
 const BARON_OF_BONE = {
   name: 'Baron of Bone',
+  type: 'UNDEAD',
   skulls: 9
 }
 
 const SHADE = {
   name: 'Shade',
-  type: 'GHOST',
+  type: 'UNDEAD',
   skulls: 1
 }
 
 const HAUNTING_SPIRIT = {
   name: 'Haunting Spirit',
-  type: 'GHOST',
+  type: 'UNDEAD',
   skulls: 3
 }
 
 const GRUDGE = {
   name: 'Grudge',
-  type: 'GHOST',
+  type: 'UNDEAD',
   skulls: 5
 }
 
 const GNAWER = {
   name: 'Gnawer',
+  type: 'BEAST',
   skulls: 1
 }
 
 const COFFIN_SPIDER = {
   name: 'Coffin Spider',
+  type: 'BEAST',
   skulls: 2
 }
 
 const SCOUNDREL = {
   name: 'Scoundrel',
+  type: 'BEAST',
   skulls: 2
 }
 
@@ -140,6 +151,7 @@ function setMonsterHealth(maxLife) {
 
 function startBattle(room) {
   renderMonsterStatBlock(room.contents.monsters[0]);
+  isItemAttuned(SUNSTONE, 0); // ITEM: Damages undead creatures.
 }
 
 function checkForMonsters() {
