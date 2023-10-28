@@ -4,6 +4,7 @@ const monsterSkullElement = document.getElementById('skull-level');
 
 const CRYPT_CRAWLER = {
   name: 'Crypt Crawler',
+  type: 'UNDEAD',
   skulls: 1
 }
 
@@ -49,16 +50,19 @@ const BARON_OF_BONE = {
 
 const SHADE = {
   name: 'Shade',
+  type: 'GHOST',
   skulls: 1
 }
 
-const GHOST = {
-  name: 'Ghost',
+const HAUNTING_SPIRIT = {
+  name: 'Haunting Spirit',
+  type: 'GHOST',
   skulls: 3
 }
 
 const GRUDGE = {
   name: 'Grudge',
+  type: 'GHOST',
   skulls: 5
 }
 

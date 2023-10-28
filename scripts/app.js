@@ -20,6 +20,9 @@ function playerAttackHandler(smite = 1) {
   let playerToMonsterDamage = dealMonsterDamage(baseAttack) + baseStrength;
   let totalDamage;
 
+  playerToMonsterDamage += isItemAttuned(WRAITHBANE); // ITEM: Increases baseAttack against ghosts.
+
+     // Smite Critical Hit
   if (playerToMonsterDamage >= baseAttack && smite > 1) {
     totalDamage = smite * (playerToMonsterDamage * baseCritModifier);
     writeToLog(
@@ -27,6 +30,7 @@ function playerAttackHandler(smite = 1) {
       currentRoom.contents.monsters[0].name,
       totalDamage
     );
+    // Smite Hit
   } else if (smite > 1) {
     totalDamage = playerToMonsterDamage * smite;
     writeToLog(
@@ -34,6 +38,7 @@ function playerAttackHandler(smite = 1) {
       currentRoom.contents.monsters[0].name,
       totalDamage
     );
+    // Critical Hit
   } else if (playerToMonsterDamage >= baseAttack) {
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
     writeToLog(
@@ -41,6 +46,7 @@ function playerAttackHandler(smite = 1) {
       currentRoom.contents.monsters[0].name,
       totalDamage
     );
+    // Normal Hit
   } else {
     totalDamage = playerToMonsterDamage;
     writeToLog(
@@ -143,9 +149,6 @@ function guardHandler() {
   // console.log(`Damage Blocked: ${damageBlocked}`);
   // console.log(`Current Player Health ${currentPlayerHealth}`);
   // console.log(`Current Player Health Bar Value ${playerHealthBar.value}`);
-
-  isGameOver();
-  specialCooldownHandler();
 }
 
 function calculateMonsterDamage() {
@@ -186,29 +189,9 @@ function potionHandler() {
     currentPlayerHealth = playerMaxHealth;
   }
 
-  if (currentRoom.contents.monsters.length > 0) {
-    monsterAttackHandler();
-    isGameOver();
-    specialCooldownHandler();
-  }
-
   writeToLog(LOG_EVENT_POTION, "You", potionHealValue);
 
   potionCounterHandler();
-}
-
-function specialCooldownHandler() {
-  const special = document.getElementById("specialCount");
-  if (specialCooldownCounter > 0) {
-    specialCooldownCounter--;
-    specialBtn.disabled = true;
-    special.textContent = `Cooldown: ${specialCooldownCounter}`;
-  }
-
-  if (specialCooldownCounter <= 0) {
-    specialBtn.disabled = false;
-    special.textContent = `Special`;
-  }
 }
 
 // ===============================
@@ -217,160 +200,12 @@ function specialCooldownHandler() {
 function fleeHandler() {
   const fleeChance = Math.round(Math.random() * 10) + baseFaith;
   console.log(fleeChance);
-  monsterAttackHandler();
   if (fleeChance >= 10) {
     console.log("Flee Successful");
     getRandomRoom(catacombRooms);
     renderCurrentRoom(currentRoom);
   }
 }
-
-// ===============================
-//        Hero: Paladin
-// ===============================
-
-let holySmiteTracker = 2.0;
-let radiantAuraTracker = 5;
-let paladin = {
-  name: "Holy Warrior Siggurd",
-  level: 1,
-  attack: 10,
-  health: 120,
-  strength: 2,
-  dexterity: 0,
-  faith: 1,
-  special: paladinHolySmite,
-};
-
-function setPaladinStats() {
-  baseAttack = paladin.attack;
-  baseHealth = paladin.health;
-  baseStrength = paladin.strength;
-  baseDexterity = paladin.dexterity;
-  baseFaith = paladin.faith;
-  specialAbility = paladin.special;
-
-  criticalDamage = calculateCritDamage();
-  strengthBonusHealth = calculateStrengthBonusHealth();
-  playerMaxHealth = calculatePlayerMaxHealth();
-  setPlayerHealthBar(playerMaxHealth);
-}
-
-function paladinHolySmite() {
-  playerAttackHandler(holySmiteTracker);
-  //   console.log(currentMonsterHealth);
-  //   console.log(monsterHealthBar.value);
-
-  isGameOver();
-  specialCooldownCounter = 4;
-  specialCooldownHandler();
-}
-
-function paladinRadiantAura() {
-  if (currentMonsterHealth <= radiantAuraTracker) {
-    currentMonsterHealth = 0;
-    monsterHealthBar.value = 0;
-    console.log("Face your judgement!");
-  }
-}
-
-// ===============================
-//        Hero: Rogue
-// ===============================
-
-let shadowStrikeTracker = 0;
-let evasionTracker = 2;
-let rogue = {
-  name: "Shadowcloak Riven",
-  level: 1,
-  attack: 8,
-  health: 100,
-  strength: 1,
-  dexterity: 2,
-  faith: 0,
-  special: rogueShadowStrike,
-};
-
-function setRogueStats() {
-  baseAttack = rogue.attack;
-  baseHealth = rogue.health;
-  baseStrength = rogue.strength;
-  baseDexterity = rogue.dexterity;
-  baseFaith = rogue.faith;
-  specialAbility = rogue.special;
-
-  criticalDamage = calculateCritDamage();
-  strengthBonusHealth = calculateStrengthBonusHealth();
-  playerMaxHealth = calculatePlayerMaxHealth();
-  setPlayerHealthBar(playerMaxHealth);
-}
-
-function rogueShadowStrike() {
-  guardHandler();
-
-  monsterHealthBar.value = +monsterHealthBar.value - criticalDamage;
-  currentMonsterHealth -= criticalDamage;
-
-  isGameOver();
-  specialCooldownCounter = 3;
-  specialCooldownHandler();
-}
-
-// See monsterAttackHandler for Rouge Passive Ability
-
-// ===============================
-//        Hero: Priestess
-// ===============================
-
-let greaterPrayerTracker = 40;
-let burningDevotionTracker = 3;
-let priestess = {
-  name: "Priestess Liheth",
-  level: 1,
-  attack: 12,
-  health: 90,
-  strength: 0,
-  dexterity: 1,
-  faith: 2,
-  special: priestessGreaterPrayer,
-};
-
-function setPriestessStats() {
-  baseAttack = priestess.attack;
-  baseHealth = priestess.health;
-  baseStrength = priestess.strength;
-  baseDexterity = priestess.dexterity;
-  baseFaith = priestess.faith;
-  specialAbility = priestess.special;
-
-  criticalDamage = calculateCritDamage();
-  strengthBonusHealth = calculateStrengthBonusHealth();
-  playerMaxHealth = calculatePlayerMaxHealth();
-  setPlayerHealthBar(playerMaxHealth);
-}
-
-function priestessGreaterPrayer() {
-  playerHealthBar.value += greaterPrayerTracker;
-  currentPlayerHealth += greaterPrayerTracker;
-
-  writeToLog(LOG_EVENT_GREATER_PRAYER, "You", greaterPrayerTracker);
-
-  isGameOver();
-  specialCooldownCounter = 8;
-  specialCooldownHandler();
-}
-
-// See dealPlayerDamage for Priestess Passive Ability
-
-// ===============================
-//        Boons & Leveling
-// ===============================
-
-let availableBoons = [];
-
-// randomly choose a boon
-// discard chosen boon from list
-// apply boon to hero
 
 // ===============================
 //          Is Game Over?
@@ -381,7 +216,8 @@ function isGameOver() {
     alert("You died!");
   }
 
-  if (currentMonsterHealth <= 0) {
+  if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {
+    isItemAttuned(BLOODSTONE); // ITEM: Recovers health when monster dies
     checkForMonsters();
   }
 
@@ -452,8 +288,6 @@ function renderCurrentRoom(currentRoom) {
     findItems();
   }
 
-  
-
   specialCooldownCounter = 0;
   specialCooldownHandler();
   togglePlayerControls();
@@ -478,7 +312,6 @@ function togglePlayerControls() {
     trapModal.style.display === "block"
   ) {
     inventoryButton.disabled = true;
-    potionBtn.disabled = true;
   } else {
     inventoryButton.disabled = false;
     potionBtn.disabled = false;
@@ -708,6 +541,8 @@ attackBtn.addEventListener("click", function () {
 guardBtn.addEventListener("click", () => {
   guardHandler();
   monsterAttackHandler();
+  isGameOver();
+  specialCooldownHandler();
 });
 
 specialBtn.addEventListener("click", () => {
@@ -718,11 +553,26 @@ specialBtn.addEventListener("click", () => {
   } else if (heroChoice === "PRIESTESS") {
     priestessGreaterPrayer();
   }
+
+  specialCooldownHandler();
+  isGameOver();
 });
 
-potionBtn.addEventListener("click", potionHandler);
+potionBtn.addEventListener("click", () => {
+  potionHandler();
 
-fleeBtn.addEventListener("click", fleeHandler);
+  if (currentRoom.contents.monsters.length > 0) {
+    monsterAttackHandler();
+    specialCooldownHandler();
+    isGameOver();
+  }
+});
+
+fleeBtn.addEventListener("click", () => {
+  fleeHandler();
+  monsterAttackHandler();
+  isGameOver();
+});
 
 greatCatacombsBtn.addEventListener("click", () => {
   catacombEntranceModal.style.display = "none";
@@ -753,6 +603,8 @@ trapButtonOne.addEventListener("click", () => {
   } else {
     trapHandler(baseFaith, "FAITH");
   }
+
+  isGameOver();
 });
 
 trapButtonTwo.addEventListener("click", () => {
@@ -763,6 +615,8 @@ trapButtonTwo.addEventListener("click", () => {
   } else {
     trapHandler(baseFaith, "FAITH");
   }
+
+  isGameOver();
 });
 
 inventoryButton.addEventListener("click", () => {

@@ -10,7 +10,7 @@ let catacombRooms = [
     backgroundImage: null,
     music: null,
     contents: {
-      monsters: [CRYPT_CRAWLER, SKELETAL_SOLDIER, ARMORED_SKELETON],
+      monsters: [GRUDGE, SKELETAL_SOLDIER, ARMORED_SKELETON],
       NPCs: null,
       items: [],
       consumables: [],
