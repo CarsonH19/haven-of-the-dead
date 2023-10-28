@@ -20,7 +20,7 @@ function playerAttackHandler(smite = 1) {
   let playerToMonsterDamage = dealMonsterDamage(baseAttack) + baseStrength;
   let totalDamage;
 
-  playerToMonsterDamage += isItemAttuned(WRAITHBANE); // ITEM: Increases baseAttack against ghosts.
+  playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0); // ITEM: Increases baseAttack against ghosts.
 
      // Smite Critical Hit
   if (playerToMonsterDamage >= baseAttack && smite > 1) {
@@ -79,8 +79,11 @@ function monsterAttackHandler() {
     );
   }
 
+  monsterToPlayerDamage = monsterToPlayerDamage * isItemAttuned(MIST_VEIL_CLOAK, 1) // ITEM: Chance to evade attacks.
+
   playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
   currentPlayerHealth -= monsterToPlayerDamage;
+
 
   writeToLog(
     LOG_EVENT_MONSTER_ATTACK,
@@ -217,7 +220,7 @@ function isGameOver() {
   }
 
   if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {
-    isItemAttuned(BLOODSTONE); // ITEM: Recovers health when monster dies
+    isItemAttuned(BLOODSTONE, null); // ITEM: Recovers health when monster dies
     checkForMonsters();
   }
 

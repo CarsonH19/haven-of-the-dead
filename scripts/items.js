@@ -108,8 +108,10 @@ const MIST_VEIL_CLOAK = {
   function: () => {
     let randomNumber = Math.floor(Math.random() * 25);
     if (randomNumber === 25) {
-      playerHealthBar.value = playerHealthBar.value;
-      currentPlayerHealth = currentPlayerHealth;
+      console.log(`Attack evaded!`);
+      return 0;
+    } else {
+      return 1;
     }
   },
 };
@@ -166,24 +168,26 @@ const BLOODSTONE = {
         currentPlayerHealth += 20;
         break;
     }
+    console.log(`You restored some health!`);
   },
 };
 
 const WRAITHBANE = {
-    name: 'Wraithbane',
-    description: '',
-    type: 'MAGIC',
-    rarity: 'RARE',
-    effect: 'While attuned to this item your attacks deal additional damage against ghosts.',
-    function: () => {
-      if (currentRoom.contents.monsters[0].type === 'GHOST') {
-        console.log(`+5 Damage`)
-        return 5;
-      } else {
-        return 0;
-      }
+  name: "Wraithbane",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "While attuned to this item your attacks deal additional damage against ghosts.",
+  function: () => {
+    if (currentRoom.contents.monsters[0].type === "GHOST") {
+      console.log(`+5 Damage to ghosts!`);
+      return 5;
+    } else {
+      return 0;
     }
- }
+  },
+};
 
 // ===============================
 //         EPIC ITEMS
@@ -198,16 +202,18 @@ const WRAITHBANE = {
 //     function:
 //  }
 
-let attunedItems = [WRAITHBANE];
+let attunedItems = [BLOODSTONE, MIST_VEIL_CLOAK, WRAITHBANE];
 let inventoryItems = [];
 
-function isItemAttuned(item) {
+function isItemAttuned(item, defaultValue) {
   for (let i = 0; i < attunedItems.length; i++) {
     if (attunedItems[i] === item) {
-      console.log(`${item.name} is being used!`)
+      console.log(`${item.name} is being used!`);
       return item.function();
     }
   }
+  console.log(`No items used.`);
+  return defaultValue;
 }
 
 function addItemToInventory(item) {
