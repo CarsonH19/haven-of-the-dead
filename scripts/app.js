@@ -83,6 +83,16 @@ function playerAttackHandler(smite = 1) {
 
 function monsterAttackHandler() {
   let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
+
+  // ITEM: Cursed Mirror - Reflects a portion of damage taken back to monster.
+  let cursedMirrorTracker = isItemAttuned(CURSED_MIRROR, 0);
+  if (cursedMirrorTracker > 0) {
+    let damageReflected = Math.round(Math.random() * (monsterToPlayerDamage / 1.5))
+    currentMonsterHealth -= damageReflected;
+    monsterHealthBar.value -= damageReflected;
+    console.log(`Damage Reflected: ${damageReflected}`);
+  }
+
   // Rogue Passive Ability Checker
   if (heroChoice === "ROGUE" && evasionTracker >= monsterToPlayerDamage) {
     monsterToPlayerDamage = 0;

@@ -215,6 +215,30 @@ const SUNSTONE = {
   },
 };
 
+const WHISPERING_AMULET = {
+    name: 'Whispering Amulet',
+    description: '',
+    type: 'MAGIC',
+    rarity: 'RARE',
+    effect: 'While attuned to this item you can communicate with some undead creatures.',
+    function: () => {
+      // Option 1: While wearing it adds NPC rooms to the catacombRooms array.
+      // Option 2: While wearing the player gets alternate dialogue options during event.
+    }
+ }
+
+ const CURSED_MIRROR = {
+  name: 'Cursed Mirror',
+  description: '',
+  type: 'MAGIC',
+  rarity: 'RARE',
+  effect: 'While attuned to this item a portion of all damage received is reflected back to the attacker.',
+  function: () => {
+    // See monsterAttackHandler for item logic.
+    return 1;
+  }
+}
+
 // ===============================
 //         EPIC ITEMS
 // ===============================
