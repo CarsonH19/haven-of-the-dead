@@ -106,11 +106,13 @@ const MIST_VEIL_CLOAK = {
   effect:
     "While attuned to this item you have a slight chance of evading enemy attacks.",
   function: () => {
-    let randomNumber = Math.floor(Math.random() * 25);
-    if (randomNumber === 25) {
+    let randomNumber = Math.floor(Math.random() * 21);
+    console.log(randomNumber);
+    if (randomNumber === 20) {
       console.log(`Attack evaded!`);
       return 0;
     } else {
+      console.log(`Attack NOT evaded...`);
       return 1;
     }
   },
@@ -202,17 +204,17 @@ const WRAITHBANE = {
 //     function:
 //  }
 
-let attunedItems = [BLOODSTONE, MIST_VEIL_CLOAK, WRAITHBANE];
+let attunedItems = [RING_OF_THE_RODENT];
 let inventoryItems = [];
 
 function isItemAttuned(item, defaultValue) {
   for (let i = 0; i < attunedItems.length; i++) {
     if (attunedItems[i] === item) {
-      console.log(`${item.name} is being used!`);
+      // console.log(`${item.name} is being used!`);
       return item.function();
     }
   }
-  console.log(`No items used.`);
+  // console.log(`No items used.`);
   return defaultValue;
 }
 
@@ -253,26 +255,26 @@ let foundItem;
 
 function findItems() {
   // Arrays need to be updated after item objects are created.
-  let randomNumber = Math.floor(Math.random() * 2 + baseFaith);
-  if (randomNumber >= 2) {
-    let itemRarity = Math.floor(Math.random() * 100 + baseFaith * 2);
+  let randomNumber = Math.floor(Math.random() * 21 + baseFaith);
+  if (randomNumber >= 20) {
+    let itemRarity = Math.floor(Math.random() * 101 + (baseFaith * 2));
     if (itemRarity >= 91) {
-      const epicIndex = Math.floor(Math.random() * epicItems.length);
+      const epicIndex = Math.floor(Math.random() * (epicItems.length + 1));
       foundItem = epicItems[epicIndex];
       epicItems.splice(epicIndex, 1);
-      console.log("Epic Item Found!");
+      // console.log("Epic Item Found!");
       // Write to Log
     } else if (itemRarity >= 61) {
-      const rareIndex = Math.floor(Math.random() * rareItems.length);
+      const rareIndex = Math.floor(Math.random() * (rareItems.length + 1));
       foundItem = rareItems[rareIndex];
       rareItems.splice(rareIndex, 1);
-      console.log("Rare Item Found!");
+      // console.log("Rare Item Found!");
       // Write to Log
     } else {
-      const commonIndex = Math.floor(Math.random() * commonItems.length);
+      const commonIndex = Math.floor(Math.random() * (commonItems.length + 1));
       foundItem = commonItems[commonIndex];
       commonItems.splice(commonIndex, 1);
-      console.log("Common Item Found!");
+      // console.log("Common Item Found!");
       // Write to Log
     }
 

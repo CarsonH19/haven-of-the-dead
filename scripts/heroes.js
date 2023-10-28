@@ -38,7 +38,7 @@ function paladinRadiantAura() {
   if (currentMonsterHealth <= radiantAuraTracker) {
     currentMonsterHealth = 0;
     monsterHealthBar.value = 0;
-    console.log("Face your judgement!");
+    // console.log("Face your judgement!");
   }
 }
 

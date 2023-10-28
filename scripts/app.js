@@ -17,13 +17,15 @@ function increasePlayerHealth(healValue) {
 // ===============================
 
 function playerAttackHandler(smite = 1) {
+  const criticalHitChance = Math.round(Math.random() * 20) + baseDexterity;
   let playerToMonsterDamage = dealMonsterDamage(baseAttack) + baseStrength;
   let totalDamage;
-
+  console.log(criticalHitChance);
   playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0); // ITEM: Increases baseAttack against ghosts.
 
-     // Smite Critical Hit
-  if (playerToMonsterDamage >= baseAttack && smite > 1) {
+  // Smite Critical Hit
+  if (criticalHitChance >= 20 && smite > 1) {
+    playerToMonsterDamage = baseAttack + baseStrength;
     totalDamage = smite * (playerToMonsterDamage * baseCritModifier);
     writeToLog(
       LOG_EVENT_SMITE_CRITICAL,
@@ -39,8 +41,10 @@ function playerAttackHandler(smite = 1) {
       totalDamage
     );
     // Critical Hit
-  } else if (playerToMonsterDamage >= baseAttack) {
+  } else if (criticalHitChance >= 20) {
+    playerToMonsterDamage = baseAttack + baseStrength;
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
+    console.log(`Critical Hit: ${totalDamage}`);
     writeToLog(
       LOG_EVENT_PLAYER_CRITICAL,
       currentRoom.contents.monsters[0].name,
@@ -49,6 +53,7 @@ function playerAttackHandler(smite = 1) {
     // Normal Hit
   } else {
     totalDamage = playerToMonsterDamage;
+    console.log(`Base Damage: ${playerToMonsterDamage}`);
     writeToLog(
       LOG_EVENT_PLAYER_ATTACK,
       currentRoom.contents.monsters[0].name,
@@ -63,8 +68,6 @@ function playerAttackHandler(smite = 1) {
   if (heroChoice === "PALADIN") {
     paladinRadiantAura();
   }
-
-  specialCooldownHandler();
 }
 
 function monsterAttackHandler() {
@@ -79,11 +82,10 @@ function monsterAttackHandler() {
     );
   }
 
-  monsterToPlayerDamage = monsterToPlayerDamage * isItemAttuned(MIST_VEIL_CLOAK, 1) // ITEM: Chance to evade attacks.
+  monsterToPlayerDamage *= isItemAttuned(MIST_VEIL_CLOAK, 1); // ITEM: Chance to evade attacks.
 
   playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
   currentPlayerHealth -= monsterToPlayerDamage;
-
 
   writeToLog(
     LOG_EVENT_MONSTER_ATTACK,
@@ -201,10 +203,12 @@ function potionHandler() {
 //             Flee
 // ===============================
 function fleeHandler() {
-  const fleeChance = Math.round(Math.random() * 10) + baseFaith;
-  console.log(fleeChance);
+  let fleeChance = Math.round(Math.random() * 10) + baseFaith;
+  // console.log(fleeChance);
+  fleeChance += isItemAttuned(RING_OF_THE_RODENT, 0);
+  // console.log(fleeChance);
   if (fleeChance >= 10) {
-    console.log("Flee Successful");
+    // console.log("Flee Successful");
     getRandomRoom(catacombRooms);
     renderCurrentRoom(currentRoom);
   }
@@ -310,11 +314,9 @@ function togglePlayerControls() {
     fleeBtn.disabled = true;
   }
 
-  if (
-    currentRoom.contents.monsters.length > 0 ||
-    trapModal.style.display === "block"
-  ) {
+  if (trapModal.style.display === "block") {
     inventoryButton.disabled = true;
+    potionBtn.disabled = true;
   } else {
     inventoryButton.disabled = false;
     potionBtn.disabled = false;
@@ -490,7 +492,7 @@ function renderContinueButton() {
 trapModal.style.display = "none";
 
 function renderTrap(trap) {
-  console.log("renderTrap Called!");
+  // console.log("renderTrap Called!");
 
   trapModal.style.display = "block";
 
@@ -533,6 +535,7 @@ function closeInventoryHandler() {
 
 attackBtn.addEventListener("click", function () {
   playerAttackHandler();
+  specialCooldownHandler();
 
   if (currentMonsterHealth <= 0) {
     isGameOver();
