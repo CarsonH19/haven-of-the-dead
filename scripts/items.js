@@ -91,9 +91,9 @@ const RING_OF_THE_RODENT = {
   type: "MAGIC",
   rarity: "COMMON",
   effect:
-    "While attuned to this item you are more likely to flee successfully.",
+    "While attuned to this item you have a higher chance to flee successfully. The greater your dexterity, the higher the chance becomes.",
   function: () => {
-    return 2;
+    return 1 + baseDexterity;
   },
 };
 
@@ -246,19 +246,37 @@ const WARDING_CANDLE = {
   description: "",
   type: "MAGIC",
   rarity: "RARE",
-  effect: "While attuned to this item there is a chance that evil spirits will flee from you. The greater your faith, the higher the chance becomes.",
+  effect:
+    "While attuned to this item there is a chance that evil spirits will flee from you. The greater your faith, the higher the chance becomes.",
   function: () => {
     if (
       currentRoom.contents.monsters[0] === SHADE ||
       currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
       currentRoom.contents.monsters[0] === GRUDGE
     ) {
-      let randomNumber = Math.round((Math.random() * 10) + baseFaith);
-      console.log(`Warding Candle Chance: ${randomNumber}`)
+      let randomNumber = Math.round(Math.random() * 10 + baseFaith);
+      console.log(`Warding Candle Chance: ${randomNumber}`);
       if (randomNumber >= 10) {
         checkForMonsters();
         console.log(`The spirit flees from you!`);
       }
+    }
+  },
+};
+
+const REVENANTS_RAGE = {
+  name: "Revenant's Rage",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "While attuned to this item you deal additional damage while below 40 points of health.",
+  function: () => {
+    if (currentPlayerHealth <= 40) {
+      console.log("Revenant's Rage bonus damage added!");
+      return 5;
+    } else {
+      return 0;
     }
   },
 };

@@ -31,7 +31,12 @@ function healPlayer(healValue) {
 function playerAttackHandler(smite = 1) {
   const criticalHitChance = Math.round(Math.random() * 20) + baseDexterity;
   let playerToMonsterDamage = dealMonsterDamage(baseAttack) + baseStrength;
-  playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0); // ITEM: Increases baseAttack against ghosts.
+
+  // ITEM: Revenant's Rage - Increases attack when low health.
+  playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
+  // ITEM: Increases attack against evil spirits.
+  playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0); 
+  
   let totalDamage;
 
   // Smite Critical Hit
