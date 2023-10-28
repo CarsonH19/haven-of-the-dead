@@ -1,96 +1,95 @@
-const monsterNameElement = document.getElementById('monster-name');
-const monsterSkullElement = document.getElementById('skull-level');
-
+const monsterNameElement = document.getElementById("monster-name");
+const monsterSkullElement = document.getElementById("skull-level");
 
 const CRYPT_CRAWLER = {
-  name: 'Crypt Crawler',
-  type: 'UNDEAD',
-  skulls: 1
-}
+  name: "Crypt Crawler",
+  type: "UNDEAD",
+  skulls: 1,
+};
 
 const DECREPIT_SKELETON = {
-  name: 'Decrepit Skeleton',
-  type: 'UNDEAD',
-  skulls: 1
-}
+  name: "Decrepit Skeleton",
+  type: "UNDEAD",
+  skulls: 1,
+};
 
 const SKELETAL_SOLDIER = {
-  name: 'Skeletal Soldier',
-  type: 'UNDEAD',
-  skulls: 2
-}
+  name: "Skeletal Soldier",
+  type: "UNDEAD",
+  skulls: 2,
+};
 
 const ARMORED_SKELETON = {
-  name: 'Armored Skeleton',
-  type: 'UNDEAD',
-  skulls: 3
-}
+  name: "Armored Skeleton",
+  type: "UNDEAD",
+  skulls: 3,
+};
 
 const BLAZING_SKELETON = {
-  name: 'Blazing Skeleton',
-  type: 'UNDEAD',
-  skulls: 3
-}
+  name: "Blazing Skeleton",
+  type: "UNDEAD",
+  skulls: 3,
+};
 
 const DRAUGR = {
-  name: 'Draugr',
-  type: 'UNDEAD',
-  skulls: 6
-}
+  name: "Draugr",
+  type: "UNDEAD",
+  skulls: 6,
+};
 
 const BONE_TITAN = {
-  name: 'Bone Titan',
-  type: 'UNDEAD',
-  skulls: 7
-}
+  name: "Bone Titan",
+  type: "UNDEAD",
+  skulls: 7,
+};
 
 const FLOOD_OF_BONES = {
-  name: 'Flood of Bones',
-  type: 'UNDEAD',
-  skulls: 8
-}
+  name: "Flood of Bones",
+  type: "UNDEAD",
+  skulls: 8,
+};
 
 const BARON_OF_BONE = {
-  name: 'Baron of Bone',
-  type: 'UNDEAD',
-  skulls: 9
-}
+  name: "Baron of Bone",
+  type: "UNDEAD",
+  skulls: 9,
+};
 
 const SHADE = {
-  name: 'Shade',
-  type: 'UNDEAD',
-  skulls: 1
-}
+  name: "Shade",
+  type: "UNDEAD",
+  skulls: 1,
+};
 
 const HAUNTING_SPIRIT = {
-  name: 'Haunting Spirit',
-  type: 'UNDEAD',
-  skulls: 3
-}
+  name: "Haunting Spirit",
+  type: "UNDEAD",
+  skulls: 3,
+};
 
 const GRUDGE = {
-  name: 'Grudge',
-  type: 'UNDEAD',
-  skulls: 5
-}
+  name: "Grudge",
+  type: "UNDEAD",
+  skulls: 5,
+};
 
 const GNAWER = {
-  name: 'Gnawer',
-  type: 'BEAST',
-  skulls: 1
-}
+  name: "Gnawer",
+  type: "BEAST",
+  skulls: 1,
+};
 
 const COFFIN_SPIDER = {
-  name: 'Coffin Spider',
-  type: 'BEAST',
-  skulls: 2
-}
+  name: "Coffin Spider",
+  type: "BEAST",
+  skulls: 2,
+};
 
 const SCOUNDREL = {
-  name: 'Scoundrel',
-  type: 'BEAST',
-  skulls: 2
-}
+  name: "Scoundrel",
+  type: "BEAST",
+  skulls: 2,
+};
 
 function monsterSkullLevel(level) {
   switch (level) {
@@ -133,14 +132,14 @@ function monsterSkullLevel(level) {
   }
 }
 
-
 function renderMonsterStatBlock(monster) {
-  monsterContainer.style.display = 'flex'
+  monsterContainer.style.display = "flex";
   monsterNameElement.textContent = monster.name;
   monsterSkullElement.textContent = monster.skulls;
   monsterSkullLevel(monster.skulls);
-  isItemAttuned(FLASK_OF_LIGHT, 0); // ITEM: Weakens ghosts.
-  setMonsterHealth(monsterMaxHealth);  
+  // ITEM: Flask of Light - Weakens evil spirits.
+  isItemAttuned(FLASK_OF_LIGHT, 0); 
+  setMonsterHealth(monsterMaxHealth);
 }
 
 function setMonsterHealth(maxLife) {
@@ -151,7 +150,10 @@ function setMonsterHealth(maxLife) {
 
 function startBattle(room) {
   renderMonsterStatBlock(room.contents.monsters[0]);
-  isItemAttuned(SUNSTONE, 0); // ITEM: Damages undead creatures.
+  // ITEM: Sunstone - Damages undead creatures.
+  isItemAttuned(SUNSTONE, 0);
+  // ITEM: Warding Candle - Chance for evil spirits to flee.
+  isItemAttuned(WARDING_CANDLE, 0); 
 }
 
 function checkForMonsters() {

@@ -182,7 +182,7 @@ const WRAITHBANE = {
   type: "MAGIC",
   rarity: "RARE",
   effect:
-    "While attuned to this item your attacks deal additional damage against undead spirits.",
+    "While attuned to this item your attacks deal additional damage against evil spirits.",
   function: () => {
     if (
       currentRoom.contents.monsters[0].name === SHADE ||
@@ -216,28 +216,52 @@ const SUNSTONE = {
 };
 
 const WHISPERING_AMULET = {
-    name: 'Whispering Amulet',
-    description: '',
-    type: 'MAGIC',
-    rarity: 'RARE',
-    effect: 'While attuned to this item you can communicate with some undead creatures.',
-    function: () => {
-      // Option 1: While wearing it adds NPC rooms to the catacombRooms array.
-      // Option 2: While wearing the player gets alternate dialogue options during event.
-    }
- }
+  name: "Whispering Amulet",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "While attuned to this item you can communicate with some undead creatures.",
+  function: () => {
+    // Option 1: While wearing it adds NPC rooms to the catacombRooms array.
+    // Option 2: While wearing the player gets alternate dialogue options during event.
+  },
+};
 
- const CURSED_MIRROR = {
-  name: 'Cursed Mirror',
-  description: '',
-  type: 'MAGIC',
-  rarity: 'RARE',
-  effect: 'While attuned to this item a portion of all damage received is reflected back to the attacker.',
+const CURSED_MIRROR = {
+  name: "Cursed Mirror",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "While attuned to this item a portion of all damage received is reflected back to the attacker.",
   function: () => {
     // See monsterAttackHandler for item logic.
     return 1;
-  }
-}
+  },
+};
+
+const WARDING_CANDLE = {
+  name: "Warding Candle",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item there is a chance that evil spirits will flee from you. The greater your faith, the higher the chance becomes.",
+  function: () => {
+    if (
+      currentRoom.contents.monsters[0] === SHADE ||
+      currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
+      currentRoom.contents.monsters[0] === GRUDGE
+    ) {
+      let randomNumber = Math.round((Math.random() * 10) + baseFaith);
+      console.log(`Warding Candle Chance: ${randomNumber}`)
+      if (randomNumber >= 10) {
+        checkForMonsters();
+        console.log(`The spirit flees from you!`);
+      }
+    }
+  },
+};
 
 // ===============================
 //         EPIC ITEMS
