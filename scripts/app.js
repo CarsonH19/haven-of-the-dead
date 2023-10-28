@@ -36,7 +36,7 @@ function playerAttackHandler(smite = 1) {
   playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
   // ITEM: Increases attack against evil spirits.
   playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0); 
-  
+
   let totalDamage;
 
   // Smite Critical Hit
@@ -108,7 +108,8 @@ function monsterAttackHandler() {
     );
   }
 
-  monsterToPlayerDamage *= isItemAttuned(MIST_VEIL_CLOAK, 1); // ITEM: Chance to evade attacks.
+  // ITEM: Mist Veil Cloak - Chance to evade attacks.
+  monsterToPlayerDamage *= isItemAttuned(MIST_VEIL_CLOAK, 1); 
 
   playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
   currentPlayerHealth -= monsterToPlayerDamage;
@@ -611,6 +612,7 @@ roomSummaryButton.addEventListener("click", () => {
   clearRoomSummaryModal();
   togglePlayerControls();
   updateRoomsCleared();
+  // ITEM: Charm of Healing - Recover 10HP after each cleared room.
   isItemAttuned(CHARM_OF_HEALING, 0);
 });
 
@@ -652,9 +654,23 @@ inventoryButton.addEventListener("click", () => {
 
 closeInventoryButton.addEventListener("click", () => {
   closeInventoryHandler();
-  setPlayerHealthBar(playerMaxHealth);
+
   // Clears the inventory to avoid duplication.
   slots = "";
   magicItemsBox.textContent = "";
   consumablesBox.textContent = "";
+
+  // Updates stats after changing attuned items.
+  if (heroChoice === 'PALADIN') {
+    setPaladinStats();
+  } else if (heroChoice === 'ROGUE') {
+    setRogueStats();
+  } else {
+    setPriestessStats();
+  }
+
+  // ITEM: Shadowstep Boots - +1 Dexterity;
+  let newDex =  baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
+  baseDexterity = newDex;
 });
+

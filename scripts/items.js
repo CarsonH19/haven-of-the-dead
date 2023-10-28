@@ -281,6 +281,19 @@ const REVENANTS_RAGE = {
   },
 };
 
+const SHADOWSTEP_BOOTS = {
+    name: 'Shadowstep Boots',
+    description: '',
+    type: 'MAGIC',
+    rarity: 'RARE',
+    effect: 'While attuned to this item your dexterity increases by 1.',
+    function: () => {
+      // See closeInventoryButton event listener for item logic.
+      console.log('Dexterity Increased!');
+      return 1;
+    }
+ }
+
 // ===============================
 //         EPIC ITEMS
 // ===============================
