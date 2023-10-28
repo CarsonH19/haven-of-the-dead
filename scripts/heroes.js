@@ -126,6 +126,16 @@ function priestessGreaterPrayer() {
 
 // See dealPlayerDamage for Priestess Passive Ability
 
+function setStatsHandler() {
+  if ((heroChoice = "PALADIN")) {
+    setPaladinStats();
+  } else if ((heroChoice = "ROGUE")) {
+    setRogueStats();
+  } else if ((heroChoice = "PRIESTESS")) {
+    setPriestessStats();
+  }
+}
+
 // ===============================
 //        Boons & Leveling
 // ===============================

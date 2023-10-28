@@ -3,15 +3,20 @@
 // ===============================
 
 function setPlayerHealthBar(maxLife) {
-  playerHealthBar.max = maxLife;
-  playerHealthBar.value = maxLife;
-  currentPlayerHealth = maxLife;
+  maxLife = playerMaxHealth + isItemAttuned(BONEMAIL, 0); // ITEM: +20 Max HP
+
+  if (currentRoom === catacombEntrance) {
+    playerHealthBar.max = maxLife;
+    playerHealthBar.value = maxLife;
+    currentPlayerHealth = maxLife;
+  } else {
+    playerHealthBar.max = maxLife;
+  }
 }
 
 function healPlayer(healValue) {
-
   playerHealthBar.value = +playerHealthBar.value + healValue;
-  currentPlayerHealth += healValue
+  currentPlayerHealth += healValue;
 
   if (currentPlayerHealth > playerMaxHealth) {
     playerHealthBar.value = playerMaxHealth;
@@ -26,9 +31,8 @@ function healPlayer(healValue) {
 function playerAttackHandler(smite = 1) {
   const criticalHitChance = Math.round(Math.random() * 20) + baseDexterity;
   let playerToMonsterDamage = dealMonsterDamage(baseAttack) + baseStrength;
-  let totalDamage;
-  console.log(criticalHitChance);
   playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0); // ITEM: Increases baseAttack against ghosts.
+  let totalDamage;
 
   // Smite Critical Hit
   if (criticalHitChance >= 20 && smite > 1) {
@@ -208,7 +212,7 @@ function fleeHandler() {
   fleeChance += isItemAttuned(RING_OF_THE_RODENT, 0);
   if (fleeChance >= 10) {
     console.log("Flee Successful");
-    // writeToLog() 
+    // writeToLog()
     getRandomRoom(catacombRooms);
     renderCurrentRoom(currentRoom);
   }
@@ -592,6 +596,7 @@ roomSummaryButton.addEventListener("click", () => {
   clearRoomSummaryModal();
   togglePlayerControls();
   updateRoomsCleared();
+  isItemAttuned(CHARM_OF_HEALING, 0);
 });
 
 continueButton.addEventListener("click", () => {
@@ -632,6 +637,7 @@ inventoryButton.addEventListener("click", () => {
 
 closeInventoryButton.addEventListener("click", () => {
   closeInventoryHandler();
+  setPlayerHealthBar(playerMaxHealth);
   // Clears the inventory to avoid duplication.
   slots = "";
   magicItemsBox.textContent = "";

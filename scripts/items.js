@@ -58,7 +58,8 @@ const BONEMAIL = {
   effect:
     "While attuned to this item your max health is increased by 20 points.",
   function: () => {
-    playerMaxHealth += 20;
+    console.log(`+20 Max HP`);
+    return 20;
   },
 };
 
@@ -67,10 +68,10 @@ const GRAVEROBBERS_SPADE = {
   description: "",
   type: "MAGIC",
   rarity: "COMMON",
-  effect:
-    "While attuned to this item you are slightly more likely to find items.",
+  effect: "While attuned to this item you are more likely to find items.",
   function: () => {
-    return 1;
+    console.log(`Digging for items!`);
+    return 2;
   },
 };
 
@@ -82,7 +83,8 @@ const CHARM_OF_HEALING = {
   effect:
     "While attuned to this item you recover 10 points of health after each room you clear.",
   function: () => {
-    currentPlayerHealth += 10;
+    healPlayer(10);
+    console.log("Player Healed by Charm of Healing!");
   },
 };
 
@@ -92,7 +94,7 @@ const RING_OF_THE_RODENT = {
   type: "MAGIC",
   rarity: "COMMON",
   effect:
-    "While attuned to this item you are slightly more likely to flee successfully.",
+    "While attuned to this item you are more likely to flee successfully.",
   function: () => {
     return 2;
   },
@@ -104,12 +106,12 @@ const MIST_VEIL_CLOAK = {
   type: "MAGIC",
   rarity: "COMMON",
   effect:
-    "While attuned to this item you have a slight chance of evading enemy attacks.",
+    "While attuned to this item you have a slight chance of completely evading enemy attacks.",
   function: () => {
-    let randomNumber = Math.floor(Math.random() * 21);
+    let randomNumber = Math.round(Math.random() * 20);
     console.log(randomNumber);
     if (randomNumber === 20) {
-      console.log(`Attack evaded!`);
+      console.log(`Attack evaded with Mist Veil Cloak!`);
       return 0;
     } else {
       console.log(`Attack NOT evaded...`);
@@ -140,37 +142,40 @@ const BLOODSTONE = {
     "When attuned to this item you recover a small amount of health after slaying a monster.",
   function: () => {
     let monsterLevel = currentRoom.contents.monsters[0].skulls;
+    let healthRecovered;
 
     switch (monsterLevel) {
       case 1:
-        currentPlayerHealth += 2;
+        healthRecovered = 2;
         break;
       case 2:
-        currentPlayerHealth += 3;
+        healthRecovered = 3;
         break;
       case 3:
-        currentPlayerHealth += 4;
+        healthRecovered = 4;
         break;
       case 4:
-        currentPlayerHealth += 5;
+        healthRecovered = 5;
         break;
       case 5:
-        currentPlayerHealth += 7;
+        healthRecovered = 7;
         break;
       case 6:
-        currentPlayerHealth += 9;
+        healthRecovered = 9;
         break;
       case 7:
-        currentPlayerHealth += 11;
+        healthRecovered = 11;
         break;
       case 8:
-        currentPlayerHealth += 15;
+        healthRecovered = 15;
         break;
       case 9:
-        currentPlayerHealth += 20;
+        healthRecovered = 20;
         break;
     }
-    console.log(`You restored some health!`);
+
+    healPlayer(healthRecovered);
+    console.log(`You recovered ${healthRecovered} health!`);
   },
 };
 
@@ -204,13 +209,13 @@ const WRAITHBANE = {
 //     function:
 //  }
 
-let attunedItems = [RING_OF_THE_RODENT];
+let attunedItems = [MIST_VEIL_CLOAK];
 let inventoryItems = [];
 
 function isItemAttuned(item, defaultValue) {
   for (let i = 0; i < attunedItems.length; i++) {
     if (attunedItems[i] === item) {
-      // console.log(`${item.name} is being used!`);
+      console.log(`${item.name} is being used!`);
       return item.function();
     }
   }
@@ -254,28 +259,27 @@ let epicItems = [EVERTORCH, EVERTORCH, EVERTORCH, EVERTORCH];
 let foundItem;
 
 function findItems() {
-  // Arrays need to be updated after item objects are created.
-  let randomNumber = Math.floor(Math.random() * 21 + baseFaith);
+  // Arrays need to be updated after all item objects are created.
+  let randomNumber = Math.round(Math.random() * 20 + baseFaith);
+  randomNumber += isItemAttuned(GRAVEROBBERS_SPADE, 0);
+  console.log(randomNumber);
   if (randomNumber >= 20) {
-    let itemRarity = Math.floor(Math.random() * 101 + (baseFaith * 2));
+    let itemRarity = Math.round(Math.random() * 100 + baseFaith);
     if (itemRarity >= 91) {
-      const epicIndex = Math.floor(Math.random() * (epicItems.length + 1));
+      const epicIndex = Math.round(Math.random() * epicItems.length);
       foundItem = epicItems[epicIndex];
       epicItems.splice(epicIndex, 1);
-      // console.log("Epic Item Found!");
-      // Write to Log
+      console.log("Epic Item Found!");
     } else if (itemRarity >= 61) {
-      const rareIndex = Math.floor(Math.random() * (rareItems.length + 1));
+      const rareIndex = Math.round(Math.random() * rareItems.length);
       foundItem = rareItems[rareIndex];
       rareItems.splice(rareIndex, 1);
-      // console.log("Rare Item Found!");
-      // Write to Log
+      console.log("Rare Item Found!");
     } else {
-      const commonIndex = Math.floor(Math.random() * (commonItems.length + 1));
+      const commonIndex = Math.round(Math.random() * commonItems.length);
       foundItem = commonItems[commonIndex];
       commonItems.splice(commonIndex, 1);
-      // console.log("Common Item Found!");
-      // Write to Log
+      console.log("Common Item Found!");
     }
 
     currentRoom.contents.items.push(foundItem);
