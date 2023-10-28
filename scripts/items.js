@@ -37,15 +37,13 @@ const FLASK_OF_LIGHT = {
   description: "",
   type: "MAGIC",
   rarity: "COMMON",
-  effect: "While attuned to this item ghosts are weakened by your pressence.",
+  effect: "While attuned to this item ghosts are weakened by your presence.",
   function: () => {
     if (
-      currentRoom.contents.monsters[0] === SHADE ||
-      currentRoom.contents.monsters[0] === GHOST ||
-      currentRoom.contents.monsters[0] === GRUDGE
-    ) {
+      currentRoom.contents.monsters[0].type === 'GHOST') {
       monsterMaxHealth = monsterMaxHealth - 15;
       monsterAttackValue = monsterAttackValue - 2;
+      console.log(`Ghost Weakened!`);
     }
   },
 };

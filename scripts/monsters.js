@@ -128,6 +128,7 @@ function renderMonsterStatBlock(monster) {
   monsterNameElement.textContent = monster.name;
   monsterSkullElement.textContent = monster.skulls;
   monsterSkullLevel(monster.skulls);
+  isItemAttuned(FLASK_OF_LIGHT, 0); // ITEM: Weakens ghosts.
   setMonsterHealth(monsterMaxHealth);  
 }
 
