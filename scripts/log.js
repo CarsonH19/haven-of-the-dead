@@ -878,11 +878,19 @@ function writeToLog(event, name, value) {
   }
 
   log.insertBefore(newEntry, log.firstChild);
+
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+
   checkLogSize();
 }
 
 function checkLogSize() {
   if (log.children.length >= 50) {
     log.removeChild(log.lastElementChild);
+  }
+
+  if (logModalList.children.length >= 50) {
+    logModalList.removeChild(logModalList.lastElementChild);
   }
 }

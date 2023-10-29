@@ -165,6 +165,7 @@ body {
 /* Log */
 .log-container {
   overflow: auto;
+  cursor: pointer;
 }
 
 .log-container h3 {
@@ -421,4 +422,26 @@ progress[value]::-moz-progress-bar {
   width: 15vw;
   font-family: monospace;
   font-size: 2rem;
+}
+
+/* Log Modal */
+#logModal {
+  display: none;
+}
+
+.log-modal-list {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  font-size: 1.2rem;
+}
+
+.log-container-modal h3 {
+  margin: 0px;
+  padding: 0px 0px 5px 0px;
+}
+
+.log-modal-list li {
+  border-bottom: 1px dashed black;
+  padding: 5px 0px 5px 0px
 }

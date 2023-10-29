@@ -68,6 +68,10 @@ const heroChoiceModal = document.getElementById("heroChoiceModal");
 // ===============================
 
 const log = document.getElementById("log");
+const logContainer = document.getElementById('logContainer');
+const logModal = document.getElementById('logModal');
+const logModalList = document.getElementById('logModalList');
+
 
 const LOG_EVENT_MONSTER_ATTACK = "MONSTER ATTACK";
 const LOG_EVENT_PLAYER_ATTACK = "PLAYER_ATTACK";
@@ -192,3 +196,6 @@ const catacombEntrance = {
 };
 
 let currentRoom = catacombEntrance;
+
+
+// LOG MODAL

@@ -31,7 +31,7 @@ function setPaladinStats() {
 
 function paladinHolySmite() {
   playerAttackHandler(holySmiteTracker);
-  specialCooldownCounter = 4;
+  specialCooldownCounter = 7;
 }
 
 function paladinRadiantAura() {
@@ -101,7 +101,7 @@ function rogueShadowStrike() {
     // );
   }
 
-  specialCooldownCounter = 3;
+  specialCooldownCounter = 5;
 }
 
 // See monsterAttackHandler for Rouge Passive Ability
@@ -143,7 +143,7 @@ function priestessGreaterPrayer() {
 
   writeToLog(LOG_EVENT_GREATER_PRAYER, "You", greaterPrayerTracker);
 
-  specialCooldownCounter = 8;
+  specialCooldownCounter = 9;
 }
 
 // See dealPlayerDamage for Priestess Passive Ability

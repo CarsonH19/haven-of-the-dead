@@ -35,7 +35,7 @@ function playerAttackHandler(smite = 1) {
   // ITEM: Revenant's Rage - Increases attack when low health.
   playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
   // ITEM: Increases attack against evil spirits.
-  playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0); 
+  playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0);
 
   let totalDamage;
 
@@ -92,7 +92,9 @@ function monsterAttackHandler() {
   // ITEM: Cursed Mirror - Reflects a portion of damage taken back to monster.
   let cursedMirrorTracker = isItemAttuned(CURSED_MIRROR, 0);
   if (cursedMirrorTracker > 0) {
-    let damageReflected = Math.round(Math.random() * (monsterToPlayerDamage / 1.5))
+    let damageReflected = Math.round(
+      Math.random() * (monsterToPlayerDamage / 1.5)
+    );
     currentMonsterHealth -= damageReflected;
     monsterHealthBar.value -= damageReflected;
     console.log(`Damage Reflected: ${damageReflected}`);
@@ -109,7 +111,7 @@ function monsterAttackHandler() {
   }
 
   // ITEM: Mist Veil Cloak - Chance to evade attacks.
-  monsterToPlayerDamage *= isItemAttuned(MIST_VEIL_CLOAK, 1); 
+  monsterToPlayerDamage *= isItemAttuned(MIST_VEIL_CLOAK, 1);
 
   playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
   currentPlayerHealth -= monsterToPlayerDamage;
@@ -663,16 +665,25 @@ closeInventoryButton.addEventListener("click", () => {
   consumablesBox.textContent = "";
 
   // Updates stats after changing attuned items.
-  if (heroChoice === 'PALADIN') {
+  if (heroChoice === "PALADIN") {
     setPaladinStats();
-  } else if (heroChoice === 'ROGUE') {
+  } else if (heroChoice === "ROGUE") {
     setRogueStats();
   } else {
     setPriestessStats();
   }
 
   // ITEM: Shadowstep Boots - +1 Dexterity;
-  let newDex =  baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
+  let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
   baseDexterity = newDex;
 });
 
+logContainer.addEventListener("click", () => {
+  logModal.style.display = "block";
+});
+
+logModal.addEventListener("click", (event) => {
+  if (event.target !== logModal || event.target === logModal) {
+    logModal.style.display = "none";
+  }
+});
