@@ -339,6 +339,8 @@ function endLevelUp() {
     closeLevelUpModal();
     clearLevelUpModal();
   }, 2000);
+
+  renderHeroStats();
 }
 
 // Event Listeners

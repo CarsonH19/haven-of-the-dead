@@ -322,6 +322,7 @@ function renderCurrentRoom(currentRoom) {
   specialCooldownHandler();
   togglePlayerControls();
   setRoomSummary();
+  renderHeroStats();
 }
 
 function togglePlayerControls() {
@@ -349,6 +350,16 @@ function togglePlayerControls() {
 function updateRoomsCleared() {
   roomCounter++;
   roomsCleared.textContent = `Rooms Cleared: ${roomCounter}`;
+}
+
+function renderHeroStats() {
+  const heroStrength = document.getElementById('heroStrength');
+  const heroDexterity = document.getElementById('heroDexterity');
+  const heroFaith = document.getElementById('heroFaith');
+
+  heroStrength.textContent = baseStrength;
+  heroDexterity.textContent = baseDexterity;
+  heroFaith.textContent = baseFaith;
 }
 
 // ===============================
@@ -672,6 +683,8 @@ closeInventoryButton.addEventListener("click", () => {
   } else {
     setPriestessStats();
   }
+
+  renderHeroStats();
 
   // ITEM: Shadowstep Boots - +1 Dexterity;
   let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
