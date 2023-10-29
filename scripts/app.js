@@ -614,6 +614,7 @@ roomSummaryButton.addEventListener("click", () => {
   updateRoomsCleared();
   // ITEM: Charm of Healing - Recover 10HP after each cleared room.
   isItemAttuned(CHARM_OF_HEALING, 0);
+  checkForLevelUp();
 });
 
 continueButton.addEventListener("click", () => {

@@ -5,9 +5,8 @@
 const monsterHealthBar = document.getElementById("monster-health");
 const playerHealthBar = document.getElementById("player-health");
 
-const monsterContainer = document.getElementById('monsterContainer');
+const monsterContainer = document.getElementById("monsterContainer");
 monsterContainer.style.display = "none";
-
 
 const attackBtn = document.getElementById("attack-btn");
 const guardBtn = document.getElementById("guard-btn");
@@ -27,7 +26,7 @@ let currentPlayerHealth;
 
 const bottomContent = document.querySelector(".bottom-content");
 const playerContainer = document.querySelector(".player-container");
-const roomsCleared = document.getElementById('roomsCleared');
+const roomsCleared = document.getElementById("roomsCleared");
 let roomCounter = 0;
 
 // ===============================
@@ -54,9 +53,9 @@ const continueButton = document.getElementById("continueButton");
 //           Trap Modal
 // ===============================
 
-const trapModal = document.getElementById('trapModal');
-const trapButtonOne = document.getElementById('trapButtonOne');
-const trapButtonTwo = document.getElementById('trapButtonTwo');
+const trapModal = document.getElementById("trapModal");
+const trapButtonOne = document.getElementById("trapButtonOne");
+const trapButtonTwo = document.getElementById("trapButtonTwo");
 
 // ===============================
 //        Choose Hero Modal
@@ -65,40 +64,33 @@ const trapButtonTwo = document.getElementById('trapButtonTwo');
 const heroChoiceModal = document.getElementById("heroChoiceModal");
 
 // ===============================
-//            Special
-// ===============================
-
-const specialText = document.getElementById("specialCount");
-
-// ===============================
 //        Log Variables
 // ===============================
 
 const log = document.getElementById("log");
 
-const LOG_EVENT_MONSTER_ATTACK = 'MONSTER ATTACK';
-const LOG_EVENT_PLAYER_ATTACK = 'PLAYER_ATTACK';
-const LOG_EVENT_PLAYER_CRITICAL = 'PLAYER CRITICAL ATTACK';
-const LOG_EVENT_GUARD = 'GUARD';
-const LOG_EVENT_POTION = 'POTION';
-const LOG_EVENT_FLEE = 'FLEE'
-const LOG_EVENT_LEVEL = 'LEVEL UP'
-const LOG_EVENT_NEW_ROOM = 'NEW ROOM';
+const LOG_EVENT_MONSTER_ATTACK = "MONSTER ATTACK";
+const LOG_EVENT_PLAYER_ATTACK = "PLAYER_ATTACK";
+const LOG_EVENT_PLAYER_CRITICAL = "PLAYER CRITICAL ATTACK";
+const LOG_EVENT_GUARD = "GUARD";
+const LOG_EVENT_POTION = "POTION";
+const LOG_EVENT_FLEE = "FLEE";
+const LOG_EVENT_LEVEL = "LEVEL UP";
+const LOG_EVENT_NEW_ROOM = "NEW ROOM";
 
-const LOG_EVENT_TRAP_DESCRIPTION = 'TRAP DESCRIPTION';
-const LOG_EVENT_TRAP_PASS = 'TRAP PASS';
-const LOG_EVENT_TRAP_FAIL = 'TRAP FAIL';
+const LOG_EVENT_TRAP_DESCRIPTION = "TRAP DESCRIPTION";
+const LOG_EVENT_TRAP_PASS = "TRAP PASS";
+const LOG_EVENT_TRAP_FAIL = "TRAP FAIL";
 
+const LOG_EVENT_SMITE = "SMITE";
+const LOG_EVENT_SMITE_CRITICAL = "CRITICAL SMITE";
+const LOG_EVENT_RADIANT_AURA = "RADIANT AURA";
 
-const LOG_EVENT_SMITE = 'SMITE';
-const LOG_EVENT_SMITE_CRITICAL = 'CRITICAL SMITE';
-const LOG_EVENT_RADIANT_AURA = 'RADIANT AURA';
+const LOG_EVENT_SHADOW_STRIKE = "SHADOW STRIKE";
+const LOG_EVENT_EVASION = "EVASION";
 
-const LOG_EVENT_SHADOW_STRIKE = 'SHADOW STRIKE';
-const LOG_EVENT_EVASION = 'EVASION';
-
-const LOG_EVENT_GREATER_PRAYER = 'GREATER PRAYER';
-const LOG_EVENT_BURNING_RADIANCE = 'BURNING RADIANCE'
+const LOG_EVENT_GREATER_PRAYER = "GREATER PRAYER";
+const LOG_EVENT_BURNING_RADIANCE = "BURNING RADIANCE";
 
 // ===============================
 //        Hero Variables
@@ -149,6 +141,33 @@ function calculateCritDamage() {
 
 // Faith
 let baseFaith;
+
+// ===============================
+//   Boons & Leveling Variables
+// ===============================
+
+const levelUpModal = document.getElementById("levelUpModal");
+// const strengthContainer = document.getElementById("strengthContainer");
+// const strengthText = document.getElementById("strengthText");
+const strengthRank = document.getElementById("strengthRank");
+// const dexterityContainer = document.getElementById("dexterityContainer");
+// const dexterityText = document.getElementById("dexterityText");
+const dexterityRank = document.getElementById("dexterityRank");
+// const faithContainer = document.getElementById("faithContainer");
+// const faithText = document.getElementById("faithText");
+const faithRank = document.getElementById("faithRank");
+// const specialContainer = document.getElementById("specialContainer");
+const specialText = document.getElementById("specialText");
+const specialRank = document.getElementById("specialRank");
+// const passiveContainer = document.getElementById("passiveContainer");
+const passiveText = document.getElementById("passiveText");
+const passiveRank = document.getElementById("passiveRank");
+
+let strengthBoonRank = 1;
+let dexterityBoonRank = 1;
+let faithBoonRank = 1;
+let specialAbilityBoonRank = 1;
+let passiveAbilityBoonRank = 1;
 
 // ===============================
 //       Catacomb Variables

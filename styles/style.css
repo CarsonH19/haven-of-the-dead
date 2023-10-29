@@ -225,7 +225,8 @@ progress[value]::-moz-progress-bar {
 ==========================================
 */
 
-.modal, .inventory-modal {
+.modal,
+.inventory-modal {
   position: fixed; /* Use fixed position */
   z-index: 1;
   left: 0;
@@ -237,10 +238,12 @@ progress[value]::-moz-progress-bar {
 
 .hero-modal-content,
 .inventory-modal-content,
+.level-up-modal-content,
 .modal-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: flex-start; 
+  gap: 40px;
   align-items: center;
   background-color: #fefefe;
   margin: 13vh auto; /*?!ADJUST FOR MOBILE?!*/
@@ -359,4 +362,63 @@ progress[value]::-moz-progress-bar {
   height: 50%;
   border: 2px black solid;
 
+}
+
+/* Level Up Modal */
+#levelUpModal {
+  display: none;
+}
+
+.level-up-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  height: 20%;
+}
+
+.level-up-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: -40px;
+  gap: 10px;
+  height: 80%;
+  width: 100%;
+}
+
+.level-up-modal-content h2 {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+
+.level-up-modal-content p {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+
+.attributes-container,
+.abilities-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.attributes-container div,
+.abilities-container div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.attributes-container button,
+.abilities-container button {
+  height: 15vh;
+  width: 15vw;
+  font-family: monospace;
+  font-size: 2rem;
 }

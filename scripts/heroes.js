@@ -46,7 +46,7 @@ function paladinRadiantAura() {
 //        Hero: Rogue
 // ===============================
 
-let shadowStrikeTracker = 0;
+let shadowStrikeTracker = 25;
 let evasionTracker = 2;
 let rogue = {
   name: "Shadowcloak Riven",
@@ -76,8 +76,30 @@ function setRogueStats() {
 function rogueShadowStrike() {
   guardHandler();
 
-  monsterHealthBar.value = +monsterHealthBar.value - criticalDamage;
-  currentMonsterHealth -= criticalDamage;
+  const criticalHitChance =
+    Math.round(Math.random() * shadowStrikeTracker) + baseDexterity;
+  let playerToMonsterDamage = dealMonsterDamage(baseAttack) + baseStrength;
+
+  // Critical Hit
+  if (criticalHitChance >= 20) {
+    playerToMonsterDamage = baseAttack + baseStrength;
+    totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
+    console.log(`Critical Hit: ${totalDamage}`);
+    // writeToLog(
+    //   LOG_EVENT_PLAYER_CRITICAL,
+    //   currentRoom.contents.monsters[0].name,
+    //   totalDamage
+    // );
+    // Normal Hit
+  } else {
+    totalDamage = playerToMonsterDamage;
+    console.log(`Base Damage: ${playerToMonsterDamage}`);
+    // writeToLog(
+    //   LOG_EVENT_PLAYER_ATTACK,
+    //   currentRoom.contents.monsters[0].name,
+    //   totalDamage
+    // );
+  }
 
   specialCooldownCounter = 3;
 }
@@ -88,7 +110,7 @@ function rogueShadowStrike() {
 //        Hero: Priestess
 // ===============================
 
-let greaterPrayerTracker = 40;
+let greaterPrayerTracker = 20;
 let burningDevotionTracker = 3;
 let priestess = {
   name: "Priestess Liheth",
@@ -127,11 +149,11 @@ function priestessGreaterPrayer() {
 // See dealPlayerDamage for Priestess Passive Ability
 
 function setStatsHandler() {
-  if ((heroChoice = "PALADIN")) {
+  if (heroChoice === "PALADIN") {
     setPaladinStats();
-  } else if ((heroChoice = "ROGUE")) {
+  } else if (heroChoice === "ROGUE") {
     setRogueStats();
-  } else if ((heroChoice = "PRIESTESS")) {
+  } else if (heroChoice === "PRIESTESS") {
     setPriestessStats();
   }
 }
@@ -140,8 +162,216 @@ function setStatsHandler() {
 //        Boons & Leveling
 // ===============================
 
-let availableBoons = [];
+let experiencePoints = 0;
+let levelCounter = 1;
 
-// randomly choose a boon
-// discard chosen boon from list
-// apply boon to hero
+function gainExperience(num) {
+  gainExperience += num;
+}
+
+function heroChecker() {
+  if (heroChoice === "PALADIN") {
+    return paladin;
+  } else if (heroChoice === "ROGUE") {
+    return rogue;
+  } else {
+    return priestess;
+  }
+}
+
+function checkForLevelUp() {
+  if (experiencePoints >= 800 && levelCounter <= 8) {
+    levelUp();
+    levelCounter++;
+  } else if (experiencePoints >= 700 && levelCounter <= 7) {
+    levelUp();
+    levelCounter++;
+  } else if (experiencePoints >= 600 && levelCounter <= 6) {
+    levelUp();
+    levelCounter++;
+  } else if (experiencePoints >= 500 && levelCounter <= 5) {
+    levelUp();
+    levelCounter++;
+  } else if (experiencePoints >= 400 && levelCounter <= 4) {
+    levelUp();
+    levelCounter++;
+  } else if (experiencePoints >= 300 && levelCounter <= 3) {
+    levelUp();
+    levelCounter++;
+  } else if (experiencePoints >= 200 && levelCounter <= 2) {
+    levelUp();
+    levelCounter++;
+  } else if (experiencePoints >= 100 && levelCounter <= 1) {
+    levelUp();
+    levelCounter++;
+  }
+}
+
+function renderLevelUpModal() {
+  let hero = heroChecker();
+  levelUpModal.style.display = "block";
+
+  if (strengthBoonRank === 4) {
+    strengthRank.textContent = "IV";
+    strengthRank.disabled = true;
+  } else if (strengthBoonRank === 3) {
+    strengthRank.textContent = "III";
+  } else if (strengthBoonRank === 2) {
+    strengthRank.textContent = "II";
+  } else {
+    strengthRank.textContent = "I";
+  }
+
+  if (dexterityBoonRank === 4) {
+    dexterityRank.textContent = "IV";
+    dexterityRank.disabled = true;
+  } else if (dexterityBoonRank === 3) {
+    dexterityRank.textContent = "III";
+  } else if (dexterityBoonRank === 2) {
+    dexterityRank.textContent = "II";
+  } else {
+    dexterityRank.textContent = "I";
+  }
+
+  if (faithBoonRank === 4) {
+    faithRank.textContent = "IV";
+    faithRank.disabled = true;
+  } else if (faithBoonRank === 3) {
+    faithRank.textContent = "III";
+  } else if (faithBoonRank === 2) {
+    faithRank.textContent = "II";
+  } else {
+    faithRank.textContent = "I";
+  }
+
+  switch (hero) {
+    case paladin:
+      specialText.textContent = "Holy Smite";
+      passiveText.textContent = "Radiant Aura";
+      break;
+    case rogue:
+      specialText.textContent = "Shadow Strike";
+      passiveText.textContent = "Evasion";
+      break;
+    case priestess:
+      specialText.textContent = "Greater Prayer";
+      passiveText.textContent = "Burning Radiance";
+      break;
+  }
+
+  if (specialAbilityBoonRank === 4) {
+    specialRank.textContent = "IV";
+    specialRank.disabled = true;
+  } else if (specialAbilityBoonRank === 3) {
+    specialRank.textContent = "III";
+  } else if (specialAbilityBoonRank === 2) {
+    specialRank.textContent = "II";
+  } else {
+    specialRank.textContent = "I";
+  }
+
+  if (passiveAbilityBoonRank === 4) {
+    passiveRank.textContent = "IV";
+    passiveRank.disabled = true;
+  } else if (passiveAbilityBoonRank === 3) {
+    passiveRank.textContent = "III";
+  } else if (passiveAbilityBoonRank === 2) {
+    passiveRank.textContent = "II";
+  } else {
+    passiveRank.textContent = "I";
+  }
+}
+
+function levelUpHandler(boon) {
+  let hero = heroChecker();
+  hero.level++;
+  hero.attack++;
+  hero.health += 10;
+
+  if (boon === "STRENGTH") {
+    hero.strength++;
+  } else if (boon === "DEXTERITY") {
+    hero.dexterity++;
+  } else if (boon === "FAITH") {
+    hero.faith++;
+  } else if (boon === "SPECIAL") {
+    switch (hero) {
+      case paladin:
+        holySmiteTracker += 0.5;
+        break;
+      case rogue:
+        shadowStrikeTracker += 5;
+        break;
+      case priestess:
+        greaterPrayerTracker += 10;
+        break;
+    }
+  } else if (boon === "PASSIVE") {
+    switch (hero) {
+      case paladin:
+        radiantAuraTracker += 2;
+        break;
+      case rogue:
+        evasionTracker++;
+        break;
+      case priestess:
+        burningDevotionTracker += 1;
+        break;
+    }
+  }
+}
+
+function closeLevelUpModal() {
+  levelUpModal.style.display = "none";
+}
+
+function clearLevelUpModal() {
+  strengthRank.textContent = "";
+  dexterityRank.textContent = "";
+  faithRank.textContent = "";
+  specialRank.textContent = "";
+  passiveRank.textContent = "";
+  specialText.textContent = "";
+  passiveText.textContent = "";
+}
+
+function endLevelUp() {
+  setStatsHandler();
+  // verifyBoonChoice();
+  setTimeout(() => {
+    closeLevelUpModal();
+    clearLevelUpModal();
+  }, 2000);
+}
+
+// Event Listeners
+
+strengthRank.addEventListener("click", () => {
+  levelUpHandler("STRENGTH");
+  strengthBoonRank++;
+  endLevelUp();
+});
+
+dexterityRank.addEventListener("click", () => {
+  levelUpHandler("DEXTERITY");
+  dexterityBoonRank++;
+  endLevelUp();
+});
+
+faithRank.addEventListener("click", () => {
+  levelUpHandler("FAITH");
+  faithBoonRank++;
+  endLevelUp();
+});
+
+specialRank.addEventListener("click", () => {
+  levelUpHandler("SPECIAL");
+  specialAbilityBoonRank++;
+  endLevelUp();
+});
+
+passiveRank.addEventListener("click", () => {
+  levelUpHandler("PASSIVE");
+  passiveAbilityBoonRank++;
+  endLevelUp();
+});
