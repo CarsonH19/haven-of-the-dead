@@ -145,6 +145,8 @@ let baseFaith;
 // ===============================
 //   Boons & Leveling Variables
 // ===============================
+let experiencePoints = 0;
+let levelCounter = 1;
 
 const levelUpModal = document.getElementById("levelUpModal");
 // const strengthContainer = document.getElementById("strengthContainer");

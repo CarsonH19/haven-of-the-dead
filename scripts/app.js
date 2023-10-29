@@ -245,6 +245,7 @@ function isGameOver() {
 
   if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {
     isItemAttuned(BLOODSTONE, null); // ITEM: Recovers health when monster dies
+    gainExperience(currentRoom.contents.monsters[0].skulls);
     checkForMonsters();
   }
 

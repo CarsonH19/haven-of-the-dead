@@ -162,11 +162,8 @@ function setStatsHandler() {
 //        Boons & Leveling
 // ===============================
 
-let experiencePoints = 0;
-let levelCounter = 1;
-
 function gainExperience(num) {
-  gainExperience += num;
+  experiencePoints += num;
 }
 
 function heroChecker() {
