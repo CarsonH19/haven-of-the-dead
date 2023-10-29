@@ -91,3 +91,11 @@ function removeCurrentRoom() {
     catacombRooms.splice(roomIndex, 1);
   }
 }
+
+// ===============================
+//    Catacomb Entrance Modal
+// ===============================
+
+function closeCatacombsEntranceModal() {
+  catacombEntranceModal.style.display = "none";
+}

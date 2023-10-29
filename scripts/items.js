@@ -282,17 +282,17 @@ const REVENANTS_RAGE = {
 };
 
 const SHADOWSTEP_BOOTS = {
-    name: 'Shadowstep Boots',
-    description: '',
-    type: 'MAGIC',
-    rarity: 'RARE',
-    effect: 'While attuned to this item your dexterity increases by 1.',
-    function: () => {
-      // See closeInventoryButton event listener for item logic.
-      console.log('Dexterity Increased!');
-      return 1;
-    }
- }
+  name: "Shadowstep Boots",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item your dexterity increases by 1.",
+  function: () => {
+    // See closeInventoryButton event listener for item logic.
+    console.log("Dexterity Increased!");
+    return 1;
+  },
+};
 
 // ===============================
 //         EPIC ITEMS
@@ -383,3 +383,44 @@ function findItems() {
     currentRoom.contents.items.push(foundItem);
   }
 }
+
+// ===============================
+//            Inventory
+// ===============================
+
+function openInventoryHandler() {
+  inventoryModal.style.display = "block";
+}
+
+function closeInventoryHandler() {
+  inventoryModal.style.display = "none";
+}
+
+inventoryButton.addEventListener("click", () => {
+  renderInventory();
+  openInventoryHandler();
+});
+
+closeInventoryButton.addEventListener("click", () => {
+  closeInventoryHandler();
+
+  // Clears the inventory to avoid duplication.
+  slots = "";
+  magicItemsBox.textContent = "";
+  consumablesBox.textContent = "";
+
+  // Updates stats after changing attuned items.
+  if (heroChoice === "PALADIN") {
+    setPaladinStats();
+  } else if (heroChoice === "ROGUE") {
+    setRogueStats();
+  } else {
+    setPriestessStats();
+  }
+
+  renderHeroStats();
+
+  // ITEM: Shadowstep Boots - +1 Dexterity;
+  let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
+  baseDexterity = newDex;
+});

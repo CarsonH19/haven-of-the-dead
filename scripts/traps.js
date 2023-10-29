@@ -34,3 +34,59 @@ function trapHandler(baseStat, attribute) {
   renderRoomSummaryModal();
 }
 
+// ===============================
+//          Trap Modal
+// ===============================
+
+trapModal.style.display = "none";
+
+function renderTrap(trap) {
+  // console.log("renderTrap Called!");
+
+  trapModal.style.display = "block";
+
+  if (trap.optionOne === "STRENGTH") {
+    trapButtonOne.textContent = "Strength";
+  } else if (trap.optionOne === "DEXTERITY") {
+    trapButtonOne.textContent = "Dexterity";
+  } else {
+    trapButtonOne.textContent = "Faith";
+  }
+
+  if (trap.optionTwo === "STRENGTH") {
+    trapButtonTwo.textContent = "Strength";
+  } else if (trap.optionTwo === "DEXTERITY") {
+    trapButtonTwo.textContent = "Dexterity";
+  } else {
+    trapButtonTwo.textContent = "Faith";
+  }
+}
+
+// ===============================
+//          Event Listeners
+// ===============================
+
+trapButtonOne.addEventListener("click", () => {
+  if (trapButtonOne.textContent === "Strength") {
+    trapHandler(baseStrength, "STRENGTH");
+  } else if (trapButtonOne.textContent === "Dexterity") {
+    trapHandler(baseDexterity, "DEXTERITY");
+  } else {
+    trapHandler(baseFaith, "FAITH");
+  }
+
+  isGameOver();
+});
+
+trapButtonTwo.addEventListener("click", () => {
+  if (trapButtonTwo.textContent === "Strength") {
+    trapHandler(baseStrength, "STRENGTH");
+  } else if (trapButtonTwo.textContent === "Dexterity") {
+    trapHandler(baseDexterity, "DEXTERITY");
+  } else {
+    trapHandler(baseFaith, "FAITH");
+  }
+
+  isGameOver();
+});
+

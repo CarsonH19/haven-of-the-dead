@@ -159,6 +159,32 @@ function setStatsHandler() {
 }
 
 // ===============================
+//             Health
+// ===============================
+
+function setPlayerHealthBar(maxLife) {
+  maxLife = playerMaxHealth + isItemAttuned(BONEMAIL, 0); // ITEM: +20 Max HP
+
+  if (currentRoom === catacombEntrance) {
+    playerHealthBar.max = maxLife;
+    playerHealthBar.value = maxLife;
+    currentPlayerHealth = maxLife;
+  } else {
+    playerHealthBar.max = maxLife;
+  }
+}
+
+function healPlayer(healValue) {
+  playerHealthBar.value = +playerHealthBar.value + healValue;
+  currentPlayerHealth += healValue;
+
+  if (currentPlayerHealth > playerMaxHealth) {
+    playerHealthBar.value = playerMaxHealth;
+    currentPlayerHealth = playerMaxHealth;
+  }
+}
+
+// ===============================
 //        Boons & Leveling
 // ===============================
 

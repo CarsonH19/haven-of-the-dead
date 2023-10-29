@@ -894,3 +894,13 @@ function checkLogSize() {
     logModalList.removeChild(logModalList.lastElementChild);
   }
 }
+
+logContainer.addEventListener("click", () => {
+  logModal.style.display = "block";
+});
+
+logModal.addEventListener("click", (event) => {
+  if (event.target !== logModal || event.target === logModal) {
+    logModal.style.display = "none";
+  }
+});

@@ -149,6 +149,7 @@ let baseFaith;
 // ===============================
 //   Boons & Leveling Variables
 // ===============================
+
 let experiencePoints = 0;
 let levelCounter = 1;
 
@@ -197,5 +198,10 @@ const catacombEntrance = {
 
 let currentRoom = catacombEntrance;
 
+// ===============================
+//      Inventory Variables
+// ===============================
 
-// LOG MODAL
+const inventoryButton = document.getElementById("inventoryBtn");
+const inventoryModal = document.getElementById("inventoryModal");
+const closeInventoryButton = document.getElementById("closeInventoryBtn");

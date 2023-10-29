@@ -1,30 +1,4 @@
 // ===============================
-//             Health
-// ===============================
-
-function setPlayerHealthBar(maxLife) {
-  maxLife = playerMaxHealth + isItemAttuned(BONEMAIL, 0); // ITEM: +20 Max HP
-
-  if (currentRoom === catacombEntrance) {
-    playerHealthBar.max = maxLife;
-    playerHealthBar.value = maxLife;
-    currentPlayerHealth = maxLife;
-  } else {
-    playerHealthBar.max = maxLife;
-  }
-}
-
-function healPlayer(healValue) {
-  playerHealthBar.value = +playerHealthBar.value + healValue;
-  currentPlayerHealth += healValue;
-
-  if (currentPlayerHealth > playerMaxHealth) {
-    playerHealthBar.value = playerMaxHealth;
-    currentPlayerHealth = playerMaxHealth;
-  }
-}
-
-// ===============================
 //            Attack
 // ===============================
 
@@ -369,14 +343,6 @@ function renderHeroStats() {
 document.getElementById("startGameModal").style.display = "none";
 
 // ===============================
-//    Catacomb Entrance Modal
-// ===============================
-
-function closeCatacombsEntranceModal() {
-  catacombEntranceModal.style.display = "none";
-}
-
-// ===============================
 //      Room Summary Modal
 // ===============================
 
@@ -519,49 +485,6 @@ function renderContinueButton() {
   }
 }
 
-// ===============================
-//          Trap Modal
-// ===============================
-
-trapModal.style.display = "none";
-
-function renderTrap(trap) {
-  // console.log("renderTrap Called!");
-
-  trapModal.style.display = "block";
-
-  if (trap.optionOne === "STRENGTH") {
-    trapButtonOne.textContent = "Strength";
-  } else if (trap.optionOne === "DEXTERITY") {
-    trapButtonOne.textContent = "Dexterity";
-  } else {
-    trapButtonOne.textContent = "Faith";
-  }
-
-  if (trap.optionTwo === "STRENGTH") {
-    trapButtonTwo.textContent = "Strength";
-  } else if (trap.optionTwo === "DEXTERITY") {
-    trapButtonTwo.textContent = "Dexterity";
-  } else {
-    trapButtonTwo.textContent = "Faith";
-  }
-}
-
-// ===============================
-//            Inventory
-// ===============================
-
-const inventoryButton = document.getElementById("inventoryBtn");
-const inventoryModal = document.getElementById("inventoryModal");
-const closeInventoryButton = document.getElementById("closeInventoryBtn");
-
-function openInventoryHandler() {
-  inventoryModal.style.display = "block";
-}
-
-function closeInventoryHandler() {
-  inventoryModal.style.display = "none";
-}
 
 // ===============================
 //       Event Listeners
@@ -638,65 +561,3 @@ continueButton.addEventListener("click", () => {
   closeContinueButton();
 });
 
-trapButtonOne.addEventListener("click", () => {
-  if (trapButtonOne.textContent === "Strength") {
-    trapHandler(baseStrength, "STRENGTH");
-  } else if (trapButtonOne.textContent === "Dexterity") {
-    trapHandler(baseDexterity, "DEXTERITY");
-  } else {
-    trapHandler(baseFaith, "FAITH");
-  }
-
-  isGameOver();
-});
-
-trapButtonTwo.addEventListener("click", () => {
-  if (trapButtonTwo.textContent === "Strength") {
-    trapHandler(baseStrength, "STRENGTH");
-  } else if (trapButtonTwo.textContent === "Dexterity") {
-    trapHandler(baseDexterity, "DEXTERITY");
-  } else {
-    trapHandler(baseFaith, "FAITH");
-  }
-
-  isGameOver();
-});
-
-inventoryButton.addEventListener("click", () => {
-  renderInventory();
-  openInventoryHandler();
-});
-
-closeInventoryButton.addEventListener("click", () => {
-  closeInventoryHandler();
-
-  // Clears the inventory to avoid duplication.
-  slots = "";
-  magicItemsBox.textContent = "";
-  consumablesBox.textContent = "";
-
-  // Updates stats after changing attuned items.
-  if (heroChoice === "PALADIN") {
-    setPaladinStats();
-  } else if (heroChoice === "ROGUE") {
-    setRogueStats();
-  } else {
-    setPriestessStats();
-  }
-
-  renderHeroStats();
-
-  // ITEM: Shadowstep Boots - +1 Dexterity;
-  let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
-  baseDexterity = newDex;
-});
-
-logContainer.addEventListener("click", () => {
-  logModal.style.display = "block";
-});
-
-logModal.addEventListener("click", (event) => {
-  if (event.target !== logModal || event.target === logModal) {
-    logModal.style.display = "none";
-  }
-});
