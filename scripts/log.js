@@ -1,14 +1,13 @@
 // ===============================
 //             Log
 // ===============================
-function writeToLog(event, name, value) {
+function writeToLog(eventType, name, value) {
   let newEntry = document.createElement("li");
   let narration = Math.floor(Math.random() * 10);
   let quote = Math.floor(Math.random() * 10);
-  let trap = currentRoom.contents.traps;
+  let event = currentRoom.contents.events;
 
-
-  switch (event) {
+  switch (eventType) {
     // ===============================
     //        Monster Events
     // ===============================
@@ -809,46 +808,46 @@ function writeToLog(event, name, value) {
     // ===============================
 
     case LOG_EVENT_TRAP_DESCRIPTION:
-      if (trap.name === "Spike Trap") {
-        newEntry.textContent = `Trap: ${trap.description} How will ${name} escape this ${value}?`;
+      if (spikeTrap) {
+        newEntry.textContent = `Trap: ${event.description} How will ${name} escape this ${value}?`;
       }
       break;
     case LOG_EVENT_TRAP_PASS:
       narration = Math.floor(Math.random() * 5);
-      if (trap.name === 'Spike Trap') {
-        if (value === 'STRENGTH') {
+      if (event.name === "Spike Trap") {
+        if (value === "STRENGTH") {
           if (narration === 1) {
-            newEntry.textContent = `"With a surge of raw power, you strain against the closing walls, muscles bulging. The spikes inch closer, but you hold them back, forcing the mechanism to yield."`
+            newEntry.textContent = `"With a surge of raw power, you strain against the closing walls, muscles bulging. The spikes inch closer, but you hold them back, forcing the mechanism to yield."`;
           } else if (narration === 2) {
-            newEntry.textContent = `"Summoning every ounce of strength, you push against the encroaching spikes. They resist, but eventually give way to your determination, halting their advance."`
+            newEntry.textContent = `"Summoning every ounce of strength, you push against the encroaching spikes. They resist, but eventually give way to your determination, halting their advance."`;
           } else if (narration === 3) {
-            newEntry.textContent = `"The walls press in relentlessly, but you meet the challenge head-on. With a tremendous effort, you force them back, creating a precious gap to escape through."`
+            newEntry.textContent = `"The walls press in relentlessly, but you meet the challenge head-on. With a tremendous effort, you force them back, creating a precious gap to escape through."`;
           } else if (narration === 4) {
-            newEntry.textContent = `"With a powerful heave, you strain against the relentless walls of spikes, pushing them back with all your might. Your muscles burn, but the trap is thwarted, and you emerge victorious."`
+            newEntry.textContent = `"With a powerful heave, you strain against the relentless walls of spikes, pushing them back with all your might. Your muscles burn, but the trap is thwarted, and you emerge victorious."`;
           } else {
-            newEntry.textContent = '"Gritting your teeth, you summon every ounce of strength within you and forcefully push the encroaching spikes back, leaving a narrow escape route in your wake."'
+            newEntry.textContent =
+              '"Gritting your teeth, you summon every ounce of strength within you and forcefully push the encroaching spikes back, leaving a narrow escape route in your wake."';
           }
-        } else if (value === 'DEXTERITY') {
+        } else if (value === "DEXTERITY") {
           if (narration === 1) {
-            newEntry.textContent = `“With swift reflexes, you sidestep the encroaching spikes, narrowly avoiding their deadly embrace.”`
+            newEntry.textContent = `“With swift reflexes, you sidestep the encroaching spikes, narrowly avoiding their deadly embrace.”`;
           } else if (narration === 2) {
-            newEntry.textContent = `“You move with lightning speed, narrowly evading the advancing spikes as they close in around you.”`
+            newEntry.textContent = `“You move with lightning speed, narrowly evading the advancing spikes as they close in around you.”`;
           } else if (narration === 3) {
-            newEntry.textContent = `“Your nimble feet dance across the floor, narrowly avoiding the deadly spikes as they inch closer.”`
+            newEntry.textContent = `“Your nimble feet dance across the floor, narrowly avoiding the deadly spikes as they inch closer.”`;
           } else if (narration === 4) {
-            newEntry.textContent = `“You move with a breathless urgency, narrowly evading the closing spikes with split-second timing.”`
+            newEntry.textContent = `“You move with a breathless urgency, narrowly evading the closing spikes with split-second timing.”`;
           } else {
-            newEntry.textContent = `“In a display of acrobatic prowess, you somersault and twist, effortlessly evading the closing spikes.”`
+            newEntry.textContent = `“In a display of acrobatic prowess, you somersault and twist, effortlessly evading the closing spikes.”`;
           }
-
         }
       }
       break;
 
     case LOG_EVENT_TRAP_FAIL:
       narration = Math.floor(Math.random() * 5);
-      if (trap.name === 'Spike Trap') {
-        if (name === 'STRENGTH') {
+      if (event.name === "Spike Trap") {
+        if (name === "STRENGTH") {
           if (narration === 1) {
             newEntry.textContent = `"Despite your best efforts, the spike walls continue to close in, and you are unable to summon the strength needed to push them back. The trap inflicts its painful toll upon you." You take ${value} damage.`;
           } else if (narration === 2) {
@@ -860,7 +859,7 @@ function writeToLog(event, name, value) {
           } else {
             newEntry.textContent = `"The relentless spikes break through, leaving you with deep, painful wounds." You take ${value} damage`;
           }
-        } else if (name === 'DEXTERITY') {
+        } else if (name === "DEXTERITY") {
           if (narration === 1) {
             newEntry.textContent = `“Despite your agile attempts, the spikes find their mark, leaving you wounded and breathless.” You take ${value} damage.`;
           } else if (narration === 2) {
@@ -878,10 +877,8 @@ function writeToLog(event, name, value) {
   }
 
   log.insertBefore(newEntry, log.firstChild);
-
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
-
   checkLogSize();
 }
 

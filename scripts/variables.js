@@ -50,12 +50,12 @@ const continueButtonModal = document.getElementById("continueButtonModal");
 const continueButton = document.getElementById("continueButton");
 
 // ===============================
-//           Trap Modal
+//           Event Modal
 // ===============================
 
-const trapModal = document.getElementById("trapModal");
-const trapButtonOne = document.getElementById("trapButtonOne");
-const trapButtonTwo = document.getElementById("trapButtonTwo");
+const eventModal = document.getElementById('eventModal');
+const eventButtonOne = document.getElementById('eventButtonOne');
+const eventButtonTwo = document.getElementById('eventButtonTwo');
 
 // ===============================
 //        Choose Hero Modal

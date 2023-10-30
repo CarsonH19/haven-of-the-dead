@@ -305,12 +305,12 @@ progress[value]::-moz-progress-bar {
   height: 50px;
 }
 
-/* Trap Modal */
-#trap {
+/* Event Modal */
+#eventModal {
   display: none;
 }
 
-.trap {
+.event {
   position: fixed;
   z-index: 1;
   left: 50%;
@@ -319,8 +319,7 @@ progress[value]::-moz-progress-bar {
   background-color: rgba(0,0,0,0.4);
 }
 
-
-.trap-content button {
+.event-content button {
   width: 150px;
   height: 50px;
 }

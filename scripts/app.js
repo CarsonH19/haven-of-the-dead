@@ -219,7 +219,7 @@ function isGameOver() {
     alert("You died!");
   }
 
-  if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {
+  if (currentMonsterHealth <= 0) {
     isItemAttuned(BLOODSTONE, null); // ITEM: Recovers health when monster dies
     gainExperience(currentRoom.contents.monsters[0].skulls);
     checkForMonsters();
@@ -281,13 +281,13 @@ function renderCurrentRoom(currentRoom) {
     monsterContainer.style.display = "none";
   }
 
-  // Renders Trap Modal if there is a trap in the room.
-  if (currentRoom.contents.traps) {
-    renderTrap(currentRoom.contents.traps);
+  // Renders Event Modal
+  if (currentRoom.contents.events) {
+    renderEvent(currentRoom.contents.events);
     writeToLog(LOG_EVENT_TRAP_DESCRIPTION, "you", "danger");
   }
 
-  // Adds findItem() if not at the Catacomb Entrance.
+  // Search for items in each room.
   if (currentRoom !== catacombEntrance) {
     findItems();
   }
@@ -305,6 +305,7 @@ function togglePlayerControls() {
     guardBtn.disabled = false;
     specialBtn.disabled = false;
     fleeBtn.disabled = false;
+    potionBtn.disabled = false;
   } else {
     attackBtn.disabled = true;
     guardBtn.disabled = true;
@@ -312,7 +313,7 @@ function togglePlayerControls() {
     fleeBtn.disabled = true;
   }
 
-  if (trapModal.style.display === "block") {
+  if (eventModal.style.display === "block") {
     inventoryButton.disabled = true;
     potionBtn.disabled = true;
   } else {
@@ -327,9 +328,9 @@ function updateRoomsCleared() {
 }
 
 function renderHeroStats() {
-  const heroStrength = document.getElementById('heroStrength');
-  const heroDexterity = document.getElementById('heroDexterity');
-  const heroFaith = document.getElementById('heroFaith');
+  const heroStrength = document.getElementById("heroStrength");
+  const heroDexterity = document.getElementById("heroDexterity");
+  const heroFaith = document.getElementById("heroFaith");
 
   heroStrength.textContent = baseStrength;
   heroDexterity.textContent = baseDexterity;
@@ -359,17 +360,14 @@ function renderRoomSummaryModal() {
   );
   const roomSummaryMonsters = document.getElementById("roomSummaryMonsters");
   const roomSummaryItems = document.getElementById("roomSummaryItems");
-  const roomSummaryNPCs = document.getElementById("roomSummaryNPCs");
-  const roomSummaryTraps = document.getElementById("roomSummaryTraps");
+  const roomSummaryEvents = document.getElementById("roomSummaryEvents");
   const roomSummaryExperience = document.getElementById(
     "roomSummaryExperience"
   );
 
   if (
     currentRoom !== catacombEntrance &&
-    currentRoom.contents.monsters.length === 0 &&
-    !currentRoom.contents.traps &&
-    !currentRoom.contents.NPCs
+    currentRoom.contents.monsters.length === 0
   ) {
     // Builds summary modal with currentRoom's contents.
     setTimeout(function () {
@@ -383,6 +381,16 @@ function renderRoomSummaryModal() {
       descriptionText = document.createElement("p");
       descriptionText.textContent = `${roomSummaryInformation.description}`;
       roomSummaryDescription.appendChild(descriptionText);
+
+      // Events
+      if (roomInfo.events) {
+        eventHeader = document.createElement("h4");
+        eventHeader.textContent = `${roomInfo.events.name}`;
+        roomSummaryEvents.appendChild(eventHeader);
+        eventText = document.createElement("p");
+        eventText.textContent = `${roomInfo.events.description}`;
+        roomSummaryEvents.appendChild(eventText);
+      }
 
       // Monsters
       if (roomInfo.monsters.length > 0) {
@@ -414,25 +422,6 @@ function renderRoomSummaryModal() {
         }
       }
 
-      // NPCs
-      if (roomInfo.NPCs) {
-        npcsHeader = document.createElement("h4");
-        npcsHeader.textContent = `${roomInfo.NPCs.name}`;
-        roomSummaryNPCs.appendChild(npcsHeader);
-        npcsText = document.createElement("p");
-        npcsText.textContent = `${roomInfo.NPCs.description}`;
-        roomSummaryNPCs.appendChild(npcsText);
-      }
-
-      // Traps
-      if (roomInfo.traps) {
-        trapsHeader = document.createElement("h4");
-        trapsHeader.textContent = `${roomInfo.traps.name}`;
-        roomSummaryTraps.appendChild(trapsHeader);
-        trapText = document.createElement("p");
-        trapText.textContent = `${roomInfo.traps.description}`;
-        roomSummaryTraps.appendChild(trapText);
-      }
       // Experience
       // experienceHeader = document.createElement('h4');
       // experienceText = document.createElement('p');
@@ -457,8 +446,7 @@ function clearRoomSummaryModal() {
   roomSummaryDescription.textContent = "";
   roomSummaryMonsters.textContent = "";
   roomSummaryItems.textContent = "";
-  roomSummaryNPCs.textContent = "";
-  roomSummaryTraps.textContent = "";
+  roomSummaryEvents.textContent = "";
   roomSummaryExperience.textContent = "";
 }
 
@@ -476,15 +464,13 @@ function renderContinueButton() {
   if (
     currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
-    !currentRoom.contents.traps &&
-    !currentRoom.contents.NPCs
+    !currentRoom.contents.events
   ) {
     continueButtonModal.style.display = "block";
   } else {
     continueButtonModal.style.display = "none";
   }
 }
-
 
 // ===============================
 //       Event Listeners
@@ -560,4 +546,3 @@ continueButton.addEventListener("click", () => {
   renderCurrentRoom(currentRoom);
   closeContinueButton();
 });
-

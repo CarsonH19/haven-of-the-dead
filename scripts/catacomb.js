@@ -10,11 +10,9 @@ let catacombRooms = [
     backgroundImage: null,
     music: null,
     contents: {
-      monsters: [GRUDGE, SHADE, HAUNTING_SPIRIT, SKELETAL_SOLDIER, ARMORED_SKELETON],
-      NPCs: null,
+      monsters: [SKELETAL_SOLDIER, ARMORED_SKELETON],
       items: [],
-      consumables: [],
-      traps: null,
+      events: null
     },
   },
   // {
@@ -71,10 +69,8 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [],
-      NPCs: null,
       items: [],
-      consumables: null,
-      traps: spikeTrap
+      events: MIMIC_CHEST
     },
   }
 ];

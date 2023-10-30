@@ -148,8 +148,10 @@ function setMonsterHealth(maxLife) {
   currentMonsterHealth = maxLife;
 }
 
-function startBattle(room) {
-  renderMonsterStatBlock(room.contents.monsters[0]);
+function startBattle() {
+  renderMonsterStatBlock(currentRoom.contents.monsters[0]);
+  togglePlayerControls();
+
   // ITEM: Sunstone - Damages undead creatures.
   isItemAttuned(SUNSTONE, 0);
   // ITEM: Warding Candle - Chance for evil spirits to flee.
@@ -160,9 +162,10 @@ function checkForMonsters() {
   currentRoom.contents.monsters.shift();
 
   if (currentRoom.contents.monsters.length > 0) {
-    startBattle(currentRoom);
+    startBattle();
     console.log("Another Monster!");
   } else {
+    console.log('RENDER SUMMARY CALLED!');
     renderRoomSummaryModal();
     togglePlayerControls();
   }
