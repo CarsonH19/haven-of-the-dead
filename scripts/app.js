@@ -463,8 +463,7 @@ function renderContinueButton() {
 
   if (
     currentRoom !== catacombEntrance &&
-    currentRoom.contents.monsters.length === 0 &&
-    !currentRoom.contents.events
+    currentRoom.contents.monsters.length === 0
   ) {
     continueButtonModal.style.display = "block";
   } else {

@@ -53,7 +53,7 @@ const GRAVEROBBER_EARVER = {
 const MIMIC_CHEST = {
   name: "Chest",
   eventType: "MISC",
-  description: "",
+  description: "You found a chest.",
   optionOne: "Yes",
   optionTwo: "No",
   passValue: null,
@@ -83,7 +83,6 @@ const MIMIC_CHEST = {
 function trapEventHandler(baseStat, attribute) {
   let event = currentRoom.contents.events;
   let randomNumber = Math.round(Math.random() * 10) + baseStat;
-  console.log(`randomNumber: ${randomNumber}`);
 
   //ITEM: Evertorch - Increases success chance with traps.
   randomNumber = randomNumber + isItemAttuned(EVERTORCH, 0);
@@ -99,7 +98,6 @@ function trapEventHandler(baseStat, attribute) {
         event.functionOne();
       }
     } else {
-      console.log([randomNumber, event.passValue])
       playerHealthBar.value -= event.failDamage;
       currentPlayerHealth -= event.failDamage;
       writeToLog(
@@ -201,6 +199,8 @@ eventButtonOne.addEventListener("click", () => {
   if (event.eventType === "MISC") {
     generalEventHandler(event.optionOne);
   }
+
+  togglePlayerControls();
 });
 
 eventButtonTwo.addEventListener("click", () => {
@@ -223,4 +223,6 @@ eventButtonTwo.addEventListener("click", () => {
   if (event.eventType === "MISC") {
     generalEventHandler(event.optionTwo);
   }
+
+  togglePlayerControls();
 });
