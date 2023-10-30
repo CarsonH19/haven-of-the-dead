@@ -92,37 +92,24 @@ body {
   align-items: stretch;
 }
 
-.player-container,
 .controls-container,
 .log-container {
   flex: 1;
-  max-width: 33%;
+  width: 33%;
   background-color: gray;
   padding: 10px;
 }
 
-#player-info {
-  display: flex;
-  flex-direction: column;
-}
-
-#player-info h3 {
-  margin-top: 0px;
-}
-
-#player-info p {
-  font-size: 1rem;
-  margin-top: -5px;
-  margin-bottom: 1px;
-}
-
-.player-stats {
-  margin-top: 20px;
+.player-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  gap: 10px;
+  width: 33%;
+  background-color: gray;
+  padding-left: 5px;
+  cursor: pointer;
 }
+
 
 .controls-container {
   display: flex;
@@ -199,7 +186,7 @@ progress {
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  height: 0.5rem;
+  height: 10%; 
   color: #ff0062;
   border: 1px solid #ad0505;
   border-radius: 10px;
@@ -209,6 +196,7 @@ progress[value]::-webkit-progress-bar,
 progress[value] {
   background-color: #b0aaaa;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  
 }
 
 progress[value]::-webkit-progress-value {
@@ -241,6 +229,7 @@ progress[value]::-moz-progress-bar {
 .hero-modal-content,
 .inventory-modal-content,
 .level-up-modal-content,
+.hero-stats-modal-content,
 .modal-content {
   display: flex;
   flex-direction: column;
@@ -450,3 +439,4 @@ progress[value]::-moz-progress-bar {
 #heroStatsModal {
   display: none;
 }
+

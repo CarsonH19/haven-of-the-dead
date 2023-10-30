@@ -18,7 +18,7 @@ let monsterMaxHealth = 100;
 let currentMonsterHealth = monsterMaxHealth;
 let monsterAttackValue = 10;
 
-let currentPlayerHealth;
+let currentPlayerHealth = null;
 
 // ===============================
 //         Game Window
@@ -175,6 +175,12 @@ let dexterityBoonRank = 1;
 let faithBoonRank = 1;
 let specialAbilityBoonRank = 1;
 let passiveAbilityBoonRank = 1;
+
+// ===============================
+//    Hero Stats Modal Variables
+// ===============================
+
+const heroStatsModal = document.getElementById('heroStatsModal');
 
 // ===============================
 //       Catacomb Variables

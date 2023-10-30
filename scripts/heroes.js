@@ -400,3 +400,36 @@ passiveRank.addEventListener("click", () => {
   passiveAbilityBoonRank++;
   endLevelUp();
 });
+
+function renderHeroStatsModal() {
+  let hero = heroChecker();
+
+  const heroName = document.getElementById("heroName");
+  heroName.textContent = hero.name;
+
+  let heroHealthCurrent = document.getElementById("heroHealthCurrent");
+  let heroHealthMax = document.getElementById("heroHealthMax");
+
+
+  heroHealthCurrent.textContent = currentPlayerHealth;
+  heroHealthMax.textContent = playerMaxHealth;
+  // const heroBonusHealth = document.getElementById('heroBonusHealth');
+  // const heroCritHitDamage = document.getElementById('heroCritHitDamage');
+  // const heroCritHitChance = document.getElementById('heroCritHitChance');
+  // const heroGuardBonus = document.getElementById('heroGuardBonus');
+  // const heroFleeChance = document.getElementById('heroFleeChance');
+  // const heroFindItemChance = document.getElementById('heroFindItemChance');
+  // const heroSpecial = document.getElementById('heroSpecial');
+  // const heroPassive = document.getElementById('heroPassive');
+}
+
+playerContainer.addEventListener("click", () => {
+  renderHeroStatsModal();
+  heroStatsModal.style.display = "block";
+});
+
+heroStatsModal.addEventListener("click", (event) => {
+  if (event.target !== logModal || event.target === heroStatsModal) {
+    heroStatsModal.style.display = "none";
+  }
+});
