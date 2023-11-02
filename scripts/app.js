@@ -101,7 +101,7 @@ function dealMonsterDamage(damage) {
   if (heroChoice === "PRIESTESS" && dealtDamage < burningDevotionTracker) {
     dealtDamage = burningDevotionTracker;
     writeToLog(
-      LOG_EVENT_BURNING_RADIANCE,
+      LOG_EVENT_BURNING_DEVOTION,
       currentRoom.contents.monsters[0].name,
       dealtDamage
     );
@@ -282,7 +282,17 @@ function renderCurrentRoom(currentRoom) {
   // Renders Event Modal
   if (currentRoom.contents.events) {
     renderEvent(currentRoom.contents.events);
-    writeToLog(LOG_EVENT_TRAP_DESCRIPTION, "you", "danger");
+    switch (currentRoom.contents.events.eventType) {
+      case "TRAP":
+        writeToLog(LOG_EVENT_TRAP_DESCRIPTION, "you", "danger");
+        break;
+      case "NPC":
+        writeToLog(LOG_EVENT_NPC_DESCRIPTION, "you", "do");
+        break;
+      case "MISC":
+        writeToLog(LOG_EVENT_MISC_DESCRIPTION, "you", "danger");
+        break;
+    }
   }
 
   // Search for items in each room.

@@ -84,8 +84,10 @@ body {
   justify-content: center;
   flex-grow: 1; /* This will allow the middle div to grow and take up any available space */
   width: 80vw;
+  height: 30vh;
   padding: 20px;
   font-size: 1rem;
+  overflow: hidden;
 }
 
 .middle-center li {

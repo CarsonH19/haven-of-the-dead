@@ -15,54 +15,26 @@ let catacombRooms = [
       events: null
     },
   },
-  // {
-  //   roomName: "Gnawer's Nest",
-  //   backgroundImage: null,
-  //   music: null,
-  //   contents: {
-  //     monsters: [GNAWER, GNAWER, GNAWER],
-  //     NPCs: null,
-  //     items: [],
-  //     consumables: null,
-  //     traps: null,
-  //   },
-  // },
-  // {
-  //   roomName: "Skull-lined Corridor",
-  //   backgroundImage: null,
-  //   music: null,
-  //   contents: {
-  //     monsters: [BONE_TITAN],
-  //     NPCs: null,
-  //     items: [],
-  //     consumables: null,
-  //     traps: null,
-  //   },
-  // },
-  // {
-  //   roomName: "Sinister Sacristy",
-  //   backgroundImage: null,
-  //   music: null,
-  //   contents: {
-  //     monsters: [],
-  //     NPCs: null,
-  //     items: [],
-  //     consumables: null,
-  //     traps: null,
-  //   },
-  // },
-  // {
-  //   roomName: "Malevolent Chapel",
-  //   backgroundImage: null,
-  //   music: null,
-  //   contents: {
-  //     monsters: [],
-  //     NPCs: null,
-  //     items: [],
-  //     consumables: null,
-  //     traps: null,
-  //   },
-  // },
+  {
+    roomName: "Sinister Sacristy",
+    backgroundImage: null,
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: GRAVEROBBER_EARVER
+    },
+  },
+  {
+    roomName: "Malevolent Chapel",
+    backgroundImage: null,
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: GAS_CHAMBER
+    },
+  },
   {
     roomName: "Veiled Crypt",
     backgroundImage: null,

@@ -33,11 +33,21 @@ function paladinHolySmite() {
 }
 
 function paladinRadiantAura() {
-  if (currentMonsterHealth <= radiantAuraTracker) {
+  if (
+    currentMonsterHealth <= radiantAuraTracker &&
+    currentRoom.contents.monsters[0].type === "UNDEAD"
+  ) {
+    writeToLog(
+      LOG_EVENT_RADIANT_AURA,
+      currentRoom.contents.monsters[0].name,
+      "destroys"
+    );
+
     currentMonsterHealth = 0;
     monsterHealthBar.value = 0;
-    // console.log("Face your judgement!");
   }
+
+
 }
 
 // ===============================
@@ -367,7 +377,95 @@ function endLevelUp() {
   renderHeroStats();
 }
 
-// Event Listeners
+function renderHeroStatsModal() {
+  let hero = heroChecker();
+  // Name
+  const heroName = document.getElementById("heroName");
+  heroName.textContent = hero.name;
+  // Health
+  let heroHealthCurrent = document.getElementById("heroHealthCurrent");
+  let heroHealthMax = document.getElementById("heroHealthMax");
+  heroHealthCurrent.textContent = currentPlayerHealth;
+  heroHealthMax.textContent = playerMaxHealth;
+  // Strength
+  let heroStatsStrength = document.getElementById("heroStatsStrength");
+  heroStatsStrength.textContent = baseStrength;
+  const heroBonusHealth = document.getElementById("heroBonusHealth");
+  heroBonusHealth.textContent = `+${strengthBonusHealth}`;
+  const heroCritHitDamage = document.getElementById("heroCritHitDamage");
+  let heroCritDamageMod = calculateBaseCritModifier() * 100;
+  heroCritHitDamage.textContent = `${heroCritDamageMod}%`;
+  // Dexterity
+  let heroStatsDexterity = document.getElementById("heroStatsDexterity");
+  heroStatsDexterity.textContent = baseDexterity;
+  const heroCritHitChance = document.getElementById("heroCritHitChance");
+  critHitPercentage = ((1 + baseDexterity) / 20) * 100;
+  heroCritHitChance.textContent = `${critHitPercentage}%`;
+  const heroGuardBonus = document.getElementById("heroGuardBonus");
+  heroGuardBonus.textContent = `+${baseDexterity}`;
+  // Faith
+  let heroStatsFaith = document.getElementById("heroStatsFaith");
+  heroStatsFaith.textContent = baseFaith;
+  const heroFleeChance = document.getElementById("heroFleeChance");
+  fleeChancePercentage = ((1 + baseFaith) / 10) * 100;
+  heroFleeChance.textContent = `${fleeChancePercentage}%`;
+  const heroFindItemChance = document.getElementById("heroFindItemChance");
+  findItemPercentage = ((1 + baseFaith) / 20) * 100;
+  heroFindItemChance.textContent = `${findItemPercentage}%`;
+  // Special
+  const heroSpecial = document.getElementById("heroSpecial");
+  let heroSpecialStat = document.createElement(`span`);
+
+  if (hero === paladin) {
+    heroSpecial.textContent = "Holy Smite:";
+    let smitePercentage = holySmiteTracker * 100;
+    heroSpecialStat.textContent = ` ${smitePercentage}%`;
+    heroSpecial.appendChild(heroSpecialStat);
+  } else if (hero === rogue) {
+    heroSpecial.textContent = "Shadow Strike:";
+    let doubleGuard = baseDexterity * 2;
+    let doubleCritChance = critHitPercentage * 2;
+    heroSpecialStat.textContent = ` +${doubleGuard} / ${doubleCritChance}%`;
+    heroSpecial.appendChild(heroSpecialStat);
+  } else {
+    heroSpecial.textContent = `Greater Prayer:`;
+    heroSpecialStat.textContent = ` +${greaterPrayerTracker}`;
+    heroSpecial.appendChild(heroSpecialStat);
+  }
+
+  // Passive
+  const heroPassive = document.getElementById("heroPassive");
+  const heroPassiveStat = document.createElement("span");
+
+  if (hero === paladin) {
+    heroPassive.textContent = "Radiant Aura:";
+    heroPassiveStat.textContent = ` +${radiantAuraTracker}`;
+    heroPassive.appendChild(heroPassiveStat);
+  } else if (hero === rogue) {
+    heroPassive.textContent = "Evasion:";
+    heroPassiveStat.textContent = ` +${evasionTracker}`;
+    heroPassive.appendChild(heroPassiveStat);
+  } else {
+    heroPassive.textContent = "Burning Devotion:";
+    heroPassiveStat.textContent = ` +${burningDevotionTracker}`;
+    heroPassive.appendChild(heroPassiveStat);
+  }
+}
+
+playerContainer.addEventListener("click", () => {
+  renderHeroStatsModal();
+  heroStatsModal.style.display = "block";
+});
+
+heroStatsModal.addEventListener("click", (event) => {
+  if (event.target !== logModal || event.target === heroStatsModal) {
+    heroStatsModal.style.display = "none";
+  }
+});
+
+// ===============================
+//      Event Listeners
+// ===============================
 
 strengthRank.addEventListener("click", () => {
   levelUpHandler("STRENGTH");
@@ -397,90 +495,4 @@ passiveRank.addEventListener("click", () => {
   levelUpHandler("PASSIVE");
   passiveAbilityBoonRank++;
   endLevelUp();
-});
-
-function renderHeroStatsModal() {
-  let hero = heroChecker();
-  // Name 
-  const heroName = document.getElementById("heroName");
-  heroName.textContent = hero.name;
-  // Health
-  let heroHealthCurrent = document.getElementById("heroHealthCurrent");
-  let heroHealthMax = document.getElementById("heroHealthMax");
-  heroHealthCurrent.textContent = currentPlayerHealth;
-  heroHealthMax.textContent = playerMaxHealth;
-  // Strength
-  let heroStatsStrength = document.getElementById('heroStatsStrength');
-  heroStatsStrength.textContent = baseStrength;
-  const heroBonusHealth = document.getElementById('heroBonusHealth');
-  heroBonusHealth.textContent = `+${strengthBonusHealth}`;
-  const heroCritHitDamage = document.getElementById('heroCritHitDamage');
-  let heroCritDamageMod = calculateBaseCritModifier() * 100;
-  heroCritHitDamage.textContent = `${heroCritDamageMod}%`;
-  // Dexterity
-  let heroStatsDexterity = document.getElementById('heroStatsDexterity');
-  heroStatsDexterity.textContent = baseDexterity;
-  const heroCritHitChance = document.getElementById('heroCritHitChance');
-  critHitPercentage = ((1 + baseDexterity) / 20) * 100;
-  heroCritHitChance.textContent = `${critHitPercentage}%`;
-  const heroGuardBonus = document.getElementById('heroGuardBonus'); 
-  heroGuardBonus.textContent = `+${baseDexterity}`;
-  // Faith
-  let heroStatsFaith = document.getElementById('heroStatsFaith');
-  heroStatsFaith.textContent = baseFaith;
-  const heroFleeChance = document.getElementById('heroFleeChance');
-  fleeChancePercentage = ((1 + baseFaith) / 10) * 100;
-  heroFleeChance.textContent = `${fleeChancePercentage}%`;
-  const heroFindItemChance = document.getElementById('heroFindItemChance');
-  findItemPercentage = ((1 + baseFaith) / 20) * 100;
-  heroFindItemChance.textContent = `${findItemPercentage}%`;
-  // Special
-  const heroSpecial = document.getElementById('heroSpecial');
-  let heroSpecialStat = document.createElement(`span`);
-  
-  if (hero === paladin) {
-    heroSpecial.textContent = 'Holy Smite:';
-    let smitePercentage = holySmiteTracker * 100;
-    heroSpecialStat.textContent = ` ${smitePercentage}%`;
-    heroSpecial.appendChild(heroSpecialStat);
-  } else if (hero === rogue) {
-    heroSpecial.textContent = 'Shadow Strike:';
-    let doubleGuard = baseDexterity * 2;
-    let doubleCritChance = critHitPercentage * 2;
-    heroSpecialStat.textContent = ` +${doubleGuard} / ${doubleCritChance}%`;
-    heroSpecial.appendChild(heroSpecialStat);
-  } else {
-    heroSpecial.textContent = `Greater Prayer:`;
-    heroSpecialStat.textContent = ` +${greaterPrayerTracker}`;
-    heroSpecial.appendChild(heroSpecialStat);
-  }
-
-  // Passive
-  const heroPassive = document.getElementById('heroPassive');
-  const heroPassiveStat = document.createElement('span');
-  
-  if (hero === paladin) {
-    heroPassive.textContent = 'Radiant Aura:';
-    heroPassiveStat.textContent = ` +${radiantAuraTracker}`;
-    heroPassive.appendChild(heroPassiveStat);
-  } else if (hero === rogue) {
-    heroPassive.textContent = 'Evasion:';
-    heroPassiveStat.textContent = ` +${evasionTracker}`;
-    heroPassive.appendChild(heroPassiveStat);
-  } else {
-    heroPassive.textContent = 'Burning Devotion:';
-    heroPassiveStat.textContent = ` +${burningDevotionTracker}`;
-    heroPassive.appendChild(heroPassiveStat);
-  }
-}
-
-playerContainer.addEventListener("click", () => {
-  renderHeroStatsModal();
-  heroStatsModal.style.display = "block";
-});
-
-heroStatsModal.addEventListener("click", (event) => {
-  if (event.target !== logModal || event.target === heroStatsModal) {
-    heroStatsModal.style.display = "none";
-  }
 });

@@ -3,7 +3,7 @@ const monsterSkullElement = document.getElementById("skull-level");
 
 const CRYPT_CRAWLER = {
   name: "Crypt Crawler",
-  type: "UNDEAD",
+  type: "BEAST",
   skulls: 1,
 };
 

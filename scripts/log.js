@@ -40,8 +40,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Decrepit Skeleton") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -65,8 +64,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Skeletal Soldier") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -90,8 +88,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Armored Skeleton") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -115,8 +112,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Blazing Skeleton") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -140,8 +136,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Draugr") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -165,8 +160,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Bone Titan") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -190,8 +184,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Flood of Bones") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -215,8 +208,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Baron of Bone") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -240,8 +232,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Shade") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -265,8 +256,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Ghost") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -290,8 +280,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Grudge") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -315,8 +304,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Gnawer") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -340,8 +328,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Coffin Spider") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -365,8 +352,7 @@ function writeToLog(eventType, name, value) {
         }
       } else if (name === "Scoundrel") {
         if (narration === 1) {
-          narration =
-            "A sudden jolt of pain shoots through you as the Crypt Crawler's fangs find their mark.";
+          narration = "";
         } else if (narration === 1) {
           narration = "";
         } else if (narration === 2) {
@@ -389,11 +375,11 @@ function writeToLog(eventType, name, value) {
           narration = "";
         }
       }
-      newEntry.textContent = `Monster Attack: ${narration} The ${name} dealt ${value} damage to you!`;
+      newEntry.textContent = `${narration} The ${name} inflicts ${value} damage to you!`;
       break;
 
     // ===============================
-    //        Player Events
+    //    Attacks & Critical Hits
     // ===============================
 
     case LOG_EVENT_PLAYER_ATTACK:
@@ -471,7 +457,7 @@ function writeToLog(eventType, name, value) {
         }
       }
 
-      newEntry.textContent = `Attack: "${quote}" You dealt ${value} damage to the ${name}!`;
+      newEntry.textContent = `${quote} You deal ${value} damage to the ${name}!`;
       break;
 
     case LOG_EVENT_PLAYER_CRITICAL:
@@ -549,8 +535,12 @@ function writeToLog(eventType, name, value) {
         }
       }
 
-      newEntry.textContent = `Critical Attack: "${quote}" You dealt ${value} damage to the ${name}!`;
+      newEntry.textContent = `${quote} You deal ${value} damage to the ${name}!`;
       break;
+
+    // ===============================
+    //              Guard
+    // ===============================
 
     case LOG_EVENT_GUARD:
       if (heroChoice === "PALADIN") {
@@ -626,18 +616,37 @@ function writeToLog(eventType, name, value) {
           narration = "";
         }
       }
-      newEntry.textContent = `Guard: You mitigate ${value} damage from the ${name}!`;
+      newEntry.textContent = `You guard ${value} damage from the ${name}!`;
       break;
 
+    // ===============================
+    //            Potion
+    // ===============================
+
     case LOG_EVENT_POTION:
-      newEntry.textContent = `Potion: ${name} restore ${value} health after drinking a potion!`;
+      newEntry.textContent = `${name} drink a potion and restore ${value} health!`;
       break;
+
+    // ===============================
+    //             Flee
+    // ===============================
+
     // case LOG_EVENT_FLEE:
+
+    // ===============================
+    //           Level Up
+    // ===============================
+
     // case LOG_EVENT_LEVEL:
+
+    // ===============================
+    //       Enter a New Room
+    // ===============================
+
     // case LOG_EVENT_NEW_ROOM:
 
     // ===============================
-    //        Paladin Events
+    //           Paladin
     // ===============================
 
     case LOG_EVENT_SMITE:
@@ -663,7 +672,7 @@ function writeToLog(eventType, name, value) {
       } else {
         quote = "";
       }
-      newEntry.textContent = `Holy Smite: "${quote}" You dealt ${value} damage to the ${name}!`;
+      newEntry.textContent = `${quote}" Your Holy Smite deals ${value} damage to the ${name}!`;
       break;
 
     case LOG_EVENT_SMITE_CRITICAL:
@@ -694,7 +703,7 @@ function writeToLog(eventType, name, value) {
         quote =
           "From the sun's heart, a torrent of flames to consume your wickedness!";
       }
-      newEntry.textContent = `Critical Smite: "${quote}" You dealt ${value} damage to the ${name}!`;
+      newEntry.textContent = `${quote} Your Holy Smite deals ${value} damage to the ${name}!`;
       break;
 
     case LOG_EVENT_RADIANT_AURA:
@@ -710,11 +719,11 @@ function writeToLog(eventType, name, value) {
       } else {
         quote = "";
       }
-      newEntry.textContent = `Radiant Aura: "${quote}" You dealt ${value} damage to the ${name}!`;
+      newEntry.textContent = `${quote} Your Radiant Aura ${value} the ${name}!`;
       break;
 
     // ===============================
-    //          Rogue Events
+    //           Rogue 
     // ===============================
 
     case LOG_EVENT_SHADOW_STRIKE:
@@ -784,10 +793,10 @@ function writeToLog(eventType, name, value) {
       } else {
         quote = "";
       }
-      newEntry.textContent = `Greater Prayer: "${quote}" ${name} restored ${value} health!`;
+      newEntry.textContent = `${quote} ${name} Greater Prayer restores ${value} health!`;
       break;
 
-    case LOG_EVENT_BURNING_RADIANCE:
+    case LOG_EVENT_BURNING_DEVOTION:
       quote = Math.floor(Math.random() * 5);
       if (quote === 1) {
         quote = "";
@@ -800,7 +809,7 @@ function writeToLog(eventType, name, value) {
       } else {
         quote = "";
       }
-      newEntry.textContent = `Evasion: "${quote}" You evaded ${value} damage from the ${name}!`;
+      newEntry.textContent = ` "${quote}" You ${value} damage from the ${name}!`;
       break;
 
     // ===============================
@@ -808,13 +817,11 @@ function writeToLog(eventType, name, value) {
     // ===============================
 
     case LOG_EVENT_TRAP_DESCRIPTION:
-      if (spikeTrap) {
-        newEntry.textContent = `Trap: ${event.description} How will ${name} escape this ${value}?`;
-      }
+      newEntry.textContent = `${event.description} How will ${name} escape this ${value}?`;
       break;
     case LOG_EVENT_TRAP_PASS:
       narration = Math.floor(Math.random() * 5);
-      if (event.name === "Spike Trap") {
+      if (event === SPIKE_WALLS) {
         if (value === "STRENGTH") {
           if (narration === 1) {
             newEntry.textContent = `"With a surge of raw power, you strain against the closing walls, muscles bulging. The spikes inch closer, but you hold them back, forcing the mechanism to yield."`;
@@ -841,12 +848,18 @@ function writeToLog(eventType, name, value) {
             newEntry.textContent = `“In a display of acrobatic prowess, you somersault and twist, effortlessly evading the closing spikes.”`;
           }
         }
+      } else if (event === GAS_CHAMBER) {
+      } else if (event === SWARM_OF_VERMIN) {
+      } else if (event === SKELETAL_HANDS) {
+      } else if (event === SPIKE_PITFALL) {
+      } else if (event === PENDULUM_BLADES) {
+      } else if (event === SPIDER_WEB) {
       }
       break;
 
     case LOG_EVENT_TRAP_FAIL:
       narration = Math.floor(Math.random() * 5);
-      if (event.name === "Spike Trap") {
+      if (SPIKE_WALLS) {
         if (name === "STRENGTH") {
           if (narration === 1) {
             newEntry.textContent = `"Despite your best efforts, the spike walls continue to close in, and you are unable to summon the strength needed to push them back. The trap inflicts its painful toll upon you." You take ${value} damage.`;
@@ -872,7 +885,61 @@ function writeToLog(eventType, name, value) {
             newEntry.textContent = `“Your movements are precise and calculated, but the spikes prove too swift. They strike, leaving you with painful wounds.” You take ${value} damage`;
           }
         }
+      } else if (event === GAS_CHAMBER) {
+      } else if (event === SWARM_OF_VERMIN) {
+      } else if (event === SKELETAL_HANDS) {
+      } else if (event === SPIKE_PITFALL) {
+      } else if (event === PENDULUM_BLADES) {
+      } else if (event === SPIDER_WEB) {
       }
+      break;
+
+    // ===============================
+    //          NPC Events
+    // ===============================
+
+    case LOG_EVENT_NPC_DESCRIPTION:
+      newEntry.textContent = `${event.description} What will ${name} ${value}?`;
+      break;
+
+    case LOG_EVENT_NPC_OPTION_ONE:
+      if (event === GRAVEROBBER_EARVER) {
+      } else if (event === IVAN_THE_SCOUNDREL) {
+      } else if (event === SCHOLAR_HENDRA) {
+      } else if (event === GRERVIL_THE_BODILESS) {
+      } else if (event === TRADER_BAZRIM) {
+      } else if (event === HOZHUL) {
+      } else if (event === CURATOR_RENVAR) {
+      }
+      break;
+
+    case LOG_EVENT_NPC_OPTION_TWO:
+      if (event === GRAVEROBBER_EARVER) {
+      } else if (event === IVAN_THE_SCOUNDREL) {
+      } else if (event === SCHOLAR_HENDRA) {
+      } else if (event === GRERVIL_THE_BODILESS) {
+      } else if (event === TRADER_BAZRIM) {
+      } else if (event === HOZHUL) {
+      } else if (event === CURATOR_RENVAR) {
+      }
+      break;
+
+    // ===============================
+    //          Misc Events
+    // ===============================
+
+    case LOG_EVENT_MISC_DESCRIPTION:
+      newEntry.textContent = `${event.description} What will ${name} ${value}?`;
+      break;
+
+    case LOG_EVENT_MISC_OPTION_ONE:
+      if (event === MIMIC_CHEST) {
+      } else if (event === ECHOING_CHIME) {
+      } else if (event === BLOOD_SIGIL) {
+      }
+      break;
+
+    case LOG_EVENT_MISC_OPTION_TWO:
       break;
   }
 
@@ -880,7 +947,7 @@ function writeToLog(eventType, name, value) {
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
   const narrativeCLone = newEntry.cloneNode(true);
-  narrativeText.insertBefore(narrativeCLone, narrativeText.firstChild); 
+  narrativeText.insertBefore(narrativeCLone, narrativeText.firstChild);
   setTimeout(() => {
     narrativeText.removeChild(narrativeText.lastElementChild);
   }, 8000);
@@ -895,11 +962,6 @@ function checkLogSize() {
   if (logModalList.children.length >= 200) {
     logModalList.removeChild(logModalList.lastElementChild);
   }
-
-  if (narrativeText.children.length > 5) {
-    narrativeText.removeChild(narrativeText.lastElementChild);
-  }
-
 }
 
 logContainer.addEventListener("click", () => {
