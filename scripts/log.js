@@ -883,7 +883,7 @@ function writeToLog(eventType, name, value) {
   narrativeText.insertBefore(narrativeCLone, narrativeText.firstChild); 
   setTimeout(() => {
     narrativeText.removeChild(narrativeText.lastElementChild);
-  }, 9000);
+  }, 8000);
   checkLogSize();
 }
 
@@ -892,9 +892,14 @@ function checkLogSize() {
     log.removeChild(log.lastElementChild);
   }
 
-  if (logModalList.children.length >= 50) {
+  if (logModalList.children.length >= 200) {
     logModalList.removeChild(logModalList.lastElementChild);
   }
+
+  if (narrativeText.children.length > 5) {
+    narrativeText.removeChild(narrativeText.lastElementChild);
+  }
+
 }
 
 logContainer.addEventListener("click", () => {
