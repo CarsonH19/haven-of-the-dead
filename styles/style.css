@@ -71,10 +71,37 @@ body {
 
 .middle-content {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between; /* This will push the left and right divs to the edges */
+  align-items: center; /* This will vertically center the elements */
 }
 
+.middle-left {
+  width: 10vw;
+}
 
+.middle-center {
+  flex-grow: 1; /* This will allow the middle div to grow and take up any available space */
+  width: 80vw;
+  padding: 20px;
+  font-size: 1rem;
+}
+
+.middle-right {
+  width: 10vw;
+}
+
+.narrative-text {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* .inventory-btn {
+  justify-self: flex-end;
+}
+
+.narrative-text {
+  justify-self: center;
+} */
 
 /* 
 ==========================================
@@ -234,11 +261,11 @@ progress[value]::-moz-progress-bar {
   display: flex;
   flex-direction: column;
   justify-content: flex-start; 
-  gap: 40px;
-  align-items: center;
+  gap: 0px;
+  align-items:flex-start;
   background-color: #fefefe;
   margin: 13vh auto; /*?!ADJUST FOR MOBILE?!*/
-  padding: 20px;
+  padding: 0px;
   border: 3px solid #888;
   border-radius: 10px;
   width: 70%;
@@ -283,7 +310,7 @@ progress[value]::-moz-progress-bar {
   position: fixed;
   z-index: 1;
   left: 50%;
-  top: 50%;
+  top: 65%;
   transform: translate(-50%, -50%);
   background-color: rgba(0,0,0,0.4);
 }
@@ -303,7 +330,7 @@ progress[value]::-moz-progress-bar {
   position: fixed;
   z-index: 1;
   left: 50%;
-  top: 50%;
+  top: 65%;
   transform: translate(-50%, -50%);
   background-color: rgba(0,0,0,0.4);
 }

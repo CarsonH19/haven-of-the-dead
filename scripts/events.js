@@ -61,13 +61,11 @@ const MIMIC_CHEST = {
   functionOne: () => {
     let randomNumber = Math.round(Math.random() * 10) + baseFaith;
     if (randomNumber >= 7) {
-      addItemToInventory(EVERTORCH);
       currentRoom.contents.items.push(EVERTORCH);
       setRoomSummary();
       // writeToLog();
     } else {
       currentRoom.contents.monsters.push(GRUDGE);
-      addItemToInventory(EVERTORCH);
       currentRoom.contents.items.push(EVERTORCH);
       setRoomSummary();
       startBattle();

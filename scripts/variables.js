@@ -29,6 +29,8 @@ const playerContainer = document.querySelector(".player-container");
 const roomsCleared = document.getElementById("roomsCleared");
 let roomCounter = 0;
 
+const narrativeText = document.getElementById('narrativeText');
+
 // ===============================
 //     Catacomb Entrance Modal
 // ===============================
@@ -119,22 +121,20 @@ function calculatePlayerMaxHealth() {
   return baseHealth + strengthBonusHealth;
 }
 
-// Dexterity
-let baseDexterity;
-let dexterityCritIncrease = calculateDexCritIncrease();
+let strengthCritIncrease = calculateStrCritIncrease();
 let baseCritModifier = 1.5 + calculateBaseCritModifier();
 let criticalDamage;
 
-function calculateDexCritIncrease() {
-  return 0.3 * baseDexterity;
+function calculateStrCritIncrease() {
+  return 0.3 * baseStrength;
 }
 
 function calculateBaseCritModifier() {
-  return 1.5 + dexterityCritIncrease;
+  return 1.5 + strengthCritIncrease;
 }
 
 function calculateCritDamage() {
-  dexterityCritIncrease = calculateDexCritIncrease();
+  strengthCritIncrease = calculateStrCritIncrease();
   baseCritModifier = calculateBaseCritModifier();
   // console.log("baseAttack:", baseAttack);
   // console.log("dexterityCritIncrease:", dexterityCritIncrease);
@@ -143,8 +143,15 @@ function calculateCritDamage() {
   return Math.round(baseAttack * baseCritModifier);
 }
 
+// Dexterity
+let baseDexterity;
+
 // Faith
 let baseFaith;
+
+// Paladin
+let holySmiteTracker = 2.0;
+let radiantAuraTracker = 5;
 
 // ===============================
 //   Boons & Leveling Variables

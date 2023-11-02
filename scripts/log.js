@@ -879,6 +879,11 @@ function writeToLog(eventType, name, value) {
   log.insertBefore(newEntry, log.firstChild);
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+  const narrativeCLone = newEntry.cloneNode(true);
+  narrativeText.insertBefore(narrativeCLone, narrativeText.firstChild); 
+  setTimeout(() => {
+    narrativeText.removeChild(narrativeText.lastElementChild);
+  }, 9000);
   checkLogSize();
 }
 

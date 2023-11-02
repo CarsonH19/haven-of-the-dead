@@ -4,7 +4,7 @@
 
 function playerAttackHandler(smite = 1) {
   const criticalHitChance = Math.round(Math.random() * 20) + baseDexterity;
-  let playerToMonsterDamage = dealMonsterDamage(baseAttack) + baseStrength;
+  let playerToMonsterDamage = dealMonsterDamage(baseAttack);
 
   // ITEM: Revenant's Rage - Increases attack when low health.
   playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
@@ -15,7 +15,6 @@ function playerAttackHandler(smite = 1) {
 
   // Smite Critical Hit
   if (criticalHitChance >= 20 && smite > 1) {
-    playerToMonsterDamage = baseAttack + baseStrength;
     totalDamage = smite * (playerToMonsterDamage * baseCritModifier);
     writeToLog(
       LOG_EVENT_SMITE_CRITICAL,
@@ -32,7 +31,6 @@ function playerAttackHandler(smite = 1) {
     );
     // Critical Hit
   } else if (criticalHitChance >= 20) {
-    playerToMonsterDamage = baseAttack + baseStrength;
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
     console.log(`Critical Hit: ${totalDamage}`);
     writeToLog(

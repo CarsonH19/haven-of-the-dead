@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <!----------------- Event MODAL  ------------------->
+    <!----------------- EVENT MODAL  ------------------->
 
     <div id="eventModal" class="event">
       <div class="event-content">
@@ -171,25 +171,27 @@
           <h4>Health Points: <span id="heroHealthCurrent">0</span>/<span id="heroHealthMax">0</span></h4>
         </div>
         <div>
-          <h4>Strength: <span id="heroStrength">0</span></h4>
+          <h4>Strength: <span id="heroStatsStrength">0</span></h4>
           <p>Bonus Health: <span id="heroBonusHealth">0</span></p>
           <p>Critical Hit Damage: <span id="heroCritHitDamage">0</span></p>
         </div>
         <div>
-          <h4>Dexterity: <span id="heroDexterity">0</span></h4>
+          <h4>Dexterity: <span id="heroStatsDexterity">0</span></h4>
           <p>Critical Hit Chance: <span id="heroCritHitChance">0</span></p>
-          <p>Guard Bonus <span id="heroGuardBonus">0</span></p>
+          <p>Guard Bonus: <span id="heroGuardBonus">0</span></p>
         </div>
         <div>
-          <h4>Faith: <span id="heroFaith">0</span></h4>
+          <h4>Faith: <span id="heroStatsFaith">0</span></h4>
           <p>Flee Chance: <span id="heroFleeChance">0</span></p>
           <p>Find Item Chance: <span id="heroFindItemChance">0</span></p>
         </div>
         <div>
-          <h4 id="heroSpecial">Special</h4>
+          <h4>Special Ability</h4>
+          <p id="heroSpecial">Special Name: </p>
         </div>
         <div>
-          <h4 id="heroPassive">Passive</h4>
+          <h4>Passive Ability</h4>
+          <p id="heroPassive">Passive Name: </p>
         </div>
       </div>
     </div>
@@ -217,7 +219,13 @@
         </div>
         <div>
           <div class="middle-content">
-            <button id="inventoryBtn">Inventory</button>
+            <div class="middle-left"></div>
+            <div class="middle-center">
+              <ul id="narrativeText" class="narrative-text"></ul>
+            </div>
+            <div class="middle-right">
+              <button id="inventoryBtn" class="inventory-btn">Inventory</button>
+            </div>
           </div>
         </div>
         <div class="bottom-content">
