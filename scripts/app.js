@@ -127,7 +127,7 @@ function specialCooldownHandler() {
     special.textContent = `Cooldown: ${specialCooldownCounter}`;
   }
 
-  if (specialCooldownCounter <= 0) {
+  if (specialCooldownCounter === 0) {
     specialBtn.disabled = false;
     special.textContent = `Special`;
   }
@@ -321,6 +321,17 @@ function togglePlayerControls() {
     fleeBtn.disabled = true;
   }
 
+  if (
+    currentRoom.contents.monsters.length > 0 &&
+    specialCooldownCounter === 0
+    ) 
+    {
+      specialBtn.disabled = false;
+    } else {
+      specialBtn.disabled = true;
+
+    }
+
   if (eventModal.style.display === "block") {
     inventoryButton.disabled = true;
     potionBtn.disabled = true;
@@ -328,6 +339,20 @@ function togglePlayerControls() {
     inventoryButton.disabled = false;
     potionBtn.disabled = false;
   }
+}
+
+function playerControlsTimeout(timeout) {
+  attackBtn.disabled = true;
+  guardBtn.disabled = true;
+  specialBtn.disabled = true;
+  fleeBtn.disabled = true;
+  inventoryButton.disabled = true;
+  potionBtn.disabled = true;
+
+  setTimeout(() => {
+    togglePlayerControls();
+    console.log('Controls On!');
+  }, timeout);
 }
 
 function updateRoomsCleared() {
@@ -490,15 +515,17 @@ attackBtn.addEventListener("click", function () {
   if (currentMonsterHealth <= 0) {
     isGameOver();
   } else {
-    monsterAttackHandler();
+    playerControlsTimeout(2000);
+    setTimeout(monsterAttackHandler, 2000);
   }
 });
 
 guardBtn.addEventListener("click", () => {
   guardHandler();
-  monsterAttackHandler();
-  isGameOver();
   specialCooldownHandler();
+  playerControlsTimeout(2000);
+  setTimeout(monsterAttackHandler, 2000);
+  isGameOver();
 });
 
 specialBtn.addEventListener("click", () => {
@@ -511,14 +538,21 @@ specialBtn.addEventListener("click", () => {
   }
 
   specialCooldownHandler();
-  isGameOver();
+
+  if (currentMonsterHealth <= 0) {
+    isGameOver();
+  } else {
+    playerControlsTimeout(2000);
+    setTimeout(monsterAttackHandler, 2000);
+  }
 });
 
 potionBtn.addEventListener("click", () => {
   potionHandler();
 
   if (currentRoom.contents.monsters.length > 0) {
-    monsterAttackHandler();
+    playerControlsTimeout(2000);
+    setTimeout(monsterAttackHandler, 2000);
     specialCooldownHandler();
     isGameOver();
   }
@@ -526,7 +560,9 @@ potionBtn.addEventListener("click", () => {
 
 fleeBtn.addEventListener("click", () => {
   fleeHandler();
-  monsterAttackHandler();
+  specialCooldownHandler();
+  playerControlsTimeout(2000);
+  setTimeout(monsterAttackHandler, 2000);
   isGameOver();
 });
 

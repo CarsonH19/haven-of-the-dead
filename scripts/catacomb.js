@@ -14,37 +14,37 @@ let catacombRooms = [
       items: [],
       events: null
     },
-  },
-  {
-    roomName: "Sinister Sacristy",
-    backgroundImage: null,
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: GRAVEROBBER_EARVER
-    },
-  },
-  {
-    roomName: "Malevolent Chapel",
-    backgroundImage: null,
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: GAS_CHAMBER
-    },
-  },
-  {
-    roomName: "Veiled Crypt",
-    backgroundImage: null,
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: MIMIC_CHEST
-    },
   }
+  // {
+  //   roomName: "Sinister Sacristy",
+  //   backgroundImage: null,
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: GRAVEROBBER_EARVER
+  //   },
+  // },
+  // {
+  //   roomName: "Malevolent Chapel",
+  //   backgroundImage: null,
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: GAS_CHAMBER
+  //   },
+  // },
+  // {
+  //   roomName: "Veiled Crypt",
+  //   backgroundImage: null,
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: MIMIC_CHEST
+  //   },
+  // }
 ];
 
 // Gets a random index and sets currentRoom to that index.
