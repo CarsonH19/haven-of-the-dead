@@ -308,7 +308,7 @@ const SHADOWSTEP_BOOTS = {
 //  }
 
 let attunedItems = [];
-let inventoryItems = [];
+let inventoryItems = [BLOODSTONE, BONEMAIL, CHARM_OF_HEALING, CURSED_MIRROR, EVERTORCH];
 
 function isItemAttuned(item, defaultValue) {
   for (let i = 0; i < attunedItems.length; i++) {
@@ -328,14 +328,25 @@ function addItemToInventory(item) {
 function renderInventory() {
   const magicItemsBox = document.getElementById("magicItemsBox");
   const consumablesBox = document.getElementById("consumablesBox");
+  const slotOne = document.getElementById("slotOne");
+  const slotTwo = document.getElementById("slotTwo");
+  const slotThree = document.getElementById("slotThree");
+  const slotFour = document.getElementById("slotFour");
+  const slotFive = document.getElementById("slotFive");
 
   for (let i = 0; i < inventoryItems.length; i++) {
     const itemBox = document.createElement("div");
-    const itemName = document.createElement("p");
-    itemName.textContent = inventoryItems[i].name;
-    const itemButton = document.createElement("button");
+    itemBox.classList.add('itemBox');
+    itemBox.classList.add('tooltip');
+    
+    const tooltipText = document.createElement('span');
+    tooltipText.classList.add('tooltipText');
+    tooltipText.textContent = inventoryItems[i].effect;
 
-    itemBox.appendChild(itemName);
+    const itemButton = document.createElement("button");
+    itemButton.setAttribute("id", inventoryItems[i].name);
+
+    itemBox.appendChild(tooltipText);
     itemBox.appendChild(itemButton);
 
     if (inventoryItems[i].type === "MAGIC") {
@@ -344,6 +355,55 @@ function renderInventory() {
       consumablesBox.appendChild(itemBox);
     }
   }
+
+  for (let i = 0; i < attunedItems.length; i++) {
+    const itemBox = document.createElement("div");
+    // const itemName = document.createElement("p");
+    itemName.textContent = attunedItems[i].name;
+    const itemButton = document.createElement("button");
+    itemButton.setAttribute("id", attunedItems[i].name);
+
+    itemBox.appendChild(itemName);
+    itemBox.appendChild(itemButton);
+
+    if (!slotOne.hasChildNodes()) {
+      slotOne.appendChild(itemBox);
+    } else if (!slotTwo.hasChildNodes()) {
+      slotTwo.appendChild(itemBox);
+    } else if (!slotThree.hasChildNodes()) {
+      slotThree.appendChild(itemBox);
+    } else if (!slotFour.hasChildNodes()) {
+      slotFour.appendChild(itemBox);
+    } else if (!slotFive.hasChildNodes()) {
+      slotFive.appendChild(itemBox);
+    }
+  }
+}
+
+function attuneItem(itemName) {
+  itemObject = inventoryItems.find((inv) => inv.name === itemName);
+
+  if (itemObject) {
+    const index = inventoryItems.indexOf(itemObject);
+    inventoryItems.splice(index, 1);
+    attunedItems.push(itemObject);
+  }
+
+  clearInventory();
+  renderInventory();
+}
+
+function removeItem(itemName) {
+  itemObject = attunedItems.find((inv) => inv.name === itemName);
+
+  if (itemObject) {
+    const index = attunedItems.indexOf(itemObject);
+    attunedItems.splice(index, 1);
+    inventoryItems.push(itemObject);
+  }
+
+  clearInventory();
+  renderInventory();
 }
 
 let commonItems = [
@@ -384,6 +444,16 @@ function findItems() {
   }
 }
 
+function clearInventory() {
+  magicItemsBox.textContent = "";
+  consumablesBox.textContent = "";
+  slotOne.textContent = "";
+  slotTwo.textContent = "";
+  slotThree.textContent = "";
+  slotFour.textContent = "";
+  slotFive.textContent = "";
+}
+
 // ===============================
 //            Inventory
 // ===============================
@@ -397,17 +467,14 @@ function closeInventoryHandler() {
 }
 
 inventoryButton.addEventListener("click", () => {
+  clearInventory();
   renderInventory();
   openInventoryHandler();
 });
 
 closeInventoryButton.addEventListener("click", () => {
   closeInventoryHandler();
-
-  // Clears the inventory to avoid duplication.
-  slots = "";
-  magicItemsBox.textContent = "";
-  consumablesBox.textContent = "";
+  clearInventory();
 
   // Updates stats after changing attuned items.
   if (heroChoice === "PALADIN") {
@@ -423,4 +490,67 @@ closeInventoryButton.addEventListener("click", () => {
   // ITEM: Shadowstep Boots - +1 Dexterity;
   let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
   baseDexterity = newDex;
+});
+
+inventoryModal.addEventListener("click", (event) => {
+  const buttons = document.getElementsByTagName("button"); // Use the plural 'buttons' to represent a collection
+
+  for (let i = 0; i < buttons.length; i++) {
+    if (magicItemsBox.contains(event.target) && event.target === buttons[i]) {
+      attuneItem(buttons[i].id);
+    }
+
+    if (
+      slotOne.contains(event.target) &&
+      event.target === buttons[i]
+    ) {
+      removeItem(buttons[i].id);
+    }
+
+    if (
+      slotTwo.contains(event.target) &&
+      event.target === buttons[i]
+    ) {
+      removeItem(buttons[i].id);
+    }
+
+    if (
+      slotThree.contains(event.target) &&
+      event.target === buttons[i]
+    ) {
+      removeItem(buttons[i].id);
+    }
+
+    if (
+      slotFour.contains(event.target) &&
+      event.target === buttons[i]
+    ) {
+      removeItem(buttons[i].id);
+    }
+
+    if (
+      slotFive.contains(event.target) &&
+      event.target === buttons[i]
+    ) {
+      removeItem(buttons[i].id);
+    }
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const itemBoxes = document.querySelectorAll('.itemBox.tooltip');
+
+  itemBoxes.forEach((itemBox) => {
+    const tooltipText = itemBox.querySelector('.tooltipText');
+
+    itemBox.addEventListener('mouseover', () => {
+      tooltipText.style.visibility = 'visible';
+      tooltipText.style.opacity = '1';
+    });
+
+    itemBox.addEventListener('mouseout', () => {
+      tooltipText.style.visibility = 'hidden';
+      tooltipText.style.opacity = '0';
+    });
+  });
 });

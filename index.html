@@ -85,23 +85,26 @@
 
     <div id="inventoryModal" class="inventory-modal">
       <div class="inventory-modal-content">
-        <h2>Inventory</h2>
+        <div class="inventory-header">
+          <h2>Inventory</h2>
+         <button id="closeInventoryBtn">Close</button>
+        </div>
         <div class="inventory-container">
           <div class="inventory-left-side">
             <div class="attuned-box">
               <h4>Attuned</h4>
               <div class="slots">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <div id="slotOne"></div>
+                <div id="slotTwo"></div>
+                <div id="slotThree"></div>
+                <div id="slotFour"></div>
+                <div id="slotFive"></div>
               </div>
             </div>
           </div>
           <div class="inventory-right-side">
             <div class="magic-items-box">
-              <h4>Magic Items</h4>
+              <h4>Items</h4>
               <div id="magicItemsBox" class="magic-items"></div>
             </div>
             <div class="consumables-box">
@@ -110,7 +113,6 @@
             </div>
           </div>
         </div>
-        <button id="closeInventoryBtn">Close</button>
       </div>
     </div>
 
@@ -168,7 +170,12 @@
       <div class="hero-stats-modal-content">
         <h3 id="heroName"></h3>
         <div>
-          <h4>Health Points: <span id="heroHealthCurrent">0</span>/<span id="heroHealthMax">0</span></h4>
+          <h4>
+            Health Points: <span id="heroHealthCurrent">0</span>/<span
+              id="heroHealthMax"
+              >0</span
+            >
+          </h4>
         </div>
         <div>
           <h4>Strength: <span id="heroStatsStrength">0</span></h4>
@@ -187,11 +194,11 @@
         </div>
         <div>
           <h4>Special Ability</h4>
-          <p id="heroSpecial">Special Name: </p>
+          <p id="heroSpecial">Special Name:</p>
         </div>
         <div>
           <h4>Passive Ability</h4>
-          <p id="heroPassive">Passive Name: </p>
+          <p id="heroPassive">Passive Name:</p>
         </div>
       </div>
     </div>
@@ -221,6 +228,7 @@
           <div class="middle-content">
             <div class="middle-left"></div>
             <div class="middle-center">
+              <!-- <div class="popup-text">Critical!</div> -->
               <ul id="narrativeText" class="narrative-text"></ul>
             </div>
             <div class="middle-right">
