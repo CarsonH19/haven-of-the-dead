@@ -83,15 +83,16 @@ body {
   display: flex;
   justify-content: center;
   flex-grow: 1; /* This will allow the middle div to grow and take up any available space */
-  width: 80vw;
+  width: 30vw;
   height: 30vh;
-  padding: 20px;
-  font-size: 1rem;
+  padding: 20px 40px 20px 40px;
+  font-size: 1.5rem;
   overflow: hidden;
 }
 
 .middle-center li {
-  margin: 8px 0px 8px 0px
+  margin: 8px 0px 8px 0px;
+  text-align: center;
 }
 
 .middle-right {
@@ -133,6 +134,7 @@ body {
   width: 33%;
   background-color: gray;
   padding: 10px;
+
 }
 
 .player-container {
@@ -152,18 +154,22 @@ body {
   align-items: center;
   background-color: gray;
   padding: 6px;
+  
 }
 
 .attack {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 30%;
+  height: 33%;
 }
 
 .attack button {
   width: 100%;
+  height: 100%;
 }
+
+
 
 #specialCountdown {
   display: block;
@@ -174,12 +180,15 @@ body {
 .other-buttons {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+  height: 66%;
 }
 
 .other-buttons button {
-  width:50%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
 }
+
 
 .log-container h3 {
   margin-top: 0px;
@@ -272,12 +281,11 @@ progress[value]::-moz-progress-bar {
   gap: 0px;
   align-items:flex-start;
   background-color: #fefefe;
-  margin: 13vh auto; /*?!ADJUST FOR MOBILE?!*/
-  padding: 0px;
+  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  width: 70%;
-  height: 60%;
+  width: 60%;
+  height: 55%;
   overflow: auto;
 }
 
