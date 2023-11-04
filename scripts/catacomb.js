@@ -7,7 +7,7 @@ let catacombRooms = [
   {
     roomName: "Bonevault",
     description: '"The Bonevault is a macabre chamber, its walls lined with ancient, weathered bones, arranged in grim displays of artistry. Dim torchlight flickers, casting eerie shadows across the floor, where piles of skeletal remains create an unsettling mosaic of mortality."',
-    backgroundImage: null,
+    backgroundImage: 'styles/images/rattling-hollow.png',
     music: null,
     contents: {
       monsters: [SKELETAL_SOLDIER, ARMORED_SKELETON],

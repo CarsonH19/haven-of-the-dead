@@ -305,6 +305,7 @@ function renderCurrentRoom(currentRoom) {
   togglePlayerControls();
   setRoomSummary();
   renderHeroStats();
+  renderBackground(currentRoom.backgroundImage);
 }
 
 function togglePlayerControls() {
@@ -368,6 +369,18 @@ function renderHeroStats() {
   heroStrength.textContent = baseStrength;
   heroDexterity.textContent = baseDexterity;
   heroFaith.textContent = baseFaith;
+}
+
+function renderBackground(link) {
+  console.log(`image: url(${link})`);
+  const image = new Image();
+  image.src = link;
+  console.log(image.src);
+  image.onload = () => {
+    gameWindow.style.backgroundImage = `url(${link})`;
+    gameWindow.style.backgroundRepeat = 'no-repeat';
+    gameWindow.style.backgroundSize = 'cover';
+  };
 }
 
 // ===============================

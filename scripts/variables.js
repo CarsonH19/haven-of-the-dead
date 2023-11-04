@@ -24,6 +24,7 @@ let currentPlayerHealth = null;
 //         Game Window
 // ===============================
 
+const gameWindow = document.querySelector('.game-window');
 const bottomContent = document.querySelector(".bottom-content");
 const playerContainer = document.querySelector(".player-container");
 const roomsCleared = document.getElementById("roomsCleared");
@@ -205,7 +206,7 @@ let roomIndex;
 
 const catacombEntrance = {
   roomName: "Catacomb Entrance",
-  backgroundImage: null,
+  backgroundImage: 'styles/images/catacomb-entrance.png',
   music: null,
   contents: {
     monsters: [],
