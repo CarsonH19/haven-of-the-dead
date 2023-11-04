@@ -236,6 +236,7 @@ heroChoiceModal.addEventListener("click", function (event) {
   const siggurd = document.getElementById("siggurd");
   const riven = document.getElementById("riven");
   const liheth = document.getElementById("liheth");
+  const playerName = document.getElementById('playerName');
 
   if (
     event.target === siggurd ||
@@ -246,12 +247,15 @@ heroChoiceModal.addEventListener("click", function (event) {
 
     if (event.target === siggurd) {
       heroChoice = "PALADIN";
+      playerName.textContent = paladin.name;
       setPaladinStats();
     } else if (event.target === riven) {
       heroChoice = "ROGUE";
+      playerName.textContent = rogue.name;
       setRogueStats();
     } else if (event.target === liheth) {
       heroChoice = "PRIESTESS";
+      playerName.textContent = priestess.name;
       setPriestessStats();
     }
 
@@ -306,6 +310,7 @@ function renderCurrentRoom(currentRoom) {
   setRoomSummary();
   renderHeroStats();
   renderBackground(currentRoom.backgroundImage);
+  updatePlayerHealthTracker();
 }
 
 function togglePlayerControls() {
@@ -381,6 +386,14 @@ function renderBackground(link) {
     gameWindow.style.backgroundRepeat = 'no-repeat';
     gameWindow.style.backgroundSize = 'cover';
   };
+}
+
+function updatePlayerHealthTracker() {
+  const currentHP = document.getElementById('currentHP');
+  const maxHP = document.getElementById('maxHP');
+
+  currentHP.textContent = currentPlayerHealth;
+  maxHP.textContent = playerMaxHealth;
 }
 
 // ===============================
@@ -530,6 +543,7 @@ attackBtn.addEventListener("click", function () {
   } else {
     playerControlsTimeout(2000);
     setTimeout(monsterAttackHandler, 2000);
+    updatePlayerHealthTracker();
   }
 });
 
@@ -539,6 +553,7 @@ guardBtn.addEventListener("click", () => {
   playerControlsTimeout(2000);
   setTimeout(monsterAttackHandler, 2000);
   isGameOver();
+  updatePlayerHealthTracker();
 });
 
 specialBtn.addEventListener("click", () => {
@@ -557,6 +572,7 @@ specialBtn.addEventListener("click", () => {
   } else {
     playerControlsTimeout(2000);
     setTimeout(monsterAttackHandler, 2000);
+    updatePlayerHealthTracker();
   }
 });
 
@@ -569,6 +585,8 @@ potionBtn.addEventListener("click", () => {
     specialCooldownHandler();
     isGameOver();
   }
+
+  updatePlayerHealthTracker();
 });
 
 fleeBtn.addEventListener("click", () => {
@@ -577,6 +595,7 @@ fleeBtn.addEventListener("click", () => {
   playerControlsTimeout(2000);
   setTimeout(monsterAttackHandler, 2000);
   isGameOver();
+  updatePlayerHealthTracker();
 });
 
 greatCatacombsBtn.addEventListener("click", () => {

@@ -17,7 +17,7 @@ let catacombRooms = [
   }
   // {
   //   roomName: "Sinister Sacristy",
-  //   backgroundImage: null,
+  //   backgroundImage: 'styles/images/corridor-two.png',
   //   music: null,
   //   contents: {
   //     monsters: [],
@@ -27,7 +27,7 @@ let catacombRooms = [
   // },
   // {
   //   roomName: "Malevolent Chapel",
-  //   backgroundImage: null,
+  //   backgroundImage: 'styles/images/hall-one.png',
   //   music: null,
   //   contents: {
   //     monsters: [],
@@ -37,7 +37,7 @@ let catacombRooms = [
   // },
   // {
   //   roomName: "Veiled Crypt",
-  //   backgroundImage: null,
+  //   backgroundImage: 'styles/images/chamber-one.png',
   //   music: null,
   //   contents: {
   //     monsters: [],

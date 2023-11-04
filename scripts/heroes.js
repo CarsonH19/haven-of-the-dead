@@ -146,8 +146,7 @@ function setPriestessStats() {
 }
 
 function priestessGreaterPrayer() {
-  playerHealthBar.value += greaterPrayerTracker;
-  currentPlayerHealth += greaterPrayerTracker;
+  healPlayer(greaterPrayerTracker);
 
   writeToLog(LOG_EVENT_GREATER_PRAYER, "You", greaterPrayerTracker);
 
@@ -190,6 +189,8 @@ function healPlayer(healValue) {
     playerHealthBar.value = playerMaxHealth;
     currentPlayerHealth = playerMaxHealth;
   }
+
+  updatePlayerHealthTracker();
 }
 
 // ===============================
@@ -379,6 +380,17 @@ function endLevelUp() {
 
 function renderHeroStatsModal() {
   let hero = heroChecker();
+  // Image
+  const heroImage = document.querySelector('.hero-stats-img');
+
+  if (hero === paladin) {
+    heroImage.style.backgroundImage = 'url(styles/images/paladin.png)';
+  } else if (hero === rogue) {
+    heroImage.style.backgroundImage = 'url(styles/images/rogue.png)';
+  } else {
+    heroImage.style.backgroundImage = 'url(styles/images/priestess.png)';
+  }
+
   // Name
   const heroName = document.getElementById("heroName");
   heroName.textContent = hero.name;
