@@ -211,15 +211,15 @@
             <h4 id="roomsCleared">Rooms Cleared: 0</h4>
           </div>
           <div id="monsterContainer" class="monster-container">
-            <section id="monster-info">
               <div class="monster-display">
                 <h3 id="monster-name">Monster</h3>
                 <h3 id="skull-level"></h3>
               </div>
-              <progress id="monster-health" max="100" value="100">
-                100%
-              </progress>
-            </section>
+              <div class="monster-health-bar">
+                <p><span><span id="monsterCurrentHP">0</span> / <span
+                  id="monsterMaxHP">0</span></p>
+                <progress id="monster-health" max="100" value="100">100%</progress>
+              </div>
           </div>
         </div>
         <div>
@@ -237,8 +237,9 @@
         <div class="bottom-content">
           <div id="playerContainer" class="player-container">
             <h3 id="playerName"></h3>
+            <h4>Level: <span id="heroLevel">1</span></h4>
             <div class="health-bar">
-              <p><span><span id="currentHP">0</span>/<span
+              <p><span><span id="currentHP">0</span> / <span
                 id="maxHP">0</span></p>
               <progress id="player-health" max="100" value="100">100%</progress>
             </div>

@@ -310,7 +310,7 @@ function renderCurrentRoom(currentRoom) {
   setRoomSummary();
   renderHeroStats();
   renderBackground(currentRoom.backgroundImage);
-  updatePlayerHealthTracker();
+  updateHealthTrackers();
 }
 
 function togglePlayerControls() {
@@ -388,12 +388,17 @@ function renderBackground(link) {
   };
 }
 
-function updatePlayerHealthTracker() {
+function updateHealthTrackers() {
   const currentHP = document.getElementById('currentHP');
   const maxHP = document.getElementById('maxHP');
+  const monsterCurrentHP = document.getElementById('monsterCurrentHP');
+  const monsterMaxHP = document.getElementById('monsterMaxHP');
 
   currentHP.textContent = currentPlayerHealth;
   maxHP.textContent = playerMaxHealth;
+
+  monsterCurrentHP.textContent = currentMonsterHealth;
+  monsterMaxHP.textContent = monsterMaxHealth;
 }
 
 // ===============================
@@ -543,7 +548,7 @@ attackBtn.addEventListener("click", function () {
   } else {
     playerControlsTimeout(2000);
     setTimeout(monsterAttackHandler, 2000);
-    updatePlayerHealthTracker();
+    updateHealthTrackers();
   }
 });
 
@@ -553,7 +558,7 @@ guardBtn.addEventListener("click", () => {
   playerControlsTimeout(2000);
   setTimeout(monsterAttackHandler, 2000);
   isGameOver();
-  updatePlayerHealthTracker();
+  updateHealthTrackers();
 });
 
 specialBtn.addEventListener("click", () => {
@@ -572,7 +577,7 @@ specialBtn.addEventListener("click", () => {
   } else {
     playerControlsTimeout(2000);
     setTimeout(monsterAttackHandler, 2000);
-    updatePlayerHealthTracker();
+    updateHealthTrackers();
   }
 });
 
@@ -586,7 +591,7 @@ potionBtn.addEventListener("click", () => {
     isGameOver();
   }
 
-  updatePlayerHealthTracker();
+  updateHealthTrackers();
 });
 
 fleeBtn.addEventListener("click", () => {
@@ -595,7 +600,7 @@ fleeBtn.addEventListener("click", () => {
   playerControlsTimeout(2000);
   setTimeout(monsterAttackHandler, 2000);
   isGameOver();
-  updatePlayerHealthTracker();
+  updateHealthTrackers();
 });
 
 greatCatacombsBtn.addEventListener("click", () => {

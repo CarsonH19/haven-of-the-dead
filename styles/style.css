@@ -16,7 +16,7 @@ h1,
 h2,
 h3,
 h4 {
-  color: #e3d6be;
+  color: var(--header);
 }
 
 body {
@@ -65,8 +65,10 @@ body {
 
 .monster-container {
   display: flex;
+  flex-direction: column;
   align-self: flex-end;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 0px;
   width: 33%;
   height: 15vh;
   border: 4px solid var(--accent);
@@ -75,24 +77,30 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
-  padding: 20px;
+  padding: 10px;
 }
 
-
-#monster-info h3 {
-  margin-top: 0px;
-}
-
-#monster-info p {
-  font-size: 1rem;
-  margin-top: -5px;
-  margin-bottom: 1px;
-}
 
 .monster-display {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  height: 30%;
 }
+
+.monster-display h3 {
+  margin: 0px;
+  padding: 0px;
+}
+
+.monster-container progress {
+  margin-top: 0px;
+}
+
+.monster-health-bar p {
+  margin: 0px;
+}
+
 
 /* 
 ==========================================
@@ -185,7 +193,7 @@ body {
 .player-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
   width: 33%;
   background-color: var(--background);
   background-image: url(images/skull-texture.jpg);
@@ -193,18 +201,25 @@ body {
   background-size: cover;
   background-blend-mode: overlay;
   cursor: pointer;
+  padding: 10px;
 }
 
 .player-container h3 {
-  align-self: flex-start;
-  margin: 10px;
+  margin: 0px;
+  height: 10%;
+}
+
+.player-container h4 {
+  margin: 0px;
+
 }
 
 .health-bar {
   display: flex;
   flex-direction: column;
-  width: 80%;
-  height: 30%;
+  justify-content: space-around;
+  width: 90%;
+  height: 25%;
 }
 
 .health-bar p {
@@ -214,15 +229,15 @@ body {
 
 
 .player-stats {
-  align-self: flex-start;
   display: flex;
   flex-direction: column;
-  margin: 10px;
-  padding: 0px;
+  justify-content: space-between;
+  width: 90%;
+  height: 40%;
 }
 
 .player-stats p {
-  margin: 4px;
+  margin: 0px;
   width: 100%;
 }
 
@@ -311,7 +326,7 @@ progress {
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  height: 20%; 
+  height: 10px; 
   color: #ff0062;
   border: 1px solid #ad0505;
   border-radius: 10px;
@@ -321,12 +336,15 @@ progress[value]::-webkit-progress-bar,
 progress[value] {
   background-color: #b0aaaa;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  border-radius: 10px;
+
   
 }
 
 progress[value]::-webkit-progress-value {
   background-color: #ad0505;
   transition: all 0.2s ease-out;
+
 }
 
 progress[value]::-moz-progress-bar {
@@ -363,12 +381,15 @@ progress[value]::-moz-progress-bar {
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
-  margin: 16vh auto; /*?!ADJUST FOR MOBILE?!*/
+  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  width: 60%;
-  height: 56%;
+  /* width: 60%;
+  height: 56%; */
+  width: 600px;
+  height: 480px;
   overflow: auto;
+  padding: 10px;
 }
 
 .modal-content button {
@@ -376,6 +397,32 @@ progress[value]::-moz-progress-bar {
   height: 50px;
 }
 
+/* 
+==========================================
+          LOG MODAL
+==========================================
+*/
+
+#logModal {
+  display: none;
+}
+
+.log-modal-list {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  font-size: 1.2rem;
+}
+
+.log-container-modal h3 {
+  margin: 0px;
+  padding: 0px 0px 5px 0px;
+}
+
+.log-modal-list li {
+  border-bottom: 1px dashed black;
+  padding: 5px 0px 5px 0px
+}
 
 /* Start Game Modal */
 #startGameModal {
@@ -618,7 +665,12 @@ progress[value]::-moz-progress-bar {
   opacity: 1;
 }
 
-/* Level Up Modal */
+/* 
+==========================================
+          LEVEL UP MODAL
+==========================================
+*/
+
 #levelUpModal {
   display: none;
 }
@@ -675,28 +727,6 @@ progress[value]::-moz-progress-bar {
   width: 15vw;
   font-family: monospace;
   font-size: 2rem;
-}
-
-/* Log Modal */
-#logModal {
-  display: none;
-}
-
-.log-modal-list {
-  margin: 0px;
-  padding: 0px;
-  list-style-type: none;
-  font-size: 1.2rem;
-}
-
-.log-container-modal h3 {
-  margin: 0px;
-  padding: 0px 0px 5px 0px;
-}
-
-.log-modal-list li {
-  border-bottom: 1px dashed black;
-  padding: 5px 0px 5px 0px
 }
 
 /* 

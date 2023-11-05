@@ -190,7 +190,7 @@ function healPlayer(healValue) {
     currentPlayerHealth = playerMaxHealth;
   }
 
-  updatePlayerHealthTracker();
+  updateHealthTrackers();
 }
 
 // ===============================
