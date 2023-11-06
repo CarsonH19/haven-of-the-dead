@@ -236,7 +236,7 @@ heroChoiceModal.addEventListener("click", function (event) {
   const siggurd = document.getElementById("siggurd");
   const riven = document.getElementById("riven");
   const liheth = document.getElementById("liheth");
-  const playerName = document.getElementById('playerName');
+  const playerName = document.getElementById("playerName");
 
   if (
     event.target === siggurd ||
@@ -330,13 +330,11 @@ function togglePlayerControls() {
   if (
     currentRoom.contents.monsters.length > 0 &&
     specialCooldownCounter === 0
-    ) 
-    {
-      specialBtn.disabled = false;
-    } else {
-      specialBtn.disabled = true;
-
-    }
+  ) {
+    specialBtn.disabled = false;
+  } else {
+    specialBtn.disabled = true;
+  }
 
   if (eventModal.style.display === "block") {
     inventoryButton.disabled = true;
@@ -357,7 +355,7 @@ function playerControlsTimeout(timeout) {
 
   setTimeout(() => {
     togglePlayerControls();
-    console.log('Controls On!');
+    console.log("Controls On!");
   }, timeout);
 }
 
@@ -383,22 +381,31 @@ function renderBackground(link) {
   console.log(image.src);
   image.onload = () => {
     gameWindow.style.backgroundImage = `url(${link})`;
-    gameWindow.style.backgroundRepeat = 'no-repeat';
-    gameWindow.style.backgroundSize = 'cover';
+    gameWindow.style.backgroundRepeat = "no-repeat";
+    gameWindow.style.backgroundSize = "cover";
   };
 }
 
 function updateHealthTrackers() {
-  const currentHP = document.getElementById('currentHP');
-  const maxHP = document.getElementById('maxHP');
-  const monsterCurrentHP = document.getElementById('monsterCurrentHP');
-  const monsterMaxHP = document.getElementById('monsterMaxHP');
+  const currentHP = document.getElementById("currentHP");
+  const maxHP = document.getElementById("maxHP");
+  const monsterCurrentHP = document.getElementById("monsterCurrentHP");
+  const monsterMaxHP = document.getElementById("monsterMaxHP");
 
   currentHP.textContent = currentPlayerHealth;
   maxHP.textContent = playerMaxHealth;
 
   monsterCurrentHP.textContent = currentMonsterHealth;
   monsterMaxHP.textContent = monsterMaxHealth;
+}
+
+function newRoomAnimation() {
+  const fade = document.getElementById("fade");
+  fade.style.animation = "fade-out 2s";
+  console.log("FADE");
+  setTimeout(() => {
+    fade.style.animation = "fade-in 2s";
+  }, 2000);
 }
 
 // ===============================
@@ -621,8 +628,11 @@ roomSummaryButton.addEventListener("click", () => {
 });
 
 continueButton.addEventListener("click", () => {
-  removeCurrentRoom();
-  getRandomRoom(catacombRooms);
-  renderCurrentRoom(currentRoom);
-  closeContinueButton();
+  newRoomAnimation();
+  setTimeout(() => {
+    removeCurrentRoom();
+    getRandomRoom(catacombRooms);
+    renderCurrentRoom(currentRoom);
+    closeContinueButton();
+  }, 1500);
 });
