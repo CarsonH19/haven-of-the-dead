@@ -905,9 +905,17 @@ function writeToLog(eventType, name, value) {
   narrativeText.insertBefore(newNarration, narrativeText.firstChild);
   setTimeout(() => {
     narrativeText.removeChild(narrativeText.lastElementChild);
-  }, 8000);
+  }, 4000);
   checkLogSize();
+  textFadeAnimation(newNarration);
 }
+
+function textFadeAnimation(text) {
+  setTimeout(() => {
+    text.style.animation = "fade-in 2s";
+  }, 2000);
+}
+
 
 function checkLogSize() {
   if (log.children.length >= 50) {
