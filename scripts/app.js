@@ -93,6 +93,8 @@ function monsterAttackHandler() {
     currentRoom.contents.monsters[0].name,
     monsterToPlayerDamage
   );
+
+  damageFlashAnimation();
 }
 
 function dealMonsterDamage(damage) {
@@ -407,6 +409,15 @@ function newRoomAnimation() {
     fade.style.animation = "fade-in 2s";
   }, 2000);
 }
+
+function damageFlashAnimation() {
+  gameWindow.classList.add('flash');
+
+  setTimeout(() => {
+    gameWindow.classList.remove('flash'); // Remove the class after the animation is complete
+  }, 500); // Adjust this timing to match the animation duration
+}
+
 
 // ===============================
 //        Start Game Modal

@@ -837,3 +837,18 @@ progress[value]::-moz-progress-bar {
     opacity: 1;
   }
 }
+
+/* Damage Flash */
+.flash {
+  box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); /* Red glow effect on the interior border */
+  animation: flashAnimation 1.0s forwards; /* Animation duration and fill mode */
+}
+
+@keyframes flashAnimation {
+  0% {
+    box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); /* Red glow effect on the interior border */
+  }
+  100% {
+    box-shadow: none; /* Remove the shadow after the animation */
+  }
+}
