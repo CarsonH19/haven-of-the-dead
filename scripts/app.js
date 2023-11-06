@@ -56,6 +56,8 @@ function playerAttackHandler(smite = 1) {
   if (heroChoice === "PALADIN") {
     paladinRadiantAura();
   }
+
+  updateHealthTrackers();
 }
 
 function monsterAttackHandler() {
@@ -94,7 +96,9 @@ function monsterAttackHandler() {
     monsterToPlayerDamage
   );
 
+  updateHealthTrackers();
   damageFlashAnimation();
+  healthLowAnimation();
 }
 
 function dealMonsterDamage(damage) {

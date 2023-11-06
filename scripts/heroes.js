@@ -191,6 +191,21 @@ function healPlayer(healValue) {
   }
 
   updateHealthTrackers();
+  healthLowAnimation();
+}
+
+function healthLowAnimation() {
+
+  if (currentPlayerHealth <= 30) {
+    playerHealthBar.classList.add('health-bar-critical');
+    gameWindow.classList.add('flash-low-health');
+
+  } else {
+    playerHealthBar.classList.remove('health-bar-critical');
+    gameWindow.classList.remove('flash-low-health');
+
+
+  }
 }
 
 // ===============================

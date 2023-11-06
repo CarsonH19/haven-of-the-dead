@@ -10,7 +10,7 @@ let catacombRooms = [
     backgroundImage: 'styles/images/rattling-hollow.png',
     music: null,
     contents: {
-      monsters: [SKELETAL_SOLDIER, ARMORED_SKELETON],
+      monsters: [BARON_OF_BONE, SKELETAL_SOLDIER, ARMORED_SKELETON],
       items: [],
       events: null
     },

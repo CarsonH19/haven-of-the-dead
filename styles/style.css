@@ -840,15 +840,55 @@ progress[value]::-moz-progress-bar {
 
 /* Damage Flash */
 .flash {
-  box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); /* Red glow effect on the interior border */
-  animation: flashAnimation 1.0s forwards; /* Animation duration and fill mode */
+  box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); 
+  animation: flashAnimation 1.0s forwards; 
+}
+
+.flash-low-health {
+  box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); 
+  animation: flashAnimation 1.0s infinite; 
 }
 
 @keyframes flashAnimation {
   0% {
-    box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); /* Red glow effect on the interior border */
+    box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); 
   }
   100% {
-    box-shadow: none; /* Remove the shadow after the animation */
+    box-shadow: none; 
   }
+}
+
+/* Health Bar Pulse */
+/* #player-health {
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+ */
+
+ /* Health Bar Shake */
+ @keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-1px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(1px);
+  }
+}
+
+.health-bar-critical {
+  animation: shake 0.5s infinite;
 }
