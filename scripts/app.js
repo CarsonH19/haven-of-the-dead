@@ -90,14 +90,14 @@ function monsterAttackHandler() {
   playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
   currentPlayerHealth -= monsterToPlayerDamage;
 
-  writeToLog(
-    LOG_EVENT_MONSTER_ATTACK,
-    currentRoom.contents.monsters[0].name,
-    monsterToPlayerDamage
-  );
-
   if (monsterToPlayerDamage > 0) {
     damageFlashAnimation();
+
+    writeToLog(
+      LOG_EVENT_MONSTER_ATTACK,
+      currentRoom.contents.monsters[0].name,
+      monsterToPlayerDamage
+    );
   }
 
   updateHealthTrackers();
@@ -159,16 +159,29 @@ function guardHandler() {
   playerHealthBar.value = +playerHealthBar.value - damageTaken;
   currentPlayerHealth -= damageTaken;
 
-  writeToLog(
-    LOG_EVENT_GUARD,
-    currentRoom.contents.monsters[0].name,
-    damageBlocked
-  );
+  if (damageBlocked > 0) {
+    writeToLog(
+      LOG_EVENT_GUARD,
+      currentRoom.contents.monsters[0].name,
+      damageBlocked + baseDexterity
+    );
+  }
+
+  if (damageTaken > 0) {
+    damageFlashAnimation();
+  }
+
+    writeToLog(
+      LOG_EVENT_MONSTER_ATTACK,
+      currentRoom.contents.monsters[0].name,
+      damageTaken
+    );
 
   // console.log(`Damage Received: ${monsterToGuardDamage}`);
   // console.log(`Damage Blocked: ${damageBlocked}`);
   // console.log(`Current Player Health ${currentPlayerHealth}`);
   // console.log(`Current Player Health Bar Value ${playerHealthBar.value}`);
+  updateHealthTrackers();
 }
 
 function calculateMonsterDamage() {
@@ -246,7 +259,7 @@ function isGameOver() {
     fadeOutAnimation(monsterContainer, 0000);
     setTimeout(() => {
       checkForMonsters();
-      monsterContainer.style.display = 'none';
+      monsterContainer.style.display = "none";
     }, 2000);
   }
 }
@@ -593,17 +606,16 @@ attackBtn.addEventListener("click", function () {
   if (currentMonsterHealth <= 0) {
     isGameOver();
   } else {
-    playerControlsTimeout(2000);
-    setTimeout(monsterAttackHandler, 2000);
+    playerControlsTimeout(1500);
+    setTimeout(monsterAttackHandler, 1200);
     updateHealthTrackers();
   }
 });
 
 guardBtn.addEventListener("click", () => {
-  guardHandler();
   specialCooldownHandler();
-  playerControlsTimeout(2000);
-  setTimeout(monsterAttackHandler, 2000);
+  playerControlsTimeout(1500);
+  setTimeout(guardHandler, 1200);
   isGameOver();
   updateHealthTrackers();
 });
@@ -613,27 +625,38 @@ specialBtn.addEventListener("click", () => {
     paladinHolySmite();
   } else if (heroChoice === "ROGUE") {
     rogueShadowStrike();
+    if (currentMonsterHealth <= 0) {
+      isGameOver();
+      playerControlsTimeout(1500);
+    }
   } else if (heroChoice === "PRIESTESS") {
     priestessGreaterPrayer();
   }
 
-  specialCooldownHandler();
-
-  if (currentMonsterHealth <= 0) {
+  if (
+    currentMonsterHealth <= 0 &&
+    (heroChoice === "PALADIN" || heroChoice === "PRIESTESS")
+  ) {
     isGameOver();
-  } else {
-    playerControlsTimeout(2000);
-    setTimeout(monsterAttackHandler, 2000);
-    updateHealthTrackers();
+  } else if (
+    currentMonsterHealth > 0 &&
+    (heroChoice === "PALADIN" || heroChoice === "PRIESTESS")
+  ) {
+    console.log("NOT A ROGUE");
+    playerControlsTimeout(1500);
+    setTimeout(monsterAttackHandler, 1200);
   }
+
+  updateHealthTrackers();
+  specialCooldownHandler();
 });
 
 potionBtn.addEventListener("click", () => {
   potionHandler();
 
   if (currentRoom.contents.monsters.length > 0) {
-    playerControlsTimeout(2000);
-    setTimeout(monsterAttackHandler, 2000);
+    playerControlsTimeout(1500);
+    setTimeout(monsterAttackHandler, 1200);
     specialCooldownHandler();
     isGameOver();
   }
@@ -644,8 +667,8 @@ potionBtn.addEventListener("click", () => {
 fleeBtn.addEventListener("click", () => {
   fleeHandler();
   specialCooldownHandler();
-  playerControlsTimeout(2000);
-  setTimeout(monsterAttackHandler, 2000);
+  playerControlsTimeout(1500);
+  setTimeout(monsterAttackHandler, 1200);
   isGameOver();
   updateHealthTrackers();
 });

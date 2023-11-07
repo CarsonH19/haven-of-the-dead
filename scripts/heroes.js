@@ -46,15 +46,13 @@ function paladinRadiantAura() {
     currentMonsterHealth = 0;
     monsterHealthBar.value = 0;
   }
-
-
 }
 
 // ===============================
 //        Hero: Rogue
 // ===============================
 
-let shadowStrikeTracker = 25;
+// let shadowStrikeTracker = 25;
 let evasionTracker = 2;
 let rogue = {
   name: "Shadowcloak Riven",
@@ -82,34 +80,76 @@ function setRogueStats() {
 }
 
 function rogueShadowStrike() {
-  guardHandler();
+  // Guard
+  setTimeout(() => {
+    function calculateMonsterShadowStrikeDamage() {
+      let damage = dealPlayerDamage(monsterAttackValue);
+      if (baseDexterity * 2 >= damage) {
+        return 0;
+      } else {
+        return damage - baseDexterity * 2;
+      }
+    }
+    const monsterToGuardDamage = calculateMonsterShadowStrikeDamage();
+    const damageBlocked = Math.round(Math.random() * monsterToGuardDamage);
+    const damageTaken = monsterToGuardDamage - damageBlocked;
+    playerHealthBar.value = +playerHealthBar.value - damageTaken;
+    currentPlayerHealth -= damageTaken;
 
-  const criticalHitChance =
-    Math.round(Math.random() * shadowStrikeTracker) + baseDexterity;
-  let playerToMonsterDamage = dealMonsterDamage(baseAttack) + baseStrength;
+    if (damageBlocked > 0) {
+      writeToLog(
+        LOG_EVENT_GUARD,
+        currentRoom.contents.monsters[0].name,
+        damageBlocked + baseDexterity * 2
+      );
+    }
+
+    if (damageTaken > 0) {
+      damageFlashAnimation();
+
+      writeToLog(
+        LOG_EVENT_MONSTER_ATTACK,
+        currentRoom.contents.monsters[0].name,
+        damageTaken
+      );
+    }
+
+    console.log(`Damage Received: ${monsterToGuardDamage}`);
+    console.log(`Damage Blocked: ${damageBlocked}`);
+    console.log(`Current Player Health ${currentPlayerHealth}`);
+    console.log(`Current Player Health Bar Value ${playerHealthBar.value}`);
+  }, 1200);
+
+  // Attack
+  const criticalHitChance = Math.round(Math.random() * 20) + baseDexterity * 2;
+  let playerToMonsterDamage = dealMonsterDamage(baseAttack);
 
   // Critical Hit
   if (criticalHitChance >= 20) {
-    playerToMonsterDamage = baseAttack + baseStrength;
+    playerToMonsterDamage = baseAttack;
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
     console.log(`Critical Hit: ${totalDamage}`);
-    // writeToLog(
-    //   LOG_EVENT_PLAYER_CRITICAL,
-    //   currentRoom.contents.monsters[0].name,
-    //   totalDamage
-    // );
+    writeToLog(
+      LOG_EVENT_PLAYER_CRITICAL,
+      currentRoom.contents.monsters[0].name,
+      totalDamage
+    );
     // Normal Hit
   } else {
     totalDamage = playerToMonsterDamage;
     console.log(`Base Damage: ${playerToMonsterDamage}`);
-    // writeToLog(
-    //   LOG_EVENT_PLAYER_ATTACK,
-    //   currentRoom.contents.monsters[0].name,
-    //   totalDamage
-    // );
+    writeToLog(
+      LOG_EVENT_PLAYER_ATTACK,
+      currentRoom.contents.monsters[0].name,
+      totalDamage
+    );
   }
 
+  monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
+  currentMonsterHealth -= totalDamage;
+
   specialCooldownCounter = 5;
+  setTimeout(updateHealthTrackers, 1250);
 }
 
 // See monsterAttackHandler for Rouge Passive Ability
@@ -195,16 +235,12 @@ function healPlayer(healValue) {
 }
 
 function healthLowAnimation() {
-
   if (currentPlayerHealth <= 30) {
-    playerHealthBar.classList.add('health-bar-critical');
-    gameWindow.classList.add('flash-low-health');
-
+    playerHealthBar.classList.add("health-bar-critical");
+    gameWindow.classList.add("flash-low-health");
   } else {
-    playerHealthBar.classList.remove('health-bar-critical');
-    gameWindow.classList.remove('flash-low-health');
-
-
+    playerHealthBar.classList.remove("health-bar-critical");
+    gameWindow.classList.remove("flash-low-health");
   }
 }
 
@@ -396,14 +432,14 @@ function endLevelUp() {
 function renderHeroStatsModal() {
   let hero = heroChecker();
   // Image
-  const heroImage = document.querySelector('.hero-stats-img');
+  const heroImage = document.querySelector(".hero-stats-img");
 
   if (hero === paladin) {
-    heroImage.style.backgroundImage = 'url(styles/images/paladin.png)';
+    heroImage.style.backgroundImage = "url(styles/images/paladin.png)";
   } else if (hero === rogue) {
-    heroImage.style.backgroundImage = 'url(styles/images/rogue.png)';
+    heroImage.style.backgroundImage = "url(styles/images/rogue.png)";
   } else {
-    heroImage.style.backgroundImage = 'url(styles/images/priestess.png)';
+    heroImage.style.backgroundImage = "url(styles/images/priestess.png)";
   }
 
   // Name
