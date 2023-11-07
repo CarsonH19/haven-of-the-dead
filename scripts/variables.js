@@ -126,7 +126,9 @@ function calculateStrengthBonusHealth() {
 }
 
 function calculatePlayerMaxHealth() {
-  return baseHealth + strengthBonusHealth;
+  let maxHealth = baseHealth + strengthBonusHealth;
+  let maxHealthWithItems = maxHealth + isItemAttuned(BONEMAIL, 0); // ITEM: +20 Max HP
+  return maxHealthWithItems;
 }
 
 let strengthCritIncrease = calculateStrCritIncrease();

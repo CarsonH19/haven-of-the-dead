@@ -138,7 +138,12 @@ function specialCooldownHandler() {
 
   if (specialCooldownCounter === 0) {
     specialBtn.disabled = false;
-    special.textContent = `Special`;
+    if (heroChoice === "PALADIN") {
+      special.textContent = `Holy Smite`;
+    } else if (heroChoice === "ROGUE") {
+      special.textContent = `Shadow Strike`;
+    } else if (heroChoice === "PRIESTESS")
+      special.textContent = `Greater Prayer`;
   }
 }
 
@@ -198,7 +203,7 @@ function potionHandler() {
 
   if (potionCounter > 0) {
     potionCounter--;
-    itemObject = inventoryItems.find((inv) => inv.name === 'Health Potion');
+    itemObject = inventoryItems.find((inv) => inv.name === "Health Potion");
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
   }
@@ -415,7 +420,7 @@ function updateHealthTrackers() {
   const monsterMaxHP = document.getElementById("monsterMaxHP");
 
   currentHP.textContent = currentPlayerHealth;
-  maxHP.textContent = playerMaxHealth;
+  maxHP.textContent = calculatePlayerMaxHealth();
 
   monsterCurrentHP.textContent = currentMonsterHealth;
   monsterMaxHP.textContent = monsterMaxHealth;
@@ -654,12 +659,14 @@ roomSummaryButton.addEventListener("click", () => {
   updateRoomsCleared();
   // ITEM: Charm of Healing - Recover 10HP after each cleared room.
   isItemAttuned(CHARM_OF_HEALING, 0);
+  updateHealthTrackers();
   checkForLevelUp();
 });
 
 continueButton.addEventListener("click", () => {
   newRoomAnimation();
   closeContinueButton();
+  updateHealthTrackers();
   setTimeout(() => {
     removeCurrentRoom();
     getRandomRoom(catacombRooms);

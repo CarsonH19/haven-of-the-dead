@@ -170,8 +170,6 @@ function setStatsHandler() {
 // ===============================
 
 function setPlayerHealthBar(maxLife) {
-  maxLife = playerMaxHealth + isItemAttuned(BONEMAIL, 0); // ITEM: +20 Max HP
-
   if (currentRoom === catacombEntrance) {
     playerHealthBar.max = maxLife;
     playerHealthBar.value = maxLife;
@@ -179,6 +177,8 @@ function setPlayerHealthBar(maxLife) {
   } else {
     playerHealthBar.max = maxLife;
   }
+
+  playerMaxHealth = maxLife;
 }
 
 function healPlayer(healValue) {

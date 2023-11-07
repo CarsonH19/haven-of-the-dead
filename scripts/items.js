@@ -622,11 +622,13 @@ closeInventoryButton.addEventListener("click", () => {
     setPaladinStats();
   } else if (heroChoice === "ROGUE") {
     setRogueStats();
-  } else {
+  } else if (heroChoice === 'PRIESTESS') {
     setPriestessStats();
   }
 
   renderHeroStats();
+  setPlayerHealthBar(calculatePlayerMaxHealth());
+  updateHealthTrackers();
 
   // ITEM: Shadowstep Boots - +1 Dexterity;
   let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
