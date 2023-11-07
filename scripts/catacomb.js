@@ -4,9 +4,284 @@
 // If a player flees from the room it is not removed from the array.
 
 let catacombRooms = [
+  // {
+  //   roomName: "Rodents' Roost",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [GNAWER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Clawed Caverns",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [GNAWER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Vermins' Vestibule",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [GNAWER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Gnawers' Nest",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [GNAWER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  {
+    roomName: "Pestilent Pit",
+    description: '',
+    backgroundImage: 'styles/images/corridor-two.png',
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: SPIKE_PITFALL
+    },
+  },
+  {
+    roomName: "Webspun Passage",
+    description: '',
+    backgroundImage: 'styles/images/corridor-two.png',
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: SPIDER_WEB
+    },
+  },
+  // {
+  //   roomName: "Creeping Coffins",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [COFFIN_SPIDER, COFFIN_SPIDER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  {
+    roomName: "Cobwebbed Crypt",
+    description: '',
+    backgroundImage: 'styles/images/corridor-two.png',
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: GAS_CHAMBER
+    },
+  },
+  // {
+  //   roomName: "The Hatchery",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Broodmother's Nest",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [CRYPT_CRAWLER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Skull-lined Corridor",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SKELETAL_SOLDIER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Bone-laden Passage",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SKELETAL_SOLDIER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Bone-carved Alter",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SKELETAL_SOLDIER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Skeletons' Rest",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SKELETAL_SOLDIER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Skeletonarium",
+  //   description: '',
+  //   backgroundImage: 'styles/images/chamber-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SKELETAL_SOLDIER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
   {
     roomName: "Bonevault",
-    description: '"The Bonevault is a macabre chamber, its walls lined with ancient, weathered bones, arranged in grim displays of artistry. Dim torchlight flickers, casting eerie shadows across the floor, where piles of skeletal remains create an unsettling mosaic of mortality."',
+    description: '',
+    backgroundImage: 'styles/images/chamber-one.png',
+    music: null,
+    contents: {
+      monsters: [],
+      items: [BONEMAIL],
+      events: PENDULUM_BLADES
+    },
+  },
+  // {
+  //   roomName: "Skeletal Sepulcher",
+  //   description: '',
+  //   backgroundImage: 'styles/images/chamber-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SKELETAL_SOLDIER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  {
+    roomName: "Marrowrest Tomb",
+    description: '',
+    backgroundImage: 'styles/images/chamber-one.png',
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: SWARM_OF_VERMIN
+    },
+  },
+  // {
+  //   roomName: "Ivory Crypt",
+  //   description: '',
+  //   backgroundImage: 'styles/images/chamber-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SKELETAL_SOLDIER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Skullcarver's Passage",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SKELETAL_SOLDIER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Candlelight Shrine",
+  //   description: '',
+  //   backgroundImage: 'styles/images/chamber-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: CANDLELIGHT_SHRINE
+  //   },
+  // },
+  // {
+  //   roomName: "Haunted Hall",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [HAUNTING_SPIRIT],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Echoing Vestibule",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [HAUNTING_SPIRIT],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Forgotten Passage",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SHADE, SHADE],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  {
+    roomName: "Bone Whisperer's Hollow",
+    description: '',
+    backgroundImage: 'styles/images/corridor-one.png',
+    music: null,
+    contents: {
+      monsters: [SHADE],
+      items: [WHISPERING_AMULET],
+      events: null
+    },
+  },
+  {
+    roomName: "Rattling Hollow",
+    description: '',
     backgroundImage: 'styles/images/rattling-hollow.png',
     music: null,
     contents: {
@@ -15,36 +290,6 @@ let catacombRooms = [
       events: null
     },
   }
-  // {
-  //   roomName: "Sinister Sacristy",
-  //   backgroundImage: 'styles/images/corridor-two.png',
-  //   music: null,
-  //   contents: {
-  //     monsters: [],
-  //     items: [],
-  //     events: GRAVEROBBER_EARVER
-  //   },
-  // },
-  // {
-  //   roomName: "Malevolent Chapel",
-  //   backgroundImage: 'styles/images/hall-one.png',
-  //   music: null,
-  //   contents: {
-  //     monsters: [],
-  //     items: [],
-  //     events: GAS_CHAMBER
-  //   },
-  // },
-  // {
-  //   roomName: "Veiled Crypt",
-  //   backgroundImage: 'styles/images/chamber-one.png',
-  //   music: null,
-  //   contents: {
-  //     monsters: [],
-  //     items: [],
-  //     events: MIMIC_CHEST
-  //   },
-  // }
 ];
 
 // Gets a random index and sets currentRoom to that index.

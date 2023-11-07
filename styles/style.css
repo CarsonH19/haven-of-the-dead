@@ -482,8 +482,14 @@ progress[value]::-moz-progress-bar {
 
 .event-content button {
   width: 150px;
-  height: 50px;
+  height: 50px; 
+  /* opacity: 1;
+  transition: 2s; */
 }
+
+/* .fade-in {
+  animation: fade-in 1s;
+} */
 
 /* Inventory Modal */
 #inventoryModal {
@@ -847,7 +853,7 @@ progress[value]::-moz-progress-bar {
   pointer-events: none;
   opacity: 0;
 }
-@keyframes fade-in {
+@keyframes fade-out {
   0% {
     opacity: 1;
   }
@@ -856,7 +862,7 @@ progress[value]::-moz-progress-bar {
   }
 }
 
-@keyframes fade-out {
+@keyframes fade-in {
   0% {
     opacity: 0;
   }

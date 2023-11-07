@@ -308,18 +308,20 @@ function renderCurrentRoom(currentRoom) {
 
   // Renders Event Modal
   if (currentRoom.contents.events) {
-    renderEvent(currentRoom.contents.events);
-    switch (currentRoom.contents.events.eventType) {
-      case "TRAP":
-        writeToLog(LOG_EVENT_TRAP_DESCRIPTION, "you", "danger");
-        break;
-      case "NPC":
-        writeToLog(LOG_EVENT_NPC_DESCRIPTION, "you", "do");
-        break;
-      case "MISC":
-        writeToLog(LOG_EVENT_MISC_DESCRIPTION, "you", "danger");
-        break;
-    }
+    setTimeout(() => {
+      renderEvent(currentRoom.contents.events);
+      switch (currentRoom.contents.events.eventType) {
+        case "TRAP":
+          writeToLog(LOG_EVENT_TRAP_DESCRIPTION, "you", "danger");
+          break;
+        case "NPC":
+          writeToLog(LOG_EVENT_NPC_DESCRIPTION, "you", "do");
+          break;
+        case "MISC":
+          writeToLog(LOG_EVENT_MISC_DESCRIPTION, "you", "danger");
+          break;
+      }
+    }, 3000);
   }
 
   // Search for items in each room.
@@ -428,10 +430,10 @@ function updateHealthTrackers() {
 
 function newRoomAnimation() {
   const fade = document.getElementById("fade");
-  fade.style.animation = "fade-out 2s";
+  fade.style.animation = "fade-in 2s";
   console.log("FADE");
   setTimeout(() => {
-    fade.style.animation = "fade-in 2s";
+    fade.style.animation = "fade-out 2s";
   }, 2000);
 }
 
@@ -569,7 +571,8 @@ function renderContinueButton() {
 
   if (
     currentRoom !== catacombEntrance &&
-    currentRoom.contents.monsters.length === 0
+    currentRoom.contents.monsters.length === 0 &&
+    currentRoom.contents.events === null
   ) {
     continueButtonModal.style.display = "block";
   } else {
