@@ -331,6 +331,17 @@ const POTION = {
     }
  }
 
+const CRYPTBREAD = {
+    name: 'Cryptbread',
+    description: '',
+    type: 'CONSUMABLE',
+    rarity: 'COMMON',
+    effect: 'Restores 10 health points when eaten.',
+    function: () => {
+      currentPlayerHealth += 10;
+      playerHealthBar.value += 10;
+    }
+ }
 
 
 let attunedItems = [];
@@ -344,7 +355,8 @@ let inventoryItems = [
   POTION,
   POTION,
   POTION,
-  POTION
+  POTION,
+  CRYPTBREAD
 ];
 
 function isItemAttuned(item, defaultValue) {
@@ -525,7 +537,8 @@ function clearInventory() {
 function useConsumable(consumable) {
   itemObject = inventoryItems.find((inv) => inv.name === consumable);
 
-  if (!itemObject === POTION) {
+  if (consumable !== 'Health Potion') {
+    console.log(consumable);
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
   }

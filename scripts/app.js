@@ -198,7 +198,7 @@ function potionHandler() {
 
   if (potionCounter > 0) {
     potionCounter--;
-    itemObject = inventoryItems.find((inv) => inv.name === POTION);
+    itemObject = inventoryItems.find((inv) => inv.name === 'Health Potion');
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
   }
