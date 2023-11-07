@@ -1231,7 +1231,7 @@ function writeToLog(eventType, name, value) {
     setTimeout(() => {
       narrativeText.removeChild(narrativeText.lastElementChild);
     }, 7000);
-    fadeOutAnimation(newNarration);
+    fadeOutAnimation(newNarration, 5000);
     fadeInAnimation(newNarration);
   }
 
@@ -1242,10 +1242,10 @@ function fadeInAnimation(text) {
   text.style.animation = "fade-in 1s";
 }
 
-function fadeOutAnimation(text) {
+function fadeOutAnimation(text, time) {
   setTimeout(() => {
     text.style.animation = "fade-out 2s";
-  }, 5000);
+  }, time);
 }
 
 function checkLogSize() {

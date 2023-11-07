@@ -133,12 +133,13 @@ function monsterSkullLevel(level) {
 }
 
 function renderMonsterStatBlock(monster) {
+  fadeInAnimation(monsterContainer);
   monsterContainer.style.display = "flex";
   monsterNameElement.textContent = monster.name;
   monsterSkullElement.textContent = monster.skulls;
   monsterSkullLevel(monster.skulls);
   // ITEM: Flask of Light - Weakens evil spirits.
-  isItemAttuned(FLASK_OF_LIGHT, 0); 
+  isItemAttuned(FLASK_OF_LIGHT, 0);
   setMonsterHealth(monsterMaxHealth);
 }
 
@@ -149,14 +150,16 @@ function setMonsterHealth(maxLife) {
 }
 
 function startBattle() {
-  renderMonsterStatBlock(currentRoom.contents.monsters[0]);
-  updateHealthTrackers();
-  togglePlayerControls();
+  setTimeout(() => {
+    renderMonsterStatBlock(currentRoom.contents.monsters[0]);
+    updateHealthTrackers();
+    togglePlayerControls();
 
-  // ITEM: Sunstone - Damages undead creatures.
-  isItemAttuned(SUNSTONE, 0);
-  // ITEM: Warding Candle - Chance for evil spirits to flee.
-  isItemAttuned(WARDING_CANDLE, 0); 
+    // ITEM: Sunstone - Damages undead creatures.
+    isItemAttuned(SUNSTONE, 0);
+    // ITEM: Warding Candle - Chance for evil spirits to flee.
+    isItemAttuned(WARDING_CANDLE, 0);
+  }, 2000);
 }
 
 function checkForMonsters() {
@@ -166,7 +169,7 @@ function checkForMonsters() {
     startBattle();
     console.log("Another Monster!");
   } else {
-    console.log('RENDER SUMMARY CALLED!');
+    console.log("RENDER SUMMARY CALLED!");
     renderRoomSummaryModal();
     togglePlayerControls();
   }

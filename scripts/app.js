@@ -243,10 +243,12 @@ function isGameOver() {
   if (currentMonsterHealth <= 0) {
     isItemAttuned(BLOODSTONE, null); // ITEM: Recovers health when monster dies
     gainExperience(currentRoom.contents.monsters[0].skulls);
-    checkForMonsters();
+    fadeOutAnimation(monsterContainer, 0000);
+    setTimeout(() => {
+      checkForMonsters();
+      monsterContainer.style.display = 'none';
+    }, 2000);
   }
-
-  return;
 }
 
 // ===============================

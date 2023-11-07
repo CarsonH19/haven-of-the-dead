@@ -79,7 +79,7 @@ const SPIKE_PITFALL = {
   name: "Spike Pitfall",
   eventType: "TRAP",
   description:
-    "he ground beneath your feet gives way suddenly, leaving you in a freefall. Your heart races as you plummet into the darkness, catching glimpses of jagged spikes gleaming below. The air rushes past you, carrying the scent of damp earth and impending danger.",
+    "The ground beneath your feet gives way suddenly, leaving you in a freefall. Your heart races as you plummet into the darkness, catching glimpses of jagged spikes gleaming below. The air rushes past you, carrying the scent of damp earth and impending danger.",
   optionOne: "Dexterity", //grasp the side
   optionTwo: "Faith", //fall but avoid spikes
   passValue: 6,
@@ -309,10 +309,10 @@ function trapEventHandler(baseStat, attribute) {
     }
   }
 
-  fadeOutAnimation(eventModal);
+  fadeOutAnimation(eventModal, 3000);
   setTimeout(() => {
     eventModal.style.display = "none";
-  }, 7000);
+  }, 5000);
 
   currentRoom.contents.events = null;
 
@@ -331,10 +331,10 @@ function generalEventHandler(option) {
       break;
   }
 
-  fadeOutAnimation(eventModal);
+  fadeOutAnimation(eventModal, 3000);
   setTimeout(() => {
     eventModal.style.display = "none";
-  }, 7000);
+  }, 5000);
 
   event = null;
   renderRoomSummaryModal();
@@ -379,7 +379,7 @@ function renderEvent(event) {
         }
         break;
     }
-    
+
     fadeInAnimation(eventModal);
     eventModal.style.display = "block";
   }, 2000);
