@@ -343,6 +343,52 @@ const CRYPTBREAD = {
     }
  }
 
+const BONE_MARROW_SOUP = {
+    name: 'Bone Marrow Soup',
+    description: '',
+    type: 'CONSUMABLE',
+    rarity: 'COMMON',
+    effect: 'Restores 15 health points when eaten.',
+    function: () => {
+      currentPlayerHealth += 15;
+      playerHealthBar.value += 15;
+    }
+ }
+
+const LICHROOT = {
+    name: 'Lichroot',
+    description: '',
+    type: 'CONSUMABLE',
+    rarity: 'RARE',
+    effect: 'Permanently increases the potency of health potions.',
+    function: () => {
+      potionHealValue += 5;
+    }
+ }
+
+const MARROWSTONE_CHEESE = {
+    name: 'Marrowstone Cheese',
+    description: '',
+    type: 'CONSUMABLE',
+    rarity: 'RARE',
+    effect: 'Restores 20 health points when eaten.',
+    function: () => {
+      currentPlayerHealth += 25;
+      playerHealthBar.value += 25;
+    }
+ }
+
+ const TOMBSTONE_TRUFFLE = {
+  name: 'Tombstone Truffle',
+  description: '',
+  type: 'CONSUMABLE',
+  rarity: 'RARE',
+  effect: 'Restores 10 health points when eaten.',
+  function: () => {
+    currentPlayerHealth += 10;
+    playerHealthBar.value += 10;  }
+}
+
 
 let attunedItems = [];
 let inventoryItems = [
