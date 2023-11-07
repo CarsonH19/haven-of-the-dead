@@ -22,8 +22,8 @@ const SPIDER_WEB = {
     "A sticky, silken labyrinth envelopes you, woven meticulously by some monstrous arachnid. The web clings to you, its threads vibrating with an eerie energy. You can feel the faint tremors of distant movements, a chilling reminder of the web's creator.",
   optionOne: "Strength", // break free
   optionTwo: "Faith", // burn away
-  passValue: 6,
-  failDamage: 0,
+  passValue: 99,
+  failDamage: "You've alerted nearby Crypt Crawlers!",
   functionOne: null,
   functionTwo: () => {
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
@@ -296,27 +296,38 @@ function trapEventHandler(baseStat, attribute) {
         event.functionOne();
       }
     } else {
-      playerHealthBar.value -= event.failDamage;
-      currentPlayerHealth -= event.failDamage;
-      writeToLog(
-        LOG_EVENT_TRAP_FAIL,
-        attribute, // Dictates descriptive trap fail text. ${name}
-        event.failDamage
-      );
+      if (event === SPIDER_WEB) {
+        writeToLog(
+          LOG_EVENT_TRAP_FAIL,
+          attribute, // Dictates descriptive trap fail text. ${name}
+          event.failDamage
+        );
+        console.log(event);
+        console.log(attribute);
+        console.log(event.failDamage);
+      } else {
+        playerHealthBar.value -= event.failDamage;
+        currentPlayerHealth -= event.failDamage;
+        writeToLog(
+          LOG_EVENT_TRAP_FAIL,
+          attribute, // Dictates descriptive trap fail text. ${name}
+          event.failDamage
+        );
+      }
       if (event.functionTwo) {
         event.functionTwo();
       }
     }
+
+    updateHealthTrackers();
   }
 
-  fadeOutAnimation(eventModal, 3000);
+  currentRoom.contents.events = null;
+  fadeOutAnimation(eventModal, 0000);
   setTimeout(() => {
     eventModal.style.display = "none";
-  }, 5000);
-
-  currentRoom.contents.events = null;
-
-  setTimeout(renderRoomSummaryModal, 8000);
+  }, 1900);
+  setTimeout(renderRoomSummaryModal, 5000);
 }
 
 function generalEventHandler(option) {
@@ -331,13 +342,14 @@ function generalEventHandler(option) {
       break;
   }
 
-  fadeOutAnimation(eventModal, 3000);
+  fadeOutAnimation(eventModal, 0000);
   setTimeout(() => {
     eventModal.style.display = "none";
-  }, 5000);
+  }, 1900);
 
-  event = null;
+  currentRoom.contents.events = null;
   renderRoomSummaryModal();
+  updateHealthTrackers();
 }
 
 // ===============================

@@ -159,7 +159,7 @@ function startBattle() {
     isItemAttuned(SUNSTONE, 0);
     // ITEM: Warding Candle - Chance for evil spirits to flee.
     isItemAttuned(WARDING_CANDLE, 0);
-  }, 2000);
+  }, 1000);
 }
 
 function checkForMonsters() {

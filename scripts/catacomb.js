@@ -48,26 +48,26 @@ let catacombRooms = [
   //     events: null
   //   },
   // },
-  {
-    roomName: "Pestilent Pit",
-    description: '',
-    backgroundImage: 'styles/images/corridor-two.png',
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: SPIKE_PITFALL
-    }
-  },
+  // {
+  //   roomName: "Pestilent Pit",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: SPIKE_PITFALL
+  //   }
+  // },
   {
     roomName: "Webspun Passage",
     description: '',
     backgroundImage: 'styles/images/corridor-two.png',
     music: null,
     contents: {
-      monsters: [BARON_OF_BONE],
+      monsters: [],
       items: [],
-      events: null
+      events: SPIDER_WEB
     }
   }
   // // {
