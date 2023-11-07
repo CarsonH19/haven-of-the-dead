@@ -96,8 +96,11 @@ function monsterAttackHandler() {
     monsterToPlayerDamage
   );
 
+  if (monsterToPlayerDamage > 0) {
+    damageFlashAnimation();
+  }
+
   updateHealthTrackers();
-  damageFlashAnimation();
   healthLowAnimation();
 }
 
@@ -176,28 +179,37 @@ function calculateMonsterDamage() {
 //            Potion
 // ===============================
 
-let potionCounter = 3;
+let potionCounter = 5;
+
 document.getElementById("potionCount").textContent = ` x ${potionCounter}`;
 
-function potionCounterHandler() {
+function potionHandler() {
   const potions = document.getElementById("potionCount");
+
+  let numberOfPotions = 0;
+
+  for (let i = 0; i < inventoryItems.length; i++) {
+    if (inventoryItems[i] === POTION) {
+      numberOfPotions++;
+    }
+  }
+
+  potionCounter = numberOfPotions;
+
   if (potionCounter > 0) {
     potionCounter--;
+    itemObject = inventoryItems.find((inv) => inv.name === POTION);
+    const index = inventoryItems.indexOf(itemObject);
+    inventoryItems.splice(index, 1);
   }
 
   if (potionCounter <= 0) {
     potionBtn.disabled = true;
   }
 
-  potions.textContent = ` x ${potionCounter}`;
-}
-
-function potionHandler() {
   healPlayer(potionHealValue);
-
   writeToLog(LOG_EVENT_POTION, "You", potionHealValue);
-
-  potionCounterHandler();
+  potions.textContent = ` x ${potionCounter}`;
 }
 
 // ===============================
@@ -349,6 +361,10 @@ function togglePlayerControls() {
     inventoryButton.disabled = false;
     potionBtn.disabled = false;
   }
+
+  if (potionCounter <= 0) {
+    potionBtn.disabled = true;
+  }
 }
 
 function playerControlsTimeout(timeout) {
@@ -415,13 +431,12 @@ function newRoomAnimation() {
 }
 
 function damageFlashAnimation() {
-  gameWindow.classList.add('flash');
+  gameWindow.classList.add("flash");
 
   setTimeout(() => {
-    gameWindow.classList.remove('flash'); // Remove the class after the animation is complete
+    gameWindow.classList.remove("flash"); // Remove the class after the animation is complete
   }, 500); // Adjust this timing to match the animation duration
 }
-
 
 // ===============================
 //        Start Game Modal
@@ -644,10 +659,10 @@ roomSummaryButton.addEventListener("click", () => {
 
 continueButton.addEventListener("click", () => {
   newRoomAnimation();
+  closeContinueButton();
   setTimeout(() => {
     removeCurrentRoom();
     getRandomRoom(catacombRooms);
     renderCurrentRoom(currentRoom);
-    closeContinueButton();
   }, 1500);
 });

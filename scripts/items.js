@@ -307,8 +307,45 @@ const SHADOWSTEP_BOOTS = {
 //     function:
 //  }
 
+// ===============================
+//         CONSUMABLES
+// ===============================
+
+// const sample = {
+//     name:
+//     description:
+//     type:
+//     rarity:
+//     effect:
+//     function:
+//  }
+
+const POTION = {
+    name: 'Health Potion',
+    description: 'A small bottle of glowing red liquid.',
+    type: 'CONSUMABLE',
+    rarity: 'COMMON',
+    effect: 'Restores 20 health points and can be used during combat.',
+    function: () => {
+      potionHandler();
+    }
+ }
+
+
+
 let attunedItems = [];
-let inventoryItems = [BLOODSTONE, BONEMAIL, CHARM_OF_HEALING, CURSED_MIRROR, EVERTORCH];
+let inventoryItems = [
+  BLOODSTONE,
+  BONEMAIL,
+  CHARM_OF_HEALING,
+  CURSED_MIRROR,
+  EVERTORCH,
+  POTION,
+  POTION,
+  POTION,
+  POTION,
+  POTION
+];
 
 function isItemAttuned(item, defaultValue) {
   for (let i = 0; i < attunedItems.length; i++) {
@@ -336,16 +373,15 @@ function renderInventory() {
 
   for (let i = 0; i < inventoryItems.length; i++) {
     const itemBox = document.createElement("div");
-    itemBox.classList.add('itemBox');
-    itemBox.classList.add('tooltip');
-    
-    const tooltipText = document.createElement('span');
-    tooltipText.classList.add('tooltipText');
+    // const itemName = document.createElement("p");
+    itemBox.classList.add("tooltip");
+    const tooltipText = document.createElement("span");
+    tooltipText.classList.add("tooltipText");
     tooltipText.textContent = inventoryItems[i].effect;
-
     const itemButton = document.createElement("button");
+    itemButton.textContent = inventoryItems[i].name;
     itemButton.setAttribute("id", inventoryItems[i].name);
-
+    // itemBox.appendChild(itemName);
     itemBox.appendChild(tooltipText);
     itemBox.appendChild(itemButton);
 
@@ -359,11 +395,16 @@ function renderInventory() {
   for (let i = 0; i < attunedItems.length; i++) {
     const itemBox = document.createElement("div");
     // const itemName = document.createElement("p");
-    itemName.textContent = attunedItems[i].name;
+    // itemName.textContent = attunedItems[i].name;
     const itemButton = document.createElement("button");
+    itemButton.textContent = attunedItems[i].name;
     itemButton.setAttribute("id", attunedItems[i].name);
-
-    itemBox.appendChild(itemName);
+    itemBox.classList.add("tooltip");
+    const tooltipText = document.createElement("span");
+    tooltipText.classList.add("tooltipText");
+    tooltipText.textContent = attunedItems[i].effect;
+    // itemBox.appendChild(itemName);
+    itemBox.appendChild(tooltipText);
     itemBox.appendChild(itemButton);
 
     if (!slotOne.hasChildNodes()) {
@@ -378,6 +419,33 @@ function renderInventory() {
       slotFive.appendChild(itemBox);
     }
   }
+
+  document.querySelectorAll(".tooltip").forEach(function (element) {
+    element.addEventListener("mouseover", function () {
+      const tooltipText = this.querySelector(".tooltipText");
+      const rect = tooltipText.getBoundingClientRect();
+      const modalRect = document
+        .querySelector(".inventory-modal-content")
+        .getBoundingClientRect();
+
+      if (rect.right > modalRect.right) {
+        tooltipText.style.left = "auto";
+        tooltipText.style.right = "0";
+      } else if (rect.left < modalRect.left) {
+        tooltipText.style.left = "0";
+        tooltipText.style.right = "auto";
+      }
+
+      tooltipText.style.visibility = "visible";
+      tooltipText.style.opacity = "1";
+    });
+
+    element.addEventListener("mouseout", function () {
+      const tooltipText = this.querySelector(".tooltipText");
+      tooltipText.style.visibility = "hidden";
+      tooltipText.style.opacity = "0";
+    });
+  });
 }
 
 function attuneItem(itemName) {
@@ -454,6 +522,20 @@ function clearInventory() {
   slotFive.textContent = "";
 }
 
+function useConsumable(consumable) {
+  itemObject = inventoryItems.find((inv) => inv.name === consumable);
+
+  if (!itemObject === POTION) {
+    const index = inventoryItems.indexOf(itemObject);
+    inventoryItems.splice(index, 1);
+  }
+
+  itemObject.function();
+
+  clearInventory();
+  renderInventory();
+}
+
 // ===============================
 //            Inventory
 // ===============================
@@ -500,57 +582,29 @@ inventoryModal.addEventListener("click", (event) => {
       attuneItem(buttons[i].id);
     }
 
-    if (
-      slotOne.contains(event.target) &&
-      event.target === buttons[i]
-    ) {
+    if (consumablesBox.contains(event.target) && event.target === buttons[i]) {
+      useConsumable(buttons[i].id);
+    }
+
+    if (slotOne.contains(event.target) && event.target === buttons[i]) {
       removeItem(buttons[i].id);
     }
 
-    if (
-      slotTwo.contains(event.target) &&
-      event.target === buttons[i]
-    ) {
+    if (slotTwo.contains(event.target) && event.target === buttons[i]) {
       removeItem(buttons[i].id);
     }
 
-    if (
-      slotThree.contains(event.target) &&
-      event.target === buttons[i]
-    ) {
+    if (slotThree.contains(event.target) && event.target === buttons[i]) {
       removeItem(buttons[i].id);
     }
 
-    if (
-      slotFour.contains(event.target) &&
-      event.target === buttons[i]
-    ) {
+    if (slotFour.contains(event.target) && event.target === buttons[i]) {
       removeItem(buttons[i].id);
     }
 
-    if (
-      slotFive.contains(event.target) &&
-      event.target === buttons[i]
-    ) {
+    if (slotFive.contains(event.target) && event.target === buttons[i]) {
       removeItem(buttons[i].id);
     }
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const itemBoxes = document.querySelectorAll('.itemBox.tooltip');
-
-  itemBoxes.forEach((itemBox) => {
-    const tooltipText = itemBox.querySelector('.tooltipText');
-
-    itemBox.addEventListener('mouseover', () => {
-      tooltipText.style.visibility = 'visible';
-      tooltipText.style.opacity = '1';
-    });
-
-    itemBox.addEventListener('mouseout', () => {
-      tooltipText.style.visibility = 'hidden';
-      tooltipText.style.opacity = '0';
-    });
-  });
-});

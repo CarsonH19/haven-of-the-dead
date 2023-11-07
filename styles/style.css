@@ -218,7 +218,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 90%;
+  width: 100%;
   height: 25%;
 }
 
@@ -343,13 +343,13 @@ progress[value] {
 
 progress[value]::-webkit-progress-value {
   background-color: #ad0505;
-  transition: all 0.2s ease-out;
+  transition: all 0.5s ease-out;
 
 }
 
 progress[value]::-moz-progress-bar {
   background-color: #ad0505;
-  transition: all 0.2s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 /* 
@@ -499,9 +499,8 @@ progress[value]::-moz-progress-bar {
   background-blend-mode: overlay;  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  width: 80%;
+  width: 60%;
   height: 70%;
-  overflow: auto;
 }
 
 .inventory-modal-content h2 {
@@ -542,12 +541,13 @@ progress[value]::-moz-progress-bar {
 }
 
 .inventory-left-side {
-  width: 30%
+  width: 20%
 }
 
 .attuned-box {
   text-align: center;
-  border: 2px black solid;
+  border-top: 2px black solid;
+  border-right: 2px black solid;
   height: 100%;
 }
 
@@ -560,19 +560,26 @@ progress[value]::-moz-progress-bar {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   margin: 10px;
   height: 90%;
 }
 
 .slots div {
-  border: 1px solid red;
-  height: 18%;
-  width: 50%;
+  border: 1px solid var(--header);
+  height: 80px;
+  width: 80px;
+}
+
+.slots button {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 
 .inventory-right-side {
-  width: 70%;
+  width: 80%;
   display: flex;
   flex-direction: column;
 }
@@ -580,7 +587,10 @@ progress[value]::-moz-progress-bar {
 .magic-items-box {
   text-align: left;
   height: 50%;
-  border: 2px black solid;
+  border-top: 2px black solid;
+  border-bottom: 2px black solid;
+
+  z-index: 1;
 }
 
 .magic-items-box h4 {
@@ -588,15 +598,12 @@ progress[value]::-moz-progress-bar {
 }
 
 .magic-items {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   margin: 10px;
   height: 80%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10vw, 1fr)); /* Set the minimum column width to 150px, but allow them to grow */
-  grid-row-gap: 1vh; 
-  grid-column-gap: 1vw;
-  
-  overflow: auto;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); 
+  gap: 10px;
 }
 
 .magic-items div {
@@ -606,32 +613,51 @@ progress[value]::-moz-progress-bar {
   /* display: flex; */
   flex-direction: column-reverse;
   margin: 10px;
-  border: 1px solid red;
+  border: 1px solid var(--header);
   box-sizing: border-box; 
-  overflow: hidden;
-}
-
-.magic-items p {
-  margin: 0px;
-  padding: 0px;
-  text-align: center;
-  font-size: 0.8rem;
 }
 
 .magic-items button {
-  height: 95%;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-size: 0.7rem;
 }
 
 .consumables-box {
   text-align: left;
-  height: 50%;
-  border: 2px black solid;
+  height: 47%;
+}
+
+.consumables div {
+  aspect-ratio: 1;
+  min-width: 50px;
+  min-height: 50px;
+  /* display: flex; */
+  flex-direction: column-reverse;
+  margin: 10px;
+  border: 1px solid var(--header);
+  box-sizing: border-box; 
 }
 
 .consumables {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   margin: 10px;
   height: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); /* Set the minimum column width to 150px, but allow them to grow */
+  grid-row-gap: 1vh; 
+  grid-column-gap: 1vw;
+  
+}
+
+.consumables button {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-size: 0.7rem;
 }
 
 .consumables-box h4 {
@@ -641,28 +667,25 @@ progress[value]::-moz-progress-bar {
 .tooltip {
   position: relative;
   cursor: pointer;
+  z-index: 1;
 }
 
-.tooltip .tooltipText {
+.tooltipText {
   visibility: hidden;
   width: 120px;
+  height: 120px;
   background-color: #000;
   color: #fff;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-  position: absolute;
-  z-index: 2;
-  bottom: 125%;
-  left: 50%;
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
-}
-
-.tooltip:hover .tooltipText {
-  visibility: visible;
-  opacity: 1;
+  z-index: 3;
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
 }
 
 /* 
