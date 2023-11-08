@@ -224,10 +224,16 @@ body {
   height: 25%;
 }
 
+.health-bar .health-level-experience {
+  display: flex;
+  justify-content: space-between;
+}
+
 .health-bar p {
   margin: 0px;
   padding: 0px;
 }
+
 
 
 .player-stats {

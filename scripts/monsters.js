@@ -158,7 +158,7 @@ function setMonsterHealth(maxLife) {
 function startBattle() {
   setTimeout(() => {
     renderMonsterStatBlock(currentRoom.contents.monsters[0]);
-    updateHealthTrackers();
+    updatePlayerTrackers();
     togglePlayerControls();
 
     // ITEM: Sunstone - Damages undead creatures.

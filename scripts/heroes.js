@@ -149,7 +149,7 @@ function rogueShadowStrike() {
   currentMonsterHealth -= totalDamage;
 
   specialCooldownCounter = 5;
-  setTimeout(updateHealthTrackers, 1250);
+  setTimeout(updatePlayerTrackers, 1250);
 }
 
 // See monsterAttackHandler for Rouge Passive Ability
@@ -230,7 +230,7 @@ function healPlayer(healValue) {
     currentPlayerHealth = playerMaxHealth;
   }
 
-  updateHealthTrackers();
+  updatePlayerTrackers();
   healthLowAnimation();
 }
 

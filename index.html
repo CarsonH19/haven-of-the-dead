@@ -238,10 +238,13 @@
         <div class="bottom-content">
           <div id="playerContainer" class="player-container">
             <h3 id="playerName"></h3>
-            <h4>Level: <span id="heroLevel">1</span></h4>
+            <!-- <h4>Level: <span id="heroLevel">1</span></h4> -->
             <div class="health-bar">
-              <p><span><span id="currentHP">0</span> / <span
-                id="maxHP">0</span></p>
+              <div class="health-level-experience">
+                <p>HP: <span id="currentHP">0</span> / <span id="maxHP">0</span></p>
+                <p>Exp: <span id="currentXP">0</span> / <span id="xpToNextLevel">0</span></p>
+                <p>Lvl: <span id="heroLevel">0</span></p>
+              </div>  
               <progress id="player-health" max="100" value="100">100%</progress>
             </div>
             <div class="player-stats">

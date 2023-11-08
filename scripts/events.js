@@ -381,7 +381,7 @@ function trapEventHandler(baseStat, attribute) {
       }
     }
 
-    updateHealthTrackers();
+    updatePlayerTrackers();
   }
 
   currentRoom.contents.events = null;
@@ -410,7 +410,7 @@ function generalEventHandler(option) {
 
   currentRoom.contents.events = null;
   // renderRoomSummaryModal(); Commented out for Graverobber Earver's Option One Event
-  updateHealthTrackers();
+  updatePlayerTrackers();
 }
 
 // ===============================

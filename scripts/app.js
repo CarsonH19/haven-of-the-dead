@@ -62,7 +62,7 @@ function playerAttackHandler(smite = 1) {
     paladinRadiantAura();
   }
 
-  updateHealthTrackers();
+  updatePlayerTrackers();
 }
 
 function monsterAttackHandler() {
@@ -111,7 +111,7 @@ function monsterAttackHandler() {
     );
   }
 
-  updateHealthTrackers();
+  updatePlayerTrackers();
   healthLowAnimation();
 }
 
@@ -212,7 +212,7 @@ function guardHandler() {
   // console.log(`Damage Blocked: ${damageBlocked}`);
   // console.log(`Current Player Health ${currentPlayerHealth}`);
   // console.log(`Current Player Health Bar Value ${playerHealthBar.value}`);
-  updateHealthTrackers();
+  updatePlayerTrackers();
 }
 
 function calculateMonsterDamage() {
@@ -382,7 +382,7 @@ function renderCurrentRoom(currentRoom) {
   setRoomSummary();
   renderHeroStats();
   renderBackground(currentRoom.backgroundImage);
-  updateHealthTrackers();
+  updatePlayerTrackers();
 }
 
 function togglePlayerControls() {
@@ -462,18 +462,56 @@ function renderBackground(link) {
   };
 }
 
-function updateHealthTrackers() {
-  const currentHP = document.getElementById("currentHP");
-  const maxHP = document.getElementById("maxHP");
-  const monsterCurrentHP = document.getElementById("monsterCurrentHP");
-  const monsterMaxHP = document.getElementById("monsterMaxHP");
+function updatePlayerTrackers() {
+  function updateHealthTrackers() {
+    const currentHP = document.getElementById("currentHP");
+    const maxHP = document.getElementById("maxHP");
+    const monsterCurrentHP = document.getElementById("monsterCurrentHP");
+    const monsterMaxHP = document.getElementById("monsterMaxHP");
+  
+    currentHP.textContent = currentPlayerHealth;
+    maxHP.textContent = calculatePlayerMaxHealth();
+  
+    monsterCurrentHP.textContent = currentMonsterHealth;
+    monsterMaxHP.textContent = monsterMaxHealth;
+  }
+  
+  function updateHeroLevel() {
+    const heroLevel = document.getElementById('heroLevel');
+    heroLevel.textContent = levelCounter;
+  }
+  
+  function updateHeroExperience() {
+    const currentXP = document.getElementById('currentXP');
+    currentXP.textContent = experiencePoints;
+    const xpToNextLevel = document.getElementById('xpToNextLevel');
+  
+    if (levelCounter === 1) {
+      xpToNextLevel.textContent = 100;
+    } else if (levelCounter === 2) {
+      xpToNextLevel.textContent = 200;
+    } else if (levelCounter === 3) {
+      xpToNextLevel.textContent = 300;
+    } else if (levelCounter === 4) {
+      xpToNextLevel.textContent = 400;
+    } else if (levelCounter === 5) {
+      xpToNextLevel.textContent = 500;
+    } else if (levelCounter === 6) {
+      xpToNextLevel.textContent = 600;
+    } else if (levelCounter === 7) {
+      xpToNextLevel.textContent = 700;
+    } else if (levelCounter === 8) {
+      xpToNextLevel.textContent = 800;
+    } else {
+      xpToNextLevel.textContent = experiencePoints;
+    }
+  }
 
-  currentHP.textContent = currentPlayerHealth;
-  maxHP.textContent = calculatePlayerMaxHealth();
-
-  monsterCurrentHP.textContent = currentMonsterHealth;
-  monsterMaxHP.textContent = monsterMaxHealth;
+  updateHealthTrackers();
+  updateHeroLevel();
+  updateHeroExperience();
 }
+
 
 function newRoomAnimation() {
   const fade = document.getElementById("fade");
@@ -654,7 +692,7 @@ attackBtn.addEventListener("click", function () {
   } else {
     playerControlsTimeout(1500);
     setTimeout(monsterAttackHandler, 1200);
-    updateHealthTrackers();
+    updatePlayerTrackers();
   }
 });
 
@@ -663,7 +701,7 @@ guardBtn.addEventListener("click", () => {
   playerControlsTimeout(1500);
   setTimeout(guardHandler, 1200);
   isGameOver();
-  updateHealthTrackers();
+  updatePlayerTrackers();
 });
 
 specialBtn.addEventListener("click", () => {
@@ -693,7 +731,7 @@ specialBtn.addEventListener("click", () => {
     setTimeout(monsterAttackHandler, 1200);
   }
 
-  updateHealthTrackers();
+  updatePlayerTrackers();
   specialCooldownHandler();
 });
 
@@ -707,7 +745,7 @@ potionBtn.addEventListener("click", () => {
     isGameOver();
   }
 
-  updateHealthTrackers();
+  updatePlayerTrackers();
 });
 
 fleeBtn.addEventListener("click", () => {
@@ -716,7 +754,7 @@ fleeBtn.addEventListener("click", () => {
   playerControlsTimeout(1500);
   setTimeout(monsterAttackHandler, 1200);
   isGameOver();
-  updateHealthTrackers();
+  updatePlayerTrackers();
 });
 
 greatCatacombsBtn.addEventListener("click", () => {
@@ -733,14 +771,14 @@ roomSummaryButton.addEventListener("click", () => {
   updateRoomsCleared();
   // ITEM: Charm of Healing - Recover 10HP after each cleared room.
   isItemAttuned(CHARM_OF_HEALING, 0);
-  updateHealthTrackers();
+  updatePlayerTrackers();
   checkForLevelUp();
 });
 
 continueButton.addEventListener("click", () => {
   newRoomAnimation();
   closeContinueButton();
-  updateHealthTrackers();
+  updatePlayerTrackers();
   setTimeout(() => {
     removeCurrentRoom();
     getRandomRoom(catacombRooms);

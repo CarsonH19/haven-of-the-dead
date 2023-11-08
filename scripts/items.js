@@ -643,7 +643,7 @@ closeInventoryButton.addEventListener("click", () => {
 
   renderHeroStats();
   setPlayerHealthBar(calculatePlayerMaxHealth());
-  updateHealthTrackers();
+  updatePlayerTrackers();
 
   // ITEM: Shadowstep Boots - +1 Dexterity;
   let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
