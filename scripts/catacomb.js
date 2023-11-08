@@ -37,17 +37,17 @@ let catacombRooms = [
   //     events: null
   //   },
   // },
-  {
-    roomName: "Gnawers' Nest",
-    description: '',
-    backgroundImage: 'styles/images/corridor-two.png',
-    music: null,
-    contents: {
-      monsters: [GNAWER, SHADE, HAUNTING_SPIRIT, GRUDGE],
-      items: [],
-      events: null
-    },
-  },
+  // {
+  //   roomName: "Gnawers' Nest",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [GNAWER, SHADE, HAUNTING_SPIRIT, GRUDGE],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
   // {
   //   roomName: "Pestilent Pit",
   //   description: '',
@@ -59,17 +59,17 @@ let catacombRooms = [
   //     events: SPIKE_PITFALL
   //   }
   // },
-  // {
-  //   roomName: "Webspun Passage",
-  //   description: "",
-  //   backgroundImage: "styles/images/corridor-two.png",
-  //   music: null,
-  //   contents: {
-  //     monsters: [],
-  //     items: [],
-  //     events: GRAVEROBBER_EARVER,
-  //   },
-  // },
+  {
+    roomName: "Webspun Passage",
+    description: "",
+    backgroundImage: "styles/images/corridor-two.png",
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: GRAVEROBBER_EARVER,
+    },
+  },
   // // {
   // //   roomName: "Creeping Coffins",
   // //   description: '',
@@ -309,26 +309,14 @@ const GRAVEROBBER_EARVER_ROOM_TWO = {
 };
 
 const GRAVEROBBER_EARVER_ROOM_THREE = {
-  roomName: "Crypt of the Gilded Lady",
+  roomName: "Crypt of the Fallen King",
   description: "A gilded door of a seemingly wealthy person in life.",
   backgroundImage: "",
   music: null,
   contents: {
     monsters: [],
     items: [],
-    events: GRAVEROBBER_EARVER_EVENT_TWO,
-  },
-};
-
-const GRAVEROBBER_EARVER_REWARD_ROOM = {
-  roomName: "Three Spirits Sanctuary",
-  description: "A warm room safe from danger and protected by blessed spirits",
-  backgroundImage: "",
-  music: null,
-  contents: {
-    monsters: [],
-    items: [POTION, MARROWSTONE_CHEESE, CRYPTBREAD, CRYPTBREAD, FALLEN_KINGS_CROWN],
-    events: GRAVEROBBER_EARVER_EVENT_TWO,
+    events: GRAVEROBBER_EARVER_EVENT_THREE,
   },
 };
 

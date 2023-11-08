@@ -118,31 +118,33 @@ const GRAVEROBBER_EARVER = {
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
-    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "Earver", );
+    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "Earver");
   },
   functionTwo: () => {
     writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Earver", "you");
-    let currentRoomCounter = roomCounter + 10;
+    let currentRoomCounter = roomCounter + 0;
     console.log(`currentRoomCounter: ${currentRoomCounter}`);
     let earverInterval = setInterval(() => {
       console.log(`currentRoomCounter: ${currentRoomCounter}`);
       if (roomCounter > currentRoomCounter) {
-        console.log('Room Added');
+        console.log("Room Added");
         catacombRooms.push(GRAVEROBBER_EARVER_ROOM_TWO);
         clearInterval(earverInterval);
       }
-    }, 60000);
+    }, 3000);
+    setTimeout(renderRoomSummaryModal, 5000);
   },
 };
 
 const GRAVEROBBER_EARVER_EVENT_TWO = {
   name: "Graverobber Earver",
   eventType: "NPC",
-  description: "",
+  description:
+    "Once more, the air grows heavy as you find Graverobber Earver, unyielding in his pursuit of forbidden riches. He implores you to lend your strength, offering a glimpse into the abyssal unknown that awaits within the looming sarcophagus, should you dare to delve into the shadows once more.",
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
-    currentRoom.contents.monsters.push(POSSESSED_EARVER);
+    currentRoom.contents.monsters.push(BONE_TITAN);
     currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
     setRoomSummary();
     startBattle();
@@ -151,34 +153,39 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
   },
   functionTwo: () => {
     writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Earver", "you");
-    let currentRoomCounter = roomCounter + 10;
+    let currentRoomCounter = roomCounter + 0;
     let earverInterval = setInterval(() => {
       console.log(`currentRoomCounter: ${currentRoomCounter}`);
       if (roomCounter > currentRoomCounter) {
-        console.log('Room Added');
+        console.log("Room Added");
         catacombRooms.push(GRAVEROBBER_EARVER_ROOM_THREE);
         clearInterval(earverInterval);
       }
-    }, 60000);
-  },};
+    }, 3000);
+    setTimeout(renderRoomSummaryModal, 5000);
+  },
+};
 
 const GRAVEROBBER_EARVER_EVENT_THREE = {
   name: "Graverobber Earver",
   eventType: "NPC",
-  description: "",
+  description:
+    "As fate would have it, you cross paths with Graverobber Earver yet again, his determination unshaken. This time, he stands before an ornate crypt belonging to a long dead king. With a knowing look, he extends his offer once more, tempting you with the allure of unimaginable treasures concealed within.",
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
-    currentRoom.contents.monsters.push(POSSESSED_EARVER);
+    currentRoom.contents.monsters.push(DRAUGR, DRAUGR, DRAUGR);
     currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
     writeToLog(LOG_EVENT_NPC_OPTION_ONE, "Earver", "you");
   },
-  functionOne: () => {
-    // spirits thank you for not ruining their remains and lead you to a treasure.
-    catacombRooms.push(GRAVEROBBER_EARVER_REWARD_ROOM);
+  functionTwo: () => {
+    currentRoom.contents.items.push(ETHEREAL_CROWN);
+    setRoomSummary();
+    writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Earver", "you");
+    setTimeout(renderRoomSummaryModal, 5000);
   },
 };
 
@@ -389,6 +396,7 @@ function trapEventHandler(baseStat, attribute) {
   setTimeout(() => {
     eventModal.style.display = "none";
   }, 1900);
+  renderRoomSummaryModal(); //Is this needed????!!
 }
 
 function generalEventHandler(option) {

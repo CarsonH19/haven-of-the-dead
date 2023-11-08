@@ -1380,9 +1380,9 @@ function writeToLog(eventType, name, value) {
         newEntry.textContent = `
         The air grows thick with malevolence as the stone door groans open. In that moment, a malevolent spirit surges into ${name}, claiming him as its vessel. His eyes blaze with unholy fire, and the spade he wields becomes a weapon of doom, swinging towards ${value} with deadly intent. `;
       } else if (event === GRAVEROBBER_EARVER_EVENT_TWO) {
-        newEntry.textContent = ``;
+        newEntry.textContent = `You decide to assist Graverobber ${Earver} in his unholy quest to open the sarcophagus. The lid creaks open, but as the contents are revealed, a deafening roar echoes through the tomb. A monstrous abomination, the dreaded Bone Titan, awakens in a fury of bones, and it mercilessly strikes down Graverobber Earver before turning its baleful gaze upon ${value}.`;
       } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
-        newEntry.textContent = ``;
+        newEntry.textContent = `"As Graverobber Earver's finally succeed in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their vengeful onslaught, ${name} meets his untimely demise, leaving ${value} to face the wrath of these risen guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
       } else if (event === SCHOLAR_HENDRA) {
       } else if (event === GRERVIL_THE_BODILESS) {
@@ -1396,11 +1396,11 @@ function writeToLog(eventType, name, value) {
 
     case LOG_EVENT_NPC_OPTION_TWO:
       if (event === GRAVEROBBER_EARVER) {
-        newEntry.textContent = `Declining Graverobber ${name}'s offer, ${value} descend further into the catacomb. His desperate struggles to breach the ancient stone door reverberate through the passageway, a chilling symphony that underscores the weight of the secrets held within.`;
+        newEntry.textContent = `Declining Graverobber ${name}'s offer, ${value} descend further into the catacomb. His desperate struggles to breach the ancient stone door reverberate through the passageway.`;
       } else if (event === GRAVEROBBER_EARVER_EVENT_TWO) {
-        newEntry.textContent = `Declining Graverobber ${name}'s offer, ${value}`;
+        newEntry.textContent = `Refusing Graverobber ${name}'s proposition, ${value} venture deeper into the catacomb. The echoes of Earver's relentless attempts to pry open the ancient stone sarcophagus resonate through the passageway.`;
       } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
-        newEntry.textContent = `Declining Graverobber ${name}'s offer, ${value}`;
+        newEntry.textContent = `As ${value} stand resolute in your refusal to aid Graverobber ${name}, the crypt door remains sealed, shunning the desecration of the king's final resting place. In the solemn silence that follows, a radiant light emanates from the heart of the chamber. The spectral king, recognizing your honor, presents you with his ethereal crown, a symbol of his gratitude and a powerful artifact.`;
       } else if (event === IVAN_THE_SCOUNDREL) {
       } else if (event === SCHOLAR_HENDRA) {
       } else if (event === GRERVIL_THE_BODILESS) {
@@ -1434,7 +1434,7 @@ function writeToLog(eventType, name, value) {
     //          Item Events
     // ===============================
 
-    case LOG_EVENT_FALLEN_KINGS_CROWN:
+    case LOG_EVENT_ETHEREAL_CROWN:
       newEntry.textContent = `The ${name} bows gently before ${value} and then vanishes.`;
       narration = newEntry.textContent;
       break;
@@ -1464,7 +1464,7 @@ function writeToLog(eventType, name, value) {
     eventType === LOG_EVENT_GREATER_PRAYER ||
     eventType === LOG_EVENT_POTION ||
     eventType === LOG_EVENT_FLEE ||
-    eventType === LOG_EVENT_FALLEN_KINGS_CROWN
+    eventType === LOG_EVENT_ETHEREAL_CROWN
   ) {
     newNarration.textContent = narration;
     narrativeText.insertBefore(newNarration, narrativeText.firstChild);

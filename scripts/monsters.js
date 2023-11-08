@@ -166,7 +166,7 @@ function startBattle() {
     // ITEM: Warding Candle - Chance for evil spirits to flee.
     isItemAttuned(WARDING_CANDLE, 0);
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
-    isItemAttuned(FALLEN_KINGS_CROWN, 0);
+    isItemAttuned(ETHEREAL_CROWN, 0);
   }, 1000);
 }
 

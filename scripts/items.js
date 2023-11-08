@@ -298,8 +298,8 @@ const SHADOWSTEP_BOOTS = {
 //         EPIC ITEMS
 // ===============================
 
-const FALLEN_KINGS_CROWN = {
-  name: "Fallen King's Crown",
+const ETHEREAL_CROWN = {
+  name: "Ethereal Crown",
   description: "",
   type: "MAGIC",
   rarity: "EPIC",
@@ -412,7 +412,6 @@ let inventoryItems = [
   BLOODSTONE,
   BONEMAIL,
   CHARM_OF_HEALING,
-  FALLEN_KINGS_CROWN,
   POTION,
   POTION,
   POTION,
