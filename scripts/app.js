@@ -32,21 +32,26 @@ function playerAttackHandler(smite = 1) {
     // Critical Hit
   } else if (criticalHitChance >= 20) {
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
-    console.log(`Critical Hit: ${totalDamage}`);
     writeToLog(
       LOG_EVENT_PLAYER_CRITICAL,
       currentRoom.contents.monsters[0].name,
       totalDamage
     );
     // Normal Hit
-  } else {
+  } else if (playerToMonsterDamage > 0) {
     totalDamage = playerToMonsterDamage;
-    console.log(`Base Damage: ${playerToMonsterDamage}`);
     writeToLog(
       LOG_EVENT_PLAYER_ATTACK,
       currentRoom.contents.monsters[0].name,
       totalDamage
-    );
+    ); 
+  } else if (playerToMonsterDamage <= 0) {
+    totalDamage = 0;
+    writeToLog(
+      LOG_EVENT_PLAYER_MISS,
+      currentRoom.contents.monsters[0].name,
+      'You'
+    ); 
   }
 
   monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
@@ -80,7 +85,7 @@ function monsterAttackHandler() {
     writeToLog(
       LOG_EVENT_EVASION,
       currentRoom.contents.monsters[0].name,
-      monsterToPlayerDamage
+      'attack'
     );
   }
 
@@ -97,6 +102,12 @@ function monsterAttackHandler() {
       LOG_EVENT_MONSTER_ATTACK,
       currentRoom.contents.monsters[0].name,
       monsterToPlayerDamage
+    );
+  } else if (monsterToPlayerDamage <= 0) {
+    writeToLog(
+      LOG_EVENT_MONSTER_MISS,
+      currentRoom.contents.monsters[0].name,
+      'you'
     );
   }
 
@@ -159,23 +170,43 @@ function guardHandler() {
   playerHealthBar.value = +playerHealthBar.value - damageTaken;
   currentPlayerHealth -= damageTaken;
 
+  console.log(damageBlocked);
+  console.log(damageTaken);
+
+
   if (damageBlocked > 0) {
+    console.log('ONE')
     writeToLog(
       LOG_EVENT_GUARD,
       currentRoom.contents.monsters[0].name,
       damageBlocked + baseDexterity
     );
+  } else if (damageBlocked <= 0 && damageTaken > 0) {
+    console.log('TWO')
+    writeToLog(
+      LOG_EVENT_GUARD_FAIL,
+      currentRoom.contents.monsters[0].name,
+      'You'
+    );
   }
 
   if (damageTaken > 0) {
     damageFlashAnimation();
-  }
 
     writeToLog(
       LOG_EVENT_MONSTER_ATTACK,
       currentRoom.contents.monsters[0].name,
       damageTaken
     );
+  } else {
+    writeToLog(
+      LOG_EVENT_MONSTER_MISS,
+      currentRoom.contents.monsters[0].name,
+      'You'
+    );
+  }
+
+  
 
   // console.log(`Damage Received: ${monsterToGuardDamage}`);
   // console.log(`Damage Blocked: ${damageBlocked}`);
@@ -238,7 +269,7 @@ function fleeHandler() {
   fleeChance += isItemAttuned(RING_OF_THE_RODENT, 0);
   if (fleeChance >= 10) {
     console.log("Flee Successful");
-    // writeToLog()
+    writeToLog(LOG_EVENT_FLEE, "You", currentRoom.name);
     getRandomRoom(catacombRooms);
     renderCurrentRoom(currentRoom);
   }
