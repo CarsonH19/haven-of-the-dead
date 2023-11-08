@@ -173,6 +173,7 @@ let radiantAuraTracker = 5;
 // ===============================
 
 let experiencePoints = 0;
+let previousExperience;
 let levelCounter = 1;
 
 const levelUpModal = document.getElementById("levelUpModal");

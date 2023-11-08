@@ -344,6 +344,7 @@ document.getElementById("gameWindow").style.display = "none";
 
 function renderCurrentRoom(currentRoom) {
   roomNameElement.textContent = currentRoom.roomName;
+  previousExperience = experiencePoints;
 
   // Renders monsters if there are monsters in the room.
   if (currentRoom.contents.monsters.length > 0) {
@@ -509,6 +510,7 @@ function closeRoomSummaryModal() {
 }
 
 function renderRoomSummaryModal() {
+  console.log('renderRoomSummaryModal Called!');
   const roomSummaryDescription = document.getElementById(
     "roomSummaryDescription"
   );
@@ -577,8 +579,20 @@ function renderRoomSummaryModal() {
       }
 
       // Experience
-      // experienceHeader = document.createElement('h4');
-      // experienceText = document.createElement('p');
+
+      if (experiencePoints > previousExperience) {
+        let experienceGained = experiencePoints - previousExperience;
+        experienceHeader = document.createElement('h4');
+        experienceHeader.textContent = `Experience`;
+        roomSummaryExperience.appendChild(experienceHeader);
+        gainedExperienceText = document.createElement('p');
+        gainedExperienceText.textContent = `Experience Gained: +${experienceGained}`;
+        roomSummaryExperience.appendChild(gainedExperienceText);
+        totalExperienceText = document.createElement('p');
+        totalExperienceText.textContent = `Total Experience: ${experiencePoints}`;
+        roomSummaryExperience.appendChild(totalExperienceText);
+      }
+
     }, 2000);
   } else {
     roomSummaryModal.style.display = "none";
@@ -587,6 +601,7 @@ function renderRoomSummaryModal() {
   // Adds items in current room to inventory
   if (currentRoom.contents.items.length > 0) {
     for (let i = 0; i < currentRoom.contents.items.length; i++) {
+      console.log('ITEM ADDED')
       addItemToInventory(currentRoom.contents.items[i]);
     }
   }
