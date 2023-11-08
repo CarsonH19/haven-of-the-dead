@@ -298,14 +298,31 @@ const SHADOWSTEP_BOOTS = {
 //         EPIC ITEMS
 // ===============================
 
-// const sample = {
-//     name:
-//     description:
-//     type:
-//     rarity:
-//     effect:
-//     function:
-//  }
+const FALLEN_KINGS_CROWN = {
+  name: "Fallen King's Crown",
+  description: "",
+  type: "MAGIC",
+  rarity: "EPIC",
+  effect: "While attuned to this item, evil spirits will not attack you.",
+  function: () => {
+    if (
+      currentRoom.contents.monsters[0] === SHADE ||
+      currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
+      currentRoom.contents.monsters[0] === GRUDGE
+    ) {
+      writeToLog(
+        LOG_EVENT_FALLEN_KINGS_CROWN,
+        currentRoom.contents.monsters[0].name,
+        "you"
+      );
+      fadeOutAnimation(monsterContainer, 0000);
+      setTimeout(() => {
+        checkForMonsters();
+        monsterContainer.style.display = "none";
+      }, 2000);
+    }
+  },
+};
 
 // ===============================
 //         CONSUMABLES
@@ -321,88 +338,86 @@ const SHADOWSTEP_BOOTS = {
 //  }
 
 const POTION = {
-    name: 'Health Potion',
-    description: 'A small bottle of glowing red liquid.',
-    type: 'CONSUMABLE',
-    rarity: 'COMMON',
-    effect: 'Restores 20 health points and can be used during combat.',
-    function: () => {
-      potionHandler();
-    }
- }
+  name: "Health Potion",
+  description: "A small bottle of glowing red liquid.",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  effect: "Restores 20 health points and can be used during combat.",
+  function: () => {
+    potionHandler();
+  },
+};
 
 const CRYPTBREAD = {
-    name: 'Cryptbread',
-    description: '',
-    type: 'CONSUMABLE',
-    rarity: 'COMMON',
-    effect: 'Restores 10 health points when eaten.',
-    function: () => {
-      currentPlayerHealth += 10;
-      playerHealthBar.value += 10;
-    }
- }
-
-const BONE_MARROW_SOUP = {
-    name: 'Bone Marrow Soup',
-    description: '',
-    type: 'CONSUMABLE',
-    rarity: 'COMMON',
-    effect: 'Restores 15 health points when eaten.',
-    function: () => {
-      currentPlayerHealth += 15;
-      playerHealthBar.value += 15;
-    }
- }
-
-const LICHROOT = {
-    name: 'Lichroot',
-    description: '',
-    type: 'CONSUMABLE',
-    rarity: 'RARE',
-    effect: 'Permanently increases the potency of health potions.',
-    function: () => {
-      potionHealValue += 5;
-    }
- }
-
-const MARROWSTONE_CHEESE = {
-    name: 'Marrowstone Cheese',
-    description: '',
-    type: 'CONSUMABLE',
-    rarity: 'RARE',
-    effect: 'Restores 20 health points when eaten.',
-    function: () => {
-      currentPlayerHealth += 25;
-      playerHealthBar.value += 25;
-    }
- }
-
- const TOMBSTONE_TRUFFLE = {
-  name: 'Tombstone Truffle',
-  description: '',
-  type: 'CONSUMABLE',
-  rarity: 'RARE',
-  effect: 'Restores 10 health points when eaten.',
+  name: "Cryptbread",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  effect: "Restores 10 health points when eaten.",
   function: () => {
     currentPlayerHealth += 10;
-    playerHealthBar.value += 10;  }
-}
+    playerHealthBar.value += 10;
+  },
+};
 
+const BONE_MARROW_SOUP = {
+  name: "Bone Marrow Soup",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  effect: "Restores 15 health points when eaten.",
+  function: () => {
+    currentPlayerHealth += 15;
+    playerHealthBar.value += 15;
+  },
+};
+
+const LICHROOT = {
+  name: "Lichroot",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "RARE",
+  effect: "Permanently increases the potency of health potions.",
+  function: () => {
+    potionHealValue += 5;
+  },
+};
+
+const MARROWSTONE_CHEESE = {
+  name: "Marrowstone Cheese",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "RARE",
+  effect: "Restores 20 health points when eaten.",
+  function: () => {
+    currentPlayerHealth += 25;
+    playerHealthBar.value += 25;
+  },
+};
+
+const TOMBSTONE_TRUFFLE = {
+  name: "Tombstone Truffle",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "RARE",
+  effect: "Restores 10 health points when eaten.",
+  function: () => {
+    currentPlayerHealth += 10;
+    playerHealthBar.value += 10;
+  },
+};
 
 let attunedItems = [];
 let inventoryItems = [
   BLOODSTONE,
   BONEMAIL,
   CHARM_OF_HEALING,
-  CURSED_MIRROR,
-  EVERTORCH,
+  FALLEN_KINGS_CROWN,
   POTION,
   POTION,
   POTION,
   POTION,
   POTION,
-  CRYPTBREAD
 ];
 
 function isItemAttuned(item, defaultValue) {
@@ -583,7 +598,7 @@ function clearInventory() {
 function useConsumable(consumable) {
   itemObject = inventoryItems.find((inv) => inv.name === consumable);
 
-  if (consumable !== 'Health Potion') {
+  if (consumable !== "Health Potion") {
     console.log(consumable);
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
@@ -622,7 +637,7 @@ closeInventoryButton.addEventListener("click", () => {
     setPaladinStats();
   } else if (heroChoice === "ROGUE") {
     setRogueStats();
-  } else if (heroChoice === 'PRIESTESS') {
+  } else if (heroChoice === "PRIESTESS") {
     setPriestessStats();
   }
 
@@ -668,4 +683,3 @@ inventoryModal.addEventListener("click", (event) => {
     }
   }
 });
-
