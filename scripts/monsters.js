@@ -91,6 +91,12 @@ const SCOUNDREL = {
   skulls: 2,
 };
 
+const POSSESSED_EARVER = {
+  name: "Graverobber Earver",
+  type: "HUMANOID",
+  skulls: 6,
+};
+
 function monsterSkullLevel(level) {
   switch (level) {
     case 1:
@@ -159,6 +165,8 @@ function startBattle() {
     isItemAttuned(SUNSTONE, 0);
     // ITEM: Warding Candle - Chance for evil spirits to flee.
     isItemAttuned(WARDING_CANDLE, 0);
+    // ITEM: Fallen King's Crown - Evil spirits don't attack you.
+    isItemAttuned(FALLEN_KINGS_CROWN, 0);
   }, 1000);
 }
 
@@ -170,7 +178,7 @@ function checkForMonsters() {
     console.log("Another Monster!");
   } else {
     console.log("RENDER SUMMARY CALLED!");
-    renderRoomSummaryModal();
+    setTimeout(renderRoomSummaryModal, 5000);
     togglePlayerControls();
   }
 }

@@ -428,17 +428,15 @@ function writeToLog(eventType, name, value) {
     // ===============================
 
     case LOG_EVENT_PLAYER_MISS:
-
       newEntry.textContent = `${value} fail to attack the ${name}!`; // value = 'You'
       break;
 
     // ===============================
     //     Monster Miss Event
     // ===============================
-      case LOG_EVENT_MONSTER_MISS:
-
-       newEntry.textContent = `The ${name} fails to attack ${value}!`; // value = 'you'
-       break;
+    case LOG_EVENT_MONSTER_MISS:
+      newEntry.textContent = `The ${name} fails to attack ${value}!`; // value = 'you'
+      break;
 
     // ===============================
     //      Critical Hit Events
@@ -592,7 +590,6 @@ function writeToLog(eventType, name, value) {
       break;
 
     case LOG_EVENT_GUARD_FAIL:
-
       newEntry.textContent = `${value} fail to guard the ${name}'s attack!`; // value = 'You'
       break;
 
@@ -601,7 +598,7 @@ function writeToLog(eventType, name, value) {
     // ===============================
 
     case LOG_EVENT_POTION:
-      if (heroChoice === 'PALADIN') {
+      if (heroChoice === "PALADIN") {
         if (narration === 1) {
           narration = `"With each drop, I feel the light of restoration coursing through me, renewing my vigor."`;
         } else if (narration === 2) {
@@ -623,7 +620,7 @@ function writeToLog(eventType, name, value) {
         } else {
           narration = `"This potion is a beacon of hope, a reminder that even in the darkest hour, there is light."`;
         }
-      } else if (heroChoice === 'ROGUE') {
+      } else if (heroChoice === "ROGUE") {
         if (narration === 1) {
           narration = `"With each sip, I feel the surge of vitality, a secret elixir for a rogue's swift return."`;
         } else if (narration === 2) {
@@ -645,7 +642,7 @@ function writeToLog(eventType, name, value) {
         } else {
           narration = `"This potion is a tool of the trade, a reminder that in the rogue's path, there is always an escape."`;
         }
-      } else if (heroChoice === 'PRIESTESS') {
+      } else if (heroChoice === "PRIESTESS") {
         if (narration === 1) {
           narration = `"With each sip, I feel the warmth of divine grace, a soothing balm for a healer's soul."`;
         } else if (narration === 2) {
@@ -677,83 +674,83 @@ function writeToLog(eventType, name, value) {
     // ===============================
 
     case LOG_EVENT_FLEE:
-  if (heroChoice === 'PALADIN') {
-    if (narration === 1) {
-      narration = `"Retreat is a tactical decision, not a sign of weakness. We shall regroup and return with renewed resolve."`;
-    } else if (narration === 2) {
-      narration = `"Live to fight another day, for the light will guide our path back to victory."`;
-    } else if (narration === 3) {
-      narration = `"There are battles best fought another time. We shall withdraw, but our purpose remains unwavering."`;
-    } else if (narration === 4) {
-      narration = `"In the face of overwhelming odds, wisdom dictates a strategic withdrawal. Our mission is not yet finished."`;
-    } else if (narration === 5) {
-      narration = `"To retreat is not to admit defeat, but to preserve our strength for the battles yet to come."`;
-    } else if (narration === 6) {
-      narration = `"Even the bravest must know when to step back. We shall return, stronger and more determined."`;
-    } else if (narration === 7) {
-      narration = `"The path of valor sometimes leads to the wisdom of retreat. We shall regroup and return, stronger than ever."`;
-    } else if (narration === 8) {
-      narration = `"In stepping back, we make way for a more opportune moment. The light shall guide us to victory in due time."`;
-    } else if (narration === 9) {
-      narration = `"To flee is to choose survival, and through survival, we shall find the strength to triumph."`;
-    } else {
-      narration = `"A tactical retreat is the mark of a wise leader. We shall live to fight for the light another day."`;
-    }
-  } else if (heroChoice === 'ROGUE') {
-    if (narration === 1) {
-      narration = `"In shadows, we find refuge. Retreat now, strike later."`;
-    } else if (narration === 2) {
-      narration = `"Stealth is our greatest ally. We slip away, leaving the enemy in confusion."`;
-    } else if (narration === 3) {
-      narration = `"The night conceals our movements. We vanish, awaiting the opportune moment to strike again."`;
-    } else if (narration === 4) {
-      narration = `"The art of the rogue is knowing when to step back. We shall return, shadows sharper than ever."`;
-    } else if (narration === 5) {
-      narration = `"To disappear is to survive, and through survival, we shall emerge stronger and more deadly."`;
-    } else if (narration === 6) {
-      narration = `"In the dance of shadows, retreat is but a strategic maneuver. We shall return, unseen and lethal."`;
-    } else if (narration === 7) {
-      narration = `"The rogue's path is one of adaptability. We shall fade into the night, only to reemerge when the time is right."`;
-    } else if (narration === 8) {
-      narration = `"In the shadows, we regroup, waiting for the perfect moment to reclaim the advantage."`;
-    } else if (narration === 9) {
-      narration = `"To flee is to choose life, and through life, we shall find the cunning to triumph."`;
-    } else {
-      narration = `"Wisdom lies in knowing when to slip away. We shall return, shadows wrapped in deadlier resolve."`;
-    }
-  } else if (heroChoice === 'PRIESTESS') {
-    if (narration === 1) {
-      narration = `"In retreat, we seek to heal and regroup. The light will guide us back to victory."`;
-    } else if (narration === 2) {
-      narration = `"To step back is to honor the sanctity of life. We shall return, renewed in our purpose."`;
-    } else if (narration === 3) {
-      narration = `"The path of compassion sometimes requires a tactical retreat. We shall return, stronger in our healing."`;
-    } else if (narration === 4) {
-      narration = `"In the face of overwhelming darkness, we step back to let the light grow brighter. Our mission is not yet finished."`;
-    } else if (narration === 5) {
-      narration = `"Even the healers must know when to seek sanctuary. We shall return, hands and hearts ready to mend."`;
-    } else if (narration === 6) {
-      narration = `"In the light's embrace, we find solace. We retreat, but our resolve remains unshaken."`;
-    } else if (narration === 7) {
-      narration = `"The priestess knows when to step back and seek divine guidance. We shall return, our healing touch more potent than ever."`;
-    } else if (narration === 8) {
-      narration = `"In stepping back, we make way for a more opportune moment. The light shall guide us to victory in due time."`;
-    } else if (narration === 9) {
-      narration = `"To retreat is to choose preservation, and through preservation, we shall find the strength to heal and triumph."`;
-    } else {
-      narration = `"A tactical retreat is the mark of a wise healer. We shall live to mend and restore another day."`;
-    }
-  }
+      if (heroChoice === "PALADIN") {
+        if (narration === 1) {
+          narration = `"Retreat is a tactical decision, not a sign of weakness. We shall regroup and return with renewed resolve."`;
+        } else if (narration === 2) {
+          narration = `"Live to fight another day, for the light will guide our path back to victory."`;
+        } else if (narration === 3) {
+          narration = `"There are battles best fought another time. We shall withdraw, but our purpose remains unwavering."`;
+        } else if (narration === 4) {
+          narration = `"In the face of overwhelming odds, wisdom dictates a strategic withdrawal. Our mission is not yet finished."`;
+        } else if (narration === 5) {
+          narration = `"To retreat is not to admit defeat, but to preserve our strength for the battles yet to come."`;
+        } else if (narration === 6) {
+          narration = `"Even the bravest must know when to step back. We shall return, stronger and more determined."`;
+        } else if (narration === 7) {
+          narration = `"The path of valor sometimes leads to the wisdom of retreat. We shall regroup and return, stronger than ever."`;
+        } else if (narration === 8) {
+          narration = `"In stepping back, we make way for a more opportune moment. The light shall guide us to victory in due time."`;
+        } else if (narration === 9) {
+          narration = `"To flee is to choose survival, and through survival, we shall find the strength to triumph."`;
+        } else {
+          narration = `"A tactical retreat is the mark of a wise leader. We shall live to fight for the light another day."`;
+        }
+      } else if (heroChoice === "ROGUE") {
+        if (narration === 1) {
+          narration = `"In shadows, we find refuge. Retreat now, strike later."`;
+        } else if (narration === 2) {
+          narration = `"Stealth is our greatest ally. We slip away, leaving the enemy in confusion."`;
+        } else if (narration === 3) {
+          narration = `"The night conceals our movements. We vanish, awaiting the opportune moment to strike again."`;
+        } else if (narration === 4) {
+          narration = `"The art of the rogue is knowing when to step back. We shall return, shadows sharper than ever."`;
+        } else if (narration === 5) {
+          narration = `"To disappear is to survive, and through survival, we shall emerge stronger and more deadly."`;
+        } else if (narration === 6) {
+          narration = `"In the dance of shadows, retreat is but a strategic maneuver. We shall return, unseen and lethal."`;
+        } else if (narration === 7) {
+          narration = `"The rogue's path is one of adaptability. We shall fade into the night, only to reemerge when the time is right."`;
+        } else if (narration === 8) {
+          narration = `"In the shadows, we regroup, waiting for the perfect moment to reclaim the advantage."`;
+        } else if (narration === 9) {
+          narration = `"To flee is to choose life, and through life, we shall find the cunning to triumph."`;
+        } else {
+          narration = `"Wisdom lies in knowing when to slip away. We shall return, shadows wrapped in deadlier resolve."`;
+        }
+      } else if (heroChoice === "PRIESTESS") {
+        if (narration === 1) {
+          narration = `"In retreat, we seek to heal and regroup. The light will guide us back to victory."`;
+        } else if (narration === 2) {
+          narration = `"To step back is to honor the sanctity of life. We shall return, renewed in our purpose."`;
+        } else if (narration === 3) {
+          narration = `"The path of compassion sometimes requires a tactical retreat. We shall return, stronger in our healing."`;
+        } else if (narration === 4) {
+          narration = `"In the face of overwhelming darkness, we step back to let the light grow brighter. Our mission is not yet finished."`;
+        } else if (narration === 5) {
+          narration = `"Even the healers must know when to seek sanctuary. We shall return, hands and hearts ready to mend."`;
+        } else if (narration === 6) {
+          narration = `"In the light's embrace, we find solace. We retreat, but our resolve remains unshaken."`;
+        } else if (narration === 7) {
+          narration = `"The priestess knows when to step back and seek divine guidance. We shall return, our healing touch more potent than ever."`;
+        } else if (narration === 8) {
+          narration = `"In stepping back, we make way for a more opportune moment. The light shall guide us to victory in due time."`;
+        } else if (narration === 9) {
+          narration = `"To retreat is to choose preservation, and through preservation, we shall find the strength to heal and triumph."`;
+        } else {
+          narration = `"A tactical retreat is the mark of a wise healer. We shall live to mend and restore another day."`;
+        }
+      }
 
-    newEntry.textContent = `${name} flee from the ${value}!`; // value = currentRoom.name
-    break;
+      newEntry.textContent = `${name} flee from the ${value}!`; // value = currentRoom.name
+      break;
 
     // ===============================
     //           Level Up
     // ===============================
 
     case LOG_EVENT_LEVEL:
-      if (heroChoice === 'PALADIN') {
+      if (heroChoice === "PALADIN") {
         if (narration === 1) {
           narration = `"With each victory, my resolve strengthens. I am forged in the fires of righteousness."`;
         } else if (narration === 2) {
@@ -775,7 +772,7 @@ function writeToLog(eventType, name, value) {
         } else {
           narration = `"With this newfound power, I shall vanquish even the darkest of foes."`;
         }
-      } else if (heroChoice === 'ROGUE') {
+      } else if (heroChoice === "ROGUE") {
         if (narration === 1) {
           narration = `"In the shadows, I find strength. With each step, I become one with the night."`;
         } else if (narration === 2) {
@@ -797,7 +794,7 @@ function writeToLog(eventType, name, value) {
         } else {
           narration = `"As the shadows envelop me, I emerge stronger, a true rogue, master of my destiny."`;
         }
-      } else if (heroChoice === 'PRIESTESS') {
+      } else if (heroChoice === "PRIESTESS") {
         if (narration === 1) {
           narration = `"With every prayer, my connection to the divine deepens, and my purpose strengthens."`;
         } else if (narration === 2) {
@@ -936,27 +933,37 @@ function writeToLog(eventType, name, value) {
 
     case LOG_EVENT_GREATER_PRAYER:
       if (narration === 1) {
-        narration = "As her voice resonates, a surge of healing light envelops her.";
+        narration =
+          "As her voice resonates, a surge of healing light envelops her.";
       } else if (narration === 2) {
-        narration = "With devout grace, the priestess channels divine energy, mending her wounds.";
+        narration =
+          "With devout grace, the priestess channels divine energy, mending her wounds.";
       } else if (narration === 3) {
-        narration = "The air shimmers with a soothing aura, knitting flesh and spirit together.";
+        narration =
+          "The air shimmers with a soothing aura, knitting flesh and spirit together.";
       } else if (narration === 4) {
-        narration = "In a sacred incantation, the priestess bestows renewed vitality upon herself.";
+        narration =
+          "In a sacred incantation, the priestess bestows renewed vitality upon herself.";
       } else if (narration === 5) {
-        narration = "The priestess' Greater Prayer flows like a river of life, revitalizing all in its path.";
+        narration =
+          "The priestess' Greater Prayer flows like a river of life, revitalizing all in its path.";
       } else if (narration === 6) {
-        narration = "With unwavering faith, the priestess mends the wounded, banishing pain and despair.";
+        narration =
+          "With unwavering faith, the priestess mends the wounded, banishing pain and despair.";
       } else if (narration === 7) {
-        narration = "A gentle radiance emanates from the priestess, filling the area with healing energy.";
+        narration =
+          "A gentle radiance emanates from the priestess, filling the area with healing energy.";
       } else if (narration === 8) {
-        narration = "As the priestess prays fervently, wounds close and strength is restored to the weary.";
+        narration =
+          "As the priestess prays fervently, wounds close and strength is restored to the weary.";
       } else if (narration === 9) {
-        narration = "The echoes of the priestess' prayer reverberate, bringing solace and renewal to all.";
+        narration =
+          "The echoes of the priestess' prayer reverberate, bringing solace and renewal to all.";
       } else {
-        narration = "Through her sacred incantation, the priestess invokes a torrent of healing energies.";
+        narration =
+          "Through her sacred incantation, the priestess invokes a torrent of healing energies.";
       }
- 
+
       newEntry.textContent = `${name} Greater Prayer restores ${value} health!`;
       break;
 
@@ -1364,10 +1371,18 @@ function writeToLog(eventType, name, value) {
 
     case LOG_EVENT_NPC_DESCRIPTION:
       newEntry.textContent = `${event.description} What will ${name} ${value}?`;
+      narration = newEntry.textContent;
+
       break;
 
     case LOG_EVENT_NPC_OPTION_ONE:
       if (event === GRAVEROBBER_EARVER) {
+        newEntry.textContent = `
+        The air grows thick with malevolence as the stone door groans open. In that moment, a malevolent spirit surges into ${name}, claiming him as its vessel. His eyes blaze with unholy fire, and the spade he wields becomes a weapon of doom, swinging towards ${value} with deadly intent. `;
+      } else if (event === GRAVEROBBER_EARVER_EVENT_TWO) {
+        newEntry.textContent = ``;
+      } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
+        newEntry.textContent = ``;
       } else if (event === IVAN_THE_SCOUNDREL) {
       } else if (event === SCHOLAR_HENDRA) {
       } else if (event === GRERVIL_THE_BODILESS) {
@@ -1375,10 +1390,17 @@ function writeToLog(eventType, name, value) {
       } else if (event === HOZHUL) {
       } else if (event === CURATOR_RENVAR) {
       }
+
+      narration = newEntry.textContent;
       break;
 
     case LOG_EVENT_NPC_OPTION_TWO:
       if (event === GRAVEROBBER_EARVER) {
+        newEntry.textContent = `Declining Graverobber ${name}'s offer, ${value} descend further into the catacomb. His desperate struggles to breach the ancient stone door reverberate through the passageway, a chilling symphony that underscores the weight of the secrets held within.`;
+      } else if (event === GRAVEROBBER_EARVER_EVENT_TWO) {
+        newEntry.textContent = `Declining Graverobber ${name}'s offer, ${value}`;
+      } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
+        newEntry.textContent = `Declining Graverobber ${name}'s offer, ${value}`;
       } else if (event === IVAN_THE_SCOUNDREL) {
       } else if (event === SCHOLAR_HENDRA) {
       } else if (event === GRERVIL_THE_BODILESS) {
@@ -1386,6 +1408,8 @@ function writeToLog(eventType, name, value) {
       } else if (event === HOZHUL) {
       } else if (event === CURATOR_RENVAR) {
       }
+
+      narration = newEntry.textContent;
       break;
 
     // ===============================
@@ -1405,6 +1429,18 @@ function writeToLog(eventType, name, value) {
 
     case LOG_EVENT_MISC_OPTION_TWO:
       break;
+
+    // ===============================
+    //          Item Events
+    // ===============================
+
+    case LOG_EVENT_FALLEN_KINGS_CROWN:
+      newEntry.textContent = `The ${name} bows gently before ${value} and then vanishes.`;
+      narration = newEntry.textContent;
+      break;
+
+
+
   }
 
   log.insertBefore(newEntry, log.firstChild);
@@ -1427,7 +1463,8 @@ function writeToLog(eventType, name, value) {
     eventType === LOG_EVENT_SHADOW_STRIKE ||
     eventType === LOG_EVENT_GREATER_PRAYER ||
     eventType === LOG_EVENT_POTION ||
-    eventType === LOG_EVENT_FLEE
+    eventType === LOG_EVENT_FLEE ||
+    eventType === LOG_EVENT_FALLEN_KINGS_CROWN
   ) {
     newNarration.textContent = narration;
     narrativeText.insertBefore(newNarration, narrativeText.firstChild);

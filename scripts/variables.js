@@ -109,6 +109,8 @@ const LOG_EVENT_EVASION = "EVASION";
 const LOG_EVENT_GREATER_PRAYER = "GREATER PRAYER";
 const LOG_EVENT_BURNING_DEVOTION = "BURNING RADIANCE";
 
+const LOG_EVENT_FALLEN_KINGS_CROWN = "FALLEN KING'S CROWN";
+
 // ===============================
 //        Hero Variables
 // ===============================

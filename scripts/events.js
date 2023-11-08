@@ -20,8 +20,8 @@ const SPIDER_WEB = {
   eventType: "TRAP",
   description:
     "A sticky, silken labyrinth envelopes you, woven meticulously by some monstrous arachnid. The web clings to you, its threads vibrating with an eerie energy. You can feel the faint tremors of distant movements, a chilling reminder of the web's creator.",
-  optionOne: "Strength", // break free
-  optionTwo: "Faith", // burn away
+  optionOne: "Strength",
+  optionTwo: "Faith",
   passValue: 99,
   failDamage: "You've alerted nearby Crypt Crawlers!",
   functionOne: null,
@@ -41,8 +41,8 @@ const GAS_CHAMBER = {
   eventType: "TRAP",
   description:
     "The chamber's atmosphere turns ominous as a noxious, green mist begins to billow forth from unseen vents. It fills the air, suffusing the space with an acrid smell. Panic sets in as you realize you're trapped, the chamber quickly becoming a suffocating sea of emerald haze.",
-  optionOne: "Strength", // hold breath
-  optionTwo: "Faith", // breathe normally
+  optionOne: "Strength",
+  optionTwo: "Faith",
   passValue: 6,
   failDamage: 25,
   functionOne: null,
@@ -54,8 +54,8 @@ const SWARM_OF_VERMIN = {
   eventType: "TRAP",
   description:
     "A horrifying spectacle unfolds before you, as an unending tide of rats pour into the chamber. Their frenetic scuttling and chittering echoes off the walls, drowning out all other sound. The ground seems to writhe beneath the onslaught, and the air grows thick with their foul scent.",
-  optionOne: "Strength", //Stomp and scare them away
-  optionTwo: "Faith", // feed them
+  optionOne: "Strength",
+  optionTwo: "Faith",
   passValue: 5,
   failDamage: 20,
   functionOne: null,
@@ -67,8 +67,8 @@ const SKELETAL_HANDS = {
   eventType: "TRAP",
   description:
     "From the depths of the catacomb floor, ghostly skeletal hands claw their way forth, bony fingers outstretched in your direction. They sway and reach, their movements eerily synchronized. The cold, clammy touch of their grasp sends shivers down your spine.",
-  optionOne: "Strength", // crush
-  optionTwo: "Dexterity", // avoid
+  optionOne: "Strength",
+  optionTwo: "Dexterity",
   passValue: 6,
   failDamage: 25,
   functionOne: null,
@@ -80,8 +80,8 @@ const SPIKE_PITFALL = {
   eventType: "TRAP",
   description:
     "The ground beneath your feet gives way suddenly, leaving you in a freefall. Your heart races as you plummet into the darkness, catching glimpses of jagged spikes gleaming below. The air rushes past you, carrying the scent of damp earth and impending danger.",
-  optionOne: "Dexterity", //grasp the side
-  optionTwo: "Faith", //fall but avoid spikes
+  optionOne: "Dexterity",
+  optionTwo: "Faith",
   passValue: 6,
   failDamage: 25,
   functionOne: null,
@@ -93,8 +93,8 @@ const PENDULUM_BLADES = {
   eventType: "TRAP",
   description:
     "A symphony of deadly precision unfolds above you, as massive blades descend from the ceiling. They swing back and forth with a rhythmic, hypnotic motion, slicing through the air like harbingers of doom. Their polished edges catch the flickering light, casting sinister gleams around the chamber.",
-  optionOne: "Dexterity", // dodge
-  optionTwo: "Faith", // walk through
+  optionOne: "Dexterity",
+  optionTwo: "Faith",
   passValue: 6,
   failDamage: 25,
   functionOne: null,
@@ -109,14 +109,76 @@ const GRAVEROBBER_EARVER = {
   name: "Graverobber Earver",
   eventType: "NPC",
   description:
-    "While venturing through the catacombs you find a peculiar man attempting to open a sealed tomb. He says if you aid him in opening the tomb he will share with you the rewards inside.",
+    "Amidst the haunting mist, you stumble upon Graverobber Earver, a sinister figure, hell-bent on breaching an ancient tomb's secrets. He beckons you to join his sinister endeavor, promising untold treasures from the cursed depths if you dare to embrace the darkness.",
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
-    console.log("Hello");
+    currentRoom.contents.monsters.push(POSSESSED_EARVER);
+    currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
+    setRoomSummary();
+    startBattle();
+    monsterAttackHandler();
+    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "Earver", );
   },
   functionTwo: () => {
-    console.log("Goodbye!");
+    writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Earver", "you");
+    let currentRoomCounter = roomCounter + 10;
+    console.log(`currentRoomCounter: ${currentRoomCounter}`);
+    let earverInterval = setInterval(() => {
+      console.log(`currentRoomCounter: ${currentRoomCounter}`);
+      if (roomCounter > currentRoomCounter) {
+        console.log('Room Added');
+        catacombRooms.push(GRAVEROBBER_EARVER_ROOM_TWO);
+        clearInterval(earverInterval);
+      }
+    }, 60000);
+  },
+};
+
+const GRAVEROBBER_EARVER_EVENT_TWO = {
+  name: "Graverobber Earver",
+  eventType: "NPC",
+  description: "",
+  optionOne: "Accept",
+  optionTwo: "Refuse",
+  functionOne: () => {
+    currentRoom.contents.monsters.push(POSSESSED_EARVER);
+    currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
+    setRoomSummary();
+    startBattle();
+    monsterAttackHandler();
+    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "Earver", "you");
+  },
+  functionTwo: () => {
+    writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Earver", "you");
+    let currentRoomCounter = roomCounter + 10;
+    let earverInterval = setInterval(() => {
+      console.log(`currentRoomCounter: ${currentRoomCounter}`);
+      if (roomCounter > currentRoomCounter) {
+        console.log('Room Added');
+        catacombRooms.push(GRAVEROBBER_EARVER_ROOM_THREE);
+        clearInterval(earverInterval);
+      }
+    }, 60000);
+  },};
+
+const GRAVEROBBER_EARVER_EVENT_THREE = {
+  name: "Graverobber Earver",
+  eventType: "NPC",
+  description: "",
+  optionOne: "Accept",
+  optionTwo: "Refuse",
+  functionOne: () => {
+    currentRoom.contents.monsters.push(POSSESSED_EARVER);
+    currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
+    setRoomSummary();
+    startBattle();
+    monsterAttackHandler();
+    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "Earver", "you");
+  },
+  functionOne: () => {
+    // spirits thank you for not ruining their remains and lead you to a treasure.
+    catacombRooms.push(GRAVEROBBER_EARVER_REWARD_ROOM);
   },
 };
 
@@ -327,7 +389,6 @@ function trapEventHandler(baseStat, attribute) {
   setTimeout(() => {
     eventModal.style.display = "none";
   }, 1900);
-  setTimeout(renderRoomSummaryModal, 5000);
 }
 
 function generalEventHandler(option) {
@@ -348,7 +409,7 @@ function generalEventHandler(option) {
   }, 1900);
 
   currentRoom.contents.events = null;
-  renderRoomSummaryModal();
+  // renderRoomSummaryModal(); Commented out for Graverobber Earver's Option One Event
   updateHealthTrackers();
 }
 
