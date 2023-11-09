@@ -178,6 +178,7 @@ function checkForMonsters() {
     console.log("Another Monster!");
   } else {
     console.log("RENDER SUMMARY CALLED!");
+    attackCounter = 0; // Item: Soulreaver
     setTimeout(renderRoomSummaryModal, 5000);
     togglePlayerControls();
   }

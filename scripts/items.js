@@ -288,7 +288,7 @@ const SHADOWSTEP_BOOTS = {
   rarity: "RARE",
   effect: "While attuned to this item your dexterity increases by 1.",
   function: () => {
-    // See closeInventoryButton event listener for item logic.
+    // See closeInventoryHandler for item logic.
     console.log("Dexterity Increased!");
     return 1;
   },
@@ -301,7 +301,7 @@ const TITANS_GAUNTLETS = {
   rarity: "RARE",
   effect: "While attuned to this item your strength increases by 1.",
   function: () => {
-    // See closeInventoryButton event listener for item logic.
+    // See closeInventoryHandler for item logic.
     console.log("Strength Increased!");
     return 1;
   },
@@ -314,24 +314,25 @@ const HOLY_RELIC = {
   rarity: "RARE",
   effect: "While attuned to this item your faith increases by 1.",
   function: () => {
-    // See closeInventoryButton event listener for item logic.
+    // See closeInventoryHandler for item logic.
     console.log("Faith Increased!");
     return 1;
   },
 };
-
 
 const CRIMSON_OFFERING = {
   name: "Crimson Offering",
   description: "",
   type: "MAGIC",
   rarity: "RARE",
-  effect: "While attuned to this item you sacrifice 5 HP after each of your attacks, but you deal an additional 10 damage.",
+  effect:
+    "While attuned to this item you sacrifice 5 HP after each of your attacks, but you deal an additional 10 damage.",
   function: () => {
     currentPlayerHealth -= 5;
     playerHealthBar.value -= 5;
+    damageFlashAnimation();
     // writeToLog You make an offering and sacrifice 5 HP
-    console.log('An offering was made...')
+    console.log("An offering was made...");
     return 10;
   },
 };
@@ -345,7 +346,7 @@ const ETHEREAL_CROWN = {
   description: "",
   type: "MAGIC",
   rarity: "EPIC",
-  effect: "While attuned to this item, evil spirits will not attack you.",
+  effect: "While attuned to this item evil spirits will not attack you.",
   function: () => {
     if (
       currentRoom.contents.monsters[0] === SHADE ||
@@ -363,6 +364,39 @@ const ETHEREAL_CROWN = {
         monsterContainer.style.display = "none";
       }, 2000);
     }
+  },
+};
+
+const SOULREAVER = {
+  name: "Soulreaver",
+  description: "",
+  type: "MAGIC",
+  rarity: "EPIC",
+  effect:
+    "While attuned to this item your damage increases by +1 for each consecutive attack up to a max of 5",
+  function: () => {
+    console.log('Soulreaver Counter: ' + attackCounter);
+    if (attackCounter === 0) {
+      attackCounter++;
+      return 0;
+    } else if (attackCounter === 1) {
+      attackCounter++;
+      return 1;
+    } else if (attackCounter === 2) {
+      attackCounter++;
+      return 2;
+    } else if (attackCounter === 3) {
+      attackCounter++;
+      return 3;
+    } else if (attackCounter === 4) {
+      attackCounter++;
+      return 4;
+    } else if (attackCounter >= 5) {
+      attackCounter++;
+      // writeToLog Soulreaver is fully charged
+      return 5;
+    }
+
   },
 };
 
@@ -453,7 +487,7 @@ let attunedItems = [];
 let inventoryItems = [
   CRIMSON_OFFERING,
   HOLY_RELIC,
-  SHADOWSTEP_BOOTS,
+  SOULREAVER,
   TITANS_GAUNTLETS,
   POTION,
   POTION,

@@ -234,3 +234,10 @@ let currentRoom = catacombEntrance;
 const inventoryButton = document.getElementById("inventoryBtn");
 const inventoryModal = document.getElementById("inventoryModal");
 const closeInventoryButton = document.getElementById("closeInventoryBtn");
+
+// ===============================
+//      Item Variables
+// ===============================
+
+// Soulreaver 
+let attackCounter = 0;
