@@ -1385,6 +1385,7 @@ function writeToLog(eventType, name, value) {
         newEntry.textContent = `"As Graverobber Earver's finally succeed in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their vengeful onslaught, ${name} meets his untimely demise, leaving ${value} to face the wrath of these risen guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
       } else if (event === SCHOLAR_HENDRA) {
+        newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. ${name} turn towards ${value}, their hollow sockets fixed on your bold presence.`;
       } else if (event === GRERVIL_THE_BODILESS) {
       } else if (event === TRADER_BAZRIM) {
       } else if (event === HOZHUL) {
@@ -1403,6 +1404,7 @@ function writeToLog(eventType, name, value) {
         newEntry.textContent = `As ${value} stand resolute in your refusal to aid Graverobber ${name}, the crypt door remains sealed, shunning the desecration of the king's final resting place. In the solemn silence that follows, a radiant light emanates from the heart of the chamber. The spectral king, recognizing your honor, presents you with his ethereal crown, a symbol of his gratitude and a powerful artifact.`;
       } else if (event === IVAN_THE_SCOUNDREL) {
       } else if (event === SCHOLAR_HENDRA) {
+        newEntry.textContent = `After the skeletons mercilessly strike down ${name}, their hollow gaze fixates on ${value}.`;
       } else if (event === GRERVIL_THE_BODILESS) {
       } else if (event === TRADER_BAZRIM) {
       } else if (event === HOZHUL) {
@@ -1439,8 +1441,10 @@ function writeToLog(eventType, name, value) {
       narration = newEntry.textContent;
       break;
 
-
-
+    case LOG_EVENT_CURSED_GRIMOIRE:
+      newEntry.textContent = `${name} cannot ${value} the Cursed Grimoire from your grasp.`;
+      narration = newEntry.textContent;
+      break;
   }
 
   log.insertBefore(newEntry, log.firstChild);
@@ -1464,7 +1468,8 @@ function writeToLog(eventType, name, value) {
     eventType === LOG_EVENT_GREATER_PRAYER ||
     eventType === LOG_EVENT_POTION ||
     eventType === LOG_EVENT_FLEE ||
-    eventType === LOG_EVENT_ETHEREAL_CROWN
+    eventType === LOG_EVENT_ETHEREAL_CROWN ||
+    eventType === LOG_EVENT_CURSED_GRIMOIRE
   ) {
     newNarration.textContent = narration;
     narrativeText.insertBefore(newNarration, narrativeText.firstChild);

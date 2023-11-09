@@ -424,6 +424,33 @@ const SOUL_JAR = {
 };
 
 // ===============================
+//         NPC ITEMS
+// ===============================
+
+// const sample = {
+//     name:
+//     description:
+//     type:
+//     rarity:
+//     effect:
+//     function:
+//  }
+
+const CURSED_GRIMOIRE = {
+    name: 'Cursed Grimoire',
+    description: '',
+    type: 'MAGIC',
+    rarity: 'EPIC',
+    effect: "This item is cursed and cannot be removed until XXXXX is summoned.",
+    function: () => {
+      currentPlayerHealth--;
+      playerHealthBar.value--;
+      damageFlashAnimation();
+      // writeToLog() demon speaks to you telepathically and your head pounds in agony. Hear a clue about how to summon him.
+    }
+ }
+
+// ===============================
 //         CONSUMABLES
 // ===============================
 
@@ -636,10 +663,12 @@ function attuneItem(itemName) {
 function removeItem(itemName) { // itemName must be the item's string name
   itemObject = attunedItems.find((inv) => inv.name === itemName);
 
-  if (itemObject) {
+  if (itemObject !== 'Curesed Grimoire') {
     const index = attunedItems.indexOf(itemObject);
     attunedItems.splice(index, 1);
     inventoryItems.push(itemObject);
+  } else {
+    // writeToLog unable to remove the Cursed Grimoire
   }
 
   clearInventory();
@@ -772,24 +801,76 @@ inventoryModal.addEventListener("click", (event) => {
       useConsumable(buttons[i].id);
     }
 
-    if (slotOne.contains(event.target) && event.target === buttons[i]) {
-      removeItem(buttons[i].id);
-    }
-
-    if (slotTwo.contains(event.target) && event.target === buttons[i]) {
-      removeItem(buttons[i].id);
-    }
-
-    if (slotThree.contains(event.target) && event.target === buttons[i]) {
-      removeItem(buttons[i].id);
-    }
-
-    if (slotFour.contains(event.target) && event.target === buttons[i]) {
-      removeItem(buttons[i].id);
-    }
-
-    if (slotFive.contains(event.target) && event.target === buttons[i]) {
-      removeItem(buttons[i].id);
+    if (buttons[i].id !== 'Cursed Grimoire') {
+      if (slotOne.contains(event.target) && event.target === buttons[i]) {
+        removeItem(buttons[i].id);
+      }
+  
+      if (slotTwo.contains(event.target) && event.target === buttons[i]) {
+        removeItem(buttons[i].id);
+      }
+  
+      if (slotThree.contains(event.target) && event.target === buttons[i]) {
+        removeItem(buttons[i].id);
+      }
+  
+      if (slotFour.contains(event.target) && event.target === buttons[i]) {
+        removeItem(buttons[i].id);
+      }
+  
+      if (slotFive.contains(event.target) && event.target === buttons[i]) {
+        removeItem(buttons[i].id);
+      }
+    } else {
+      writeToLog(LOG_EVENT_CURSED_GRIMOIRE, 'You', 'remove');
     }
   }
 });
+
+
+
+// if (slotOne.contains(event.target) && event.target === buttons[i]) {
+//   if (buttons[i].id === "Cursed Grimoire") {
+//     //writeToLog
+//     console.log("CANT REMOVE");
+//   } else {
+//     removeItem(buttons[i].id);
+//   }
+// }
+
+// if (slotTwo.contains(event.target) && event.target === buttons[i]) {
+//   if (buttons[i].id === "Cursed Grimoire") {
+//     //writeToLog
+//     console.log("CANT REMOVE");
+//   } else {
+//     removeItem(buttons[i].id);
+//   }
+// }
+
+// if (slotThree.contains(event.target) && event.target === buttons[i]) {
+//   if (buttons[i].id === "Cursed Grimoire") {
+//     //writeToLog
+//     console.log("CANT REMOVE");
+//   } else {
+//     removeItem(buttons[i].id);
+//   }
+// }
+
+// if (slotFour.contains(event.target) && event.target === buttons[i]) {
+//   if (buttons[i].id === "Cursed Grimoire") {
+//     //writeToLog
+//     console.log("CANT REMOVE");
+//   } else {
+//     removeItem(buttons[i].id);
+//   }
+// }
+
+// if (slotFive.contains(event.target) && event.target === buttons[i]) {
+//   if (buttons[i].id === "Cursed Grimoire") {
+//     //writeToLog
+//     console.log("CANT REMOVE");
+//   } else {
+//     removeItem(buttons[i].id);
+//   }
+// }
+// }
