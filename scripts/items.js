@@ -320,6 +320,22 @@ const HOLY_RELIC = {
   },
 };
 
+
+const CRIMSON_OFFERING = {
+  name: "Crimson Offering",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item you sacrifice 5 HP after each of your attacks, but you deal an additional 10 damage.",
+  function: () => {
+    currentPlayerHealth -= 5;
+    playerHealthBar.value -= 5;
+    // writeToLog You make an offering and sacrifice 5 HP
+    console.log('An offering was made...')
+    return 10;
+  },
+};
+
 // ===============================
 //         EPIC ITEMS
 // ===============================
@@ -435,7 +451,7 @@ const TOMBSTONE_TRUFFLE = {
 
 let attunedItems = [];
 let inventoryItems = [
-  BLOODSTONE,
+  CRIMSON_OFFERING,
   HOLY_RELIC,
   SHADOWSTEP_BOOTS,
   TITANS_GAUNTLETS,

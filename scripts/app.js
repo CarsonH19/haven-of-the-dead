@@ -10,6 +10,8 @@ function playerAttackHandler(smite = 1) {
   playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
   // ITEM: Increases attack against evil spirits.
   playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0);
+  // ITEM: Crimson Offering - -5HP & +10 damage
+  playerToMonsterDamage += isItemAttuned(CRIMSON_OFFERING, 0);
 
   let totalDamage;
 
@@ -44,14 +46,14 @@ function playerAttackHandler(smite = 1) {
       LOG_EVENT_PLAYER_ATTACK,
       currentRoom.contents.monsters[0].name,
       totalDamage
-    ); 
+    );
   } else if (playerToMonsterDamage <= 0) {
     totalDamage = 0;
     writeToLog(
       LOG_EVENT_PLAYER_MISS,
       currentRoom.contents.monsters[0].name,
-      'You'
-    ); 
+      "You"
+    );
   }
 
   monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
@@ -85,7 +87,7 @@ function monsterAttackHandler() {
     writeToLog(
       LOG_EVENT_EVASION,
       currentRoom.contents.monsters[0].name,
-      'attack'
+      "attack"
     );
   }
 
@@ -107,7 +109,7 @@ function monsterAttackHandler() {
     writeToLog(
       LOG_EVENT_MONSTER_MISS,
       currentRoom.contents.monsters[0].name,
-      'you'
+      "you"
     );
   }
 
@@ -173,20 +175,19 @@ function guardHandler() {
   console.log(damageBlocked);
   console.log(damageTaken);
 
-
   if (damageBlocked > 0) {
-    console.log('ONE')
+    console.log("ONE");
     writeToLog(
       LOG_EVENT_GUARD,
       currentRoom.contents.monsters[0].name,
       damageBlocked + baseDexterity
     );
   } else if (damageBlocked <= 0 && damageTaken > 0) {
-    console.log('TWO')
+    console.log("TWO");
     writeToLog(
       LOG_EVENT_GUARD_FAIL,
       currentRoom.contents.monsters[0].name,
-      'You'
+      "You"
     );
   }
 
@@ -202,11 +203,9 @@ function guardHandler() {
     writeToLog(
       LOG_EVENT_MONSTER_MISS,
       currentRoom.contents.monsters[0].name,
-      'You'
+      "You"
     );
   }
-
-  
 
   // console.log(`Damage Received: ${monsterToGuardDamage}`);
   // console.log(`Damage Blocked: ${damageBlocked}`);
@@ -469,24 +468,24 @@ function updatePlayerTrackers() {
     const maxHP = document.getElementById("maxHP");
     const monsterCurrentHP = document.getElementById("monsterCurrentHP");
     const monsterMaxHP = document.getElementById("monsterMaxHP");
-  
+
     currentHP.textContent = currentPlayerHealth;
     maxHP.textContent = calculatePlayerMaxHealth();
-  
+
     monsterCurrentHP.textContent = currentMonsterHealth;
     monsterMaxHP.textContent = monsterMaxHealth;
   }
-  
+
   function updateHeroLevel() {
-    const heroLevel = document.getElementById('heroLevel');
+    const heroLevel = document.getElementById("heroLevel");
     heroLevel.textContent = levelCounter;
   }
-  
+
   function updateHeroExperience() {
-    const currentXP = document.getElementById('currentXP');
+    const currentXP = document.getElementById("currentXP");
     currentXP.textContent = experiencePoints;
-    const xpToNextLevel = document.getElementById('xpToNextLevel');
-  
+    const xpToNextLevel = document.getElementById("xpToNextLevel");
+
     if (levelCounter === 1) {
       xpToNextLevel.textContent = 100;
     } else if (levelCounter === 2) {
@@ -512,7 +511,6 @@ function updatePlayerTrackers() {
   updateHeroLevel();
   updateHeroExperience();
 }
-
 
 function newRoomAnimation() {
   const fade = document.getElementById("fade");
@@ -549,7 +547,7 @@ function closeRoomSummaryModal() {
 }
 
 function renderRoomSummaryModal() {
-  console.log('renderRoomSummaryModal Called!');
+  console.log("renderRoomSummaryModal Called!");
   const roomSummaryDescription = document.getElementById(
     "roomSummaryDescription"
   );
@@ -621,17 +619,16 @@ function renderRoomSummaryModal() {
 
       if (experiencePoints > previousExperience) {
         let experienceGained = experiencePoints - previousExperience;
-        experienceHeader = document.createElement('h4');
+        experienceHeader = document.createElement("h4");
         experienceHeader.textContent = `Experience`;
         roomSummaryExperience.appendChild(experienceHeader);
-        gainedExperienceText = document.createElement('p');
+        gainedExperienceText = document.createElement("p");
         gainedExperienceText.textContent = `Experience Gained: +${experienceGained}`;
         roomSummaryExperience.appendChild(gainedExperienceText);
-        totalExperienceText = document.createElement('p');
+        totalExperienceText = document.createElement("p");
         totalExperienceText.textContent = `Total Experience: ${experiencePoints}`;
         roomSummaryExperience.appendChild(totalExperienceText);
       }
-
     }, 2000);
   } else {
     roomSummaryModal.style.display = "none";
@@ -640,7 +637,7 @@ function renderRoomSummaryModal() {
   // Adds items in current room to inventory
   if (currentRoom.contents.items.length > 0) {
     for (let i = 0; i < currentRoom.contents.items.length; i++) {
-      console.log('ITEM ADDED')
+      console.log("ITEM ADDED");
       addItemToInventory(currentRoom.contents.items[i]);
     }
   }
