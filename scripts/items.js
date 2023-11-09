@@ -410,7 +410,7 @@ const SOUL_JAR = {
     if (currentPlayerHealth <= 0) {
       currentPlayerHealth = calculatePlayerMaxHealth() * 0.5;
       playerHealthBar.value = calculatePlayerMaxHealth() * 0.5;
-      removeItem('Soul Jar');
+      removeItem("Soul Jar");
       itemObject = inventoryItems.find((inv) => inv.name === "Soul Jar");
       const index = inventoryItems.indexOf(itemObject);
       inventoryItems.splice(index, 1);
@@ -437,18 +437,18 @@ const SOUL_JAR = {
 //  }
 
 const CURSED_GRIMOIRE = {
-    name: 'Cursed Grimoire',
-    description: '',
-    type: 'MAGIC',
-    rarity: 'EPIC',
-    effect: "This item is cursed and cannot be removed until XXXXX is summoned.",
-    function: () => {
-      currentPlayerHealth--;
-      playerHealthBar.value--;
-      damageFlashAnimation();
-      // writeToLog() demon speaks to you telepathically and your head pounds in agony. Hear a clue about how to summon him.
-    }
- }
+  name: "Cursed Grimoire",
+  description: "",
+  type: "MAGIC",
+  rarity: "EPIC",
+  effect: "This item is cursed and cannot be removed until XXXXX is summoned.",
+  function: () => {
+    currentPlayerHealth--;
+    playerHealthBar.value--;
+    damageFlashAnimation();
+    // writeToLog() demon speaks to you telepathically and your head pounds in agony. Hear a clue about how to summon him.
+  },
+};
 
 // ===============================
 //         CONSUMABLES
@@ -660,10 +660,11 @@ function attuneItem(itemName) {
   renderInventory();
 }
 
-function removeItem(itemName) { // itemName must be the item's string name
+function removeItem(itemName) {
+  // itemName must be the item's string name
   itemObject = attunedItems.find((inv) => inv.name === itemName);
 
-  if (itemObject !== 'Curesed Grimoire') {
+  if (itemObject !== "Curesed Grimoire") {
     const index = attunedItems.indexOf(itemObject);
     attunedItems.splice(index, 1);
     inventoryItems.push(itemObject);
@@ -801,76 +802,31 @@ inventoryModal.addEventListener("click", (event) => {
       useConsumable(buttons[i].id);
     }
 
-    if (buttons[i].id !== 'Cursed Grimoire') {
+    if (buttons[i].id !== "Cursed Grimoire") {
       if (slotOne.contains(event.target) && event.target === buttons[i]) {
         removeItem(buttons[i].id);
       }
-  
+
       if (slotTwo.contains(event.target) && event.target === buttons[i]) {
         removeItem(buttons[i].id);
       }
-  
+
       if (slotThree.contains(event.target) && event.target === buttons[i]) {
         removeItem(buttons[i].id);
       }
-  
+
       if (slotFour.contains(event.target) && event.target === buttons[i]) {
         removeItem(buttons[i].id);
       }
-  
+
       if (slotFive.contains(event.target) && event.target === buttons[i]) {
         removeItem(buttons[i].id);
       }
-    } else {
+    } else if (
+      buttons[i].id === "Cursed Grimoire" &&
+      event.target === buttons[i]
+    ) {
       writeToLog(LOG_EVENT_CURSED_GRIMOIRE, 'You', 'remove');
     }
   }
 });
-
-
-
-// if (slotOne.contains(event.target) && event.target === buttons[i]) {
-//   if (buttons[i].id === "Cursed Grimoire") {
-//     //writeToLog
-//     console.log("CANT REMOVE");
-//   } else {
-//     removeItem(buttons[i].id);
-//   }
-// }
-
-// if (slotTwo.contains(event.target) && event.target === buttons[i]) {
-//   if (buttons[i].id === "Cursed Grimoire") {
-//     //writeToLog
-//     console.log("CANT REMOVE");
-//   } else {
-//     removeItem(buttons[i].id);
-//   }
-// }
-
-// if (slotThree.contains(event.target) && event.target === buttons[i]) {
-//   if (buttons[i].id === "Cursed Grimoire") {
-//     //writeToLog
-//     console.log("CANT REMOVE");
-//   } else {
-//     removeItem(buttons[i].id);
-//   }
-// }
-
-// if (slotFour.contains(event.target) && event.target === buttons[i]) {
-//   if (buttons[i].id === "Cursed Grimoire") {
-//     //writeToLog
-//     console.log("CANT REMOVE");
-//   } else {
-//     removeItem(buttons[i].id);
-//   }
-// }
-
-// if (slotFive.contains(event.target) && event.target === buttons[i]) {
-//   if (buttons[i].id === "Cursed Grimoire") {
-//     //writeToLog
-//     console.log("CANT REMOVE");
-//   } else {
-//     removeItem(buttons[i].id);
-//   }
-// }
-// }

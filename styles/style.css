@@ -151,7 +151,9 @@ body {
 .narrative-text {
   list-style-type: none;
   padding: 0;
+  z-index: 99;
 }
+
 
 /* .inventory-btn {
   justify-self: flex-end;
@@ -459,7 +461,7 @@ progress[value]::-moz-progress-bar {
 
 .continue-btn {
   position: fixed;
-  z-index: 1;
+  z-index: 0;
   left: 50%;
   top: 65%;
   transform: translate(-50%, -50%);
@@ -493,10 +495,6 @@ progress[value]::-moz-progress-bar {
   transition: 2s; */
 }
 
-/* .fade-in {
-  animation: fade-in 1s;
-} */
-
 /* Inventory Modal */
 #inventoryModal {
   display: none;
@@ -524,9 +522,9 @@ progress[value]::-moz-progress-bar {
   justify-self: center;
 }
 
-.inventory-modal { /*DELETE IF NEEDED */
-  position: fixed; /* Use fixed position */
-  z-index: 1;
+.inventory-modal { 
+  position: fixed;
+  z-index: 0;
   left: 0;
   top: 0;
   width: 100%;
