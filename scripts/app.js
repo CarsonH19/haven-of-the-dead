@@ -285,6 +285,7 @@ function isGameOver() {
   }
 
   if (currentMonsterHealth <= 0) {
+    playerControlsTimeout(2000);
     isItemAttuned(BLOODSTONE, null); // ITEM: Recovers health when monster dies
     gainExperience(currentRoom.contents.monsters[0].skulls);
     fadeOutAnimation(monsterContainer, 0000);

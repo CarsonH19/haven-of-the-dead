@@ -294,6 +294,32 @@ const SHADOWSTEP_BOOTS = {
   },
 };
 
+const TITANS_GAUNTLETS = {
+  name: "Titan's Gauntlets",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item your strength increases by 1.",
+  function: () => {
+    // See closeInventoryButton event listener for item logic.
+    console.log("Strength Increased!");
+    return 1;
+  },
+};
+
+const HOLY_RELIC = {
+  name: "Holy Relic",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item your faith increases by 1.",
+  function: () => {
+    // See closeInventoryButton event listener for item logic.
+    console.log("Faith Increased!");
+    return 1;
+  },
+};
+
 // ===============================
 //         EPIC ITEMS
 // ===============================
@@ -410,8 +436,9 @@ const TOMBSTONE_TRUFFLE = {
 let attunedItems = [];
 let inventoryItems = [
   BLOODSTONE,
-  BONEMAIL,
-  CHARM_OF_HEALING,
+  HOLY_RELIC,
+  SHADOWSTEP_BOOTS,
+  TITANS_GAUNTLETS,
   POTION,
   POTION,
   POTION,
@@ -619,6 +646,22 @@ function openInventoryHandler() {
 
 function closeInventoryHandler() {
   inventoryModal.style.display = "none";
+
+  // ITEM: Shadowstep Boots - +1 Dexterity;
+  let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
+  baseDexterity = newDex;
+
+  // ITEM: Titan's Guantlets - +1 Strength;
+  let newStr = baseStrength + isItemAttuned(TITANS_GAUNTLETS, 0);
+  baseStrength = newStr;
+
+  // ITEM: Holy Relic - +1 Faith;
+  let newFaith = baseFaith + isItemAttuned(HOLY_RELIC, 0);
+  baseFaith = newFaith;
+
+  setPlayerHealthBar(calculatePlayerMaxHealth());
+  renderHeroStats();
+  updatePlayerTrackers();
 }
 
 inventoryButton.addEventListener("click", () => {
@@ -628,9 +671,6 @@ inventoryButton.addEventListener("click", () => {
 });
 
 closeInventoryButton.addEventListener("click", () => {
-  closeInventoryHandler();
-  clearInventory();
-
   // Updates stats after changing attuned items.
   if (heroChoice === "PALADIN") {
     setPaladinStats();
@@ -640,13 +680,11 @@ closeInventoryButton.addEventListener("click", () => {
     setPriestessStats();
   }
 
-  renderHeroStats();
+  closeInventoryHandler();
+  clearInventory();
   setPlayerHealthBar(calculatePlayerMaxHealth());
+  renderHeroStats();
   updatePlayerTrackers();
-
-  // ITEM: Shadowstep Boots - +1 Dexterity;
-  let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
-  baseDexterity = newDex;
 });
 
 inventoryModal.addEventListener("click", (event) => {

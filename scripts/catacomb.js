@@ -293,7 +293,7 @@ let catacombRooms = [
 ];
 
 // ===============================
-//     NPC  Catacomb Rooms
+//     NPC Catacomb Rooms
 // ===============================
 
 const GRAVEROBBER_EARVER_ROOM_TWO = {

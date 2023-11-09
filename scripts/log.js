@@ -1380,7 +1380,7 @@ function writeToLog(eventType, name, value) {
         newEntry.textContent = `
         The air grows thick with malevolence as the stone door groans open. In that moment, a malevolent spirit surges into ${name}, claiming him as its vessel. His eyes blaze with unholy fire, and the spade he wields becomes a weapon of doom, swinging towards ${value} with deadly intent. `;
       } else if (event === GRAVEROBBER_EARVER_EVENT_TWO) {
-        newEntry.textContent = `You decide to assist Graverobber ${Earver} in his unholy quest to open the sarcophagus. The lid creaks open, but as the contents are revealed, a deafening roar echoes through the tomb. A monstrous abomination, the dreaded Bone Titan, awakens in a fury of bones, and it mercilessly strikes down Graverobber Earver before turning its baleful gaze upon ${value}.`;
+        newEntry.textContent = `You decide to assist Graverobber ${name} in his unholy quest to open the sarcophagus. The lid creaks open, but as the contents are revealed, a deafening roar echoes through the tomb. A monstrous abomination, the dreaded Bone Titan, awakens in a fury of bones, and it mercilessly strikes down Graverobber Earver before turning its baleful gaze upon ${value}.`;
       } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
         newEntry.textContent = `"As Graverobber Earver's finally succeed in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their vengeful onslaught, ${name} meets his untimely demise, leaving ${value} to face the wrath of these risen guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
