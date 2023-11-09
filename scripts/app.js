@@ -2,9 +2,11 @@
 //            Attack
 // ===============================
 
+
 function playerAttackHandler(smite = 1) {
   const criticalHitChance = Math.round(Math.random() * 20) + baseDexterity;
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
+  let totalDamage;
 
   // ITEM: Revenant's Rage - Increases attack when low health.
   playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
@@ -12,8 +14,8 @@ function playerAttackHandler(smite = 1) {
   playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0);
   // ITEM: Crimson Offering - -5HP & +10 damage
   playerToMonsterDamage += isItemAttuned(CRIMSON_OFFERING, 0);
-
-  let totalDamage;
+  // ITEM: Soulreaver - damage++ for each consecutive attack;
+  playerToMonsterDamage += isItemAttuned(SOULREAVER, 0);
 
   // Smite Critical Hit
   if (criticalHitChance >= 20 && smite > 1) {
@@ -695,6 +697,7 @@ attackBtn.addEventListener("click", function () {
 });
 
 guardBtn.addEventListener("click", () => {
+  attackCounter = 0; // Item: Soulreaver
   specialCooldownHandler();
   playerControlsTimeout(1500);
   setTimeout(guardHandler, 1200);
@@ -712,6 +715,7 @@ specialBtn.addEventListener("click", () => {
       playerControlsTimeout(1500);
     }
   } else if (heroChoice === "PRIESTESS") {
+    attackCounter = 0; // Item: Soulreaver
     priestessGreaterPrayer();
   }
 
@@ -734,6 +738,7 @@ specialBtn.addEventListener("click", () => {
 });
 
 potionBtn.addEventListener("click", () => {
+  attackCounter = 0; // Item: Soulreaver
   potionHandler();
 
   if (currentRoom.contents.monsters.length > 0) {
@@ -747,6 +752,7 @@ potionBtn.addEventListener("click", () => {
 });
 
 fleeBtn.addEventListener("click", () => {
+  attackCounter = 0; // Item: Soulreaver
   fleeHandler();
   specialCooldownHandler();
   playerControlsTimeout(1500);
