@@ -212,7 +212,7 @@ const IVAN_THE_SCOUNDREL = {
 
 const SCHOLAR_HENDRA = {
   name: "Scholar Hendra",
-  eventType: 'NPC',
+  eventType: "NPC",
   description:
     "Upon a bone-forged altar, a desperate woman struggles to shield her grimoire from encroaching skeletal horrors. Her cries for help echo through the chamber. Will you aid her in vanquishing the undead horde or ignore her cries?",
   optionOne: "Help",
@@ -226,12 +226,13 @@ const SCHOLAR_HENDRA = {
       SKELETAL_SOLDIER,
       DECREPIT_SKELETON
     );
-    currentRoom.description = "After vanquishing the skeletal horde, Hendra rewards your valor with two precious health potions, then mysteriously fades into the catacombs, her grimoire clutched tightly, leaving you with a sense of foreboding.",
-    currentRoom.contents.items.push(POTION, POTION);
+    (currentRoom.description =
+      "After vanquishing the skeletal horde, Hendra rewards your valor with two precious health potions, then mysteriously fades into the catacombs, her grimoire clutched tightly, leaving you with a sense of foreboding."),
+      currentRoom.contents.items.push(POTION, POTION);
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
-    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "They", "you"); 
+    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "They", "you");
   },
   functionTwo: () => {
     currentRoom.contents.monsters.push(
@@ -240,8 +241,8 @@ const SCHOLAR_HENDRA = {
       SKELETAL_SOLDIER,
       DECREPIT_SKELETON
     );
-    currentRoom.description =
-      "After defeating the skeletal horde, you discover Hendra's lifeless form, her fingers tightly clasping a mysterious grimiore. With solemn determination, you claim the coveted relic as your own.",
+    (currentRoom.description =
+      "After defeating the skeletal horde, you discover Hendra's lifeless form, her fingers tightly clasping a mysterious grimiore. With solemn determination, you claim the coveted relic as your own."),
       currentRoom.contents.items.push(CURSED_GRIMOIRE);
     setRoomSummary();
     startBattle();
@@ -474,18 +475,9 @@ function renderEvent(event) {
         }
         break;
 
-      case "NPC":
-        if (event === GRAVEROBBER_EARVER) {
-          eventButtonOne.textContent = event.optionOne;
-          eventButtonTwo.textContent = event.optionTwo;
-        }
-        break;
-
-      case "MISC":
-        if (event === MIMIC_CHEST) {
-          eventButtonOne.textContent = event.optionOne;
-          eventButtonTwo.textContent = event.optionTwo;
-        }
+      case "NPC" || "MISC":
+        eventButtonOne.textContent = event.optionOne;
+        eventButtonTwo.textContent = event.optionTwo;
         break;
     }
 
