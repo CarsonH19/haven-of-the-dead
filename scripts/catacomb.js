@@ -59,17 +59,17 @@ let catacombRooms = [
   //     events: SPIKE_PITFALL
   //   }
   // },
-  {
-    roomName: "Webspun Passage",
-    description: "",
-    backgroundImage: "styles/images/corridor-two.png",
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: GRAVEROBBER_EARVER,
-    },
-  },
+  // {
+  //   roomName: "Webspun Passage",
+  //   description: "",
+  //   backgroundImage: "styles/images/corridor-two.png",
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: GRAVEROBBER_EARVER,
+  //   },
+  // },
   // // {
   // //   roomName: "Creeping Coffins",
   // //   description: '',
@@ -125,28 +125,28 @@ let catacombRooms = [
   // //     events: null
   // //   },
   // // },
-  // // {
-  // //   roomName: "Bone-laden Passage",
-  // //   description: '',
-  // //   backgroundImage: 'styles/images/corridor-one.png',
-  // //   music: null,
-  // //   contents: {
-  // //     monsters: [SKELETAL_SOLDIER],
-  // //     items: [],
-  // //     events: null
-  // //   },
-  // // },
-  // // {
-  // //   roomName: "Bone-carved Alter",
-  // //   description: '',
-  // //   backgroundImage: 'styles/images/corridor-one.png',
-  // //   music: null,
-  // //   contents: {
-  // //     monsters: [SKELETAL_SOLDIER],
-  // //     items: [],
-  // //     events: null
-  // //   },
-  // // },
+  {
+    roomName: "Bone-laden Passage",
+    description: '',
+    backgroundImage: 'styles/images/corridor-one.png',
+    music: null,
+    contents: {
+      monsters: [SKELETAL_SOLDIER],
+      items: [],
+      events: null
+    },
+  },
+  {
+    roomName: "Bone-forged Alter",
+    description: '',
+    backgroundImage: 'styles/images/corridor-one.png',
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: SCHOLAR_HENDRA
+    },
+  },
   // // {
   // //   roomName: "Skeletons' Rest",
   // //   description: '',

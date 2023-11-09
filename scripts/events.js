@@ -212,13 +212,41 @@ const IVAN_THE_SCOUNDREL = {
 
 const SCHOLAR_HENDRA = {
   name: "Scholar Hendra",
-  description: "",
+  eventType: 'NPC',
+  description:
+    "Upon a bone-forged altar, a desperate woman struggles to shield her grimoire from encroaching skeletal horrors. Her cries for help echo through the chamber. Will you aid her in vanquishing the undead horde or ignore her cries?",
   optionOne: "Help",
   optionTwo: "Ignore",
   passValue: null,
   failDamage: null,
-  functionOne: () => {},
-  functionTwo: () => {},
+  functionOne: () => {
+    currentRoom.contents.monsters.push(
+      DECREPIT_SKELETON,
+      SKELETAL_SOLDIER,
+      SKELETAL_SOLDIER,
+      DECREPIT_SKELETON
+    );
+    currentRoom.description = "After vanquishing the skeletal horde, Hendra rewards your valor with two precious health potions, then mysteriously fades into the catacombs, her grimoire clutched tightly, leaving you with a sense of foreboding.",
+    currentRoom.contents.items.push(POTION, POTION);
+    setRoomSummary();
+    startBattle();
+    monsterAttackHandler();
+    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "They", "you"); 
+  },
+  functionTwo: () => {
+    currentRoom.contents.monsters.push(
+      DECREPIT_SKELETON,
+      SKELETAL_SOLDIER,
+      SKELETAL_SOLDIER,
+      DECREPIT_SKELETON
+    );
+    currentRoom.description =
+      "After defeating the skeletal horde, you discover Hendra's lifeless form, her fingers tightly clasping a mysterious grimiore. With solemn determination, you claim the coveted relic as your own.",
+      currentRoom.contents.items.push(CURSED_GRIMOIRE);
+    setRoomSummary();
+    startBattle();
+    writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Hendra", "you");
+  },
 };
 
 const GRERVIL_THE_BODILESS = {
