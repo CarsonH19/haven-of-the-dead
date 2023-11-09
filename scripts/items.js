@@ -375,7 +375,7 @@ const SOULREAVER = {
   effect:
     "While attuned to this item your damage increases by +1 for each consecutive attack up to a max of 5",
   function: () => {
-    console.log('Soulreaver Counter: ' + attackCounter);
+    console.log("Soulreaver Counter: " + attackCounter);
     if (attackCounter === 0) {
       attackCounter++;
       return 0;
@@ -396,7 +396,30 @@ const SOULREAVER = {
       // writeToLog Soulreaver is fully charged
       return 5;
     }
+  },
+};
 
+const SOUL_JAR = {
+  name: "Soul Jar",
+  description: "",
+  type: "MAGIC",
+  rarity: "EPIC",
+  effect:
+    "While attuned to this item if you die, you'll be resurrected with half your HP. This item is then destroyed.",
+  function: () => {
+    if (currentPlayerHealth <= 0) {
+      currentPlayerHealth = calculatePlayerMaxHealth() * 0.5;
+      playerHealthBar.value = calculatePlayerMaxHealth() * 0.5;
+      removeItem('Soul Jar');
+      itemObject = inventoryItems.find((inv) => inv.name === "Soul Jar");
+      const index = inventoryItems.indexOf(itemObject);
+      inventoryItems.splice(index, 1);
+      updatePlayerTrackers();
+      healthLowAnimation();
+
+      // writeToLog() Resurrected! Soul Jar was destroyed!
+      console.log("Resurrected with Soul Jar");
+    }
   },
 };
 
@@ -486,7 +509,7 @@ const TOMBSTONE_TRUFFLE = {
 let attunedItems = [];
 let inventoryItems = [
   CRIMSON_OFFERING,
-  HOLY_RELIC,
+  SOUL_JAR,
   SOULREAVER,
   TITANS_GAUNTLETS,
   POTION,
@@ -610,7 +633,7 @@ function attuneItem(itemName) {
   renderInventory();
 }
 
-function removeItem(itemName) {
+function removeItem(itemName) { // itemName must be the item's string name
   itemObject = attunedItems.find((inv) => inv.name === itemName);
 
   if (itemObject) {

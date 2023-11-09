@@ -2,7 +2,6 @@
 //            Attack
 // ===============================
 
-
 function playerAttackHandler(smite = 1) {
   const criticalHitChance = Math.round(Math.random() * 20) + baseDexterity;
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
@@ -282,12 +281,20 @@ function fleeHandler() {
 
 function isGameOver() {
   if (currentPlayerHealth <= 0) {
-    alert("You died!");
+    console.log("Less than 0 HP");
+    // ITEM: Soul Jar - resurrect with half HP
+    isItemAttuned(SOUL_JAR, null);
+    setTimeout(() => {
+      if (currentPlayerHealth <= 0) {
+        alert("You died!");
+      }
+    }, 1000);
   }
 
   if (currentMonsterHealth <= 0) {
     playerControlsTimeout(2000);
-    isItemAttuned(BLOODSTONE, null); // ITEM: Recovers health when monster dies
+    // ITEM: Bloodstone - Recovers health when monster dies
+    isItemAttuned(BLOODSTONE, null);
     gainExperience(currentRoom.contents.monsters[0].skulls);
     fadeOutAnimation(monsterContainer, 0000);
     setTimeout(() => {
@@ -692,6 +699,7 @@ attackBtn.addEventListener("click", function () {
   } else {
     playerControlsTimeout(1500);
     setTimeout(monsterAttackHandler, 1200);
+    setTimeout(isGameOver, 1500);
     updatePlayerTrackers();
   }
 });
@@ -701,7 +709,7 @@ guardBtn.addEventListener("click", () => {
   specialCooldownHandler();
   playerControlsTimeout(1500);
   setTimeout(guardHandler, 1200);
-  isGameOver();
+  setTimeout(isGameOver, 1500);
   updatePlayerTrackers();
 });
 
