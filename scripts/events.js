@@ -323,7 +323,7 @@ const CURATOR_RENVAR = {
 //         Safe Room
 // ===============================
 
-const CANDLELIGHT_SHRINE = {
+const SAFE_ROOM = {
   name: "Candlelight Shrine",
   eventType: "SAFE ROOM",
   description:
@@ -501,7 +501,7 @@ function renderEvent(event) {
 
       case "SAFE ROOM":
         console.log("Safe Room");
-        CANDLELIGHT_SHRINE.functionOne();
+        SAFE_ROOM.functionOne();
         //writeToLog()
         currentRoom.contents.events = null;
         setTimeout(renderContinueButton, 5000);

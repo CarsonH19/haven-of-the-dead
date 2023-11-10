@@ -243,6 +243,8 @@ const closeInventoryButton = document.getElementById("closeInventoryBtn");
 // Soulreaver 
 let attackCounter = 0;
 
+let guidingLightTracker;
+
 // Candles 
 let wardingCandleTracker;
 let soothingCandleTracker;

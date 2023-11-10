@@ -16,17 +16,6 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Candlelight Shrine",
-    description: 'A safe place.',
-    backgroundImage: 'styles/images/corridor-one.png',
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: CANDLELIGHT_SHRINE
-    },
-  },
-  {
     roomName: "Clawed Caverns",
     description: '',
     backgroundImage: 'styles/images/corridor-two.png',
@@ -243,7 +232,7 @@ let catacombRooms = [
   // //   contents: {
   // //     monsters: [],
   // //     items: [],
-  // //     events: CANDLELIGHT_SHRINE
+  // //     events: SAFE_ROOM
   // //   },
   // // },
   // // {
@@ -267,29 +256,29 @@ let catacombRooms = [
   // //     items: [],
   // //     events: null
   // //   },
-  // // },
-  // // {
-  // //   roomName: "Forgotten Passage",
-  // //   description: '',
-  // //   backgroundImage: 'styles/images/corridor-two.png',
-  // //   music: null,
-  // //   contents: {
-  // //     monsters: [SHADE, SHADE],
-  // //     items: [],
-  // //     events: null
-  // //   },
-  // // },
-  // {
-  //   roomName: "Bone Whisperer's Hollow",
-  //   description: '',
-  //   backgroundImage: 'styles/images/corridor-one.png',
-  //   music: null,
-  //   contents: {
-  //     monsters: [SHADE],
-  //     items: [WHISPERING_AMULET],
-  //     events: null
-  //   },
   // },
+  {
+    roomName: "Forgotten Passage",
+    description: '',
+    backgroundImage: 'styles/images/corridor-two.png',
+    music: null,
+    contents: {
+      monsters: [SHADE, SHADE],
+      items: [],
+      events: null
+    },
+  },
+  {
+    roomName: "Bone Whisperer's Hollow",
+    description: '',
+    backgroundImage: 'styles/images/corridor-one.png',
+    music: null,
+    contents: {
+      monsters: [SHADE],
+      items: [WHISPERING_AMULET],
+      events: null
+    },
+  },
   // {
   //   roomName: "Rattling Hollow",
   //   description: '',
@@ -302,6 +291,22 @@ let catacombRooms = [
   //   },
   // }
 ];
+
+// ===============================
+//          Safe Rooms 
+// ===============================
+
+const CANDLELIGHT_SHRINE = {
+  roomName: "Candlelight Shrine",
+  description: 'A safe place.',
+  backgroundImage: 'styles/images/corridor-one.png',
+  music: null,
+  contents: {
+    monsters: [],
+    items: [],
+    events: SAFE_ROOM
+  },
+}
 
 // ===============================
 //     NPC Catacomb Rooms

@@ -804,8 +804,14 @@ continueButton.addEventListener("click", () => {
   closeContinueButton();
   updatePlayerTrackers();
   setTimeout(() => {
-    removeCurrentRoom();
-    getRandomRoom(catacombRooms);
-    renderCurrentRoom(currentRoom);
+    if (guidingLightTracker === "ARRIVE") {
+      renderCurrentRoom(CANDLELIGHT_SHRINE);
+      guidingLightTracker = null;
+    } else {
+      console.log('Random Room');
+      removeCurrentRoom();
+      getRandomRoom(catacombRooms);
+      renderCurrentRoom(currentRoom);
+    }
   }, 1500);
 });

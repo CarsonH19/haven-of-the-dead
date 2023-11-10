@@ -634,6 +634,30 @@ const SOULFLAME_CANDLE = {
   },
 };
 
+const GUIDING_LIGHT = {
+  name: "Guiding Light",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "RARE",
+  effect:
+    "When this item is used a light will guide you to the nearest Candlelight Shrine. The light vanishes after leading you to safety.",
+  function: () => {
+    let randomNumber = (Math.floor(Math.random() * 1) + 1);
+    let duration = roomCounter + randomNumber;
+    let guidingLightInterval = setInterval(() => {
+      console.log(`Soulflame Candle Duration: ${duration - roomCounter}`);
+      if (roomCounter >= duration) {
+        guidingLightTracker = "ARRIVE";
+        console.log("You arrive at a Candlelight Shrine");
+        clearInterval(guidingLightInterval);
+      } else {
+        guidingLightTracker = "GUIDING";
+        console.log("The light guides you!");
+      }
+    }, 15000);
+  },
+};
+
 // ===============================
 //    Item & Inventory Arrays
 // ===============================
@@ -745,6 +769,7 @@ function candleHandler(candle) {
       } else {
         return 1;
       }
+
   }
 }
 
