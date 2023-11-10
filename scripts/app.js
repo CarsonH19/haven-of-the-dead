@@ -3,22 +3,25 @@
 // ===============================
 
 function playerAttackHandler(smite = 1) {
-  const criticalHitChance = Math.round(Math.random() * 20) + baseDexterity;
+  let criticalHitChance = Math.round(Math.random() * 20) + baseDexterity;
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
   let totalDamage;
 
-  // ITEM: Revenant's Rage - Increases attack when low health.
+  // ITEM: Revenant's Rage - Increases attack when low health
   playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
   // ITEM: Increases attack against evil spirits.
   playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0);
   // ITEM: Crimson Offering - -5HP & +10 damage
   playerToMonsterDamage += isItemAttuned(CRIMSON_OFFERING, 0);
-  // ITEM: Soulreaver - damage++ for each consecutive attack;
+  // ITEM: Soulreaver - damage++ for each consecutive attack
   playerToMonsterDamage += isItemAttuned(SOULREAVER, 0);
+
+  // ITEM: Blazing Candle - all attacks are critical hits
+  criticalHitChance += candleHandler(BLAZING_CANDLE);
 
   // Smite Critical Hit
   if (criticalHitChance >= 20 && smite > 1) {
-    totalDamage = smite * (playerToMonsterDamage * baseCritModifier);
+    totalDamage = Math.round(smite * (playerToMonsterDamage * baseCritModifier));
     writeToLog(
       LOG_EVENT_SMITE_CRITICAL,
       currentRoom.contents.monsters[0].name,

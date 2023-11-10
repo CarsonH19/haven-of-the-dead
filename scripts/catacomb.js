@@ -120,7 +120,7 @@ let catacombRooms = [
     backgroundImage: 'styles/images/corridor-one.png',
     music: null,
     contents: {
-      monsters: [SKELETAL_SOLDIER],
+      monsters: [SKELETAL_SOLDIER, SHADE, SHADE, SHADE],
       items: [],
       events: null
     },

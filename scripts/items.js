@@ -460,7 +460,7 @@ const CRYPTBREAD = {
   function: () => {
     currentPlayerHealth += 10;
     playerHealthBar.value += 10;
-    //writeToLog 
+    //writeToLog
   },
 };
 
@@ -473,7 +473,7 @@ const BONE_MARROW_SOUP = {
   function: () => {
     currentPlayerHealth += 15;
     playerHealthBar.value += 15;
-    //writeToLog 
+    //writeToLog
   },
 };
 
@@ -485,7 +485,7 @@ const LICHROOT = {
   effect: "Permanently increases the potency of health potions.",
   function: () => {
     potionHealValue += 5;
-    //writeToLog 
+    //writeToLog
   },
 };
 
@@ -498,8 +498,7 @@ const MARROWSTONE_CHEESE = {
   function: () => {
     currentPlayerHealth += 25;
     playerHealthBar.value += 25;
-    //writeToLog 
-
+    //writeToLog
   },
 };
 
@@ -512,8 +511,7 @@ const TOMBSTONE_TRUFFLE = {
   function: () => {
     currentPlayerHealth += 10;
     playerHealthBar.value += 10;
-    //writeToLog 
-
+    //writeToLog
   },
 };
 
@@ -525,7 +523,7 @@ const LESSER_WHISP = {
   effect: "Can be used to gain +5 experience.",
   function: () => {
     experiencePoints += 5;
-    //writeToLog 
+    //writeToLog
   },
 };
 
@@ -537,7 +535,7 @@ const GREATER_WHISP = {
   effect: "Can be used to gain +20 experience.",
   function: () => {
     experiencePoints += 20;
-    //writeToLog 
+    //writeToLog
   },
 };
 
@@ -547,18 +545,19 @@ const WARDING_CANDLE = {
   type: "CONSUMABLE",
   rarity: "RARE",
   effect:
-    "When this item is used there is a chance that evil spirits will flee from you. The candle burns through the next five rooms.",
+    "When this item is used there is a chance that evil spirits will flee from you. The candle burns out after clearing five rooms.",
   function: () => {
+    wardingCandleTracker = 5;
     let duration = roomCounter + 5;
     let wardingCandleInterval = setInterval(() => {
       console.log(`Warding Candle Duration: ${duration - roomCounter}`);
       if (roomCounter >= duration) {
-        wardingCandleTracker = 'BURNED OUT';
+        wardingCandleTracker = "BURNED OUT";
         console.log(" WardingCandle Burns Out");
         clearInterval(wardingCandleInterval);
       } else {
-        wardingCandleTracker = 'LIT';
-        console.log('Warding Candle is lit!')
+        wardingCandleTracker = "LIT";
+        console.log("Warding Candle is lit!");
       }
     }, 15000);
   },
@@ -570,9 +569,21 @@ const FLICKERING_CANDLE = {
   type: "CONSUMABLE",
   rarity: "COMMON",
   effect:
-    "When this item is used your chance to flee successfully becomes 100%. After fleeing three times the candle dies.",
+    "When this item is used your chance to flee successfully becomes 100%. After fleeing three times the candle burns out.",
   function: () => {
     flickeringCandleTracker = 3;
+  },
+};
+
+const BLAZING_CANDLE = {
+  name: "Blazing Candle",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "EPIC",
+  effect:
+    "When this item is used all of your attacks are critical hits. After five critical hits the candle burns out.",
+  function: () => {
+    blazingCandleTracker = 5;
   },
 };
 
@@ -601,7 +612,6 @@ let commonItems = [
 let rareItems = [EVERTORCH, EVERTORCH, EVERTORCH, EVERTORCH];
 let epicItems = [EVERTORCH, EVERTORCH, EVERTORCH, EVERTORCH];
 let foundItem;
-
 
 // ===============================
 //       Item Handling Logic
@@ -634,7 +644,7 @@ function attuneItem(itemName) {
 function candleHandler(candle) {
   switch (candle) {
     case WARDING_CANDLE:
-      if (wardingCandleTracker === 'LIT') {
+      if (wardingCandleTracker === "LIT") {
         if (
           currentRoom.contents.monsters[0] === SHADE ||
           currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
@@ -645,22 +655,33 @@ function candleHandler(candle) {
           if (randomNumber >= 5) {
             fadeOutAnimation(monsterContainer, 0000);
             setTimeout(() => {
-            checkForMonsters();
-            monsterContainer.style.display = "none";
-          }, 2000);
+              checkForMonsters();
+              monsterContainer.style.display = "none";
+            }, 2000);
             //writeToLog
             console.log(`The spirit flees from you!`);
-          } 
+          }
         }
-      } 
+      }
       break;
 
     case FLICKERING_CANDLE:
       if (flickeringCandleTracker > 0) {
-        console.log('Flickering candle is used!');
+        console.log("Flickering candle is used!");
         //writeToLog
         flickeringCandleTracker--;
         return 10;
+      }
+      break;
+
+    case BLAZING_CANDLE:
+      if (blazingCandleTracker > 0) {
+        console.log("Blazing candle is used!");
+        //writeToLog
+        blazingCandleTracker--;
+        return 20;
+      } else {
+        return 0;
       }
   }
 }
@@ -915,7 +936,7 @@ inventoryModal.addEventListener("click", (event) => {
       buttons[i].id === "Cursed Grimoire" &&
       event.target === buttons[i]
     ) {
-      writeToLog(LOG_EVENT_CURSED_GRIMOIRE, 'You', 'remove');
+      writeToLog(LOG_EVENT_CURSED_GRIMOIRE, "You", "remove");
     }
   }
 });

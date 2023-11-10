@@ -246,3 +246,4 @@ let attackCounter = 0;
 // Candles 
 let wardingCandleTracker;
 let flickeringCandleTracker;
+let blazingCandleTracker;
