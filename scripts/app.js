@@ -21,7 +21,8 @@ function playerAttackHandler(smite = 1) {
 
   // Smite Critical Hit
   if (criticalHitChance >= 20 && smite > 1) {
-    totalDamage = Math.round(smite * (playerToMonsterDamage * baseCritModifier)
+    totalDamage = Math.round(
+      smite * (playerToMonsterDamage * baseCritModifier)
     );
     writeToLog(
       LOG_EVENT_SMITE_CRITICAL,
@@ -679,12 +680,14 @@ function closeContinueButton() {
 
 function renderContinueButton() {
   continueButton.textContent = "Continue...";
+  console.log("Continue Button Called!");
 
   if (
     currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
     currentRoom.contents.events === null
   ) {
+    console.log("Continue Button Rendered!");
     continueButtonModal.style.display = "block";
   } else {
     continueButtonModal.style.display = "none";

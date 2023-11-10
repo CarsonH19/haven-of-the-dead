@@ -320,6 +320,25 @@ const CURATOR_RENVAR = {
 };
 
 // ===============================
+//         Safe Room
+// ===============================
+
+const CANDLELIGHT_SHRINE = {
+  name: "Candlelight Shrine",
+  eventType: "SAFE ROOM",
+  description:
+    "You find a Candlelight Shrine. Evil can't enter this holy place. You are free to rest.",
+  optionOne: null,
+  optionTwo: null,
+  passValue: null,
+  failDamage: null,
+  functionOne: () => {
+    healPlayer(calculatePlayerMaxHealth());
+  },
+  functionTwo: null,
+};
+
+// ===============================
 //          Misc. Events
 // ===============================
 
@@ -375,6 +394,10 @@ const BLOOD_SIGIL = {
   functionOne: null,
   functionTwo: null,
 };
+
+// ===============================
+//          Event Logic
+// ===============================
 
 function trapEventHandler(baseStat, attribute) {
   let event = currentRoom.contents.events;
@@ -450,10 +473,6 @@ function generalEventHandler(option) {
   updatePlayerTrackers();
 }
 
-// ===============================
-//          Trap Modal
-// ===============================
-
 function renderEvent(event) {
   setTimeout(() => {
     switch (event.eventType) {
@@ -479,16 +498,30 @@ function renderEvent(event) {
         eventButtonOne.textContent = event.optionOne;
         eventButtonTwo.textContent = event.optionTwo;
         break;
+
+      case "SAFE ROOM":
+        console.log("Safe Room");
+        CANDLELIGHT_SHRINE.functionOne();
+        //writeToLog()
+        currentRoom.contents.events = null;
+        setTimeout(renderContinueButton, 5000);
+        break;
     }
 
-    fadeInAnimation(eventModal);
-    eventModal.style.display = "block";
+    if (
+      event.eventType === "TRAP" ||
+      event.eventType === "NPC" ||
+      event.eventType === "MISC"
+    ) {
+      fadeInAnimation(eventModal);
+      eventModal.style.display = "block";
+    }
   }, 2000);
 }
 
-//
-// Event Listeners from app.js
-//
+// ===============================
+//       Event Listeners
+// ===============================
 
 eventButtonOne.addEventListener("click", () => {
   let event = currentRoom.contents.events;

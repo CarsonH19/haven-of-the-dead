@@ -16,6 +16,17 @@ let catacombRooms = [
     },
   },
   {
+    roomName: "Candlelight Shrine",
+    description: 'A safe place.',
+    backgroundImage: 'styles/images/corridor-one.png',
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: CANDLELIGHT_SHRINE
+    },
+  },
+  {
     roomName: "Clawed Caverns",
     description: '',
     backgroundImage: 'styles/images/corridor-two.png',
@@ -81,17 +92,17 @@ let catacombRooms = [
   // //     events: null
   // //   },
   // // },
-  {
-    roomName: "Cobwebbed Crypt",
-    description: '',
-    backgroundImage: 'styles/images/corridor-two.png',
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: GAS_CHAMBER
-    },
-  },
+  // {
+  //   roomName: "Cobwebbed Crypt",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: GAS_CHAMBER
+  //   },
+  // },
   // // {
   // //   roomName: "The Hatchery",
   // //   description: '',
@@ -114,28 +125,28 @@ let catacombRooms = [
   // //     events: null
   // //   },
   // // },
-  {
-    roomName: "Skull-lined Corridor",
-    description: '',
-    backgroundImage: 'styles/images/corridor-one.png',
-    music: null,
-    contents: {
-      monsters: [SKELETAL_SOLDIER, SHADE, SHADE, SHADE],
-      items: [],
-      events: null
-    },
-  },
-  {
-    roomName: "Bone-laden Passage",
-    description: '',
-    backgroundImage: 'styles/images/corridor-one.png',
-    music: null,
-    contents: {
-      monsters: [SKELETAL_SOLDIER],
-      items: [],
-      events: null
-    },
-  },
+  // {
+  //   roomName: "Skull-lined Corridor",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SKELETAL_SOLDIER, SHADE, SHADE, SHADE],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Bone-laden Passage",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SKELETAL_SOLDIER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
   // {
   //   roomName: "Bone-forged Alter",
   //   description: '',
