@@ -122,7 +122,7 @@ const GRAVEROBBER_EARVER = {
   },
   functionTwo: () => {
     writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Earver", "you");
-    let currentRoomCounter = roomCounter + 0;
+    let currentRoomCounter = roomCounter + 10;
     console.log(`currentRoomCounter: ${currentRoomCounter}`);
     let earverInterval = setInterval(() => {
       console.log(`currentRoomCounter: ${currentRoomCounter}`);
@@ -131,7 +131,7 @@ const GRAVEROBBER_EARVER = {
         catacombRooms.push(GRAVEROBBER_EARVER_ROOM_TWO);
         clearInterval(earverInterval);
       }
-    }, 3000);
+    }, 60000);
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
@@ -153,7 +153,7 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
   },
   functionTwo: () => {
     writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Earver", "you");
-    let currentRoomCounter = roomCounter + 0;
+    let currentRoomCounter = roomCounter + 10;
     let earverInterval = setInterval(() => {
       console.log(`currentRoomCounter: ${currentRoomCounter}`);
       if (roomCounter > currentRoomCounter) {
@@ -161,7 +161,7 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
         catacombRooms.push(GRAVEROBBER_EARVER_ROOM_THREE);
         clearInterval(earverInterval);
       }
-    }, 3000);
+    }, 60000);
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };

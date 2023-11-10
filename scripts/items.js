@@ -241,29 +241,6 @@ const CURSED_MIRROR = {
   },
 };
 
-const WARDING_CANDLE = {
-  name: "Warding Candle",
-  description: "",
-  type: "MAGIC",
-  rarity: "RARE",
-  effect:
-    "While attuned to this item there is a chance that evil spirits will flee from you. The greater your faith, the higher the chance becomes.",
-  function: () => {
-    if (
-      currentRoom.contents.monsters[0] === SHADE ||
-      currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
-      currentRoom.contents.monsters[0] === GRUDGE
-    ) {
-      let randomNumber = Math.round(Math.random() * 10 + baseFaith);
-      console.log(`Warding Candle Chance: ${randomNumber}`);
-      if (randomNumber >= 10) {
-        checkForMonsters();
-        console.log(`The spirit flees from you!`);
-      }
-    }
-  },
-};
-
 const REVENANTS_RAGE = {
   name: "Revenant's Rage",
   description: "",
@@ -483,6 +460,7 @@ const CRYPTBREAD = {
   function: () => {
     currentPlayerHealth += 10;
     playerHealthBar.value += 10;
+    //writeToLog 
   },
 };
 
@@ -495,6 +473,7 @@ const BONE_MARROW_SOUP = {
   function: () => {
     currentPlayerHealth += 15;
     playerHealthBar.value += 15;
+    //writeToLog 
   },
 };
 
@@ -506,6 +485,7 @@ const LICHROOT = {
   effect: "Permanently increases the potency of health potions.",
   function: () => {
     potionHealValue += 5;
+    //writeToLog 
   },
 };
 
@@ -518,6 +498,8 @@ const MARROWSTONE_CHEESE = {
   function: () => {
     currentPlayerHealth += 25;
     playerHealthBar.value += 25;
+    //writeToLog 
+
   },
 };
 
@@ -530,21 +512,100 @@ const TOMBSTONE_TRUFFLE = {
   function: () => {
     currentPlayerHealth += 10;
     playerHealthBar.value += 10;
+    //writeToLog 
+
   },
 };
+
+const LESSER_WHISP = {
+  name: "Lesser Whisp",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  effect: "Can be used to gain +5 experience.",
+  function: () => {
+    experiencePoints += 5;
+    //writeToLog 
+  },
+};
+
+const GREATER_WHISP = {
+  name: "Greater Whisp",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  effect: "Can be used to gain +20 experience.",
+  function: () => {
+    experiencePoints += 20;
+    //writeToLog 
+  },
+};
+
+const WARDING_CANDLE = {
+  name: "Warding Candle",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "RARE",
+  effect:
+    "When this item is used there is a chance that evil spirits will flee from you. The candle burns through the next five rooms.",
+  function: () => {
+    let duration = roomCounter + 5;
+    let wardingCandleInterval = setInterval(() => {
+      console.log(`Warding Candle Duration: ${duration - roomCounter}`);
+      if (roomCounter >= duration) {
+        wardingCandleTracker = 'BURNED OUT';
+        console.log(" WardingCandle Burns Out");
+        clearInterval(wardingCandleInterval);
+      } else {
+        wardingCandleTracker = 'LIT';
+        console.log('Warding Candle is lit!')
+      }
+    }, 15000);
+  },
+};
+
+const FLICKERING_CANDLE = {
+  name: "Flickering Candle",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  effect:
+    "When this item is used your chance to flee successfully becomes 100%. After fleeing three times the candle dies.",
+  function: () => {
+    flickeringCandleTracker = 3;
+  },
+};
+
+// ===============================
+//    Item & Inventory Arrays
+// ===============================
 
 let attunedItems = [];
 let inventoryItems = [
   CRIMSON_OFFERING,
-  SOUL_JAR,
-  SOULREAVER,
-  TITANS_GAUNTLETS,
+  LESSER_WHISP,
+  WARDING_CANDLE,
   POTION,
   POTION,
   POTION,
   POTION,
   POTION,
 ];
+
+let commonItems = [
+  EVERTORCH,
+  FLASK_OF_LIGHT,
+  RING_OF_THE_RODENT,
+  CHARM_OF_HEALING,
+];
+let rareItems = [EVERTORCH, EVERTORCH, EVERTORCH, EVERTORCH];
+let epicItems = [EVERTORCH, EVERTORCH, EVERTORCH, EVERTORCH];
+let foundItem;
+
+
+// ===============================
+//       Item Handling Logic
+// ===============================
 
 function isItemAttuned(item, defaultValue) {
   for (let i = 0; i < attunedItems.length; i++) {
@@ -555,6 +616,150 @@ function isItemAttuned(item, defaultValue) {
   }
   // console.log(`No items used.`);
   return defaultValue;
+}
+
+function attuneItem(itemName) {
+  itemObject = inventoryItems.find((inv) => inv.name === itemName);
+
+  if (itemObject) {
+    const index = inventoryItems.indexOf(itemObject);
+    inventoryItems.splice(index, 1);
+    attunedItems.push(itemObject);
+  }
+
+  clearInventory();
+  renderInventory();
+}
+
+function candleHandler(candle) {
+  switch (candle) {
+    case WARDING_CANDLE:
+      if (wardingCandleTracker === 'LIT') {
+        if (
+          currentRoom.contents.monsters[0] === SHADE ||
+          currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
+          currentRoom.contents.monsters[0] === GRUDGE
+        ) {
+          let randomNumber = Math.round(Math.random() * 10);
+          console.log(`Warding Candle Chance: ${randomNumber}`);
+          if (randomNumber >= 5) {
+            fadeOutAnimation(monsterContainer, 0000);
+            setTimeout(() => {
+            checkForMonsters();
+            monsterContainer.style.display = "none";
+          }, 2000);
+            //writeToLog
+            console.log(`The spirit flees from you!`);
+          } 
+        }
+      } 
+      break;
+
+    case FLICKERING_CANDLE:
+      if (flickeringCandleTracker > 0) {
+        console.log('Flickering candle is used!');
+        //writeToLog
+        flickeringCandleTracker--;
+        return 10;
+      }
+  }
+}
+
+function removeItem(itemName) {
+  // itemName must be the item's string name
+  itemObject = attunedItems.find((inv) => inv.name === itemName);
+
+  if (itemObject !== "Curesed Grimoire") {
+    const index = attunedItems.indexOf(itemObject);
+    attunedItems.splice(index, 1);
+    inventoryItems.push(itemObject);
+  } else {
+    // writeToLog unable to remove the Cursed Grimoire
+  }
+
+  clearInventory();
+  renderInventory();
+}
+
+function findItems() {
+  // Arrays need to be updated after all item objects are created.
+  let randomNumber = Math.round(Math.random() * 20 + baseFaith);
+  randomNumber += isItemAttuned(GRAVEROBBERS_SPADE, 0);
+  console.log(randomNumber);
+  if (randomNumber >= 20) {
+    let itemRarity = Math.round(Math.random() * 100 + baseFaith);
+    if (itemRarity >= 91) {
+      const epicIndex = Math.round(Math.random() * epicItems.length);
+      foundItem = epicItems[epicIndex];
+      epicItems.splice(epicIndex, 1);
+      console.log("Epic Item Found!");
+    } else if (itemRarity >= 61) {
+      const rareIndex = Math.round(Math.random() * rareItems.length);
+      foundItem = rareItems[rareIndex];
+      rareItems.splice(rareIndex, 1);
+      console.log("Rare Item Found!");
+    } else {
+      const commonIndex = Math.round(Math.random() * commonItems.length);
+      foundItem = commonItems[commonIndex];
+      commonItems.splice(commonIndex, 1);
+      console.log("Common Item Found!");
+    }
+
+    currentRoom.contents.items.push(foundItem);
+  }
+}
+
+function useConsumable(consumable) {
+  itemObject = inventoryItems.find((inv) => inv.name === consumable);
+
+  if (consumable !== "Health Potion") {
+    console.log(consumable);
+    const index = inventoryItems.indexOf(itemObject);
+    inventoryItems.splice(index, 1);
+  }
+
+  itemObject.function();
+
+  clearInventory();
+  renderInventory();
+}
+
+// ===============================
+//    Inventory Handling Logic
+// ===============================
+
+function openInventoryHandler() {
+  inventoryModal.style.display = "block";
+}
+
+function closeInventoryHandler() {
+  inventoryModal.style.display = "none";
+
+  // ITEM: Shadowstep Boots - +1 Dexterity;
+  let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
+  baseDexterity = newDex;
+
+  // ITEM: Titan's Guantlets - +1 Strength;
+  let newStr = baseStrength + isItemAttuned(TITANS_GAUNTLETS, 0);
+  baseStrength = newStr;
+
+  // ITEM: Holy Relic - +1 Faith;
+  let newFaith = baseFaith + isItemAttuned(HOLY_RELIC, 0);
+  baseFaith = newFaith;
+
+  setPlayerHealthBar(calculatePlayerMaxHealth());
+  renderHeroStats();
+  updatePlayerTrackers();
+}
+
+function clearInventory() {
+  magicItemsBox.textContent = "";
+  consumablesBox.textContent = "";
+  slotOne.textContent = "";
+  slotTwo.textContent = "";
+  slotThree.textContent = "";
+  slotFour.textContent = "";
+  slotFive.textContent = "";
 }
 
 function addItemToInventory(item) {
@@ -647,125 +852,9 @@ function renderInventory() {
   });
 }
 
-function attuneItem(itemName) {
-  itemObject = inventoryItems.find((inv) => inv.name === itemName);
-
-  if (itemObject) {
-    const index = inventoryItems.indexOf(itemObject);
-    inventoryItems.splice(index, 1);
-    attunedItems.push(itemObject);
-  }
-
-  clearInventory();
-  renderInventory();
-}
-
-function removeItem(itemName) {
-  // itemName must be the item's string name
-  itemObject = attunedItems.find((inv) => inv.name === itemName);
-
-  if (itemObject !== "Curesed Grimoire") {
-    const index = attunedItems.indexOf(itemObject);
-    attunedItems.splice(index, 1);
-    inventoryItems.push(itemObject);
-  } else {
-    // writeToLog unable to remove the Cursed Grimoire
-  }
-
-  clearInventory();
-  renderInventory();
-}
-
-let commonItems = [
-  EVERTORCH,
-  FLASK_OF_LIGHT,
-  RING_OF_THE_RODENT,
-  CHARM_OF_HEALING,
-];
-let rareItems = [EVERTORCH, EVERTORCH, EVERTORCH, EVERTORCH];
-let epicItems = [EVERTORCH, EVERTORCH, EVERTORCH, EVERTORCH];
-let foundItem;
-
-function findItems() {
-  // Arrays need to be updated after all item objects are created.
-  let randomNumber = Math.round(Math.random() * 20 + baseFaith);
-  randomNumber += isItemAttuned(GRAVEROBBERS_SPADE, 0);
-  console.log(randomNumber);
-  if (randomNumber >= 20) {
-    let itemRarity = Math.round(Math.random() * 100 + baseFaith);
-    if (itemRarity >= 91) {
-      const epicIndex = Math.round(Math.random() * epicItems.length);
-      foundItem = epicItems[epicIndex];
-      epicItems.splice(epicIndex, 1);
-      console.log("Epic Item Found!");
-    } else if (itemRarity >= 61) {
-      const rareIndex = Math.round(Math.random() * rareItems.length);
-      foundItem = rareItems[rareIndex];
-      rareItems.splice(rareIndex, 1);
-      console.log("Rare Item Found!");
-    } else {
-      const commonIndex = Math.round(Math.random() * commonItems.length);
-      foundItem = commonItems[commonIndex];
-      commonItems.splice(commonIndex, 1);
-      console.log("Common Item Found!");
-    }
-
-    currentRoom.contents.items.push(foundItem);
-  }
-}
-
-function clearInventory() {
-  magicItemsBox.textContent = "";
-  consumablesBox.textContent = "";
-  slotOne.textContent = "";
-  slotTwo.textContent = "";
-  slotThree.textContent = "";
-  slotFour.textContent = "";
-  slotFive.textContent = "";
-}
-
-function useConsumable(consumable) {
-  itemObject = inventoryItems.find((inv) => inv.name === consumable);
-
-  if (consumable !== "Health Potion") {
-    console.log(consumable);
-    const index = inventoryItems.indexOf(itemObject);
-    inventoryItems.splice(index, 1);
-  }
-
-  itemObject.function();
-
-  clearInventory();
-  renderInventory();
-}
-
 // ===============================
-//            Inventory
+//        Event Listeners
 // ===============================
-
-function openInventoryHandler() {
-  inventoryModal.style.display = "block";
-}
-
-function closeInventoryHandler() {
-  inventoryModal.style.display = "none";
-
-  // ITEM: Shadowstep Boots - +1 Dexterity;
-  let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
-  baseDexterity = newDex;
-
-  // ITEM: Titan's Guantlets - +1 Strength;
-  let newStr = baseStrength + isItemAttuned(TITANS_GAUNTLETS, 0);
-  baseStrength = newStr;
-
-  // ITEM: Holy Relic - +1 Faith;
-  let newFaith = baseFaith + isItemAttuned(HOLY_RELIC, 0);
-  baseFaith = newFaith;
-
-  setPlayerHealthBar(calculatePlayerMaxHealth());
-  renderHeroStats();
-  updatePlayerTrackers();
-}
 
 inventoryButton.addEventListener("click", () => {
   clearInventory();

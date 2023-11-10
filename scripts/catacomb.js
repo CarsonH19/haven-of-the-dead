@@ -4,39 +4,39 @@
 // If a player flees from the room it is not removed from the array.
 
 let catacombRooms = [
-  // {
-  //   roomName: "Rodents' Roost",
-  //   description: '',
-  //   backgroundImage: 'styles/images/corridor-two.png',
-  //   music: null,
-  //   contents: {
-  //     monsters: [GNAWER],
-  //     items: [],
-  //     events: null
-  //   },
-  // },
-  // {
-  //   roomName: "Clawed Caverns",
-  //   description: '',
-  //   backgroundImage: 'styles/images/corridor-two.png',
-  //   music: null,
-  //   contents: {
-  //     monsters: [GNAWER],
-  //     items: [],
-  //     events: null
-  //   },
-  // },
-  // {
-  //   roomName: "Vermins' Vestibule",
-  //   description: '',
-  //   backgroundImage: 'styles/images/corridor-two.png',
-  //   music: null,
-  //   contents: {
-  //     monsters: [GNAWER],
-  //     items: [],
-  //     events: null
-  //   },
-  // },
+  {
+    roomName: "Rodents' Roost",
+    description: '',
+    backgroundImage: 'styles/images/corridor-two.png',
+    music: null,
+    contents: {
+      monsters: [SHADE],
+      items: [],
+      events: null
+    },
+  },
+  {
+    roomName: "Clawed Caverns",
+    description: '',
+    backgroundImage: 'styles/images/corridor-two.png',
+    music: null,
+    contents: {
+      monsters: [SHADE],
+      items: [],
+      events: null
+    },
+  },
+  {
+    roomName: "Vermins' Vestibule",
+    description: '',
+    backgroundImage: 'styles/images/corridor-two.png',
+    music: null,
+    contents: {
+      monsters: [SHADE],
+      items: [],
+      events: null
+    },
+  },
   // {
   //   roomName: "Gnawers' Nest",
   //   description: '',
@@ -81,17 +81,17 @@ let catacombRooms = [
   // //     events: null
   // //   },
   // // },
-  // {
-  //   roomName: "Cobwebbed Crypt",
-  //   description: '',
-  //   backgroundImage: 'styles/images/corridor-two.png',
-  //   music: null,
-  //   contents: {
-  //     monsters: [],
-  //     items: [],
-  //     events: GAS_CHAMBER
-  //   },
-  // },
+  {
+    roomName: "Cobwebbed Crypt",
+    description: '',
+    backgroundImage: 'styles/images/corridor-two.png',
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: GAS_CHAMBER
+    },
+  },
   // // {
   // //   roomName: "The Hatchery",
   // //   description: '',
@@ -114,17 +114,17 @@ let catacombRooms = [
   // //     events: null
   // //   },
   // // },
-  // // {
-  // //   roomName: "Skull-lined Corridor",
-  // //   description: '',
-  // //   backgroundImage: 'styles/images/corridor-one.png',
-  // //   music: null,
-  // //   contents: {
-  // //     monsters: [SKELETAL_SOLDIER],
-  // //     items: [],
-  // //     events: null
-  // //   },
-  // // },
+  {
+    roomName: "Skull-lined Corridor",
+    description: '',
+    backgroundImage: 'styles/images/corridor-one.png',
+    music: null,
+    contents: {
+      monsters: [SKELETAL_SOLDIER],
+      items: [],
+      events: null
+    },
+  },
   {
     roomName: "Bone-laden Passage",
     description: '',
@@ -136,17 +136,17 @@ let catacombRooms = [
       events: null
     },
   },
-  {
-    roomName: "Bone-forged Alter",
-    description: '',
-    backgroundImage: 'styles/images/corridor-one.png',
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: SCHOLAR_HENDRA
-    },
-  },
+  // {
+  //   roomName: "Bone-forged Alter",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: SCHOLAR_HENDRA
+  //   },
+  // },
   // // {
   // //   roomName: "Skeletons' Rest",
   // //   description: '',

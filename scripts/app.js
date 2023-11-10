@@ -267,6 +267,7 @@ function potionHandler() {
 function fleeHandler() {
   let fleeChance = Math.round(Math.random() * 10) + baseFaith;
   fleeChance += isItemAttuned(RING_OF_THE_RODENT, 0);
+  fleeChance += candleHandler(FLICKERING_CANDLE);
   if (fleeChance >= 10) {
     console.log("Flee Successful");
     writeToLog(LOG_EVENT_FLEE, "You", currentRoom.name);
@@ -782,7 +783,9 @@ roomSummaryButton.addEventListener("click", () => {
   togglePlayerControls();
   updateRoomsCleared();
   // ITEM: Charm of Healing - Recover 10HP after each cleared room.
-  isItemAttuned(CHARM_OF_HEALING, 0);
+  isItemAttuned(CHARM_OF_HEALING, null);
+  // ITEM: Cursed Grimoire - NPC ITEM / hurts you after each cleared room.
+  isItemAttuned(CURSED_GRIMOIRE, null);
   updatePlayerTrackers();
   checkForLevelUp();
 });

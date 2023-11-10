@@ -28,8 +28,6 @@ const gameWindow = document.querySelector('.game-window');
 const bottomContent = document.querySelector(".bottom-content");
 const playerContainer = document.querySelector(".player-container");
 const roomsCleared = document.getElementById("roomsCleared");
-let roomCounter = 0;
-
 const narrativeText = document.getElementById('narrativeText');
 
 // ===============================
@@ -211,7 +209,8 @@ const heroStatsModal = document.getElementById('heroStatsModal');
 // ===============================
 
 const roomNameElement = document.getElementById("catacombRoomName");
-let roomIndex;
+let roomIndex; // DELETE?!
+let roomCounter = 0;
 
 const catacombEntrance = {
   roomName: "Catacomb Entrance",
@@ -228,6 +227,7 @@ const catacombEntrance = {
 
 let currentRoom = catacombEntrance;
 
+
 // ===============================
 //      Inventory Variables
 // ===============================
@@ -242,3 +242,7 @@ const closeInventoryButton = document.getElementById("closeInventoryBtn");
 
 // Soulreaver 
 let attackCounter = 0;
+
+// Candles 
+let wardingCandleTracker;
+let flickeringCandleTracker;

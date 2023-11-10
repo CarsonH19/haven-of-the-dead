@@ -164,7 +164,7 @@ function startBattle() {
     // ITEM: Sunstone - Damages undead creatures.
     isItemAttuned(SUNSTONE, 0);
     // ITEM: Warding Candle - Chance for evil spirits to flee.
-    isItemAttuned(WARDING_CANDLE, 0);
+    candleHandler(WARDING_CANDLE);
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
     isItemAttuned(ETHEREAL_CROWN, 0);
   }, 1000);
