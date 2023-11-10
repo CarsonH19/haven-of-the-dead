@@ -37,9 +37,14 @@ const FLASK_OF_LIGHT = {
   description: "",
   type: "MAGIC",
   rarity: "COMMON",
-  effect: "While attuned to this item ghosts are weakened by your presence.",
+  effect:
+    "While attuned to this item evil spirits are weakened by your presence.",
   function: () => {
-    if (currentRoom.contents.monsters[0].type === "GHOST") {
+    if (
+      currentRoom.contents.monsters[0] === SHADE ||
+      currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
+      currentRoom.contents.monsters[0] === GRUDGE
+    ) {
       monsterMaxHealth = monsterMaxHealth - 15;
       monsterAttackValue = monsterAttackValue - 2;
       console.log(`Ghost Weakened!`);
@@ -185,9 +190,9 @@ const WRAITHBANE = {
     "While attuned to this item your attacks deal additional damage against evil spirits.",
   function: () => {
     if (
-      currentRoom.contents.monsters[0].name === SHADE ||
-      currentRoom.contents.monsters[0].name === HAUNTING_SPIRIT ||
-      currentRoom.contents.monsters[0].name === GRUDGE
+      currentRoom.contents.monsters[0] === SHADE ||
+      currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
+      currentRoom.contents.monsters[0] === GRUDGE
     ) {
       console.log(`+5 Damage to ghosts!`);
       return 5;
@@ -249,7 +254,7 @@ const REVENANTS_RAGE = {
   effect:
     "While attuned to this item you deal additional damage while below 40 points of health.",
   function: () => {
-    if (currentPlayerHealth <= 40) {
+    if (currentPlayerHealth <= 30) {
       console.log("Revenant's Rage bonus damage added!");
       return 5;
     } else {
@@ -308,6 +313,7 @@ const CRIMSON_OFFERING = {
     currentPlayerHealth -= 5;
     playerHealthBar.value -= 5;
     damageFlashAnimation();
+    isGameOver();
     // writeToLog You make an offering and sacrifice 5 HP
     console.log("An offering was made...");
     return 10;
@@ -458,8 +464,7 @@ const CRYPTBREAD = {
   rarity: "COMMON",
   effect: "Restores 10 health points when eaten.",
   function: () => {
-    currentPlayerHealth += 10;
-    playerHealthBar.value += 10;
+    healPlayer(10);
     //writeToLog
   },
 };
@@ -471,8 +476,7 @@ const BONE_MARROW_SOUP = {
   rarity: "COMMON",
   effect: "Restores 15 health points when eaten.",
   function: () => {
-    currentPlayerHealth += 15;
-    playerHealthBar.value += 15;
+    healPlayer(15);
     //writeToLog
   },
 };
@@ -496,8 +500,7 @@ const MARROWSTONE_CHEESE = {
   rarity: "RARE",
   effect: "Restores 20 health points when eaten.",
   function: () => {
-    currentPlayerHealth += 25;
-    playerHealthBar.value += 25;
+    healPlayer(25);
     //writeToLog
   },
 };
@@ -509,8 +512,7 @@ const TOMBSTONE_TRUFFLE = {
   rarity: "RARE",
   effect: "Restores 10 health points when eaten.",
   function: () => {
-    currentPlayerHealth += 10;
-    playerHealthBar.value += 10;
+    healPlayer(10);
     //writeToLog
   },
 };
@@ -553,11 +555,35 @@ const WARDING_CANDLE = {
       console.log(`Warding Candle Duration: ${duration - roomCounter}`);
       if (roomCounter >= duration) {
         wardingCandleTracker = "BURNED OUT";
-        console.log(" WardingCandle Burns Out");
+        console.log("Warding Candle Burns Out");
         clearInterval(wardingCandleInterval);
       } else {
         wardingCandleTracker = "LIT";
         console.log("Warding Candle is lit!");
+      }
+    }, 15000);
+  },
+};
+
+const SOOTHING_CANDLE = {
+  name: "Soothing Candle",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  effect:
+    "When this item is used you restore 10HP after clearing a room. The candle burns out after clearing five rooms.",
+  function: () => {
+    soothingCandleTracker = 5;
+    let duration = roomCounter + 5;
+    let soothingCandleInterval = setInterval(() => {
+      console.log(`Soothing Candle Duration: ${duration - roomCounter}`);
+      if (roomCounter >= duration) {
+        soothingCandleTracker = "BURNED OUT";
+        console.log("Soothing Candle Burns Out");
+        clearInterval(soothingCandleInterval);
+      } else {
+        soothingCandleTracker = "LIT";
+        console.log("Soothing Candle is lit!");
       }
     }, 15000);
   },
@@ -663,6 +689,10 @@ function candleHandler(candle) {
           }
         }
       }
+      break;
+
+    case SOOTHING_CANDLE:
+      healPlayer(10);
       break;
 
     case FLICKERING_CANDLE:

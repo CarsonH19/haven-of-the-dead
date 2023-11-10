@@ -21,7 +21,9 @@ function playerAttackHandler(smite = 1) {
 
   // Smite Critical Hit
   if (criticalHitChance >= 20 && smite > 1) {
-    totalDamage = Math.round(smite * (playerToMonsterDamage * baseCritModifier));
+    totalDamage = Math.round(
+      smite * (playerToMonsterDamage * baseCritModifier)
+    );
     writeToLog(
       LOG_EVENT_SMITE_CRITICAL,
       currentRoom.contents.monsters[0].name,
@@ -295,7 +297,7 @@ function isGameOver() {
     }, 1000);
   }
 
-  if (currentMonsterHealth <= 0) {
+  if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {
     playerControlsTimeout(2000);
     // ITEM: Bloodstone - Recovers health when monster dies
     isItemAttuned(BLOODSTONE, null);
@@ -789,6 +791,8 @@ roomSummaryButton.addEventListener("click", () => {
   isItemAttuned(CHARM_OF_HEALING, null);
   // ITEM: Cursed Grimoire - NPC ITEM / hurts you after each cleared room.
   isItemAttuned(CURSED_GRIMOIRE, null);
+  // ITEM: Soothing Candle - Recover 10HP after each cleared room.
+  candleHandler(SOOTHING_CANDLE);
   updatePlayerTrackers();
   checkForLevelUp();
 });
