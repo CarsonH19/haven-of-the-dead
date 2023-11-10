@@ -524,7 +524,7 @@ const LESSER_WHISP = {
   rarity: "COMMON",
   effect: "Can be used to gain +5 experience.",
   function: () => {
-    experiencePoints += 5;
+    gainExperience(5);
     //writeToLog
   },
 };
@@ -536,7 +536,7 @@ const GREATER_WHISP = {
   rarity: "COMMON",
   effect: "Can be used to gain +20 experience.",
   function: () => {
-    experiencePoints += 20;
+    gainExperience(25);
     //writeToLog
   },
 };
@@ -549,7 +549,6 @@ const WARDING_CANDLE = {
   effect:
     "When this item is used there is a chance that evil spirits will flee from you. The candle burns out after clearing five rooms.",
   function: () => {
-    wardingCandleTracker = 5;
     let duration = roomCounter + 5;
     let wardingCandleInterval = setInterval(() => {
       console.log(`Warding Candle Duration: ${duration - roomCounter}`);
@@ -573,7 +572,6 @@ const SOOTHING_CANDLE = {
   effect:
     "When this item is used you restore 10HP after clearing a room. The candle burns out after clearing five rooms.",
   function: () => {
-    soothingCandleTracker = 5;
     let duration = roomCounter + 5;
     let soothingCandleInterval = setInterval(() => {
       console.log(`Soothing Candle Duration: ${duration - roomCounter}`);
@@ -610,6 +608,29 @@ const BLAZING_CANDLE = {
     "When this item is used all of your attacks are critical hits. After five critical hits the candle burns out.",
   function: () => {
     blazingCandleTracker = 5;
+  },
+};
+
+const SOULFLAME_CANDLE = {
+  name: "Soulflame Candle",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "EPIC",
+  effect:
+    "When this item is used the experience you gain is doubled. The candle burns out after gaining 100XP.",
+  function: () => {
+    let duration = experiencePoints + 100;
+    let soulflameCandleInterval = setInterval(() => {
+      console.log(`Soulflame Candle Duration: ${duration - experiencePoints}`);
+      if (experiencePoints >= duration) {
+        soulflameCandleTracker = "BURNED OUT";
+        console.log("Soulflame Candle Burns Out");
+        clearInterval(soulflameCandleInterval);
+      } else {
+        soulflameCandleTracker = "LIT";
+        console.log("Soulflame Candle is lit!");
+      }
+    }, 15000);
   },
 };
 
@@ -692,7 +713,9 @@ function candleHandler(candle) {
       break;
 
     case SOOTHING_CANDLE:
-      healPlayer(10);
+      if (soothingCandleTracker === "LIT") {
+        healPlayer(10);
+      }
       break;
 
     case FLICKERING_CANDLE:
@@ -712,6 +735,15 @@ function candleHandler(candle) {
         return 20;
       } else {
         return 0;
+      }
+
+    case SOULFLAME_CANDLE:
+      if (soulflameCandleTracker === "LIT") {
+        console.log("Soulflame candle is used!");
+        //writeToLog
+        return 2;
+      } else {
+        return 1;
       }
   }
 }

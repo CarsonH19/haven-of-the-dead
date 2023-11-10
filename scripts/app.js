@@ -21,8 +21,7 @@ function playerAttackHandler(smite = 1) {
 
   // Smite Critical Hit
   if (criticalHitChance >= 20 && smite > 1) {
-    totalDamage = Math.round(
-      smite * (playerToMonsterDamage * baseCritModifier)
+    totalDamage = Math.round(smite * (playerToMonsterDamage * baseCritModifier)
     );
     writeToLog(
       LOG_EVENT_SMITE_CRITICAL,

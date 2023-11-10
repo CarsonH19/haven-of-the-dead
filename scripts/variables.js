@@ -248,3 +248,4 @@ let wardingCandleTracker;
 let soothingCandleTracker;
 let flickeringCandleTracker;
 let blazingCandleTracker;
+let soulflameCandleTracker;

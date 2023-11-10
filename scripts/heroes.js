@@ -249,6 +249,9 @@ function healthLowAnimation() {
 // ===============================
 
 function gainExperience(num) {
+  // ITEM: Soulflame Candle - gain double exp.
+  num = num * candleHandler(SOULFLAME_CANDLE);
+
   experiencePoints += num;
 }
 
