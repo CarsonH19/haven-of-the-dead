@@ -517,8 +517,8 @@ const TOMBSTONE_TRUFFLE = {
   },
 };
 
-const LESSER_WHISP = {
-  name: "Lesser Whisp",
+const LESSER_SOULSTONE = {
+  name: "Lesser Soulstone",
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
@@ -529,8 +529,8 @@ const LESSER_WHISP = {
   },
 };
 
-const GREATER_WHISP = {
-  name: "Greater Whisp",
+const GREATER_SOULSTONE = {
+  name: "Greater Soulstone",
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
@@ -665,7 +665,7 @@ const GUIDING_LIGHT = {
 let attunedItems = [];
 let inventoryItems = [
   CRIMSON_OFFERING,
-  LESSER_WHISP,
+  LESSER_SOULSTONE,
   WARDING_CANDLE,
   POTION,
   POTION,

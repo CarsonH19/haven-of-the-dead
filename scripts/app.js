@@ -804,6 +804,7 @@ continueButton.addEventListener("click", () => {
   closeContinueButton();
   updatePlayerTrackers();
   setTimeout(() => {
+    // ITEM: Guiding Light - guides you to a Candlelight Shrine
     if (guidingLightTracker === "ARRIVE") {
       renderCurrentRoom(CANDLELIGHT_SHRINE);
       guidingLightTracker = null;
