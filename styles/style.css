@@ -5,7 +5,7 @@
   --header: #e3d6be;
   --text: lightgray;
   --accent: #212121;
-  --orb: #e3d6be;
+  --orb: #fff3b4;
 }
 
 * {
@@ -141,9 +141,17 @@ body {
   align-items: flex-start;
 }
 
+.critical {
+  color: #ad0505; /* Set the color for critical hits */
+  font-weight: bold; /* Add any additional styling for critical hits */
+  animation: critical-hit 0.5s, damage-shake 0.5;
+}
+
 .damage {
+  list-style-type: none;
   color: rgb(233, 233, 233);
-  font-size: 2.0rem;
+  padding: 0px;
+  font-size: 2.5rem;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -158,11 +166,6 @@ body {
   align-items: flex-end;
 }
 
-.critical {
-  color: #ad0505; /* Set the color for critical hits */
-  font-weight: bold; /* Add any additional styling for critical hits */
-  animation: critical-hit 0.5s, damage-shake 0.5;
-}
 
 @keyframes critical-hit {
   0% { transform: scale(1); }

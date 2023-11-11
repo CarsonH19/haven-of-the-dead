@@ -661,7 +661,7 @@ const GUIDING_LIGHT = {
     wisp.classList.add('orb');
     
     const root = document.documentElement;
-    root.style.setProperty('--orb', 'blue');
+    root.style.setProperty('--orb', '#fff3b4');
   },
 };
 

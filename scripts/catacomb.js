@@ -4,39 +4,39 @@
 // If a player flees from the room it is not removed from the array.
 
 let catacombRooms = [
-  {
-    roomName: "Rodents' Roost",
-    description: '',
-    backgroundImage: 'styles/images/corridor-two.png',
-    music: null,
-    contents: {
-      monsters: [SHADE],
-      items: [],
-      events: null
-    },
-  },
-  {
-    roomName: "Clawed Caverns",
-    description: '',
-    backgroundImage: 'styles/images/corridor-two.png',
-    music: null,
-    contents: {
-      monsters: [SHADE],
-      items: [],
-      events: null
-    },
-  },
-  {
-    roomName: "Vermins' Vestibule",
-    description: '',
-    backgroundImage: 'styles/images/corridor-two.png',
-    music: null,
-    contents: {
-      monsters: [SHADE],
-      items: [],
-      events: null
-    },
-  },
+  // {
+  //   roomName: "Rodents' Roost",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SHADE],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Clawed Caverns",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SHADE],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
+  // {
+  //   roomName: "Vermins' Vestibule",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SHADE],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
   // {
   //   roomName: "Gnawers' Nest",
   //   description: '',
@@ -263,22 +263,22 @@ let catacombRooms = [
     backgroundImage: 'styles/images/corridor-two.png',
     music: null,
     contents: {
-      monsters: [SHADE, SHADE],
+      monsters: [BONE_TITAN],
       items: [],
       events: null
     },
   },
-  {
-    roomName: "Bone Whisperer's Hollow",
-    description: '',
-    backgroundImage: 'styles/images/corridor-one.png',
-    music: null,
-    contents: {
-      monsters: [SHADE],
-      items: [WHISPERING_AMULET],
-      events: null
-    },
-  },
+  // {
+  //   roomName: "Bone Whisperer's Hollow",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [SHADE],
+  //     items: [WHISPERING_AMULET],
+  //     events: null
+  //   },
+  // },
   // {
   //   roomName: "Rattling Hollow",
   //   description: '',

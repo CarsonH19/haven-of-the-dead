@@ -1,45 +1,58 @@
 // ===============================
 //            Attack
 // ===============================
+const damageDealtElement = document.getElementById("damageDealt");
+const damageReceivedElement = document.getElementById("damageReceived");
 
 function showDamage(damage, source, critical) {
-  const damageDealtElement = document.getElementById('damageDealt');
-  const damageReceivedElement = document.getElementById('damageReceived');
+  const numbers = document.createElement("li");
 
-  if (source === 'PLAYER') {
-    damageElement = damageDealtElement; 
+  if (source === "PLAYER") {
+    damageElement = damageDealtElement;
   } else {
     damageElement = damageReceivedElement;
   }
 
-  damageElement.classList.remove('critical');
-  damageElement.classList.remove('fade-out');
-  damageElement.innerText = damage;
-  damageElement.style.opacity = '1';
+  numbers.classList.remove("critical", "fade-out", "damage-shake");
+  numbers.textContent = damage;
+  numbers.style.opacity = "1";
 
   if (critical) {
     // Apply special red text and animation for critical hit
-    damageElement.classList.add('critical');
-    
+    numbers.classList.add("critical");
   } else {
     // Apply regular shake animation
-    damageElement.classList.add('damage-shake');
+    numbers.classList.add("damage-shake");
   }
 
   // Shake for 1 second
   setTimeout(() => {
-    damageElement.classList.add('fade-out');
-    damageElement.classList.add('damage-shake');
+    numbers.classList.add("fade-out");
 
     // Fade out after the shaking stops
     setTimeout(() => {
-      damageElement.classList.remove('damage-shake');
-      damageElement.style.opacity = '0';
-    }, 500); 
-  }, 500); 
+      numbers.style.opacity = "0";
+    }, 500);
+  }, 500);
+
+  damageElement.insertBefore(numbers, damageElement.firstChild);
+
+  if (damageDealtElement.children.length > 1) {
+    damageDealtElement.removeChild(damageDealtElement.lastElementChild)
+  }
+
+  if (damageReceivedElement.children.length > 1) {
+    damageReceivedElement.removeChild(damageReceivedElement.lastElementChild)
+  }
+
 }
 
 function playerAttackHandler(smite = 1) {
+  // Paladin Passive Ability Checker
+  if (heroChoice === "PALADIN") {
+    paladinRadiantAura();
+  }
+
   let criticalHitChance = Math.round(Math.random() * 20) + baseDexterity;
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
   let totalDamage;
@@ -61,7 +74,7 @@ function playerAttackHandler(smite = 1) {
     totalDamage = Math.round(
       smite * (playerToMonsterDamage * baseCritModifier)
     );
-    showDamage(totalDamage, 'PLAYER', 'CRIT');
+    showDamage(totalDamage, "PLAYER", "CRIT");
     writeToLog(
       LOG_EVENT_SMITE_CRITICAL,
       currentRoom.contents.monsters[0].name,
@@ -70,7 +83,7 @@ function playerAttackHandler(smite = 1) {
     // Smite Hit
   } else if (smite > 1) {
     totalDamage = playerToMonsterDamage * smite;
-    showDamage(totalDamage, 'PLAYER');
+    showDamage(totalDamage, "PLAYER");
     writeToLog(
       LOG_EVENT_SMITE,
       currentRoom.contents.monsters[0].name,
@@ -79,7 +92,7 @@ function playerAttackHandler(smite = 1) {
     // Critical Hit
   } else if (criticalHitChance >= 20) {
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
-    showDamage(totalDamage, 'PLAYER', 'CRIT');
+    showDamage(totalDamage, "PLAYER", "CRIT");
     writeToLog(
       LOG_EVENT_PLAYER_CRITICAL,
       currentRoom.contents.monsters[0].name,
@@ -88,7 +101,7 @@ function playerAttackHandler(smite = 1) {
     // Normal Hit
   } else if (playerToMonsterDamage > 0) {
     totalDamage = playerToMonsterDamage;
-    showDamage(totalDamage, 'PLAYER');
+    showDamage(totalDamage, "PLAYER");
     writeToLog(
       LOG_EVENT_PLAYER_ATTACK,
       currentRoom.contents.monsters[0].name,
@@ -96,7 +109,7 @@ function playerAttackHandler(smite = 1) {
     );
   } else if (playerToMonsterDamage <= 0) {
     totalDamage = 0;
-    showDamage(totalDamage, 'PLAYER');
+    showDamage(totalDamage, "PLAYER");
     writeToLog(
       LOG_EVENT_PLAYER_MISS,
       currentRoom.contents.monsters[0].name,
@@ -106,11 +119,6 @@ function playerAttackHandler(smite = 1) {
 
   monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
   currentMonsterHealth -= totalDamage;
-
-  // Paladin Passive Ability Checker
-  if (heroChoice === "PALADIN") {
-    paladinRadiantAura();
-  }
 
   updatePlayerTrackers();
 }
@@ -161,7 +169,7 @@ function monsterAttackHandler() {
     );
   }
 
-  showDamage(monsterToPlayerDamage, 'MONSTER');
+  showDamage(monsterToPlayerDamage, "MONSTER");
   updatePlayerTrackers();
   healthLowAnimation();
 }
@@ -731,6 +739,7 @@ function renderContinueButton() {
     currentRoom.contents.events === null
   ) {
     console.log("Continue Button Rendered!");
+    fadeInAnimation(continueButtonModal);
     continueButtonModal.style.display = "block";
   } else {
     continueButtonModal.style.display = "none";
@@ -852,7 +861,7 @@ continueButton.addEventListener("click", () => {
       renderCurrentRoom(CANDLELIGHT_SHRINE);
       guidingLightTracker = null;
     } else {
-      console.log('Random Room');
+      console.log("Random Room");
       removeCurrentRoom();
       getRandomRoom(catacombRooms);
       renderCurrentRoom(currentRoom);
