@@ -96,6 +96,7 @@ function playerAttackHandler(smite = 1) {
     );
   } else if (playerToMonsterDamage <= 0) {
     totalDamage = 0;
+    showDamage(totalDamage, 'PLAYER');
     writeToLog(
       LOG_EVENT_PLAYER_MISS,
       currentRoom.contents.monsters[0].name,
@@ -145,7 +146,6 @@ function monsterAttackHandler() {
   currentPlayerHealth -= monsterToPlayerDamage;
 
   if (monsterToPlayerDamage > 0) {
-    showDamage(monsterToPlayerDamage, 'MONSTER');
     damageFlashAnimation();
 
     writeToLog(
@@ -161,6 +161,7 @@ function monsterAttackHandler() {
     );
   }
 
+  showDamage(monsterToPlayerDamage, 'MONSTER');
   updatePlayerTrackers();
   healthLowAnimation();
 }

@@ -642,6 +642,7 @@ const GUIDING_LIGHT = {
   effect:
     "When this item is used a light will guide you to the nearest Candlelight Shrine. The light vanishes after leading you to safety.",
   function: () => {
+    const wisp = document.querySelector('.wisp');
     let randomNumber = (Math.floor(Math.random() * 1) + 1);
     let duration = roomCounter + randomNumber;
     let guidingLightInterval = setInterval(() => {
@@ -655,6 +656,11 @@ const GUIDING_LIGHT = {
         console.log("The light guides you!");
       }
     }, 15000);
+
+    wisp.classList.add('orb');
+    
+    const root = document.documentElement;
+    root.style.setProperty('--orb', 'blue');
   },
 };
 

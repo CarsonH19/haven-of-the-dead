@@ -5,7 +5,7 @@
   --header: #e3d6be;
   --text: lightgray;
   --accent: #212121;
-
+  --orb: #e3d6be;
 }
 
 * {
@@ -122,6 +122,7 @@ body {
 .middle-center {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   flex-grow: 1; /* This will allow the middle div to grow and take up any available space */
   width: 30vw;
   height: 30vh;
@@ -191,6 +192,9 @@ body {
 }
 
 .narrative-text {
+  /* position: absolute;
+  top: 50%;
+  left: 50%; */
   list-style-type: none;
   padding: 0;
   z-index: 99;
@@ -566,7 +570,7 @@ progress[value]::-moz-progress-bar {
 
 .inventory-modal { 
   position: fixed;
-  z-index: 0;
+  z-index: 2;
   left: 0;
   top: 0;
   width: 100%;
@@ -975,4 +979,64 @@ progress[value]::-moz-progress-bar {
 
 .health-bar-critical {
   animation: shake 0.5s infinite;
+}
+
+
+.orb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  background: radial-gradient(circle, var(--orb) 5%, rgba(255, 236, 160, 0) 100%);
+  /* transform: translateY(-50%); */
+  animation: orbAnimation 6s ease-in-out infinite, pulseAnimation 2.0s ease-in-out infinite;
+  box-shadow: 0 0 40px 10px #ffeca0; increased glow effect
+  opacity: 90%;
+}
+
+@keyframes pulseAnimation {
+  0% {
+    box-shadow: 0 0 20px 00px var(--orb);
+  }
+  50% {
+    box-shadow: 0 0 40px 10px var(--orb); /* adjusted glow effect for pulsing */
+  }
+  100% {
+    box-shadow: 0 0 20px 0px var(--orb); /* adjusted glow effect for pulsing */
+  }
+}
+
+
+@keyframes orbAnimation {
+  0%, 100% {
+    left: 50%;
+    transform: translateY(-50%) translateX(0);
+  }
+  15% {
+    left: 55%;
+    transform: translateY(-55%) translateX(5%);
+  }
+  30% {
+    left: 50%;
+    transform: translateY(-50%) translateX(0);
+  }
+  45% {
+    left: 45%;
+    transform: translateY(-45%) translateX(-5%);
+  }
+  60% {
+    left: 50%;
+    transform: translateY(-50%) translateX(0);
+  }
+  75% {
+    top: 40%;
+    transform: translateY(-40%) translateX(0);
+  }
+  90% {
+    top: 60%;
+    transform: translateY(-60%) translateX(0);
+  }
 }
