@@ -618,19 +618,23 @@ const SOULFLAME_CANDLE = {
   rarity: "EPIC",
   effect:
     "When this item is used the experience you gain is doubled. The candle burns out after gaining 100XP.",
+  status: 'All experience gained is doubled.',
+  duration: null,
   function: () => {
-    let duration = experiencePoints + 100;
+    let itemDuration = experiencePoints + 100;
+    SOULFLAME_CANDLE.duration = '100XP';
     let soulflameCandleInterval = setInterval(() => {
-      console.log(`Soulflame Candle Duration: ${duration - experiencePoints}`);
-      if (experiencePoints >= duration) {
+      SOULFLAME_CANDLE.duration = `Duration: ${itemDuration - experiencePoints}XP`;
+      if (experiencePoints >= itemDuration) {
         soulflameCandleTracker = "BURNED OUT";
-        console.log("Soulflame Candle Burns Out");
+        SOULFLAME_CANDLE.duration = null;
         clearInterval(soulflameCandleInterval);
       } else {
         soulflameCandleTracker = "LIT";
         console.log("Soulflame Candle is lit!");
       }
-    }, 15000);
+    }, 3000);
+    renderStatusEffects(SOULFLAME_CANDLE);
   },
 };
 
@@ -641,16 +645,19 @@ const GUIDING_LIGHT = {
   rarity: "RARE",
   effect:
     "When this item is used a light will guide you to the nearest Candlelight Shrine. The light vanishes after leading you to safety.",
+  status: 'Guiding you to a nearby Candlelight Shrine.',
+  duration: null,
   function: () => {
     const wisp = document.querySelector('.wisp');
-    let randomNumber = (Math.floor(Math.random() * 1) + 1);
+    let randomNumber = (Math.floor(Math.random() * 3) + 1);
     let duration = roomCounter + randomNumber;
+    GUIDING_LIGHT.duration = 'Searching';
     let guidingLightInterval = setInterval(() => {
-      console.log(`Soulflame Candle Duration: ${duration - roomCounter}`);
+      GUIDING_LIGHT.duration = `Duration: ${duration - roomCounter} Rooms`;
       if (roomCounter >= duration) {
         guidingLightTracker = "ARRIVE";
         wisp.classList.remove('orb');
-        console.log("You arrive at a Candlelight Shrine");
+        GUIDING_LIGHT.duration = null;
         clearInterval(guidingLightInterval);
       } else {
         guidingLightTracker = "GUIDING";
@@ -843,32 +850,54 @@ function useConsumable(consumable) {
 
 function renderStatusEffects(effect) {
   const middleLeft = document.querySelector('.middle-left');
+  
+  // New Status Effect
   const newEffect = document.createElement('div');
-  newEffect.classList.add("tooltip");
-
   newEffect.textContent = effect.name;
   middleLeft.appendChild(newEffect);
 
-  const tooltipText = document.createElement("span");
-  tooltipText.textContent = effect.effect;
+  // Status Effect Tooltip
+  newEffect.classList.add("tooltip");
+  const tooltipText = document.createElement("ul");
+  // tooltipText.textContent = effect.effect;
   tooltipText.classList.add("tooltipText");
   newEffect.appendChild(tooltipText);
+
+  const tooltipNoteName = document.createElement('li');
+  const tooltipNoteDuration = document.createElement('li');
+  const tooltipNoteStatus = document.createElement('li');
+  tooltipNoteName.textContent = effect.name;
+  tooltipNoteDuration.textContent = effect.duration;
+  // Updates & Check Effect Duration
+  let newEffectInterval = setInterval(() => {
+    tooltipNoteDuration.textContent = effect.duration;
+    if (effect.duration === null) {
+      // Removes Element when duration ends
+      middleLeft.removeChild(newEffect);
+      clearInterval(newEffectInterval);
+    }
+  }, 3000);
+  tooltipNoteStatus.textContent = effect.status;
+
+  tooltipText.appendChild(tooltipNoteName);
+  tooltipText.appendChild(tooltipNoteDuration);
+  tooltipText.appendChild(tooltipNoteStatus);
 
   document.querySelectorAll(".tooltip").forEach(function (element) {
     element.addEventListener("mouseover", function () {
       const tooltipText = this.querySelector(".tooltipText");
-      const rect = tooltipText.getBoundingClientRect();
-      const modalRect = document
-        .querySelector(".inventory-modal-content")
-        .getBoundingClientRect();
+      // const rect = tooltipText.getBoundingClientRect();
+      // const modalRect = document
+      //   .querySelector(".inventory-modal-content")
+      //   .getBoundingClientRect();
 
-      if (rect.right > modalRect.right) {
-        tooltipText.style.left = "auto";
-        tooltipText.style.right = "0";
-      } else if (rect.left < modalRect.left) {
-        tooltipText.style.left = "0";
-        tooltipText.style.right = "auto";
-      }
+      // if (rect.right > modalRect.right) {
+      //   tooltipText.style.left = "auto";
+      //   tooltipText.style.right = "0";
+      // } else if (rect.left < modalRect.left) {
+      //   tooltipText.style.left = "0";
+      //   tooltipText.style.right = "auto";
+      // }
 
       tooltipText.style.visibility = "visible";
       tooltipText.style.opacity = "1";

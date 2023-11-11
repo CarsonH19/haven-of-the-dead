@@ -779,6 +779,10 @@ progress[value]::-moz-progress-bar {
   left: 50%;
 }
 
+.tooltipText li {
+  list-style: none;
+}
+
 /* 
 ==========================================
           LEVEL UP MODAL
