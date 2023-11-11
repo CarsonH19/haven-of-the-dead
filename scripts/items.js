@@ -662,6 +662,8 @@ const GUIDING_LIGHT = {
     
     const root = document.documentElement;
     root.style.setProperty('--orb', '#fff3b4');
+
+    renderStatusEffects(GUIDING_LIGHT);
   },
 };
 
@@ -837,6 +839,47 @@ function useConsumable(consumable) {
 
   clearInventory();
   renderInventory();
+}
+
+function renderStatusEffects(effect) {
+  const middleLeft = document.querySelector('.middle-left');
+  const newEffect = document.createElement('div');
+  newEffect.classList.add("tooltip");
+
+  newEffect.textContent = effect.name;
+  middleLeft.appendChild(newEffect);
+
+  const tooltipText = document.createElement("span");
+  tooltipText.textContent = effect.effect;
+  tooltipText.classList.add("tooltipText");
+  newEffect.appendChild(tooltipText);
+
+  document.querySelectorAll(".tooltip").forEach(function (element) {
+    element.addEventListener("mouseover", function () {
+      const tooltipText = this.querySelector(".tooltipText");
+      const rect = tooltipText.getBoundingClientRect();
+      const modalRect = document
+        .querySelector(".inventory-modal-content")
+        .getBoundingClientRect();
+
+      if (rect.right > modalRect.right) {
+        tooltipText.style.left = "auto";
+        tooltipText.style.right = "0";
+      } else if (rect.left < modalRect.left) {
+        tooltipText.style.left = "0";
+        tooltipText.style.right = "auto";
+      }
+
+      tooltipText.style.visibility = "visible";
+      tooltipText.style.opacity = "1";
+    });
+
+    element.addEventListener("mouseout", function () {
+      const tooltipText = this.querySelector(".tooltipText");
+      tooltipText.style.visibility = "hidden";
+      tooltipText.style.opacity = "0";
+    });
+  });
 }
 
 // ===============================
