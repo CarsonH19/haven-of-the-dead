@@ -2,6 +2,43 @@
 //            Attack
 // ===============================
 
+function showDamage(damage, source, critical) {
+  const damageDealtElement = document.getElementById('damageDealt');
+  const damageReceivedElement = document.getElementById('damageReceived');
+
+  if (source === 'PLAYER') {
+    damageElement = damageDealtElement; 
+  } else {
+    damageElement = damageReceivedElement;
+  }
+
+  damageElement.classList.remove('critical');
+  damageElement.classList.remove('fade-out');
+  damageElement.innerText = damage;
+  damageElement.style.opacity = '1';
+
+  if (critical) {
+    // Apply special red text and animation for critical hit
+    damageElement.classList.add('critical');
+    
+  } else {
+    // Apply regular shake animation
+    damageElement.classList.add('damage-shake');
+  }
+
+  // Shake for 1 second
+  setTimeout(() => {
+    damageElement.classList.add('fade-out');
+    damageElement.classList.add('damage-shake');
+
+    // Fade out after the shaking stops
+    setTimeout(() => {
+      damageElement.classList.remove('damage-shake');
+      damageElement.style.opacity = '0';
+    }, 500); 
+  }, 500); 
+}
+
 function playerAttackHandler(smite = 1) {
   let criticalHitChance = Math.round(Math.random() * 20) + baseDexterity;
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
@@ -24,6 +61,7 @@ function playerAttackHandler(smite = 1) {
     totalDamage = Math.round(
       smite * (playerToMonsterDamage * baseCritModifier)
     );
+    showDamage(totalDamage, 'PLAYER', 'CRIT');
     writeToLog(
       LOG_EVENT_SMITE_CRITICAL,
       currentRoom.contents.monsters[0].name,
@@ -32,6 +70,7 @@ function playerAttackHandler(smite = 1) {
     // Smite Hit
   } else if (smite > 1) {
     totalDamage = playerToMonsterDamage * smite;
+    showDamage(totalDamage, 'PLAYER');
     writeToLog(
       LOG_EVENT_SMITE,
       currentRoom.contents.monsters[0].name,
@@ -40,6 +79,7 @@ function playerAttackHandler(smite = 1) {
     // Critical Hit
   } else if (criticalHitChance >= 20) {
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
+    showDamage(totalDamage, 'PLAYER', 'CRIT');
     writeToLog(
       LOG_EVENT_PLAYER_CRITICAL,
       currentRoom.contents.monsters[0].name,
@@ -48,6 +88,7 @@ function playerAttackHandler(smite = 1) {
     // Normal Hit
   } else if (playerToMonsterDamage > 0) {
     totalDamage = playerToMonsterDamage;
+    showDamage(totalDamage, 'PLAYER');
     writeToLog(
       LOG_EVENT_PLAYER_ATTACK,
       currentRoom.contents.monsters[0].name,
@@ -104,6 +145,7 @@ function monsterAttackHandler() {
   currentPlayerHealth -= monsterToPlayerDamage;
 
   if (monsterToPlayerDamage > 0) {
+    showDamage(monsterToPlayerDamage, 'MONSTER');
     damageFlashAnimation();
 
     writeToLog(
