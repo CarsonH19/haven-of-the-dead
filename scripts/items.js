@@ -649,6 +649,7 @@ const GUIDING_LIGHT = {
       console.log(`Soulflame Candle Duration: ${duration - roomCounter}`);
       if (roomCounter >= duration) {
         guidingLightTracker = "ARRIVE";
+        wisp.classList.remove('orb');
         console.log("You arrive at a Candlelight Shrine");
         clearInterval(guidingLightInterval);
       } else {
