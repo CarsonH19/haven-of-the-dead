@@ -13,7 +13,6 @@
 // - Titan's Gauntlets
 // - Holy Relic
 
-
 // Rare Items
 // - Bloodstone
 // - Wraithbane
@@ -21,7 +20,6 @@
 // - Whispering Amulet
 // - Cursed Mirror
 // - Revenant's Rage
-
 
 // Epic Items
 // - Ethereal Crown - Graverobber Earver Event Three
@@ -48,16 +46,15 @@
 // - Lesser Soulstone
 // - Greater Soulstone
 
-// Candles 
+// Candles
 // - Warding Candle
 // - Soothing Candle
 // - Flickering Candle
 // - Blazing Candle
 // - Soulflame Candle
 
-// Wisps 
+// Wisps
 // Guiding Light
-
 
 // ===============================
 //        COMMON ITEMS
@@ -464,7 +461,6 @@ const CRIMSON_OFFERING = {
   },
 };
 
-
 // ===============================
 //         QUEST ITEMS
 // ===============================
@@ -567,8 +563,6 @@ const TOMBSTONE_TRUFFLE = {
 //     effect:
 //     function:
 //  }
-
-
 
 const LICHROOT = {
   name: "Lichroot",
@@ -755,12 +749,7 @@ const GUIDING_LIGHT = {
 
 let attunedItems = [];
 
-let inventoryItems = [
-  GUIDING_LIGHT,
-  POTION,
-  POTION,
-  POTION
-];
+let inventoryItems = [GUIDING_LIGHT, POTION, POTION, POTION];
 
 let commonItems = [
   EVERTORCH,
@@ -794,7 +783,13 @@ let rareItems = [
   GUIDING_LIGHT,
 ];
 
-let epicItems = [SOULREAVER, CRIMSON_OFFERING, SOUL_JAR, BLAZING_CANDLE, SOULFLAME_CANDLE];
+let epicItems = [
+  SOULREAVER,
+  CRIMSON_OFFERING,
+  SOUL_JAR,
+  BLAZING_CANDLE,
+  SOULFLAME_CANDLE,
+];
 
 let foundItem;
 
@@ -902,31 +897,60 @@ function removeItem(itemName) {
   renderInventory();
 }
 
-function findItems() {
-  // Arrays need to be updated after all item objects are created.
+function findItemChance() {
   let randomNumber = Math.round(Math.random() * 20 + baseFaith);
+
+  // ITEM: Graverobber's Spade - Increase item find chance by 10%
   randomNumber += isItemAttuned(GRAVEROBBERS_SPADE, 0);
-  console.log(randomNumber);
   if (randomNumber >= 20) {
     let itemRarity = Math.round(Math.random() * 100 + baseFaith);
     if (itemRarity >= 91) {
+      getItem("EPIC");
+    } else if (itemRarity >= 61) {
+      getItem("RARE");
+    } else {
+      getItem("COMMON");
+    }
+  }
+}
+
+function getItem(rarity) {
+  switch (rarity) {
+    case "EPIC":
       const epicIndex = Math.round(Math.random() * epicItems.length);
       foundItem = epicItems[epicIndex];
       epicItems.splice(epicIndex, 1);
+      currentRoom.contents.items.push(foundItem);
       console.log("Epic Item Found!");
-    } else if (itemRarity >= 61) {
+      break;
+
+    case "RARE":
       const rareIndex = Math.round(Math.random() * rareItems.length);
       foundItem = rareItems[rareIndex];
       rareItems.splice(rareIndex, 1);
+      currentRoom.contents.items.push(foundItem);
       console.log("Rare Item Found!");
-    } else {
+      break;
+
+    case "COMMON":
       const commonIndex = Math.round(Math.random() * commonItems.length);
       foundItem = commonItems[commonIndex];
       commonItems.splice(commonIndex, 1);
+      currentRoom.contents.items.push(foundItem);
       console.log("Common Item Found!");
-    }
+      break;
 
-    currentRoom.contents.items.push(foundItem);
+    case "RANDOM":
+      let itemRarity = Math.round(Math.random() * 100 + baseFaith);
+
+      if (itemRarity >= 91) {
+        getItem("EPIC");
+      } else if (itemRarity >= 61) {
+        getItem("RARE");
+      } else {
+        getItem("COMMON");
+      }
+      break;
   }
 }
 
