@@ -1,10 +1,63 @@
-// This file holds all the items and their logic.
+// ===============================
+//             ITEMS
+// ===============================
 
-// Inventory Modal
-// Add sections to the modal
-//  - An Attuned Section
-//  - Items Section
-//  - Consumables Section
+// Common Items
+// - Evertorch
+// - Flask of Light
+// - Bonemail
+// - Graverobber's Spade - Graverobber Earver
+// - Charm of Healing
+// - Mist Veil Cloak
+// - Shadowstep Boots
+// - Titan's Gauntlets
+// - Holy Relic
+
+
+// Rare Items
+// - Bloodstone
+// - Wraithbane
+// - Sunstone
+// - Whispering Amulet
+// - Cursed Mirror
+// - Revenant's Rage
+
+
+// Epic Items
+// - Ethereal Crown - Graverobber Earver Event Three
+// - Soulreaver
+// - Soul Jar
+// - Crimson Offering
+
+// Quest Items
+// - Cursed Grimoire - Scholar Hendra
+
+// ===============================
+//          CONSUMABLES
+// ===============================
+
+// Food & Drink
+// - Potion
+// - Cryptbread
+// - Bone Marrow Soup
+// - Marrowstone Cheese
+// - Tombestone Truffle
+
+//  Misc. Consumables
+// - Lichroot
+// - Lesser Soulstone
+// - Greater Soulstone
+
+// Candles 
+// - Warding Candle
+// - Soothing Candle
+// - Flickering Candle
+// - Blazing Candle
+// - Soulflame Candle
+
+// Wisps 
+// Guiding Light
+
 
 // ===============================
 //        COMMON ITEMS
@@ -122,6 +175,45 @@ const MIST_VEIL_CLOAK = {
   },
 };
 
+const SHADOWSTEP_BOOTS = {
+  name: "Shadowstep Boots",
+  description: "",
+  type: "MAGIC",
+  rarity: "COMMON",
+  effect: "While attuned to this item your dexterity increases by 1.",
+  function: () => {
+    // See closeInventoryHandler for item logic.
+    console.log("Dexterity Increased!");
+    return 1;
+  },
+};
+
+const TITANS_GAUNTLETS = {
+  name: "Titan's Gauntlets",
+  description: "",
+  type: "MAGIC",
+  rarity: "COMMON",
+  effect: "While attuned to this item your strength increases by 1.",
+  function: () => {
+    // See closeInventoryHandler for item logic.
+    console.log("Strength Increased!");
+    return 1;
+  },
+};
+
+const HOLY_RELIC = {
+  name: "Holy Relic",
+  description: "",
+  type: "MAGIC",
+  rarity: "COMMON",
+  effect: "While attuned to this item your faith increases by 1.",
+  function: () => {
+    // See closeInventoryHandler for item logic.
+    console.log("Faith Increased!");
+    return 1;
+  },
+};
+
 // ===============================
 //         RARE ITEMS
 // ===============================
@@ -194,8 +286,8 @@ const WRAITHBANE = {
       currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
       currentRoom.contents.monsters[0] === GRUDGE
     ) {
-      console.log(`+5 Damage to ghosts!`);
-      return 5;
+      console.log(`+3 Damage to ghosts!`);
+      return 3;
     } else {
       return 0;
     }
@@ -252,71 +344,19 @@ const REVENANTS_RAGE = {
   type: "MAGIC",
   rarity: "RARE",
   effect:
-    "While attuned to this item you deal additional damage while below 40 points of health.",
+    "While attuned to this item you deal more damage when your health reaches critical levels.",
   function: () => {
-    if (currentPlayerHealth <= 30) {
-      console.log("Revenant's Rage bonus damage added!");
-      return 5;
+    if (currentPlayerHealth <= 10) {
+      return 4;
+    } else if (currentPlayerHealth <= 20) {
+      return 3;
+    } else if (currentPlayerHealth <= 30) {
+      return 2;
+    } else if (currentPlayerHealth <= 40) {
+      return 1;
     } else {
       return 0;
     }
-  },
-};
-
-const SHADOWSTEP_BOOTS = {
-  name: "Shadowstep Boots",
-  description: "",
-  type: "MAGIC",
-  rarity: "RARE",
-  effect: "While attuned to this item your dexterity increases by 1.",
-  function: () => {
-    // See closeInventoryHandler for item logic.
-    console.log("Dexterity Increased!");
-    return 1;
-  },
-};
-
-const TITANS_GAUNTLETS = {
-  name: "Titan's Gauntlets",
-  description: "",
-  type: "MAGIC",
-  rarity: "RARE",
-  effect: "While attuned to this item your strength increases by 1.",
-  function: () => {
-    // See closeInventoryHandler for item logic.
-    console.log("Strength Increased!");
-    return 1;
-  },
-};
-
-const HOLY_RELIC = {
-  name: "Holy Relic",
-  description: "",
-  type: "MAGIC",
-  rarity: "RARE",
-  effect: "While attuned to this item your faith increases by 1.",
-  function: () => {
-    // See closeInventoryHandler for item logic.
-    console.log("Faith Increased!");
-    return 1;
-  },
-};
-
-const CRIMSON_OFFERING = {
-  name: "Crimson Offering",
-  description: "",
-  type: "MAGIC",
-  rarity: "RARE",
-  effect:
-    "While attuned to this item you sacrifice 5 HP after each of your attacks, but you deal an additional 10 damage.",
-  function: () => {
-    currentPlayerHealth -= 5;
-    playerHealthBar.value -= 5;
-    damageFlashAnimation();
-    isGameOver();
-    // writeToLog You make an offering and sacrifice 5 HP
-    console.log("An offering was made...");
-    return 10;
   },
 };
 
@@ -406,8 +446,27 @@ const SOUL_JAR = {
   },
 };
 
+const CRIMSON_OFFERING = {
+  name: "Crimson Offering",
+  description: "",
+  type: "MAGIC",
+  rarity: "EPIC",
+  effect:
+    "While attuned to this item you sacrifice 5 HP after each of your attacks, but you deal an additional 10 damage.",
+  function: () => {
+    currentPlayerHealth -= 5;
+    playerHealthBar.value -= 5;
+    damageFlashAnimation();
+    isGameOver();
+    // writeToLog You make an offering and sacrifice 5 HP
+    console.log("An offering was made...");
+    return 10;
+  },
+};
+
+
 // ===============================
-//         NPC ITEMS
+//         QUEST ITEMS
 // ===============================
 
 // const sample = {
@@ -434,17 +493,8 @@ const CURSED_GRIMOIRE = {
 };
 
 // ===============================
-//         CONSUMABLES
+//        FOOD & DRINK
 // ===============================
-
-// const sample = {
-//     name:
-//     description:
-//     type:
-//     rarity:
-//     effect:
-//     function:
-//  }
 
 const POTION = {
   name: "Health Potion",
@@ -481,18 +531,6 @@ const BONE_MARROW_SOUP = {
   },
 };
 
-const LICHROOT = {
-  name: "Lichroot",
-  description: "",
-  type: "CONSUMABLE",
-  rarity: "RARE",
-  effect: "Permanently increases the potency of health potions.",
-  function: () => {
-    potionHealValue += 5;
-    //writeToLog
-  },
-};
-
 const MARROWSTONE_CHEESE = {
   name: "Marrowstone Cheese",
   description: "",
@@ -517,6 +555,33 @@ const TOMBSTONE_TRUFFLE = {
   },
 };
 
+// ===============================
+//        MISC CONSUMABLES
+// ===============================
+
+// const sample = {
+//     name:
+//     description:
+//     type:
+//     rarity:
+//     effect:
+//     function:
+//  }
+
+
+
+const LICHROOT = {
+  name: "Lichroot",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "RARE",
+  effect: "Permanently increases the potency of health potions.",
+  function: () => {
+    potionHealValue += 5;
+    //writeToLog
+  },
+};
+
 const LESSER_SOULSTONE = {
   name: "Lesser Soulstone",
   description: "",
@@ -533,13 +598,17 @@ const GREATER_SOULSTONE = {
   name: "Greater Soulstone",
   description: "",
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "RARE",
   effect: "Can be used to gain +20 experience.",
   function: () => {
     gainExperience(25);
     //writeToLog
   },
 };
+
+// ===============================
+//           CANDLES
+// ===============================
 
 const WARDING_CANDLE = {
   name: "Warding Candle",
@@ -618,13 +687,15 @@ const SOULFLAME_CANDLE = {
   rarity: "EPIC",
   effect:
     "When this item is used the experience you gain is doubled. The candle burns out after gaining 100XP.",
-  status: 'All experience gained is doubled.',
+  status: "All experience gained is doubled.",
   duration: null,
   function: () => {
     let itemDuration = experiencePoints + 100;
-    SOULFLAME_CANDLE.duration = '100XP';
+    SOULFLAME_CANDLE.duration = "100XP";
     let soulflameCandleInterval = setInterval(() => {
-      SOULFLAME_CANDLE.duration = `Duration: ${itemDuration - experiencePoints}XP`;
+      SOULFLAME_CANDLE.duration = `Duration: ${
+        itemDuration - experiencePoints
+      }XP`;
       if (experiencePoints >= itemDuration) {
         soulflameCandleTracker = "BURNED OUT";
         SOULFLAME_CANDLE.duration = null;
@@ -638,6 +709,10 @@ const SOULFLAME_CANDLE = {
   },
 };
 
+// ===============================
+//            WISPS
+// ===============================
+
 const GUIDING_LIGHT = {
   name: "Guiding Light",
   description: "",
@@ -645,18 +720,18 @@ const GUIDING_LIGHT = {
   rarity: "RARE",
   effect:
     "When this item is used a light will guide you to the nearest Candlelight Shrine. The light vanishes after leading you to safety.",
-  status: 'Guiding you to a nearby Candlelight Shrine.',
+  status: "Guiding you to a nearby Candlelight Shrine.",
   duration: null,
   function: () => {
-    const wisp = document.querySelector('.wisp');
-    let randomNumber = (Math.floor(Math.random() * 3) + 1);
+    const wisp = document.querySelector(".wisp");
+    let randomNumber = Math.floor(Math.random() * 3) + 1;
     let duration = roomCounter + randomNumber;
-    GUIDING_LIGHT.duration = 'Searching';
+    GUIDING_LIGHT.duration = "Searching";
     let guidingLightInterval = setInterval(() => {
       GUIDING_LIGHT.duration = `Duration: ${duration - roomCounter} Rooms`;
       if (roomCounter >= duration) {
         guidingLightTracker = "ARRIVE";
-        wisp.classList.remove('orb');
+        wisp.classList.remove("orb");
         GUIDING_LIGHT.duration = null;
         clearInterval(guidingLightInterval);
       } else {
@@ -665,10 +740,10 @@ const GUIDING_LIGHT = {
       }
     }, 15000);
 
-    wisp.classList.add('orb');
-    
+    wisp.classList.add("orb");
+
     const root = document.documentElement;
-    root.style.setProperty('--orb', '#fff3b4');
+    root.style.setProperty("--orb", "#fff3b4");
 
     renderStatusEffects(GUIDING_LIGHT);
   },
@@ -679,25 +754,48 @@ const GUIDING_LIGHT = {
 // ===============================
 
 let attunedItems = [];
+
 let inventoryItems = [
-  CRIMSON_OFFERING,
-  LESSER_SOULSTONE,
-  WARDING_CANDLE,
+  GUIDING_LIGHT,
   POTION,
   POTION,
-  POTION,
-  POTION,
-  POTION,
+  POTION
 ];
 
 let commonItems = [
   EVERTORCH,
   FLASK_OF_LIGHT,
+  BONEMAIL,
   RING_OF_THE_RODENT,
   CHARM_OF_HEALING,
+  MIST_VEIL_CLOAK,
+  POTION,
+  CRYPTBREAD,
+  BONE_MARROW_SOUP,
+  LESSER_SOULSTONE,
+  SOOTHING_CANDLE,
+  FLICKERING_CANDLE,
+  SHADOWSTEP_BOOTS,
+  TITANS_GAUNTLETS,
+  HOLY_RELIC,
 ];
-let rareItems = [EVERTORCH, EVERTORCH, EVERTORCH, EVERTORCH];
-let epicItems = [EVERTORCH, EVERTORCH, EVERTORCH, EVERTORCH];
+
+let rareItems = [
+  BLOODSTONE,
+  WRAITHBANE,
+  SUNSTONE,
+  CURSED_MIRROR,
+  REVENANTS_RAGE,
+  LICHROOT,
+  MARROWSTONE_CHEESE,
+  GREATER_SOULSTONE,
+  TOMBSTONE_TRUFFLE,
+  WARDING_CANDLE,
+  GUIDING_LIGHT,
+];
+
+let epicItems = [SOULREAVER, CRIMSON_OFFERING, SOUL_JAR, BLAZING_CANDLE, SOULFLAME_CANDLE];
+
 let foundItem;
 
 // ===============================
@@ -785,7 +883,6 @@ function candleHandler(candle) {
       } else {
         return 1;
       }
-
   }
 }
 
@@ -849,10 +946,10 @@ function useConsumable(consumable) {
 }
 
 function renderStatusEffects(effect) {
-  const middleLeft = document.querySelector('.middle-left');
-  
+  const middleLeft = document.querySelector(".middle-left");
+
   // New Status Effect
-  const newEffect = document.createElement('div');
+  const newEffect = document.createElement("div");
   newEffect.textContent = effect.name;
   middleLeft.appendChild(newEffect);
 
@@ -863,9 +960,9 @@ function renderStatusEffects(effect) {
   tooltipText.classList.add("tooltipText");
   newEffect.appendChild(tooltipText);
 
-  const tooltipNoteName = document.createElement('li');
-  const tooltipNoteDuration = document.createElement('li');
-  const tooltipNoteStatus = document.createElement('li');
+  const tooltipNoteName = document.createElement("li");
+  const tooltipNoteDuration = document.createElement("li");
+  const tooltipNoteStatus = document.createElement("li");
   tooltipNoteName.textContent = effect.name;
   tooltipNoteDuration.textContent = effect.duration;
   // Updates & Check Effect Duration

@@ -1,11 +1,58 @@
 const monsterNameElement = document.getElementById("monster-name");
 const monsterSkullElement = document.getElementById("skull-level");
 
+// ===============================
+//            Gnawers
+// ===============================
+
+const GNAWER = {
+  name: "Gnawer",
+  type: "BEAST",
+  skulls: 1,
+};
+
+// ===============================
+//            Spiders
+// ===============================
+
 const CRYPT_CRAWLER = {
   name: "Crypt Crawler",
   type: "BEAST",
   skulls: 1,
 };
+
+const COFFIN_SPIDER = {
+  name: "Coffin Spider",
+  type: "BEAST",
+  skulls: 2,
+};
+
+const BROODMOTHER = {
+  name: "Broodmother",
+  type: "BEAST",
+  skulls: 6,
+};
+
+// ===============================
+//           Scoundrels
+// ===============================
+
+const SCOUNDREL = {
+  name: "Scoundrel",
+  type: "HUMANOID",
+  skulls: 2,
+};
+
+const TOMB_RAIDER = {
+  name: "Scoundrel",
+  type: "HUMANOID",
+  skulls: 3,
+};
+
+
+// ===============================
+//           Skeletons
+// ===============================
 
 const DECREPIT_SKELETON = {
   name: "Decrepit Skeleton",
@@ -55,6 +102,10 @@ const BARON_OF_BONE = {
   skulls: 9,
 };
 
+// ===============================
+//          Evil Spirits
+// ===============================
+
 const SHADE = {
   name: "Shade",
   type: "UNDEAD",
@@ -73,29 +124,27 @@ const GRUDGE = {
   skulls: 5,
 };
 
-const GNAWER = {
-  name: "Gnawer",
-  type: "BEAST",
-  skulls: 1,
-};
-
-const COFFIN_SPIDER = {
-  name: "Coffin Spider",
-  type: "BEAST",
-  skulls: 2,
-};
-
-const SCOUNDREL = {
-  name: "Scoundrel",
-  type: "BEAST",
-  skulls: 2,
-};
+// ===============================
+//             NPCs
+// ===============================
 
 const POSSESSED_EARVER = {
   name: "Graverobber Earver",
   type: "HUMANOID",
   skulls: 6,
 };
+
+// ===============================
+//             Misc.
+// ===============================
+
+const MIMIC_CHEST = {
+  name: "Mimic Chest",
+  type: "HUMANOID",
+  skulls: 4,
+};
+
+
 
 function monsterSkullLevel(level) {
   switch (level) {

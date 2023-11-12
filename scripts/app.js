@@ -284,7 +284,7 @@ function calculateMonsterDamage() {
 //            Potion
 // ===============================
 
-let potionCounter = 5;
+let potionCounter = 3;
 
 document.getElementById("potionCount").textContent = ` x ${potionCounter}`;
 

@@ -1,4 +1,49 @@
 // ===============================
+//         Finished Events
+// ===============================
+
+// Candlelight Shrine
+// Safe Room
+
+// Trap Events
+// Spike Walls
+// Spider Web
+// Swarm of Vermin
+// Gas Chamber
+// Skeletal Hands
+// Spike Pitfall
+// Pendulum Blades
+
+// NPC Events
+// Graverobber Earver
+// Graverobber Earver Event Two
+// Graverobber Earver Event Three
+// Scholar Hendra
+
+// MISC Events
+// Mimic Chest
+
+
+// ===============================
+//         Safe Room
+// ===============================
+
+const SAFE_ROOM = {
+  name: "Candlelight Shrine",
+  eventType: "SAFE ROOM",
+  description:
+    "You find a Candlelight Shrine. Evil can't enter this holy place. You are free to rest.",
+  optionOne: null,
+  optionTwo: null,
+  passValue: null,
+  failDamage: null,
+  functionOne: () => {
+    healPlayer(calculatePlayerMaxHealth());
+  },
+  functionTwo: null,
+};
+
+// ===============================
 //         Trap Events
 // ===============================
 
@@ -189,7 +234,7 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
   },
 };
 
-const IVAN_THE_SCOUNDREL = {
+const IVAN_THE_SCOUNDREL = { // !UNFINISHED!
   name: "Ivan the Scoundrel",
   eventType: "NPC",
   description: "",
@@ -250,7 +295,7 @@ const SCHOLAR_HENDRA = {
   },
 };
 
-const GRERVIL_THE_BODILESS = {
+const GRERVIL_THE_BODILESS = { // !UNFINISHED!
   name: "Grervil the Bodiless",
   description: "",
   optionOne: "Speak",
@@ -267,7 +312,7 @@ const GRERVIL_THE_BODILESS = {
   },
 };
 
-const TRADER_BAZRIM = {
+const TRADER_BAZRIM = { // !UNFINISHED!
   name: "Trader Bazrim",
   eventType: "NPC",
   description: "",
@@ -284,7 +329,7 @@ const TRADER_BAZRIM = {
   },
 };
 
-const HOZHUL = {
+const HOZHUL = { // !UNFINISHED!
   name: "Hozhul, Keeper of Souls",
   eventType: "NPC",
   description: "",
@@ -301,7 +346,7 @@ const HOZHUL = {
   },
 };
 
-const CURATOR_RENVAR = {
+const CURATOR_RENVAR = { // !UNFINISHED!
   name: "Curator Renvar",
   description: "",
   optionOne: "Accept",
@@ -317,25 +362,6 @@ const CURATOR_RENVAR = {
     // writeToLog maybe next time you’ll have a taste for adventure
     // after room counter gains 10 re add his room to catacombRooms
   },
-};
-
-// ===============================
-//         Safe Room
-// ===============================
-
-const SAFE_ROOM = {
-  name: "Candlelight Shrine",
-  eventType: "SAFE ROOM",
-  description:
-    "You find a Candlelight Shrine. Evil can't enter this holy place. You are free to rest.",
-  optionOne: null,
-  optionTwo: null,
-  passValue: null,
-  failDamage: null,
-  functionOne: () => {
-    healPlayer(calculatePlayerMaxHealth());
-  },
-  functionTwo: null,
 };
 
 // ===============================
@@ -368,7 +394,19 @@ const MIMIC_CHEST = {
   },
 };
 
-const ECHOING_CHIME = {
+const BONEVAULT = {  // !UNFINISHED!
+  name: "Bonevault",
+  eventType: "MISC",
+  description: "",
+  optionOne: "",
+  optionTwo: "",
+  passValue: null,
+  failDamage: null,
+  functionOne: () => {},
+  functionTwo: () => {},
+};
+
+const ECHOING_CHIME = { // !UNFINISHED!
   name: "Echoing Chime",
   eventType: "MISC",
   description: "",
@@ -383,7 +421,7 @@ const ECHOING_CHIME = {
   functionTwo: null,
 };
 
-const BLOOD_SIGIL = {
+const BLOOD_SIGIL = { // !UNFINISHED!
   name: "Blood Sigil",
   eventType: "MISC",
   description: "",

@@ -762,6 +762,9 @@ progress[value]::-moz-progress-bar {
 }
 
 .tooltipText {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   visibility: hidden;
   width: 120px;
   height: 120px;
@@ -937,6 +940,7 @@ progress[value]::-moz-progress-bar {
   background-color: #000;
   pointer-events: none;
   opacity: 0;
+  z-index: 99;
 }
 
 .fade-out {
