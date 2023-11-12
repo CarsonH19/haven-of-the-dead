@@ -439,7 +439,7 @@ function renderCurrentRoom(currentRoom) {
 
   // Search for items in each room.
   if (currentRoom !== catacombEntrance) {
-    findItems();
+    findItemChance();
   }
 
   specialCooldownCounter = 0;

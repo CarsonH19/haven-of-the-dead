@@ -154,7 +154,7 @@ const GRAVEROBBER_EARVER = {
   name: "Graverobber Earver",
   eventType: "NPC",
   description:
-    "Amidst the haunting mist, you stumble upon Graverobber Earver, a sinister figure, hell-bent on breaching an ancient tomb's secrets. He beckons you to join his sinister endeavor, promising untold treasures from the cursed depths if you dare to embrace the darkness.",
+    "Amidst the haunting mist, you stumble upon Graverobber Earver, a sinister figure, hell-bent on breaching an ancient tomb. He beckons you to join his sinister endeavor, promising untold treasures from the cursed depths if you dare to embrace the darkness.",
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
@@ -368,29 +368,31 @@ const CURATOR_RENVAR = { // !UNFINISHED!
 //          Misc. Events
 // ===============================
 
-const MIMIC_CHEST = {
+const COFFIN_SPIDER_EVENT = {
   name: "Chest",
   eventType: "MISC",
-  description: "You find a large ornately decorated chest. What will you do?",
+  description: "You find a large ornately decorated coffin. Something valuable may be hidden inside.  What will you do?",
   optionOne: "Open",
   optionTwo: "Ignore",
   passValue: null,
   failDamage: null,
   functionOne: () => {
-    let randomNumber = Math.round(Math.random() * 10) + baseFaith;
+    let randomNumber = Math.round(Math.random() * 10);
     if (randomNumber >= 7) {
-      currentRoom.contents.items.push(EVERTORCH);
+      getItem('RANDOM');
       setRoomSummary();
-      // writeToLog();
+      // writeToLog(); Normal Coffin
     } else {
-      currentRoom.contents.monsters.push(GRUDGE);
-      currentRoom.contents.items.push(EVERTORCH);
+      currentRoom.contents.monsters.push(COFFIN_SPIDER);
+      monsterAttackHandler();
+      getItem('RANDOM');
       setRoomSummary();
       startBattle();
+      // writeToLog(); Coffin Spider
     }
   },
   functionTwo: () => {
-    // writeToLog();
+    // writeToLog(); Ignore
   },
 };
 
@@ -532,7 +534,12 @@ function renderEvent(event) {
         }
         break;
 
-      case "NPC" || "MISC":
+      case "NPC":
+        eventButtonOne.textContent = event.optionOne;
+        eventButtonTwo.textContent = event.optionTwo;
+        break;
+      
+      case "MISC":
         eventButtonOne.textContent = event.optionOne;
         eventButtonTwo.textContent = event.optionTwo;
         break;

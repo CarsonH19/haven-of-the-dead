@@ -24,7 +24,7 @@ const CRYPT_CRAWLER = {
 const COFFIN_SPIDER = {
   name: "Coffin Spider",
   type: "BEAST",
-  skulls: 2,
+  skulls: 3,
 };
 
 const BROODMOTHER = {
@@ -133,17 +133,6 @@ const POSSESSED_EARVER = {
   type: "HUMANOID",
   skulls: 6,
 };
-
-// ===============================
-//             Misc.
-// ===============================
-
-const MIMIC_CHEST = {
-  name: "Mimic Chest",
-  type: "HUMANOID",
-  skulls: 4,
-};
-
 
 
 function monsterSkullLevel(level) {
