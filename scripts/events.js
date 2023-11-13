@@ -233,7 +233,8 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
   },
 };
 
-const IVAN_THE_SCOUNDREL = { // !FINISHED!
+const IVAN_THE_SCOUNDREL = {
+  // !FINISHED!
   // !UNFINISHED!
   name: "Ivan the Scoundrel",
   eventType: "NPC",
@@ -286,7 +287,11 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
     useConsumable("Ivan's Cache Key"); // deletes item from inventory
     POISONED.function();
     currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
-    currentRoom.contents.items.push(LAUGHING_COFFIN_COIN, SHADOWSTEP_BOOTS, ROWDY_WISP);
+    currentRoom.contents.items.push(
+      LAUGHING_COFFIN_COIN,
+      SHADOWSTEP_BOOTS,
+      ROWDY_WISP
+    );
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
@@ -307,22 +312,57 @@ const LAUGHING_COFFIN_EVENT = {
   optionOne: "Pay",
   optionTwo: "Refuse",
   functionOne: () => {
-    if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
-      //writeToLog() lets have a drink!!! / rest at the tavern
+    let patrons = laughingCoffinRoom.contents.monsters;
+
+    if (
+      patrons.includes(IVAN_STATS) &&
+      inventoryItems.includes(LAUGHING_COFFIN_COIN)
+    ) {
+      // writeToLog() you enter the tavern and find Ivan. Surprised to find you here -> you'll pay for leaving me to die!
+      useConsumable(LAUGHING_COFFIN_COIN); // deletes the coin from inventory
+      startBattle();
+    } else if (
+      patrons.includes(IVAN_STATS) &&
+      !inventoryItems.includes(LAUGHING_COFFIN_COIN)
+    ) {
+      // writeToLog() You walked into the lions den... get him boys!
+      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
+      setRoomSummary();
+      startBattle();
+    } else if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
+      //writeToLog() The scoundrels welcome you to have a drink
       healPlayer(calculatePlayerMaxHealth());
       renderStatusEffects(BLACKHEART_BREW);
       setRoomSummary();
       setTimeout(newRoomAnimation, 2000);
       setTimeout(renderRoomSummaryModal, 7000);
     } else {
-
+      // writeToLog() If you don't have coin, don't waste our time!
+      console.log('NO COIN!');
+      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
+      setRoomSummary();
+      startBattle();
     }
   },
   functionTwo: () => {
-    if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
+    let patrons = laughingCoffinRoom.contents.monsters;
 
+    if (
+      patrons.includes(IVAN_STATS) &&
+      inventoryItems.includes(CACHE_KEY)
+    ) {
+      // writeToLog() You should have just opened the cache
+      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
+      setRoomSummary();
+      startBattle();
+    } else if (patrons.includes(IVAN_STATS)) {
+      // writeToLog() You're gonna wish I died in that web!
+      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
+      setRoomSummary();
+      startBattle();
     } else {
-
+      // writeToLog() If your not hear to spend your coin then move along before you get hurt.
+      setTimeout(renderRoomSummaryModal, 5000);
     }
   },
 };

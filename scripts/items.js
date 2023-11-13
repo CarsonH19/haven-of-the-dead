@@ -811,7 +811,7 @@ const ROWDY_WISP = {
   duration: null,
   function: () => {
     const wisp = document.querySelector(".wisp");
-    let randomNumber = Math.floor(Math.random() * 0) + 1;
+    let randomNumber = Math.floor(Math.random() * 0) + 0;
     let duration = roomCounter + randomNumber;
     ROWDY_WISP.duration = "Searching";
     let rowdyWispInterval = setInterval(() => {

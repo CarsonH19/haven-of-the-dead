@@ -869,7 +869,7 @@ continueButton.addEventListener("click", () => {
       renderCurrentRoom(CANDLELIGHT_SHRINE);
       guidingLightTracker = null;
     } else if (rowdyWispTracker === "ARRIVE"){
-      renderCurrentRoom(LAUGHING_COFFIN_ROOM);
+      renderCurrentRoom(laughingCoffinRoom);
       rowdyWispTracker = null;
     } else {
       console.log("Random Room");
