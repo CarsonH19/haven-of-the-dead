@@ -29,6 +29,7 @@
 
 // Quest Items
 // - Cursed Grimoire - Scholar Hendra
+// - Jawbone Key - Ivan the Scoundrel
 
 // ===============================
 //          CONSUMABLES
@@ -488,6 +489,34 @@ const CURSED_GRIMOIRE = {
   },
 };
 
+const CACHE_KEY = {
+  // !UNFINISHED!
+  name: "Ivan's Cache Key",
+  description: "",
+  type: "MAGIC",
+  rarity: "COMMON",
+  effect:
+    "Given to you by Ivan the Scoundrel, he said it unlocks a chamber within the catacombs were his hidden cache is kept.",
+  function: () => {
+    // Unlocks a trapped vault.
+    // writeToLog()
+  },
+};
+
+const LAUGHING_COFFIN_COIN = {
+  // !UNFINISHED!
+  name: "Laughing Coffin Coin",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "Taken from Ivan the Scoundrel, it may be of some value to other scoundrels.",
+  function: () => {
+    // Gives you access to the Laughin Coffin SAFE_ROOM.
+    // writeToLog()
+  },
+};
+
 // ===============================
 //        FOOD & DRINK
 // ===============================
@@ -597,6 +626,35 @@ const GREATER_SOULSTONE = {
   function: () => {
     gainExperience(25);
     //writeToLog
+  },
+};
+
+const BLACKHEART_BREW = {
+  name: "Blackheart Brew",
+  description: "A favored drink of the scoundrels at the Laughing Coffin.",
+  type: "CONSUMABLE",
+  rarity: "RARE",
+  effect:
+    "Can be used to gain increased Strength, but decreased Dexterity for a short time.",
+  status: "You are drunk.",
+  duration: null,
+  function: () => {
+    let duration = roomCounter + 5;
+    blackheartBrewTracker = "DRUNK";
+    BLACKHEART_BREW.duration = "5 Rooms"
+    let blackheartBrewInterval = setInterval(() => {
+    BLACKHEART_BREW.duration = `Duration: ${duration - roomCounter} Rooms`;
+      if (roomCounter >= duration) {
+        blackheartBrewTracker = "SOBER";
+        BLACKHEART_BREW.duration = null;
+        baseDexterity++;
+        baseStrength--;
+        clearInterval(blackheartBrewInterval);
+      }
+    }, 15000);
+
+    itemEffectHandler(BLACKHEART_BREW);
+    renderStatusEffects(BLACKHEART_BREW);
   },
 };
 
@@ -743,6 +801,41 @@ const GUIDING_LIGHT = {
   },
 };
 
+const ROWDY_WISP = {
+  name: "Rowdy Wisp",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "RARE",
+  effect: "",
+  status: "Guiding you to the Laughing Coffin.",
+  duration: null,
+  function: () => {
+    const wisp = document.querySelector(".wisp");
+    let randomNumber = Math.floor(Math.random() * 3) + 1;
+    let duration = roomCounter + randomNumber;
+    ROWDY_WISP.duration = "Searching";
+    let rowdyWispInterval = setInterval(() => {
+      ROWDY_WISP.duration = `Duration: ${duration - roomCounter} Rooms`;
+      if (roomCounter >= duration) {
+        rowdyWispTracker = "ARRIVE";
+        wisp.classList.remove("orb");
+        ROWDY_WISP.duration = null;
+        clearInterval(rowdyWispInterval);
+      } else {
+        rowdyWispTracker = "GUIDING";
+        console.log("The Rowdy Wisp guides you!");
+      }
+    }, 15000);
+
+    wisp.classList.add("orb");
+
+    const root = document.documentElement;
+    root.style.setProperty("--orb", "#f2b268");
+
+    renderStatusEffects(ROWDY_WISP);
+  },
+};
+
 // ===============================
 //    Item & Inventory Arrays
 // ===============================
@@ -821,8 +914,8 @@ function attuneItem(itemName) {
   renderInventory();
 }
 
-function candleHandler(candle) {
-  switch (candle) {
+function itemEffectHandler(item) {
+  switch (item) {
     case WARDING_CANDLE:
       if (wardingCandleTracker === "LIT") {
         if (
@@ -878,6 +971,16 @@ function candleHandler(candle) {
       } else {
         return 1;
       }
+
+    case BLACKHEART_BREW:
+      if (blackheartBrewTracker === "DRUNK") {
+        console.log("You are drunk on Blackheart Brew");
+        //writeToLog()
+        baseDexterity--;
+        baseStrength++;
+        updatePlayerTrackers();
+      }
+      break;
   }
 }
 
@@ -1055,8 +1158,10 @@ function closeInventoryHandler() {
   let newFaith = baseFaith + isItemAttuned(HOLY_RELIC, 0);
   baseFaith = newFaith;
 
+  // ITEM: Blackheart Brew - -1 Dex +1 Strength
+  itemEffectHandler(BLACKHEART_BREW);
+
   setPlayerHealthBar(calculatePlayerMaxHealth());
-  renderHeroStats();
   updatePlayerTrackers();
 }
 
@@ -1183,7 +1288,6 @@ closeInventoryButton.addEventListener("click", () => {
   closeInventoryHandler();
   clearInventory();
   setPlayerHealthBar(calculatePlayerMaxHealth());
-  renderHeroStats();
   updatePlayerTrackers();
 });
 

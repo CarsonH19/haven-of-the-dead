@@ -122,16 +122,18 @@ let specialCooldownCounter = 0;
 
 // Strength
 let baseStrength;
-let strengthBonusHealth;
-let playerMaxHealth = baseHealth + strengthBonusHealth;
+let strengthBonusHealth = calculateStrengthBonusHealth();
+let playerMaxHealth = baseHealth + calculateStrengthBonusHealth();
 
 function calculateStrengthBonusHealth() {
   return baseStrength * 10;
 }
 
 function calculatePlayerMaxHealth() {
-  let maxHealth = baseHealth + strengthBonusHealth;
-  let maxHealthWithItems = maxHealth + isItemAttuned(BONEMAIL, 0); // ITEM: +20 Max HP
+  let strengthBonusHealth = calculateStrengthBonusHealth();
+  playerMaxHealth = baseHealth + strengthBonusHealth;
+  let maxHealthWithItems = playerMaxHealth + isItemAttuned(BONEMAIL, 0); // ITEM: +20 Max HP
+  
   return maxHealthWithItems;
 }
 
@@ -244,10 +246,10 @@ const closeInventoryButton = document.getElementById("closeInventoryBtn");
 let attackCounter = 0;
 
 let guidingLightTracker;
-
-// Candles 
 let wardingCandleTracker;
 let soothingCandleTracker;
 let flickeringCandleTracker;
 let blazingCandleTracker;
 let soulflameCandleTracker;
+let blackheartBrewTracker;
+let rowdyWispTracker;

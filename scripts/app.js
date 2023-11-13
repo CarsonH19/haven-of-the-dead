@@ -38,13 +38,12 @@ function showDamage(damage, source, critical) {
   damageElement.insertBefore(numbers, damageElement.firstChild);
 
   if (damageDealtElement.children.length > 1) {
-    damageDealtElement.removeChild(damageDealtElement.lastElementChild)
+    damageDealtElement.removeChild(damageDealtElement.lastElementChild);
   }
 
   if (damageReceivedElement.children.length > 1) {
-    damageReceivedElement.removeChild(damageReceivedElement.lastElementChild)
+    damageReceivedElement.removeChild(damageReceivedElement.lastElementChild);
   }
-
 }
 
 function playerAttackHandler(smite = 1) {
@@ -67,7 +66,7 @@ function playerAttackHandler(smite = 1) {
   playerToMonsterDamage += isItemAttuned(SOULREAVER, 0);
 
   // ITEM: Blazing Candle - all attacks are critical hits
-  criticalHitChance += candleHandler(BLAZING_CANDLE);
+  criticalHitChance += itemEffectHandler(BLAZING_CANDLE);
 
   // Smite Critical Hit
   if (criticalHitChance >= 20 && smite > 1) {
@@ -323,7 +322,7 @@ function potionHandler() {
 function fleeHandler() {
   let fleeChance = Math.round(Math.random() * 10) + baseFaith;
   fleeChance += isItemAttuned(RING_OF_THE_RODENT, 0);
-  fleeChance += candleHandler(FLICKERING_CANDLE);
+  fleeChance += itemEffectHandler(FLICKERING_CANDLE);
   if (fleeChance >= 10) {
     console.log("Flee Successful");
     writeToLog(LOG_EVENT_FLEE, "You", currentRoom.name);
@@ -413,10 +412,18 @@ function renderCurrentRoom(currentRoom) {
   previousExperience = experiencePoints;
 
   // Renders monsters if there are monsters in the room.
-  if (currentRoom.contents.monsters.length > 0) {
+  if (
+    currentRoom.contents.monsters.length > 0 &&
+    currentRoom.contents.events === null
+  ) {
     startBattle(currentRoom);
   } else {
     monsterContainer.style.display = "none";
+  }
+
+  // Search for items in each room.
+  if (currentRoom !== catacombEntrance) {
+    findItemChance();
   }
 
   // Renders Event Modal
@@ -437,16 +444,15 @@ function renderCurrentRoom(currentRoom) {
     }, 3000);
   }
 
-  // Search for items in each room.
-  if (currentRoom !== catacombEntrance) {
-    findItemChance();
+  // Calls function if one exists
+  if (currentRoom.function) {
+    currentRoom.function();
   }
 
   specialCooldownCounter = 0;
   specialCooldownHandler();
   togglePlayerControls();
   setRoomSummary();
-  renderHeroStats();
   renderBackground(currentRoom.backgroundImage);
   updatePlayerTrackers();
 }
@@ -506,16 +512,6 @@ function updateRoomsCleared() {
   roomsCleared.textContent = `Rooms Cleared: ${roomCounter}`;
 }
 
-function renderHeroStats() {
-  const heroStrength = document.getElementById("heroStrength");
-  const heroDexterity = document.getElementById("heroDexterity");
-  const heroFaith = document.getElementById("heroFaith");
-
-  heroStrength.textContent = baseStrength;
-  heroDexterity.textContent = baseDexterity;
-  heroFaith.textContent = baseFaith;
-}
-
 function renderBackground(link) {
   console.log(`image: url(${link})`);
   const image = new Image();
@@ -573,9 +569,20 @@ function updatePlayerTrackers() {
     }
   }
 
+  function renderHeroStats() {
+    const heroStrength = document.getElementById("heroStrength");
+    const heroDexterity = document.getElementById("heroDexterity");
+    const heroFaith = document.getElementById("heroFaith");
+  
+    heroStrength.textContent = baseStrength;
+    heroDexterity.textContent = baseDexterity;
+    heroFaith.textContent = baseFaith;
+  }
+  
   updateHealthTrackers();
   updateHeroLevel();
   updateHeroExperience();
+  renderHeroStats();
 }
 
 function newRoomAnimation() {
@@ -846,7 +853,7 @@ roomSummaryButton.addEventListener("click", () => {
   // ITEM: Cursed Grimoire - NPC ITEM / hurts you after each cleared room.
   isItemAttuned(CURSED_GRIMOIRE, null);
   // ITEM: Soothing Candle - Recover 10HP after each cleared room.
-  candleHandler(SOOTHING_CANDLE);
+  itemEffectHandler(SOOTHING_CANDLE);
   updatePlayerTrackers();
   checkForLevelUp();
 });
@@ -855,11 +862,15 @@ continueButton.addEventListener("click", () => {
   newRoomAnimation();
   closeContinueButton();
   updatePlayerTrackers();
+
   setTimeout(() => {
-    // ITEM: Guiding Light - guides you to a Candlelight Shrine
+    // ITEM: Wisps
     if (guidingLightTracker === "ARRIVE") {
       renderCurrentRoom(CANDLELIGHT_SHRINE);
       guidingLightTracker = null;
+    } else if (rowdyWispTracker === "ARRIVE"){
+      renderCurrentRoom(LAUGHING_COFFIN_ROOM);
+      rowdyWispTracker = null;
     } else {
       console.log("Random Room");
       removeCurrentRoom();
