@@ -43,13 +43,6 @@ const SCOUNDREL = {
   skulls: 2,
 };
 
-const TOMB_RAIDER = {
-  name: "Scoundrel",
-  type: "HUMANOID",
-  skulls: 3,
-};
-
-
 // ===============================
 //           Skeletons
 // ===============================
@@ -134,6 +127,20 @@ const POSSESSED_EARVER = {
   skulls: 6,
 };
 
+const IVAN_STATS = {
+  name: "Ivan the Scoundrel",
+  type: "HUMANOID",
+  skulls: 6,
+  function: () => {
+    // Ivan attacks and moves back behind another scoundrel
+    currentRoom.contents.monsters.push(SCOUNDREL);
+    let index = myArray.indexOf(IVAN_STATS);
+    if (index > 0 && index < currentRoom.contents.monsters.length) {
+      // Swap the current element with the one at the preceding index
+      [array[index], array[index - 1]] = [array[index - 1], array[index]];
+    }
+  },
+};
 
 function monsterSkullLevel(level) {
   switch (level) {
@@ -202,7 +209,7 @@ function startBattle() {
     // ITEM: Sunstone - Damages undead creatures.
     isItemAttuned(SUNSTONE, 0);
     // ITEM: Warding Candle - Chance for evil spirits to flee.
-    candleHandler(WARDING_CANDLE);
+    itemEffectHandler(WARDING_CANDLE);
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
     isItemAttuned(ETHEREAL_CROWN, 0);
   }, 1000);

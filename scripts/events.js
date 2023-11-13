@@ -21,8 +21,7 @@
 // Scholar Hendra
 
 // MISC Events
-// Mimic Chest
-
+// Coffin Spider
 
 // ===============================
 //         Safe Room
@@ -234,7 +233,8 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
   },
 };
 
-const IVAN_THE_SCOUNDREL = { // !UNFINISHED!
+const IVAN_THE_SCOUNDREL = { // !FINISHED!
+  // !UNFINISHED!
   name: "Ivan the Scoundrel",
   eventType: "NPC",
   description: "",
@@ -244,14 +244,86 @@ const IVAN_THE_SCOUNDREL = { // !UNFINISHED!
   failDamage: null,
   functionOne: () => {
     // writeToLog thanks you
-    // gives you key to secret area with treasure
-    // key leads to trapped room where he tries to kill you and steal your items
-    // drops map of scoundrel hideouts
-    // add hideouts to catacombRooms
+    // gives you a key to a room with Ivan's secret stash of treasure
+    currentRoom.contents.items.push(CACHE_KEY);
+    // key adds trapped room where he tries to kill you and steal your items
+    let addRoom = roomCounter + 1;
+    let ivanInterval = setInterval(() => {
+      console.log(`currentRoomCounter: ${addRoom}`);
+      if (roomCounter > addRoom) {
+        console.log("Room Added");
+        catacombRooms.push(IVANS_CACHE);
+        clearInterval(ivanInterval);
+      }
+    }, 5000);
+    catacombRooms.push(IVANS_CACHE);
+    setRoomSummary();
+    setTimeout(renderRoomSummaryModal, 5000);
   },
   functionTwo: () => {
     // writeToLog angry says you won’t leave the catacombs alive!
     // adds additional trap rooms to catacomb array.
+    catacombRooms.push(
+      IVAN_TRAP_ROOM_ONE,
+      IVAN_TRAP_ROOM_TWO,
+      IVAN_TRAP_ROOM_THREE
+    );
+    // add Ivan the Scoundrel to the Laughing Coffin room
+    laughingCoffinRoom.contents.monsters.push(IVAN_STATS);
+    setTimeout(renderRoomSummaryModal, 5000);
+  },
+};
+
+const IVAN_THE_SCOUNDREL_EVENT_TWO = {
+  //!UNFINISHED!
+  name: "Ivan the Scoundrel",
+  eventType: "NPC",
+  description: "You find Ivan's hidden cache. You have the key to open it.",
+  optionOne: "Open",
+  optionTwo: "Don't Open",
+  functionOne: () => {
+    //writeToLog(); Poison smoke billows, its an ambush!
+    useConsumable("Ivan's Cache Key"); // deletes item from inventory
+    POISONED.function();
+    currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
+    currentRoom.contents.items.push(LAUGHING_COFFIN_COIN, SHADOWSTEP_BOOTS, ROWDY_WISP);
+    setRoomSummary();
+    startBattle();
+    monsterAttackHandler();
+  },
+  functionTwo: () => {
+    // writeToLog
+    // add Ivan to the Laughing Coffin Room
+    laughingCoffinRoom.contents.monsters.push(IVAN_STATS);
+    setTimeout(renderRoomSummaryModal, 5000);
+  },
+};
+
+const LAUGHING_COFFIN_EVENT = {
+  name: "The Laughing Coffin",
+  eventType: "MISC",
+  description:
+    "A group of scoundrels demands you pay a Laughing Coffin Coin before you can the tavern.",
+  optionOne: "Pay",
+  optionTwo: "Refuse",
+  functionOne: () => {
+    if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
+      //writeToLog() lets have a drink!!! / rest at the tavern
+      healPlayer(calculatePlayerMaxHealth());
+      renderStatusEffects(BLACKHEART_BREW);
+      setRoomSummary();
+      setTimeout(newRoomAnimation, 2000);
+      setTimeout(renderRoomSummaryModal, 7000);
+    } else {
+
+    }
+  },
+  functionTwo: () => {
+    if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
+
+    } else {
+
+    }
   },
 };
 
@@ -295,7 +367,8 @@ const SCHOLAR_HENDRA = {
   },
 };
 
-const GRERVIL_THE_BODILESS = { // !UNFINISHED!
+const GRERVIL_THE_BODILESS = {
+  // !UNFINISHED!
   name: "Grervil the Bodiless",
   description: "",
   optionOne: "Speak",
@@ -312,7 +385,8 @@ const GRERVIL_THE_BODILESS = { // !UNFINISHED!
   },
 };
 
-const TRADER_BAZRIM = { // !UNFINISHED!
+const TRADER_BAZRIM = {
+  // !UNFINISHED!
   name: "Trader Bazrim",
   eventType: "NPC",
   description: "",
@@ -329,7 +403,8 @@ const TRADER_BAZRIM = { // !UNFINISHED!
   },
 };
 
-const HOZHUL = { // !UNFINISHED!
+const HOZHUL = {
+  // !UNFINISHED!
   name: "Hozhul, Keeper of Souls",
   eventType: "NPC",
   description: "",
@@ -346,7 +421,8 @@ const HOZHUL = { // !UNFINISHED!
   },
 };
 
-const CURATOR_RENVAR = { // !UNFINISHED!
+const CURATOR_RENVAR = {
+  // !UNFINISHED!
   name: "Curator Renvar",
   description: "",
   optionOne: "Accept",
@@ -371,7 +447,8 @@ const CURATOR_RENVAR = { // !UNFINISHED!
 const COFFIN_SPIDER_EVENT = {
   name: "Chest",
   eventType: "MISC",
-  description: "You find a large ornately decorated coffin. Something valuable may be hidden inside.  What will you do?",
+  description:
+    "You find a large ornately decorated coffin. Something valuable may be hidden inside.  What will you do?",
   optionOne: "Open",
   optionTwo: "Ignore",
   passValue: null,
@@ -379,13 +456,13 @@ const COFFIN_SPIDER_EVENT = {
   functionOne: () => {
     let randomNumber = Math.round(Math.random() * 10);
     if (randomNumber >= 7) {
-      getItem('RANDOM');
+      getItem("RANDOM");
       setRoomSummary();
       // writeToLog(); Normal Coffin
     } else {
       currentRoom.contents.monsters.push(COFFIN_SPIDER);
       monsterAttackHandler();
-      getItem('RANDOM');
+      getItem("RANDOM");
       setRoomSummary();
       startBattle();
       // writeToLog(); Coffin Spider
@@ -396,7 +473,8 @@ const COFFIN_SPIDER_EVENT = {
   },
 };
 
-const BONEVAULT = {  // !UNFINISHED!
+const BONEVAULT = {
+  // !UNFINISHED!
   name: "Bonevault",
   eventType: "MISC",
   description: "",
@@ -408,7 +486,8 @@ const BONEVAULT = {  // !UNFINISHED!
   functionTwo: () => {},
 };
 
-const ECHOING_CHIME = { // !UNFINISHED!
+const ECHOING_CHIME = {
+  // !UNFINISHED!
   name: "Echoing Chime",
   eventType: "MISC",
   description: "",
@@ -423,7 +502,8 @@ const ECHOING_CHIME = { // !UNFINISHED!
   functionTwo: null,
 };
 
-const BLOOD_SIGIL = { // !UNFINISHED!
+const BLOOD_SIGIL = {
+  // !UNFINISHED!
   name: "Blood Sigil",
   eventType: "MISC",
   description: "",
@@ -538,7 +618,7 @@ function renderEvent(event) {
         eventButtonOne.textContent = event.optionOne;
         eventButtonTwo.textContent = event.optionTwo;
         break;
-      
+
       case "MISC":
         eventButtonOne.textContent = event.optionOne;
         eventButtonTwo.textContent = event.optionTwo;

@@ -2,9 +2,9 @@
 //         Tier One Rooms
 // ===============================
 
-// Starting Rooms: 
+// Starting Rooms:
 // Monsters:
-// - Rats: Gnawers 
+// - Rats: Gnawers
 // - Spiders: Crypt Crawlers, Coffin Spiders
 // -- Boss: Broodmother
 // - Skeletons: Decrepit Skeletons, Skeletal Soldiers
@@ -15,8 +15,7 @@
 // Ivan the Scoundrel
 // Mimic Chest
 // Spider Web
-// Swarm of Vermin 
-
+// Swarm of Vermin
 
 let catacombRooms = [
   // {
@@ -63,28 +62,28 @@ let catacombRooms = [
   //     events: SPIDER_WEB,
   //   },
   // },
-  {
-    roomName: "Creeping Coffins", 
-    description: '',
-    backgroundImage: 'styles/images/corridor-two.png',
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: COFFIN_SPIDER_EVENT
-    },
-  },
-  // // {
-  // //   roomName: "Cobwebbed Crypt",
-  // //   description: '',
-  // //   backgroundImage: 'styles/images/corridor-two.png',
-  // //   music: null,
-  // //   contents: {
-  // //     monsters: [],
-  // //     items: [],
-  // //     events: IVAN_THE_SCOUNDREL 
-  // //   },
-  // // },
+  // {
+  //   roomName: "Creeping Coffins", // !FINISHED!
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: COFFIN_SPIDER_EVENT
+  //   },
+  // },
+  // {
+  //   roomName: "Cobwebbed Crypt",
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: IVAN_THE_SCOUNDREL
+  //   },
+  // },
   // {
   //   roomName: "The Hatchery", // !FINISHED!
   //   description: '',
@@ -275,29 +274,28 @@ let catacombRooms = [
 
 const TIER_TWO_ROOMS = [
   {
-    roomName: "Bone-forged Alter",
-    description: '',
-    backgroundImage: 'styles/images/corridor-one.png',
+    roomName: "Bone-forged Alter", // !FINISHED!
+    description: "",
+    backgroundImage: "styles/images/corridor-one.png",
     music: null,
     contents: {
       monsters: [],
       items: [],
-      events: SCHOLAR_HENDRA
+      events: SCHOLAR_HENDRA,
     },
   },
   {
     roomName: "Pestilent Pit", // !FINISHED!
-    description: '',
-    backgroundImage: 'styles/images/corridor-two.png',
+    description: "",
+    backgroundImage: "styles/images/corridor-two.png",
     music: null,
     contents: {
       monsters: [],
       items: [],
-      events: SPIKE_PITFALL
-    }
+      events: SPIKE_PITFALL,
+    },
   },
 ];
-
 
 // ===============================
 //         Tier Three Rooms
@@ -316,25 +314,38 @@ const TIER_THREE_ROOMS = [];
 const TIER_FOUR_ROOMS = [];
 
 // ===============================
-//          Safe Rooms 
+//          Safe Rooms
 // ===============================
-
 
 const CANDLELIGHT_SHRINE = {
   roomName: "Candlelight Shrine",
-  description: 'A safe place.',
-  backgroundImage: 'styles/images/corridor-one.png',
+  description: "A safe place.",
+  backgroundImage: "styles/images/corridor-one.png",
   music: null,
   contents: {
     monsters: [],
     items: [],
-    events: SAFE_ROOM
+    events: SAFE_ROOM,
   },
-}
+};
+
+let laughingCoffinRoom = { 
+  roomName: "The Laughing Coffin", 
+  description: "Tavern within the catacombs ran by scoundrels.",
+  backgroundImage: "styles/images/corridor-two.png",
+  music: null,
+  contents: {
+    monsters: [],
+    items: [],
+    events: LAUGHING_COFFIN_EVENT
+  },
+};
 
 // ===============================
 //     NPC Catacomb Rooms
 // ===============================
+
+// Graverobber Earver
 
 const GRAVEROBBER_EARVER_ROOM_TWO = {
   roomName: "Gilded Sarcophagus",
@@ -360,6 +371,54 @@ const GRAVEROBBER_EARVER_ROOM_THREE = {
   },
 };
 
+// Ivan the Scoundrel
+const IVANS_CACHE = {
+  roomName: "Ivan's Cache",
+  description: "",
+  backgroundImage: "",
+  music: null,
+  contents: {
+    monsters: [],
+    items: [],
+    events: IVAN_THE_SCOUNDREL_EVENT_TWO,
+  },
+};
+
+const IVAN_TRAP_ROOM_ONE = {
+  roomName: "",
+  description: "",
+  backgroundImage: "",
+  music: null,
+  contents: {
+    monsters: [],
+    items: [],
+    events: GAS_CHAMBER,
+  },
+};
+
+const IVAN_TRAP_ROOM_TWO = {
+  roomName: "",
+  description: "",
+  backgroundImage: "",
+  music: null,
+  contents: {
+    monsters: [],
+    items: [],
+    events: PENDULUM_BLADES,
+  },
+};
+
+const IVAN_TRAP_ROOM_THREE = {
+  roomName: "",
+  description: "",
+  backgroundImage: "",
+  music: null,
+  contents: {
+    monsters: [],
+    items: [],
+    events: SPIKE_PITFALL,
+  },
+};
 
 // ===============================
 //     Catacomb Room Logic

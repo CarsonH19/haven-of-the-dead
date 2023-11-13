@@ -641,9 +641,9 @@ const BLACKHEART_BREW = {
   function: () => {
     let duration = roomCounter + 5;
     blackheartBrewTracker = "DRUNK";
-    BLACKHEART_BREW.duration = "5 Rooms"
+    BLACKHEART_BREW.duration = "5 Rooms";
     let blackheartBrewInterval = setInterval(() => {
-    BLACKHEART_BREW.duration = `Duration: ${duration - roomCounter} Rooms`;
+      BLACKHEART_BREW.duration = `Duration: ${duration - roomCounter} Rooms`;
       if (roomCounter >= duration) {
         blackheartBrewTracker = "SOBER";
         BLACKHEART_BREW.duration = null;
@@ -811,7 +811,7 @@ const ROWDY_WISP = {
   duration: null,
   function: () => {
     const wisp = document.querySelector(".wisp");
-    let randomNumber = Math.floor(Math.random() * 3) + 1;
+    let randomNumber = Math.floor(Math.random() * 0) + 1;
     let duration = roomCounter + randomNumber;
     ROWDY_WISP.duration = "Searching";
     let rowdyWispInterval = setInterval(() => {
@@ -978,6 +978,16 @@ function itemEffectHandler(item) {
         //writeToLog()
         baseDexterity--;
         baseStrength++;
+        updatePlayerTrackers();
+      }
+      break;
+
+    case POISONED:
+      if (poisonedTracker === "POISONED") {
+        console.log("You are poisoned!");
+        //writeToLog()
+        baseDexterity -= 2;
+        baseStrength -= 2;
         updatePlayerTrackers();
       }
       break;

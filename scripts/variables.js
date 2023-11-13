@@ -253,3 +253,35 @@ let blazingCandleTracker;
 let soulflameCandleTracker;
 let blackheartBrewTracker;
 let rowdyWispTracker;
+
+
+// ===============================
+//     Misc. Status Effects
+// ===============================
+
+const POISONED = {
+  name: "Poisoned",
+  description: "",
+  effect:
+    "Your Strength & Dexterity are 0 while poisoned.",
+  status: "You are poisoned.",
+  duration: null,
+  function: () => {
+    let duration = roomCounter + 3;
+    poisonedTracker = "POISONED";
+    POISONED.duration = "5 Rooms"
+    let poisonedInterval = setInterval(() => {
+    POISONED.duration = `Duration: ${duration - roomCounter} Rooms`;
+      if (roomCounter >= duration) {
+        poisonedTracker = null;
+        POISONED.duration = null;
+        baseDexterity += 2;
+        baseStrength += 2;
+        clearInterval(poisonedInterval);
+      }
+    }, 15000);
+
+    itemEffectHandler(POISONED);
+    renderStatusEffects(POISONED);
+  },
+};

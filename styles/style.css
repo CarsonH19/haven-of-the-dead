@@ -771,6 +771,7 @@ progress[value]::-moz-progress-bar {
   background-color: #000;
   color: #fff;
   text-align: center;
+  font-size: 0.8rem;
   border-radius: 6px;
   padding: 5px 0;
   margin-left: -60px;

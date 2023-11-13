@@ -250,7 +250,7 @@ function healthLowAnimation() {
 
 function gainExperience(num) {
   // ITEM: Soulflame Candle - gain double exp.
-  num = num * candleHandler(SOULFLAME_CANDLE);
+  num = num * itemEffectHandler(SOULFLAME_CANDLE);
 
   experiencePoints += num;
 }
@@ -429,7 +429,7 @@ function endLevelUp() {
     clearLevelUpModal();
   }, 2000);
 
-  renderHeroStats();
+  updatePlayerTrackers();
 }
 
 function renderHeroStatsModal() {
