@@ -504,7 +504,6 @@ const CACHE_KEY = {
 };
 
 const LAUGHING_COFFIN_COIN = {
-  // !UNFINISHED!
   name: "Laughing Coffin Coin",
   description: "",
   type: "MAGIC",
@@ -512,8 +511,7 @@ const LAUGHING_COFFIN_COIN = {
   effect:
     "Taken from Ivan the Scoundrel, it may be of some value to other scoundrels.",
   function: () => {
-    // Gives you access to the Laughin Coffin SAFE_ROOM.
-    // writeToLog()
+    writeToLog(LOG_EVENT_ITEM, LAUGHING_COFFIN_COIN);
   },
 };
 
@@ -636,7 +634,7 @@ const BLACKHEART_BREW = {
   rarity: "RARE",
   effect:
     "Can be used to gain increased Strength, but decreased Dexterity for a short time.",
-  status: "You are drunk.",
+  status: "You are drunk. Strength increased by 2 & Dexterity decreased by 1.",
   duration: null,
   function: () => {
     let duration = roomCounter + 5;
@@ -648,7 +646,7 @@ const BLACKHEART_BREW = {
         blackheartBrewTracker = "SOBER";
         BLACKHEART_BREW.duration = null;
         baseDexterity++;
-        baseStrength--;
+        baseStrength -= 2;
         clearInterval(blackheartBrewInterval);
       }
     }, 15000);
@@ -981,7 +979,7 @@ function itemEffectHandler(item) {
         console.log("You are drunk on Blackheart Brew");
         //writeToLog()
         baseDexterity--;
-        baseStrength++;
+        baseStrength += 2;
         updatePlayerTrackers();
       }
       break;
@@ -1072,7 +1070,8 @@ function getItem(rarity) {
 }
 
 function useConsumable(consumable) {
-  itemObject = inventoryItems.find((inv) => inv.name === consumable);
+  // must use item's string name
+  let itemObject = inventoryItems.find((inv) => inv.name === consumable);
 
   if (consumable !== "Health Potion") {
     console.log(consumable);

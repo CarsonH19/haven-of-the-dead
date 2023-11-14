@@ -977,7 +977,7 @@ function writeToLog(eventType, name, value) {
 
     case LOG_EVENT_SAFE_ROOM:
       newEntry.textContent = `${event.summary}`;
-      console.log('HI');
+      console.log("HI");
       narration = newEntry.textContent;
       break;
 
@@ -1418,7 +1418,7 @@ function writeToLog(eventType, name, value) {
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Refusing the scoundrel's plea, he hisses, "You'll rue this day. My revenge will echo through these cursed catacombs." The shadows deepen, foretelling the ominous path ahead.`;
       } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
-        newEntry.textContent = `Stumbling upon the hidden cache, you resist the urge to open it, wary of the scoundrel's dubious past. The crypt's shadows seem to whisper caution, leaving the untouched bounty a tempting mystery in the labyrinth of the endless catacomb.`;
+        newEntry.textContent = `Discovering the concealed cache, caution grips you as Ivan's offer of kindness grows suspicious. Suddenly, shadows and an ambush unfolds. With weapons unsheathed, Ivan and his cohorts emerge, revealing your instincts not to trust him were right all along.`;
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `After the skeletons mercilessly strike down ${name}, their hollow gaze fixates on ${value}.`;
       } else if (event === GRERVIL_THE_BODILESS) {
@@ -1440,28 +1440,48 @@ function writeToLog(eventType, name, value) {
       break;
 
     case LOG_EVENT_MISC_OPTION_ONE:
-      if (event === MIMIC_CHEST) {
-      } else if (event === ECHOING_CHIME) {
-      } else if (event === BLOOD_SIGIL) {
+      if (event === LAUGHING_COFFIN_EVENT) {
+        if (name === "ONE") {
+          newEntry.textContent = `Within the Laughing Coffin, the air hums with covert whispers. Abruptly, Ivan the Scoundrel confronts you, eyes ablaze. 'Left me to die, did you?' he sneers, unsheathing his blade. Resentment drips like venom in the tainted atmosphere.`;
+        } else if (name === "TWO") {
+          newEntry.textContent = `As you enter the heart of the Laughing Coffin, the air thick with the aroma of treachery, a band of scoundrels welcomes you with sly grins. "New blood, eh?" one chuckles, raising a tankard. "Join the revelry, stranger, and drink to the shadows that bind us all."`;
+        } else if (name === "THREE") {
+          newEntry.textContent = `The scoundrels' eyes narrow, skepticism etched across their faces. "Show it then!" demands the leader, tension thickening. Your bluff exposed, the atmosphere ignites with menace. "Seems our new friend needs a harsh lesson," sneers another, drawing a blade.`;
+        }
       }
+
+      narration = newEntry.textContent;
       break;
 
     case LOG_EVENT_MISC_OPTION_TWO:
+      if (event === LAUGHING_COFFIN_EVENT) {
+        newEntry.textContent = `With a Laughing Coffin Coin in hand, the den of rogues turns their eyes upon you. "Got the token, have you?" one grins, only to scowl as you hesitate. "Wasting our time, are you?" another scoffs. "If you ain't here to play, stranger, best you leave before we make you regret it."`
+      }
+
+      narration = newEntry.textContent;
       break;
 
     // ===============================
     //          Item Events
     // ===============================
 
-    case LOG_EVENT_ETHEREAL_CROWN:
-      newEntry.textContent = `The ${name} bows gently before ${value} and then vanishes.`;
+    case LOG_EVENT_ITEM:
+      if (name === LAUGHING_COFFIN_COIN) {
+        newEntry.textContent = `You pay a Laughing Coffin Coin and enter the tavern.`;
+      }
       narration = newEntry.textContent;
       break;
 
-    case LOG_EVENT_CURSED_GRIMOIRE:
-      newEntry.textContent = `${name} cannot ${value} the Cursed Grimoire from your grasp.`;
-      narration = newEntry.textContent;
-      break;
+    // Fix these logs
+    // case LOG_EVENT_ETHEREAL_CROWN:
+    //   newEntry.textContent = `The ${name} bows gently before ${value} and then vanishes.`;
+    //   narration = newEntry.textContent;
+    //   break;
+
+    // case LOG_EVENT_CURSED_GRIMOIRE:
+    //   newEntry.textContent = `${name} cannot ${value} the Cursed Grimoire from your grasp.`;
+    //   narration = newEntry.textContent;
+    //   break;
   }
 
   log.insertBefore(newEntry, log.firstChild);
@@ -1486,8 +1506,7 @@ function writeToLog(eventType, name, value) {
     eventType === LOG_EVENT_GREATER_PRAYER ||
     eventType === LOG_EVENT_POTION ||
     eventType === LOG_EVENT_FLEE ||
-    eventType === LOG_EVENT_ETHEREAL_CROWN ||
-    eventType === LOG_EVENT_CURSED_GRIMOIRE
+    eventType === LOG_EVENT_ITEM
   ) {
     newNarration.textContent = narration;
     narrativeText.insertBefore(newNarration, narrativeText.firstChild);

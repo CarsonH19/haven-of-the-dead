@@ -75,7 +75,7 @@ let catacombRooms = [
   // },
   {
     roomName: "Cobwebbed Crypt",
-    description: '',
+    description: 'The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.',
     summary: '',
     backgroundImage: 'styles/images/corridor-two.png',
     music: null,
@@ -334,9 +334,8 @@ const CANDLELIGHT_SHRINE = {
 };
 
 const LAUGHING_COFFIN_ROOM = { 
-  roomName: "The Laughing Coffin", 
-  description: "Tavern within the catacombs ran by scoundrels.",
-  summary: "",
+  roomName: "The Laughing Coffin Tavern", 
+  description: "The Laughing Coffin tavern stands as a sanctuary, welcoming scoundrels and coin-bearers alike. Here, amid the shadows, an unexpected haven emerges—a place to relax, where whispered secrets and clinking coins intertwine in the dim-lit embrace of this clandestine refuge.",
   backgroundImage: "styles/images/corridor-two.png",
   music: null,
   contents: {
@@ -380,9 +379,8 @@ const GRAVEROBBER_EARVER_ROOM_THREE = {
 
 // Ivan the Scoundrel
 const IVANS_CACHE = {
-  roomName: "Ivan's Cache",
-  description: "",
-  summary: "",
+  roomName: "Ivan's Hidden Cache",
+  description: "Ivan's Hidden Cache, a clandestine chamber within the catacombs, echoes with whispered secrets and the scent of ill-gotten gains. Anticipation hangs thick in the air as tales of treasures untold circulate. At the heart of the room, a mysterious chest guards the spoils, tempting fate with promises of riches waiting to be unveiled.",
   backgroundImage: "",
   music: null,
   contents: {

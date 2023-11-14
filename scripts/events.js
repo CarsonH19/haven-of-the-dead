@@ -39,7 +39,6 @@ const SAFE_ROOM = {
   passValue: null,
   failDamage: null,
   functionOne: () => {
-
     healPlayer(calculatePlayerMaxHealth());
   },
   functionTwo: null,
@@ -241,15 +240,14 @@ const IVAN_THE_SCOUNDREL = {
   eventType: "NPC",
   description: `
   Trapped, a scoundrel ensnared in a spider's web begs, "Release me, and treasures hidden in these catacombs shall be yours." Dare you free the scoundrel, confronting the unknown horrors lurking nearby?`,
-  summary: '',
+  summary: "",
   optionOne: "Release",
   optionTwo: "Leave",
   passValue: null,
   failDamage: null,
   functionOne: () => {
     writeToLog(LOG_EVENT_NPC_OPTION_ONE);
-    currentRoom.summary = `Amidst the severed limbs of the defeated arachnid, the scoundrel, grateful yet wary, hands over a cryptic key. "Treasures await within my hidden cache," he smirks. "Take what's yours."`
-    IVAN_THE_SCOUNDREL.summary = `You saved Ivan the Scoundrel from a terrible fate and he rewarded you with the key to his hidden cache.`;
+    IVAN_THE_SCOUNDREL.summary = `Amidst the severed limbs of the defeated arachnid, the scoundrel, grateful yet wary, hands over a cryptic key. "Treasures await within my hidden cache," he smirks. "Take what's yours."`;
     currentRoom.contents.items.push(CACHE_KEY); // reward for saving him
     currentRoom.contents.monsters.push(BROODMOTHER); // mini-boss
     let addRoom = roomCounter + 10; // start room counter for event 2
@@ -265,8 +263,7 @@ const IVAN_THE_SCOUNDREL = {
   },
   functionTwo: () => {
     writeToLog(LOG_EVENT_NPC_OPTION_TWO);
-    currentRoom.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
-    IVAN_THE_SCOUNDREL.summary = `You abandoned Ivan the Scoundrel, leaving him to perish in the spider's web. He will not forget this.`;
+    IVAN_THE_SCOUNDREL.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
     let addRoom = roomCounter + 5; // start room counter for to add traps
     let ivanInterval = setInterval(() => {
       if (roomCounter > addRoom) {
@@ -274,10 +271,11 @@ const IVAN_THE_SCOUNDREL = {
           IVAN_TRAP_ROOM_ONE,
           IVAN_TRAP_ROOM_TWO,
           IVAN_TRAP_ROOM_THREE
-        );        clearInterval(ivanInterval);
+        );
+        clearInterval(ivanInterval);
       }
     }, 60000);
-   
+
     LAUGHING_COFFIN_ROOM.contents.monsters.push(IVAN_STATS);
     setRoomSummary();
     setTimeout(renderRoomSummaryModal, 5000);
@@ -292,11 +290,10 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   optionTwo: "Leave",
   functionOne: () => {
     writeToLog(LOG_EVENT_NPC_OPTION_ONE);
-    currentRoom.summary = `Adrift in the poison's haze, resilience ignites within. Battling through weakness, you stand defiant against Ivan and the scoundrels. Gasping in triumph, you stand amidst the defeated, the ambush thwarted.`;
     IVAN_THE_SCOUNDREL_EVENT_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
-
     useConsumable("Ivan's Cache Key"); // deletes item from inventory
     POISONED.function();
+    monsterAttackHandler();
     currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
     currentRoom.contents.items.push(
       LAUGHING_COFFIN_COIN,
@@ -309,8 +306,17 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   },
   functionTwo: () => {
     writeToLog(LOG_EVENT_NPC_OPTION_TWO);
-    LAUGHING_COFFIN_ROOM.contents.monsters.push(IVAN_STATS);
-    setTimeout(renderRoomSummaryModal, 5000);
+    IVAN_THE_SCOUNDREL_EVENT_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
+    useConsumable("Ivan's Cache Key"); // deletes item from inventory
+    currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
+    currentRoom.contents.items.push(
+      LAUGHING_COFFIN_COIN,
+      SHADOWSTEP_BOOTS,
+      ROWDY_WISP
+    );
+    setRoomSummary();
+    startBattle();
+    monsterAttackHandler();
   },
 };
 
@@ -463,10 +469,10 @@ const COFFIN_SPIDER_EVENT = {
 };
 
 const LAUGHING_COFFIN_EVENT = {
-  name: "The Laughing Coffin Tavern",
+  name: "The Laughing Coffin",
   eventType: "MISC",
-  description:
-    "A group of scoundrels demand you pay a Laughing Coffin Coin before you can the tavern.",
+  description: `The Laughing Coffin tavern, sanctuary for underworld denizens. Its creaking sign, carved with a skeletal grin, entices the bold. Amid dim-lit haze, dubious characters eye you, inviting pay to join their revelry. The air, thick with whispered schemes, hints at the consequences of refusing. Pay the toll or risk the ire of its wicked patrons.`,
+  summary: "",
   optionOne: "Pay",
   optionTwo: "Refuse",
   functionOne: () => {
@@ -476,55 +482,32 @@ const LAUGHING_COFFIN_EVENT = {
       patrons.includes(IVAN_STATS) &&
       inventoryItems.includes(LAUGHING_COFFIN_COIN)
     ) {
-      // writeToLog() you enter the tavern and find Ivan. Surprised to find you here -> you'll pay for leaving me to die!
-      useConsumable(LAUGHING_COFFIN_COIN); // deletes the coin from inventory
+      LAUGHING_COFFIN_EVENT.summary = `After a fierce brawl with Ivan, the Laughing Coffin's patrons swiftly eject you for the disruption. However, in acknowledgment of your coin, they send you off with a drink, the bitter taste of conflict lingering in the air`;
       LAUGHING_COFFIN_ROOM.contents.items.push(BLACKHEART_BREW);
-      setRoomSummary();
-      startBattle();
-      // change roomSummary no fighting! Take your drink and get out!
-    } else if (
-      patrons.includes(IVAN_STATS) &&
-      !inventoryItems.includes(LAUGHING_COFFIN_COIN)
-    ) {
-      // writeToLog() So you're a liar and you left me to die ... get him boys!
-      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
+      useConsumable("Laughing Coffin Coin"); // removes coin from inventory
+      writeToLog(LOG_EVENT_MISC_OPTION_ONE, "ONE");
       setRoomSummary();
       startBattle();
     } else if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
-      //writeToLog() The scoundrels welcome you to have a drink
+      LAUGHING_COFFIN_EVENT.summary = `You pay the toll, exchanging a Laughing Coffin Coin for camaraderie and unexpected relaxation within the infamous tavern.`
+      useConsumable("Laughing Coffin Coin"); // removes coin from inventory
+      writeToLog(LOG_EVENT_MISC_OPTION_ONE, "TWO");
       healPlayer(calculatePlayerMaxHealth());
-      renderStatusEffects(BLACKHEART_BREW);
       setRoomSummary();
-      setTimeout(newRoomAnimation, 2000);
-      setTimeout(renderRoomSummaryModal, 7000);
+      setTimeout(BLACKHEART_BREW.function, 6500);
+      setTimeout(newRoomAnimation, 5000);
+      setTimeout(renderRoomSummaryModal, 9000);
     } else {
-      // writeToLog() If you don't have coin, don't waste our time!
-      console.log('NO COIN!');
+      writeToLog(LOG_EVENT_MISC_OPTION_ONE, "THREE");
+      console.log("NO COIN!");
       patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
       setRoomSummary();
       startBattle();
     }
   },
   functionTwo: () => {
-    let patrons = LAUGHING_COFFIN_ROOM.contents.monsters;
-
-    if (
-      patrons.includes(IVAN_STATS) &&
-      inventoryItems.includes(CACHE_KEY)
-    ) {
-      // writeToLog() You should have just opened the cache, now we have to do this the hard way.
-      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
-      setRoomSummary();
-      startBattle();
-    } else if (patrons.includes(IVAN_STATS)) {
-      // writeToLog() You're gonna wish I died in that web!
-      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
-      setRoomSummary();
-      startBattle();
-    } else {
-      // writeToLog() If your not hear to spend your coin then move along before you get hurt.
-      setTimeout(renderRoomSummaryModal, 5000);
-    }
+    writeToLog(LOG_EVENT_MISC_OPTION_TWO);
+    setTimeout(renderRoomSummaryModal, 5000);
   },
 };
 
@@ -644,7 +627,6 @@ function generalEventHandler(option) {
   }, 1900);
 
   currentRoom.contents.events = null;
-  // renderRoomSummaryModal(); Commented out for Graverobber Earver's Option One Event
   updatePlayerTrackers();
 }
 
@@ -682,7 +664,7 @@ function renderEvent(event) {
       case "SAFE ROOM":
         SAFE_ROOM.functionOne();
         writeToLog(LOG_EVENT_SAFE_ROOM);
-        console.log('HELLO');
+        console.log("HELLO");
         currentRoom.contents.events = null;
         setTimeout(renderContinueButton, 5000);
         break;

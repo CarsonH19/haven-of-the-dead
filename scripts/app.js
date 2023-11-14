@@ -645,7 +645,7 @@ function renderRoomSummaryModal() {
       descriptionHeader.textContent = `${roomSummaryInformation.roomName}`;
       roomSummaryDescription.appendChild(descriptionHeader);
       descriptionText = document.createElement("p");
-      descriptionText.textContent = `${roomSummaryInformation.summary}`;
+      descriptionText.textContent = `${roomSummaryInformation.description}`;
       roomSummaryDescription.appendChild(descriptionText);
 
       // Events
