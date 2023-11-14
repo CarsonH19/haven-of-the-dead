@@ -286,11 +286,14 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   //!UNFINISHED!
   name: "Ivan the Scoundrel",
   eventType: "NPC",
-  description: "You find Ivan's hidden cache. You have the key to open it.",
+  description: `Stumbling upon Ivan the Scoundrel's secret cache, a hidden bounty awaits. A glinting lock beckons. Will you wield Ivan's Cache Key to unveil the treasures within?`,
   optionOne: "Open",
-  optionTwo: "Don't Open",
+  optionTwo: "Leave",
   functionOne: () => {
-    //writeToLog(); Poison smoke billows, its an ambush!
+    writeToLog(LOG_EVENT_NPC_OPTION_ONE);
+    currentRoom.summary = `Adrift in the poison's haze, resilience ignites within. Battling through weakness, you stand defiant against Ivan and the scoundrels. Gasping in triumph, you stand amidst the defeated, the ambush thwarted.`;
+    IVAN_THE_SCOUNDREL_EVENT_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
+
     useConsumable("Ivan's Cache Key"); // deletes item from inventory
     POISONED.function();
     currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
@@ -304,8 +307,7 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
     monsterAttackHandler();
   },
   functionTwo: () => {
-    // writeToLog
-    // add Ivan to the Laughing Coffin Room
+    writeToLog(LOG_EVENT_NPC_OPTION_TWO);
     LAUGHING_COFFIN_ROOM.contents.monsters.push(IVAN_STATS);
     setTimeout(renderRoomSummaryModal, 5000);
   },

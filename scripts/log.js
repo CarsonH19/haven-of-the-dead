@@ -1385,6 +1385,8 @@ function writeToLog(eventType, name, value) {
         newEntry.textContent = `"As Graverobber Earver's finally succeed in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their vengeful onslaught, ${name} meets his untimely demise, leaving ${value} to face the wrath of these risen guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Released from captivity, the scoundrel breathes thanks, but a looming arachnid descends, hungry eyes fixed on its newfound prey.`
+      } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
+        newEntry.textContent = `As the key turns, a malevolent hiss escapes as deadly poison gas clouds your senses. Weakening, you realize the scoundrel's gratitude was a ruse. Ivan and his accomplices emerge, encircling you like prey in ambush. Peril looms in their treacherous laughter."`;
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. ${name} turn towards ${value}, their hollow sockets fixed on your bold presence.`;
       } else if (event === GRERVIL_THE_BODILESS) {
@@ -1405,6 +1407,8 @@ function writeToLog(eventType, name, value) {
         newEntry.textContent = `As ${value} stand resolute in your refusal to aid Graverobber ${name}, the crypt door remains sealed, shunning the desecration of the king's final resting place. In the solemn silence that follows, a radiant light emanates from the heart of the chamber. The spectral king, recognizing your honor, presents you with his ethereal crown, a symbol of his gratitude and a powerful artifact.`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Refusing the scoundrel's plea, he hisses, "You'll rue this day. My revenge will echo through these cursed catacombs." The shadows deepen, foretelling the ominous path ahead.`;
+      } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
+        newEntry.textContent = `Stumbling upon the hidden cache, you resist the urge to open it, wary of the scoundrel's dubious past. The crypt's shadows seem to whisper caution, leaving the untouched bounty a tempting mystery in the labyrinth of the endless catacomb.`
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `After the skeletons mercilessly strike down ${name}, their hollow gaze fixates on ${value}.`;
       } else if (event === GRERVIL_THE_BODILESS) {
