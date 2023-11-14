@@ -432,13 +432,13 @@ function renderCurrentRoom(currentRoom) {
       renderEvent(currentRoom.contents.events);
       switch (currentRoom.contents.events.eventType) {
         case "TRAP":
-          writeToLog(LOG_EVENT_TRAP_DESCRIPTION, "you", "danger");
+          writeToLog(LOG_EVENT_TRAP_DESCRIPTION);
           break;
         case "NPC":
-          writeToLog(LOG_EVENT_NPC_DESCRIPTION, "you", "do");
+          writeToLog(LOG_EVENT_NPC_DESCRIPTION);
           break;
         case "MISC":
-          writeToLog(LOG_EVENT_MISC_DESCRIPTION, "you", "danger");
+          writeToLog(LOG_EVENT_MISC_DESCRIPTION);
           break;
       }
     }, 3000);
@@ -645,7 +645,7 @@ function renderRoomSummaryModal() {
       descriptionHeader.textContent = `${roomSummaryInformation.roomName}`;
       roomSummaryDescription.appendChild(descriptionHeader);
       descriptionText = document.createElement("p");
-      descriptionText.textContent = `${roomSummaryInformation.description}`;
+      descriptionText.textContent = `${roomSummaryInformation.summary}`;
       roomSummaryDescription.appendChild(descriptionText);
 
       // Events
@@ -654,7 +654,7 @@ function renderRoomSummaryModal() {
         eventHeader.textContent = `${roomInfo.events.name}`;
         roomSummaryEvents.appendChild(eventHeader);
         eventText = document.createElement("p");
-        eventText.textContent = `${roomInfo.events.description}`;
+        eventText.textContent = `${roomInfo.events.summary}`;
         roomSummaryEvents.appendChild(eventText);
       }
 
@@ -866,10 +866,12 @@ continueButton.addEventListener("click", () => {
   setTimeout(() => {
     // ITEM: Wisps
     if (guidingLightTracker === "ARRIVE") {
+      currentRoom = CANDLELIGHT_SHRINE;
       renderCurrentRoom(CANDLELIGHT_SHRINE);
       guidingLightTracker = null;
     } else if (rowdyWispTracker === "ARRIVE"){
-      renderCurrentRoom(laughingCoffinRoom);
+      currentRoom = LAUGHING_COFFIN_ROOM;
+      renderCurrentRoom(LAUGHING_COFFIN_ROOM);
       rowdyWispTracker = null;
     } else {
       console.log("Random Room");

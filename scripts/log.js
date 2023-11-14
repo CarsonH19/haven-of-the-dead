@@ -1370,7 +1370,7 @@ function writeToLog(eventType, name, value) {
     // ===============================
 
     case LOG_EVENT_NPC_DESCRIPTION:
-      newEntry.textContent = `${event.description} What will ${name} ${value}?`;
+      newEntry.textContent = `${event.description}`;
       narration = newEntry.textContent;
 
       break;
@@ -1384,6 +1384,7 @@ function writeToLog(eventType, name, value) {
       } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
         newEntry.textContent = `"As Graverobber Earver's finally succeed in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their vengeful onslaught, ${name} meets his untimely demise, leaving ${value} to face the wrath of these risen guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
+        newEntry.textContent = `Released from captivity, the scoundrel breathes thanks, but a looming arachnid descends, hungry eyes fixed on its newfound prey.`
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. ${name} turn towards ${value}, their hollow sockets fixed on your bold presence.`;
       } else if (event === GRERVIL_THE_BODILESS) {
@@ -1403,6 +1404,7 @@ function writeToLog(eventType, name, value) {
       } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
         newEntry.textContent = `As ${value} stand resolute in your refusal to aid Graverobber ${name}, the crypt door remains sealed, shunning the desecration of the king's final resting place. In the solemn silence that follows, a radiant light emanates from the heart of the chamber. The spectral king, recognizing your honor, presents you with his ethereal crown, a symbol of his gratitude and a powerful artifact.`;
       } else if (event === IVAN_THE_SCOUNDREL) {
+        newEntry.textContent = `Refusing the scoundrel's plea, he hisses, "You'll rue this day. My revenge will echo through these cursed catacombs." The shadows deepen, foretelling the ominous path ahead.`;
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `After the skeletons mercilessly strike down ${name}, their hollow gaze fixates on ${value}.`;
       } else if (event === GRERVIL_THE_BODILESS) {
@@ -1419,7 +1421,8 @@ function writeToLog(eventType, name, value) {
     // ===============================
 
     case LOG_EVENT_MISC_DESCRIPTION:
-      newEntry.textContent = `${event.description} What will ${name} ${value}?`;
+      newEntry.textContent = `${event.description}`;
+      narration = newEntry.textContent;
       break;
 
     case LOG_EVENT_MISC_OPTION_ONE:

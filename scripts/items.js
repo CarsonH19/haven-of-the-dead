@@ -776,9 +776,11 @@ const GUIDING_LIGHT = {
   duration: null,
   function: () => {
     const wisp = document.querySelector(".wisp");
-    let randomNumber = Math.floor(Math.random() * 3) + 1;
+    CANDLELIGHT_SHRINE.contents.events = SAFE_ROOM;
+    let randomNumber = Math.floor(Math.random() * 0) + 0;
     let duration = roomCounter + randomNumber;
     GUIDING_LIGHT.duration = "Searching";
+
     let guidingLightInterval = setInterval(() => {
       GUIDING_LIGHT.duration = `Duration: ${duration - roomCounter} Rooms`;
       if (roomCounter >= duration) {
@@ -811,9 +813,11 @@ const ROWDY_WISP = {
   duration: null,
   function: () => {
     const wisp = document.querySelector(".wisp");
+    LAUGHING_COFFIN_ROOM.contents.events = LAUGHING_COFFIN_EVENT;
     let randomNumber = Math.floor(Math.random() * 0) + 0;
     let duration = roomCounter + randomNumber;
     ROWDY_WISP.duration = "Searching";
+
     let rowdyWispInterval = setInterval(() => {
       ROWDY_WISP.duration = `Duration: ${duration - roomCounter} Rooms`;
       if (roomCounter >= duration) {

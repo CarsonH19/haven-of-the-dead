@@ -22,6 +22,7 @@
 
 // MISC Events
 // Coffin Spider
+// The Laughing Coffin
 
 // ===============================
 //         Safe Room
@@ -234,43 +235,49 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
 };
 
 const IVAN_THE_SCOUNDREL = {
-  // !FINISHED!
-  // !UNFINISHED!
   name: "Ivan the Scoundrel",
   eventType: "NPC",
-  description: "",
-  optionOne: "Set Free",
+  description: `
+  Trapped, a scoundrel ensnared in a spider's web begs, "Release me, and treasures hidden in these catacombs shall be yours." Dare you free the scoundrel, confronting the unknown horrors lurking nearby?`,
+  summary: '',
+  optionOne: "Release",
   optionTwo: "Leave",
   passValue: null,
   failDamage: null,
   functionOne: () => {
-    // writeToLog thanks you
-    // gives you a key to a room with Ivan's secret stash of treasure
-    currentRoom.contents.items.push(CACHE_KEY);
-    // key adds trapped room where he tries to kill you and steal your items
-    let addRoom = roomCounter + 1;
+    writeToLog(LOG_EVENT_NPC_OPTION_ONE);
+    currentRoom.summary = `Amidst the severed limbs of the defeated arachnid, the scoundrel, grateful yet wary, hands over a cryptic key. "Treasures await within my hidden cache," he smirks. "Take what's yours."`
+    IVAN_THE_SCOUNDREL.summary = `You saved Ivan the Scoundrel from a terrible fate and he rewarded you with the key to his hidden cache.`;
+    currentRoom.contents.items.push(CACHE_KEY); // reward for saving him
+    currentRoom.contents.monsters.push(BROODMOTHER); // mini-boss
+    let addRoom = roomCounter + 10; // start room counter for event 2
     let ivanInterval = setInterval(() => {
-      console.log(`currentRoomCounter: ${addRoom}`);
       if (roomCounter > addRoom) {
-        console.log("Room Added");
         catacombRooms.push(IVANS_CACHE);
         clearInterval(ivanInterval);
       }
-    }, 5000);
-    catacombRooms.push(IVANS_CACHE);
+    }, 60000);
+
     setRoomSummary();
-    setTimeout(renderRoomSummaryModal, 5000);
+    startBattle();
   },
   functionTwo: () => {
-    // writeToLog angry says you won’t leave the catacombs alive!
-    // adds additional trap rooms to catacomb array.
-    catacombRooms.push(
-      IVAN_TRAP_ROOM_ONE,
-      IVAN_TRAP_ROOM_TWO,
-      IVAN_TRAP_ROOM_THREE
-    );
-    // add Ivan the Scoundrel to the Laughing Coffin room
-    laughingCoffinRoom.contents.monsters.push(IVAN_STATS);
+    writeToLog(LOG_EVENT_NPC_OPTION_TWO);
+    currentRoom.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
+    IVAN_THE_SCOUNDREL.summary = `You abandoned Ivan the Scoundrel, leaving him to perish in the spider's web. He will not forget this.`;
+    let addRoom = roomCounter + 5; // start room counter for to add traps
+    let ivanInterval = setInterval(() => {
+      if (roomCounter > addRoom) {
+        catacombRooms.push(
+          IVAN_TRAP_ROOM_ONE,
+          IVAN_TRAP_ROOM_TWO,
+          IVAN_TRAP_ROOM_THREE
+        );        clearInterval(ivanInterval);
+      }
+    }, 60000);
+   
+    LAUGHING_COFFIN_ROOM.contents.monsters.push(IVAN_STATS);
+    setRoomSummary();
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
@@ -299,20 +306,20 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   functionTwo: () => {
     // writeToLog
     // add Ivan to the Laughing Coffin Room
-    laughingCoffinRoom.contents.monsters.push(IVAN_STATS);
+    LAUGHING_COFFIN_ROOM.contents.monsters.push(IVAN_STATS);
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
 
 const LAUGHING_COFFIN_EVENT = {
-  name: "The Laughing Coffin",
+  name: "The Laughing Coffin Tavern",
   eventType: "MISC",
   description:
-    "A group of scoundrels demands you pay a Laughing Coffin Coin before you can the tavern.",
+    "A group of scoundrels demand you pay a Laughing Coffin Coin before you can the tavern.",
   optionOne: "Pay",
   optionTwo: "Refuse",
   functionOne: () => {
-    let patrons = laughingCoffinRoom.contents.monsters;
+    let patrons = LAUGHING_COFFIN_ROOM.contents.monsters;
 
     if (
       patrons.includes(IVAN_STATS) &&
@@ -320,12 +327,15 @@ const LAUGHING_COFFIN_EVENT = {
     ) {
       // writeToLog() you enter the tavern and find Ivan. Surprised to find you here -> you'll pay for leaving me to die!
       useConsumable(LAUGHING_COFFIN_COIN); // deletes the coin from inventory
+      LAUGHING_COFFIN_ROOM.contents.items.push(BLACKHEART_BREW);
+      setRoomSummary();
       startBattle();
+      // change roomSummary no fighting! Take your drink and get out!
     } else if (
       patrons.includes(IVAN_STATS) &&
       !inventoryItems.includes(LAUGHING_COFFIN_COIN)
     ) {
-      // writeToLog() You walked into the lions den... get him boys!
+      // writeToLog() So you're a liar and you left me to die ... get him boys!
       patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
       setRoomSummary();
       startBattle();
@@ -345,13 +355,13 @@ const LAUGHING_COFFIN_EVENT = {
     }
   },
   functionTwo: () => {
-    let patrons = laughingCoffinRoom.contents.monsters;
+    let patrons = LAUGHING_COFFIN_ROOM.contents.monsters;
 
     if (
       patrons.includes(IVAN_STATS) &&
       inventoryItems.includes(CACHE_KEY)
     ) {
-      // writeToLog() You should have just opened the cache
+      // writeToLog() You should have just opened the cache, now we have to do this the hard way.
       patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
       setRoomSummary();
       startBattle();
@@ -498,6 +508,7 @@ const COFFIN_SPIDER_EVENT = {
     if (randomNumber >= 7) {
       getItem("RANDOM");
       setRoomSummary();
+      setTimeout(renderRoomSummaryModal, 5000);
       // writeToLog(); Normal Coffin
     } else {
       currentRoom.contents.monsters.push(COFFIN_SPIDER);
@@ -510,6 +521,7 @@ const COFFIN_SPIDER_EVENT = {
   },
   functionTwo: () => {
     // writeToLog(); Ignore
+    setTimeout(renderRoomSummaryModal, 5000);
   },
 };
 

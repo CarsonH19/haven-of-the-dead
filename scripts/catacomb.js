@@ -73,17 +73,18 @@ let catacombRooms = [
   //     events: COFFIN_SPIDER_EVENT
   //   },
   // },
-  // {
-  //   roomName: "Cobwebbed Crypt",
-  //   description: '',
-  //   backgroundImage: 'styles/images/corridor-two.png',
-  //   music: null,
-  //   contents: {
-  //     monsters: [],
-  //     items: [],
-  //     events: IVAN_THE_SCOUNDREL
-  //   },
-  // },
+  {
+    roomName: "Cobwebbed Crypt",
+    description: '',
+    summary: '',
+    backgroundImage: 'styles/images/corridor-two.png',
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: IVAN_THE_SCOUNDREL
+    },
+  },
   // {
   //   roomName: "The Hatchery", // !FINISHED!
   //   description: '',
@@ -276,6 +277,7 @@ const TIER_TWO_ROOMS = [
   {
     roomName: "Bone-forged Alter", // !FINISHED!
     description: "",
+    summary: "",
     backgroundImage: "styles/images/corridor-one.png",
     music: null,
     contents: {
@@ -287,6 +289,7 @@ const TIER_TWO_ROOMS = [
   {
     roomName: "Pestilent Pit", // !FINISHED!
     description: "",
+    summary: "",
     backgroundImage: "styles/images/corridor-two.png",
     music: null,
     contents: {
@@ -320,6 +323,7 @@ const TIER_FOUR_ROOMS = [];
 const CANDLELIGHT_SHRINE = {
   roomName: "Candlelight Shrine",
   description: "A safe place.",
+  summary: "",
   backgroundImage: "styles/images/corridor-one.png",
   music: null,
   contents: {
@@ -329,9 +333,10 @@ const CANDLELIGHT_SHRINE = {
   },
 };
 
-let laughingCoffinRoom = { 
+const LAUGHING_COFFIN_ROOM = { 
   roomName: "The Laughing Coffin", 
   description: "Tavern within the catacombs ran by scoundrels.",
+  summary: "",
   backgroundImage: "styles/images/corridor-two.png",
   music: null,
   contents: {
@@ -350,6 +355,7 @@ let laughingCoffinRoom = {
 const GRAVEROBBER_EARVER_ROOM_TWO = {
   roomName: "Gilded Sarcophagus",
   description: "A large stone sarcophagus.",
+  summary: "",
   backgroundImage: "",
   music: null,
   contents: {
@@ -362,6 +368,7 @@ const GRAVEROBBER_EARVER_ROOM_TWO = {
 const GRAVEROBBER_EARVER_ROOM_THREE = {
   roomName: "Crypt of the Fallen King",
   description: "A gilded door of a seemingly wealthy person in life.",
+  summary: "",
   backgroundImage: "",
   music: null,
   contents: {
@@ -375,6 +382,7 @@ const GRAVEROBBER_EARVER_ROOM_THREE = {
 const IVANS_CACHE = {
   roomName: "Ivan's Cache",
   description: "",
+  summary: "",
   backgroundImage: "",
   music: null,
   contents: {
