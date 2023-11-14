@@ -329,7 +329,7 @@ const CANDLELIGHT_SHRINE = {
   contents: {
     monsters: [],
     items: [],
-    events: SAFE_ROOM,
+    events: SAFE_ROOM
   },
 };
 

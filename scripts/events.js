@@ -25,19 +25,21 @@
 // The Laughing Coffin
 
 // ===============================
-//         Safe Room
+//         Safe Rooms
 // ===============================
 
 const SAFE_ROOM = {
   name: "Candlelight Shrine",
   eventType: "SAFE ROOM",
   description:
-    "You find a Candlelight Shrine. Evil can't enter this holy place. You are free to rest.",
+    "Before you lies the Candlelight Shrine, a haven untainted by darkness. Here, malevolence recoils, granting you respite. Embrace the flickering sanctuary, and let the shadows fade as you rest, shielded from the evil that prowls beyond its sacred glow.",
+  summary: `You rest at the Candlelight Shrine. The sacred flames stand sentinel, offering solace in the heart of the endless catacomb.`,
   optionOne: null,
   optionTwo: null,
   passValue: null,
   failDamage: null,
   functionOne: () => {
+
     healPlayer(calculatePlayerMaxHealth());
   },
   functionTwo: null,
@@ -283,7 +285,6 @@ const IVAN_THE_SCOUNDREL = {
 };
 
 const IVAN_THE_SCOUNDREL_EVENT_TWO = {
-  //!UNFINISHED!
   name: "Ivan the Scoundrel",
   eventType: "NPC",
   description: `Stumbling upon Ivan the Scoundrel's secret cache, a hidden bounty awaits. A glinting lock beckons. Will you wield Ivan's Cache Key to unveil the treasures within?`,
@@ -310,72 +311,6 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
     writeToLog(LOG_EVENT_NPC_OPTION_TWO);
     LAUGHING_COFFIN_ROOM.contents.monsters.push(IVAN_STATS);
     setTimeout(renderRoomSummaryModal, 5000);
-  },
-};
-
-const LAUGHING_COFFIN_EVENT = {
-  name: "The Laughing Coffin Tavern",
-  eventType: "MISC",
-  description:
-    "A group of scoundrels demand you pay a Laughing Coffin Coin before you can the tavern.",
-  optionOne: "Pay",
-  optionTwo: "Refuse",
-  functionOne: () => {
-    let patrons = LAUGHING_COFFIN_ROOM.contents.monsters;
-
-    if (
-      patrons.includes(IVAN_STATS) &&
-      inventoryItems.includes(LAUGHING_COFFIN_COIN)
-    ) {
-      // writeToLog() you enter the tavern and find Ivan. Surprised to find you here -> you'll pay for leaving me to die!
-      useConsumable(LAUGHING_COFFIN_COIN); // deletes the coin from inventory
-      LAUGHING_COFFIN_ROOM.contents.items.push(BLACKHEART_BREW);
-      setRoomSummary();
-      startBattle();
-      // change roomSummary no fighting! Take your drink and get out!
-    } else if (
-      patrons.includes(IVAN_STATS) &&
-      !inventoryItems.includes(LAUGHING_COFFIN_COIN)
-    ) {
-      // writeToLog() So you're a liar and you left me to die ... get him boys!
-      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
-      setRoomSummary();
-      startBattle();
-    } else if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
-      //writeToLog() The scoundrels welcome you to have a drink
-      healPlayer(calculatePlayerMaxHealth());
-      renderStatusEffects(BLACKHEART_BREW);
-      setRoomSummary();
-      setTimeout(newRoomAnimation, 2000);
-      setTimeout(renderRoomSummaryModal, 7000);
-    } else {
-      // writeToLog() If you don't have coin, don't waste our time!
-      console.log('NO COIN!');
-      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
-      setRoomSummary();
-      startBattle();
-    }
-  },
-  functionTwo: () => {
-    let patrons = LAUGHING_COFFIN_ROOM.contents.monsters;
-
-    if (
-      patrons.includes(IVAN_STATS) &&
-      inventoryItems.includes(CACHE_KEY)
-    ) {
-      // writeToLog() You should have just opened the cache, now we have to do this the hard way.
-      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
-      setRoomSummary();
-      startBattle();
-    } else if (patrons.includes(IVAN_STATS)) {
-      // writeToLog() You're gonna wish I died in that web!
-      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
-      setRoomSummary();
-      startBattle();
-    } else {
-      // writeToLog() If your not hear to spend your coin then move along before you get hurt.
-      setTimeout(renderRoomSummaryModal, 5000);
-    }
   },
 };
 
@@ -524,6 +459,72 @@ const COFFIN_SPIDER_EVENT = {
   functionTwo: () => {
     // writeToLog(); Ignore
     setTimeout(renderRoomSummaryModal, 5000);
+  },
+};
+
+const LAUGHING_COFFIN_EVENT = {
+  name: "The Laughing Coffin Tavern",
+  eventType: "MISC",
+  description:
+    "A group of scoundrels demand you pay a Laughing Coffin Coin before you can the tavern.",
+  optionOne: "Pay",
+  optionTwo: "Refuse",
+  functionOne: () => {
+    let patrons = LAUGHING_COFFIN_ROOM.contents.monsters;
+
+    if (
+      patrons.includes(IVAN_STATS) &&
+      inventoryItems.includes(LAUGHING_COFFIN_COIN)
+    ) {
+      // writeToLog() you enter the tavern and find Ivan. Surprised to find you here -> you'll pay for leaving me to die!
+      useConsumable(LAUGHING_COFFIN_COIN); // deletes the coin from inventory
+      LAUGHING_COFFIN_ROOM.contents.items.push(BLACKHEART_BREW);
+      setRoomSummary();
+      startBattle();
+      // change roomSummary no fighting! Take your drink and get out!
+    } else if (
+      patrons.includes(IVAN_STATS) &&
+      !inventoryItems.includes(LAUGHING_COFFIN_COIN)
+    ) {
+      // writeToLog() So you're a liar and you left me to die ... get him boys!
+      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
+      setRoomSummary();
+      startBattle();
+    } else if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
+      //writeToLog() The scoundrels welcome you to have a drink
+      healPlayer(calculatePlayerMaxHealth());
+      renderStatusEffects(BLACKHEART_BREW);
+      setRoomSummary();
+      setTimeout(newRoomAnimation, 2000);
+      setTimeout(renderRoomSummaryModal, 7000);
+    } else {
+      // writeToLog() If you don't have coin, don't waste our time!
+      console.log('NO COIN!');
+      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
+      setRoomSummary();
+      startBattle();
+    }
+  },
+  functionTwo: () => {
+    let patrons = LAUGHING_COFFIN_ROOM.contents.monsters;
+
+    if (
+      patrons.includes(IVAN_STATS) &&
+      inventoryItems.includes(CACHE_KEY)
+    ) {
+      // writeToLog() You should have just opened the cache, now we have to do this the hard way.
+      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
+      setRoomSummary();
+      startBattle();
+    } else if (patrons.includes(IVAN_STATS)) {
+      // writeToLog() You're gonna wish I died in that web!
+      patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
+      setRoomSummary();
+      startBattle();
+    } else {
+      // writeToLog() If your not hear to spend your coin then move along before you get hurt.
+      setTimeout(renderRoomSummaryModal, 5000);
+    }
   },
 };
 
@@ -679,9 +680,9 @@ function renderEvent(event) {
         break;
 
       case "SAFE ROOM":
-        console.log("Safe Room");
         SAFE_ROOM.functionOne();
-        //writeToLog()
+        writeToLog(LOG_EVENT_SAFE_ROOM);
+        console.log('HELLO');
         currentRoom.contents.events = null;
         setTimeout(renderContinueButton, 5000);
         break;
