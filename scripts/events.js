@@ -489,7 +489,7 @@ const LAUGHING_COFFIN_EVENT = {
       setRoomSummary();
       startBattle();
     } else if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
-      LAUGHING_COFFIN_EVENT.summary = `You pay the toll, exchanging a Laughing Coffin Coin for camaraderie and unexpected relaxation within the infamous tavern.`
+      LAUGHING_COFFIN_EVENT.summary = `You pay the toll, exchanging a Laughing Coffin Coin for camaraderie and unexpected relaxation within the infamous tavern.`;
       useConsumable("Laughing Coffin Coin"); // removes coin from inventory
       writeToLog(LOG_EVENT_MISC_OPTION_ONE, "TWO");
       healPlayer(calculatePlayerMaxHealth());
@@ -509,19 +509,6 @@ const LAUGHING_COFFIN_EVENT = {
     writeToLog(LOG_EVENT_MISC_OPTION_TWO);
     setTimeout(renderRoomSummaryModal, 5000);
   },
-};
-
-const BONEVAULT = {
-  // !UNFINISHED!
-  name: "Bonevault",
-  eventType: "MISC",
-  description: "",
-  optionOne: "",
-  optionTwo: "",
-  passValue: null,
-  failDamage: null,
-  functionOne: () => {},
-  functionTwo: () => {},
 };
 
 const ECHOING_CHIME = {
@@ -552,6 +539,49 @@ const BLOOD_SIGIL = {
   functionOne: null,
   functionTwo: null,
 };
+
+// ===============================
+//          Locked Rooms
+// ===============================
+
+const LOCKED_ROOM = {
+  // !UNFINISHED!
+  name: "Locked Room",
+  eventType: "MISC",
+  description: "You discover a locked room. Do you wish to open it.",
+  optionOne: "Unlock",
+  optionTwo: "Leave",
+  passValue: null,
+  failDamage: null,
+  functionOne: () => {
+    if (inventoryItems.includes(SKELETON_KEY)) {
+      useConsumable("Skeleton Key"); // removes item from inventory
+      lockedRoomHandler(currentRoom.roomName);
+    } else {
+      writeToLog(LOG_EVENT_MISC_OPTION_ONE, 'TWO');
+      setTimeout(renderRoomSummaryModal, 5000);
+    }
+  },
+  functionTwo: () => {
+    writeToLog(LOG_EVENT_MISC_OPTION_TWO);
+    setTimeout(renderRoomSummaryModal, 5000);
+  },
+};
+
+function lockedRoomHandler(room) {
+  let monsters = currentRoom.contents.monsters;
+  let items = currentRoom.contents.items;
+
+  switch (room) {
+    case "Bonevault":
+      writeToLog(LOG_EVENT_MISC_OPTION_ONE, currentRoom.roomName, 'ONE');
+      monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
+      items.push(BONEMAIL, BONE_MARROW_SOUP, POTION, POTION);
+      getItem("RARE");
+      setRoomSummary();
+      startBattle();
+  }
+}
 
 // ===============================
 //          Event Logic

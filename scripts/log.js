@@ -1448,6 +1448,18 @@ function writeToLog(eventType, name, value) {
         } else if (name === "THREE") {
           newEntry.textContent = `The scoundrels' eyes narrow, skepticism etched across their faces. "Show it then!" demands the leader, tension thickening. Your bluff exposed, the atmosphere ignites with menace. "Seems our new friend needs a harsh lesson," sneers another, drawing a blade.`;
         }
+      } else if (event === LOCKED_ROOM) {
+        if (name === "ONE") {
+          newEntry.textContent = `${currentRoom.description}`;
+        } else if (name === "TWO") {
+          if (heroChoice === 'PALADIN') {
+            newEntry.textContent = `"The divine light guides my path through these cryptic depths, revealing the way even in the absence of a key."`;
+          } else if (heroChoice === 'ROGUE') {
+            newEntry.textContent = `"The key eludes us, but shadows conceal more than keys reveal."`;
+          } else if (heroChoice === 'PRIESTESS') {
+            newEntry.textContent = `"In the absence of a key, divine guidance shall illuminate my path forward."`;
+          }
+        }
       }
 
       narration = newEntry.textContent;
@@ -1456,6 +1468,8 @@ function writeToLog(eventType, name, value) {
     case LOG_EVENT_MISC_OPTION_TWO:
       if (event === LAUGHING_COFFIN_EVENT) {
         newEntry.textContent = `With a Laughing Coffin Coin in hand, the den of rogues turns their eyes upon you. "Got the token, have you?" one grins, only to scowl as you hesitate. "Wasting our time, are you?" another scoffs. "If you ain't here to play, stranger, best you leave before we make you regret it."`
+      } else if (event === LOCKED_ROOM) {
+        newEntry.textContent = `As you press on through the catacomb, the chamber remains tightly sealed, its secrets remain a mystery.`;
       }
 
       narration = newEntry.textContent;
@@ -1468,6 +1482,8 @@ function writeToLog(eventType, name, value) {
     case LOG_EVENT_ITEM:
       if (name === LAUGHING_COFFIN_COIN) {
         newEntry.textContent = `You pay a Laughing Coffin Coin and enter the tavern.`;
+      } else if (name === SKELETON_KEY) {
+        newEntry.textContent = `You use a Skeleton Key to unlock the ${value}`;
       }
       narration = newEntry.textContent;
       break;

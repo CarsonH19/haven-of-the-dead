@@ -151,17 +151,17 @@ let catacombRooms = [
   //     events: null
   //   },
   // },
-  // // {
-  // //   roomName: "Bonevault",
-  // //   description: '',
-  // //   backgroundImage: 'styles/images/chamber-one.png',
-  // //   music: null,
-  // //   contents: {
-  // //     monsters: [],
-  // //     items: [],
-  // //     events: BONEVAULT
-  // //   },
-  // // },
+  {
+    roomName: "Bonevault",
+    description: '',
+    backgroundImage: 'styles/images/rattling-hollow.png',
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: LOCKED_ROOM
+    },
+  },
   // {
   //   roomName: "Skeletal Sepulcher", // !FINISHED!
   //   description: '',
