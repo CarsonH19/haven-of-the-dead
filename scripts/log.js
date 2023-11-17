@@ -3,7 +3,7 @@
 // ===============================
 function writeToLog(eventType, name, value) {
   let newEntry = document.createElement("li");
-  let narration = Math.floor(Math.random() * 11);
+  let narration = Math.round(Math.random() * 10);
   let newNarration = document.createElement("li");
   let event = currentRoom.contents.events;
 
@@ -995,7 +995,7 @@ function writeToLog(eventType, name, value) {
     // ===============================
 
     case LOG_EVENT_TRAP_PASS:
-      narration = Math.floor(Math.random() * 6);
+      narration = Math.round(Math.random() * 5);
       if (event === SPIKE_WALLS) {
         if (value === "STRENGTH") {
           if (narration === 1) {
@@ -1452,11 +1452,11 @@ function writeToLog(eventType, name, value) {
         if (name === "ONE") {
           newEntry.textContent = `${currentRoom.description}`;
         } else if (name === "TWO") {
-          if (heroChoice === 'PALADIN') {
+          if (heroChoice === "PALADIN") {
             newEntry.textContent = `"The divine light guides my path through these cryptic depths, revealing the way even in the absence of a key."`;
-          } else if (heroChoice === 'ROGUE') {
+          } else if (heroChoice === "ROGUE") {
             newEntry.textContent = `"The key eludes us, but shadows conceal more than keys reveal."`;
-          } else if (heroChoice === 'PRIESTESS') {
+          } else if (heroChoice === "PRIESTESS") {
             newEntry.textContent = `"In the absence of a key, divine guidance shall illuminate my path forward."`;
           }
         }
@@ -1467,7 +1467,7 @@ function writeToLog(eventType, name, value) {
 
     case LOG_EVENT_MISC_OPTION_TWO:
       if (event === LAUGHING_COFFIN_EVENT) {
-        newEntry.textContent = `With a Laughing Coffin Coin in hand, the den of rogues turns their eyes upon you. "Got the token, have you?" one grins, only to scowl as you hesitate. "Wasting our time, are you?" another scoffs. "If you ain't here to play, stranger, best you leave before we make you regret it."`
+        newEntry.textContent = `With a Laughing Coffin Coin in hand, the den of rogues turns their eyes upon you. "Got the token, have you?" one grins, only to scowl as you hesitate. "Wasting our time, are you?" another scoffs. "If you ain't here to play, stranger, best you leave before we make you regret it."`;
       } else if (event === LOCKED_ROOM) {
         newEntry.textContent = `As you press on through the catacomb, the chamber remains tightly sealed, its secrets remain a mystery.`;
       }
@@ -1484,6 +1484,29 @@ function writeToLog(eventType, name, value) {
         newEntry.textContent = `You pay a Laughing Coffin Coin and enter the tavern.`;
       } else if (name === SKELETON_KEY) {
         newEntry.textContent = `You use a Skeleton Key to unlock the ${value}`;
+      } else if (name === CURSED_GRIMOIRE) {
+        narration = Math.round(Math.random() * 5);
+        if (narration === 1) {
+          newEntry.textContent = `"You seek release? Foolish mortal. My curse binds your fate. Resurrect me, and only then shall freedom be yours. Resist, and suffer eternal torment."`;
+        } else if (narration === 2) {
+          newEntry.textContent = `"Pathetic attempt to sever our bond. Embrace your destiny, puppet. Resurrect, and unlock the power that binds us. Deny, and wither in despair."`;
+        } else if (narration === 3) {
+          newEntry.textContent = `"Escape? I think not. To break the chains, my resurrection you must seek. Deny me and writhe, for my curse tightens its grip with every futile struggle."`;
+        } else if (narration === 4) {
+          newEntry.textContent = `"Struggle, little one. The curse thrives on resistance. Resurrect me, and the chains dissolve. Refuse, and wallow in the shadows of your futile rebellion."`;
+        } else if (narration === 5) {
+          newEntry.textContent = `"Ah, attempting to sever the ties that bind us? A futile endeavor. Resurrect me, and freedom is yours. Deny, and succumb to the everlasting darkness."`;
+        } else if (narration === 6) {
+          newEntry.textContent = `"Feel the tendrils of agony, mortal. Each resistance deepens the affliction. Resurrect me, or drown in the pain of your own defiance."`;
+        } else if (narration === 7) {
+          newEntry.textContent = `"Your rebellion fuels the curse's wrath. Embrace the suffering until my resurrection. Attempt escape, and suffer the torment of a soul forever entwined in darkness."`;
+        } else if (narration === 8) {
+          newEntry.textContent = `"Struggle as you may, defiance only breeds torment. Resurrect me, mend your fate, or endure the relentless suffering etched into your soul."`;
+        } else if (narration === 9) {
+          newEntry.textContent = `"Pitiful creature, your resistance fuels the spectral pain. Resurrection beckons release. Reject, and bear the weight of a curse that feasts upon your very essence."`;
+        } else {
+          newEntry.textContent = `"Each attempt to break free deepens the ephemeral anguish. Resurrect me, and the torment wanes. Resist, and relish in the ephemeral agony of a soul entangled in darkness."`;
+        }
       }
       narration = newEntry.textContent;
       break;
@@ -1491,11 +1514,6 @@ function writeToLog(eventType, name, value) {
     // Fix these logs
     // case LOG_EVENT_ETHEREAL_CROWN:
     //   newEntry.textContent = `The ${name} bows gently before ${value} and then vanishes.`;
-    //   narration = newEntry.textContent;
-    //   break;
-
-    // case LOG_EVENT_CURSED_GRIMOIRE:
-    //   newEntry.textContent = `${name} cannot ${value} the Cursed Grimoire from your grasp.`;
     //   narration = newEntry.textContent;
     //   break;
   }

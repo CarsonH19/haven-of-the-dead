@@ -462,6 +462,18 @@ const CRIMSON_OFFERING = {
   },
 };
 
+const SKELETON_KEY = {
+  name: "Skeleton Key",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "This key can be used to unlock various locked rooms throughout the catacomb.",
+  function: () => {
+    writeToLog(LOG_EVENT_ITEM, SKELETON_KEY, currentRoom.roomName);
+  },
+};
+
 // ===============================
 //         QUEST ITEMS
 // ===============================
@@ -480,12 +492,12 @@ const CURSED_GRIMOIRE = {
   description: "",
   type: "MAGIC",
   rarity: "EPIC",
-  effect: "This item is cursed and cannot be removed until XXXXX is summoned.",
+  effect: "This item is cursed and cannot be unattuned.",
   function: () => {
     currentPlayerHealth--;
     playerHealthBar.value--;
     damageFlashAnimation();
-    // writeToLog() demon speaks to you telepathically and your head pounds in agony. Hear a clue about how to summon him.
+    writeToLog(LOG_EVENT_ITEM, CURSED_GRIMOIRE);
   },
 };
 
@@ -1003,8 +1015,6 @@ function removeItem(itemName) {
     const index = attunedItems.indexOf(itemObject);
     attunedItems.splice(index, 1);
     inventoryItems.push(itemObject);
-  } else {
-    // writeToLog unable to remove the Cursed Grimoire
   }
 
   clearInventory();
@@ -1012,18 +1022,21 @@ function removeItem(itemName) {
 }
 
 function findItemChance() {
-  let randomNumber = Math.round(Math.random() * 20 + baseFaith);
+  if (currentRoom.contents.events === null) {
+    let randomNumber = Math.round(Math.random() * 20 + baseFaith);
 
-  // ITEM: Graverobber's Spade - Increase item find chance by 10%
-  randomNumber += isItemAttuned(GRAVEROBBERS_SPADE, 0);
-  if (randomNumber >= 20) {
-    let itemRarity = Math.round(Math.random() * 100 + baseFaith);
-    if (itemRarity >= 91) {
-      getItem("EPIC");
-    } else if (itemRarity >= 61) {
-      getItem("RARE");
-    } else {
-      getItem("COMMON");
+    // ITEM: Graverobber's Spade - Increase item find chance by 10%
+    randomNumber += isItemAttuned(GRAVEROBBERS_SPADE, 0);
+
+    if (randomNumber >= 20) {
+      let itemRarity = Math.round(Math.random() * 100 + baseFaith);
+      if (itemRarity >= 91) {
+        getItem("EPIC");
+      } else if (itemRarity >= 61) {
+        getItem("RARE");
+      } else {
+        getItem("COMMON");
+      }
     }
   }
 }
@@ -1339,7 +1352,7 @@ inventoryModal.addEventListener("click", (event) => {
       buttons[i].id === "Cursed Grimoire" &&
       event.target === buttons[i]
     ) {
-      writeToLog(LOG_EVENT_CURSED_GRIMOIRE, "You", "remove");
+      CURSED_GRIMOIRE.function();
     }
   }
 });
