@@ -1484,6 +1484,8 @@ function writeToLog(eventType, name, value) {
         newEntry.textContent = `You pay a Laughing Coffin Coin and enter the tavern.`;
       } else if (name === SKELETON_KEY) {
         newEntry.textContent = `You use a Skeleton Key to unlock the ${value}`;
+      } else if (name === CACHE_KEY) {
+        newEntry.textContent = `You use the Cache Key to unlock Ivan's Hidden Cache.`;
       } else if (name === CURSED_GRIMOIRE) {
         narration = Math.round(Math.random() * 5);
         if (narration === 1) {
@@ -1507,7 +1509,10 @@ function writeToLog(eventType, name, value) {
         } else {
           newEntry.textContent = `"Each attempt to break free deepens the ephemeral anguish. Resurrect me, and the torment wanes. Resist, and relish in the ephemeral agony of a soul entangled in darkness."`;
         }
+      } else if (name === SOUL_JAR) {
+        newEntry.textContent = `As the abyss claims you, the Soul Jar shatters. Shadows coil around your essence, wrenching you from the void. Resurrected, echoes of ancient souls linger, whispering tales of the realm beyond death.`;
       }
+      
       narration = newEntry.textContent;
       break;
 

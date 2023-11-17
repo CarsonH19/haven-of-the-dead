@@ -438,7 +438,7 @@ const SOUL_JAR = {
       updatePlayerTrackers();
       healthLowAnimation();
 
-      // writeToLog() Resurrected! Soul Jar was destroyed!
+      writeToLog(LOG_EVENT_ITEM, SOUL_JAR);
       console.log("Resurrected with Soul Jar");
     }
   },
@@ -510,8 +510,8 @@ const CACHE_KEY = {
     "Given to you by Ivan the Scoundrel, he said it unlocks a chamber within the catacombs were his hidden cache is kept.",
   function: () => {
     // Unlocks a trapped vault.
-    // writeToLog()
-  },
+    writeToLog(LOG_EVENT_ITEM, CACHE_KEY);
+    },
 };
 
 const LAUGHING_COFFIN_COIN = {
@@ -1135,18 +1135,6 @@ function renderStatusEffects(effect) {
   document.querySelectorAll(".tooltip").forEach(function (element) {
     element.addEventListener("mouseover", function () {
       const tooltipText = this.querySelector(".tooltipText");
-      // const rect = tooltipText.getBoundingClientRect();
-      // const modalRect = document
-      //   .querySelector(".inventory-modal-content")
-      //   .getBoundingClientRect();
-
-      // if (rect.right > modalRect.right) {
-      //   tooltipText.style.left = "auto";
-      //   tooltipText.style.right = "0";
-      // } else if (rect.left < modalRect.left) {
-      //   tooltipText.style.left = "0";
-      //   tooltipText.style.right = "auto";
-      // }
 
       tooltipText.style.visibility = "visible";
       tooltipText.style.opacity = "1";
