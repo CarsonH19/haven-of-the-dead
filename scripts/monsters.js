@@ -69,6 +69,15 @@ const BLAZING_SKELETON = {
   name: "Blazing Skeleton",
   type: "UNDEAD",
   skulls: 3,
+  function: () => {
+    //writeToLog() erupts in flames on death
+    playerHealthBar.value = +playerHealthBar.value - 15;
+    currentPlayerHealth -= 15;
+    showDamage(15, "MONSTER");
+    updatePlayerTrackers();
+    damageFlashAnimation();
+    healthLowAnimation();
+  }
 };
 
 const DRAUGR = {
@@ -81,12 +90,20 @@ const BONE_TITAN = {
   name: "Bone Titan",
   type: "UNDEAD",
   skulls: 7,
+  function: () => {
+    currentRoom.contents.monsters.push(DECREPIT_SKELETON, DECREPIT_SKELETON, DECREPIT_SKELETON);
+    //writeToLog(); crumbles and reforms into smaller skeletons
+  },
 };
 
 const FLOOD_OF_BONES = {
   name: "Flood of Bones",
   type: "UNDEAD",
   skulls: 8,
+  function: () => {
+    //writeToLog() if critical attack, spawns 2 decrepit skeletons 
+    currentRoom.contents.monsters.push(DECREPIT_SKELETON);
+  }
 };
 
 const BARON_OF_BONE = {
@@ -109,6 +126,9 @@ const HAUNTING_SPIRIT = {
   name: "Haunting Spirit",
   type: "UNDEAD",
   skulls: 3,
+  function: () => {
+    //writeToLog() gives you the haunted condition... causes Shades to randomly appear and attack you.
+  }
 };
 
 const GRUDGE = {
@@ -133,7 +153,6 @@ const IVAN_STATS = {
   skulls: 6,
   function: () => {
     // Ivan attacks and moves back behind another scoundrel
-    currentRoom.contents.monsters.push(SCOUNDREL);
     let index = myArray.indexOf(IVAN_STATS);
     if (index > 0 && index < currentRoom.contents.monsters.length) {
       // Swap the current element with the one at the preceding index
@@ -226,5 +245,31 @@ function checkForMonsters() {
     attackCounter = 0; // Item: Soulreaver
     setTimeout(renderRoomSummaryModal, 5000);
     togglePlayerControls();
+  }
+}
+
+function monsterAbilityHandler(monster) {
+  const currentMonster = currentRoom.contents.monsters[0];
+  switch (monster) {
+    case BONE_TITAN:
+      if (currentMonsterHealth <= 0) {
+        console.log('Bone Titan Ability Called!');
+        BONE_TITAN.function();
+      }
+      break;
+
+    case BLAZING_SKELETON:
+      if (currentMonsterHealth <= 0) {
+        console.log('Blazing Skeleton Ability Called!');
+        BLAZING_SKELETON.function();
+      }
+      break;
+
+    case FLOOD_OF_BONES:
+      if (criticalHitChance >= 20) {
+        console.log('Flood of Bones Ability Called!');
+        FLOOD_OF_BONES.function();
+      }
+
   }
 }

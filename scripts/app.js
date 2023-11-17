@@ -1,58 +1,14 @@
 // ===============================
 //            Attack
 // ===============================
-const damageDealtElement = document.getElementById("damageDealt");
-const damageReceivedElement = document.getElementById("damageReceived");
 
-function showDamage(damage, source, critical) {
-  const numbers = document.createElement("li");
-
-  if (source === "PLAYER") {
-    damageElement = damageDealtElement;
-  } else {
-    damageElement = damageReceivedElement;
-  }
-
-  numbers.classList.remove("critical", "fade-out", "damage-shake");
-  numbers.textContent = damage;
-  numbers.style.opacity = "1";
-
-  if (critical) {
-    // Apply special red text and animation for critical hit
-    numbers.classList.add("critical");
-  } else {
-    // Apply regular shake animation
-    numbers.classList.add("damage-shake");
-  }
-
-  // Shake for 1 second
-  setTimeout(() => {
-    numbers.classList.add("fade-out");
-
-    // Fade out after the shaking stops
-    setTimeout(() => {
-      numbers.style.opacity = "0";
-    }, 500);
-  }, 500);
-
-  damageElement.insertBefore(numbers, damageElement.firstChild);
-
-  if (damageDealtElement.children.length > 1) {
-    damageDealtElement.removeChild(damageDealtElement.lastElementChild);
-  }
-
-  if (damageReceivedElement.children.length > 1) {
-    damageReceivedElement.removeChild(damageReceivedElement.lastElementChild);
-  }
-}
-
-function playerAttackHandler(smite = 1) {
+function playerAttackHandler(smite) {
   // Paladin Passive Ability Checker
   if (heroChoice === "PALADIN") {
     paladinRadiantAura();
   }
 
-  let criticalHitChance = Math.round(Math.random() * 20) + baseDexterity;
+  criticalHitChance = calculateCritHitChance();
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
   let totalDamage;
 
@@ -64,7 +20,6 @@ function playerAttackHandler(smite = 1) {
   playerToMonsterDamage += isItemAttuned(CRIMSON_OFFERING, 0);
   // ITEM: Soulreaver - damage++ for each consecutive attack
   playerToMonsterDamage += isItemAttuned(SOULREAVER, 0);
-
   // ITEM: Blazing Candle - all attacks are critical hits
   criticalHitChance += itemEffectHandler(BLAZING_CANDLE);
 
@@ -116,14 +71,42 @@ function playerAttackHandler(smite = 1) {
     );
   }
 
-  monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
-  currentMonsterHealth -= totalDamage;
-
+  damageMonster(totalDamage);
+  monsterAbilityHandler(currentRoom.contents.monsters[0]);
   updatePlayerTrackers();
+}
+
+function damageMonster(damage) {
+  monsterHealthBar.value = +monsterHealthBar.value - damage;
+  currentMonsterHealth -= damage;
+}
+
+function dealMonsterDamage(damage) {
+  let damageDealt = Math.round(Math.random() * damage);
+
+  if (heroChoice === "PRIESTESS" && damageDealt < burningDevotionTracker) {
+    damageDealt = burningDevotionTracker;
+    writeToLog(
+      LOG_EVENT_BURNING_DEVOTION,
+      currentRoom.contents.monsters[0].name,
+      damageDealt
+    );
+  }
+
+  return damageDealt;
+}
+
+function calculateCritHitChance() {
+  let number = Math.round(Math.random() * 20) + baseDexterity;
+
+  return number;
 }
 
 function monsterAttackHandler() {
   let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
+
+  // ITEM: Mist Veil Cloak - Chance to evade attacks.
+  monsterToPlayerDamage *= isItemAttuned(MIST_VEIL_CLOAK, 1);
 
   // ITEM: Cursed Mirror - Reflects a portion of damage taken back to monster.
   let cursedMirrorTracker = isItemAttuned(CURSED_MIRROR, 0);
@@ -131,8 +114,7 @@ function monsterAttackHandler() {
     let damageReflected = Math.round(
       Math.random() * (monsterToPlayerDamage / 1.5)
     );
-    currentMonsterHealth -= damageReflected;
-    monsterHealthBar.value -= damageReflected;
+    damageMonster(damageReflected);
     console.log(`Damage Reflected: ${damageReflected}`);
   }
 
@@ -145,12 +127,6 @@ function monsterAttackHandler() {
       "attack"
     );
   }
-
-  // ITEM: Mist Veil Cloak - Chance to evade attacks.
-  monsterToPlayerDamage *= isItemAttuned(MIST_VEIL_CLOAK, 1);
-
-  playerHealthBar.value = +playerHealthBar.value - monsterToPlayerDamage;
-  currentPlayerHealth -= monsterToPlayerDamage;
 
   if (monsterToPlayerDamage > 0) {
     damageFlashAnimation();
@@ -167,30 +143,66 @@ function monsterAttackHandler() {
       "you"
     );
   }
-
+  
+  damagePlayer(monsterToPlayerDamage);
+  monsterAbilityHandler(currentRoom.contents.monsters[0]);
   showDamage(monsterToPlayerDamage, "MONSTER");
   updatePlayerTrackers();
   healthLowAnimation();
 }
 
-function dealMonsterDamage(damage) {
-  let dealtDamage = Math.round(Math.random() * damage);
-
-  if (heroChoice === "PRIESTESS" && dealtDamage < burningDevotionTracker) {
-    dealtDamage = burningDevotionTracker;
-    writeToLog(
-      LOG_EVENT_BURNING_DEVOTION,
-      currentRoom.contents.monsters[0].name,
-      dealtDamage
-    );
-  }
-
-  return dealtDamage;
-}
-
 function dealPlayerDamage(damage) {
   const dealtDamage = Math.round(Math.random() * damage);
   return dealtDamage;
+}
+
+function damagePlayer(damage) {
+  playerHealthBar.value = +playerHealthBar.value - damage;
+  currentPlayerHealth -= damage;
+}
+
+function showDamage(damage, source, critical) {
+  const damageDealtElement = document.getElementById("damageDealt");
+  const damageReceivedElement = document.getElementById("damageReceived");
+  const numbers = document.createElement("li");
+
+  if (source === "PLAYER") {
+    damageElement = damageDealtElement;
+  } else {
+    damageElement = damageReceivedElement;
+  }
+
+  numbers.classList.remove("critical", "fade-out", "damage-shake");
+  numbers.textContent = damage;
+  numbers.style.opacity = "1";
+
+  if (critical) {
+    // Apply special red text and animation for critical hit
+    numbers.classList.add("critical");
+  } else {
+    // Apply regular shake animation
+    numbers.classList.add("damage-shake");
+  }
+
+  // Shake for 1 second
+  setTimeout(() => {
+    numbers.classList.add("fade-out");
+
+    // Fade out after the shaking stops
+    setTimeout(() => {
+      numbers.style.opacity = "0";
+    }, 500);
+  }, 500);
+
+  damageElement.insertBefore(numbers, damageElement.firstChild);
+
+  if (damageDealtElement.children.length > 1) {
+    damageDealtElement.removeChild(damageDealtElement.lastElementChild);
+  }
+
+  if (damageReceivedElement.children.length > 1) {
+    damageReceivedElement.removeChild(damageReceivedElement.lastElementChild);
+  }
 }
 
 // ===============================

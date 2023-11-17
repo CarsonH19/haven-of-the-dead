@@ -1,5 +1,5 @@
 // // ===============================
-// //        GeneralVariables
+// //        General Variables
 // // ===============================
 
 const monsterHealthBar = document.getElementById("monster-health");
@@ -17,6 +17,7 @@ const fleeBtn = document.getElementById("flee-btn");
 let monsterMaxHealth = 100;
 let currentMonsterHealth = monsterMaxHealth;
 let monsterAttackValue = 10;
+
 
 let currentPlayerHealth = null;
 
@@ -119,6 +120,7 @@ let baseAttack;
 let baseHealth;
 let potionHealValue = 20;
 let specialCooldownCounter = 0;
+let criticalHitChance;
 
 // Strength
 let baseStrength;

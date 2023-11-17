@@ -490,7 +490,6 @@ const CURSED_GRIMOIRE = {
 };
 
 const CACHE_KEY = {
-  // !UNFINISHED!
   name: "Ivan's Cache Key",
   description: "",
   type: "MAGIC",
