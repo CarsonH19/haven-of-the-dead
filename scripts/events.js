@@ -29,7 +29,7 @@
 // ===============================
 
 const SAFE_ROOM = {
-  name: "Candlelight Shrine",
+  name: "Safe Room",
   eventType: "SAFE ROOM",
   description:
     "Before you lies the Candlelight Shrine, a haven untainted by darkness. Here, malevolence recoils, granting you respite. Embrace the flickering sanctuary, and let the shadows fade as you rest, shielded from the evil that prowls beyond its sacred glow.",

@@ -523,7 +523,7 @@ const CACHE_KEY = {
   function: () => {
     // Unlocks a trapped vault.
     writeToLog(LOG_EVENT_ITEM, CACHE_KEY);
-    },
+  },
 };
 
 // ===============================
@@ -607,7 +607,8 @@ const LICHROOT = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
-  effect: "Permanently increases the potency of health potions.",
+  effect:
+    "Can be used to permanently increase the potency of health potions by 5HP.",
   function: () => {
     potionHealValue += 5;
     //writeToLog
@@ -662,7 +663,7 @@ const BLACKHEART_BREW = {
       }
     }, 15000);
 
-    itemEffectHandler(BLACKHEART_BREW);
+    statusEffectHandler(BLACKHEART_BREW);
     renderStatusEffects(BLACKHEART_BREW);
   },
 };
@@ -678,19 +679,27 @@ const WARDING_CANDLE = {
   rarity: "RARE",
   effect:
     "When this item is used there is a chance that evil spirits will flee from you. The candle burns out after clearing five rooms.",
-  function: () => {
-    let duration = roomCounter + 5;
+  status: 'There is a chance the undead will evade you.',
+  duration: null,
+    function: () => {
+    let itemDuration = roomCounter + 5;
+    WARDING_CANDLE.duration = 'Duration: 5 Rooms';
     let wardingCandleInterval = setInterval(() => {
-      console.log(`Warding Candle Duration: ${duration - roomCounter}`);
-      if (roomCounter >= duration) {
+      if (itemDuration - roomCounter > 1) {
+        WARDING_CANDLE.duration = `Duration: ${itemDuration - roomCounter} Rooms`;
+      } else {
+        WARDING_CANDLE.duration = `Duration: ${itemDuration - roomCounter} Room`;
+      }
+
+      if (roomCounter >= itemDuration) {
         wardingCandleTracker = "BURNED OUT";
-        console.log("Warding Candle Burns Out");
+        WARDING_CANDLE.duration = null;
         clearInterval(wardingCandleInterval);
       } else {
         wardingCandleTracker = "LIT";
-        console.log("Warding Candle is lit!");
       }
     }, 15000);
+    renderStatusEffects(WARDING_CANDLE);
   },
 };
 
@@ -701,19 +710,27 @@ const SOOTHING_CANDLE = {
   rarity: "COMMON",
   effect:
     "When this item is used you restore 10HP after clearing a room. The candle burns out after clearing five rooms.",
+  status: 'You regain some HP after clearing a room.',
+  duration: null,
   function: () => {
-    let duration = roomCounter + 5;
+    let itemDuration = roomCounter + 5;
+    SOOTHING_CANDLE.duration = 'Duration: 5 Rooms';
     let soothingCandleInterval = setInterval(() => {
-      console.log(`Soothing Candle Duration: ${duration - roomCounter}`);
-      if (roomCounter >= duration) {
+      if (itemDuration - roomCounter > 1) {
+        SOOTHING_CANDLE.duration = `Duration: ${itemDuration - roomCounter} Rooms`;
+      } else {
+        SOOTHING_CANDLE.duration = `Duration: ${itemDuration - roomCounter} Room`;
+      }
+
+      if (roomCounter >= itemDuration) {
         soothingCandleTracker = "BURNED OUT";
-        console.log("Soothing Candle Burns Out");
+        SOOTHING_CANDLE.duration = null;
         clearInterval(soothingCandleInterval);
       } else {
         soothingCandleTracker = "LIT";
-        console.log("Soothing Candle is lit!");
       }
     }, 15000);
+    renderStatusEffects(SOOTHING_CANDLE);
   },
 };
 
@@ -724,8 +741,20 @@ const FLICKERING_CANDLE = {
   rarity: "COMMON",
   effect:
     "When this item is used your chance to flee successfully becomes 100%. After fleeing three times the candle burns out.",
-  function: () => {
+  status: 'You always successfully flee.',
+  duration: null,
+    function: () => {
     flickeringCandleTracker = 3;
+    FLICKERING_CANDLE.duration = `Duration: 3`;
+    let flickeringCandleInterval = setInterval(() => {
+      FLICKERING_CANDLE.duration = `Duration: ${flickeringCandleTracker}`;
+      if (flickeringCandleTracker <= 0) {
+        flickeringCandleTracker = "BURNED OUT";
+        FLICKERING_CANDLE.duration = null;
+        clearInterval(flickeringCandleInterval);
+      }
+    }, 3000);
+    renderStatusEffects(FLICKERING_CANDLE);
   },
 };
 
@@ -736,8 +765,20 @@ const BLAZING_CANDLE = {
   rarity: "EPIC",
   effect:
     "When this item is used all of your attacks are critical hits. After five critical hits the candle burns out.",
+  status: "All attacks made are critical hits.",
+  duration: null,
   function: () => {
     blazingCandleTracker = 5;
+    BLAZING_CANDLE.duration = `Duration: 5 Attacks`;
+    let blazingCandleInterval = setInterval(() => {
+      BLAZING_CANDLE.duration = `Duration: ${blazingCandleTracker} Attacks`;
+      if (blazingCandleTracker <= 0) {
+        blazingCandleTracker = "BURNED OUT";
+        BLAZING_CANDLE.duration = null;
+        clearInterval(blazingCandleInterval);
+      }
+    }, 3000);
+    renderStatusEffects(BLAZING_CANDLE);
   },
 };
 
@@ -754,9 +795,7 @@ const SOULFLAME_CANDLE = {
     let itemDuration = experiencePoints + 100;
     SOULFLAME_CANDLE.duration = "100XP";
     let soulflameCandleInterval = setInterval(() => {
-      SOULFLAME_CANDLE.duration = `Duration: ${
-        itemDuration - experiencePoints
-      }XP`;
+      SOULFLAME_CANDLE.duration = `Duration: ${itemDuration - experiencePoints}XP`;
       if (experiencePoints >= itemDuration) {
         soulflameCandleTracker = "BURNED OUT";
         SOULFLAME_CANDLE.duration = null;
@@ -787,12 +826,17 @@ const GUIDING_LIGHT = {
     const wisp = document.querySelector(".wisp");
     CANDLELIGHT_SHRINE.contents.events = SAFE_ROOM;
     let randomNumber = Math.floor(Math.random() * 0) + 0;
-    let duration = roomCounter + randomNumber;
+    let itemDuration = roomCounter + randomNumber;
     GUIDING_LIGHT.duration = "Searching";
 
     let guidingLightInterval = setInterval(() => {
-      GUIDING_LIGHT.duration = `Duration: ${duration - roomCounter} Rooms`;
-      if (roomCounter >= duration) {
+      if (itemDuration - roomCounter > 1) {
+        GUIDING_LIGHT.duration = `Duration: ${itemDuration - roomCounter} Rooms`;
+      } else {
+        GUIDING_LIGHT.duration = `Duration: ${itemDuration - roomCounter} Room`;
+      }
+
+      if (roomCounter >= itemDuration) {
         guidingLightTracker = "ARRIVE";
         wisp.classList.remove("orb");
         GUIDING_LIGHT.duration = null;
@@ -869,15 +913,10 @@ let candleItems = [
   FLICKERING_CANDLE,
   WARDING_CANDLE,
   BLAZING_CANDLE,
-  SOULFLAME_CANDLE
+  SOULFLAME_CANDLE,
 ];
 
-let wispItems = [
-  GUIDING_LIGHT,
-  ROWDY_WISP
-];
-
-
+let wispItems = [GUIDING_LIGHT, ROWDY_WISP];
 
 let commonItems = [
   EVERTORCH,
@@ -906,8 +945,8 @@ let rareItems = [
   GUIDING_LIGHT,
   ROWDY_WISP,
   BLACKHEART_BREW,
-  LAUGHING_COFFIN_COIN, 
-  LICHROOT
+  LAUGHING_COFFIN_COIN,
+  LICHROOT,
 ];
 
 let epicItems = [
@@ -948,17 +987,16 @@ function attuneItem(itemName) {
   renderInventory();
 }
 
-function itemEffectHandler(item) {
+function statusEffectHandler(item) {
   switch (item) {
     case WARDING_CANDLE:
       if (wardingCandleTracker === "LIT") {
         if (
-          currentRoom.contents.monsters[0] === SHADE ||
-          currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
-          currentRoom.contents.monsters[0] === GRUDGE
+          currentRoom.contents.monsters[0].type === 'UNDEAD' &&
+          currentRoom.contents.monsters[0].skulls <= 6
         ) {
           let randomNumber = Math.round(Math.random() * 10);
-          console.log(`Warding Candle Chance: ${randomNumber}`);
+
           if (randomNumber >= 5) {
             fadeOutAnimation(monsterContainer, 0000);
             setTimeout(() => {
@@ -966,7 +1004,6 @@ function itemEffectHandler(item) {
               monsterContainer.style.display = "none";
             }, 2000);
             //writeToLog
-            console.log(`The spirit flees from you!`);
           }
         }
       }
@@ -980,7 +1017,6 @@ function itemEffectHandler(item) {
 
     case FLICKERING_CANDLE:
       if (flickeringCandleTracker > 0) {
-        console.log("Flickering candle is used!");
         //writeToLog
         flickeringCandleTracker--;
         return 10;
@@ -989,7 +1025,6 @@ function itemEffectHandler(item) {
 
     case BLAZING_CANDLE:
       if (blazingCandleTracker > 0) {
-        console.log("Blazing candle is used!");
         //writeToLog
         blazingCandleTracker--;
         return 20;
@@ -999,7 +1034,6 @@ function itemEffectHandler(item) {
 
     case SOULFLAME_CANDLE:
       if (soulflameCandleTracker === "LIT") {
-        console.log("Soulflame candle is used!");
         //writeToLog
         return 2;
       } else {
@@ -1008,7 +1042,6 @@ function itemEffectHandler(item) {
 
     case BLACKHEART_BREW:
       if (blackheartBrewTracker === "DRUNK") {
-        console.log("You are drunk on Blackheart Brew");
         //writeToLog()
         baseDexterity--;
         baseStrength += 2;
@@ -1100,14 +1133,14 @@ function getItem(rarity) {
       }
       break;
 
-    case 'CANDLE':
-      console.log('CANDLE FOUND');
+    case "CANDLE":
+      console.log("CANDLE FOUND");
       const candleIndex = Math.round(Math.random() * candleItems.length);
       foundItem = candleItems[candleIndex];
       currentRoom.contents.items.push(foundItem);
       break;
-    
-    case 'WISP':
+
+    case "WISP":
       const wispIndex = Math.round(Math.random() * wispItems.length);
       foundItem = wispItems[wispIndex];
       currentRoom.contents.items.push(foundItem);
@@ -1206,7 +1239,7 @@ function closeInventoryHandler() {
   baseFaith = newFaith;
 
   // ITEM: Blackheart Brew - -1 Dex +1 Strength
-  itemEffectHandler(BLACKHEART_BREW);
+  statusEffectHandler(BLACKHEART_BREW);
 
   setPlayerHealthBar(calculatePlayerMaxHealth());
   updatePlayerTrackers();

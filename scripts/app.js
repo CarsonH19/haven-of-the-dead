@@ -21,7 +21,7 @@ function playerAttackHandler(smite) {
   // ITEM: Soulreaver - damage++ for each consecutive attack
   playerToMonsterDamage += isItemAttuned(SOULREAVER, 0);
   // ITEM: Blazing Candle - all attacks are critical hits
-  criticalHitChance += itemEffectHandler(BLAZING_CANDLE);
+  criticalHitChance += statusEffectHandler(BLAZING_CANDLE);
 
   // Smite Critical Hit
   if (criticalHitChance >= 20 && smite > 1) {
@@ -333,8 +333,12 @@ function potionHandler() {
 // ===============================
 function fleeHandler() {
   let fleeChance = Math.round(Math.random() * 10) + baseFaith;
+
+  // ITEM: Ring of the Rodent - Increased flee chance
   fleeChance += isItemAttuned(RING_OF_THE_RODENT, 0);
-  fleeChance += itemEffectHandler(FLICKERING_CANDLE);
+  // ITEM: FLickering Candle - 100% flee chance
+  fleeChance += statusEffectHandler(FLICKERING_CANDLE);
+
   if (fleeChance >= 10) {
     console.log("Flee Successful");
     writeToLog(LOG_EVENT_FLEE, "You", currentRoom.name);
@@ -349,7 +353,6 @@ function fleeHandler() {
 
 function isGameOver() {
   if (currentPlayerHealth <= 0) {
-    console.log("Less than 0 HP");
     // ITEM: Soul Jar - resurrect with half HP
     isItemAttuned(SOUL_JAR, null);
     setTimeout(() => {
@@ -515,7 +518,6 @@ function playerControlsTimeout(timeout) {
 
   setTimeout(() => {
     togglePlayerControls();
-    console.log("Controls On!");
   }, timeout);
 }
 
@@ -525,10 +527,8 @@ function updateRoomsCleared() {
 }
 
 function renderBackground(link) {
-  console.log(`image: url(${link})`);
   const image = new Image();
   image.src = link;
-  console.log(image.src);
   image.onload = () => {
     gameWindow.style.backgroundImage = `url(${link})`;
     gameWindow.style.backgroundRepeat = "no-repeat";
@@ -600,7 +600,6 @@ function updatePlayerTrackers() {
 function newRoomAnimation() {
   const fade = document.getElementById("fade");
   fade.style.animation = "fade-in 2s";
-  console.log("FADE");
   setTimeout(() => {
     fade.style.animation = "fade-out 2s";
   }, 2000);
@@ -632,7 +631,6 @@ function closeRoomSummaryModal() {
 }
 
 function renderRoomSummaryModal() {
-  console.log("renderRoomSummaryModal Called!");
   const roomSummaryDescription = document.getElementById(
     "roomSummaryDescription"
   );
@@ -722,7 +720,6 @@ function renderRoomSummaryModal() {
   // Adds items in current room to inventory
   if (currentRoom.contents.items.length > 0) {
     for (let i = 0; i < currentRoom.contents.items.length; i++) {
-      console.log("ITEM ADDED");
       addItemToInventory(currentRoom.contents.items[i]);
     }
   }
@@ -750,14 +747,12 @@ function closeContinueButton() {
 
 function renderContinueButton() {
   continueButton.textContent = "Continue...";
-  console.log("Continue Button Called!");
 
   if (
     currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
     currentRoom.contents.events === null
   ) {
-    console.log("Continue Button Rendered!");
     fadeInAnimation(continueButtonModal);
     continueButtonModal.style.display = "block";
   } else {
@@ -815,7 +810,6 @@ specialBtn.addEventListener("click", () => {
     currentMonsterHealth > 0 &&
     (heroChoice === "PALADIN" || heroChoice === "PRIESTESS")
   ) {
-    console.log("NOT A ROGUE");
     playerControlsTimeout(1500);
     setTimeout(monsterAttackHandler, 1200);
   }
@@ -865,7 +859,7 @@ roomSummaryButton.addEventListener("click", () => {
   // ITEM: Cursed Grimoire - NPC ITEM / hurts you after each cleared room.
   isItemAttuned(CURSED_GRIMOIRE, null);
   // ITEM: Soothing Candle - Recover 10HP after each cleared room.
-  itemEffectHandler(SOOTHING_CANDLE);
+  statusEffectHandler(SOOTHING_CANDLE);
   updatePlayerTrackers();
   checkForLevelUp();
 });
@@ -886,7 +880,6 @@ continueButton.addEventListener("click", () => {
       renderCurrentRoom(LAUGHING_COFFIN_ROOM);
       rowdyWispTracker = null;
     } else {
-      console.log("Random Room");
       removeCurrentRoom();
       getRandomRoom(catacombRooms);
       renderCurrentRoom(currentRoom);
