@@ -39,7 +39,11 @@ const SAFE_ROOM = {
   passValue: null,
   failDamage: null,
   functionOne: () => {
+    getItem('CANDLE');
     healPlayer(calculatePlayerMaxHealth());
+    setRoomSummary();
+    setTimeout(renderRoomSummaryModal, 5000);
+    //writeToLog() restored to full health and found a candle
   },
   functionTwo: null,
 };
@@ -694,9 +698,7 @@ function renderEvent(event) {
       case "SAFE ROOM":
         SAFE_ROOM.functionOne();
         writeToLog(LOG_EVENT_SAFE_ROOM);
-        console.log("HELLO");
         currentRoom.contents.events = null;
-        setTimeout(renderContinueButton, 5000);
         break;
     }
 

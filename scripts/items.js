@@ -358,6 +358,18 @@ const REVENANTS_RAGE = {
   },
 };
 
+const LAUGHING_COFFIN_COIN = {
+  name: "Laughing Coffin Coin",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "Taken from Ivan the Scoundrel, it may be of some value to other scoundrels.",
+  function: () => {
+    writeToLog(LOG_EVENT_ITEM, LAUGHING_COFFIN_COIN);
+  },
+};
+
 // ===============================
 //         EPIC ITEMS
 // ===============================
@@ -512,18 +524,6 @@ const CACHE_KEY = {
     // Unlocks a trapped vault.
     writeToLog(LOG_EVENT_ITEM, CACHE_KEY);
     },
-};
-
-const LAUGHING_COFFIN_COIN = {
-  name: "Laughing Coffin Coin",
-  description: "",
-  type: "MAGIC",
-  rarity: "RARE",
-  effect:
-    "Taken from Ivan the Scoundrel, it may be of some value to other scoundrels.",
-  function: () => {
-    writeToLog(LOG_EVENT_ITEM, LAUGHING_COFFIN_COIN);
-  },
 };
 
 // ===============================
@@ -857,6 +857,28 @@ let attunedItems = [];
 
 let inventoryItems = [GUIDING_LIGHT, POTION, POTION, POTION];
 
+let foodAndDrinkItems = [
+  MARROWSTONE_CHEESE,
+  TOMBSTONE_TRUFFLE,
+  CRYPTBREAD,
+  BONE_MARROW_SOUP,
+];
+
+let candleItems = [
+  SOOTHING_CANDLE,
+  FLICKERING_CANDLE,
+  WARDING_CANDLE,
+  BLAZING_CANDLE,
+  SOULFLAME_CANDLE
+];
+
+let wispItems = [
+  GUIDING_LIGHT,
+  ROWDY_WISP
+];
+
+
+
 let commonItems = [
   EVERTORCH,
   FLASK_OF_LIGHT,
@@ -865,8 +887,6 @@ let commonItems = [
   CHARM_OF_HEALING,
   MIST_VEIL_CLOAK,
   POTION,
-  CRYPTBREAD,
-  BONE_MARROW_SOUP,
   LESSER_SOULSTONE,
   SOOTHING_CANDLE,
   FLICKERING_CANDLE,
@@ -881,12 +901,13 @@ let rareItems = [
   SUNSTONE,
   CURSED_MIRROR,
   REVENANTS_RAGE,
-  LICHROOT,
-  MARROWSTONE_CHEESE,
   GREATER_SOULSTONE,
-  TOMBSTONE_TRUFFLE,
   WARDING_CANDLE,
   GUIDING_LIGHT,
+  ROWDY_WISP,
+  BLACKHEART_BREW,
+  LAUGHING_COFFIN_COIN, 
+  LICHROOT
 ];
 
 let epicItems = [
@@ -1077,6 +1098,19 @@ function getItem(rarity) {
       } else {
         getItem("COMMON");
       }
+      break;
+
+    case 'CANDLE':
+      console.log('CANDLE FOUND');
+      const candleIndex = Math.round(Math.random() * candleItems.length);
+      foundItem = candleItems[candleIndex];
+      currentRoom.contents.items.push(foundItem);
+      break;
+    
+    case 'WISP':
+      const wispIndex = Math.round(Math.random() * wispItems.length);
+      foundItem = wispItems[wispIndex];
+      currentRoom.contents.items.push(foundItem);
       break;
   }
 }
