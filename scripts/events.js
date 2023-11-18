@@ -39,7 +39,7 @@ const SAFE_ROOM = {
   passValue: null,
   failDamage: null,
   functionOne: () => {
-    getItem('CANDLE');
+    getItem("CANDLE");
     healPlayer(calculatePlayerMaxHealth());
     setRoomSummary();
     setTimeout(renderRoomSummaryModal, 5000);
@@ -364,78 +364,78 @@ const SCHOLAR_HENDRA = {
   },
 };
 
-const GRERVIL_THE_BODILESS = {
-  // !UNFINISHED!
-  name: "Grervil the Bodiless",
-  description: "",
-  optionOne: "Speak",
-  optionTwo: "Ignore",
-  passValue: null,
-  failDamage: null,
-  functionOne: () => {
-    // if Whispering Amulet is attuned you will learn to search for his body.
-    // add Grervil’s body room to catacomb array
-    // add Grervil’s Head as an item
-  },
-  functionTwo: () => {
-    // add Grervil’s body room but the player destroys the body.
-  },
-};
+// const GRERVIL_THE_BODILESS = {
+//   // !UNFINISHED!
+//   name: "Grervil the Bodiless",
+//   description: "",
+//   optionOne: "Speak",
+//   optionTwo: "Ignore",
+//   passValue: null,
+//   failDamage: null,
+//   functionOne: () => {
+//     // if Whispering Amulet is attuned you will learn to search for his body.
+//     // add Grervil’s body room to catacomb array
+//     // add Grervil’s Head as an item
+//   },
+//   functionTwo: () => {
+//     // add Grervil’s body room but the player destroys the body.
+//   },
+// };
 
-const TRADER_BAZRIM = {
-  // !UNFINISHED!
-  name: "Trader Bazrim",
-  eventType: "NPC",
-  description: "",
-  optionOne: "Accept",
-  optionTwo: "Decline",
-  passValue: null,
-  failDamage: null,
-  functionOne: () => {
-    // opens modal with items
-    // if trade a rare or higher item gives an item of equal value
-  },
-  functionTwo: () => {
-    // writeToLog don’t be greedy
-  },
-};
+// const TRADER_BAZRIM = {
+//   // !UNFINISHED!
+//   name: "Trader Bazrim",
+//   eventType: "NPC",
+//   description: "",
+//   optionOne: "Accept",
+//   optionTwo: "Decline",
+//   passValue: null,
+//   failDamage: null,
+//   functionOne: () => {
+//     // opens modal with items
+//     // if trade a rare or higher item gives an item of equal value
+//   },
+//   functionTwo: () => {
+//     // writeToLog don’t be greedy
+//   },
+// };
 
-const HOZHUL = {
-  // !UNFINISHED!
-  name: "Hozhul, Keeper of Souls",
-  eventType: "NPC",
-  description: "",
-  optionOne: "Accept",
-  optionTwo: "Decline",
-  passValue: null,
-  failDamage: null,
-  functionOne: () => {
-    // opens modal with items
-    // if trade a rare or higher item gives an item of equal value
-  },
-  functionTwo: () => {
-    // writeToLog don’t be greedy
-  },
-};
+// const HOZHUL = {
+//   // !UNFINISHED!
+//   name: "Hozhul, Keeper of Souls",
+//   eventType: "NPC",
+//   description: "",
+//   optionOne: "Accept",
+//   optionTwo: "Decline",
+//   passValue: null,
+//   failDamage: null,
+//   functionOne: () => {
+//     // opens modal with items
+//     // if trade a rare or higher item gives an item of equal value
+//   },
+//   functionTwo: () => {
+//     // writeToLog don’t be greedy
+//   },
+// };
 
-const CURATOR_RENVAR = {
-  // !UNFINISHED!
-  name: "Curator Renvar",
-  description: "",
-  optionOne: "Accept",
-  optionTwo: "Decline",
-  passValue: null,
-  failDamage: null,
-  functionOne: () => {
-    // opens trade modal
-    // give key based off item rarity
-    // if no option call functionTwo
-  },
-  functionTwo: () => {
-    // writeToLog maybe next time you’ll have a taste for adventure
-    // after room counter gains 10 re add his room to catacombRooms
-  },
-};
+// const CURATOR_RENVAR = {
+//   // !UNFINISHED!
+//   name: "Curator Renvar",
+//   description: "",
+//   optionOne: "Accept",
+//   optionTwo: "Decline",
+//   passValue: null,
+//   failDamage: null,
+//   functionOne: () => {
+//     // opens trade modal
+//     // give key based off item rarity
+//     // if no option call functionTwo
+//   },
+//   functionTwo: () => {
+//     // writeToLog maybe next time you’ll have a taste for adventure
+//     // after room counter gains 10 re add his room to catacombRooms
+//   },
+// };
 
 // ===============================
 //          Misc. Events
@@ -531,17 +531,26 @@ const ECHOING_CHIME = {
   functionTwo: null,
 };
 
-const BLOOD_SIGIL = {
-  // !UNFINISHED!
-  name: "Blood Sigil",
+const CRIMSON_COVENANT = {
+  name: "Crimson Covenant",
   eventType: "MISC",
-  description: "",
+  description: "An alter surrounded by hooded figures.",
   optionOne: "Sacrifice",
-  optionTwo: "Ignore",
-  passValue: null,
-  failDamage: null,
-  functionOne: null,
-  functionTwo: null,
+  optionTwo: "Refuse",
+  functionOne: () => {
+    if (currentPlayerHealth >= 60) {
+      damagePlayer(50);
+      damageFlashAnimation();
+      bloodSacrificed += 50;
+      BLOOD_PACT.function();
+      // writeToLog(LOG_EVENT_MISC_OPTION_ONE); //cut and bleed into the alter
+      setTimeout(renderRoomSummaryModal, 5000);
+    }
+  },
+  functionTwo: () => {
+    // writeToLog(LOG_EVENT_MISC_OPTION_TWO);
+    setTimeout(renderRoomSummaryModal, 5000);
+  },
 };
 
 // ===============================
@@ -562,7 +571,7 @@ const LOCKED_ROOM = {
       useConsumable("Skeleton Key"); // removes item from inventory
       lockedRoomHandler(currentRoom.roomName);
     } else {
-      writeToLog(LOG_EVENT_MISC_OPTION_ONE, 'TWO');
+      writeToLog(LOG_EVENT_MISC_OPTION_ONE, "TWO");
       setTimeout(renderRoomSummaryModal, 5000);
     }
   },
@@ -578,7 +587,7 @@ function lockedRoomHandler(room) {
 
   switch (room) {
     case "Bonevault":
-      writeToLog(LOG_EVENT_MISC_OPTION_ONE, currentRoom.roomName, 'ONE');
+      writeToLog(LOG_EVENT_MISC_OPTION_ONE, currentRoom.roomName, "ONE");
       monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
       items.push(BONEMAIL, BONE_MARROW_SOUP, POTION, POTION);
       getItem("RARE");

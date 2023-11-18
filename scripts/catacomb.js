@@ -18,17 +18,17 @@
 // Swarm of Vermin
 
 let catacombRooms = [
-  // {
-  //   roomName: "Clawed Caverns", // !FINISHED!
-  //   description: '',
-  //   backgroundImage: 'styles/images/corridor-two.png',
-  //   music: null,
-  //   contents: {
-  //     monsters: [GNAWER, GNAWER],
-  //     items: [],
-  //     events: null
-  //   },
-  // },
+  {
+    roomName: "Clawed Caverns", // !FINISHED!
+    description: '',
+    backgroundImage: 'styles/images/corridor-two.png',
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: CRIMSON_COVENANT
+    },
+  },
   // {
   //   roomName: "Vermins' Vestibule", // !FINISHED!
   //   description: '',
@@ -73,18 +73,18 @@ let catacombRooms = [
   //     events: COFFIN_SPIDER_EVENT
   //   },
   // },
-  {
-    roomName: "Cobwebbed Crypt",
-    description: 'The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.',
-    summary: '',
-    backgroundImage: 'styles/images/corridor-two.png',
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: IVAN_THE_SCOUNDREL
-    },
-  },
+  // {
+  //   roomName: "Cobwebbed Crypt",
+  //   description: 'The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.',
+  //   summary: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: IVAN_THE_SCOUNDREL
+  //   },
+  // },
   // {
   //   roomName: "The Hatchery", // !FINISHED!
   //   description: '',
@@ -151,17 +151,17 @@ let catacombRooms = [
   //     events: null
   //   },
   // },
-  {
-    roomName: "Bonevault",
-    description: '',
-    backgroundImage: 'styles/images/rattling-hollow.png',
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: LOCKED_ROOM
-    },
-  },
+  // {
+  //   roomName: "Bonevault",
+  //   description: '',
+  //   backgroundImage: 'styles/images/rattling-hollow.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: LOCKED_ROOM
+  //   },
+  // },
   // {
   //   roomName: "Skeletal Sepulcher", // !FINISHED!
   //   description: '',
@@ -333,6 +333,10 @@ const CANDLELIGHT_SHRINE = {
   },
 };
 
+// ===============================
+//          Misc. Rooms
+// ===============================
+
 const LAUGHING_COFFIN_ROOM = { 
   roomName: "The Laughing Coffin Tavern", 
   description: "The Laughing Coffin tavern stands as a sanctuary, welcoming scoundrels and coin-bearers alike. Here, amid the shadows, an unexpected haven emerges—a place to relax, where whispered secrets and clinking coins intertwine in the dim-lit embrace of this clandestine refuge.",
@@ -342,6 +346,19 @@ const LAUGHING_COFFIN_ROOM = {
     monsters: [],
     items: [],
     events: LAUGHING_COFFIN_EVENT
+  },
+};
+
+const BLOOD_ALTER = {
+  roomName: "Blood Alter",
+  description: "The altar, carved from the cold, black stone native to the catacombs, stands in a chamber illuminated only by the eerie glow of blood-red torches. The walls are adorned with morbid murals, depicting the Lord of Crimson, the deity of blood and life.",
+  summary: "",
+  backgroundImage: "styles/images/corridor-one.png",
+  music: null,
+  contents: {
+    monsters: [],
+    items: [],
+    events: CRIMSON_COVENANT
   },
 };
 

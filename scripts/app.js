@@ -879,6 +879,10 @@ continueButton.addEventListener("click", () => {
       currentRoom = LAUGHING_COFFIN_ROOM;
       renderCurrentRoom(LAUGHING_COFFIN_ROOM);
       rowdyWispTracker = null;
+    } else if (unholyWispTracker === "ARRIVE") {
+      currentRoom = BLOOD_ALTER;
+      renderCurrentRoom(BLOOD_ALTER);
+      rowdyWispTracker = null;
     } else {
       removeCurrentRoom();
       getRandomRoom(catacombRooms);

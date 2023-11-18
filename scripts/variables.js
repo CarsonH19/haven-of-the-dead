@@ -241,25 +241,69 @@ const inventoryModal = document.getElementById("inventoryModal");
 const closeInventoryButton = document.getElementById("closeInventoryBtn");
 
 // ===============================
-//      Item Variables
+//        Item Variables
 // ===============================
 
 // Soulreaver 
 let attackCounter = 0;
 
+// Wisps
 let guidingLightTracker;
+let rowdyWispTracker;
+
+// Candles
 let wardingCandleTracker;
 let soothingCandleTracker;
 let flickeringCandleTracker;
 let blazingCandleTracker;
 let soulflameCandleTracker;
+
+// Misc.
 let blackheartBrewTracker;
-let rowdyWispTracker;
-
 
 // ===============================
-//     Misc. Status Effects
+//       Event Trackers
 // ===============================
+
+let bloodSacrificed = 0;
+
+// ===============================
+//     Status Effects
+// ===============================
+
+const BLOOD_PACT = {
+  name: "Blood Pact",
+  description: "",
+  effect:
+    "Your base attack is increased by 5, but your faith is reduced by 2.",
+  status: "",
+  duration: null,
+  function: () => {
+    let statusDuration = roomCounter + 10;
+    BLOOD_PACT.duration = "Duration: 10 Rooms"
+    let bloodPactInterval = setInterval(() => {
+      if (statusDuration - roomCounter > 1) {
+        BLOOD_PACT.duration = `Duration: ${
+          statusDuration - roomCounter
+        } Rooms`;
+      } else {
+        BLOOD_PACT.duration = `Duration: ${
+          statusDuration - roomCounter
+        } Room`;
+      }
+
+      if (roomCounter >= statusDuration) {
+        BLOOD_PACT.duration = null;
+        baseAttack -= 5;
+        baseFaith += 2;
+        clearInterval(bloodPactInterval);
+      }
+    }, 15000);
+
+    statusEffectHandler(BLOOD_PACT);
+    renderStatusEffects(BLOOD_PACT);
+  },
+};
 
 const POISONED = {
   name: "Poisoned",
@@ -269,13 +313,11 @@ const POISONED = {
   status: "You are poisoned.",
   duration: null,
   function: () => {
-    let duration = roomCounter + 3;
-    poisonedTracker = "POISONED";
+    let statusDuration = roomCounter + 3;
     POISONED.duration = "5 Rooms"
     let poisonedInterval = setInterval(() => {
-    POISONED.duration = `Duration: ${duration - roomCounter} Rooms`;
-      if (roomCounter >= duration) {
-        poisonedTracker = null;
+    POISONED.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
+      if (roomCounter >= statusDuration) {
         POISONED.duration = null;
         baseDexterity += 2;
         baseStrength += 2;
@@ -283,7 +325,7 @@ const POISONED = {
       }
     }, 15000);
 
-    itemEffectHandler(POISONED);
+    statusEffectHandler(POISONED);
     renderStatusEffects(POISONED);
   },
 };
