@@ -515,27 +515,29 @@ const LAUGHING_COFFIN_EVENT = {
   },
 };
 
-const ECHOING_CHIME = {
-  // !UNFINISHED!
-  name: "Echoing Chime",
-  eventType: "MISC",
-  description: "",
-  optionOne: "Ring",
-  optionTwo: "Ignore",
-  passValue: null,
-  failDamage: null,
-  functionOne: () => {
-    // filters through catacombRooms and adds additional evil spirits to rooms with undead creatures.
-    // adds secret rooms to catacombRooms
-  },
-  functionTwo: null,
-};
+// const ECHOING_CHIME = {
+//   // !UNFINISHED!
+//   name: "Echoing Chime",
+//   eventType: "MISC",
+//   description: "",
+//   optionOne: "Ring",
+//   optionTwo: "Ignore",
+//   passValue: null,
+//   failDamage: null,
+//   functionOne: () => {
+//     // filters through catacombRooms and adds additional evil spirits to rooms with undead creatures.
+//     // adds secret rooms to catacombRooms
+//     // adds ghost NPC to rooms
+//   },
+//   functionTwo: null,
+// };
 
 const CRIMSON_COVENANT = {
   name: "Crimson Covenant",
   eventType: "MISC",
-  description: "An alter surrounded by hooded figures.",
-  optionOne: "Sacrifice",
+  description: "Before you, an altar looms, encircled by hooded figures in blood-stained robes. With chilling devotion, they cut their wrists, offering crimson tributes to the ominous altar. Echoing chants fill the catacomb—a haunting invitation. Will you join their sacrificial ritual at the blood altar?",
+  summary: '',
+  optionOne: "Join",
   optionTwo: "Refuse",
   functionOne: () => {
     if (currentPlayerHealth >= 60) {
@@ -543,12 +545,14 @@ const CRIMSON_COVENANT = {
       damageFlashAnimation();
       bloodSacrificed += 50;
       BLOOD_PACT.function();
-      // writeToLog(LOG_EVENT_MISC_OPTION_ONE); //cut and bleed into the alter
+      CRIMSON_COVENANT.summary = 'You partake in the sacrificial ritual of the Crimson Covenant, spilling your blood on the Blood Alter.';
+      writeToLog(LOG_EVENT_MISC_OPTION_ONE); 
       setTimeout(renderRoomSummaryModal, 5000);
     }
   },
   functionTwo: () => {
-    // writeToLog(LOG_EVENT_MISC_OPTION_TWO);
+    CRIMSON_COVENANT.summary = 'You refuse to partake in the sacrificial ritual of the Crimson Covenant.';
+    writeToLog(LOG_EVENT_MISC_OPTION_TWO);
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
@@ -558,7 +562,6 @@ const CRIMSON_COVENANT = {
 // ===============================
 
 const LOCKED_ROOM = {
-  // !UNFINISHED!
   name: "Locked Room",
   eventType: "MISC",
   description: "You discover a locked room. Do you wish to open it.",

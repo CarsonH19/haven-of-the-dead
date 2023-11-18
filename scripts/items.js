@@ -893,6 +893,42 @@ const ROWDY_WISP = {
   },
 };
 
+const UNHOLY_WISP = {
+  name: "Unholy Wisp",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "RARE",
+  effect: "",
+  status: "Guiding you to the Blood Alter.",
+  duration: null,
+  function: () => {
+    const wisp = document.querySelector(".wisp");
+    BLOOD_ALTER.contents.events = CRIMSON_COVENANT;
+    let randomNumber = Math.floor(Math.random() * 0) + 0;
+    let wispDuration = roomCounter + randomNumber;
+    UNHOLY_WISP.duration = "Searching";
+
+    let unholyWispInterval = setInterval(() => {
+      UNHOLY_WISP.duration = `Duration: ${wispDuration - roomCounter} Rooms`;
+      if (roomCounter >= wispDuration) {
+        unholyWispTracker = "ARRIVE";
+        wisp.classList.remove("orb");
+        UNHOLY_WISP.duration = null;
+        clearInterval(unholyWispInterval);
+      } else {
+        unholyWispTracker = "GUIDING";
+      }
+    }, 15000);
+
+    wisp.classList.add("orb");
+
+    const root = document.documentElement;
+    root.style.setProperty("--orb", "#bf3637");
+
+    renderStatusEffects(UNHOLY_WISP);
+  },
+};
+
 // ===============================
 //    Item & Inventory Arrays
 // ===============================

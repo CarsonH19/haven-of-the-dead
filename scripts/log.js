@@ -1460,16 +1460,21 @@ function writeToLog(eventType, name, value) {
             newEntry.textContent = `"In the absence of a key, divine guidance shall illuminate my path forward."`;
           }
         }
+      } else if (event === CRIMSON_COVENANT) {
+        newEntry.textContent = `As your blood mingles with the sacrificial stream, an otherworldly energy surges through the catacomb. The hooded figures bow in silent acknowledgment. A newfound power courses through you, but at what cost?`;
       }
 
       narration = newEntry.textContent;
       break;
 
     case LOG_EVENT_MISC_OPTION_TWO:
+      console.log('WHAT?!')
       if (event === LAUGHING_COFFIN_EVENT) {
         newEntry.textContent = `With a Laughing Coffin Coin in hand, the den of rogues turns their eyes upon you. "Got the token, have you?" one grins, only to scowl as you hesitate. "Wasting our time, are you?" another scoffs. "If you ain't here to play, stranger, best you leave before we make you regret it."`;
       } else if (event === LOCKED_ROOM) {
         newEntry.textContent = `As you press on through the catacomb, the chamber remains tightly sealed, its secrets remain a mystery.`;
+      } else if (event === CRIMSON_COVENANT) {
+        newEntry.textContent = `You step back from the altar, rejecting the sinister invitation. The hooded figures pause, their crimson eyes piercing the darkness. The catacomb's air tightens with an unsettling stillness. he chanting falters, and the figures regard you with an ominous silence as you descend further into the catacomb.`;
       }
 
       narration = newEntry.textContent;
@@ -1512,7 +1517,7 @@ function writeToLog(eventType, name, value) {
       } else if (name === SOUL_JAR) {
         newEntry.textContent = `As the abyss claims you, the Soul Jar shatters. Shadows coil around your essence, wrenching you from the void. Resurrected, echoes of ancient souls linger, whispering tales of the realm beyond death.`;
       }
-      
+
       narration = newEntry.textContent;
       break;
 

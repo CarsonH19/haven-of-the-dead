@@ -94,7 +94,7 @@ const LOG_EVENT_SAFE_ROOM = "SAFE ROOM";
 
 const LOG_EVENT_NPC_OPTION_ONE = 'NPC OPTION ONE';
 const LOG_EVENT_NPC_OPTION_TWO = 'NPC OPTION TWO';
-const LOG_EVENT_MISC_OPTION_ONE = 'MISC OPTION TWO';
+const LOG_EVENT_MISC_OPTION_ONE = 'MISC OPTION ONE';
 const LOG_EVENT_MISC_OPTION_TWO = 'MISC OPTION TWO';
 const LOG_EVENT_TRAP_PASS = "TRAP PASS";
 const LOG_EVENT_TRAP_FAIL = "TRAP FAIL";
@@ -250,6 +250,7 @@ let attackCounter = 0;
 // Wisps
 let guidingLightTracker;
 let rowdyWispTracker;
+let unholyWispTracker;
 
 // Candles
 let wardingCandleTracker;
