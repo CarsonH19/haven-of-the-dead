@@ -751,6 +751,14 @@ progress[value]::-moz-progress-bar {
   margin: 1vh;
 }
 
+.item-counter {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 2px 5px; 
+  font-size: 0.7rem;
+}
+
 .tooltip {
   position: relative;
   cursor: pointer;

@@ -20,6 +20,7 @@
 // - Whispering Amulet
 // - Cursed Mirror
 // - Revenant's Rage
+// - Laughing Coffin Coin
 
 // Epic Items
 // - Ethereal Crown - Graverobber Earver Event Three
@@ -29,7 +30,7 @@
 
 // Quest Items
 // - Cursed Grimoire - Scholar Hendra
-// - Jawbone Key - Ivan the Scoundrel
+// - Cache Key - Ivan the Scoundrel
 
 // ===============================
 //          CONSUMABLES
@@ -46,6 +47,7 @@
 // - Lichroot
 // - Lesser Soulstone
 // - Greater Soulstone
+// - Blackheart Brew
 
 // Candles
 // - Warding Candle
@@ -56,10 +58,20 @@
 
 // Wisps
 // Guiding Light
+// Rowdy Wisp
 
 // ===============================
 //        COMMON ITEMS
 // ===============================
+
+// const sample = {
+//     name:
+//     description:
+//     type:
+//     rarity:
+//     effect:
+//     function:
+//  }
 
 const EVERTORCH = {
   name: "Evertorch",
@@ -73,15 +85,6 @@ const EVERTORCH = {
     return 2;
   },
 };
-
-// const sample = {
-//     name:
-//     description:
-//     type:
-//     rarity:
-//     effect:
-//     function:
-//  }
 
 const FLASK_OF_LIGHT = {
   name: "Flask of Light",
@@ -98,7 +101,6 @@ const FLASK_OF_LIGHT = {
     ) {
       monsterMaxHealth = monsterMaxHealth - 15;
       monsterAttackValue = monsterAttackValue - 2;
-      console.log(`Ghost Weakened!`);
     }
   },
 };
@@ -111,7 +113,6 @@ const BONEMAIL = {
   effect:
     "While attuned to this item your max health is increased by 20 points.",
   function: () => {
-    console.log(`+20 Max HP`);
     return 20;
   },
 };
@@ -123,7 +124,6 @@ const GRAVEROBBERS_SPADE = {
   rarity: "COMMON",
   effect: "While attuned to this item you are more likely to find items.",
   function: () => {
-    console.log(`Digging for items!`);
     return 2;
   },
 };
@@ -137,7 +137,6 @@ const CHARM_OF_HEALING = {
     "While attuned to this item you recover 10 points of health after each room you clear.",
   function: () => {
     healPlayer(10);
-    console.log("Player Healed by Charm of Healing!");
   },
 };
 
@@ -162,7 +161,6 @@ const MIST_VEIL_CLOAK = {
     "While attuned to this item you have a slight chance of completely evading enemy attacks.",
   function: () => {
     let randomNumber = Math.round(Math.random() * 20);
-    console.log(randomNumber);
     if (randomNumber === 20) {
       console.log(`Attack evaded with Mist Veil Cloak!`);
       return 0;
@@ -181,7 +179,6 @@ const SHADOWSTEP_BOOTS = {
   effect: "While attuned to this item your dexterity increases by 1.",
   function: () => {
     // See closeInventoryHandler for item logic.
-    console.log("Dexterity Increased!");
     return 1;
   },
 };
@@ -194,7 +191,6 @@ const TITANS_GAUNTLETS = {
   effect: "While attuned to this item your strength increases by 1.",
   function: () => {
     // See closeInventoryHandler for item logic.
-    console.log("Strength Increased!");
     return 1;
   },
 };
@@ -207,7 +203,6 @@ const HOLY_RELIC = {
   effect: "While attuned to this item your faith increases by 1.",
   function: () => {
     // See closeInventoryHandler for item logic.
-    console.log("Faith Increased!");
     return 1;
   },
 };
@@ -231,7 +226,7 @@ const BLOODSTONE = {
   type: "MAGIC",
   rarity: "RARE",
   effect:
-    "When attuned to this item you recover a small amount of health after slaying a monster.",
+    "When attuned to this item you recover a small amount of health after defeating a creature.",
   function: () => {
     let monsterLevel = currentRoom.contents.monsters[0].skulls;
     let healthRecovered;
@@ -241,33 +236,32 @@ const BLOODSTONE = {
         healthRecovered = 2;
         break;
       case 2:
-        healthRecovered = 3;
-        break;
-      case 3:
         healthRecovered = 4;
         break;
+      case 3:
+        healthRecovered = 6;
+        break;
       case 4:
-        healthRecovered = 5;
+        healthRecovered = 8;
         break;
       case 5:
-        healthRecovered = 7;
+        healthRecovered = 10;
         break;
       case 6:
-        healthRecovered = 9;
-        break;
-      case 7:
-        healthRecovered = 11;
-        break;
-      case 8:
         healthRecovered = 15;
         break;
-      case 9:
+      case 7:
         healthRecovered = 20;
+        break;
+      case 8:
+        healthRecovered = 30;
+        break;
+      case 9:
+        healthRecovered = 40;
         break;
     }
 
     healPlayer(healthRecovered);
-    console.log(`You recovered ${healthRecovered} health!`);
   },
 };
 
@@ -301,7 +295,6 @@ const SUNSTONE = {
     "While attuned to this item undead creatures take damage at the start of battle.",
   function: () => {
     if (currentRoom.contents.monsters[0].type === "UNDEAD") {
-      console.log(`The Sunstone deals 10 Damage!`);
       currentMonsterHealth -= 10;
       monsterHealthBar.value -= 10;
     } else {
@@ -451,7 +444,6 @@ const SOUL_JAR = {
       healthLowAnimation();
 
       writeToLog(LOG_EVENT_ITEM, SOUL_JAR);
-      console.log("Resurrected with Soul Jar");
     }
   },
 };
@@ -469,7 +461,6 @@ const CRIMSON_OFFERING = {
     damageFlashAnimation();
     isGameOver();
     // writeToLog You make an offering and sacrifice 5 HP
-    console.log("An offering was made...");
     return 10;
   },
 };
@@ -679,16 +670,20 @@ const WARDING_CANDLE = {
   rarity: "RARE",
   effect:
     "When this item is used there is a chance that evil spirits will flee from you. The candle burns out after clearing five rooms.",
-  status: 'There is a chance the undead will evade you.',
+  status: "There is a chance the undead will evade you.",
   duration: null,
-    function: () => {
+  function: () => {
     let itemDuration = roomCounter + 5;
-    WARDING_CANDLE.duration = 'Duration: 5 Rooms';
+    WARDING_CANDLE.duration = "Duration: 5 Rooms";
     let wardingCandleInterval = setInterval(() => {
       if (itemDuration - roomCounter > 1) {
-        WARDING_CANDLE.duration = `Duration: ${itemDuration - roomCounter} Rooms`;
+        WARDING_CANDLE.duration = `Duration: ${
+          itemDuration - roomCounter
+        } Rooms`;
       } else {
-        WARDING_CANDLE.duration = `Duration: ${itemDuration - roomCounter} Room`;
+        WARDING_CANDLE.duration = `Duration: ${
+          itemDuration - roomCounter
+        } Room`;
       }
 
       if (roomCounter >= itemDuration) {
@@ -710,16 +705,20 @@ const SOOTHING_CANDLE = {
   rarity: "COMMON",
   effect:
     "When this item is used you restore 10HP after clearing a room. The candle burns out after clearing five rooms.",
-  status: 'You regain some HP after clearing a room.',
+  status: "You regain some HP after clearing a room.",
   duration: null,
   function: () => {
     let itemDuration = roomCounter + 5;
-    SOOTHING_CANDLE.duration = 'Duration: 5 Rooms';
+    SOOTHING_CANDLE.duration = "Duration: 5 Rooms";
     let soothingCandleInterval = setInterval(() => {
       if (itemDuration - roomCounter > 1) {
-        SOOTHING_CANDLE.duration = `Duration: ${itemDuration - roomCounter} Rooms`;
+        SOOTHING_CANDLE.duration = `Duration: ${
+          itemDuration - roomCounter
+        } Rooms`;
       } else {
-        SOOTHING_CANDLE.duration = `Duration: ${itemDuration - roomCounter} Room`;
+        SOOTHING_CANDLE.duration = `Duration: ${
+          itemDuration - roomCounter
+        } Room`;
       }
 
       if (roomCounter >= itemDuration) {
@@ -741,9 +740,9 @@ const FLICKERING_CANDLE = {
   rarity: "COMMON",
   effect:
     "When this item is used your chance to flee successfully becomes 100%. After fleeing three times the candle burns out.",
-  status: 'You always successfully flee.',
+  status: "You always successfully flee.",
   duration: null,
-    function: () => {
+  function: () => {
     flickeringCandleTracker = 3;
     FLICKERING_CANDLE.duration = `Duration: 3`;
     let flickeringCandleInterval = setInterval(() => {
@@ -795,14 +794,15 @@ const SOULFLAME_CANDLE = {
     let itemDuration = experiencePoints + 100;
     SOULFLAME_CANDLE.duration = "100XP";
     let soulflameCandleInterval = setInterval(() => {
-      SOULFLAME_CANDLE.duration = `Duration: ${itemDuration - experiencePoints}XP`;
+      SOULFLAME_CANDLE.duration = `Duration: ${
+        itemDuration - experiencePoints
+      }XP`;
       if (experiencePoints >= itemDuration) {
         soulflameCandleTracker = "BURNED OUT";
         SOULFLAME_CANDLE.duration = null;
         clearInterval(soulflameCandleInterval);
       } else {
         soulflameCandleTracker = "LIT";
-        console.log("Soulflame Candle is lit!");
       }
     }, 3000);
     renderStatusEffects(SOULFLAME_CANDLE);
@@ -831,7 +831,9 @@ const GUIDING_LIGHT = {
 
     let guidingLightInterval = setInterval(() => {
       if (itemDuration - roomCounter > 1) {
-        GUIDING_LIGHT.duration = `Duration: ${itemDuration - roomCounter} Rooms`;
+        GUIDING_LIGHT.duration = `Duration: ${
+          itemDuration - roomCounter
+        } Rooms`;
       } else {
         GUIDING_LIGHT.duration = `Duration: ${itemDuration - roomCounter} Room`;
       }
@@ -843,7 +845,6 @@ const GUIDING_LIGHT = {
         clearInterval(guidingLightInterval);
       } else {
         guidingLightTracker = "GUIDING";
-        console.log("The light guides you!");
       }
     }, 15000);
 
@@ -880,7 +881,6 @@ const ROWDY_WISP = {
         clearInterval(rowdyWispInterval);
       } else {
         rowdyWispTracker = "GUIDING";
-        console.log("The Rowdy Wisp guides you!");
       }
     }, 15000);
 
@@ -966,11 +966,9 @@ let foundItem;
 function isItemAttuned(item, defaultValue) {
   for (let i = 0; i < attunedItems.length; i++) {
     if (attunedItems[i] === item) {
-      console.log(`${item.name} is being used!`);
       return item.function();
     }
   }
-  // console.log(`No items used.`);
   return defaultValue;
 }
 
@@ -992,7 +990,7 @@ function statusEffectHandler(item) {
     case WARDING_CANDLE:
       if (wardingCandleTracker === "LIT") {
         if (
-          currentRoom.contents.monsters[0].type === 'UNDEAD' &&
+          currentRoom.contents.monsters[0].type === "UNDEAD" &&
           currentRoom.contents.monsters[0].skulls <= 6
         ) {
           let randomNumber = Math.round(Math.random() * 10);
@@ -1051,7 +1049,6 @@ function statusEffectHandler(item) {
 
     case POISONED:
       if (poisonedTracker === "POISONED") {
-        console.log("You are poisoned!");
         //writeToLog()
         baseDexterity -= 2;
         baseStrength -= 2;
@@ -1268,31 +1265,58 @@ function renderInventory() {
   const slotFour = document.getElementById("slotFour");
   const slotFive = document.getElementById("slotFive");
 
-  for (let i = 0; i < inventoryItems.length; i++) {
-    const itemBox = document.createElement("div");
-    // const itemName = document.createElement("p");
-    itemBox.classList.add("tooltip");
-    const tooltipText = document.createElement("span");
-    tooltipText.classList.add("tooltipText");
-    tooltipText.textContent = inventoryItems[i].effect;
-    const itemButton = document.createElement("button");
-    itemButton.textContent = inventoryItems[i].name;
-    itemButton.setAttribute("id", inventoryItems[i].name);
-    // itemBox.appendChild(itemName);
-    itemBox.appendChild(tooltipText);
-    itemBox.appendChild(itemButton);
+  const renderedItems = {};
 
-    if (inventoryItems[i].type === "MAGIC") {
-      magicItemsBox.appendChild(itemBox);
+  for (let i = 0; i < inventoryItems.length; i++) {
+    const itemName = inventoryItems[i].name;
+
+    // Check if the item has already been rendered
+    if (renderedItems[itemName]) {
+      // Increment the counter for this item
+      renderedItems[itemName]++;
     } else {
-      consumablesBox.appendChild(itemBox);
+      // First time encountering this item, initialize the counter
+      renderedItems[itemName] = 1;
+
+      const itemBox = document.createElement("div");
+      itemBox.classList.add("tooltip");
+      const tooltipText = document.createElement("span");
+      tooltipText.classList.add("tooltipText");
+      tooltipText.textContent = inventoryItems[i].effect;
+      const itemButton = document.createElement("button");
+
+      itemButton.textContent = itemName;
+
+      itemButton.setAttribute("id", itemName);
+
+      itemBox.appendChild(tooltipText);
+      itemBox.appendChild(itemButton);
+
+      if (inventoryItems[i].type === "MAGIC") {
+        magicItemsBox.appendChild(itemBox);
+      } else {
+        consumablesBox.appendChild(itemBox);
+      }
     }
   }
 
+ // Display counts for each item
+for (const itemName in renderedItems) {
+  const itemButton = document.getElementById(itemName);
+
+  // Create a separate span element for the counter
+  const counterSpan = document.createElement("span");
+  counterSpan.classList.add("item-counter");
+
+  // Append counter to the item name if there's more than one instance
+  if (renderedItems[itemName] > 1) {
+    counterSpan.textContent = `x${renderedItems[itemName]}`;
+    itemButton.appendChild(counterSpan); // Append counter to the button
+  }
+}
+
   for (let i = 0; i < attunedItems.length; i++) {
     const itemBox = document.createElement("div");
-    // const itemName = document.createElement("p");
-    // itemName.textContent = attunedItems[i].name;
     const itemButton = document.createElement("button");
     itemButton.textContent = attunedItems[i].name;
     itemButton.setAttribute("id", attunedItems[i].name);
@@ -1300,7 +1324,7 @@ function renderInventory() {
     const tooltipText = document.createElement("span");
     tooltipText.classList.add("tooltipText");
     tooltipText.textContent = attunedItems[i].effect;
-    // itemBox.appendChild(itemName);
+
     itemBox.appendChild(tooltipText);
     itemBox.appendChild(itemButton);
 
