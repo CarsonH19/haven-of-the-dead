@@ -83,7 +83,7 @@ const LOG_EVENT_GUARD_FAIL = "GAURD FAIL";
 const LOG_EVENT_POTION = "POTION";
 const LOG_EVENT_FLEE = "FLEE";
 const LOG_EVENT_LEVEL = "LEVEL UP";
-const LOG_EVENT_NEW_ROOM = "NEW ROOM";
+const LOG_EVENT_ROOM = "ROOM";
 
 const LOG_EVENT_TRAP_DESCRIPTION = "TRAP DESCRIPTION";
 const LOG_EVENT_NPC_DESCRIPTION = "NPC DESCRIPTION";
@@ -248,6 +248,7 @@ let attackCounter = 0;
 let guidingLightTracker;
 let rowdyWispTracker;
 let unholyWispTracker;
+let restlessWispTracker;
 
 // Candles
 let wardingCandleTracker;

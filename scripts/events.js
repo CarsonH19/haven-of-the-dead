@@ -375,7 +375,7 @@ const FORSAKEN_COMMANDER = {
   failDamage: null,
   functionOne: () => {
     if (attunedItems.includes(WHISPERING_AMULET)) {
-      // currentRoom.contents.items.push(RESTLESS_WISP);
+      currentRoom.contents.items.push(RESTLESS_WISP);
       LEGIONS_GRACE.function(); // Applies Legion's Grace status effect
       setTimeout(renderRoomSummaryModal, 5000);
       setRoomSummary();

@@ -882,7 +882,11 @@ continueButton.addEventListener("click", () => {
     } else if (unholyWispTracker === "ARRIVE") {
       currentRoom = BLOOD_ALTER;
       renderCurrentRoom(BLOOD_ALTER);
-      rowdyWispTracker = null;
+      unholyWispTracker = null;
+    } else if (restlessWispTracker === 'ARRIVE') {
+      currentRoom = LOST_LEGIONS_VALE;
+      renderCurrentRoom(LOST_LEGIONS_VALE);
+      restlessWispTracker = null;
     } else {
       removeCurrentRoom();
       getRandomRoom(catacombRooms);

@@ -1,6 +1,7 @@
 // ===============================
 //             Log
 // ===============================
+
 function writeToLog(eventType, name, value) {
   let newEntry = document.createElement("li");
   let narration = Math.round(Math.random() * 10);
@@ -1468,7 +1469,6 @@ function writeToLog(eventType, name, value) {
       break;
 
     case LOG_EVENT_MISC_OPTION_TWO:
-      console.log('WHAT?!')
       if (event === LAUGHING_COFFIN_EVENT) {
         newEntry.textContent = `With a Laughing Coffin Coin in hand, the den of rogues turns their eyes upon you. "Got the token, have you?" one grins, only to scowl as you hesitate. "Wasting our time, are you?" another scoffs. "If you ain't here to play, stranger, best you leave before we make you regret it."`;
       } else if (event === LOCKED_ROOM) {
@@ -1476,6 +1476,17 @@ function writeToLog(eventType, name, value) {
       } else if (event === CRIMSON_COVENANT) {
         newEntry.textContent = `You step back from the altar, rejecting the sinister invitation. The hooded figures pause, their crimson eyes piercing the darkness. The catacomb's air tightens with an unsettling stillness. he chanting falters, and the figures regard you with an ominous silence as you descend further into the catacomb.`;
       }
+
+      narration = newEntry.textContent;
+      break;
+
+    // ===============================
+    //          Room Events
+    // ===============================
+      case LOG_EVENT_ROOM:
+        if (currentRoom === LOST_LEGIONS_VALE) {
+          newEntry.textContent = `An expansive chamber unveils the remnants of a long-forgotten battle. Echoes of ancient conflict stir as skeletal warriors awaken. The air quivers with the chilling resonance of an eternal struggle, and the bones of the fallen rise once more.`;
+        }
 
       narration = newEntry.textContent;
       break;
@@ -1550,7 +1561,8 @@ function writeToLog(eventType, name, value) {
     eventType === LOG_EVENT_GREATER_PRAYER ||
     eventType === LOG_EVENT_POTION ||
     eventType === LOG_EVENT_FLEE ||
-    eventType === LOG_EVENT_ITEM
+    eventType === LOG_EVENT_ITEM ||
+    eventType === LOG_EVENT_ROOM
   ) {
     newNarration.textContent = narration;
     narrativeText.insertBefore(newNarration, narrativeText.firstChild);

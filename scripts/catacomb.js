@@ -348,6 +348,23 @@ const CANDLELIGHT_SHRINE = {
 //          Misc. Rooms
 // ===============================
 
+const LOST_LEGIONS_VALE = {
+  roomName: "Lost Legions Vale",
+  description: `A desolate vale in the catacomb's heart, where the whispers of forgotten warriors echo through the cold stone. Rusted armor and tattered banners line the silent path, revealing the untold tales of legions lost to time.`,
+  backgroundImage: "styles/images/corridor-one.png",
+  music: null,
+  contents: {
+    monsters: [],
+    items: [SOULREAVER],
+    events: null,
+  },
+  function: () => {
+    setTimeout(() => {
+      writeToLog(LOG_EVENT_ROOM, LOST_LEGIONS_VALE);
+    }, 1500);
+  }
+}
+
 const LAUGHING_COFFIN_ROOM = { 
   roomName: "The Laughing Coffin Tavern", 
   description: "The Laughing Coffin tavern stands as a sanctuary, welcoming scoundrels and coin-bearers alike. Here, amid the shadows, an unexpected haven emerges—a place to relax, where whispered secrets and clinking coins intertwine in the dim-lit embrace of this clandestine refuge.",

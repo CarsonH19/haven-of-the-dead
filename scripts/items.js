@@ -363,6 +363,18 @@ const LAUGHING_COFFIN_COIN = {
   },
 };
 
+const SKELETON_KEY = {
+  name: "Skeleton Key",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "This key can be used to unlock various locked rooms throughout the catacomb.",
+  function: () => {
+    writeToLog(LOG_EVENT_ITEM, SKELETON_KEY, currentRoom.roomName);
+  },
+};
+
 // ===============================
 //         EPIC ITEMS
 // ===============================
@@ -407,21 +419,28 @@ const SOULREAVER = {
       return 0;
     } else if (attackCounter === 1) {
       attackCounter++;
+      healPlayer(1);
       return 1;
     } else if (attackCounter === 2) {
       attackCounter++;
+      healPlayer(2);
       return 2;
     } else if (attackCounter === 3) {
       attackCounter++;
+      healPlayer(3);
       return 3;
     } else if (attackCounter === 4) {
       attackCounter++;
+      healPlayer(4);
       return 4;
     } else if (attackCounter >= 5) {
       attackCounter++;
-      // writeToLog Soulreaver is fully charged
+      healPlayer(5);
+      // writeToLog Soulreaver is fully charged & heals you
       return 5;
     }
+
+ 
   },
 };
 
@@ -462,18 +481,6 @@ const CRIMSON_OFFERING = {
     isGameOver();
     // writeToLog You make an offering and sacrifice 5 HP
     return 10;
-  },
-};
-
-const SKELETON_KEY = {
-  name: "Skeleton Key",
-  description: "",
-  type: "MAGIC",
-  rarity: "RARE",
-  effect:
-    "This key can be used to unlock various locked rooms throughout the catacomb.",
-  function: () => {
-    writeToLog(LOG_EVENT_ITEM, SKELETON_KEY, currentRoom.roomName);
   },
 };
 
@@ -818,8 +825,7 @@ const GUIDING_LIGHT = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
-  effect:
-    "When this item is used a light will guide you to the nearest Candlelight Shrine. The light vanishes after leading you to safety.",
+  effect: "When this item is used a light will guide you to the nearest Candlelight Shrine.",
   status: "Guiding you to a nearby Candlelight Shrine.",
   duration: null,
   function: () => {
@@ -862,7 +868,7 @@ const ROWDY_WISP = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
-  effect: "",
+  effect: "When this item is used a wisp will guide you to the Laughing Coffin Tavern.",
   status: "Guiding you to the Laughing Coffin.",
   duration: null,
   function: () => {
@@ -898,7 +904,7 @@ const UNHOLY_WISP = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
-  effect: "",
+  effect: "When this item is used a wisp will guide you to the nearest Blood Alter.",
   status: "Guiding you to the Blood Alter.",
   duration: null,
   function: () => {
@@ -926,6 +932,47 @@ const UNHOLY_WISP = {
     root.style.setProperty("--orb", "#bf3637");
 
     renderStatusEffects(UNHOLY_WISP);
+  },
+};
+
+const RESTLESS_WISP = {
+  name: "Restless Wisp",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "RARE",
+  effect: "When this item is used a wisp will guide you to Lost Legions Vale.",
+  status: "Guiding you to Lost Legions Vale.",
+  duration: null,
+  function: () => {
+    const wisp = document.querySelector(".wisp");
+    let randomNumber = Math.floor(Math.random() * 0) + 0;
+    let wispDuration = roomCounter + randomNumber;
+    RESTLESS_WISP.duration = "Searching";
+
+    // LOST_LEGIONS_VALE.contents.monsters.push(SKELETAL_CAPTAIN); // ADD BOSS?!
+
+    for (let i = 0; i < 5; i++) {
+      LOST_LEGIONS_VALE.contents.monsters.push(SKELETAL_SOLDIER);
+    }
+
+    let restlessWispInterval = setInterval(() => {
+      RESTLESS_WISP.duration = `Duration: ${wispDuration - roomCounter} Rooms`;
+      if (roomCounter >= wispDuration) {
+        restlessWispTracker = "ARRIVE";
+        wisp.classList.remove("orb");
+        RESTLESS_WISP.duration = null;
+        clearInterval(restlessWispInterval);
+      } else {
+        restlessWispTracker = "GUIDING";
+      }
+    }, 15000);
+
+    wisp.classList.add("orb");
+
+    const root = document.documentElement;
+    root.style.setProperty("--orb", "#95dba8");
+
+    renderStatusEffects(RESTLESS_WISP);
   },
 };
 
