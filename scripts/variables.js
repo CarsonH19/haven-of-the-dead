@@ -18,18 +18,17 @@ let monsterMaxHealth = 100;
 let currentMonsterHealth = monsterMaxHealth;
 let monsterAttackValue = 10;
 
-
 let currentPlayerHealth = null;
 
 // ===============================
 //         Game Window
 // ===============================
 
-const gameWindow = document.querySelector('.game-window');
+const gameWindow = document.querySelector(".game-window");
 const bottomContent = document.querySelector(".bottom-content");
 const playerContainer = document.querySelector(".player-container");
 const roomsCleared = document.getElementById("roomsCleared");
-const narrativeText = document.getElementById('narrativeText');
+const narrativeText = document.getElementById("narrativeText");
 
 // ===============================
 //     Catacomb Entrance Modal
@@ -55,9 +54,9 @@ const continueButton = document.getElementById("continueButton");
 //           Event Modal
 // ===============================
 
-const eventModal = document.getElementById('eventModal');
-const eventButtonOne = document.getElementById('eventButtonOne');
-const eventButtonTwo = document.getElementById('eventButtonTwo');
+const eventModal = document.getElementById("eventModal");
+const eventButtonOne = document.getElementById("eventButtonOne");
+const eventButtonTwo = document.getElementById("eventButtonTwo");
 
 // ===============================
 //        Choose Hero Modal
@@ -70,10 +69,9 @@ const heroChoiceModal = document.getElementById("heroChoiceModal");
 // ===============================
 
 const log = document.getElementById("log");
-const logContainer = document.getElementById('logContainer');
-const logModal = document.getElementById('logModal');
-const logModalList = document.getElementById('logModalList');
-
+const logContainer = document.getElementById("logContainer");
+const logModal = document.getElementById("logModal");
+const logModalList = document.getElementById("logModalList");
 
 const LOG_EVENT_MONSTER_ATTACK = "MONSTER ATTACK";
 const LOG_EVENT_MONSTER_MISS = "MONSTER MISS";
@@ -92,10 +90,10 @@ const LOG_EVENT_NPC_DESCRIPTION = "NPC DESCRIPTION";
 const LOG_EVENT_MISC_DESCRIPTION = "MISC DESCRIPTION";
 const LOG_EVENT_SAFE_ROOM = "SAFE ROOM";
 
-const LOG_EVENT_NPC_OPTION_ONE = 'NPC OPTION ONE';
-const LOG_EVENT_NPC_OPTION_TWO = 'NPC OPTION TWO';
-const LOG_EVENT_MISC_OPTION_ONE = 'MISC OPTION ONE';
-const LOG_EVENT_MISC_OPTION_TWO = 'MISC OPTION TWO';
+const LOG_EVENT_NPC_OPTION_ONE = "NPC OPTION ONE";
+const LOG_EVENT_NPC_OPTION_TWO = "NPC OPTION TWO";
+const LOG_EVENT_MISC_OPTION_ONE = "MISC OPTION ONE";
+const LOG_EVENT_MISC_OPTION_TWO = "MISC OPTION TWO";
 const LOG_EVENT_TRAP_PASS = "TRAP PASS";
 const LOG_EVENT_TRAP_FAIL = "TRAP FAIL";
 
@@ -135,7 +133,7 @@ function calculatePlayerMaxHealth() {
   let strengthBonusHealth = calculateStrengthBonusHealth();
   playerMaxHealth = baseHealth + strengthBonusHealth;
   let maxHealthWithItems = playerMaxHealth + isItemAttuned(BONEMAIL, 0); // ITEM: +20 Max HP
-  
+
   return maxHealthWithItems;
 }
 
@@ -206,7 +204,7 @@ let passiveAbilityBoonRank = 1;
 //    Hero Stats Modal Variables
 // ===============================
 
-const heroStatsModal = document.getElementById('heroStatsModal');
+const heroStatsModal = document.getElementById("heroStatsModal");
 
 // ===============================
 //       Catacomb Variables
@@ -218,7 +216,7 @@ let roomCounter = 0;
 
 const catacombEntrance = {
   roomName: "Catacomb Entrance",
-  backgroundImage: 'styles/images/catacomb-entrance.png',
+  backgroundImage: "styles/images/catacomb-entrance.png",
   music: null,
   contents: {
     monsters: [],
@@ -230,7 +228,6 @@ const catacombEntrance = {
 };
 
 let currentRoom = catacombEntrance;
-
 
 // ===============================
 //      Inventory Variables
@@ -244,7 +241,7 @@ const closeInventoryButton = document.getElementById("closeInventoryBtn");
 //        Item Variables
 // ===============================
 
-// Soulreaver 
+// Soulreaver
 let attackCounter = 0;
 
 // Wisps
@@ -272,25 +269,42 @@ let bloodSacrificed = 0;
 //     Status Effects
 // ===============================
 
+const LEGIONS_GRACE = {
+  name: "Legion's Grace",
+  description: "The more soldiers laid to rest the greater this boon becomes.",
+  status: `Base Attack increased by 1. The more soldiers laid to rest the greater the legion's grace becomes.`,
+  duration: null,
+  function: () => {
+    let legionTracker = 27;
+    let attackBoost = 1;
+    LEGIONS_GRACE.duration = `0 soldiers put to rest`;
+    setInterval(() => {
+      LEGIONS_GRACE.duration = `${legionTracker} soldiers put to rest`;
+      LEGIONS_GRACE.status = `Base Attack increased by ${attackBoost}. The more soldiers laid to rest, the greater the legion's grace becomes.`
+      if (legionTracker % 30 === 0 ) {
+        statusEffectHandler(LEGIONS_GRACE);
+        attackBoost++;
+      } 
+    }, 5000);
+
+    statusEffectHandler(LEGIONS_GRACE);
+    renderStatusEffects(LEGIONS_GRACE);
+  },
+};
+
 const BLOOD_PACT = {
   name: "Blood Pact",
   description: "",
-  effect:
-    "Your base attack is increased by 5, but your faith is reduced by 2.",
-  status: "",
+  status: "Your base attack is increased by 5, but your faith is reduced by 2.",
   duration: null,
   function: () => {
-    let statusDuration = roomCounter + 10;
-    BLOOD_PACT.duration = "Duration: 10 Rooms"
+    let statusDuration = roomCounter + 15;
+    BLOOD_PACT.duration = "Duration: 15 Rooms";
     let bloodPactInterval = setInterval(() => {
       if (statusDuration - roomCounter > 1) {
-        BLOOD_PACT.duration = `Duration: ${
-          statusDuration - roomCounter
-        } Rooms`;
+        BLOOD_PACT.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
       } else {
-        BLOOD_PACT.duration = `Duration: ${
-          statusDuration - roomCounter
-        } Room`;
+        BLOOD_PACT.duration = `Duration: ${statusDuration - roomCounter} Room`;
       }
 
       if (roomCounter >= statusDuration) {
@@ -309,15 +323,14 @@ const BLOOD_PACT = {
 const POISONED = {
   name: "Poisoned",
   description: "",
-  effect:
-    "Your Strength & Dexterity are 0 while poisoned.",
+  effect: "Your Strength & Dexterity are 0 while poisoned.",
   status: "You are poisoned.",
   duration: null,
   function: () => {
     let statusDuration = roomCounter + 3;
-    POISONED.duration = "5 Rooms"
+    POISONED.duration = "5 Rooms";
     let poisonedInterval = setInterval(() => {
-    POISONED.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
+      POISONED.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
       if (roomCounter >= statusDuration) {
         POISONED.duration = null;
         baseDexterity += 2;

@@ -19,16 +19,27 @@
 
 let catacombRooms = [
   {
-    roomName: "Clawed Caverns", // !FINISHED!
-    description: '',
-    backgroundImage: 'styles/images/corridor-two.png',
-    music: null,
-    contents: {
-      monsters: [],
-      items: [],
-      events: CRIMSON_COVENANT
+      roomName: "TEST ROOM", // !FINISHED!
+      description: 'TEST =)',
+      backgroundImage: 'styles/images/corridor-two.png',
+      music: null,
+      contents: {
+        monsters: [],
+        items: [],
+        events: FORSAKEN_COMMANDER
+      },
     },
-  },
+  // {
+  //   roomName: "Clawed Caverns", // !FINISHED!
+  //   description: '',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [GNAWER, GNAWER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
   // {
   //   roomName: "Vermins' Vestibule", // !FINISHED!
   //   description: '',

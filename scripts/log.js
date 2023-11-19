@@ -1399,10 +1399,12 @@ function writeToLog(eventType, name, value) {
         newEntry.textContent = `As the key turns, a malevolent hiss escapes as deadly poison gas clouds your senses. Weakening, you realize the scoundrel's gratitude was a ruse. Ivan and his accomplices emerge, encircling you like prey in ambush. Peril looms in their treacherous laughter."`;
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. ${name} turn towards ${value}, their hollow sockets fixed on your bold presence.`;
-      } else if (event === GRERVIL_THE_BODILESS) {
-      } else if (event === TRADER_BAZRIM) {
-      } else if (event === HOZHUL) {
-      } else if (event === CURATOR_RENVAR) {
+      } else if  (event === FORSAKEN_COMMANDER) {
+        if (name === 'ONE') {
+          newEntry.textContent = `Valiant adventurer, my legion haunts these depths, bound by an unholy curse. Free them from the chains of undeath. Venture forth, quell the skeletal uprising, and usher my warriors into the eternal rest they deserve.`;
+        } else if (name === 'TWO') {
+          newEntry.textContent = `The ethereal voice echoes, but its spectral words elude your comprehension. The spirit's frustration intensifies, and anger darkens its gaze. Enraged, it lashes out with a vengeful force.`;
+        }
       }
 
       narration = newEntry.textContent;
@@ -1421,10 +1423,8 @@ function writeToLog(eventType, name, value) {
         newEntry.textContent = `Discovering the concealed cache, caution grips you as Ivan's offer of kindness grows suspicious. Suddenly, shadows and an ambush unfolds. With weapons unsheathed, Ivan and his cohorts emerge, revealing your instincts not to trust him were right all along.`;
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `After the skeletons mercilessly strike down ${name}, their hollow gaze fixates on ${value}.`;
-      } else if (event === GRERVIL_THE_BODILESS) {
-      } else if (event === TRADER_BAZRIM) {
-      } else if (event === HOZHUL) {
-      } else if (event === CURATOR_RENVAR) {
+      } else if (event === FORSAKEN_COMMANDER) {
+        newEntry.textContent = `As you disregard the spirit's plea, an ominous chill fills the catacomb. Skeletal apparitions rise with a malevolent purpose. In the darkness, an onslaught ensues, the consequence of denying the restless spirit.`;
       }
 
       narration = newEntry.textContent;

@@ -1091,6 +1091,19 @@ function statusEffectHandler(item) {
         updatePlayerTrackers();
       }
       break;
+
+    case BLOOD_PACT:
+      //writeToLog()
+      baseAttack += 5;
+      baseFaith -= 2;
+      updatePlayerTrackers();
+      break;
+
+    case LEGIONS_GRACE:
+      //writeToLog()
+      baseAttack++;
+      updatePlayerTrackers();
+      break;
   }
 }
 
@@ -1336,20 +1349,20 @@ function renderInventory() {
     }
   }
 
- // Display counts for each item
-for (const itemName in renderedItems) {
-  const itemButton = document.getElementById(itemName);
+  // Display counts for each item
+  for (const itemName in renderedItems) {
+    const itemButton = document.getElementById(itemName);
 
-  // Create a separate span element for the counter
-  const counterSpan = document.createElement("span");
-  counterSpan.classList.add("item-counter");
+    // Create a separate span element for the counter
+    const counterSpan = document.createElement("span");
+    counterSpan.classList.add("item-counter");
 
-  // Append counter to the item name if there's more than one instance
-  if (renderedItems[itemName] > 1) {
-    counterSpan.textContent = `x${renderedItems[itemName]}`;
-    itemButton.appendChild(counterSpan); // Append counter to the button
+    // Append counter to the item name if there's more than one instance
+    if (renderedItems[itemName] > 1) {
+      counterSpan.textContent = `x${renderedItems[itemName]}`;
+      itemButton.appendChild(counterSpan); // Append counter to the button
+    }
   }
-}
 
   for (let i = 0; i < attunedItems.length; i++) {
     const itemBox = document.createElement("div");

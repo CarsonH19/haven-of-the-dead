@@ -141,16 +141,29 @@ const GRUDGE = {
 //             NPCs
 // ===============================
 
+const FORSAKEN_COMMANDER_STATS = {
+  name: "Forsaken Commander",
+  type: "UNDEAD",
+  skulls: 6,
+};
+
+const SPECTRAL_SOLDIER = {
+  name: "Spectral Soldier",
+  type: "UNDEAD",
+  skulls: 2,
+};
+
+
 const POSSESSED_EARVER = {
   name: "Graverobber Earver",
   type: "HUMANOID",
-  skulls: 6,
+  skulls: 4,
 };
 
 const IVAN_STATS = {
   name: "Ivan the Scoundrel",
   type: "HUMANOID",
-  skulls: 6,
+  skulls: 5,
   function: () => {
     // Ivan attacks and moves back behind another scoundrel
     let index = myArray.indexOf(IVAN_STATS);
@@ -228,7 +241,7 @@ function startBattle() {
     // ITEM: Sunstone - Damages undead creatures.
     isItemAttuned(SUNSTONE, 0);
     // ITEM: Warding Candle - Chance for evil spirits to flee.
-    itemEffectHandler(WARDING_CANDLE);
+    statusEffectHandler(WARDING_CANDLE);
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
     isItemAttuned(ETHEREAL_CROWN, 0);
   }, 1000);

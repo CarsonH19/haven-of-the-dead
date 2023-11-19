@@ -364,6 +364,48 @@ const SCHOLAR_HENDRA = {
   },
 };
 
+const FORSAKEN_COMMANDER = {
+  name: "Forsaken Commander",
+  eventType: "NPC",
+  description:
+    "A spectral commander, draped in ethereal sorrow, materializes before you. Its mournful plea echoes through the chamber. Will you heed its desperate entreaty.",
+  optionOne: "Listen",
+  optionTwo: "Ignore",
+  passValue: null,
+  failDamage: null,
+  functionOne: () => {
+    if (attunedItems.includes(WHISPERING_AMULET)) {
+      // currentRoom.contents.items.push(RESTLESS_WISP);
+      LEGIONS_GRACE.function(); // Applies Legion's Grace status effect
+      setTimeout(renderRoomSummaryModal, 5000);
+      setRoomSummary();
+      writeToLog(LOG_EVENT_NPC_OPTION_ONE, "ONE");
+    } else {
+
+      currentRoom.contents.monsters.push(
+        SPECTRAL_SOLDIER,
+        SPECTRAL_SOLDIER,
+        FORSAKEN_COMMANDER_STATS
+      );
+      currentRoom.contents.items.push(WRAITHBANE);
+      setRoomSummary();
+      startBattle();
+      writeToLog(LOG_EVENT_NPC_OPTION_ONE, "TWO");
+    }
+  },
+  functionTwo: () => {
+    currentRoom.contents.monsters.push(
+      SPECTRAL_SOLDIER,
+      SPECTRAL_SOLDIER,
+      FORSAKEN_COMMANDER_STATS
+    );
+    currentRoom.contents.items.push(WRAITHBANE);
+    setRoomSummary();
+    startBattle();
+    writeToLog(LOG_EVENT_NPC_OPTION_TWO);
+  },
+};
+
 // const GRERVIL_THE_BODILESS = {
 //   // !UNFINISHED!
 //   name: "Grervil the Bodiless",
@@ -535,8 +577,9 @@ const LAUGHING_COFFIN_EVENT = {
 const CRIMSON_COVENANT = {
   name: "Crimson Covenant",
   eventType: "MISC",
-  description: "Before you, an altar looms, encircled by hooded figures in blood-stained robes. With chilling devotion, they cut their wrists, offering crimson tributes to the ominous altar. Echoing chants fill the catacomb—a haunting invitation. Will you join their sacrificial ritual at the blood altar?",
-  summary: '',
+  description:
+    "Before you, an altar looms, encircled by hooded figures in blood-stained robes. With chilling devotion, they cut their wrists, offering crimson tributes to the ominous altar. Echoing chants fill the catacomb—a haunting invitation. Will you join their sacrificial ritual at the blood altar?",
+  summary: "",
   optionOne: "Join",
   optionTwo: "Refuse",
   functionOne: () => {
@@ -545,13 +588,17 @@ const CRIMSON_COVENANT = {
       damageFlashAnimation();
       bloodSacrificed += 50;
       BLOOD_PACT.function();
-      CRIMSON_COVENANT.summary = 'You partake in the sacrificial ritual of the Crimson Covenant, spilling your blood on the Blood Alter.';
-      writeToLog(LOG_EVENT_MISC_OPTION_ONE); 
+      CRIMSON_COVENANT.summary =
+        "You partake in the sacrificial ritual of the Crimson Covenant, spilling your blood on the Blood Alter.";
+      setRoomSummary();
+      writeToLog(LOG_EVENT_MISC_OPTION_ONE);
       setTimeout(renderRoomSummaryModal, 5000);
     }
   },
   functionTwo: () => {
-    CRIMSON_COVENANT.summary = 'You refuse to partake in the sacrificial ritual of the Crimson Covenant.';
+    CRIMSON_COVENANT.summary =
+      "You refuse to partake in the sacrificial ritual of the Crimson Covenant.";
+    setRoomSummary();
     writeToLog(LOG_EVENT_MISC_OPTION_TWO);
     setTimeout(renderRoomSummaryModal, 5000);
   },
