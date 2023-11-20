@@ -31,6 +31,7 @@
 // Quest Items
 // - Cursed Grimoire - Scholar Hendra
 // - Cache Key - Ivan the Scoundrel
+// - Grervil's Head
 
 // ===============================
 //          CONSUMABLES
@@ -523,6 +524,19 @@ const CACHE_KEY = {
     writeToLog(LOG_EVENT_ITEM, CACHE_KEY);
   },
 };
+
+const GRERVILS_HEAD = {
+  name: "Grervil's Head",
+  description: "",
+  type: "MAGIC",
+  rarity: "COMMON",
+  effect: "Head of the talking skull, Grervil.",
+  function: () => {
+    // Obtained after meeting Grervil agreeing to help him find his body.
+    writeToLog(LOG_EVENT_ITEM, GRERVILS_HEAD);
+  },
+};
+
 
 // ===============================
 //        FOOD & DRINK

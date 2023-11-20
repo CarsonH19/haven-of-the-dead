@@ -381,7 +381,6 @@ const FORSAKEN_COMMANDER = {
       setRoomSummary();
       writeToLog(LOG_EVENT_NPC_OPTION_ONE, "ONE");
     } else {
-
       currentRoom.contents.monsters.push(
         SPECTRAL_SOLDIER,
         SPECTRAL_SOLDIER,
@@ -406,23 +405,85 @@ const FORSAKEN_COMMANDER = {
   },
 };
 
-// const GRERVIL_THE_BODILESS = {
-//   // !UNFINISHED!
-//   name: "Grervil the Bodiless",
-//   description: "",
-//   optionOne: "Speak",
-//   optionTwo: "Ignore",
-//   passValue: null,
-//   failDamage: null,
-//   functionOne: () => {
-//     // if Whispering Amulet is attuned you will learn to search for his body.
-//     // add Grervil’s body room to catacomb array
-//     // add Grervil’s Head as an item
-//   },
-//   functionTwo: () => {
-//     // add Grervil’s body room but the player destroys the body.
-//   },
-// };
+// Grervil the Bodiless Function
+
+function findRandomUndeadRoom() {
+  let randomRoom;
+
+  do {
+    const randomIndex = Math.floor(Math.random() * catacombRooms.length);
+    randomRoom = catacombRooms[randomIndex];
+  } while (
+    !randomRoom.contents.monsters[0] ||
+    randomRoom.contents.monsters[0].type !== "UNDEAD"
+  );
+
+  return randomRoom;
+}
+
+const GRERVIL_THE_BODILESS = {
+  name: "Grervil the Bodiless",
+  eventType: "NPC",
+  description:
+    "You find a skull sitting atop a stone sarcophagus. Its chattering teeth almost sound like words. Do you approach to hear better?",
+  summary: "", // Outcome depends on choice
+  optionOne: "Approach",
+  optionTwo: "Ignore",
+  functionOne: () => {
+    if (attunedItems.includes(WHISPERING_AMULET)) {
+      const randomUndeadRoom = findRandomUndeadRoom();
+      randomUndeadRoom.contents.monsters.push(GRERVILS_BODY);
+
+      grervilsQuestInterval = setInterval(() => {
+        if (currentRoom.contents.monsters[0] === GRERVILS_BODY) {
+          currentRoom.description = `You found Grervil's Body while exploring the ${currentRoom.roomName}. Reuniting the skull with its body he gives you a key ring with several keys before running off.`;
+          currentRoom.contents.items.push(SKELETON_KEY); // ADD MORE ITEMS FOR REWARD!!!
+          playerControlsTimeout(7000);
+          useConsumable("Grervil's Head"); // removes item from inventory
+
+          setTimeout(() => {
+            fadeOutAnimation(monsterContainer, 0000);
+            setTimeout(() => {
+              checkForMonsters();
+              monsterContainer.style.display = "none";
+            }, 2000);
+          }, 5000);
+
+          setTimeout(setRoomSummary, 7500);
+          writeToLog(LOG_EVENT_ROOM);
+          clearInterval(grervilsQuestInterval);
+        }
+      }, 3000);
+
+      GRERVIL_THE_BODILESS.summary =
+        "Grervil the Bodiless joins you on your journey within the catacomb, in search of his wandering body.";
+      inventoryItems.push(GRERVILS_HEAD);
+
+      setRoomSummary();
+      setTimeout(renderRoomSummaryModal, 5000);
+      writeToLog(LOG_EVENT_NPC_OPTION_ONE, "ONE");
+    } else {
+      const randomUndeadRoom = findRandomUndeadRoom();
+      randomUndeadRoom.contents.monsters.push(HEADLESS_SKELETON);
+
+      GRERVIL_THE_BODILESS.summary = `Unable to understanding the chattering skull you simply walk away.`;
+
+      setRoomSummary();
+      setTimeout(renderRoomSummaryModal, 5000);
+      writeToLog(LOG_EVENT_NPC_OPTION_ONE, "TWO");
+    }
+  },
+  functionTwo: () => {
+    const randomUndeadRoom = findRandomUndeadRoom();
+    randomUndeadRoom.contents.monsters.push(HEADLESS_SKELETON);
+
+    GRERVIL_THE_BODILESS.summary = `Unable to understanding the chattering skull you simply walk away.`;
+
+    setRoomSummary();
+    setTimeout(renderRoomSummaryModal, 5000);
+    writeToLog(LOG_EVENT_NPC_OPTION_ONE);
+  },
+};
 
 // const TRADER_BAZRIM = {
 //   // !UNFINISHED!

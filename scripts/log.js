@@ -1406,6 +1406,12 @@ function writeToLog(eventType, name, value) {
         } else if (name === 'TWO') {
           newEntry.textContent = `The ethereal voice echoes, but its spectral words elude your comprehension. The spirit's frustration intensifies, and anger darkens its gaze. Enraged, it lashes out with a vengeful force.`;
         }
+      } else if (event === GRERVIL_THE_BODILESS) {
+        if (name === 'ONE') {
+          newEntry.textContent = `You speak with Grervil`;
+        } else if (name === 'TWO') {
+          newEntry.textContent = `You attempt to speak, but can't understand`;
+        }
       }
 
       narration = newEntry.textContent;
@@ -1426,6 +1432,8 @@ function writeToLog(eventType, name, value) {
         newEntry.textContent = `After the skeletons mercilessly strike down ${name}, their hollow gaze fixates on ${value}.`;
       } else if (event === FORSAKEN_COMMANDER) {
         newEntry.textContent = `As you disregard the spirit's plea, an ominous chill fills the catacomb. Skeletal apparitions rise with a malevolent purpose. In the darkness, an onslaught ensues, the consequence of denying the restless spirit.`;
+      } else if (event === GRERVIL_THE_BODILESS) {
+        newEntry.textContent = `You ignore the chattering skull.`;
       }
 
       narration = newEntry.textContent;
@@ -1486,6 +1494,8 @@ function writeToLog(eventType, name, value) {
       case LOG_EVENT_ROOM:
         if (currentRoom === LOST_LEGIONS_VALE) {
           newEntry.textContent = `An expansive chamber unveils the remnants of a long-forgotten battle. Echoes of ancient conflict stir as skeletal warriors awaken. The air quivers with the chilling resonance of an eternal struggle, and the bones of the fallen rise once more.`;
+        } else if (currentRoom.contents.monsters[0] === GRERVILS_BODY) {
+          newEntry.textContent = `STOP! WAIT!`;
         }
 
       narration = newEntry.textContent;

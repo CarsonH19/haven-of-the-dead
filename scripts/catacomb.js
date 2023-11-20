@@ -26,7 +26,7 @@ let catacombRooms = [
       contents: {
         monsters: [],
         items: [],
-        events: FORSAKEN_COMMANDER
+        events: GRERVIL_THE_BODILESS
       },
     },
   // {
@@ -173,17 +173,17 @@ let catacombRooms = [
   //     events: LOCKED_ROOM
   //   },
   // },
-  // {
-  //   roomName: "Skeletal Sepulcher", // !FINISHED!
-  //   description: '',
-  //   backgroundImage: 'styles/images/chamber-one.png',
-  //   music: null,
-  //   contents: {
-  //     monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, SKELETAL_SOLDIER],
-  //     items: [],
-  //     events: null
-  //   },
-  // },
+  {
+    roomName: "Skeletal Sepulcher", // !FINISHED!
+    description: '',
+    backgroundImage: 'styles/images/chamber-one.png',
+    music: null,
+    contents: {
+      monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, SKELETAL_SOLDIER],
+      items: [],
+      events: null
+    },
+  },
   // {
   //   roomName: "Marrowrest Tomb", // !FINISHED!
   //   description: '',

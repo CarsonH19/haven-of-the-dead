@@ -141,6 +141,18 @@ const GRUDGE = {
 //             NPCs
 // ===============================
 
+const GRERVILS_BODY = {
+  name: "Grervil's Body",
+  type: "UNDEAD",
+  skulls: 3,
+};
+
+const HEADLESS_SKELETON = {
+  name: "Headless Skeleton",
+  type: "UNDEAD",
+  skulls: 1,
+};
+
 const FORSAKEN_COMMANDER_STATS = {
   name: "Forsaken Commander",
   type: "UNDEAD",
