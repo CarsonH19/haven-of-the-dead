@@ -24,9 +24,9 @@ let catacombRooms = [
       backgroundImage: 'styles/images/corridor-two.png',
       music: null,
       contents: {
-        monsters: [],
+        monsters: [BONE_TITAN],
         items: [],
-        events: GRERVIL_THE_BODILESS
+        events: null,
       },
     },
   // {
@@ -173,17 +173,17 @@ let catacombRooms = [
   //     events: LOCKED_ROOM
   //   },
   // },
-  {
-    roomName: "Skeletal Sepulcher", // !FINISHED!
-    description: '',
-    backgroundImage: 'styles/images/chamber-one.png',
-    music: null,
-    contents: {
-      monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, SKELETAL_SOLDIER],
-      items: [],
-      events: null
-    },
-  },
+  // {
+  //   roomName: "Skeletal Sepulcher", // !FINISHED!
+  //   description: '',
+  //   backgroundImage: 'styles/images/chamber-one.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, SKELETAL_SOLDIER],
+  //     items: [],
+  //     events: null
+  //   },
+  // },
   // {
   //   roomName: "Marrowrest Tomb", // !FINISHED!
   //   description: '',
@@ -212,7 +212,7 @@ let catacombRooms = [
   //   backgroundImage: 'styles/images/corridor-one.png',
   //   music: null,
   //   contents: {
-  //     monsters: [TOMB_RAIDER],
+  //     monsters: [BONE_TITAN],
   //     items: [],
   //     events: null
   //   },
@@ -307,6 +307,18 @@ const TIER_TWO_ROOMS = [
       monsters: [],
       items: [],
       events: SPIKE_PITFALL,
+    },
+  },
+  {
+    roomName: "Pile of Skulls", // !FINISHED!
+    description: "A chamber with a large pile of skulls in the center.",
+    summary: "",
+    backgroundImage: "styles/images/corridor-two.png",
+    music: null,
+    contents: {
+      monsters: [],
+      items: [],
+      events: GRERVILS_HEAD
     },
   },
 ];

@@ -61,6 +61,7 @@ function playerAttackHandler(smite) {
       currentRoom.contents.monsters[0].name,
       totalDamage
     );
+    // Miss (No Damage)
   } else if (playerToMonsterDamage <= 0) {
     totalDamage = 0;
     showDamage(totalDamage, "PLAYER");
@@ -72,7 +73,6 @@ function playerAttackHandler(smite) {
   }
 
   damageMonster(totalDamage);
-  monsterAbilityHandler(currentRoom.contents.monsters[0]);
   updatePlayerTrackers();
 }
 

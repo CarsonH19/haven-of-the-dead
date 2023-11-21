@@ -902,7 +902,7 @@ const GUIDING_LIGHT = {
   function: () => {
     const wisp = document.querySelector(".wisp");
     CANDLELIGHT_SHRINE.contents.events = SAFE_ROOM;
-    let randomNumber = Math.floor(Math.random() * 0) + 0;
+    let randomNumber = Math.round(Math.random() * 5) + 1;
     let itemDuration = roomCounter + randomNumber;
     GUIDING_LIGHT.duration = "Searching";
 
@@ -946,7 +946,7 @@ const ROWDY_WISP = {
   function: () => {
     const wisp = document.querySelector(".wisp");
     LAUGHING_COFFIN_ROOM.contents.events = LAUGHING_COFFIN_EVENT;
-    let randomNumber = Math.floor(Math.random() * 0) + 0;
+    let randomNumber = Math.round(Math.random() * 5) + 1;
     let duration = roomCounter + randomNumber;
     ROWDY_WISP.duration = "Searching";
 
@@ -983,7 +983,7 @@ const UNHOLY_WISP = {
   function: () => {
     const wisp = document.querySelector(".wisp");
     BLOOD_ALTER.contents.events = CRIMSON_COVENANT;
-    let randomNumber = Math.floor(Math.random() * 0) + 0;
+    let randomNumber = Math.round(Math.random() * 5) + 1;
     let wispDuration = roomCounter + randomNumber;
     UNHOLY_WISP.duration = "Searching";
 
@@ -1018,7 +1018,7 @@ const RESTLESS_WISP = {
   duration: null,
   function: () => {
     const wisp = document.querySelector(".wisp");
-    let randomNumber = Math.floor(Math.random() * 0) + 0;
+    let randomNumber = Math.round(Math.random() * 5) + 1;
     let wispDuration = roomCounter + randomNumber;
     RESTLESS_WISP.duration = "Searching";
 
@@ -1103,6 +1103,9 @@ let rareItems = [
   BLACKHEART_BREW,
   LAUGHING_COFFIN_COIN,
   LICHROOT,
+  PLAGUEWARD_PENDANT,
+  TOXINWEAVE_MASK,
+  GHOSTSHROUD_TALISMAN
 ];
 
 let epicItems = [
@@ -1199,6 +1202,7 @@ function statusEffectHandler(item) {
         //writeToLog()
         baseDexterity--;
         baseStrength += 2;
+        calculatePlayerMaxHealth();
         updatePlayerTrackers();
       }
       break;
@@ -1206,6 +1210,7 @@ function statusEffectHandler(item) {
     case POISONED:
       baseDexterity -= 2;
       baseStrength -= 2;
+      calculatePlayerMaxHealth();
       updatePlayerTrackers();
       //writeToLog() You've been poisoned!
       break;
@@ -1218,7 +1223,7 @@ function statusEffectHandler(item) {
       baseHealth = Math.round(baseHealth * 0.8);
       calculatePlayerMaxHealth();
       updatePlayerTrackers();
-      //writeToLog() You've been haunted!
+      //writeToLog() You've been diseased!
       break;
 
     case BLOOD_PACT:

@@ -9,6 +9,9 @@ const GNAWER = {
   name: "Gnawer",
   type: "BEAST",
   skulls: 1,
+  function: () => {
+    DISEASED.function();
+  },
 };
 
 // ===============================
@@ -71,13 +74,13 @@ const BLAZING_SKELETON = {
   skulls: 3,
   function: () => {
     //writeToLog() erupts in flames on death
-    playerHealthBar.value = +playerHealthBar.value - 15;
-    currentPlayerHealth -= 15;
+    damagePlayer(15);
     showDamage(15, "MONSTER");
+    damageMonster(currentMonsterHealth);
     updatePlayerTrackers();
     damageFlashAnimation();
     healthLowAnimation();
-  }
+  },
 };
 
 const DRAUGR = {
@@ -91,7 +94,12 @@ const BONE_TITAN = {
   type: "UNDEAD",
   skulls: 7,
   function: () => {
-    currentRoom.contents.monsters.push(DECREPIT_SKELETON, DECREPIT_SKELETON, DECREPIT_SKELETON);
+    damageMonster(currentMonsterHealth);
+    currentRoom.contents.monsters.push(
+      DECREPIT_SKELETON,
+      DECREPIT_SKELETON,
+      DECREPIT_SKELETON
+    );
     //writeToLog(); crumbles and reforms into smaller skeletons
   },
 };
@@ -101,9 +109,9 @@ const FLOOD_OF_BONES = {
   type: "UNDEAD",
   skulls: 8,
   function: () => {
-    //writeToLog() if critical attack, spawns 2 decrepit skeletons 
+    //writeToLog() if critical attack, spawns 2 decrepit skeletons
     currentRoom.contents.monsters.push(DECREPIT_SKELETON);
-  }
+  },
 };
 
 const BARON_OF_BONE = {
@@ -129,7 +137,7 @@ const HAUNTING_SPIRIT = {
   function: () => {
     HAUNTED.function(); // applies the haunted condition
     //writeToLog() gives you the haunted condition... causes Shades to randomly appear and attack you.
-  }
+  },
 };
 
 const GRUDGE = {
@@ -138,7 +146,7 @@ const GRUDGE = {
   skulls: 5,
   function: () => {
     HAUNTED.function(); // applies the haunted condition
-  }
+  },
 };
 
 // ===============================
@@ -168,7 +176,6 @@ const SPECTRAL_SOLDIER = {
   type: "UNDEAD",
   skulls: 2,
 };
-
 
 const POSSESSED_EARVER = {
   name: "Graverobber Earver",
@@ -280,40 +287,48 @@ function checkForMonsters() {
 function monsterAbilityHandler(monster) {
   switch (monster) {
     case BONE_TITAN:
-      if (currentMonsterHealth <= 0) {
-        console.log('Bone Titan Ability Called!');
+      if (currentMonsterHealth <= 15) {
+        console.log("Bone Titan Ability Called!");
         BONE_TITAN.function();
       }
       break;
 
     case BLAZING_SKELETON:
-      if (currentMonsterHealth <= 0) {
-        console.log('Blazing Skeleton Ability Called!');
+      if (currentMonsterHealth <= 5) {
+        console.log("Blazing Skeleton Ability Called!");
         BLAZING_SKELETON.function();
       }
       break;
 
     case FLOOD_OF_BONES:
       if (criticalHitChance >= 20) {
-        console.log('Flood of Bones Ability Called!');
+        console.log("Flood of Bones Ability Called!");
         FLOOD_OF_BONES.function();
       }
       break;
 
-      case HAUNTING_SPIRIT:
-        let spiritHauntChance = Math.round(Math.random() * 50);
-        if (spiritHauntChance >= 49) {
-          console.log('Haunting Spirit Ability Called!');
-          HAUNTING_SPIRIT.function();
-        }
-        break;
+    case HAUNTING_SPIRIT:
+      let spiritHauntChance = Math.round(Math.random() * 50);
+      if (spiritHauntChance === 50) {
+        console.log("Haunting Spirit Ability Called!");
+        HAUNTING_SPIRIT.function();
+      }
+      break;
 
-      case GRUDGE:
-        let grudgeHauntChance = Math.round(Math.random() * 20);
-        if (grudgeHauntChance >= 19) {
-          console.log('Grudge Ability Called!');
-          GRUDGE.function();
-        }
-        break;
+    case GRUDGE:
+      let grudgeHauntChance = Math.round(Math.random() * 20);
+      if (grudgeHauntChance === 20) {
+        console.log("Grudge Ability Called!");
+        GRUDGE.function();
+      }
+      break;
+
+    case GNAWER:
+      let gnawerDiseaseChance = Math.round(Math.random() * 100);
+      if (gnawerDiseaseChance === 100) {
+        console.log("Gnawer Ability Called!");
+        GNAWER.function();
+      }
+      break;
   }
 }
