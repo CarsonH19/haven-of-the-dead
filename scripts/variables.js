@@ -330,17 +330,50 @@ const POISONED = {
   function: () => {
     let statusDuration = roomCounter + 3;
     POISONED.duration = "5 Rooms";
-    let poisonedInterval = setInterval(() => {
-      POISONED.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
-      if (roomCounter >= statusDuration) {
-        POISONED.duration = null;
-        baseDexterity += 2;
-        baseStrength += 2;
-        clearInterval(poisonedInterval);
-      }
-    }, 15000);
+    
+    // ITEM: Plagueward Charm - Poison Immunity
+    const immune = isItemAttuned(PLAGUEWARD_CHARM, null);
 
-    statusEffectHandler(POISONED);
-    renderStatusEffects(POISONED);
+    if (!immune) {
+      let poisonedInterval = setInterval(() => {
+        POISONED.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
+        if (roomCounter >= statusDuration) {
+          POISONED.duration = null;
+          baseDexterity += 2;
+          baseStrength += 2;
+          clearInterval(poisonedInterval);
+        }
+      }, 15000);
+  
+      statusEffectHandler(POISONED);
+      renderStatusEffects(POISONED);
+    }
   },
 };
+
+const HAUNTED = {
+  name: "Haunted",
+  description: "",
+  effect: "Evil spirits are following you.",
+  status: "You are haunted.",
+  duration: null,
+  function: () => {
+    let statusDuration = roomCounter + 3;
+    HAUNTED.duration = `Duration: ?`;
+    
+    // ITEM: Plagueward Charm - Poison Immunity
+    // const immune = isItemAttuned(PLAGUEWARD_CHARM, null);
+
+    // if (!immune) {
+      let hauntedInterval = setInterval(() => {
+        if (roomCounter >= statusDuration) {
+          HAUNTED.duration = null;
+          clearInterval(hauntedInterval);
+        }
+      }, 15000);
+  
+      statusEffectHandler(HAUNTED);
+      renderStatusEffects(HAUNTED);
+    }
+  } //,
+// };
