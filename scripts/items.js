@@ -21,6 +21,7 @@
 // - Cursed Mirror
 // - Revenant's Rage
 // - Laughing Coffin Coin
+// - Plagueward Charm
 
 // Epic Items
 // - Ethereal Crown - Graverobber Earver Event Three
@@ -208,18 +209,6 @@ const HOLY_RELIC = {
   },
 };
 
-const PLAGUEWARD_CHARM = {
-  name: "Plagueward Charm",
-  description: "",
-  type: "MAGIC",
-  rarity: "RARE",
-  effect: "While attuned to this item it prevents you from being poisoned.",
-  function: () => {
-    // writeToLog()
-    return 'IMMUNE';
-  },
-};
-
 // ===============================
 //         RARE ITEMS
 // ===============================
@@ -376,15 +365,39 @@ const LAUGHING_COFFIN_COIN = {
   },
 };
 
-const SKELETON_KEY = {
-  name: "Skeleton Key",
+const PLAGUEWARD_PENDANT = {
+  name: "Plagueward Pendant",
   description: "",
   type: "MAGIC",
   rarity: "RARE",
-  effect:
-    "This key can be used to unlock various locked rooms throughout the catacomb.",
+  effect: "While attuned to this item it prevents you from being diseased.",
   function: () => {
-    writeToLog(LOG_EVENT_ITEM, SKELETON_KEY, currentRoom.roomName);
+    // writeToLog()
+    return "IMMUNE";
+  },
+};
+
+const GHOSTSHROUD_TALISMAN = {
+  name: "Ghostshroud Talisman",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item it prevents you from being haunted.",
+  function: () => {
+    // writeToLog()
+    return "IMMUNE";
+  },
+};
+
+const TOXINWEAVE_MASK = {
+  name: "Toxinweave_Mask",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item it prevents you from being poisoned.",
+  function: () => {
+    // writeToLog()
+    return "IMMUNE";
   },
 };
 
@@ -452,8 +465,6 @@ const SOULREAVER = {
       // writeToLog Soulreaver is fully charged & heals you
       return 5;
     }
-
- 
   },
 };
 
@@ -549,7 +560,6 @@ const GRERVILS_HEAD = {
   },
 };
 
-
 // ===============================
 //        FOOD & DRINK
 // ===============================
@@ -644,8 +654,7 @@ const GRAVEBLOOM = {
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
-  effect:
-    "Can be used for a chance to cure poison.",
+  effect: "Can be used for a chance to cure poison.",
   function: () => {
     if (POISONED.duration !== null) {
       let randomNumber = Math.round(Math.random() * 10);
@@ -654,14 +663,13 @@ const GRAVEBLOOM = {
         POISONED.duration = null;
         baseDexterity += 2;
         baseStrength += 2;
-        clearInterval(poisonedInterval);  
+        clearInterval(poisonedInterval);
       }
 
       //writeToLog() Posioned Cured!
     }
-
   },
-}; 
+};
 
 const LESSER_SOULSTONE = {
   name: "Lesser Soulstone",
@@ -713,6 +721,18 @@ const BLACKHEART_BREW = {
 
     statusEffectHandler(BLACKHEART_BREW);
     renderStatusEffects(BLACKHEART_BREW);
+  },
+};
+
+const SKELETON_KEY = {
+  name: "Skeleton Key",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "This key can be used to unlock various locked rooms throughout the catacomb.",
+  function: () => {
+    writeToLog(LOG_EVENT_ITEM, SKELETON_KEY, currentRoom.roomName);
   },
 };
 
@@ -875,7 +895,8 @@ const GUIDING_LIGHT = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
-  effect: "When this item is used a light will guide you to the nearest Candlelight Shrine.",
+  effect:
+    "When this item is used a light will guide you to the nearest Candlelight Shrine.",
   status: "Guiding you to a nearby Candlelight Shrine.",
   duration: null,
   function: () => {
@@ -918,7 +939,8 @@ const ROWDY_WISP = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
-  effect: "When this item is used a wisp will guide you to the Laughing Coffin Tavern.",
+  effect:
+    "When this item is used a wisp will guide you to the Laughing Coffin Tavern.",
   status: "Guiding you to the Laughing Coffin.",
   duration: null,
   function: () => {
@@ -954,7 +976,8 @@ const UNHOLY_WISP = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
-  effect: "When this item is used a wisp will guide you to the nearest Blood Alter.",
+  effect:
+    "When this item is used a wisp will guide you to the nearest Blood Alter.",
   status: "Guiding you to the Blood Alter.",
   duration: null,
   function: () => {
@@ -1184,14 +1207,19 @@ function statusEffectHandler(item) {
       baseDexterity -= 2;
       baseStrength -= 2;
       updatePlayerTrackers();
-      //writeToLog() You've been poisoned! 
+      //writeToLog() You've been poisoned!
       break;
 
     case HAUNTED:
-      //writeToLog() You've been poisoned!
-      break; 
+      //writeToLog() You've been haunted!
+      break;
 
-
+    case DISEASED:
+      baseHealth = Math.round(baseHealth * 0.8);
+      calculatePlayerMaxHealth();
+      updatePlayerTrackers();
+      //writeToLog() You've been haunted!
+      break;
 
     case BLOOD_PACT:
       //writeToLog()

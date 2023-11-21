@@ -131,10 +131,15 @@ function calculateStrengthBonusHealth() {
 
 function calculatePlayerMaxHealth() {
   let strengthBonusHealth = calculateStrengthBonusHealth();
-  playerMaxHealth = baseHealth + strengthBonusHealth;
-  let maxHealthWithItems = playerMaxHealth + isItemAttuned(BONEMAIL, 0); // ITEM: +20 Max HP
+  playerMaxHealth = baseHealth + strengthBonusHealth + isItemAttuned(BONEMAIL, 0);
 
-  return maxHealthWithItems;
+  if (currentPlayerHealth > playerMaxHealth) {
+    currentPlayerHealth = playerMaxHealth;
+    playerHealthBar.value =  playerMaxHealth;
+    playerHealthBar.max = playerMaxHealth;
+  }
+
+  return playerMaxHealth
 }
 
 let strengthCritIncrease = calculateStrCritIncrease();
@@ -325,14 +330,14 @@ const POISONED = {
   name: "Poisoned",
   description: "",
   effect: "Your Strength & Dexterity are 0 while poisoned.",
-  status: "You are poisoned.",
+  status: "Your Strength and Dexterity are reduced.",
   duration: null,
   function: () => {
-    let statusDuration = roomCounter + 3;
-    POISONED.duration = "5 Rooms";
+    let statusDuration = roomCounter + 5;
+    POISONED.duration = "Duration: 5 Rooms";
     
-    // ITEM: Plagueward Charm - Poison Immunity
-    const immune = isItemAttuned(PLAGUEWARD_CHARM, null);
+    // ITEM: Toxinweave Mask - Poison Immunity
+    const immune = isItemAttuned(TOXINWEAVE_MASK, null);
 
     if (!immune) {
       let poisonedInterval = setInterval(() => {
@@ -355,16 +360,17 @@ const HAUNTED = {
   name: "Haunted",
   description: "",
   effect: "Evil spirits are following you.",
-  status: "You are haunted.",
+  status: "Evil spirits are following you.",
   duration: null,
   function: () => {
-    let statusDuration = roomCounter + 3;
+    let randomNumber = Math.round(Math.random() * 9) + 1;
+    let statusDuration = roomCounter + randomNumber;
     HAUNTED.duration = `Duration: ?`;
     
-    // ITEM: Plagueward Charm - Poison Immunity
-    // const immune = isItemAttuned(PLAGUEWARD_CHARM, null);
+    // ITEM: Ghostshroud Talisman - Haunted Immunity
+    const immune = isItemAttuned(GHOSTSHROUD_TALISMAN, null);
 
-    // if (!immune) {
+    if (!immune) {
       let hauntedInterval = setInterval(() => {
         if (roomCounter >= statusDuration) {
           HAUNTED.duration = null;
@@ -375,5 +381,33 @@ const HAUNTED = {
       statusEffectHandler(HAUNTED);
       renderStatusEffects(HAUNTED);
     }
-  } //,
-// };
+  },
+};
+
+const DISEASED = {
+  name: "Diseased",
+  description: "",
+  effect: "Your max health is reduced by 20%.",
+  status: "Your max health is reduced.",
+  duration: null,
+  function: () => {
+    let statusDuration = roomCounter + 5;
+    DISEASED.duration = `Duration: 5 Rooms`;
+    
+    // ITEM: Plagueward Pendant - Poison Immunity
+    const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
+
+    if (!immune) {
+      let hauntedInterval = setInterval(() => {
+        DISEASED.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
+        if (roomCounter >= statusDuration) {
+          DISEASED.duration = null;
+          clearInterval(hauntedInterval);
+        }
+      }, 15000);
+  
+      statusEffectHandler(DISEASED);
+      renderStatusEffects(DISEASED);
+    }
+  },
+};
