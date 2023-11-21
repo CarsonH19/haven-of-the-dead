@@ -127,6 +127,7 @@ const HAUNTING_SPIRIT = {
   type: "UNDEAD",
   skulls: 3,
   function: () => {
+    HAUNTED.function(); // applies the haunted condition
     //writeToLog() gives you the haunted condition... causes Shades to randomly appear and attack you.
   }
 };
@@ -135,6 +136,9 @@ const GRUDGE = {
   name: "Grudge",
   type: "UNDEAD",
   skulls: 5,
+  function: () => {
+    HAUNTED.function(); // applies the haunted condition
+  }
 };
 
 // ===============================
@@ -274,7 +278,6 @@ function checkForMonsters() {
 }
 
 function monsterAbilityHandler(monster) {
-  const currentMonster = currentRoom.contents.monsters[0];
   switch (monster) {
     case BONE_TITAN:
       if (currentMonsterHealth <= 0) {
@@ -295,6 +298,22 @@ function monsterAbilityHandler(monster) {
         console.log('Flood of Bones Ability Called!');
         FLOOD_OF_BONES.function();
       }
+      break;
 
+      case HAUNTING_SPIRIT:
+        let spiritHauntChance = Math.round(Math.random() * 50);
+        if (spiritHauntChance >= 49) {
+          console.log('Haunting Spirit Ability Called!');
+          HAUNTING_SPIRIT.function();
+        }
+        break;
+
+      case GRUDGE:
+        let grudgeHauntChance = Math.round(Math.random() * 20);
+        if (grudgeHauntChance >= 19) {
+          console.log('Grudge Ability Called!');
+          GRUDGE.function();
+        }
+        break;
   }
 }
