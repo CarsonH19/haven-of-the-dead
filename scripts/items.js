@@ -1105,7 +1105,7 @@ let rareItems = [
   LICHROOT,
   PLAGUEWARD_PENDANT,
   TOXINWEAVE_MASK,
-  GHOSTSHROUD_TALISMAN
+  GHOSTSHROUD_TALISMAN,
 ];
 
 let epicItems = [
@@ -1224,6 +1224,10 @@ function statusEffectHandler(item) {
       calculatePlayerMaxHealth();
       updatePlayerTrackers();
       //writeToLog() You've been diseased!
+      break;
+
+    case WEBBED:
+      //writeToLog()
       break;
 
     case BLOOD_PACT:

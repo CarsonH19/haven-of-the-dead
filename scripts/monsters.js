@@ -34,6 +34,9 @@ const BROODMOTHER = {
   name: "Broodmother",
   type: "BEAST",
   skulls: 6,
+  function: () => {
+    WEBBED.function();
+  }
 };
 
 // ===============================
@@ -328,6 +331,16 @@ function monsterAbilityHandler(monster) {
       if (gnawerDiseaseChance === 100) {
         console.log("Gnawer Ability Called!");
         GNAWER.function();
+      }
+      break;
+
+    case BROODMOTHER:
+      let webChance = Math.round(Math.random() * 3);
+      console.log(webChance);
+
+      if (webChance === 3) {
+        console.log("Broodmother Ability Called!");
+        WEBBED.function();
       }
       break;
   }

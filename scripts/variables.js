@@ -411,3 +411,36 @@ const DISEASED = {
     }
   },
 };
+
+const WEBBED = {
+  name: "Webbed",
+  description: "",
+  effect: "You are caught in spider webbing.",
+  status: "You are caught in spider webbing.",
+  duration: null,
+  function: () => {
+    WEBBED.duration = `Struggling to break free...`;
+    
+    // // ITEM: Plagueward Pendant - Poison Immunity
+    // const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
+
+    // if (!immune) {
+      let webbedInterval = setInterval(() => {
+        let breakFreeChance = Math.round(Math.random() * 3);
+        
+        if(breakFreeChance === 3) {
+          console.log('You broke free!');
+          WEBBED.duration = null;
+          clearInterval(webbedInterval);
+        } else {
+          monsterAttackHandler();
+        }
+
+        playerControlsTimeout(3200);
+      }, 3000);
+  
+      statusEffectHandler(WEBBED);
+      renderStatusEffects(WEBBED);
+    }
+  } //,
+// };
