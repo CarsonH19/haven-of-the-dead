@@ -487,6 +487,46 @@ function removeCurrentRoom() {
   }
 }
 
+function findRandomUndeadRoom() {
+  let randomRoom;
+
+  do {
+    const randomIndex = Math.floor(Math.random() * catacombRooms.length);
+    randomRoom = catacombRooms[randomIndex];
+  } while (
+    !randomRoom.contents.monsters[0] ||
+    randomRoom.contents.monsters[0].type !== "UNDEAD"
+  );
+
+  return randomRoom;
+}
+
+function checkCurrentRoom() {
+  const roomMonsters = currentRoom.contents.monsters;
+  
+  // Check if player is haunted
+  if (roomMonsters[0].type === 'UNDEAD' && HAUNTED.duration !== null) {
+    let randomSpirits = Math.round(Math.random() * 2);
+    console.log('UNDEAD FOUND');
+    console.log(randomSpirits);
+
+    switch (randomSpirits) {
+      case 0:
+        roomMonsters.unshift(SHADE);
+        break;
+
+      case 1:
+        roomMonsters.unshift(SHADE, SHADE);
+       break;
+
+      case 2:
+        roomMonsters.unshift(HAUNTING_SPIRIT);
+       break;
+
+    }
+  }
+}
+
 // ===============================
 //    Catacomb Entrance Modal
 // ===============================

@@ -431,7 +431,8 @@ function renderCurrentRoom(currentRoom) {
     currentRoom.contents.monsters.length > 0 &&
     currentRoom.contents.events === null
   ) {
-    startBattle(currentRoom);
+    checkCurrentRoom(); // Used for the haunted condition
+    setTimeout(startBattle(currentRoom), 2000);
   } else {
     monsterContainer.style.display = "none";
   }

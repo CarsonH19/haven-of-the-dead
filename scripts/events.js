@@ -405,22 +405,6 @@ const FORSAKEN_COMMANDER = {
   },
 };
 
-// Grervil the Bodiless Function
-
-function findRandomUndeadRoom() {
-  let randomRoom;
-
-  do {
-    const randomIndex = Math.floor(Math.random() * catacombRooms.length);
-    randomRoom = catacombRooms[randomIndex];
-  } while (
-    !randomRoom.contents.monsters[0] ||
-    randomRoom.contents.monsters[0].type !== "UNDEAD"
-  );
-
-  return randomRoom;
-}
-
 const GRERVIL_THE_BODILESS = {
   name: "Grervil the Bodiless",
   eventType: "NPC",

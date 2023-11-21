@@ -208,6 +208,18 @@ const HOLY_RELIC = {
   },
 };
 
+const PLAGUEWARD_CHARM = {
+  name: "Plagueward Charm",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item it prevents you from being poisoned.",
+  function: () => {
+    // writeToLog()
+    return 'IMMUNE';
+  },
+};
+
 // ===============================
 //         RARE ITEMS
 // ===============================
@@ -626,6 +638,30 @@ const LICHROOT = {
     //writeToLog
   },
 };
+
+const GRAVEBLOOM = {
+  name: "Gravebloom",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  effect:
+    "Can be used for a chance to cure poison.",
+  function: () => {
+    if (POISONED.duration !== null) {
+      let randomNumber = Math.round(Math.random() * 10);
+
+      if (randomNumber >= 9) {
+        POISONED.duration = null;
+        baseDexterity += 2;
+        baseStrength += 2;
+        clearInterval(poisonedInterval);  
+      }
+
+      //writeToLog() Posioned Cured!
+    }
+
+  },
+}; 
 
 const LESSER_SOULSTONE = {
   name: "Lesser Soulstone",
@@ -1145,13 +1181,17 @@ function statusEffectHandler(item) {
       break;
 
     case POISONED:
-      if (poisonedTracker === "POISONED") {
-        //writeToLog()
-        baseDexterity -= 2;
-        baseStrength -= 2;
-        updatePlayerTrackers();
-      }
+      baseDexterity -= 2;
+      baseStrength -= 2;
+      updatePlayerTrackers();
+      //writeToLog() You've been poisoned! 
       break;
+
+    case HAUNTED:
+      //writeToLog() You've been poisoned!
+      break; 
+
+
 
     case BLOOD_PACT:
       //writeToLog()
