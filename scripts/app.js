@@ -544,8 +544,8 @@ function updatePlayerTrackers() {
     const monsterCurrentHP = document.getElementById("monsterCurrentHP");
     const monsterMaxHP = document.getElementById("monsterMaxHP");
 
-    currentHP.textContent = currentPlayerHealth;
     maxHP.textContent = calculatePlayerMaxHealth();
+    currentHP.textContent = currentPlayerHealth;
 
     monsterCurrentHP.textContent = currentMonsterHealth;
     monsterMaxHP.textContent = monsterMaxHealth;

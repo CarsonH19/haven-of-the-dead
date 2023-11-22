@@ -133,13 +133,25 @@ function calculatePlayerMaxHealth() {
   let strengthBonusHealth = calculateStrengthBonusHealth();
   playerMaxHealth = baseHealth + strengthBonusHealth + isItemAttuned(BONEMAIL, 0);
 
+  if (DISEASED.duration !== null) {
+    playerMaxHealth = playerMaxHealth * 0.8;
+  }
+
   if (currentPlayerHealth > playerMaxHealth) {
     currentPlayerHealth = playerMaxHealth;
-    playerHealthBar.value =  playerMaxHealth;
+    playerHealthBar.value = playerMaxHealth;
     playerHealthBar.max = playerMaxHealth;
   }
 
-  return playerMaxHealth
+  if (currentRoom === catacombEntrance) {
+    playerHealthBar.max = playerMaxHealth;
+    playerHealthBar.value = playerMaxHealth;
+    currentPlayerHealth = playerMaxHealth;
+  } else {
+    playerHealthBar.max = playerMaxHealth;
+  }
+  
+  return playerMaxHealth;
 }
 
 let strengthCritIncrease = calculateStrCritIncrease();
@@ -277,7 +289,6 @@ let bloodSacrificed = 0;
 
 const LEGIONS_GRACE = {
   name: "Legion's Grace",
-  description: "The more soldiers laid to rest the greater this boon becomes.",
   status: `Base Attack increased by 1. The more soldiers laid to rest the greater the legion's grace becomes.`,
   duration: null,
   function: () => {
@@ -286,11 +297,11 @@ const LEGIONS_GRACE = {
     LEGIONS_GRACE.duration = `0 soldiers put to rest`;
     setInterval(() => {
       LEGIONS_GRACE.duration = `${legionTracker} soldiers put to rest`;
-      LEGIONS_GRACE.status = `Base Attack increased by ${attackBoost}. The more soldiers laid to rest, the greater the legion's grace becomes.`
-      if (legionTracker % 30 === 0 ) {
+      LEGIONS_GRACE.status = `Base Attack increased by ${attackBoost}. The more soldiers laid to rest, the greater the legion's grace becomes.`;
+      if (legionTracker % 30 === 0) {
         statusEffectHandler(LEGIONS_GRACE);
         attackBoost++;
-      } 
+      }
     }, 5000);
 
     statusEffectHandler(LEGIONS_GRACE);
@@ -300,67 +311,90 @@ const LEGIONS_GRACE = {
 
 const BLOOD_PACT = {
   name: "Blood Pact",
-  description: "",
   status: "Your base attack is increased by 5, but your faith is reduced by 2.",
   duration: null,
   function: () => {
-    let statusDuration = roomCounter + 15;
-    BLOOD_PACT.duration = "Duration: 15 Rooms";
-    let bloodPactInterval = setInterval(() => {
-      if (statusDuration - roomCounter > 1) {
-        BLOOD_PACT.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
-      } else {
-        BLOOD_PACT.duration = `Duration: ${statusDuration - roomCounter} Room`;
-      }
+    if (BLOOD_PACT.duration === null) {
+      let statusDuration = roomCounter + 15;
+      BLOOD_PACT.duration = "Duration: 15 Rooms";
+      let bloodPactInterval = setInterval(() => {
+        if (statusDuration - roomCounter > 1) {
+          BLOOD_PACT.duration = `Duration: ${
+            statusDuration - roomCounter
+          } Rooms`;
+        } else {
+          BLOOD_PACT.duration = `Duration: ${
+            statusDuration - roomCounter
+          } Room`;
+        }
 
-      if (roomCounter >= statusDuration) {
-        BLOOD_PACT.duration = null;
-        baseAttack -= 5;
-        baseFaith += 2;
-        clearInterval(bloodPactInterval);
-      }
-    }, 15000);
+        if (roomCounter >= statusDuration) {
+          BLOOD_PACT.duration = null;
+          baseAttack -= 5;
+          baseFaith += 2;
 
-    statusEffectHandler(BLOOD_PACT);
-    renderStatusEffects(BLOOD_PACT);
+          updatePlayerTrackers();
+          clearInterval(bloodPactInterval);
+        }
+      }, 15000);
+
+      statusEffectHandler(BLOOD_PACT);
+      renderStatusEffects(BLOOD_PACT);
+    } else {
+      let statusDuration = roomCounter + 15;
+      BLOOD_PACT.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
+    }
   },
 };
 
 const POISONED = {
   name: "Poisoned",
-  description: "",
-  effect: "Your Strength & Dexterity are 0 while poisoned.",
-  status: "Your Strength and Dexterity are reduced.",
+  status: "Your Strength and Dexterity are reduced by 2.",
   duration: null,
   statusDuration: null,
   function: (length) => {
     if (POISONED.duration === null) {
       POISONED.statusDuration = roomCounter + length;
-      POISONED.duration = `Duration: ${POISONED.statusDuration - roomCounter} Rooms`;
-      
+      POISONED.duration = `Duration: ${
+        POISONED.statusDuration - roomCounter
+      } Rooms`;
+
       // ITEM: Toxinweave Mask - Poison Immunity
       const immune = isItemAttuned(TOXINWEAVE_MASK, null);
-  
+
       if (!immune) {
         let poisonedInterval = setInterval(() => {
-          POISONED.duration = `Duration: ${POISONED.statusDuration - roomCounter} Rooms`;
+          if (POISONED.statusDuration - roomCounter > 1) {
+            POISONED.duration = `Duration: ${
+              POISONED.statusDuration - roomCounter
+            } Rooms`;
+          } else {
+            POISONED.duration = `Duration: ${
+              POISONED.statusDuration - roomCounter
+            } Room`;
+          }
+
           if (roomCounter >= POISONED.statusDuration) {
             POISONED.duration = null;
+            POISONED.statusDuration = null;
             baseDexterity += 2;
             baseStrength += 2;
+
+            updatePlayerTrackers();
             clearInterval(poisonedInterval);
           }
         }, 15000);
-    
+
         statusEffectHandler(POISONED);
         renderStatusEffects(POISONED);
       }
     } else {
-      if (length > (POISONED.statusDuration - roomCounter)) {
-        console.log('called');
+      if (length > POISONED.statusDuration - roomCounter) {
         POISONED.statusDuration = roomCounter + length;
-        POISONED.duration = `Duration: ${POISONED.statusDuration - roomCounter} Rooms`;
-        //writeToLog() Poisoned intensifies 
+        POISONED.duration = `Duration: ${
+          POISONED.statusDuration - roomCounter
+        } Rooms`;
+        //writeToLog() Poisoned intensifies
       }
     }
   },
@@ -368,89 +402,116 @@ const POISONED = {
 
 const HAUNTED = {
   name: "Haunted",
-  description: "",
-  effect: "Evil spirits are following you.",
   status: "Evil spirits are following you.",
   duration: null,
+  statusDuration: null,
   function: () => {
     let randomNumber = Math.round(Math.random() * 9) + 1;
-    let statusDuration = roomCounter + randomNumber;
-    HAUNTED.duration = `Duration: ?`;
-    
-    // ITEM: Ghostshroud Talisman - Haunted Immunity
-    const immune = isItemAttuned(GHOSTSHROUD_TALISMAN, null);
+    if (HAUNTED.duration === null) {
+      HAUNTED.statusDuration = roomCounter + randomNumber;
+      HAUNTED.duration = `Duration: ?`;
 
-    if (!immune) {
-      let hauntedInterval = setInterval(() => {
-        if (roomCounter >= statusDuration) {
-          HAUNTED.duration = null;
-          clearInterval(hauntedInterval);
-        }
-      }, 15000);
-  
-      statusEffectHandler(HAUNTED);
-      renderStatusEffects(HAUNTED);
+      // ITEM: Ghostshroud Talisman - Haunted Immunity
+      const immune = isItemAttuned(GHOSTSHROUD_TALISMAN, null);
+
+      if (!immune) {
+        let hauntedInterval = setInterval(() => {
+          if (roomCounter >= HAUNTED.statusDuration) {
+            HAUNTED.duration = null;
+            HAUNTED.statusDuration = null;
+            clearInterval(hauntedInterval);
+          }
+        }, 15000);
+
+        statusEffectHandler(HAUNTED);
+        renderStatusEffects(HAUNTED);
+      }
+    } else {
+      if (randomNumber > HAUNTED.statusDuration) {
+        HAUNTED.statusDuration = roomCounter + randomNumber;
+        //writeToLog() Haunted again
+      }
     }
   },
 };
 
 const DISEASED = {
   name: "Diseased",
-  description: "",
-  effect: "Your max health is reduced by 20%.",
-  status: "Your max health is reduced.",
+  status: "Your max health is reduced by 20%.",
   duration: null,
-  function: () => {
-    let statusDuration = roomCounter + 5;
-    DISEASED.duration = `Duration: 5 Rooms`;
-    
-    // ITEM: Plagueward Pendant - Poison Immunity
-    const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
+  function: (length) => {
+    if (DISEASED.duration === null) {
+      DISEASED.statusDuration = roomCounter + length;
+      DISEASED.duration = `Duration: ${
+        DISEASED.statusDuration - roomCounter
+      } Rooms`;
 
-    if (!immune) {
-      let hauntedInterval = setInterval(() => {
-        DISEASED.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
-        if (roomCounter >= statusDuration) {
-          DISEASED.duration = null;
-          clearInterval(hauntedInterval);
-        }
-      }, 15000);
-  
-      statusEffectHandler(DISEASED);
-      renderStatusEffects(DISEASED);
+      // ITEM: Plagueward Pendant - Disease Immunity
+      const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
+
+      if (!immune) {
+        let diseasedInterval = setInterval(() => {
+          if (DISEASED.statusDuration - roomCounter > 1) {
+            DISEASED.duration = `Duration: ${
+              DISEASED.statusDuration - roomCounter
+            } Rooms`;
+          } else {
+            DISEASED.duration = `Duration: ${
+              DISEASED.statusDuration - roomCounter
+            } Room`;
+          }
+
+          if (roomCounter >= DISEASED.statusDuration) {
+            DISEASED.duration = null;
+            DISEASED.statusDuration = null;
+
+            updatePlayerTrackers();
+            clearInterval(diseasedInterval);
+          }
+        }, 15000);
+
+        statusEffectHandler(DISEASED);
+        renderStatusEffects(DISEASED);
+      }
+    } else {
+      if (length > DISEASED.statusDuration - roomCounter) {
+        DISEASED.statusDuration = roomCounter + length;
+        DISEASED.duration = `Duration: ${
+          DISEASED.statusDuration - roomCounter
+        } Rooms`;
+        //writeToLog() Disease intensifies
+      }
     }
   },
 };
 
 const WEBBED = {
   name: "Webbed",
-  description: "",
-  effect: "You are caught in spider webbing.",
   status: "You are caught in spider webbing.",
   duration: null,
   function: () => {
     WEBBED.duration = `Struggling to break free...`;
-    
+
     // // ITEM: Plagueward Pendant - Poison Immunity
     // const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
 
     // if (!immune) {
-      let webbedInterval = setInterval(() => {
-        let breakFreeChance = Math.round(Math.random() * 3);
-        
-        if(breakFreeChance === 3) {
-          console.log('You broke free!');
-          WEBBED.duration = null;
-          clearInterval(webbedInterval);
-        } else {
-          monsterAttackHandler();
-        }
+    let webbedInterval = setInterval(() => {
+      let breakFreeChance = Math.round(Math.random() * 3);
 
-        playerControlsTimeout(3200);
-      }, 3000);
-  
-      statusEffectHandler(WEBBED);
-      renderStatusEffects(WEBBED);
-    }
-  } //,
+      if (breakFreeChance === 3) {
+        console.log("You broke free!");
+        WEBBED.duration = null;
+        clearInterval(webbedInterval);
+      } else {
+        monsterAttackHandler();
+      }
+
+      playerControlsTimeout(3200);
+    }, 3000);
+
+    statusEffectHandler(WEBBED);
+    renderStatusEffects(WEBBED);
+  },
+}; //,
 // };

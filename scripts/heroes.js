@@ -24,7 +24,6 @@ function setPaladinStats() {
   criticalDamage = calculateCritDamage();
   strengthBonusHealth = calculateStrengthBonusHealth();
   playerMaxHealth = calculatePlayerMaxHealth();
-  setPlayerHealthBar(playerMaxHealth);
 }
 
 function paladinHolySmite() {
@@ -76,7 +75,6 @@ function setRogueStats() {
   criticalDamage = calculateCritDamage();
   strengthBonusHealth = calculateStrengthBonusHealth();
   playerMaxHealth = calculatePlayerMaxHealth();
-  setPlayerHealthBar(playerMaxHealth);
 }
 
 function rogueShadowStrike() {
@@ -182,7 +180,6 @@ function setPriestessStats() {
   criticalDamage = calculateCritDamage();
   strengthBonusHealth = calculateStrengthBonusHealth();
   playerMaxHealth = calculatePlayerMaxHealth();
-  setPlayerHealthBar(playerMaxHealth);
 }
 
 function priestessGreaterPrayer() {
@@ -208,18 +205,6 @@ function setStatsHandler() {
 // ===============================
 //             Health
 // ===============================
-
-function setPlayerHealthBar(maxLife) {
-  if (currentRoom === catacombEntrance) {
-    playerHealthBar.max = maxLife;
-    playerHealthBar.value = maxLife;
-    currentPlayerHealth = maxLife;
-  } else {
-    playerHealthBar.max = maxLife;
-  }
-
-  playerMaxHealth = maxLife;
-}
 
 function healPlayer(healValue) {
   playerHealthBar.value = +playerHealthBar.value + healValue;

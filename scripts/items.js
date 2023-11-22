@@ -1202,7 +1202,6 @@ function statusEffectHandler(item) {
         //writeToLog()
         baseDexterity--;
         baseStrength += 2;
-        calculatePlayerMaxHealth();
         updatePlayerTrackers();
       }
       break;
@@ -1210,7 +1209,6 @@ function statusEffectHandler(item) {
     case POISONED:
       baseDexterity -= 2;
       baseStrength -= 2;
-      calculatePlayerMaxHealth();
       updatePlayerTrackers();
       //writeToLog() You've been poisoned!
       break;
@@ -1220,8 +1218,6 @@ function statusEffectHandler(item) {
       break;
 
     case DISEASED:
-      baseHealth = Math.round(baseHealth * 0.8);
-      calculatePlayerMaxHealth();
       updatePlayerTrackers();
       //writeToLog() You've been diseased!
       break;
@@ -1454,7 +1450,7 @@ function closeInventoryHandler() {
   // ITEM: Blackheart Brew - -1 Dex +1 Strength
   statusEffectHandler(BLACKHEART_BREW);
 
-  setPlayerHealthBar(calculatePlayerMaxHealth());
+  calculatePlayerMaxHealth();
   updatePlayerTrackers();
 }
 
@@ -1607,7 +1603,7 @@ closeInventoryButton.addEventListener("click", () => {
 
   closeInventoryHandler();
   clearInventory();
-  setPlayerHealthBar(calculatePlayerMaxHealth());
+  calculatePlayerMaxHealth();
   updatePlayerTrackers();
 });
 
