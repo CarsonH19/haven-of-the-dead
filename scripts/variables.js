@@ -131,7 +131,8 @@ function calculateStrengthBonusHealth() {
 
 function calculatePlayerMaxHealth() {
   let strengthBonusHealth = calculateStrengthBonusHealth();
-  playerMaxHealth = baseHealth + strengthBonusHealth + isItemAttuned(BONEMAIL, 0);
+  playerMaxHealth =
+    baseHealth + strengthBonusHealth + isItemAttuned(BONEMAIL, 0);
 
   if (DISEASED.duration !== null) {
     playerMaxHealth = playerMaxHealth * 0.8;
@@ -150,7 +151,7 @@ function calculatePlayerMaxHealth() {
   } else {
     playerHealthBar.max = playerMaxHealth;
   }
-  
+
   return playerMaxHealth;
 }
 
@@ -489,29 +490,41 @@ const WEBBED = {
   name: "Webbed",
   status: "You are caught in spider webbing.",
   duration: null,
-  function: () => {
-    WEBBED.duration = `Struggling to break free...`;
+  function: (webStrength) => {
+    if (WEBBED.duration === null) {
+      attackBtn.disabled = true;
+      guardBtn.disabled = true;
+      specialBtn.disabled = true;
+      fleeBtn.disabled = true;
+      inventoryButton.disabled = true;
+      potionBtn.disabled = true;
 
-    // // ITEM: Plagueward Pendant - Poison Immunity
-    // const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
+      WEBBED.duration = `Struggling to break free...`;
 
-    // if (!immune) {
-    let webbedInterval = setInterval(() => {
-      let breakFreeChance = Math.round(Math.random() * 3);
+      // ADD SPIDER WEB IMAGE
 
-      if (breakFreeChance === 3) {
-        console.log("You broke free!");
-        WEBBED.duration = null;
-        clearInterval(webbedInterval);
-      } else {
-        monsterAttackHandler();
-      }
+      // // ITEM: Plagueward Pendant - Poison Immunity
+      // const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
 
-      playerControlsTimeout(3200);
-    }, 3000);
+      // if (!immune) {
+      let webbedInterval = setInterval(() => {
+        let breakFreeChance = Math.round(Math.random() * webStrength);
 
-    statusEffectHandler(WEBBED);
-    renderStatusEffects(WEBBED);
+        if (breakFreeChance + baseStrength >= webStrength) {
+          console.log("You broke free!");
+          WEBBED.duration = null;
+          togglePlayerControls();
+          //writeToLog() You break free
+          clearInterval(webbedInterval);
+        } else {
+          monsterAttackHandler();
+          //writeToLog() The spider attacks you while you struggle to break free
+        }
+      }, 3000);
+
+      statusEffectHandler(WEBBED);
+      renderStatusEffects(WEBBED);
+    }
   },
 }; //,
 // };

@@ -1223,7 +1223,7 @@ function statusEffectHandler(item) {
       break;
 
     case WEBBED:
-      //writeToLog()
+      //writeToLog() You are caught in the spiders web
       break;
 
     case BLOOD_PACT:
