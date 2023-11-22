@@ -36,7 +36,7 @@ const BROODMOTHER = {
   skulls: 6,
   function: () => {
     WEBBED.function();
-  }
+  },
 };
 
 // ===============================
@@ -331,6 +331,24 @@ function monsterAbilityHandler(monster) {
       if (gnawerDiseaseChance === 100) {
         console.log("Gnawer Ability Called!");
         GNAWER.function();
+      }
+      break;
+
+    case CRYPT_CRAWLER:
+      let crawlerWebChance = Math.round(Math.random() * 3);
+
+      if (crawlerWebChance === 3) {
+        console.log("Crypt Crawler Ability Called!");
+        WEBBED.function();
+      }
+      break;
+
+    case COFFIN_SPIDER:
+      let coffinSpiderWebChance = Math.round(Math.random() * 3);
+
+      if (coffinSpiderWebChance === 3) {
+        console.log("Coffin Spider Ability Called!");
+        WEBBED.function();
       }
       break;
 

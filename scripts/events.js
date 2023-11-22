@@ -39,11 +39,14 @@ const SAFE_ROOM = {
   passValue: null,
   failDamage: null,
   functionOne: () => {
-    getItem("CANDLE");
-    healPlayer(calculatePlayerMaxHealth());
-    setRoomSummary();
-    setTimeout(renderRoomSummaryModal, 5000);
-    //writeToLog() restored to full health and found a candle
+    setTimeout(() => {
+      getItem("CANDLE");
+      healPlayer(calculatePlayerMaxHealth());
+      setRoomSummary();
+      newRoomAnimation(); // creates passing of time effect
+      setTimeout(renderRoomSummaryModal, 4000);
+      //writeToLog() restored to full health and found a candle
+    });
   },
   functionTwo: null,
 };

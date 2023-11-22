@@ -1348,8 +1348,25 @@ function useConsumable(consumable) {
   renderInventory();
 }
 
+// List to store active effects
+const activeEffects = [];
+
 function renderStatusEffects(effect) {
   const middleLeft = document.querySelector(".middle-left");
+
+  // Check if the effect is already active
+  const existingEffectIndex = activeEffects.findIndex(
+    (activeEffect) => activeEffect.name === effect.name
+  );
+
+  if (existingEffectIndex !== -1) {
+    // Update the existing effect
+    const existingEffect = activeEffects[existingEffectIndex];
+    existingEffect.duration = effect.duration;
+    // You can update other properties as needed
+
+    return; // Exit the function since the effect is already active
+  }
 
   // New Status Effect
   const newEffect = document.createElement("div");
@@ -1359,7 +1376,6 @@ function renderStatusEffects(effect) {
   // Status Effect Tooltip
   newEffect.classList.add("tooltip");
   const tooltipText = document.createElement("ul");
-  // tooltipText.textContent = effect.effect;
   tooltipText.classList.add("tooltipText");
   newEffect.appendChild(tooltipText);
 
@@ -1368,6 +1384,7 @@ function renderStatusEffects(effect) {
   const tooltipNoteStatus = document.createElement("li");
   tooltipNoteName.textContent = effect.name;
   tooltipNoteDuration.textContent = effect.duration;
+
   // Updates & Check Effect Duration
   let newEffectInterval = setInterval(() => {
     tooltipNoteDuration.textContent = effect.duration;
@@ -1375,13 +1392,25 @@ function renderStatusEffects(effect) {
       // Removes Element when duration ends
       middleLeft.removeChild(newEffect);
       clearInterval(newEffectInterval);
+
+      // Remove the effect from the activeEffects list
+      activeEffects.splice(existingEffectIndex, 1);
     }
   }, 3000);
+
   tooltipNoteStatus.textContent = effect.status;
 
   tooltipText.appendChild(tooltipNoteName);
   tooltipText.appendChild(tooltipNoteDuration);
   tooltipText.appendChild(tooltipNoteStatus);
+
+  // Add the effect to the list of active effects
+  activeEffects.push({
+    element: newEffect,
+    name: effect.name,
+    duration: effect.duration,
+    // Add other properties as needed
+  });
 
   document.querySelectorAll(".tooltip").forEach(function (element) {
     element.addEventListener("mouseover", function () {
