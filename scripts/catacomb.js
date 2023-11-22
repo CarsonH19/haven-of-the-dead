@@ -24,7 +24,7 @@ let catacombRooms = [
       backgroundImage: 'styles/images/corridor-two.png',
       music: null,
       contents: {
-        monsters: [BROODMOTHER, BROODMOTHER, BROODMOTHER],
+        monsters: [CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER],
         items: [],
         events: null,
       },

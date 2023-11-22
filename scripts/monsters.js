@@ -43,9 +43,10 @@ const BROODMOTHER = {
 };
 
 function webChance() {
-  let webChance = Math.round(Math.random() * 5);
+  let webChance = Math.round(Math.random() * 0);
+  console.log(webChance);
 
-  if (webChance === 5) {
+  if (webChance === 0) {
     return true;
   }
 }
@@ -348,7 +349,7 @@ function monsterAbilityHandler(monster) {
     case CRYPT_CRAWLER:
       if (webChance()) {
         console.log("Crypt Crawler Ability Called!");
-        CRYPT_CRAWLER.function();
+        setTimeout(CRYPT_CRAWLER.function, 300);
       }
       break;
 
