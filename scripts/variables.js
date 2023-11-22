@@ -332,26 +332,36 @@ const POISONED = {
   effect: "Your Strength & Dexterity are 0 while poisoned.",
   status: "Your Strength and Dexterity are reduced.",
   duration: null,
-  function: () => {
-    let statusDuration = roomCounter + 5;
-    POISONED.duration = "Duration: 5 Rooms";
-    
-    // ITEM: Toxinweave Mask - Poison Immunity
-    const immune = isItemAttuned(TOXINWEAVE_MASK, null);
-
-    if (!immune) {
-      let poisonedInterval = setInterval(() => {
-        POISONED.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
-        if (roomCounter >= statusDuration) {
-          POISONED.duration = null;
-          baseDexterity += 2;
-          baseStrength += 2;
-          clearInterval(poisonedInterval);
-        }
-      }, 15000);
+  statusDuration: null,
+  function: (length) => {
+    if (POISONED.duration === null) {
+      POISONED.statusDuration = roomCounter + length;
+      POISONED.duration = `Duration: ${POISONED.statusDuration - roomCounter} Rooms`;
+      
+      // ITEM: Toxinweave Mask - Poison Immunity
+      const immune = isItemAttuned(TOXINWEAVE_MASK, null);
   
-      statusEffectHandler(POISONED);
-      renderStatusEffects(POISONED);
+      if (!immune) {
+        let poisonedInterval = setInterval(() => {
+          POISONED.duration = `Duration: ${POISONED.statusDuration - roomCounter} Rooms`;
+          if (roomCounter >= POISONED.statusDuration) {
+            POISONED.duration = null;
+            baseDexterity += 2;
+            baseStrength += 2;
+            clearInterval(poisonedInterval);
+          }
+        }, 15000);
+    
+        statusEffectHandler(POISONED);
+        renderStatusEffects(POISONED);
+      }
+    } else {
+      if (length > (POISONED.statusDuration - roomCounter)) {
+        console.log('called');
+        POISONED.statusDuration = roomCounter + length;
+        POISONED.duration = `Duration: ${POISONED.statusDuration - roomCounter} Rooms`;
+        //writeToLog() Poisoned intensifies 
+      }
     }
   },
 };
