@@ -618,7 +618,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
           narration =
             "From the sun's heart, a torrent of flames to consume your wickedness!";
         }
-        newEntry.textContent = `Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
+        newEntry.textContent = `${narration} Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
         break;
   
       // Paladin Passive
@@ -653,7 +653,8 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
         } else {
           narration = `“In the heart of the night, I am the unseen blade.”`;
         }
-        newEntry.textContent = `Your Shadow Strike deals ${dataOne} damage to the ${monsterName}!`;
+
+        newEntry.textContent = `${narration} Your Shadow Strike deals ${dataOne} damage to the ${monsterName}!`;
         break;
   
       // Rogue Passive
@@ -699,7 +700,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
             "Through her sacred incantation, the priestess invokes a torrent of healing energies.";
         }
   
-        newEntry.textContent = `Your Greater Prayer restores ${dataOne} health!`;
+        newEntry.textContent = `${narration} Your Greater Prayer restores ${dataOne} health!`;
         break;
   
       // Priestess Passive
@@ -729,7 +730,6 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
 
   let newEntry = document.createElement("li");
   let narration = Math.round(Math.random() * 9);
-  let monsterName = currentRoom.contents.monsters[0].name;
   let event = currentRoom.contents.events;
 
   switch(logType) {

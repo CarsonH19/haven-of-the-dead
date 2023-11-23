@@ -376,6 +376,8 @@ heroChoiceModal.addEventListener("click", function (event) {
   const liheth = document.getElementById("liheth");
   const playerName = document.getElementById("playerName");
 
+  specialCooldownCounter = 0;
+
   if (
     event.target === siggurd ||
     event.target === riven ||
@@ -452,14 +454,14 @@ function renderCurrentRoom(currentRoom) {
   // Calls function if one exists
   if (currentRoom.function) {
     currentRoom.function();
-  }
-
-  specialCooldownCounter = 0;
+  }  
+  
   specialCooldownHandler();
   togglePlayerControls();
   setRoomSummary();
   renderBackground(currentRoom.backgroundImage);
   updatePlayerTrackers();
+  checkForNewTier();
 }
 
 function togglePlayerControls() {

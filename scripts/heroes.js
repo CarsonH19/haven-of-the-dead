@@ -36,11 +36,7 @@ function paladinRadiantAura() {
     currentMonsterHealth <= radiantAuraTracker &&
     currentRoom.contents.monsters[0].type === "UNDEAD"
   ) {
-    writeToLog(
-      LOG_RADIANT_AURA,
-      currentRoom.contents.monsters[0].name,
-      "destroys"
-    );
+    writeToLogHero(LOG_RADIANT_AURA, "NO");
 
     currentMonsterHealth = 0;
     monsterHealthBar.value = 0;
@@ -95,27 +91,15 @@ function rogueShadowStrike() {
     currentPlayerHealth -= damageTaken;
 
     if (damageBlocked > 0) {
-      writeToLog(
-        LOG_GUARD,
-        currentRoom.contents.monsters[0].name,
-        damageBlocked + baseDexterity * 2
-      );
+      writeToLogAction(LOG_GUARD, "NO", damageBlocked + baseDexterity * 2);
     }
 
     if (damageTaken > 0) {
       damageFlashAnimation();
-
-      writeToLog(
-        LOG_MONSTER_ATTACK,
-        currentRoom.contents.monsters[0].name,
-        damageTaken
-      );
+      writeToLogMonster(LOG_MONSTER_ATTACK, "NO", damageTaken);
+    } else {
+      writeToLogMonster(LOG_MONSTER_MISS, "NO");
     }
-
-    console.log(`Damage Received: ${monsterToGuardDamage}`);
-    console.log(`Damage Blocked: ${damageBlocked}`);
-    console.log(`Current Player Health ${currentPlayerHealth}`);
-    console.log(`Current Player Health Bar Value ${playerHealthBar.value}`);
   }, 1200);
 
   // Attack
@@ -126,28 +110,19 @@ function rogueShadowStrike() {
   if (criticalHitChance >= 20) {
     playerToMonsterDamage = baseAttack;
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
-    console.log(`Critical Hit: ${totalDamage}`);
-    writeToLog(
-      LOG_PLAYER_CRITICAL,
-      currentRoom.contents.monsters[0].name,
-      totalDamage
-    );
+    
     // Normal Hit
   } else {
     totalDamage = playerToMonsterDamage;
-    console.log(`Base Damage: ${playerToMonsterDamage}`);
-    writeToLog(
-      LOG_PLAYER_ATTACK,
-      currentRoom.contents.monsters[0].name,
-      totalDamage
-    );
   }
 
   monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
   currentMonsterHealth -= totalDamage;
 
   specialCooldownCounter = 5;
+
   setTimeout(updatePlayerTrackers, 1250);
+  writeToLogHero(LOG_SHADOW_STRIKE, 'YES');
 }
 
 // See monsterAttackHandler for Rouge Passive Ability
@@ -185,7 +160,7 @@ function setPriestessStats() {
 function priestessGreaterPrayer() {
   healPlayer(greaterPrayerTracker);
 
-  writeToLog(LOG_GREATER_PRAYER, "You", greaterPrayerTracker);
+  writeToLogHero(LOG_GREATER_PRAYER, "YES", greaterPrayerTracker);
 
   specialCooldownCounter = 9;
 }
