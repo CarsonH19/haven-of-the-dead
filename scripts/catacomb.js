@@ -36,7 +36,7 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [GNAWER, GNAWER],
-      items: [],
+      items: [MARROWSTONE_CHEESE],
       events: null,
     },
   },
@@ -74,7 +74,7 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Creeping Coffins", // !FINISHED!
+    roomName: "Creeping Coffin", // !FINISHED!
     description: "",
     backgroundImage: "styles/images/corridor-two.png",
     music: null,
@@ -104,7 +104,7 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [SCOUNDREL],
-      items: [],
+      items: [BLACKHEART_BREW],
       events: null,
     },
   },
@@ -116,8 +116,11 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL, SCOUNDREL],
-      items: [],
+      items: [ROWDY_WISP],
       events: null,
+    },
+    function: () => {
+      getItem("COMMON");
     },
   },
   {
@@ -156,9 +159,12 @@ let catacombRooms = [
     backgroundImage: "styles/images/corridor-two.png",
     music: null,
     contents: {
-      monsters: [BROODMOTHER], // Broodmother's ability !UNFINISHED!
+      monsters: [BROODMOTHER],
       items: [],
       events: null,
+    },
+    function: () => {
+      getItem("COMMON");
     },
   },
   {
@@ -168,7 +174,7 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [DECREPIT_SKELETON, SKELETAL_SOLDIER, DECREPIT_SKELETON],
-      items: [],
+      items: [BONE_MARROW_SOUP],
       events: null,
     },
   },
@@ -179,7 +185,7 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [SKELETAL_SOLDIER, DECREPIT_SKELETON],
-      items: [],
+      items: [LESSER_SOULSTONE],
       events: null,
     },
   },
@@ -190,7 +196,7 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, DECREPIT_SKELETON],
-      items: [],
+      items: [GRAVEBLOOM],
       events: null,
     },
   },
@@ -201,8 +207,11 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON],
-      items: [],
+      items: [SKELETON_KEY],
       events: null,
+    },
+    function: () => {
+      getItem("COMMON");
     },
   },
   {
@@ -223,7 +232,7 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, SKELETAL_SOLDIER],
-      items: [],
+      items: [BONE_MARROW_SOUP],
       events: null,
     },
   },
@@ -256,7 +265,7 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [BONE_TITAN],
-      items: [],
+      items: [CRYPTBREAD, CRYPTBREAD],
       events: null,
     },
   },
@@ -267,7 +276,7 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [HAUNTING_SPIRIT],
-      items: [],
+      items: [GRAVEBLOOM],
       events: null,
     },
   },
@@ -289,7 +298,7 @@ let catacombRooms = [
     music: null,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL],
-      items: [],
+      items: [POTION, POTION],
       events: null,
     },
   },
@@ -313,6 +322,9 @@ let catacombRooms = [
       monsters: [FLOOD_OF_BONES],
       items: [],
       events: null,
+    },
+    function: () => {
+      getItem("RARE");
     },
   },
 ];
