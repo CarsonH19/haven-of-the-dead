@@ -500,6 +500,7 @@ const WEBBED = {
       potionBtn.disabled = true;
 
       WEBBED.duration = `Struggling to break free...`;
+      let counter = 0;
 
       // ADD SPIDER WEB IMAGE
 
@@ -509,14 +510,17 @@ const WEBBED = {
       // if (!immune) {
       let webbedInterval = setInterval(() => {
         let breakFreeChance = Math.round(Math.random() * webStrength);
+        breakFreeChance += (baseStrength + counter);
 
-        if (breakFreeChance + baseStrength >= webStrength) {
+        if (breakFreeChance >= webStrength) {
           console.log("You broke free!");
           WEBBED.duration = null;
+          counter = 0;
           togglePlayerControls();
           //writeToLog() You break free
           clearInterval(webbedInterval);
         } else {
+          counter++;
           monsterAttackHandler();
           //writeToLog() The spider attacks you while you struggle to break free
         }

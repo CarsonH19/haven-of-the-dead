@@ -23,30 +23,34 @@ const CRYPT_CRAWLER = {
   type: "BEAST",
   skulls: 1,
   function: () => {
-    WEBBED.function(3);
-  }
+    WEBBED.function(4);
+  },
 };
 
 const COFFIN_SPIDER = {
   name: "Coffin Spider",
   type: "BEAST",
   skulls: 3,
+  function: () => {
+    WEBBED.function(5);
+  },
 };
 
 const BROODMOTHER = {
   name: "Broodmother",
   type: "BEAST",
   skulls: 6,
+  hatchEggCounter: 0,
   function: () => {
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
   },
 };
 
-function webChance() {
-  let webChance = Math.round(Math.random() * 0);
+function webChance(chance) {
+  let webChance = Math.round(Math.random() * chance);
   console.log(webChance);
 
-  if (webChance === 0) {
+  if (webChance === chance) {
     return true;
   }
 }
@@ -347,23 +351,27 @@ function monsterAbilityHandler(monster) {
       break;
 
     case CRYPT_CRAWLER:
-      if (webChance()) {
+      if (webChance(4)) {
         console.log("Crypt Crawler Ability Called!");
         setTimeout(CRYPT_CRAWLER.function, 300);
       }
       break;
 
     case COFFIN_SPIDER:
-      if (webChance()) {
-        console.log("Coffin Spider Ability Called!");
-        COFFIN_SPIDER.function();
-      }
+        if (webChance(3)) {
+          console.log("Coffin Spider Ability Called!");
+          setTimeout(CRYPT_CRAWLER.function, 300);
+        }
+
       break;
 
     case BROODMOTHER:
-      if (criticalHitChance >= 20) {
+      if (BROODMOTHER.hatchEggCounter === 3) {
         console.log("Broodmother Ability Called!");
+        BROODMOTHER.hatchEggCounter = 0;
         BROODMOTHER.function();
+      } else {
+        BROODMOTHER.hatchEggCounter++;
       }
       break;
   }
