@@ -61,6 +61,8 @@
 // Wisps
 // Guiding Light
 // Rowdy Wisp
+// Unholy Wisp
+// Restless Wisp
 
 // ===============================
 //        COMMON ITEMS
