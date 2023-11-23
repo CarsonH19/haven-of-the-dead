@@ -361,7 +361,7 @@ const LAUGHING_COFFIN_COIN = {
   effect:
     "Taken from Ivan the Scoundrel, it may be of some value to other scoundrels.",
   function: () => {
-    writeToLog(LOG_EVENT_ITEM, LAUGHING_COFFIN_COIN);
+    writeToLogItem(LOG_ITEM, LAUGHING_COFFIN_COIN);
   },
 };
 
@@ -372,7 +372,7 @@ const PLAGUEWARD_PENDANT = {
   rarity: "RARE",
   effect: "While attuned to this item it prevents you from being diseased.",
   function: () => {
-    // writeToLog()
+    // writeToLogItem()
     return "IMMUNE";
   },
 };
@@ -384,7 +384,7 @@ const GHOSTSHROUD_TALISMAN = {
   rarity: "RARE",
   effect: "While attuned to this item it prevents you from being haunted.",
   function: () => {
-    // writeToLog()
+    // writeToLogItem()
     return "IMMUNE";
   },
 };
@@ -396,7 +396,7 @@ const TOXINWEAVE_MASK = {
   rarity: "RARE",
   effect: "While attuned to this item it prevents you from being poisoned.",
   function: () => {
-    // writeToLog()
+    // writeToLogItem()
     return "IMMUNE";
   },
 };
@@ -417,16 +417,13 @@ const ETHEREAL_CROWN = {
       currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
       currentRoom.contents.monsters[0] === GRUDGE
     ) {
-      writeToLog(
-        LOG_EVENT_FALLEN_KINGS_CROWN,
-        currentRoom.contents.monsters[0].name,
-        "you"
-      );
       fadeOutAnimation(monsterContainer, 0000);
       setTimeout(() => {
-        checkForMonsters();
         monsterContainer.style.display = "none";
+        checkForMonsters();
+        writeToLogItem(LOG_ITEM, 'YES', ETHEREAL_CROWN);
       }, 2000);
+      
     }
   },
 };
@@ -462,7 +459,7 @@ const SOULREAVER = {
     } else if (attackCounter >= 5) {
       attackCounter++;
       healPlayer(5);
-      // writeToLog Soulreaver is fully charged & heals you
+      // writeToLogItem Soulreaver is fully charged & heals you
       return 5;
     }
   },
@@ -486,7 +483,7 @@ const SOUL_JAR = {
       updatePlayerTrackers();
       healthLowAnimation();
 
-      writeToLog(LOG_EVENT_ITEM, SOUL_JAR);
+      writeToLogItem(LOG_ITEM, 'YES', SOUL_JAR);
     }
   },
 };
@@ -503,7 +500,7 @@ const CRIMSON_OFFERING = {
     playerHealthBar.value -= 5;
     damageFlashAnimation();
     isGameOver();
-    // writeToLog You make an offering and sacrifice 5 HP
+    // writeToLogItem You make an offering and sacrifice 5 HP
     return 10;
   },
 };
@@ -531,7 +528,7 @@ const CURSED_GRIMOIRE = {
     currentPlayerHealth--;
     playerHealthBar.value--;
     damageFlashAnimation();
-    writeToLog(LOG_EVENT_ITEM, CURSED_GRIMOIRE);
+    writeToLogItem(LOG_ITEM, 'YES', CURSED_GRIMOIRE);
   },
 };
 
@@ -544,7 +541,7 @@ const CACHE_KEY = {
     "Given to you by Ivan the Scoundrel, he said it unlocks a chamber within the catacombs were his hidden cache is kept.",
   function: () => {
     // Unlocks a trapped vault.
-    writeToLog(LOG_EVENT_ITEM, CACHE_KEY);
+    writeToLogItem(LOG_ITEM, 'YES', CACHE_KEY);
   },
 };
 
@@ -556,7 +553,7 @@ const GRERVILS_HEAD = {
   effect: "Head of the talking skull, Grervil.",
   function: () => {
     // Obtained after meeting Grervil agreeing to help him find his body.
-    writeToLog(LOG_EVENT_ITEM, GRERVILS_HEAD);
+    writeToLogItem(LOG_ITEM, 'YES', GRERVILS_HEAD);
   },
 };
 
@@ -583,7 +580,7 @@ const CRYPTBREAD = {
   effect: "Restores 10 health points when eaten.",
   function: () => {
     healPlayer(10);
-    //writeToLog
+    //writeToLogItem
   },
 };
 
@@ -595,7 +592,7 @@ const BONE_MARROW_SOUP = {
   effect: "Restores 15 health points when eaten.",
   function: () => {
     healPlayer(15);
-    //writeToLog
+    //writeToLogItem
   },
 };
 
@@ -607,7 +604,7 @@ const MARROWSTONE_CHEESE = {
   effect: "Restores 20 health points when eaten.",
   function: () => {
     healPlayer(25);
-    //writeToLog
+    //writeToLogItem
   },
 };
 
@@ -619,7 +616,7 @@ const TOMBSTONE_TRUFFLE = {
   effect: "Restores 10 health points when eaten.",
   function: () => {
     healPlayer(10);
-    //writeToLog
+    //writeToLogItem
   },
 };
 
@@ -645,7 +642,7 @@ const LICHROOT = {
     "Can be used to permanently increase the potency of health potions by 5HP.",
   function: () => {
     potionHealValue += 5;
-    //writeToLog
+    //writeToLogItem
   },
 };
 
@@ -666,7 +663,7 @@ const GRAVEBLOOM = {
         clearInterval(poisonedInterval);
       }
 
-      //writeToLog() Posioned Cured!
+      //writeToLogItem() Posioned Cured!
     }
   },
 };
@@ -679,7 +676,7 @@ const LESSER_SOULSTONE = {
   effect: "Can be used to gain +5 experience.",
   function: () => {
     gainExperience(5);
-    //writeToLog
+    //writeToLogItem
   },
 };
 
@@ -691,7 +688,7 @@ const GREATER_SOULSTONE = {
   effect: "Can be used to gain +20 experience.",
   function: () => {
     gainExperience(25);
-    //writeToLog
+    //writeToLogItem
   },
 };
 
@@ -732,7 +729,7 @@ const SKELETON_KEY = {
   effect:
     "This key can be used to unlock various locked rooms throughout the catacomb.",
   function: () => {
-    writeToLog(LOG_EVENT_ITEM, SKELETON_KEY, currentRoom.roomName);
+    writeToLogItem(LOG_ITEM, 'YES', SKELETON_KEY, currentRoom.roomName);
   },
 };
 
@@ -1160,7 +1157,7 @@ function statusEffectHandler(item) {
               checkForMonsters();
               monsterContainer.style.display = "none";
             }, 2000);
-            //writeToLog
+            //writeToLogItem
           }
         }
       }
@@ -1174,7 +1171,7 @@ function statusEffectHandler(item) {
 
     case FLICKERING_CANDLE:
       if (flickeringCandleTracker > 0) {
-        //writeToLog
+        //writeToLogItem
         flickeringCandleTracker--;
         return 10;
       }
@@ -1182,7 +1179,7 @@ function statusEffectHandler(item) {
 
     case BLAZING_CANDLE:
       if (blazingCandleTracker > 0) {
-        //writeToLog
+        //writeToLogItem
         blazingCandleTracker--;
         return 20;
       } else {
@@ -1191,7 +1188,7 @@ function statusEffectHandler(item) {
 
     case SOULFLAME_CANDLE:
       if (soulflameCandleTracker === "LIT") {
-        //writeToLog
+        //writeToLogItem
         return 2;
       } else {
         return 1;
@@ -1199,7 +1196,7 @@ function statusEffectHandler(item) {
 
     case BLACKHEART_BREW:
       if (blackheartBrewTracker === "DRUNK") {
-        //writeToLog()
+        //writeToLogItem()
         baseDexterity--;
         baseStrength += 2;
         updatePlayerTrackers();
@@ -1210,31 +1207,31 @@ function statusEffectHandler(item) {
       baseDexterity -= 2;
       baseStrength -= 2;
       updatePlayerTrackers();
-      //writeToLog() You've been poisoned!
+      //writeToLogItem() You've been poisoned!
       break;
 
     case HAUNTED:
-      //writeToLog() You've been haunted!
+      //writeToLogItem() You've been haunted!
       break;
 
     case DISEASED:
       updatePlayerTrackers();
-      //writeToLog() You've been diseased!
+      //writeToLogItem() You've been diseased!
       break;
 
     case WEBBED:
-      //writeToLog() You are caught in the spiders web
+      //writeToLogItem() You are caught in the spiders web
       break;
 
     case BLOOD_PACT:
-      //writeToLog()
+      //writeToLogItem()
       baseAttack += 5;
       baseFaith -= 2;
       updatePlayerTrackers();
       break;
 
     case LEGIONS_GRACE:
-      //writeToLog()
+      //writeToLogItem()
       baseAttack++;
       updatePlayerTrackers();
       break;

@@ -37,7 +37,7 @@ function paladinRadiantAura() {
     currentRoom.contents.monsters[0].type === "UNDEAD"
   ) {
     writeToLog(
-      LOG_EVENT_RADIANT_AURA,
+      LOG_RADIANT_AURA,
       currentRoom.contents.monsters[0].name,
       "destroys"
     );
@@ -96,7 +96,7 @@ function rogueShadowStrike() {
 
     if (damageBlocked > 0) {
       writeToLog(
-        LOG_EVENT_GUARD,
+        LOG_GUARD,
         currentRoom.contents.monsters[0].name,
         damageBlocked + baseDexterity * 2
       );
@@ -106,7 +106,7 @@ function rogueShadowStrike() {
       damageFlashAnimation();
 
       writeToLog(
-        LOG_EVENT_MONSTER_ATTACK,
+        LOG_MONSTER_ATTACK,
         currentRoom.contents.monsters[0].name,
         damageTaken
       );
@@ -128,7 +128,7 @@ function rogueShadowStrike() {
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
     console.log(`Critical Hit: ${totalDamage}`);
     writeToLog(
-      LOG_EVENT_PLAYER_CRITICAL,
+      LOG_PLAYER_CRITICAL,
       currentRoom.contents.monsters[0].name,
       totalDamage
     );
@@ -137,7 +137,7 @@ function rogueShadowStrike() {
     totalDamage = playerToMonsterDamage;
     console.log(`Base Damage: ${playerToMonsterDamage}`);
     writeToLog(
-      LOG_EVENT_PLAYER_ATTACK,
+      LOG_PLAYER_ATTACK,
       currentRoom.contents.monsters[0].name,
       totalDamage
     );
@@ -185,7 +185,7 @@ function setPriestessStats() {
 function priestessGreaterPrayer() {
   healPlayer(greaterPrayerTracker);
 
-  writeToLog(LOG_EVENT_GREATER_PRAYER, "You", greaterPrayerTracker);
+  writeToLog(LOG_GREATER_PRAYER, "You", greaterPrayerTracker);
 
   specialCooldownCounter = 9;
 }

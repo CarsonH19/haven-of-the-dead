@@ -372,7 +372,7 @@ const LOST_LEGIONS_VALE = {
   },
   function: () => {
     setTimeout(() => {
-      writeToLog(LOG_EVENT_ROOM, LOST_LEGIONS_VALE);
+      // writeToLog(LOG_EVENT_ROOM, LOST_LEGIONS_VALE);  // NEED TO FIX!!!
     }, 1500);
   }
 }

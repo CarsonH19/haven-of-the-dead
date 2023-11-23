@@ -1,466 +1,117 @@
-// ===============================
-//             Log
-// ===============================
+  // ==============================================================
+  //                         ACTIONS
+  // ==============================================================
 
-function writeToLog(eventType, name, value) {
+function writeToLogActions(logType, narrate, dataOne) {
   let newEntry = document.createElement("li");
-  let narration = Math.round(Math.random() * 10);
-  let newNarration = document.createElement("li");
-  let event = currentRoom.contents.events;
+  let narration = Math.round(Math.random() * 9);
+  let monsterName;
 
-  switch (eventType) {
-    // ===============================
-    //      Monster Attack Events
-    // ===============================
+  if (currentRoom.contents.monsters.length > 0) {
+    monsterName = currentRoom.contents.monsters[0].name;
+  }
 
-    case LOG_EVENT_MONSTER_ATTACK:
-      if (name === "Crypt Crawler") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Decrepit Skeleton") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Skeletal Soldier") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Armored Skeleton") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Blazing Skeleton") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Draugr") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Bone Titan") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Flood of Bones") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Baron of Bone") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Shade") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Ghost") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Grudge") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Gnawer") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Coffin Spider") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      } else if (name === "Scoundrel") {
-        if (narration === 1) {
-          narration = ``;
-        } else if (narration === 2) {
-          narration = ``;
-        } else if (narration === 3) {
-          narration = ``;
-        } else if (narration === 4) {
-          narration = ``;
-        } else if (narration === 5) {
-          narration = ``;
-        } else if (narration === 6) {
-          narration = ``;
-        } else if (narration === 7) {
-          narration = ``;
-        } else if (narration === 8) {
-          narration = ``;
-        } else if (narration === 9) {
-          narration = ``;
-        } else {
-          narration = ``;
-        }
-      }
-      newEntry.textContent = `${narration} The ${name} inflicts ${value} damage to you!`;
-      break;
+  switch (logType) {
 
     // ===============================
-    //     Player Attack Events
+    //     Player Attack Logs
     // ===============================
 
-    case LOG_EVENT_PLAYER_ATTACK:
+    case LOG_PLAYER_ATTACK:
       if (heroChoice === "PALADIN") {
         if (narration === 1) {
-          narration = `You swing your greatsword in a wide arc, the blade gleaming with radiant energy as it cleaves through the ${name}'s defenses.`;
+          narration = `You swing your greatsword in a wide arc, the blade gleaming with radiant energy as it cleaves through the ${monsterName}'s defenses.`;
         } else if (narration === 2) {
-          narration = `With a powerful thrust, your greatsword pierces through the ${name}'s armor, leaving a trail of holy light in its wake.`;
+          narration = `With a powerful thrust, your greatsword pierces through the ${monsterName}'s armor, leaving a trail of holy light in its wake.`;
         } else if (narration === 3) {
           narration = `You channel your righteous fury, delivering a punishing overhead strike that sends shockwaves of holy energy rippling through the air.`;
         } else if (narration === 4) {
-          narration = `With a swift and precise motion, you sweep your greatsword in a graceful arc, leaving a trail of radiant energy that burns the ${name}.`;
+          narration = `With a swift and precise motion, you sweep your greatsword in a graceful arc, leaving a trail of radiant energy that burns the ${monsterName}.`;
         } else if (narration === 5) {
-          narration = `You lunge forward, your greatsword leading the way like a beacon of purity, piercing through the ${name}.`;
+          narration = `You lunge forward, your greatsword leading the way like a beacon of purity, piercing through the ${monsterName}.`;
         } else if (narration === 6) {
-          narration = `You whirl your greatsword in a frenzied dance of light and steel, striking the ${name} with a fervent determination.`;
+          narration = `You whirl your greatsword in a frenzied dance of light and steel, striking the ${monsterName} with a fervent determination.`;
         } else if (narration === 7) {
-          narration = `You charge forward, greatsword held high, delivering a relentless assault that leaves no room for the ${name} to counter.`;
+          narration = `You charge forward, greatsword held high, delivering a relentless assault that leaves no room for the ${monsterName} to counter.`;
         } else if (narration === 8) {
           narration = `Your greatsword pulses with intense light as you unleash a flurry of strikes, each blow carrying the weight of divine justice.`;
         } else if (narration === 9) {
-          narration = `Your blade glows with an ethereal light, and as it strikes, imparting a profound sense of justice upon the ${name}.`;
+          narration = `Your blade glows with an ethereal light, and as it strikes, imparting a profound sense of justice upon the ${monsterName}.`;
         } else {
-          narration = `Your strike is infused with the power of the heavens, rending through the ${name}'s defenses with celestial force.`;
+          narration = `Your strike is infused with the power of the heavens, rending through the ${monsterName}'s defenses with celestial force.`;
         }
       } else if (heroChoice === "ROGUE") {
         if (narration === 1) {
-          narration = `Your dagger seems to meld with the darkness, striking the ${name} with a stealthy grace that belies its deadly intent.`;
+          narration = `Your dagger seems to meld with the darkness, striking the ${monsterName} with a stealthy grace that belies its deadly intent.`;
         } else if (narration === 2) {
           narration = `Your dagger moves like a phantom through the shadows, leaving behind a trail of obsidian-hued energy.`;
         } else if (narration === 3) {
           narration = `Your daggers move in perfect harmony, their edges infused with the essence of shadows, creating a stealthy and deadly pincer movement.`;
         } else if (narration === 4) {
-          narration = `You disappear into the shadows, only to reemerge in a sudden, unexpected strike, catching the ${name} off guard.`;
+          narration = `You disappear into the shadows, only to reemerge in a sudden, unexpected strike, catching the ${monsterName} off guard.`;
         } else if (narration === 5) {
-          narration = `Your dagger’s blade seems to whisper through the air, striking the ${name} with uncanny precision as if guided by the shadows themselves.`;
+          narration = `Your dagger’s blade seems to whisper through the air, striking the ${monsterName} with uncanny precision as if guided by the shadows themselves.`;
         } else if (narration === 6) {
           narration = `Your movements are a graceful dance of shadow and steel, leaving behind a sense of foreboding darkness in their wake.`;
         } else if (narration === 7) {
           narration = `With the speed of nightfall, you dart in to deliver a swift, calculated strike before melting back into the shadows.`;
         } else if (narration === 8) {
-          narration = `Your dagger becomes a conduit for the encroaching twilight, striking with a shadowy force that seems to wrap around the ${name}.`;
+          narration = `Your dagger becomes a conduit for the encroaching twilight, striking with a shadowy force that seems to wrap around the ${monsterName}.`;
         } else if (narration === 9) {
-          narration = `Your dagger appears from the shadows, striking before the ${name} even registers their presence.`;
+          narration = `Your dagger appears from the shadows, striking before the ${monsterName} even registers their presence.`;
         } else {
-          narration = `You shroud the ${name} in a veil of shadow, making them believe they've dodged the strike, only to realize too late that they were deceived.`;
+          narration = `You shroud the ${monsterName} in a veil of shadow, making them believe they've dodged the strike, only to realize too late that they were deceived.`;
         }
       } else if (heroChoice === "PRIESTESS") {
         if (narration === 1) {
-          narration = `You conjure a beam of pure light, directing it towards the ${name} with unwavering faith.`;
+          narration = `You conjure a beam of pure light, directing it towards the ${monsterName} with unwavering faith.`;
         } else if (narration === 2) {
-          narration = `A radiant halo manifests around you, expanding outward to strike the ${name} with a burst of celestial energy.`;
+          narration = `A radiant halo manifests around you, expanding outward to strike the ${monsterName} with a burst of celestial energy.`;
         } else if (narration === 3) {
-          narration = `You call upon the power of the heavens to unleash a radiant explosion, engulfing the ${name} in brilliant light.`;
+          narration = `You call upon the power of the heavens to unleash a radiant explosion, engulfing the ${monsterName} in brilliant light.`;
         } else if (narration === 4) {
-          narration = `A spear of golden light materializes in your hand, hurtling towards the ${name} with divine precision.`;
+          narration = `A spear of golden light materializes in your hand, hurtling towards the ${monsterName} with divine precision.`;
         } else if (narration === 5) {
-          narration = `You release a burst of concentrated light energy, illuminating the area as it engulfs the ${name}.`;
+          narration = `You release a burst of concentrated light energy, illuminating the area as it engulfs the ${monsterName}.`;
         } else if (narration === 6) {
-          narration = `A swirling orb of ethereal light forms, pulsating with power before launching towards the ${name} in a blinding flash.`;
+          narration = `A swirling orb of ethereal light forms, pulsating with power before launching towards the ${monsterName} in a blinding flash.`;
         } else if (narration === 7) {
-          narration = `You weave a tapestry of light, shaping it into a focused beam that pierces through the ${name}'s defenses.`;
+          narration = `You weave a tapestry of light, shaping it into a focused beam that pierces through the ${monsterName}'s defenses.`;
         } else if (narration === 8) {
-          narration = `You summon a protective shield of radiant energy, using it to bash into the ${name} with a forceful strike.`;
+          narration = `You summon a protective shield of radiant energy, using it to bash into the ${monsterName} with a forceful strike.`;
         } else if (narration === 9) {
-          narration = `Beams of light rain down upon the ${name}, creating a cascade of radiant energy that engulfs them in brilliance.`;
+          narration = `Beams of light rain down upon the ${monsterName}, creating a cascade of radiant energy that engulfs them in brilliance.`;
         } else {
-          narration = `You channel the essence of a guiding beacon, directing its luminous energy towards the ${name} in a searing strike`;
+          narration = `You channel the essence of a guiding beacon, directing its luminous energy towards the ${monsterName} in a searing strike`;
         }
       }
 
-      newEntry.textContent = `${narration} You deal ${value} damage to the ${name}!`;
-      break;
-
-    // ===============================
-    //     Player Miss Event
-    // ===============================
-
-    case LOG_EVENT_PLAYER_MISS:
-      newEntry.textContent = `${value} fail to attack the ${name}!`; // value = 'You'
-      break;
-
-    // ===============================
-    //     Monster Miss Event
-    // ===============================
-    case LOG_EVENT_MONSTER_MISS:
-      newEntry.textContent = `The ${name} fails to attack ${value}!`; // value = 'you'
+      newEntry.textContent = `You deal ${dataOne} damage to the ${monsterName}!`;
       break;
 
     // ===============================
     //      Critical Hit Events
     // ===============================
 
-    case LOG_EVENT_PLAYER_CRITICAL:
+    case LOG_PLAYER_CRITICAL:
+
       if (heroChoice === "PALADIN") {
         if (narration === 1) {
-          narration = `Your greatsword blazes with an overwhelming brilliance, obliterating the ${name}'s resistance and leaving nothing but radiant aftermath.`;
+          narration = `Your greatsword blazes with an overwhelming brilliance, obliterating the ${monsterName}'s resistance and leaving nothing but radiant aftermath.`;
         } else if (narration === 2) {
-          narration = `With a masterful flourish, your greatsword cleaves through the ${name} with unparalleled precision, leaving them utterly vanquished.`;
+          narration = `With a masterful flourish, your greatsword cleaves through the ${monsterName} with unparalleled precision, leaving them utterly vanquished.`;
         } else if (narration === 3) {
-          narration = `Your greatsword becomes an unstoppable force, a torrent of holy energy crashing down upon the ${name}, leaving them shattered and defeated.`;
+          narration = `Your greatsword becomes an unstoppable force, a torrent of holy energy crashing down upon the ${monsterName}, leaving them shattered and defeated.`;
         } else if (narration === 4) {
-          narration = `Your strike reaches its zenith, a culmination of righteousness and power, leaving the ${name} in awe of the unwavering force they face.`;
+          narration = `Your strike reaches its zenith, a culmination of righteousness and power, leaving the ${monsterName} in awe of the unwavering force they face.`;
         } else if (narration === 5) {
-          narration = `Your greatsword's blade seems to transcend reality, creating a rift of celestial energy that consumes the ${name} in a brilliant explosion of light.`;
+          narration = `Your greatsword's blade seems to transcend reality, creating a rift of celestial energy that consumes the ${monsterName} in a brilliant explosion of light.`;
         } else if (narration === 6) {
           narration = `Your greatsword dances through the battlefield, leaving a wake of divine devastation as it strikes true with impeccable precision.`;
         } else if (narration === 7) {
-          narration = `Your greatswor's edge becomes an extension of the heavens themselves, as it effortlessly rends through the ${name}, leaving them in awe of their impending fate.`;
+          narration = `Your greatswor's edge becomes an extension of the heavens themselves, as it effortlessly rends through the ${monsterName}, leaving them in awe of their impending fate.`;
         } else if (narration === 8) {
-          narration = `Your greatsword's strike transcends mortal limitations, delivering an attack of unparalleled force and leaving the ${name} broken and defeated.`;
+          narration = `Your greatsword's strike transcends mortal limitations, delivering an attack of unparalleled force and leaving the ${monsterName} broken and defeated.`;
         } else if (narration === 9) {
           narration = `Your strike is a reckoning, a surge of purifying energy that obliterates all traces of malevolence.`;
         } else {
@@ -470,61 +121,69 @@ function writeToLog(eventType, name, value) {
         if (narration === 1) {
           narration = `Your dagger's strike is imbued with the essence of the void, leaving behind a wound that seems to consume the very light around it.`;
         } else if (narration === 2) {
-          narration = `Your daggers move in a rapid flurry, creating a crescendo of strikes that overwhelms the ${name}'s defenses, all while bathed in the ebon glow of shadow.`;
+          narration = `Your daggers move in a rapid flurry, creating a crescendo of strikes that overwhelms the ${monsterName}'s defenses, all while bathed in the ebon glow of shadow.`;
         } else if (narration === 3) {
-          narration = `Each strike is a haunting note in a symphony of shadows, orchestrated with deadly precision to bring about the ${name}'s demise.`;
+          narration = `Each strike is a haunting note in a symphony of shadows, orchestrated with deadly precision to bring about the ${monsterName}'s demise.`;
         } else if (narration === 4) {
-          narration = `Your movements create a blinding series of shadowy illusions, making it impossible for the ${name} to anticipate the real strike.`;
+          narration = `Your movements create a blinding series of shadowy illusions, making it impossible for the ${monsterName} to anticipate the real strike.`;
         } else if (narration === 5) {
-          narration = `You seem to dissolve into the shadows, only to reappear behind the ${name}, daggers poised to strike with devastating force.`;
+          narration = `You seem to dissolve into the shadows, only to reappear behind the ${monsterName}, daggers poised to strike with devastating force.`;
         } else if (narration === 6) {
           narration = `Your movements are a blur of shadow and finesse, leaving behind an afterimage of their lethal artistry, each strike accompanied by a trailing veil of shadows.`;
         } else if (narration === 7) {
-          narration = `Your daggers strike with a serpent's cunning, finding the ${name}'s weak points with uncanny precision, shrouded in the embracing darkness of twilight.`;
+          narration = `Your daggers strike with a serpent's cunning, finding the ${monsterName}'s weak points with uncanny precision, shrouded in the embracing darkness of twilight.`;
         } else if (narration === 8) {
-          narration = `Your strikes are accompanied by an ethereal play of midnight shadows, making it nearly impossible for the ${name} to discern the real attack.`;
+          narration = `Your strikes are accompanied by an ethereal play of midnight shadows, making it nearly impossible for the ${monsterName} to discern the real attack.`;
         } else if (narration === 9) {
-          narration = `Your dagger carries with it the weight of the midnight hour, striking with a darkness that seems to seep into the ${name}'s soul, leaving them enveloped in a shroud of shadows.`;
+          narration = `Your dagger carries with it the weight of the midnight hour, striking with a darkness that seems to seep into the ${monsterName}'s soul, leaving them enveloped in a shroud of shadows.`;
         } else {
-          narration = `You unleashes a rapid barrage of strikes, each one accompanied by a disorienting illusion, overwhelming the ${name}'s senses in a torrent of shadow.`;
+          narration = `You unleashes a rapid barrage of strikes, each one accompanied by a disorienting illusion, overwhelming the ${monsterName}'s senses in a torrent of shadow.`;
         }
       } else if (heroChoice === "PRIESTESS") {
         if (narration === 1) {
-          narration = `Your magic intensifies, purging the ${name} with a blinding surge of cleansing light, searing away all darkness.`;
+          narration = `Your magic intensifies, purging the ${monsterName} with a blinding surge of cleansing light, searing away all darkness.`;
         } else if (narration === 2) {
-          narration = `You channel the full might of celestial power, releasing a cataclysmic explosion of divine energy upon the ${name}.`;
+          narration = `You channel the full might of celestial power, releasing a cataclysmic explosion of divine energy upon the ${monsterName}.`;
         } else if (narration === 3) {
           narration = `Wings of light unfurl behind you as you summon a devastating strike, leaving behind a trail of radiant devastation.`;
         } else if (narration === 4) {
-          narration = `You conjure a swirling vortex of concentrated light, drawing the ${name} into its center before unleashing its blinding power.`;
+          narration = `You conjure a swirling vortex of concentrated light, drawing the ${monsterName} into its center before unleashing its blinding power.`;
         } else if (narration === 5) {
-          narration = `Your strike is guided by the first light of dawn, bringing with it a force that shatters the ${name}'s defenses.`;
+          narration = `Your strike is guided by the first light of dawn, bringing with it a force that shatters the ${monsterName}'s defenses.`;
         } else if (narration === 6) {
-          narration = `Your magic converges with beams of brilliant light, creating a cataclysmic explosion that consumes the ${name}.`;
+          narration = `Your magic converges with beams of brilliant light, creating a cataclysmic explosion that consumes the ${monsterName}.`;
         } else if (narration === 7) {
           narration = `You conjure the power of the solstice, unleashing a surge of radiant energy that obliterates all darkness in its path.`;
         } else if (narration === 8) {
-          narration = `You call upon the ultimate beacon of celestial power, sending forth a beam of light that scorches the ${name}, leaving them consumed by its brilliance.`;
+          narration = `You call upon the ultimate beacon of celestial power, sending forth a beam of light that scorches the ${monsterName}, leaving them consumed by its brilliance.`;
         } else if (narration === 9) {
-          narration = `You raise your arms, conjuring a torrent of radiant energy that surges towards the ${name}, sweeping them away in a torrent of brilliance.`;
+          narration = `You raise your arms, conjuring a torrent of radiant energy that surges towards the ${monsterName}, sweeping them away in a torrent of brilliance.`;
         } else {
-          narration = `A wave of pure light washes over the ${name}, purging them of darkness and leaving behind a realm of untouched serenity.`;
+          narration = `A wave of pure light washes over the ${monsterName}, purging them of darkness and leaving behind a realm of untouched serenity.`;
         }
       }
 
-      newEntry.textContent = `${narration} You deal ${value} damage to the ${name}!`;
+      newEntry.textContent = `${narration} You deal ${dataOne} damage to the ${monsterName}!`;
       break;
+
+    // ===============================
+    //     Player Miss Event
+    // ===============================
+
+      case LOG_PLAYER_MISS:
+        newEntry.textContent = `You fail to attack the ${monsterName}!`; 
+        break;
 
     // ===============================
     //              Guard
     // ===============================
 
-    case LOG_EVENT_GUARD:
+    case LOG_GUARD:
       if (heroChoice === "PALADIN") {
         if (narration === 1) {
-          narration = `With the weight of your greatsword held firm, you stand like an unyielding sentinel, ready to meet the ${name}'s assault head-on.`;
+          narration = `With the weight of your greatsword held firm, you stand like an unyielding sentinel, ready to meet the ${monsterName}'s assault head-on.`;
         } else if (narration === 2) {
-          narration = `As the ${name} closes in, you steady your stance, drawing upon the boundless power of the divine to fortify your defenses.`;
+          narration = `As the ${monsterName} closes in, you steady your stance, drawing upon the boundless power of the divine to fortify your defenses.`;
         } else if (narration === 3) {
           narration = `The greatsword in your grasp becomes an extension of your resolve, an unbreakable bulwark against the impending onslaught.`;
         } else if (narration === 4) {
@@ -532,15 +191,15 @@ function writeToLog(eventType, name, value) {
         } else if (narration === 5) {
           narration = `The edge of your greatsword gleams with an inner light, radiating an aura of protection that wards off the encroaching darkness.`;
         } else if (narration === 6) {
-          narration = `With each calculated step, you align your greatsword with precision, establishing an impenetrable barrier that defies the ${name}'s advance.`;
+          narration = `With each calculated step, you align your greatsword with precision, establishing an impenetrable barrier that defies the ${monsterName}'s advance.`;
         } else if (narration === 7) {
           narration = `The divine essence within you resonates through your greatsword, creating a palpable forcefield that stands resolute against all threats.`;
         } else if (narration === 8) {
-          narration = `With unwavering determination, you brandish your greatsword, the sheer presence of the blade warding off the ${name}'s intent.`;
+          narration = `With unwavering determination, you brandish your greatsword, the sheer presence of the blade warding off the ${monsterName}'s intent.`;
         } else if (narration === 9) {
-          narration = `As the ${name}'s strike nears, you grip your greatsword with unyielding strength, transforming it into an insurmountable fortress of defense.`;
+          narration = `As the ${monsterName}'s strike nears, you grip your greatsword with unyielding strength, transforming it into an insurmountable fortress of defense.`;
         } else {
-          narration = `The aura of your greatsword shimmers with an ethereal light, projecting an unbreakable shield that rebuffs the force of the ${name}'s attack.`;
+          narration = `The aura of your greatsword shimmers with an ethereal light, projecting an unbreakable shield that rebuffs the force of the ${monsterName}'s attack.`;
         }
       } else if (heroChoice === "ROGUE") {
         if (narration === 1) {
@@ -550,13 +209,13 @@ function writeToLog(eventType, name, value) {
         } else if (narration === 3) {
           narration = `With a flick of your concealed dagger, you redirect the incoming blow into the catacomb wall.`;
         } else if (narration === 4) {
-          narration = `As the ${name}'s strike, your dagger moves in a mesmerizing dance, dispersing its potency in a shadowy veil,`;
+          narration = `As the ${monsterName}'s strike, your dagger moves in a mesmerizing dance, dispersing its potency in a shadowy veil,`;
         } else if (narration === 5) {
           narration = `In a display of nimbleness, you sidestep the oncoming attack, your dagger deflecting the force and redirecting it into the shadows,`;
         } else if (narration === 6) {
-          narration = `You seamlessly weave your dagger into the path of the ${name}'s attack, redirecting its energy`;
+          narration = `You seamlessly weave your dagger into the path of the ${monsterName}'s attack, redirecting its energy`;
         } else if (narration === 7) {
-          narration = `Your dagger becomes an extension of yourself and you skillfully parry the ${name}'s attack using the blade to disperse its force`;
+          narration = `Your dagger becomes an extension of yourself and you skillfully parry the ${monsterName}'s attack using the blade to disperse its force`;
         } else if (narration === 8) {
           narration = `With a swift, calculated movement, you use your dagger to intercept the strike.`;
         } else if (narration === 9) {
@@ -566,39 +225,39 @@ function writeToLog(eventType, name, value) {
         }
       } else if (heroChoice === "PRIESTESS") {
         if (narration === 1) {
-          narration = `With a whispered prayer, you raise a protective barrier of divine energy, deflecting the ${name}'s assault with a shimmering glow.`;
+          narration = `With a whispered prayer, you raise a protective barrier of divine energy, deflecting the ${monsterName}'s assault with a shimmering glow.`;
         } else if (narration === 2) {
-          narration = `You channel the sacred power within, creating a barrier of light that stands as an impenetrable shield against the ${name}'s attack.`;
+          narration = `You channel the sacred power within, creating a barrier of light that stands as an impenetrable shield against the ${monsterName}'s attack.`;
         } else if (narration === 3) {
           narration = `As the ${name}'s strike approaches, you raise your hand, conjuring a protective ward that absorbs the blow with a gentle shimmer.`;
         } else if (narration === 4) {
-          narration = `Your aura seems to expand, creating a protective field that nullifies the ${name}'s assault.`;
+          narration = `Your aura seems to expand, creating a protective field that nullifies the ${monsterName}'s assault.`;
         } else if (narration === 5) {
-          narration = `With a graceful motion, you summon a radiant shield that seems to repel the ${name}'s strike with a gentle force.`;
+          narration = `With a graceful motion, you summon a radiant shield that seems to repel the ${monsterName}'s strike with a gentle force.`;
         } else if (narration === 6) {
           narration = `Your presence seems to radiate a soothing energy, creating a protective aura that envelopes you.`;
         } else if (narration === 7) {
-          narration = `With a serene gesture, you conjure a barrier of light, deflecting the ${name}'s attack with a gentle force.`;
+          narration = `With a serene gesture, you conjure a barrier of light, deflecting the ${monsterName}'s attack with a gentle force.`;
         } else if (narration === 8) {
-          narration = `You shimmer with a divine light, repelling the ${name}'s strike with a gentle but unyielding force.`;
+          narration = `You shimmer with a divine light, repelling the ${monsterName}'s strike with a gentle but unyielding force.`;
         } else if (narration === 9) {
-          narration = `With a focused gaze, you channel the sacred energy within, forming a protective barrier that nullifies the ${name}'s assault.`;
+          narration = `With a focused gaze, you channel the sacred energy within, forming a protective barrier that nullifies the ${monsterName}'s assault.`;
         } else {
-          narration = `As the ${name}'s strike approaches, you raise your hand, creating a barrier of light that absorbs the blow with a gentle but resolute force.`;
+          narration = `As the ${monsterName}'s strike approaches, you raise your hand, creating a barrier of light that absorbs the blow with a gentle but resolute force.`;
         }
       }
-      newEntry.textContent = `${narration} You guard ${value} damage from the ${name}!`;
+      newEntry.textContent = `${narration} You guard ${dataOne} damage from the ${monsterName}!`;
       break;
 
-    case LOG_EVENT_GUARD_FAIL:
-      newEntry.textContent = `${value} fail to guard the ${name}'s attack!`; // value = 'You'
+    case LOG_GUARD_FAIL:
+      newEntry.textContent = `You fail to guard the ${monsterName}'s attack!`;
       break;
 
     // ===============================
     //            Potion
     // ===============================
 
-    case LOG_EVENT_POTION:
+    case LOG_POTION:
       if (heroChoice === "PALADIN") {
         if (narration === 1) {
           narration = `"With each drop, I feel the light of restoration coursing through me, renewing my vigor."`;
@@ -667,14 +326,14 @@ function writeToLog(eventType, name, value) {
         }
       }
 
-      newEntry.textContent = `${name} drink a potion and restore ${value} health!`;
+      newEntry.textContent = `${narration} You drink a potion and restore ${dataOne} health!`;
       break;
 
     // ===============================
     //             Flee
     // ===============================
 
-    case LOG_EVENT_FLEE:
+    case LOG_FLEE:
       if (heroChoice === "PALADIN") {
         if (narration === 1) {
           narration = `"Retreat is a tactical decision, not a sign of weakness. We shall regroup and return with renewed resolve."`;
@@ -743,14 +402,89 @@ function writeToLog(eventType, name, value) {
         }
       }
 
-      newEntry.textContent = `${name} flee from the ${value}!`; // value = currentRoom.name
+      newEntry.textContent = `You flee from the ${currentRoom.roomName}!`; 
       break;
+  }
+
+    log.insertBefore(newEntry, log.firstChild);
+    const newEntryClone = newEntry.cloneNode(true);
+    logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+
+    if (narrate === 'YES') {
+      writeToNarrative(narration);
+    }
+
+    checkLogSize();
+}
+
+  // ==============================================================
+  //                         MONSTERS
+  // ==============================================================
+
+
+
+function writeToLogMonster(logType, narrate, dataOne) {
+  let newEntry = document.createElement("li");
+  let monsterName = currentRoom.contents.monsters[0].name;
+  let narration = Math.round(Math.random() * 9);
+
+    switch (logType) {
+
+      // ===============================
+      //      Monster Attack Log
+      // ===============================
+
+      case LOG_MONSTER_ATTACK:
+        newEntry.textContent = `The ${monsterName} deals ${dataOne} damage to you!`;
+        break;  
+
+      // ===============================
+      //      Monster Miss Log
+      // ===============================
+
+      case LOG_MONSTER_MISS:
+      newEntry.textContent = `The ${monsterName} fails to attack ${dataOne}!`; 
+      break; 
+
+      // ===============================
+      //      Monster Ability Log
+      // ===============================
+
+      case LOG_MONSTER_ABILITY:
+        newEntry.textContent = `The ${monsterName} deals ${dataOne} damage to you!`;
+        break;  
+    }
+
+    log.insertBefore(newEntry, log.firstChild);
+    const newEntryClone = newEntry.cloneNode(true);
+    logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+
+    if (narrate === 'YES') {
+      writeToNarrative(newEntry.textContent);
+    }
+
+    checkLogSize();
+}
+
+  // ==============================================================
+  //                         HEROES
+  // ==============================================================
+
+function writeToLogHero(logType, narrate, dataOne, dataTwo) {
+  // dataOne =
+  // dataTwo = 
+
+  let newEntry = document.createElement("li");
+  let monsterName = currentRoom.contents.monsters[0].name;
+  let narration = Math.round(Math.random() * 9);
+
+    switch (logType) {
 
     // ===============================
     //           Level Up
     // ===============================
 
-    case LOG_EVENT_LEVEL:
+    case LOG_LEVEL:
       if (heroChoice === "PALADIN") {
         if (narration === 1) {
           narration = `"With each victory, my resolve strengthens. I am forged in the fires of righteousness."`;
@@ -819,186 +553,213 @@ function writeToLog(eventType, name, value) {
         }
       }
 
-      newEntry.textContent = `${narration}" Your Holy Smite deals ${value} damage to the ${name}!`;
+      newEntry.textContent = `${narration}" Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
       break;
 
+      // ===============================
+      //         Paladin Logs
+      // ===============================
+
+      // Paladin Ability
+      case LOG_SMITE:
+        if (narration === 1) {
+          narration = `"In the name of the divine, your foe shall know the burning light!"`;
+        } else if (narration === 2) {
+          narration = `"With righteous fury, the smite of holiness purges all evil."`;
+        } else if (narration === 3) {
+          narration = `"May the heavens guide your strike, champion of the light!"`;
+        } else if (narration === 4) {
+          narration = `"A blinding radiance erupts as your smite pierces the darkness."`;
+        } else if (narration === 5) {
+          narration = `"The darkness recoils in the face of your holy onslaught."`;
+        } else if (narration === 6) {
+          narration = `"Behold the power of the sacred, as it lays waste to the unholy!"`;
+        } else if (narration === 7) {
+          narration = `"With each swing, the smite of righteousness carves a path of purity."`;
+        } else if (narration === 8) {
+          narration = `"The echoes of angels resonate as your smite strikes true."`;
+        } else if (narration === 9) {
+          narration = `"The unholy tremble as the light of righteousness descends upon them."`;
+        } else {
+          narration = `"Through the strength of faith, your smite brings judgment upon the wicked."`;
+        }
+  
+        newEntry.textContent = `Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
+        break;
+  
+      
+      case LOG_SMITE_CRITICAL:
+        if (narration === 1) {
+          narration =
+            "In the blazing name of the sun, I smite you, let its fire cleanse your soul!";
+        } else if (narration === 2) {
+          narration =
+            "By the searing light of the sun, I reduce your wickedness to cinders!";
+        } else if (narration === 3) {
+          narration = "The sun's wrath is an inferno, and you shall be consumed!";
+        } else if (narration === 4) {
+          narration =
+            "May the sun's fire consume your wickedness, leaving only ashes!";
+        } else if (narration === 5) {
+          narration = "By the sun's radiant might, I sear your malevolence!";
+        } else if (narration === 6) {
+          narration =
+            "Feel the scorching embrace of the sun's fury, wretched foe!";
+        } else if (narration === 7) {
+          narration =
+            "In the sun's brilliant embrace, I strike you down, leaving only embers!";
+        } else if (narration === 8) {
+          narration =
+            "By the fiery embrace of the sun, I brand you with holy fury!";
+        } else if (narration === 9) {
+          narration =
+            "In the name of the sun, I command you to burn in righteous fire!";
+        } else {
+          narration =
+            "From the sun's heart, a torrent of flames to consume your wickedness!";
+        }
+        newEntry.textContent = `Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
+        break;
+  
+      // Paladin Passive
+      case LOG_RADIANT_AURA:
+        newEntry.textContent = `Your Radiant Aura destroys the ${monsterName}!`; 
+        break;
+  
+      // ===============================
+      //         Rogue Logs
+      // ===============================
+  
+      // Rogue Ability
+      case LOG_SHADOW_STRIKE:
+        if (narration === 1) {
+          narration = `“Embrace the shadows, for they shall be your silent accomplice.”`;
+        } else if (narration === 2) {
+          narration = `“From the darkness I strike, a phantom in the night.”`;
+        } else if (narration === 3) {
+          narration = `“Witness the dance of shadows, and despair.”`;
+        } else if (narration === 4) {
+          narration = `“In shadows we find our strength, in silence we claim our victory.”`;
+        } else if (narration === 5) {
+          narration = `“The night is my ally, and together we shall prevail.”`;
+        } else if (narration === 6) {
+          narration = `“Fade into shadow, emerge in triumph.”`;
+        } else if (narration === 7) {
+          narration = `“They'll never see it coming… until it's too late.”`;
+        } else if (narration === 8) {
+          narration = `“Where there is shadow, there is opportunity.”`;
+        } else if (narration === 9) {
+          narration = `“From the depths of darkness, I arise to strike!”`;
+        } else {
+          narration = `“In the heart of the night, I am the unseen blade.”`;
+        }
+        newEntry.textContent = `Your Shadow Strike deals ${dataOne} damage to the ${monsterName}!`;
+        break;
+  
+      // Rogue Passive
+      case LOG_EVASION:
+        newEntry.textContent = `You evade the ${monsterName}'s attack!`;
+        break;
+  
+      // ===============================
+      //        Priestess Logs
+      // ===============================
+  
+      // Priestess Ability
+      case LOG_GREATER_PRAYER:
+        if (narration === 1) {
+          narration =
+            "As her voice resonates, a surge of healing light envelops her.";
+        } else if (narration === 2) {
+          narration =
+            "With devout grace, the priestess channels divine energy, mending her wounds.";
+        } else if (narration === 3) {
+          narration =
+            "The air shimmers with a soothing aura, knitting flesh and spirit together.";
+        } else if (narration === 4) {
+          narration =
+            "In a sacred incantation, the priestess bestows renewed vitality upon herself.";
+        } else if (narration === 5) {
+          narration =
+            "The priestess' Greater Prayer flows like a river of life, revitalizing all in its path.";
+        } else if (narration === 6) {
+          narration =
+            "With unwavering faith, the priestess mends the wounded, banishing pain and despair.";
+        } else if (narration === 7) {
+          narration =
+            "A gentle radiance emanates from the priestess, filling the area with healing energy.";
+        } else if (narration === 8) {
+          narration =
+            "As the priestess prays fervently, wounds close and strength is restored to the weary.";
+        } else if (narration === 9) {
+          narration =
+            "The echoes of the priestess' prayer reverberate, bringing solace and renewal to all.";
+        } else {
+          narration =
+            "Through her sacred incantation, the priestess invokes a torrent of healing energies.";
+        }
+  
+        newEntry.textContent = `Your Greater Prayer restores ${dataOne} health!`;
+        break;
+  
+      // Priestess Passive
+      case LOG_BURNING_DEVOTION:
+        newEntry.textContent = `Your Burning Devotion guides your attack. You deal ${dataOne} damage to the ${monsterName}!`;
+        break;
+  }
+
+    log.insertBefore(newEntry, log.firstChild);
+    const newEntryClone = newEntry.cloneNode(true);
+    logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+
+    if (narrate === 'YES') {
+      writeToNarrative(newEntry.textContent);
+    }
+
+    checkLogSize();
+}
+
+  // ==============================================================
+  //                         EVENTS
+  // ==============================================================
+
+function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
+  // dataOne = 
+  // dataTwo =
+
+  let newEntry = document.createElement("li");
+  let narration = Math.round(Math.random() * 9);
+  let monsterName = currentRoom.contents.monsters[0].name;
+  let event = currentRoom.contents.events;
+
+  switch(logType) {
+
     // ===============================
-    //       Enter a New Room
+    //     SAFE ROOM EVENT LOGS
     // ===============================
 
-    // case LOG_EVENT_NEW_ROOM:
-
-    // ===============================
-    //           Paladin
-    // ===============================
-
-    case LOG_EVENT_SMITE:
-      if (narration === 1) {
-        narration = `"In the name of the divine, your foe shall know the burning light!"`;
-      } else if (narration === 2) {
-        narration = `"With righteous fury, the smite of holiness purges all evil."`;
-      } else if (narration === 3) {
-        narration = `"May the heavens guide your strike, champion of the light!"`;
-      } else if (narration === 4) {
-        narration = `"A blinding radiance erupts as your smite pierces the darkness."`;
-      } else if (narration === 5) {
-        narration = `"The darkness recoils in the face of your holy onslaught."`;
-      } else if (narration === 6) {
-        narration = `"Behold the power of the sacred, as it lays waste to the unholy!"`;
-      } else if (narration === 7) {
-        narration = `"With each swing, the smite of righteousness carves a path of purity."`;
-      } else if (narration === 8) {
-        narration = `"The echoes of angels resonate as your smite strikes true."`;
-      } else if (narration === 9) {
-        narration = `"The unholy tremble as the light of righteousness descends upon them."`;
-      } else {
-        narration = `"Through the strength of faith, your smite brings judgment upon the wicked."`;
-      }
-
-      newEntry.textContent = `Your Holy Smite deals ${value} damage to the ${name}!`;
-      break;
-
-    case LOG_EVENT_SMITE_CRITICAL:
-      if (narration === 1) {
-        narration =
-          "In the blazing name of the sun, I smite you, let its fire cleanse your soul!";
-      } else if (narration === 2) {
-        narration =
-          "By the searing light of the sun, I reduce your wickedness to cinders!";
-      } else if (narration === 3) {
-        narration = "The sun's wrath is an inferno, and you shall be consumed!";
-      } else if (narration === 4) {
-        narration =
-          "May the sun's fire consume your wickedness, leaving only ashes!";
-      } else if (narration === 5) {
-        narration = "By the sun's radiant might, I sear your malevolence!";
-      } else if (narration === 6) {
-        narration =
-          "Feel the scorching embrace of the sun's fury, wretched foe!";
-      } else if (narration === 7) {
-        narration =
-          "In the sun's brilliant embrace, I strike you down, leaving only embers!";
-      } else if (narration === 8) {
-        narration =
-          "By the fiery embrace of the sun, I brand you with holy fury!";
-      } else if (narration === 9) {
-        narration =
-          "In the name of the sun, I command you to burn in righteous fire!";
-      } else {
-        narration =
-          "From the sun's heart, a torrent of flames to consume your wickedness!";
-      }
-      newEntry.textContent = `Your Holy Smite deals ${value} damage to the ${name}!`;
-      break;
-
-    case LOG_EVENT_RADIANT_AURA:
-      newEntry.textContent = `Your Radiant Aura ${value} the ${name}!`; // value = 'destroys'
-      break;
-
-    // ===============================
-    //           Rogue
-    // ===============================
-
-    case LOG_EVENT_SHADOW_STRIKE:
-      if (narration === 1) {
-        narration = `“Embrace the shadows, for they shall be your silent accomplice.”`;
-      } else if (narration === 2) {
-        narration = `“From the darkness I strike, a phantom in the night.”`;
-      } else if (narration === 3) {
-        narration = `“Witness the dance of shadows, and despair.”`;
-      } else if (narration === 4) {
-        narration = `“In shadows we find our strength, in silence we claim our victory.”`;
-      } else if (narration === 5) {
-        narration = `“The night is my ally, and together we shall prevail.”`;
-      } else if (narration === 6) {
-        narration = `“Fade into shadow, emerge in triumph.”`;
-      } else if (narration === 7) {
-        narration = `“They'll never see it coming… until it's too late.”`;
-      } else if (narration === 8) {
-        narration = `“Where there is shadow, there is opportunity.”`;
-      } else if (narration === 9) {
-        narration = `“From the depths of darkness, I arise to strike!”`;
-      } else {
-        narration = `“In the heart of the night, I am the unseen blade.”`;
-      }
-      newEntry.textContent = `Your Shadow Strike deals ${value} damage to the ${name}!`;
-      break;
-
-    case LOG_EVENT_EVASION:
-      newEntry.textContent = `You evade the ${name}'s ${value}!`; // ${value} = attack
-      break;
-
-    // ===============================
-    //        Priestess Events
-    // ===============================
-
-    case LOG_EVENT_GREATER_PRAYER:
-      if (narration === 1) {
-        narration =
-          "As her voice resonates, a surge of healing light envelops her.";
-      } else if (narration === 2) {
-        narration =
-          "With devout grace, the priestess channels divine energy, mending her wounds.";
-      } else if (narration === 3) {
-        narration =
-          "The air shimmers with a soothing aura, knitting flesh and spirit together.";
-      } else if (narration === 4) {
-        narration =
-          "In a sacred incantation, the priestess bestows renewed vitality upon herself.";
-      } else if (narration === 5) {
-        narration =
-          "The priestess' Greater Prayer flows like a river of life, revitalizing all in its path.";
-      } else if (narration === 6) {
-        narration =
-          "With unwavering faith, the priestess mends the wounded, banishing pain and despair.";
-      } else if (narration === 7) {
-        narration =
-          "A gentle radiance emanates from the priestess, filling the area with healing energy.";
-      } else if (narration === 8) {
-        narration =
-          "As the priestess prays fervently, wounds close and strength is restored to the weary.";
-      } else if (narration === 9) {
-        narration =
-          "The echoes of the priestess' prayer reverberate, bringing solace and renewal to all.";
-      } else {
-        narration =
-          "Through her sacred incantation, the priestess invokes a torrent of healing energies.";
-      }
-
-      newEntry.textContent = `${name} Greater Prayer restores ${value} health!`;
-      break;
-
-    case LOG_EVENT_BURNING_DEVOTION:
-      newEntry.textContent = `Your Burning Devotion guides your attack. You deal ${value} damage to the ${name}!`;
-      break;
-
-    // ===============================
-    //        SAFE ROOM EVENT
-    // ===============================
-
-    case LOG_EVENT_SAFE_ROOM:
+    case LOG_SAFE_ROOM:
       newEntry.textContent = `${event.summary}`;
-      console.log("HI");
       narration = newEntry.textContent;
       break;
 
     // ===============================
-    //    TRAP EVENT DESCRIPTIONS
+    //  TRAP EVENT DESCRIPTIONS LOGS
     // ===============================
 
-    case LOG_EVENT_TRAP_DESCRIPTION:
-      newEntry.textContent = `${event.description} How will ${name} overcome this ${value}?`;
+    case LOG_TRAP_DESCRIPTION:
+      newEntry.textContent = `${event.description} How will overcome this danger?`;
       narration = newEntry.textContent;
       break;
 
     // ===============================
-    //        TRAP PASS EVENTS
+    //     TRAP PASS EVENT LOGS
     // ===============================
 
-    case LOG_EVENT_TRAP_PASS:
-      narration = Math.round(Math.random() * 5);
+    case LOG_TRAP_PASS:
+      narration = Math.round(Math.random() * 4);
       if (event === SPIKE_WALLS) {
-        if (value === "STRENGTH") {
+        if (dataOne === "STRENGTH") {
           if (narration === 1) {
             newEntry.textContent = `With a surge of raw power, you strain against the closing walls, muscles bulging. The spikes inch closer, but you hold them back, forcing the mechanism to yield.`;
           } else if (narration === 2) {
@@ -1011,7 +772,7 @@ function writeToLog(eventType, name, value) {
             newEntry.textContent =
               "Gritting your teeth, you summon every ounce of strength within you and forcefully push the encroaching spikes back, leaving a narrow escape route in your wake.";
           }
-        } else if (value === "DEXTERITY") {
+        } else if (dataOne === "DEXTERITY") {
           if (narration === 1) {
             newEntry.textContent = `With swift reflexes, you sidestep the encroaching spikes, narrowly avoiding their deadly embrace.`;
           } else if (narration === 2) {
@@ -1025,7 +786,7 @@ function writeToLog(eventType, name, value) {
           }
         }
       } else if (event === GAS_CHAMBER) {
-        if (value === "STRENGTH") {
+        if (dataOne === "STRENGTH") {
           if (narration === 1) {
             newEntry.textContent = `With a powerful surge of energy, you heave against the sealed door, breaking it open. Gas spews out, but you stand tall, unaffected by its toxic fumes.`;
           } else if (narration === 2) {
@@ -1037,7 +798,7 @@ function writeToLog(eventType, name, value) {
           } else {
             newEntry.textContent = `Gritting your teeth, you unleash a torrent of strength, breaking through the sealed door. The gas billows out, but you stand resolute and untouched.`;
           }
-        } else if (value === "FAITH") {
+        } else if (dataOne === "FAITH") {
           if (narration === 1) {
             newEntry.textContent = `With unwavering belief, you kneel in prayer as the gas chamber fills. Miraculously, a divine light surrounds you, shielding you from harm.`;
           } else if (narration === 2) {
@@ -1051,7 +812,7 @@ function writeToLog(eventType, name, value) {
           }
         }
       } else if (event === SWARM_OF_VERMIN) {
-        if (value === "STRENGTH") {
+        if (dataOne === "STRENGTH") {
           if (narration === 1) {
             newEntry.textContent = `Summoning your immense strength, you roar and slam your fists into the ground, creating a shockwave that scatters the rats in all directions. You stand unharmed, triumphant amidst the chaos.`;
           } else if (narration === 2) {
@@ -1063,7 +824,7 @@ function writeToLog(eventType, name, value) {
           } else {
             newEntry.textContent = `With a mighty display of strength, you create a shockwave that scatters the rats, leaving you unharmed and in control of the situation.`;
           }
-        } else if (value === "FAITH") {
+        } else if (dataOne === "FAITH") {
           if (narration === 1) {
             newEntry.textContent = `Calling upon your unshakeable faith, you close your eyes and speak a prayer. A radiant light emanates from you, forming a protective barrier that sends the rats fleeing in terror. You emerge unscathed, your faith unwavering.`;
           } else if (narration === 2) {
@@ -1077,7 +838,7 @@ function writeToLog(eventType, name, value) {
           }
         }
       } else if (event === SKELETAL_HANDS) {
-        if (value === "STRENGTH") {
+        if (dataOne === "STRENGTH") {
           if (narration === 1) {
             newEntry.textContent = `You feel the skeletal hands clawing at your ankles, but you summon a burst of strength, kicking free from their grasp. With a powerful lunge, you escape their reach unscathed.`;
           } else if (narration === 2) {
@@ -1089,7 +850,7 @@ function writeToLog(eventType, name, value) {
           } else {
             newEntry.textContent = `Summoning every ounce of your formidable strength, you free yourself from the skeletal hands' grasp, leaving them empty-handed and frustrated.`;
           }
-        } else if (value === "DEXTERITY") {
+        } else if (dataOne === "DEXTERITY") {
           if (narration === 1) {
             newEntry.textContent = `With lightning-quick reflexes, you twist and turn, slipping free from the skeletal hands' attempts to grab you. You emerge unscathed, leaving them grasping at air.`;
           } else if (narration === 2) {
@@ -1103,7 +864,7 @@ function writeToLog(eventType, name, value) {
           }
         }
       } else if (event === SPIKE_PITFALL) {
-        if (value === "DEXTERITY") {
+        if (dataOne === "DEXTERITY") {
           if (narration === 1) {
             newEntry.textContent = `With a graceful leap, you clear the pitfall and land safely on the other side, narrowly avoiding the deadly spikes below.`;
           } else if (narration === 2) {
@@ -1115,7 +876,7 @@ function writeToLog(eventType, name, value) {
           } else {
             newEntry.textContent = `In a display of acrobatic prowess, you effortlessly glide over the pit, leaving the lethal spikes below untouched.`;
           }
-        } else if (value === "FAITH") {
+        } else if (dataOne === "FAITH") {
           if (narration === 1) {
             newEntry.textContent = `With unwavering belief, you step out into the abyss, trusting in a higher power. Miraculously, solid ground meets your feet, sparing you from the spikes below.`;
           } else if (narration === 2) {
@@ -1129,7 +890,7 @@ function writeToLog(eventType, name, value) {
           }
         }
       } else if (event === PENDULUM_BLADES) {
-        if (value === "DEXTERITY") {
+        if (dataOne === "DEXTERITY") {
           if (narration === 1) {
             newEntry.textContent = `With lightning-fast reflexes, you effortlessly navigate through the pendulum blades, narrowly avoiding their deadly arc.`;
           } else if (narration === 2) {
@@ -1141,7 +902,7 @@ function writeToLog(eventType, name, value) {
           } else {
             newEntry.textContent = `In a display of acrobatic prowess, you deftly weave through the swinging pendulum blades, emerging unharmed on the other side.`;
           }
-        } else if (value === "FAITH") {
+        } else if (dataOne === "FAITH") {
           if (narration === 1) {
             newEntry.textContent = `With unwavering faith, you close your eyes and step forward, trusting in a higher power to guide you safely through the pendulum blades.`;
           } else if (narration === 2) {
@@ -1155,7 +916,7 @@ function writeToLog(eventType, name, value) {
           }
         }
       } else if (event === SPIDER_WEB) {
-        if (value === "STRENGTH") {
+        if (dataOne === "STRENGTH") {
           if (narration === 1) {
             newEntry.textContent = `Summoning an incredible surge of raw power, you tear through the sticky webbing with sheer brute force. The strands snap and break, setting you free.`;
           } else if (narration === 2) {
@@ -1167,7 +928,7 @@ function writeToLog(eventType, name, value) {
           } else {
             newEntry.textContent = `Gritting your teeth, you summon a tremendous display of strength, tearing through the webbing like it's paper. The spider's trap is no match for your might.`;
           }
-        } else if (value === "FAITH") {
+        } else if (dataOne === "FAITH") {
           if (narration === 1) {
             newEntry.textContent = `With unwavering faith, you call upon divine power to guide you. A brilliant light surrounds you, dissolving the webbing and setting you free.`;
           } else if (narration === 2) {
@@ -1188,188 +949,188 @@ function writeToLog(eventType, name, value) {
     //        TRAP FAIL EVENTS
     // ===============================
 
-    case LOG_EVENT_TRAP_FAIL:
+    case LOG_TRAP_FAIL:
       narration = Math.floor(Math.random() * 6);
       if (event === SPIKE_WALLS) {
-        if (name === "STRENGTH") {
+        if (dataOneOne === "STRENGTH") {
           if (narration === 1) {
-            newEntry.textContent = `Despite your best efforts, the spike walls continue to close in, and you are unable to summon the strength needed to push them back. The trap inflicts its painful toll upon you. You take ${value} damage.`;
+            newEntry.textContent = `Despite your best efforts, the spike walls continue to close in, and you are unable to summon the strength needed to push them back. The trap inflicts its painful toll upon you. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `The walls of spikes continue their inexorable advance, and despite your determination, you are unable to halt their progress. The trap inflicts a painful, pinching injury. You take ${value} damage.`;
+            newEntry.textContent = `The walls of spikes continue their inexorable advance, and despite your determination, you are unable to halt their progress. The trap inflicts a painful, pinching injury. You take ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `The spikes close in, finding their mark, piercing through your defenses. Pain flares through your body." You take ${value} damage.`;
+            newEntry.textContent = `The spikes close in, finding their mark, piercing through your defenses. Pain flares through your body." You take ${dataTwo} damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `Despite your efforts, the spikes find their mark, leaving you wounded and breathless." You take ${value} damage.`;
+            newEntry.textContent = `Despite your efforts, the spikes find their mark, leaving you wounded and breathless." You take ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `The relentless spikes break through, leaving you with deep, painful wounds." You take ${value} damage`;
+            newEntry.textContent = `The relentless spikes break through, leaving you with deep, painful wounds." You take ${dataTwo} damage`;
           }
-        } else if (name === "DEXTERITY") {
+        } else if (dataOne === "DEXTERITY") {
           if (narration === 1) {
-            newEntry.textContent = `Despite your agile attempts, the spikes find their mark, leaving you wounded and breathless.” You take ${value} damage.`;
+            newEntry.textContent = `Despite your agile attempts, the spikes find their mark, leaving you wounded and breathless.” You take ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `You navigate the narrowing space with impressive agility, but the spikes outmatch even your lightning-fast reflexes. They strike, leaving you wounded. You take ${value} damage.`;
+            newEntry.textContent = `You navigate the narrowing space with impressive agility, but the spikes outmatch even your lightning-fast reflexes. They strike, leaving you wounded. You take ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You come agonizingly close to evading the spikes, but they catch you at the last moment, leaving you with a series of painful scratches. You take ${value} damage.`;
+            newEntry.textContent = `You come agonizingly close to evading the spikes, but they catch you at the last moment, leaving you with a series of painful scratches. You take ${dataTwo} damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `You execute a series of deft maneuvers, but the spikes catch you on the edge of your escape. They graze you, leaving shallow wounds in their wake. You take ${value} damage.`;
+            newEntry.textContent = `You execute a series of deft maneuvers, but the spikes catch you on the edge of your escape. They graze you, leaving shallow wounds in their wake. You take ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `Your movements are precise and calculated, but the spikes prove too swift. They strike, leaving you with painful wounds. You take ${value} damage`;
+            newEntry.textContent = `Your movements are precise and calculated, but the spikes prove too swift. They strike, leaving you with painful wounds. You take ${dataTwo} damage`;
           }
         }
       } else if (event === SPIDER_WEB) {
-        if (name === "STRENGTH") {
+        if (dataOne === "STRENGTH") {
           if (narration === 1) {
-            newEntry.textContent = `You strain against the sticky silk, managing to free yourself from the spider's web, but not without difficulty. ${value}`;
+            newEntry.textContent = `You strain against the sticky silk, managing to free yourself from the spider's web, but not without difficulty. ${dataTwo}`;
           } else if (narration === 2) {
-            newEntry.textContent = `With a mighty effort, you tear yourself free from the spider's web, but not before it has inflicted painful abrasions. ${value}`;
+            newEntry.textContent = `With a mighty effort, you tear yourself free from the spider's web, but not before it has inflicted painful abrasions. ${dataTwo}`;
           } else if (narration === 3) {
-            newEntry.textContent = `You summon your strength, breaking free from the spider's web, but not without consequence. The struggle leaves you with painful welts. ${value}`;
+            newEntry.textContent = `You summon your strength, breaking free from the spider's web, but not without consequence. The struggle leaves you with painful welts. ${dataTwo}`;
           } else if (narration === 4) {
-            newEntry.textContent = `After a fierce struggle, you manage to break free from the spider's web, but not without paying a price. ${value}`;
+            newEntry.textContent = `After a fierce struggle, you manage to break free from the spider's web, but not without paying a price. ${dataTwo}`;
           } else {
-            newEntry.textContent = `With a final surge of strength, you tear yourself free from the spider's web, but the effort takes its toll. ${value}`;
+            newEntry.textContent = `With a final surge of strength, you tear yourself free from the spider's web, but the effort takes its toll. ${dataTwo}`;
           }
-        } else if (name === "FAITH") {
+        } else if (dataOne === "FAITH") {
           if (narration === 1) {
-            newEntry.textContent = `You call upon your faith, finding the inner strength to break free from the spider's web. However, the ordeal leaves you drained and wounded. ${value}`;
+            newEntry.textContent = `You call upon your faith, finding the inner strength to break free from the spider's web. However, the ordeal leaves you drained and wounded. ${dataTwo}`;
           } else if (narration === 2) {
-            newEntry.textContent = `With a prayer on your lips, you manage to tear yourself free from the spider's web, but not without suffering. ${value}`;
+            newEntry.textContent = `With a prayer on your lips, you manage to tear yourself free from the spider's web, but not without suffering. ${dataTwo}`;
           } else if (narration === 3) {
-            newEntry.textContent = `You draw upon your faith, summoning the resolve to break free from the spider's web. The effort leaves you with painful welts. ${value}`;
+            newEntry.textContent = `You draw upon your faith, summoning the resolve to break free from the spider's web. The effort leaves you with painful welts. ${dataTwo}`;
           } else if (narration === 4) {
-            newEntry.textContent = `Guided by your faith, you break free from the spider's web, but not without paying a price. ${value}`;
+            newEntry.textContent = `Guided by your faith, you break free from the spider's web, but not without paying a price. ${dataTwo}`;
           } else {
-            newEntry.textContent = `In your moment of need, your faith empowers you to tear yourself free from the spider's web. The effort, however, takes its toll. ${value}`;
+            newEntry.textContent = `In your moment of need, your faith empowers you to tear yourself free from the spider's web. The effort, however, takes its toll. ${dataTwo}`;
           }
         }
       } else if (event === SWARM_OF_VERMIN) {
-        if (name === "STRENGTH") {
+        if (dataOne === "STRENGTH") {
           if (narration === 1) {
-            newEntry.textContent = `You summon all your strength to fight off the relentless tide of rats, but they overwhelm you, leaving you battered and bitten. You take ${value} damage.`;
+            newEntry.textContent = `You summon all your strength to fight off the relentless tide of rats, but they overwhelm you, leaving you battered and bitten. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `You put up a valiant effort, using your strength to fend off the onslaught of rats. However, their sheer numbers prove too much. They manage to sink their teeth into you, causing ${value} damage.`;
+            newEntry.textContent = `You put up a valiant effort, using your strength to fend off the onslaught of rats. However, their sheer numbers prove too much. They manage to sink their teeth into you, causing ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You push back against the sea of rats with all your might, but they manage to break through your defenses. Their sharp bites inflict ${value} damage.`;
+            newEntry.textContent = `You push back against the sea of rats with all your might, but they manage to break through your defenses. Their sharp bites inflict ${dataTwo} damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `You try to use your strength to create some breathing room, but the rats are unrelenting. They swarm over you, leaving you with painful bites and ${value} damage.`;
+            newEntry.textContent = `You try to use your strength to create some breathing room, but the rats are unrelenting. They swarm over you, leaving you with painful bites and ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `Despite your best efforts, the rats swarm over you, sinking their teeth in. You take ${value} damage.`;
+            newEntry.textContent = `Despite your best efforts, the rats swarm over you, sinking their teeth in. You take ${dataTwo} damage.`;
           }
-        } else if (name === "FAITH") {
+        } else if (dataOne === "FAITH") {
           if (narration === 1) {
-            newEntry.textContent = `You call upon your faith for protection, but the rats manage to find their way through. They bite and scratch, causing ${value} damage.`;
+            newEntry.textContent = `You call upon your faith for protection, but the rats manage to find their way through. They bite and scratch, causing ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `With unwavering faith, you try to repel the rats, but they prove too numerous. They manage to get to you, causing ${value} damage.`;
+            newEntry.textContent = `With unwavering faith, you try to repel the rats, but they prove too numerous. They manage to get to you, causing ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You pray for divine intervention, but the rats persist. They bite and scratch, inflicting ${value} damage.`;
+            newEntry.textContent = `You pray for divine intervention, but the rats persist. They bite and scratch, inflicting ${dataTwo} damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `You trust in your faith to protect you, but the rats find their way through. Their bites and scratches leave you with ${value} damage.`;
+            newEntry.textContent = `You trust in your faith to protect you, but the rats find their way through. Their bites and scratches leave you with ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `Despite your faith, the rats manage to get to you. Their bites and scratches result in ${value} damage.`;
+            newEntry.textContent = `Despite your faith, the rats manage to get to you. Their bites and scratches result in ${dataTwo} damage.`;
           }
         }
       } else if (event === SKELETAL_HANDS) {
-        if (name === "STRENGTH") {
+        if (dataOne === "STRENGTH") {
           if (narration === 1) {
-            newEntry.textContent = `You summon all your strength and manage to break free from the skeletal hands' grasp, but not before they tighten their grip. You take ${value} damage.`;
+            newEntry.textContent = `You summon all your strength and manage to break free from the skeletal hands' grasp, but not before they tighten their grip. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `With a powerful surge of strength, you force the skeletal hands away, but not without suffering some damage. You take ${value} damage.`;
+            newEntry.textContent = `With a powerful surge of strength, you force the skeletal hands away, but not without suffering some damage. You take ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You strain against the skeletal hands, eventually breaking free, but not without paying the price. You take ${value} damage.`;
+            newEntry.textContent = `You strain against the skeletal hands, eventually breaking free, but not without paying the price. You take ${dataTwo} damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `Your muscles bulge as you wrench yourself free from the skeletal hands' grasp, but not without a cost. You take ${value} damage.`;
+            newEntry.textContent = `Your muscles bulge as you wrench yourself free from the skeletal hands' grasp, but not without a cost. You take ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `With a mighty effort, you free yourself from the skeletal hands, though not without suffering some damage. You take ${value} damage.`;
+            newEntry.textContent = `With a mighty effort, you free yourself from the skeletal hands, though not without suffering some damage. You take ${dataTwo} damage.`;
           }
-        } else if (name === "DEXTERITY") {
+        } else if (dataOne === "DEXTERITY") {
           if (narration === 1) {
-            newEntry.textContent = `You twist and contort your body with remarkable dexterity, slipping free from the skeletal hands' grasp. However, they manage to graze you. You take ${value} damage.`;
+            newEntry.textContent = `You twist and contort your body with remarkable dexterity, slipping free from the skeletal hands' grasp. However, they manage to graze you. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `With astonishing agility, you wriggle out of the skeletal hands' clutches, though not without sustaining some damage. You take ${value} damage.`;
+            newEntry.textContent = `With astonishing agility, you wriggle out of the skeletal hands' clutches, though not without sustaining some damage. You take ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You move with incredible precision, evading the skeletal hands' grasp. They scrape against you, causing damage. You take ${value} damage.`;
+            newEntry.textContent = `You move with incredible precision, evading the skeletal hands' grasp. They scrape against you, causing damage. You take ${dataTwo} damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `Your swift movements allow you to slip free from the skeletal hands' clutches, but not without a slight cost. You take ${value} damage.`;
+            newEntry.textContent = `Your swift movements allow you to slip free from the skeletal hands' clutches, but not without a slight cost. You take ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `With a display of remarkable dexterity, you manage to free yourself from the skeletal hands, though not without suffering some damage. You take ${value} damage.`;
+            newEntry.textContent = `With a display of remarkable dexterity, you manage to free yourself from the skeletal hands, though not without suffering some damage. You take ${dataTwo} damage.`;
           }
         }
       } else if (event === SPIKE_PITFALL) {
-        if (name === "DEXTERITY") {
+        if (dataOne === "DEXTERITY") {
           if (narration === 1) {
-            newEntry.textContent = `You react swiftly, attempting to evade the spikes below. However, they still manage to graze you, leaving you with painful wounds. You take ${value} damage.`;
+            newEntry.textContent = `You react swiftly, attempting to evade the spikes below. However, they still manage to graze you, leaving you with painful wounds. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `You muster your agility and make a desperate attempt to avoid the spikes. Despite your efforts, you still suffer wounds. You take ${value} damage.`;
+            newEntry.textContent = `You muster your agility and make a desperate attempt to avoid the spikes. Despite your efforts, you still suffer wounds. You take ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You execute a series of nimble movements, narrowly escaping the worst of the spikes' wrath. Unfortunately, they still find their mark. You take ${value} damage.`;
+            newEntry.textContent = `You execute a series of nimble movements, narrowly escaping the worst of the spikes' wrath. Unfortunately, they still find their mark. You take ${dataTwo} damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `With impressive dexterity, you manage to evade some of the spikes. However, a few still catch you, leaving you wounded. You take ${value} damage.`;
+            newEntry.textContent = `With impressive dexterity, you manage to evade some of the spikes. However, a few still catch you, leaving you wounded. You take ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `Your agile instincts kick in, allowing you to avoid the worst of the spikes. Nonetheless, you're not entirely unscathed. You take ${value} damage.`;
+            newEntry.textContent = `Your agile instincts kick in, allowing you to avoid the worst of the spikes. Nonetheless, you're not entirely unscathed. You take ${dataTwo} damage.`;
           }
-        } else if (name === "FAITH") {
+        } else if (dataOne === "FAITH") {
           if (narration === 1) {
-            newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you to safety. While you manage to avoid the worst of the spikes, some still find their mark. You take ${value} damage.`;
+            newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you to safety. While you manage to avoid the worst of the spikes, some still find their mark. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `With unwavering faith, you believe you can escape unscathed. However, the spikes still leave their mark. You take ${value} damage.`;
+            newEntry.textContent = `With unwavering faith, you believe you can escape unscathed. However, the spikes still leave their mark. You take ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You place your trust in your faith and make a leap of faith, hoping for the best. While you avoid the worst of the spikes, you're not entirely unharmed. You take ${value} damage.`;
+            newEntry.textContent = `You place your trust in your faith and make a leap of faith, hoping for the best. While you avoid the worst of the spikes, you're not entirely unharmed. You take ${dataTwo} damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `With a prayer on your lips, you take a leap of faith, believing in a miraculous escape. Some spikes still graze you, leaving you wounded. You take ${value} damage.`;
+            newEntry.textContent = `With a prayer on your lips, you take a leap of faith, believing in a miraculous escape. Some spikes still graze you, leaving you wounded. You take ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `Your unshakable faith carries you through, allowing you to avoid the worst of the spikes. However, you're not entirely unscathed. You take ${value} damage.`;
+            newEntry.textContent = `Your unshakable faith carries you through, allowing you to avoid the worst of the spikes. However, you're not entirely unscathed. You take ${dataTwo} damage.`;
           }
         }
       } else if (event === PENDULUM_BLADES) {
-        if (name === "DEXTERITY") {
+        if (dataOne === "DEXTERITY") {
           if (narration === 1) {
-            newEntry.textContent = `You gracefully maneuver through the swinging blades, but one catches you off guard, leaving you with a deep gash. You take ${value} damage.`;
+            newEntry.textContent = `You gracefully maneuver through the swinging blades, but one catches you off guard, leaving you with a deep gash. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `Your agile movements serve you well, but a misstep leaves you vulnerable to a glancing blow. You take ${value} damage.`;
+            newEntry.textContent = `Your agile movements serve you well, but a misstep leaves you vulnerable to a glancing blow. You take ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You expertly time your movements, but a sudden change in the blades' pattern catches you off balance. You take ${value} damage.`;
+            newEntry.textContent = `You expertly time your movements, but a sudden change in the blades' pattern catches you off balance. You take ${dataTwo} damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `Your dexterity allows you to navigate through the swinging blades with finesse, but a momentary lapse in focus results in a shallow cut. You take ${value} damage.`;
+            newEntry.textContent = `Your dexterity allows you to navigate through the swinging blades with finesse, but a momentary lapse in focus results in a shallow cut. You take ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `You skillfully evade most of the swinging blades, but one scrapes against your side, leaving you with a painful wound. You take ${value} damage.`;
+            newEntry.textContent = `You skillfully evade most of the swinging blades, but one scrapes against your side, leaving you with a painful wound. You take ${dataTwo} damage.`;
           }
-        } else if (name === "FAITH") {
+        } else if (dataOne === "FAITH") {
           if (narration === 1) {
-            newEntry.textContent = `With unwavering faith, you trust in a higher power to guide you through the perilous blades. However, a moment of doubt leads to a glancing blow. You take ${value} damage.`;
+            newEntry.textContent = `With unwavering faith, you trust in a higher power to guide you through the perilous blades. However, a moment of doubt leads to a glancing blow. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `Your faith shields you from the worst of the swinging blades, but a brief lapse in concentration leaves you vulnerable. You take ${value} damage.`;
+            newEntry.textContent = `Your faith shields you from the worst of the swinging blades, but a brief lapse in concentration leaves you vulnerable. You take ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You put your trust in divine protection, but a sudden change in the blades' pattern catches you off guard. You take ${value} damage.`;
+            newEntry.textContent = `You put your trust in divine protection, but a sudden change in the blades' pattern catches you off guard. You take ${dataTwo} damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `Your unwavering faith guides you through the trap, but a momentary lapse in focus results in a shallow cut. You take ${value} damage.`;
+            newEntry.textContent = `Your unwavering faith guides you through the trap, but a momentary lapse in focus results in a shallow cut. You take ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `With steadfast faith, you navigate through the swinging blades, but one scrapes against your side, leaving you with a painful wound. You take ${value} damage.`;
+            newEntry.textContent = `With steadfast faith, you navigate through the swinging blades, but one scrapes against your side, leaving you with a painful wound. You take ${dataTwo} damage.`;
           }
         }
       } else if (event === GAS_CHAMBER) {
-        if (name === "STRENGTH") {
+        if (dataOne === "STRENGTH") {
           if (narration === 0) {
-            newEntry.textContent = `You muster all your strength and push against the heavy door, but it only budges slightly. The poison smoke seeps in, making you cough and choke. You manage to escape, but you take ${value} damage.`;
+            newEntry.textContent = `You muster all your strength and push against the heavy door, but it only budges slightly. The poison smoke seeps in, making you cough and choke. You manage to escape, but you take ${dataTwo} damage.`;
           } else if (narration === 1) {
-            newEntry.textContent = `You strain every muscle, but the door remains stubbornly shut. The toxic fumes fill the chamber, leaving you gasping for air. With one final burst of effort, you break free, but you take ${value} damage.`;
+            newEntry.textContent = `You strain every muscle, but the door remains stubbornly shut. The toxic fumes fill the chamber, leaving you gasping for air. With one final burst of effort, you break free, but you take ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `You put all your might into forcing the door open, but it barely moves. The poison smoke clouds your vision, causing you to stumble. You eventually break free, but you take ${value} damage.`;
+            newEntry.textContent = `You put all your might into forcing the door open, but it barely moves. The poison smoke clouds your vision, causing you to stumble. You eventually break free, but you take ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `With a tremendous effort, you manage to make some progress against the door. The room fills with noxious fumes, leaving you disoriented. Finally, you burst through, but you take ${value} damage.`;
+            newEntry.textContent = `With a tremendous effort, you manage to make some progress against the door. The room fills with noxious fumes, leaving you disoriented. Finally, you burst through, but you take ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `You throw your weight against the door, but it holds fast. The poisonous gas envelops you, making it hard to breathe. With one last, desperate push, you break free, but you take ${value} damage.`;
+            newEntry.textContent = `You throw your weight against the door, but it holds fast. The poisonous gas envelops you, making it hard to breathe. With one last, desperate push, you break free, but you take ${dataTwo} damage.`;
           }
-        } else if (name === "FAITH") {
+        } else if (dataOne === "FAITH") {
           if (narration === 0) {
-            newEntry.textContent = `You close your eyes, focus your faith, and pray for strength. With a surge of determination, you push against the door, but it only gives way slightly. The poison smoke makes you dizzy, and you escape, but not without taking ${value} damage.`;
+            newEntry.textContent = `You close your eyes, focus your faith, and pray for strength. With a surge of determination, you push against the door, but it only gives way slightly. The poison smoke makes you dizzy, and you escape, but not without taking ${dataTwo} damage.`;
           } else if (narration === 1) {
-            newEntry.textContent = `You channel your faith and call upon divine strength. The door resists, but you feel a glimmer of progress. The toxic fumes cloud your senses, and with a final burst of resolve, you break free, though not without taking ${value} damage.`;
+            newEntry.textContent = `You channel your faith and call upon divine strength. The door resists, but you feel a glimmer of progress. The toxic fumes cloud your senses, and with a final burst of resolve, you break free, though not without taking ${dataTwo} damage.`;
           } else if (narration === 2) {
-            newEntry.textContent = `You close your eyes, place your trust in your faith, and push with all your might. The door moves only slightly, but you feel a surge of divine energy. The poison smoke disorients you, but you manage to escape, albeit with ${value} damage.`;
+            newEntry.textContent = `You close your eyes, place your trust in your faith, and push with all your might. The door moves only slightly, but you feel a surge of divine energy. The poison smoke disorients you, but you manage to escape, albeit with ${dataTwo} damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `With unwavering faith, you summon inner strength and push against the door. It gives way just a bit, but you feel a divine presence guiding you. The room fills with poisonous fumes, leaving you struggling. Eventually, you break free, though you take ${value} damage.`;
+            newEntry.textContent = `With unwavering faith, you summon inner strength and push against the door. It gives way just a bit, but you feel a divine presence guiding you. The room fills with poisonous fumes, leaving you struggling. Eventually, you break free, though you take ${dataTwo} damage.`;
           } else {
-            newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you. The door resists, but you feel a divine force supporting you. The noxious fumes make it hard to think, but with a final surge of faith, you break free, though not without taking ${value} damage.`;
+            newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you. The door resists, but you feel a divine force supporting you. The noxious fumes make it hard to think, but with a final surge of faith, you break free, though not without taking ${dataTwo} damage.`;
           }
         }
       }
@@ -1380,36 +1141,36 @@ function writeToLog(eventType, name, value) {
     //          NPC Events
     // ===============================
 
-    case LOG_EVENT_NPC_DESCRIPTION:
+    case LOG_NPC_DESCRIPTION:
       newEntry.textContent = `${event.description}`;
       narration = newEntry.textContent;
 
       break;
 
-    case LOG_EVENT_NPC_OPTION_ONE:
+    case LOG_NPC_OPTION_ONE:
       if (event === GRAVEROBBER_EARVER) {
         newEntry.textContent = `
-        The air grows thick with malevolence as the stone door groans open. In that moment, a malevolent spirit surges into ${name}, claiming him as its vessel. His eyes blaze with unholy fire, and the spade he wields becomes a weapon of doom, swinging towards ${value} with deadly intent. `;
-      } else if (event === GRAVEROBBER_EARVER_EVENT_TWO) {
-        newEntry.textContent = `You decide to assist Graverobber ${name} in his unholy quest to open the sarcophagus. The lid creaks open, but as the contents are revealed, a deafening roar echoes through the tomb. A monstrous abomination, the dreaded Bone Titan, awakens in a fury of bones, and it mercilessly strikes down Graverobber Earver before turning its baleful gaze upon ${value}.`;
-      } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
-        newEntry.textContent = `"As Graverobber Earver's finally succeed in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their vengeful onslaught, ${name} meets his untimely demise, leaving ${value} to face the wrath of these risen guardians."`;
+        The air grows thick with malevolence as the stone door groans open. In that moment, a malevolent spirit surges into Earver, claiming him as its vessel. His eyes blaze with unholy fire, and the spade he wields becomes a weapon of doom, swinging towards you with deadly intent. `;
+      } else if (event === GRAVEROBBER_EARVER_TWO) {
+        newEntry.textContent = `You decide to assist Graverobber Earver in his unholy quest to open the sarcophagus. The lid creaks open, but as the contents are revealed, a deafening roar echoes through the tomb. A monstrous abomination, the dreaded Bone Titan, awakens in a fury of giant bones, and it mercilessly strikes down Graverobber Earver before turning its baleful gaze upon you.`;
+      } else if (event === GRAVEROBBER_EARVER_THREE) {
+        newEntry.textContent = `"As Graverobber Earver's finally succeed in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their vengeful onslaught, he meets his untimely demise, leaving you to face the wrath of these risen guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Released from captivity, the scoundrel breathes thanks, but a looming arachnid descends, hungry eyes fixed on its newfound prey.`;
-      } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
+      } else if (event === IVAN_THE_SCOUNDREL_TWO) {
         newEntry.textContent = `As the key turns, a malevolent hiss escapes as deadly poison gas clouds your senses. Weakening, you realize the scoundrel's gratitude was a ruse. Ivan and his accomplices emerge, encircling you like prey in ambush. Peril looms in their treacherous laughter."`;
       } else if (event === SCHOLAR_HENDRA) {
-        newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. ${name} turn towards ${value}, their hollow sockets fixed on your bold presence.`;
+        newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. They turn towards you, their hollow sockets fixed on your bold presence.`;
       } else if  (event === FORSAKEN_COMMANDER) {
-        if (name === 'ONE') {
+        if (dataOne === 'ONE') {
           newEntry.textContent = `Valiant adventurer, my legion haunts these depths, bound by an unholy curse. Free them from the chains of undeath. Venture forth, quell the skeletal uprising, and usher my warriors into the eternal rest they deserve.`;
-        } else if (name === 'TWO') {
+        } else if (dataOne === 'TWO') {
           newEntry.textContent = `The ethereal voice echoes, but its spectral words elude your comprehension. The spirit's frustration intensifies, and anger darkens its gaze. Enraged, it lashes out with a vengeful force.`;
         }
       } else if (event === GRERVIL_THE_BODILESS) {
-        if (name === 'ONE') {
+        if (dataOne === 'ONE') {
           newEntry.textContent = `You speak with Grervil`;
-        } else if (name === 'TWO') {
+        } else if (dataOne === 'TWO') {
           newEntry.textContent = `You attempt to speak, but can't understand`;
         }
       }
@@ -1417,19 +1178,19 @@ function writeToLog(eventType, name, value) {
       narration = newEntry.textContent;
       break;
 
-    case LOG_EVENT_NPC_OPTION_TWO:
+    case LOG_NPC_OPTION_TWO:
       if (event === GRAVEROBBER_EARVER) {
-        newEntry.textContent = `Declining Graverobber ${name}'s offer, ${value} descend further into the catacomb. His desperate struggles to breach the ancient stone door reverberate through the passageway.`;
-      } else if (event === GRAVEROBBER_EARVER_EVENT_TWO) {
-        newEntry.textContent = `Refusing Graverobber ${name}'s proposition, ${value} venture deeper into the catacomb. The echoes of Earver's relentless attempts to pry open the ancient stone sarcophagus resonate through the passageway.`;
-      } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
-        newEntry.textContent = `As ${value} stand resolute in your refusal to aid Graverobber ${name}, the crypt door remains sealed, shunning the desecration of the king's final resting place. In the solemn silence that follows, a radiant light emanates from the heart of the chamber. The spectral king, recognizing your honor, presents you with his ethereal crown, a symbol of his gratitude and a powerful artifact.`;
+        newEntry.textContent = `Declining Graverobber Earver's offer, you descend further into the catacomb. His desperate struggles to breach the ancient stone door reverberate through the passageway.`;
+      } else if (event === GRAVEROBBER_EARVER_TWO) {
+        newEntry.textContent = `Refusing Graverobber Earver's proposition, you venture deeper into the catacomb. The echoes of Earver's relentless attempts to pry open the ancient stone sarcophagus resonate through the passageway.`;
+      } else if (event === GRAVEROBBER_EARVER_THREE) {
+        newEntry.textContent = `As you stand resolute in your refusal to aid GraverobberEarver, the crypt door remains sealed, shunning the desecration of the king's final resting place. In the solemn silence that follows, a radiant light emanates from the heart of the chamber. The spectral king, recognizing your honor, presents you with his ethereal crown, a symbol of his gratitude and a powerful artifact.`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Refusing the scoundrel's plea, he hisses, "You'll rue this day. My revenge will echo through these cursed catacombs." The shadows deepen, foretelling the ominous path ahead.`;
-      } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
+      } else if (event === IVAN_THE_SCOUNDREL_TWO) {
         newEntry.textContent = `Discovering the concealed cache, caution grips you as Ivan's offer of kindness grows suspicious. Suddenly, shadows and an ambush unfolds. With weapons unsheathed, Ivan and his cohorts emerge, revealing your instincts not to trust him were right all along.`;
       } else if (event === SCHOLAR_HENDRA) {
-        newEntry.textContent = `After the skeletons mercilessly strike down ${name}, their hollow gaze fixates on ${value}.`;
+        newEntry.textContent = `After the skeletons mercilessly strike down Hendra, their hollow gaze fixate on you.`;
       } else if (event === FORSAKEN_COMMANDER) {
         newEntry.textContent = `As you disregard the spirit's plea, an ominous chill fills the catacomb. Skeletal apparitions rise with a malevolent purpose. In the darkness, an onslaught ensues, the consequence of denying the restless spirit.`;
       } else if (event === GRERVIL_THE_BODILESS) {
@@ -1443,24 +1204,24 @@ function writeToLog(eventType, name, value) {
     //          Misc Events
     // ===============================
 
-    case LOG_EVENT_MISC_DESCRIPTION:
+    case LOG_MISC_DESCRIPTION:
       newEntry.textContent = `${event.description}`;
       narration = newEntry.textContent;
       break;
 
-    case LOG_EVENT_MISC_OPTION_ONE:
+    case LOG_MISC_OPTION_ONE:
       if (event === LAUGHING_COFFIN_EVENT) {
-        if (name === "ONE") {
+        if (dataOne === "ONE") {
           newEntry.textContent = `Within the Laughing Coffin, the air hums with covert whispers. Abruptly, Ivan the Scoundrel confronts you, eyes ablaze. 'Left me to die, did you?' he sneers, unsheathing his blade. Resentment drips like venom in the tainted atmosphere.`;
-        } else if (name === "TWO") {
+        } else if (dataOne === "TWO") {
           newEntry.textContent = `As you enter the heart of the Laughing Coffin, the air thick with the aroma of treachery, a band of scoundrels welcomes you with sly grins. "New blood, eh?" one chuckles, raising a tankard. "Join the revelry, stranger, and drink to the shadows that bind us all."`;
-        } else if (name === "THREE") {
+        } else if (dataOne === "THREE") {
           newEntry.textContent = `The scoundrels' eyes narrow, skepticism etched across their faces. "Show it then!" demands the leader, tension thickening. Your bluff exposed, the atmosphere ignites with menace. "Seems our new friend needs a harsh lesson," sneers another, drawing a blade.`;
         }
       } else if (event === LOCKED_ROOM) {
-        if (name === "ONE") {
+        if (dataOne === "ONE") {
           newEntry.textContent = `${currentRoom.description}`;
-        } else if (name === "TWO") {
+        } else if (dataOne === "TWO") {
           if (heroChoice === "PALADIN") {
             newEntry.textContent = `"The divine light guides my path through these cryptic depths, revealing the way even in the absence of a key."`;
           } else if (heroChoice === "ROGUE") {
@@ -1476,7 +1237,7 @@ function writeToLog(eventType, name, value) {
       narration = newEntry.textContent;
       break;
 
-    case LOG_EVENT_MISC_OPTION_TWO:
+    case LOG_MISC_OPTION_TWO:
       if (event === LAUGHING_COFFIN_EVENT) {
         newEntry.textContent = `With a Laughing Coffin Coin in hand, the den of rogues turns their eyes upon you. "Got the token, have you?" one grins, only to scowl as you hesitate. "Wasting our time, are you?" another scoffs. "If you ain't here to play, stranger, best you leave before we make you regret it."`;
       } else if (event === LOCKED_ROOM) {
@@ -1487,32 +1248,45 @@ function writeToLog(eventType, name, value) {
 
       narration = newEntry.textContent;
       break;
+  }
 
-    // ===============================
-    //          Room Events
-    // ===============================
-      case LOG_EVENT_ROOM:
-        if (currentRoom === LOST_LEGIONS_VALE) {
-          newEntry.textContent = `An expansive chamber unveils the remnants of a long-forgotten battle. Echoes of ancient conflict stir as skeletal warriors awaken. The air quivers with the chilling resonance of an eternal struggle, and the bones of the fallen rise once more.`;
-        } else if (currentRoom.contents.monsters[0] === GRERVILS_BODY) {
-          newEntry.textContent = `STOP! WAIT!`;
-        }
+  log.insertBefore(newEntry, log.firstChild);
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
-      narration = newEntry.textContent;
-      break;
+  if (narrate) {
+    writeToNarrative(newEntry.textContent);
+  }
 
+  checkLogSize();
+}
+
+// ==============================================================
+//                         ITEMS 
+// ==============================================================
+
+function writeToLogItem(logType, narrate, dataOne, dataTwo) {
+  // dataOne = 
+  // dataTwo =
+  
+  let newEntry = document.createElement("li");
+  let monsterName = currentRoom.contents.monsters[0].name;
+  let narration = Math.round(Math.random() * 9);
+
+  switch (logType) {
+  
     // ===============================
-    //          Item Events
+    //          Item Logs
     // ===============================
 
-    case LOG_EVENT_ITEM:
-      if (name === LAUGHING_COFFIN_COIN) {
+    case LOG_ITEM:
+      if (dataOne === LAUGHING_COFFIN_COIN) {
         newEntry.textContent = `You pay a Laughing Coffin Coin and enter the tavern.`;
-      } else if (name === SKELETON_KEY) {
-        newEntry.textContent = `You use a Skeleton Key to unlock the ${value}`;
-      } else if (name === CACHE_KEY) {
+      } else if (dataOne === SKELETON_KEY) {
+        newEntry.textContent = `You use a Skeleton Key to unlock the ${dataTwo}`;
+      } else if (dataOne === CACHE_KEY) {
         newEntry.textContent = `You use the Cache Key to unlock Ivan's Hidden Cache.`;
-      } else if (name === CURSED_GRIMOIRE) {
+      } else if (dataOne === CURSED_GRIMOIRE) {
         narration = Math.round(Math.random() * 5);
         if (narration === 1) {
           newEntry.textContent = `"You seek release? Foolish mortal. My curse binds your fate. Resurrect me, and only then shall freedom be yours. Resist, and suffer eternal torment."`;
@@ -1535,55 +1309,78 @@ function writeToLog(eventType, name, value) {
         } else {
           newEntry.textContent = `"Each attempt to break free deepens the ephemeral anguish. Resurrect me, and the torment wanes. Resist, and relish in the ephemeral agony of a soul entangled in darkness."`;
         }
-      } else if (name === SOUL_JAR) {
+      } else if (dataOne === SOUL_JAR) {
         newEntry.textContent = `As the abyss claims you, the Soul Jar shatters. Shadows coil around your essence, wrenching you from the void. Resurrected, echoes of ancient souls linger, whispering tales of the realm beyond death.`;
       }
 
       narration = newEntry.textContent;
       break;
-
-    // Fix these logs
-    // case LOG_EVENT_ETHEREAL_CROWN:
-    //   newEntry.textContent = `The ${name} bows gently before ${value} and then vanishes.`;
-    //   narration = newEntry.textContent;
-    //   break;
   }
 
   log.insertBefore(newEntry, log.firstChild);
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
-  if (
-    eventType === LOG_EVENT_SAFE_ROOM ||
-    eventType === LOG_EVENT_TRAP_DESCRIPTION ||
-    eventType === LOG_EVENT_TRAP_PASS ||
-    eventType === LOG_EVENT_TRAP_FAIL ||
-    eventType === LOG_EVENT_NPC_DESCRIPTION ||
-    eventType === LOG_EVENT_NPC_OPTION_ONE ||
-    eventType === LOG_EVENT_NPC_OPTION_TWO ||
-    eventType === LOG_EVENT_MISC_DESCRIPTION ||
-    eventType === LOG_EVENT_MISC_OPTION_ONE ||
-    eventType === LOG_EVENT_MISC_OPTION_TWO ||
-    eventType === LOG_EVENT_PLAYER_CRITICAL ||
-    eventType === LOG_EVENT_SMITE ||
-    eventType === LOG_EVENT_SMITE_CRITICAL ||
-    eventType === LOG_EVENT_SHADOW_STRIKE ||
-    eventType === LOG_EVENT_GREATER_PRAYER ||
-    eventType === LOG_EVENT_POTION ||
-    eventType === LOG_EVENT_FLEE ||
-    eventType === LOG_EVENT_ITEM ||
-    eventType === LOG_EVENT_ROOM
-  ) {
-    newNarration.textContent = narration;
-    narrativeText.insertBefore(newNarration, narrativeText.firstChild);
-    setTimeout(() => {
-      narrativeText.removeChild(narrativeText.lastElementChild);
-    }, 7000);
-    fadeOutAnimation(newNarration, 5000);
-    fadeInAnimation(newNarration);
+  if (narrate) {
+    writeToNarrative(newEntry.textContent);
   }
 
   checkLogSize();
+}
+
+// ==============================================================
+//                         STATUS EFFECTS 
+// ==============================================================
+
+function writeToLogStatusEffect(logType, narrate, dataOne, dataTwo) {
+  // dataOne = 
+  // dataTwo =
+  
+  let newEntry = document.createElement("li");
+  let monsterName = currentRoom.contents.monsters[0].name;
+  let narration = Math.round(Math.random() * 9);
+
+  switch (logType) {
+  
+    // ===============================
+    //       Status Effect Logs
+    // ===============================
+
+  }
+}
+
+    // // ===============================
+    // //          Room Events
+    // // ===============================
+    //   case LOG_ROOM:
+    //     if (currentRoom === LOST_LEGIONS_VALE) {
+    //       newEntry.textContent = `An expansive chamber unveils the remnants of a long-forgotten battle. Echoes of ancient conflict stir as skeletal warriors awaken. The air quivers with the chilling resonance of an eternal struggle, and the bones of the fallen rise once more.`;
+    //     } else if (currentRoom.contents.monsters[0] === GRERVILS_BODY) {
+    //       newEntry.textContent = `STOP! WAIT!`;
+    //     }
+
+    //   narration = newEntry.textContent;
+    //   break;
+
+
+
+// ==============================================================
+//                  LOG & NARRATIVE LOGIC
+// ==============================================================
+
+function writeToNarrative(narration) {
+  console.log(narration)
+  let newNarration = document.createElement("li");
+  newNarration.textContent = narration;
+
+  narrativeText.insertBefore(newNarration, narrativeText.firstChild);
+
+  setTimeout(() => {
+    narrativeText.removeChild(narrativeText.lastElementChild);
+  }, 7000);
+
+  fadeOutAnimation(newNarration, 5000);
+  fadeInAnimation(newNarration);
 }
 
 function fadeInAnimation(element) {
@@ -1605,6 +1402,10 @@ function checkLogSize() {
     logModalList.removeChild(logModalList.lastElementChild);
   }
 }
+
+// ==============================================================
+//                     LOG EVENT LISTENERS
+// ==============================================================
 
 logContainer.addEventListener("click", () => {
   logModal.style.display = "block";

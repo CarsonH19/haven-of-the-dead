@@ -29,47 +29,43 @@ function playerAttackHandler(smite) {
       smite * (playerToMonsterDamage * baseCritModifier)
     );
     showDamage(totalDamage, "PLAYER", "CRIT");
-    writeToLog(
-      LOG_EVENT_SMITE_CRITICAL,
-      currentRoom.contents.monsters[0].name,
+    writeToLogHero(
+      LOG_SMITE_CRITICAL,
+      'YES',
       totalDamage
     );
     // Smite Hit
   } else if (smite > 1) {
     totalDamage = playerToMonsterDamage * smite;
     showDamage(totalDamage, "PLAYER");
-    writeToLog(
-      LOG_EVENT_SMITE,
-      currentRoom.contents.monsters[0].name,
+    writeToLogHero(
+      LOG_SMITE,
+      'YES',
       totalDamage
     );
     // Critical Hit
   } else if (criticalHitChance >= 20) {
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
     showDamage(totalDamage, "PLAYER", "CRIT");
-    writeToLog(
-      LOG_EVENT_PLAYER_CRITICAL,
-      currentRoom.contents.monsters[0].name,
+    writeToLogActions(
+      LOG_PLAYER_CRITICAL,
+      'YES',
       totalDamage
     );
     // Normal Hit
   } else if (playerToMonsterDamage > 0) {
     totalDamage = playerToMonsterDamage;
     showDamage(totalDamage, "PLAYER");
-    writeToLog(
-      LOG_EVENT_PLAYER_ATTACK,
-      currentRoom.contents.monsters[0].name,
+    writeToLogActions(
+      LOG_PLAYER_ATTACK,
+      'NO',
       totalDamage
     );
     // Miss (No Damage)
   } else if (playerToMonsterDamage <= 0) {
     totalDamage = 0;
     showDamage(totalDamage, "PLAYER");
-    writeToLog(
-      LOG_EVENT_PLAYER_MISS,
-      currentRoom.contents.monsters[0].name,
-      "You"
-    );
+    writeToLogActions(LOG_PLAYER_MISS, 'NO');
   }
 
   damageMonster(totalDamage);
@@ -86,9 +82,9 @@ function dealMonsterDamage(damage) {
 
   if (heroChoice === "PRIESTESS" && damageDealt < burningDevotionTracker) {
     damageDealt = burningDevotionTracker;
-    writeToLog(
-      LOG_EVENT_BURNING_DEVOTION,
-      currentRoom.contents.monsters[0].name,
+    writeToLogHero(
+      LOG_BURNING_DEVOTION,
+      'NO',
       damageDealt
     );
   }
@@ -121,27 +117,22 @@ function monsterAttackHandler() {
   // Rogue Passive Ability Checker
   if (heroChoice === "ROGUE" && evasionTracker >= monsterToPlayerDamage) {
     monsterToPlayerDamage = 0;
-    writeToLog(
-      LOG_EVENT_EVASION,
-      currentRoom.contents.monsters[0].name,
-      "attack"
+    writeToLogHero(
+      LOG_EVASION,
+      'NO'
     );
   }
 
   if (monsterToPlayerDamage > 0) {
     damageFlashAnimation();
 
-    writeToLog(
-      LOG_EVENT_MONSTER_ATTACK,
-      currentRoom.contents.monsters[0].name,
+    writeToLogMonster(
+      LOG_MONSTER_ATTACK,
+      'NO',
       monsterToPlayerDamage
     );
   } else if (monsterToPlayerDamage <= 0) {
-    writeToLog(
-      LOG_EVENT_MONSTER_MISS,
-      currentRoom.contents.monsters[0].name,
-      "you"
-    );
+    writeToLogMonster(LOG_MONSTER_MISS, 'NO');
   }
   
   damagePlayer(monsterToPlayerDamage);
@@ -245,33 +236,31 @@ function guardHandler() {
 
   if (damageBlocked > 0) {
     console.log("ONE");
-    writeToLog(
-      LOG_EVENT_GUARD,
-      currentRoom.contents.monsters[0].name,
+    writeToLogActions(
+      LOG_GUARD,
+      'NO',
       damageBlocked + baseDexterity
     );
   } else if (damageBlocked <= 0 && damageTaken > 0) {
     console.log("TWO");
-    writeToLog(
-      LOG_EVENT_GUARD_FAIL,
-      currentRoom.contents.monsters[0].name,
-      "You"
+    writeToLogActions(
+      LOG_GUARD_FAIL,
+      'NO'
     );
   }
 
   if (damageTaken > 0) {
     damageFlashAnimation();
 
-    writeToLog(
-      LOG_EVENT_MONSTER_ATTACK,
-      currentRoom.contents.monsters[0].name,
+    writeToLogMonster(
+      LOG_MONSTER_ATTACK,
+      'NO',
       damageTaken
     );
   } else {
-    writeToLog(
-      LOG_EVENT_MONSTER_MISS,
-      currentRoom.contents.monsters[0].name,
-      "You"
+    writeToLogMonster(
+      LOG_MONSTER_MISS,
+      'NO'
     );
   }
 
@@ -324,7 +313,7 @@ function potionHandler() {
   }
 
   healPlayer(potionHealValue);
-  writeToLog(LOG_EVENT_POTION, "You", potionHealValue);
+  writeToLogActions(LOG_POTION, 'YES', potionHealValue);
   potions.textContent = ` x ${potionCounter}`;
 }
 
@@ -341,7 +330,7 @@ function fleeHandler() {
 
   if (fleeChance >= 10) {
     console.log("Flee Successful");
-    writeToLog(LOG_EVENT_FLEE, "You", currentRoom.name);
+    writeToLogActions(LOG_FLEE, 'YES', currentRoom.name);
     getRandomRoom(catacombRooms);
     renderCurrentRoom(currentRoom);
   }
@@ -448,13 +437,13 @@ function renderCurrentRoom(currentRoom) {
       renderEvent(currentRoom.contents.events);
       switch (currentRoom.contents.events.eventType) {
         case "TRAP":
-          writeToLog(LOG_EVENT_TRAP_DESCRIPTION);
+          writeToLogEvent(LOG_TRAP_DESCRIPTION, 'YES');
           break;
         case "NPC":
-          writeToLog(LOG_EVENT_NPC_DESCRIPTION);
+          writeToLogEvent(LOG_NPC_DESCRIPTION, 'YES');
           break;
         case "MISC":
-          writeToLog(LOG_EVENT_MISC_DESCRIPTION);
+          writeToLogEvent(LOG_MISC_DESCRIPTION, 'YES');
           break;
       }
     }, 3000);

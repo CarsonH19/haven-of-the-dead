@@ -171,10 +171,10 @@ const GRAVEROBBER_EARVER = {
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
-    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "Earver");
+    writeToLog(LOG_NPC_OPTION_ONE, "Earver");
   },
   functionTwo: () => {
-    writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Earver", "you");
+    writeToLog(LOG_NPC_OPTION_TWO, "Earver", "you");
     let currentRoomCounter = roomCounter + 10;
     console.log(`currentRoomCounter: ${currentRoomCounter}`);
     let earverInterval = setInterval(() => {
@@ -202,10 +202,10 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
-    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "Earver", "you");
+    writeToLog(LOG_NPC_OPTION_ONE, "Earver", "you");
   },
   functionTwo: () => {
-    writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Earver", "you");
+    writeToLog(LOG_NPC_OPTION_TWO, "Earver", "you");
     let currentRoomCounter = roomCounter + 10;
     let earverInterval = setInterval(() => {
       console.log(`currentRoomCounter: ${currentRoomCounter}`);
@@ -232,12 +232,12 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
-    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "Earver", "you");
+    writeToLog(LOG_NPC_OPTION_ONE, "Earver", "you");
   },
   functionTwo: () => {
     currentRoom.contents.items.push(ETHEREAL_CROWN);
     setRoomSummary();
-    writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Earver", "you");
+    writeToLog(LOG_NPC_OPTION_TWO, "Earver", "you");
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
@@ -253,7 +253,7 @@ const IVAN_THE_SCOUNDREL = {
   passValue: null,
   failDamage: null,
   functionOne: () => {
-    writeToLog(LOG_EVENT_NPC_OPTION_ONE);
+    writeToLog(LOG_NPC_OPTION_ONE);
     IVAN_THE_SCOUNDREL.summary = `Amidst the severed limbs of the defeated arachnid, the scoundrel, grateful yet wary, hands over a cryptic key. "Treasures await within my hidden cache," he smirks. "Take what's yours."`;
     currentRoom.contents.items.push(CACHE_KEY); // reward for saving him
     currentRoom.contents.monsters.push(BROODMOTHER); // mini-boss
@@ -269,7 +269,7 @@ const IVAN_THE_SCOUNDREL = {
     startBattle();
   },
   functionTwo: () => {
-    writeToLog(LOG_EVENT_NPC_OPTION_TWO);
+    writeToLog(LOG_NPC_OPTION_TWO);
     IVAN_THE_SCOUNDREL.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
     let addRoom = roomCounter + 5; // start room counter for to add traps
     let ivanInterval = setInterval(() => {
@@ -296,8 +296,8 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   optionOne: "Open",
   optionTwo: "Leave",
   functionOne: () => {
-    writeToLog(LOG_EVENT_NPC_OPTION_ONE);
-    IVAN_THE_SCOUNDREL_EVENT_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
+    writeToLog(LOG_NPC_OPTION_ONE);
+    IVAN_THE_SCOUNDREL_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
     useConsumable("Ivan's Cache Key"); // deletes item from inventory
     POISONED.function();
     monsterAttackHandler();
@@ -312,8 +312,8 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
     monsterAttackHandler();
   },
   functionTwo: () => {
-    writeToLog(LOG_EVENT_NPC_OPTION_TWO);
-    IVAN_THE_SCOUNDREL_EVENT_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
+    writeToLog(LOG_NPC_OPTION_TWO);
+    IVAN_THE_SCOUNDREL_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
     useConsumable("Ivan's Cache Key"); // deletes item from inventory
     currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
     currentRoom.contents.items.push(
@@ -349,7 +349,7 @@ const SCHOLAR_HENDRA = {
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
-    writeToLog(LOG_EVENT_NPC_OPTION_ONE, "They", "you");
+    writeToLog(LOG_NPC_OPTION_ONE, "They", "you");
   },
   functionTwo: () => {
     currentRoom.contents.monsters.push(
@@ -363,7 +363,7 @@ const SCHOLAR_HENDRA = {
       currentRoom.contents.items.push(CURSED_GRIMOIRE);
     setRoomSummary();
     startBattle();
-    writeToLog(LOG_EVENT_NPC_OPTION_TWO, "Hendra", "you");
+    writeToLog(LOG_NPC_OPTION_TWO, "Hendra", "you");
   },
 };
 
@@ -382,7 +382,7 @@ const FORSAKEN_COMMANDER = {
       LEGIONS_GRACE.function(); // Applies Legion's Grace status effect
       setTimeout(renderRoomSummaryModal, 5000);
       setRoomSummary();
-      writeToLog(LOG_EVENT_NPC_OPTION_ONE, "ONE");
+      writeToLog(LOG_NPC_OPTION_ONE, "ONE");
     } else {
       currentRoom.contents.monsters.push(
         SPECTRAL_SOLDIER,
@@ -392,7 +392,7 @@ const FORSAKEN_COMMANDER = {
       currentRoom.contents.items.push(WRAITHBANE);
       setRoomSummary();
       startBattle();
-      writeToLog(LOG_EVENT_NPC_OPTION_ONE, "TWO");
+      writeToLog(LOG_NPC_OPTION_ONE, "TWO");
     }
   },
   functionTwo: () => {
@@ -404,7 +404,7 @@ const FORSAKEN_COMMANDER = {
     currentRoom.contents.items.push(WRAITHBANE);
     setRoomSummary();
     startBattle();
-    writeToLog(LOG_EVENT_NPC_OPTION_TWO);
+    writeToLog(LOG_NPC_OPTION_TWO);
   },
 };
 
@@ -437,7 +437,7 @@ const GRERVIL_THE_BODILESS = {
           }, 5000);
 
           setTimeout(setRoomSummary, 7500);
-          writeToLog(LOG_EVENT_ROOM);
+          writeToLog(LOG_ROOM);
           clearInterval(grervilsQuestInterval);
         }
       }, 3000);
@@ -448,7 +448,7 @@ const GRERVIL_THE_BODILESS = {
 
       setRoomSummary();
       setTimeout(renderRoomSummaryModal, 5000);
-      writeToLog(LOG_EVENT_NPC_OPTION_ONE, "ONE");
+      writeToLog(LOG_NPC_OPTION_ONE, "ONE");
     } else {
       const randomUndeadRoom = findRandomUndeadRoom();
       randomUndeadRoom.contents.monsters.push(HEADLESS_SKELETON);
@@ -457,7 +457,7 @@ const GRERVIL_THE_BODILESS = {
 
       setRoomSummary();
       setTimeout(renderRoomSummaryModal, 5000);
-      writeToLog(LOG_EVENT_NPC_OPTION_ONE, "TWO");
+      writeToLog(LOG_NPC_OPTION_ONE, "TWO");
     }
   },
   functionTwo: () => {
@@ -468,7 +468,7 @@ const GRERVIL_THE_BODILESS = {
 
     setRoomSummary();
     setTimeout(renderRoomSummaryModal, 5000);
-    writeToLog(LOG_EVENT_NPC_OPTION_ONE);
+    writeToLog(LOG_NPC_OPTION_ONE);
   },
 };
 
@@ -579,20 +579,20 @@ const LAUGHING_COFFIN_EVENT = {
       LAUGHING_COFFIN_EVENT.summary = `After a fierce brawl with Ivan, the Laughing Coffin's patrons swiftly eject you for the disruption. However, in acknowledgment of your coin, they send you off with a drink, the bitter taste of conflict lingering in the air`;
       LAUGHING_COFFIN_ROOM.contents.items.push(BLACKHEART_BREW);
       useConsumable("Laughing Coffin Coin"); // removes coin from inventory
-      writeToLog(LOG_EVENT_MISC_OPTION_ONE, "ONE");
+      writeToLog(LOG_MISC_OPTION_ONE, "ONE");
       setRoomSummary();
       startBattle();
     } else if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
       LAUGHING_COFFIN_EVENT.summary = `You pay the toll, exchanging a Laughing Coffin Coin for camaraderie and unexpected relaxation within the infamous tavern.`;
       useConsumable("Laughing Coffin Coin"); // removes coin from inventory
-      writeToLog(LOG_EVENT_MISC_OPTION_ONE, "TWO");
+      writeToLog(LOG_MISC_OPTION_ONE, "TWO");
       healPlayer(calculatePlayerMaxHealth());
       setRoomSummary();
       setTimeout(BLACKHEART_BREW.function, 6500);
       setTimeout(newRoomAnimation, 5000);
       setTimeout(renderRoomSummaryModal, 9000);
     } else {
-      writeToLog(LOG_EVENT_MISC_OPTION_ONE, "THREE");
+      writeToLog(LOG_MISC_OPTION_ONE, "THREE");
       console.log("NO COIN!");
       patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
       setRoomSummary();
@@ -600,7 +600,7 @@ const LAUGHING_COFFIN_EVENT = {
     }
   },
   functionTwo: () => {
-    writeToLog(LOG_EVENT_MISC_OPTION_TWO);
+    writeToLog(LOG_MISC_OPTION_TWO);
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
@@ -639,7 +639,7 @@ const CRIMSON_COVENANT = {
       CRIMSON_COVENANT.summary =
         "You partake in the sacrificial ritual of the Crimson Covenant, spilling your blood on the Blood Alter.";
       setRoomSummary();
-      writeToLog(LOG_EVENT_MISC_OPTION_ONE);
+      writeToLog(LOG_MISC_OPTION_ONE);
       setTimeout(renderRoomSummaryModal, 5000);
     }
   },
@@ -647,7 +647,7 @@ const CRIMSON_COVENANT = {
     CRIMSON_COVENANT.summary =
       "You refuse to partake in the sacrificial ritual of the Crimson Covenant.";
     setRoomSummary();
-    writeToLog(LOG_EVENT_MISC_OPTION_TWO);
+    writeToLog(LOG_MISC_OPTION_TWO);
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
@@ -669,12 +669,12 @@ const LOCKED_ROOM = {
       useConsumable("Skeleton Key"); // removes item from inventory
       lockedRoomHandler(currentRoom.roomName);
     } else {
-      writeToLog(LOG_EVENT_MISC_OPTION_ONE, "TWO");
+      writeToLog(LOG_MISC_OPTION_ONE, "TWO");
       setTimeout(renderRoomSummaryModal, 5000);
     }
   },
   functionTwo: () => {
-    writeToLog(LOG_EVENT_MISC_OPTION_TWO);
+    writeToLog(LOG_MISC_OPTION_TWO);
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
@@ -685,7 +685,7 @@ function lockedRoomHandler(room) {
 
   switch (room) {
     case "Bonevault":
-      writeToLog(LOG_EVENT_MISC_OPTION_ONE, currentRoom.roomName, "ONE");
+      writeToLog(LOG_MISC_OPTION_ONE, currentRoom.roomName, "ONE");
       monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
       items.push(BONEMAIL, BONE_MARROW_SOUP, POTION, POTION);
       getItem("RARE");
@@ -708,7 +708,7 @@ function trapEventHandler(baseStat, attribute) {
   if (event.eventType === "TRAP") {
     if (randomNumber >= event.passValue) {
       writeToLog(
-        LOG_EVENT_TRAP_PASS,
+        LOG_TRAP_PASS,
         "you",
         attribute // Dictates descriptive trap pass text. ${value}
       );
@@ -718,7 +718,7 @@ function trapEventHandler(baseStat, attribute) {
     } else {
       if (event === SPIDER_WEB) {
         writeToLog(
-          LOG_EVENT_TRAP_FAIL,
+          LOG_TRAP_FAIL,
           attribute, // Dictates descriptive trap fail text. ${name}
           event.failDamage
         );
@@ -729,7 +729,7 @@ function trapEventHandler(baseStat, attribute) {
         playerHealthBar.value -= event.failDamage;
         currentPlayerHealth -= event.failDamage;
         writeToLog(
-          LOG_EVENT_TRAP_FAIL,
+          LOG_TRAP_FAIL,
           attribute, // Dictates descriptive trap fail text. ${name}
           event.failDamage
         );
@@ -804,7 +804,7 @@ function renderEvent(event) {
 
       case "SAFE ROOM":
         SAFE_ROOM.functionOne();
-        writeToLog(LOG_EVENT_SAFE_ROOM);
+        writeToLog(LOG_SAFE_ROOM);
         currentRoom.contents.events = null;
         break;
     }
