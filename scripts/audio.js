@@ -102,6 +102,10 @@ function soundEffectHandler(object, type) {
     case "ITEM":
       sound = object.soundEffect;
       break;
+
+    case 'NEW ROOM':
+      sound = object;
+      break;
   }
 
   // Check if the AudioContext and GainNode are already created
@@ -151,6 +155,21 @@ const flameLicks2 = loadAudio(
   "flameLicks2"
 );
 
+const skeletonKeyIn2 = loadAudio(
+  "audio/sound-effects/Skeleton Key In 2.mp3",
+  "skeletonKeyIn2"
+);
+
+const coinFlipLand = loadAudio(
+  "audio/sound-effects/Coin Flip Land.mp3",
+  "coinFlipLand"
+);
+
+const crystalWhoosh = loadAudio(
+  "audio/sound-effects/Whoosh Crystal.mp3",
+  "crystalWhoosh"
+);
+
 // Food
 const chewCrackersMouth = loadAudio(
   "audio/sound-effects/Chew Crackers Mouth.mp3",
@@ -163,7 +182,9 @@ const gulpingWater24 = loadAudio(
   "gulpingWater24"
 );
 
-// Ambience
-const droneDungeon = loadAudio("audio/music/Drone Dungeon.mp3", true);
+// Rooms
+
+const whooshLowAir = loadAudio('audio/sound-effects/Whoosh Low Air.mp3', 'whooshLowAir')
+// const droneDungeon = loadAudio("audio/music/Drone Dungeon.mp3", true);
 
 // Music

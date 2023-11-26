@@ -7,13 +7,24 @@ let catacombRooms = [
       roomName: "TEST ROOM", // !FINISHED!
       description: 'TEST =)',
       backgroundImage: 'styles/images/corridor-two.png',
-      music: droneDungeon,
+      music: null,
       contents: {
         monsters: [SKELETAL_SOLDIER],
         items: [],
         events: null,
       },
     },
+    {
+    roomName: "TEST ROOM TWO", // !FINISHED!
+    description: 'TEST =)',
+    backgroundImage: 'styles/images/corridor-two.png',
+    music: null,
+    contents: {
+      monsters: [BROODMOTHER],
+      items: [],
+      events: null,
+    },
+  },
 ];
 
 

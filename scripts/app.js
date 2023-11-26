@@ -908,6 +908,8 @@ continueButton.addEventListener("click", () => {
       renderCurrentRoom(currentRoom);
     }
   }, 1500);
+
+  soundEffectHandler(whooshLowAir ,'NEW ROOM');
 });
 
 settingsButton.addEventListener('click', () => {

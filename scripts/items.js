@@ -368,6 +368,7 @@ const REVENANTS_RAGE = {
 const LAUGHING_COFFIN_COIN = {
   name: "Laughing Coffin Coin",
   description: "",
+  soundEffect: coinFlipLand,
   type: "MAGIC",
   rarity: "RARE",
   effect:
@@ -704,6 +705,7 @@ const CURSED_GRIMOIRE = {
 const CACHE_KEY = {
   name: "Ivan's Cache Key",
   description: "",
+  soundEffect: skeletonKeyIn2,
   type: "MAGIC",
   rarity: "COMMON",
   effect:
@@ -846,6 +848,7 @@ const GRAVEBLOOM = {
 const LESSER_SOULSTONE = {
   name: "Lesser Soulstone",
   description: "",
+  soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
   rarity: "COMMON",
   effect: "Can be used to gain +5 experience.",
@@ -858,6 +861,7 @@ const LESSER_SOULSTONE = {
 const GREATER_SOULSTONE = {
   name: "Greater Soulstone",
   description: "",
+  soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
   rarity: "RARE",
   effect: "Can be used to gain +20 experience.",
@@ -900,6 +904,7 @@ const BLACKHEART_BREW = {
 const SKELETON_KEY = {
   name: "Skeleton Key",
   description: "",
+  soundEffect: skeletonKeyIn2,
   type: "MAGIC",
   rarity: "RARE",
   effect:
