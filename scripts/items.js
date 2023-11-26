@@ -916,6 +916,7 @@ const SKELETON_KEY = {
 const WARDING_CANDLE = {
   name: "Warding Candle",
   description: "",
+  soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "RARE",
   effect:
@@ -951,6 +952,7 @@ const WARDING_CANDLE = {
 const SOOTHING_CANDLE = {
   name: "Soothing Candle",
   description: "",
+  soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "COMMON",
   effect:
@@ -986,6 +988,7 @@ const SOOTHING_CANDLE = {
 const FLICKERING_CANDLE = {
   name: "Flickering Candle",
   description: "",
+  soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "COMMON",
   effect:
@@ -1010,6 +1013,7 @@ const FLICKERING_CANDLE = {
 const BLAZING_CANDLE = {
   name: "Blazing Candle",
   description: "",
+  soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "EPIC",
   effect:
@@ -1034,6 +1038,7 @@ const BLAZING_CANDLE = {
 const SOULFLAME_CANDLE = {
   name: "Soulflame Candle",
   description: "",
+  soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "EPIC",
   effect:

@@ -106,11 +106,14 @@ function soundEffectHandler(object, type) {
 
   // Check if the AudioContext and GainNode are already created
   if (!object.audioContext) {
-    object.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    object.audioContext = new (window.AudioContext ||
+      window.webkitAudioContext)();
     object.gainNode = object.audioContext.createGain();
 
     // Create a single MediaElementSourceNode
-    object.mediaElementSource = object.audioContext.createMediaElementSource(document.createElement('audio'));
+    object.mediaElementSource = object.audioContext.createMediaElementSource(
+      document.createElement("audio")
+    );
     object.mediaElementSource.connect(object.gainNode);
     object.gainNode.connect(object.audioContext.destination);
   }
@@ -122,6 +125,7 @@ function soundEffectHandler(object, type) {
   object.mediaElementSource.mediaElement = sound;
 
   // Play the audio
+  sound.volume = volume;
   sound.play();
 }
 
@@ -131,7 +135,7 @@ function soundEffectHandler(object, type) {
 
 // Heroes
 const severMetalHit2 = loadAudio(
-  "audio/Sever Metal Hit 2.mp3",
+  "audio/sound-effects/Sever Metal Hit 2.mp3",
   "severMetalHit2"
 );
 
@@ -142,21 +146,24 @@ const severMetalHit2 = loadAudio(
 // Monster Death
 
 // Items
-const flameLicks2 = loadAudio("audio/Flame Licks 2.mp3", "flameLicks2");
+const flameLicks2 = loadAudio(
+  "audio/sound-effects/Flame Licks 2.mp3",
+  "flameLicks2"
+);
 
 // Food
 const chewCrackersMouth = loadAudio(
-  "audio/Chew Crackers Mouth.mp3",
+  "audio/sound-effects/Chew Crackers Mouth.mp3",
   "chewCrackersMouth"
 );
 
 // Drink
 const gulpingWater24 = loadAudio(
-  "audio/Gulping Water 24.mp3",
+  "audio/sound-effects/Gulping Water 24.mp3",
   "gulpingWater24"
 );
 
 // Ambience
-const droneDungeon = loadAudio("audio/Drone Dungeon.mp3", true);
+const droneDungeon = loadAudio("audio/music/Drone Dungeon.mp3", true);
 
 // Music
