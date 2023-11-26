@@ -110,6 +110,14 @@ const LOG_BURNING_DEVOTION = "BURNING RADIANCE";
 const LOG_ITEM = "ITEM";
 
 // ===============================
+//       Event Trackers
+// ===============================
+
+let bloodSacrificed = 0;
+let crimsonCovenantTracker = 0;
+let bloodPactTracker = 0;
+
+// ===============================
 //        Hero Variables
 // ===============================
 
@@ -131,8 +139,7 @@ function calculateStrengthBonusHealth() {
 
 function calculatePlayerMaxHealth() {
   let strengthBonusHealth = calculateStrengthBonusHealth();
-  playerMaxHealth =
-    baseHealth + strengthBonusHealth + isItemAttuned(BONEMAIL, 0);
+  playerMaxHealth = baseHealth + strengthBonusHealth + bloodPactTracker;
 
   if (DISEASED.duration !== null) {
     playerMaxHealth = playerMaxHealth * 0.8;
@@ -170,10 +177,6 @@ function calculateBaseCritModifier() {
 function calculateCritDamage() {
   strengthCritIncrease = calculateStrCritIncrease();
   baseCritModifier = calculateBaseCritModifier();
-  // console.log("baseAttack:", baseAttack);
-  // console.log("dexterityCritIncrease:", dexterityCritIncrease);
-  // console.log("baseCritModifier:", baseCritModifier);
-  // console.log(Math.round(baseAttack * baseCritModifier));
   return Math.round(baseAttack * baseCritModifier);
 }
 
@@ -186,6 +189,12 @@ let baseFaith;
 // Paladin
 let holySmiteTracker = 2.0;
 let radiantAuraTracker = 5;
+
+// Rogue
+let shadowStrikeTracker = 6;
+let evasionTracker = 2;
+
+// Priestess
 
 // ===============================
 //   Boons & Leveling Variables
@@ -279,12 +288,6 @@ let soulflameCandleTracker;
 let blackheartBrewTracker;
 
 // ===============================
-//       Event Trackers
-// ===============================
-
-let bloodSacrificed = 0;
-
-// ===============================
 //     Status Effects
 // ===============================
 
@@ -310,43 +313,43 @@ const LEGIONS_GRACE = {
   },
 };
 
-const BLOOD_PACT = {
-  name: "Blood Pact",
-  status: "Your base attack is increased by 5, but your faith is reduced by 2.",
-  duration: null,
-  function: () => {
-    if (BLOOD_PACT.duration === null) {
-      let statusDuration = roomCounter + 15;
-      BLOOD_PACT.duration = "Duration: 15 Rooms";
-      let bloodPactInterval = setInterval(() => {
-        if (statusDuration - roomCounter > 1) {
-          BLOOD_PACT.duration = `Duration: ${
-            statusDuration - roomCounter
-          } Rooms`;
-        } else {
-          BLOOD_PACT.duration = `Duration: ${
-            statusDuration - roomCounter
-          } Room`;
-        }
+// const BLOOD_PACT = {
+//   name: "Blood Pact",
+//   status: "Your base attack is increased by 5, but your faith is reduced by 2.",
+//   duration: null,
+//   function: () => {
+//     if (BLOOD_PACT.duration === null) {
+//       let statusDuration = roomCounter + 15;
+//       BLOOD_PACT.duration = "Duration: 15 Rooms";
+//       let bloodPactInterval = setInterval(() => {
+//         if (statusDuration - roomCounter > 1) {
+//           BLOOD_PACT.duration = `Duration: ${
+//             statusDuration - roomCounter
+//           } Rooms`;
+//         } else {
+//           BLOOD_PACT.duration = `Duration: ${
+//             statusDuration - roomCounter
+//           } Room`;
+//         }
 
-        if (roomCounter >= statusDuration) {
-          BLOOD_PACT.duration = null;
-          baseAttack -= 5;
-          baseFaith += 2;
+//         if (roomCounter >= statusDuration) {
+//           BLOOD_PACT.duration = null;
+//           baseAttack -= 5;
+//           baseFaith += 1;
 
-          updatePlayerTrackers();
-          clearInterval(bloodPactInterval);
-        }
-      }, 15000);
+//           updatePlayerTrackers();
+//           clearInterval(bloodPactInterval);
+//         }
+//       }, 15000);
 
-      statusEffectHandler(BLOOD_PACT);
-      renderStatusEffects(BLOOD_PACT);
-    } else {
-      let statusDuration = roomCounter + 15;
-      BLOOD_PACT.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
-    }
-  },
-};
+//       statusEffectHandler(BLOOD_PACT);
+//       renderStatusEffects(BLOOD_PACT);
+//     } else {
+//       let statusDuration = roomCounter + 15;
+//       BLOOD_PACT.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
+//     }
+//   },
+// };
 
 const POISONED = {
   name: "Poisoned",
@@ -510,7 +513,7 @@ const WEBBED = {
       // if (!immune) {
       let webbedInterval = setInterval(() => {
         let breakFreeChance = Math.round(Math.random() * webStrength);
-        breakFreeChance += (baseStrength + counter);
+        breakFreeChance += baseStrength + counter;
 
         if (breakFreeChance >= webStrength) {
           console.log("You broke free!");

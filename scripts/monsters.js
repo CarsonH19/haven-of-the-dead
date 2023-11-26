@@ -205,7 +205,7 @@ const POSSESSED_EARVER = {
 const IVAN_STATS = {
   name: "Ivan the Scoundrel",
   type: "HUMANOID",
-  skulls: 5,
+  skulls: 6,
   function: () => {
     // Ivan attacks and moves back behind another scoundrel
     let index = myArray.indexOf(IVAN_STATS);
@@ -281,11 +281,16 @@ function startBattle() {
     togglePlayerControls();
 
     // ITEM: Sunstone - Damages undead creatures.
-    isItemAttuned(SUNSTONE, 0);
+    isItemAttuned(SUNSTONE);
+
     // ITEM: Warding Candle - Chance for evil spirits to flee.
     statusEffectHandler(WARDING_CANDLE);
+
+    // ITEM: Rattlebone Charm - Chance for humanoids to flee.
+    isItemAttuned(RATTLEBONE_CHARM);
+    
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
-    isItemAttuned(ETHEREAL_CROWN, 0);
+    isItemAttuned(ETHEREAL_CROWN);
   }, 1000);
 }
 
@@ -358,10 +363,10 @@ function monsterAbilityHandler(monster) {
       break;
 
     case COFFIN_SPIDER:
-        if (webChance(3)) {
-          console.log("Coffin Spider Ability Called!");
-          setTimeout(CRYPT_CRAWLER.function, 300);
-        }
+      if (webChance(3)) {
+        console.log("Coffin Spider Ability Called!");
+        setTimeout(CRYPT_CRAWLER.function, 300);
+      }
 
       break;
 

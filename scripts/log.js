@@ -443,7 +443,7 @@ function writeToLogMonster(logType, narrate, dataOne) {
       // ===============================
 
       case LOG_MONSTER_MISS:
-      newEntry.textContent = `The ${monsterName} fails to attack ${dataOne}!`; 
+      newEntry.textContent = `The ${monsterName} fails to attack you!`; 
       break; 
 
       // ===============================
@@ -714,7 +714,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
     logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
     if (narrate === 'YES') {
-      writeToNarrative(newEntry.textContent);
+      writeToNarrative(narration);
     }
 
     checkLogSize();

@@ -73,8 +73,13 @@ function playerAttackHandler(smite) {
 }
 
 function damageMonster(damage) {
-  monsterHealthBar.value = +monsterHealthBar.value - damage;
-  currentMonsterHealth -= damage;
+  if (currentMonsterHealth - damage <= 0) {
+    monsterHealthBar.value = 0;
+    currentMonsterHealth = 0;
+  } else {
+    monsterHealthBar.value = +monsterHealthBar.value - damage;
+    currentMonsterHealth -= damage;
+  }
 }
 
 function dealMonsterDamage(damage) {
@@ -100,6 +105,9 @@ function calculateCritHitChance() {
 
 function monsterAttackHandler() {
   let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
+
+  // ITEM: Bonechill Amulet - reduces Draugr attacks
+  monsterToPlayerDamage *= isItemAttuned(BONECHILL_AMULET, 1);
 
   // ITEM: Mist Veil Cloak - Chance to evade attacks.
   monsterToPlayerDamage *= isItemAttuned(MIST_VEIL_CLOAK, 1);
@@ -148,8 +156,13 @@ function dealPlayerDamage(damage) {
 }
 
 function damagePlayer(damage) {
-  playerHealthBar.value = +playerHealthBar.value - damage;
-  currentPlayerHealth -= damage;
+  if (currentPlayerHealth - damage <= 0) {
+    playerHealthBar.value = 0;
+    currentPlayerHealth = 0;
+  } else {
+    playerHealthBar.value = +playerHealthBar.value - damage;
+    currentPlayerHealth -= damage;
+  }
 }
 
 function showDamage(damage, source, critical) {
@@ -182,7 +195,7 @@ function showDamage(damage, source, critical) {
     // Fade out after the shaking stops
     setTimeout(() => {
       numbers.style.opacity = "0";
-    }, 500);
+    }, 450);
   }, 500);
 
   damageElement.insertBefore(numbers, damageElement.firstChild);
@@ -352,7 +365,8 @@ function isGameOver() {
   }
 
   if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {
-    playerControlsTimeout(2000);
+    playerControlsTimeout(3000);
+
     // ITEM: Bloodstone - Recovers health when monster dies
     isItemAttuned(BLOODSTONE, null);
     gainExperience(currentRoom.contents.monsters[0].skulls);
@@ -526,6 +540,8 @@ function renderBackground(link) {
     gameWindow.style.backgroundRepeat = "no-repeat";
     gameWindow.style.backgroundSize = "cover";
   };
+
+
 }
 
 function updatePlayerTrackers() {
@@ -553,23 +569,23 @@ function updatePlayerTrackers() {
     const xpToNextLevel = document.getElementById("xpToNextLevel");
 
     if (levelCounter === 1) {
-      xpToNextLevel.textContent = 100;
+      xpToNextLevel.textContent = 30; 
     } else if (levelCounter === 2) {
-      xpToNextLevel.textContent = 200;
+      xpToNextLevel.textContent = 80; 
     } else if (levelCounter === 3) {
-      xpToNextLevel.textContent = 300;
+      xpToNextLevel.textContent = 160; 
     } else if (levelCounter === 4) {
-      xpToNextLevel.textContent = 400;
+      xpToNextLevel.textContent = 270; 
     } else if (levelCounter === 5) {
-      xpToNextLevel.textContent = 500;
+      xpToNextLevel.textContent = 410;
     } else if (levelCounter === 6) {
-      xpToNextLevel.textContent = 600;
+      xpToNextLevel.textContent = 580; 
     } else if (levelCounter === 7) {
-      xpToNextLevel.textContent = 700;
+      xpToNextLevel.textContent = 780; 
     } else if (levelCounter === 8) {
-      xpToNextLevel.textContent = 800;
+      xpToNextLevel.textContent = 999;
     } else {
-      xpToNextLevel.textContent = experiencePoints;
+      xpToNextLevel.textContent = `Max Level`;
     }
   }
 
@@ -582,7 +598,9 @@ function updatePlayerTrackers() {
     heroDexterity.textContent = baseDexterity;
     heroFaith.textContent = baseFaith;
   }
-  
+
+  fadeIn(currentRoom.music, 3);
+
   updateHealthTrackers();
   updateHeroLevel();
   updateHeroExperience();
@@ -768,6 +786,10 @@ attackBtn.addEventListener("click", function () {
     setTimeout(isGameOver, 1500);
     updatePlayerTrackers();
   }
+
+  if (heroChoice === 'ROGUE') {
+    daggerSoundFX.play();
+  }
 });
 
 guardBtn.addEventListener("click", () => {
@@ -886,3 +908,11 @@ continueButton.addEventListener("click", () => {
     }
   }, 1500);
 });
+
+settingsButton.addEventListener('click', () => {
+  // openSettingsHandler();
+  settingsModal.style.display = 'block';
+})
+
+volumeUpButton.addEventListener("click", () => adjustVolume(music, 0.05));
+volumeDownButton.addEventListener("click", () => adjustVolume(music, -0.05));

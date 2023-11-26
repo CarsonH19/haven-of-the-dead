@@ -451,14 +451,11 @@ progress[value]::-moz-progress-bar {
   background-color: rgba(0,0,0,0.4);
 }
 
-.hero-modal-content,
-.level-up-modal-content,
 .modal-content {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; 
+  text-align: left;
   gap: 0px;
-  align-items:flex-start;
   background-color: var(--background);
   background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
@@ -469,11 +466,128 @@ progress[value]::-moz-progress-bar {
   border-radius: 10px;
   /* width: 60%;
   height: 56%; */
-  width: 600px;
-  height: 480px;
+  width: 860px;
+  height: 600px;
   overflow: auto;
   padding: 10px;
 }
+
+
+
+.catacomb-entrance-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: left;
+  gap: 0px;
+  background-color: var(--background);
+  background-image: url(images/skull-texture.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
+  border: 3px solid #888;
+  border-radius: 10px;
+  /* width: 60%;
+  height: 56%; */
+  width: 720px;
+  height: 520px;
+  overflow: auto;
+  padding: 20px;
+}
+
+.catacomb-entrance-modal-content h2 {
+  align-self: center;
+}
+
+.catacomb-entrance-modal-content h3 {
+  margin-bottom: 0px;
+}
+
+.catacomb-entrance-modal-content p {
+  margin: 0px;
+  font-size: 1.0rem;
+}
+
+.catacomb-entrance-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.catacomb-entrance-button-container button {
+  width: 150px;
+  height: 50px;
+  margin-top: 20px;
+}
+
+.hero-choice-modal-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 0px;
+  background-color: var(--background);
+  background-image: url(images/skull-texture.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
+  border: 3px solid #888;
+  border-radius: 10px;
+  /* width: 60%;
+  height: 56%; */
+  width: 860px;
+  height: 600px;
+  overflow: auto;
+  padding: 10px;
+}
+
+.hero-choice-modal-content h1 {
+  align-self: center;
+}
+
+.character-images {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.siggurd-image, .riven-image, .liheth-image {
+  width: 33%;
+  height: 100%;
+  border: solid var(--header) 2px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  border-radius: 10px; 
+}
+
+.siggurd-image {
+  background-image: url(images/paladin.png);
+}
+
+.riven-image {
+  background-image: url(images/rogue.png);
+}
+
+.liheth-image {
+  background-image: url(images/priestess.png);
+}
+
+.hero-choice-buttons {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-self: flex-end; 
+}
+
+.hero-choice-buttons button {
+  cursor: pointer;
+}
+
 
 .modal-content button {
   width: 150px;
@@ -524,6 +638,11 @@ progress[value]::-moz-progress-bar {
 
 /* Room Summary Modal */
 #roomSummaryModal {
+  display: none;
+}
+
+/* Settings Modal */
+#settingsModal {
   display: none;
 }
 
@@ -805,12 +924,36 @@ progress[value]::-moz-progress-bar {
   display: none;
 }
 
+.level-up-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  gap: 0px;
+  align-items:flex-start;
+  background-color: var(--background);
+  background-image: url(images/skull-texture.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
+  border: 3px solid #888;
+  border-radius: 10px;
+  /* width: 60%;
+  height: 56%; */
+  width: 720px;
+  height: 520px;
+  overflow: auto;
+  padding: 10px;
+}
+
 .level-up-top {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 10px;
   height: 20%;
+  width: 100%;
 }
 
 .level-up-bottom {
@@ -829,7 +972,7 @@ progress[value]::-moz-progress-bar {
   text-align: center;
 }
 
-.level-up-modal-content p {
+.level-up-modal-content h3 {
   margin: 0px;
   padding: 0px;
   text-align: center;
@@ -853,8 +996,24 @@ progress[value]::-moz-progress-bar {
 
 .attributes-container button,
 .abilities-container button {
-  height: 15vh;
-  width: 15vw;
+  aspect-ratio: 1;
+  height: 100px;
+  width: 100px;
+  font-family: monospace;
+  font-size: 2rem;
+  background-color: lightgray; 
+  color: var(--background);
+
+}
+
+.attributes-container button:hover,
+.abilities-container button:hover {
+  background-color: var(--background);
+  color: lightgrey;
+  transition: 0.5s;
+  aspect-ratio: 1;
+  height: 100px;
+  width: 100px;
   font-family: monospace;
   font-size: 2rem;
 }
@@ -1041,7 +1200,7 @@ progress[value]::-moz-progress-bar {
   background: radial-gradient(circle, var(--orb) 5%, rgba(255, 236, 160, 0) 100%);
   /* transform: translateY(-50%); */
   animation: orbAnimation 6s ease-in-out infinite, pulseAnimation 2.0s ease-in-out infinite;
-  box-shadow: 0 0 40px 10px #ffeca0; increased glow effect
+  box-shadow: 0 0 40px 10px #ffeca0; 
   opacity: 90%;
 }
 

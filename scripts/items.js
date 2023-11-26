@@ -109,18 +109,6 @@ const FLASK_OF_LIGHT = {
   },
 };
 
-const BONEMAIL = {
-  name: "Bonemail",
-  description: "",
-  type: "MAGIC",
-  rarity: "COMMON",
-  effect:
-    "While attuned to this item your max health is increased by 20 points.",
-  function: () => {
-    return 20;
-  },
-};
-
 const GRAVEROBBERS_SPADE = {
   name: "Graverobber's Spade",
   description: "",
@@ -182,8 +170,10 @@ const SHADOWSTEP_BOOTS = {
   rarity: "COMMON",
   effect: "While attuned to this item your dexterity increases by 1.",
   function: () => {
-    // See closeInventoryHandler for item logic.
-    return 1;
+    baseDexterity++;
+  },
+  unequip: () => {
+    baseDexterity--;
   },
 };
 
@@ -194,8 +184,10 @@ const TITANS_GAUNTLETS = {
   rarity: "COMMON",
   effect: "While attuned to this item your strength increases by 1.",
   function: () => {
-    // See closeInventoryHandler for item logic.
-    return 1;
+    baseStrength++;
+  },
+  unequip: () => {
+    baseStrength--;
   },
 };
 
@@ -206,8 +198,29 @@ const HOLY_RELIC = {
   rarity: "COMMON",
   effect: "While attuned to this item your faith increases by 1.",
   function: () => {
-    // See closeInventoryHandler for item logic.
-    return 1;
+    baseFaith++;
+  },
+  unequip: () => {
+    baseFaith--;
+  },
+};
+
+const SACRIFICIAL_BLADE = {
+  name: "Sacrificial Blade",
+  description: "",
+  type: "MAGIC",
+  rarity: "COMMON",
+  effect:
+    "While attuned to this item your attack increases by 3, but your faith decreases by 1.",
+  function: () => {
+    console.log("stats added!");
+    baseAttack += 3;
+    baseFaith--;
+  },
+  unequip: () => {
+    console.log("stats removed!");
+    baseAttack -= 3;
+    baseFaith++;
   },
 };
 
@@ -314,10 +327,7 @@ const WHISPERING_AMULET = {
   rarity: "RARE",
   effect:
     "While attuned to this item you can communicate with some undead creatures.",
-  function: () => {
-    // Option 1: While wearing it adds NPC rooms to the catacombRooms array.
-    // Option 2: While wearing the player gets alternate dialogue options during event.
-  },
+  function: () => {},
 };
 
 const CURSED_MIRROR = {
@@ -403,6 +413,54 @@ const TOXINWEAVE_MASK = {
   },
 };
 
+const BERSERKER_PAULDRONS = {
+  name: "Berserker Pauldrons",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item you gain +2 Strength, but -1 Faith.",
+  function: () => {
+    baseStrength += 2;
+    baseFaith -= 1;
+  },
+  unequip: () => {
+    baseStrength -= 2;
+    baseFaith += 1;
+  },
+};
+
+const TOME_OF_DEVOTION = {
+  name: "Tome of Devotion",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item you gain +2 Faith, but -1 Dexterity.",
+  function: () => {
+    baseFaith += 2;
+    baseDexterity -= 1;
+  },
+  unequip: () => {
+    baseFaith -= 2;
+    baseDexterity += 1;
+  },
+};
+
+const BRACELET_OF_THE_SERPENT = {
+  name: "Bracelet of the Serpent",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item you gain +2 Dexterity, but -1 Strength.",
+  function: () => {
+    baseDexterity += 2;
+    baseStrength -= 1;
+  },
+  unequip: () => {
+    baseDexterity -= 2;
+    baseStrength += 1;
+  },
+};
+
 // ===============================
 //         EPIC ITEMS
 // ===============================
@@ -423,9 +481,8 @@ const ETHEREAL_CROWN = {
       setTimeout(() => {
         monsterContainer.style.display = "none";
         checkForMonsters();
-        writeToLogItem(LOG_ITEM, 'YES', ETHEREAL_CROWN);
+        writeToLogItem(LOG_ITEM, "YES", ETHEREAL_CROWN);
       }, 2000);
-      
     }
   },
 };
@@ -485,7 +542,7 @@ const SOUL_JAR = {
       updatePlayerTrackers();
       healthLowAnimation();
 
-      writeToLogItem(LOG_ITEM, 'YES', SOUL_JAR);
+      writeToLogItem(LOG_ITEM, "YES", SOUL_JAR);
     }
   },
 };
@@ -504,6 +561,116 @@ const CRIMSON_OFFERING = {
     isGameOver();
     // writeToLogItem You make an offering and sacrifice 5 HP
     return 10;
+  },
+};
+
+// ===============================
+//       LOCKED ROOM ITEMS
+// ===============================
+
+const BONEMAIL = {
+  name: "Bonemail",
+  description: "",
+  type: "MAGIC",
+  rarity: "COMMON",
+  effect: "While attuned to this item your max health is increased by 20HP.",
+  function: () => {
+    baseHealth += 20;
+  },
+  unequip: () => {
+    baseHealth -= 20;
+  },
+};
+
+const RIBCAGE_DEFENDER = {
+  name: "Ribcage Defender",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item your max health is increased by 30HP.",
+  function: () => {
+    baseHealth += 30;
+  },
+  unequip: () => {
+    baseHealth -= 30;
+  },
+};
+
+const SKULLCRUSHER_HELM = {
+  name: "Skullcrusher Helm",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "While attuned to this item your max health is increased by 20HP and you gain +1 Strength.",
+  function: () => {
+    baseHealth += 20;
+  },
+  unequip: () => {
+    baseHealth -= 20;
+  },
+};
+
+const BONECHILL_AMULET = {
+  name: "Bone Chill Amulet",
+  description: "",
+  type: "MAGIC",
+  rarity: "COMMON",
+  effect:
+    "While attuned to this item you have resistance against draugr attacks.",
+  function: () => {
+    if (currentRoom.contents.monsters[0] === DRAUGR) {
+      return 0.5;
+    } else {
+      return 1;
+    }
+  },
+};
+
+const RATTLEBONE_CHARM = {
+  name: "Rattlebone Charm",
+  description: "",
+  type: "MAGIC",
+  rarity: "COMMON",
+  effect:
+    "While attuned to this item there is a chance that humans will flee from you.",
+  function: () => {
+    if (
+      currentRoom.contents.monsters[0].type === "HUMANOID" &&
+      currentRoom.contents.monsters[0] !== IVAN_STATS
+    ) {
+      let randomNumber = Math.round(Math.random() * 10);
+
+      if (randomNumber >= 5) {
+        fadeOutAnimation(monsterContainer, 0000);
+        setTimeout(() => {
+          checkForMonsters();
+          monsterContainer.style.display = "none";
+        }, 2000);
+        //writeToLogItem
+      }
+    }
+  },
+};
+
+const SPINE_OF_THE_NECROMANCER = {
+  name: "Spine of the Necromance",
+  description: "",
+  type: "EPIC",
+  rarity: "COMMON",
+  effect:
+    "While attuned to this item you gain +9 Attack, but all stats are reduced by 1.",
+  function: () => {
+    baseAttack += 9;
+    baseStrength -= 1;
+    baseDexterity -= 1;
+    baseFaith -= 1;
+  },
+  unequip: () => {
+    baseAttack -= 9;
+    baseStrength += 1;
+    baseDexterity += 1;
+    baseFaith += 1;
   },
 };
 
@@ -530,7 +697,7 @@ const CURSED_GRIMOIRE = {
     currentPlayerHealth--;
     playerHealthBar.value--;
     damageFlashAnimation();
-    writeToLogItem(LOG_ITEM, 'YES', CURSED_GRIMOIRE);
+    writeToLogItem(LOG_ITEM, "YES", CURSED_GRIMOIRE);
   },
 };
 
@@ -543,7 +710,7 @@ const CACHE_KEY = {
     "Given to you by Ivan the Scoundrel, he said it unlocks a chamber within the catacombs were his hidden cache is kept.",
   function: () => {
     // Unlocks a trapped vault.
-    writeToLogItem(LOG_ITEM, 'YES', CACHE_KEY);
+    writeToLogItem(LOG_ITEM, "YES", CACHE_KEY);
   },
 };
 
@@ -555,7 +722,7 @@ const GRERVILS_HEAD = {
   effect: "Head of the talking skull, Grervil.",
   function: () => {
     // Obtained after meeting Grervil agreeing to help him find his body.
-    writeToLogItem(LOG_ITEM, 'YES', GRERVILS_HEAD);
+    writeToLogItem(LOG_ITEM, "YES", GRERVILS_HEAD);
   },
 };
 
@@ -731,7 +898,7 @@ const SKELETON_KEY = {
   effect:
     "This key can be used to unlock various locked rooms throughout the catacomb.",
   function: () => {
-    writeToLogItem(LOG_ITEM, 'YES', SKELETON_KEY, currentRoom.roomName);
+    writeToLogItem(LOG_ITEM, "YES", SKELETON_KEY, currentRoom.roomName);
   },
 };
 
@@ -1056,11 +1223,17 @@ let attunedItems = [];
 
 let inventoryItems = [GUIDING_LIGHT, POTION, POTION, POTION];
 
-let foodAndDrinkItems = [
+let consumableItems = [
+  POTION,
   MARROWSTONE_CHEESE,
   TOMBSTONE_TRUFFLE,
   CRYPTBREAD,
   BONE_MARROW_SOUP,
+  LICHROOT,
+  GRAVEBLOOM,
+  LESSER_SOULSTONE,
+  GREATER_SOULSTONE,
+  BLACKHEART_BREW,
 ];
 
 let candleItems = [
@@ -1071,17 +1244,23 @@ let candleItems = [
   SOULFLAME_CANDLE,
 ];
 
-let wispItems = [GUIDING_LIGHT, ROWDY_WISP];
+let wispItems = [GUIDING_LIGHT, ROWDY_WISP, UNHOLY_WISP, RESTLESS_WISP];
+
+let bonevaultItems = [
+  BONEMAIL,
+  RIBCAGE_DEFENDER,
+  SKULLCRUSHER_HELM,
+  BONECHILL_AMULET,
+  RATTLEBONE_CHARM,
+  SPINE_OF_THE_NECROMANCER,
+];
 
 let commonItems = [
   EVERTORCH,
   FLASK_OF_LIGHT,
-  BONEMAIL,
   RING_OF_THE_RODENT,
   CHARM_OF_HEALING,
   MIST_VEIL_CLOAK,
-  POTION,
-  LESSER_SOULSTONE,
   SOOTHING_CANDLE,
   FLICKERING_CANDLE,
   SHADOWSTEP_BOOTS,
@@ -1090,21 +1269,20 @@ let commonItems = [
 ];
 
 let rareItems = [
-  BLOODSTONE,
   WRAITHBANE,
   SUNSTONE,
   CURSED_MIRROR,
   REVENANTS_RAGE,
-  GREATER_SOULSTONE,
   WARDING_CANDLE,
   GUIDING_LIGHT,
   ROWDY_WISP,
-  BLACKHEART_BREW,
   LAUGHING_COFFIN_COIN,
-  LICHROOT,
   PLAGUEWARD_PENDANT,
   TOXINWEAVE_MASK,
   GHOSTSHROUD_TALISMAN,
+  BERSERKER_PAULDRONS,
+  TOME_OF_DEVOTION,
+  BRACELET_OF_THE_SERPENT,
 ];
 
 let epicItems = [
@@ -1131,12 +1309,37 @@ function isItemAttuned(item, defaultValue) {
 }
 
 function attuneItem(itemName) {
+  // itemName must be the item's string name
   itemObject = inventoryItems.find((inv) => inv.name === itemName);
 
   if (itemObject) {
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
     attunedItems.push(itemObject);
+  }
+
+  if (itemObject.unequip) {
+    console.log("item function called!");
+    itemObject.function();
+  }
+
+  clearInventory();
+  renderInventory();
+}
+
+function removeItem(itemName) {
+  // itemName must be the item's string name
+  itemObject = attunedItems.find((inv) => inv.name === itemName);
+
+  if (itemObject !== "Curesed Grimoire") {
+    const index = attunedItems.indexOf(itemObject);
+    attunedItems.splice(index, 1);
+    inventoryItems.push(itemObject);
+  }
+
+  if (itemObject.unequip) {
+    console.log("item function called!");
+    itemObject.unequip();
   }
 
   clearInventory();
@@ -1240,26 +1443,16 @@ function statusEffectHandler(item) {
   }
 }
 
-function removeItem(itemName) {
-  // itemName must be the item's string name
-  itemObject = attunedItems.find((inv) => inv.name === itemName);
-
-  if (itemObject !== "Curesed Grimoire") {
-    const index = attunedItems.indexOf(itemObject);
-    attunedItems.splice(index, 1);
-    inventoryItems.push(itemObject);
-  }
-
-  clearInventory();
-  renderInventory();
-}
-
 function findItemChance() {
   if (currentRoom.contents.events === null) {
     let randomNumber = Math.round(Math.random() * 20 + baseFaith);
 
     // ITEM: Graverobber's Spade - Increase item find chance by 10%
     randomNumber += isItemAttuned(GRAVEROBBERS_SPADE, 0);
+
+    if (randomNumber > 10) {
+      getItem("CONSUMABLE");
+    }
 
     if (randomNumber >= 20) {
       let itemRarity = Math.round(Math.random() * 100 + baseFaith);
@@ -1312,6 +1505,15 @@ function getItem(rarity) {
       }
       break;
 
+    case "CONSUMABLE":
+      console.log("CONSUMABLE FOUND");
+      const consumableIndex = Math.round(
+        Math.random() * consumableItems.length
+      );
+      foundItem = consumableItems[consumableIndex];
+      currentRoom.contents.items.push(foundItem);
+      break;
+
     case "CANDLE":
       console.log("CANDLE FOUND");
       const candleIndex = Math.round(Math.random() * candleItems.length);
@@ -1323,6 +1525,13 @@ function getItem(rarity) {
       const wispIndex = Math.round(Math.random() * wispItems.length);
       foundItem = wispItems[wispIndex];
       currentRoom.contents.items.push(foundItem);
+      break;
+
+    case "BONEVAULT":
+      const bonevaultIndex = Math.round(Math.random() * bonevaultItems.length);
+      foundItem = bonevaultItems[bonevaultIndex];
+      currentRoom.contents.items.push(foundItem);
+      bonevaultItems.splice(bonevaultIndex, 1);
       break;
   }
 }
@@ -1433,18 +1642,6 @@ function openInventoryHandler() {
 
 function closeInventoryHandler() {
   inventoryModal.style.display = "none";
-
-  // ITEM: Shadowstep Boots - +1 Dexterity;
-  let newDex = baseDexterity + isItemAttuned(SHADOWSTEP_BOOTS, 0);
-  baseDexterity = newDex;
-
-  // ITEM: Titan's Guantlets - +1 Strength;
-  let newStr = baseStrength + isItemAttuned(TITANS_GAUNTLETS, 0);
-  baseStrength = newStr;
-
-  // ITEM: Holy Relic - +1 Faith;
-  let newFaith = baseFaith + isItemAttuned(HOLY_RELIC, 0);
-  baseFaith = newFaith;
 
   // ITEM: Blackheart Brew - -1 Dex +1 Strength
   statusEffectHandler(BLACKHEART_BREW);
@@ -1592,14 +1789,7 @@ inventoryButton.addEventListener("click", () => {
 
 closeInventoryButton.addEventListener("click", () => {
   // Updates stats after changing attuned items.
-  if (heroChoice === "PALADIN") {
-    setPaladinStats();
-  } else if (heroChoice === "ROGUE") {
-    setRogueStats();
-  } else if (heroChoice === "PRIESTESS") {
-    setPriestessStats();
-  }
-
+  // setStatsHandler();
   closeInventoryHandler();
   clearInventory();
   calculatePlayerMaxHealth();

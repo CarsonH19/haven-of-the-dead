@@ -47,8 +47,6 @@ function paladinRadiantAura() {
 //        Hero: Rogue
 // ===============================
 
-// let shadowStrikeTracker = 25;
-let evasionTracker = 2;
 let rogue = {
   name: "Shadowcloak Riven",
   level: 1,
@@ -74,30 +72,27 @@ function setRogueStats() {
 }
 
 function rogueShadowStrike() {
+  specialCooldownCounter = shadowStrikeTracker;
+
   // Guard
   setTimeout(() => {
-    function calculateMonsterShadowStrikeDamage() {
-      let damage = dealPlayerDamage(monsterAttackValue);
-      if (baseDexterity * 2 >= damage) {
-        return 0;
-      } else {
-        return damage - baseDexterity * 2;
-      }
-    }
-    const monsterToGuardDamage = calculateMonsterShadowStrikeDamage();
-    const damageBlocked = Math.round(Math.random() * monsterToGuardDamage);
-    const damageTaken = monsterToGuardDamage - damageBlocked;
-    playerHealthBar.value = +playerHealthBar.value - damageTaken;
-    currentPlayerHealth -= damageTaken;
+    let monsterToGuardDamage = dealPlayerDamage(monsterAttackValue);
+    let damageBlocked = Math.round(Math.random() * monsterToGuardDamage);
+    damageBlocked += baseDexterity * 2;
+    let damageTaken = monsterToGuardDamage - damageBlocked;
 
-    if (damageBlocked > 0) {
-      writeToLogAction(LOG_GUARD, "NO", damageBlocked + baseDexterity * 2);
+    if (damageBlocked <= monsterToGuardDamage) {
+      writeToLogActions(LOG_GUARD, "NO", damageBlocked);
     }
 
     if (damageTaken > 0) {
       damageFlashAnimation();
+      showDamage(damageTaken, "MONSTER");
+      damagePlayer(damageTaken);
       writeToLogMonster(LOG_MONSTER_ATTACK, "NO", damageTaken);
     } else {
+      damagePlayer(0);
+      showDamage(0, "MONSTER");
       writeToLogMonster(LOG_MONSTER_MISS, "NO");
     }
   }, 1200);
@@ -105,24 +100,26 @@ function rogueShadowStrike() {
   // Attack
   const criticalHitChance = Math.round(Math.random() * 20) + baseDexterity * 2;
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
-
+  let totalDamage;
   // Critical Hit
   if (criticalHitChance >= 20) {
     playerToMonsterDamage = baseAttack;
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
-    
+    showDamage(totalDamage, "PLAYER", "CRIT");
+    writeToLogHero(LOG_SHADOW_STRIKE, "YES", totalDamage);
     // Normal Hit
-  } else {
+  } else if (playerToMonsterDamage > 0) {
     totalDamage = playerToMonsterDamage;
+    showDamage(totalDamage, "PLAYER");
+    writeToLogHero(LOG_SHADOW_STRIKE, "YES", totalDamage);
+  } else {
+    // Attack Misses
+    showDamage(totalDamage, "PLAYER");
+    writeToLogHero(LOG_PLAYER_MISS, "NO");
   }
 
-  monsterHealthBar.value = +monsterHealthBar.value - totalDamage;
-  currentMonsterHealth -= totalDamage;
-
-  specialCooldownCounter = 5;
-
+  damageMonster(totalDamage);
   setTimeout(updatePlayerTrackers, 1250);
-  writeToLogHero(LOG_SHADOW_STRIKE, 'YES');
 }
 
 // See monsterAttackHandler for Rouge Passive Ability
@@ -226,34 +223,40 @@ function heroChecker() {
 }
 
 function checkForLevelUp() {
-  if (experiencePoints >= 800 && levelCounter <= 8) {
-    levelUp();
+  if (experiencePoints >= 999 && levelCounter <= 8) {
+    renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 700 && levelCounter <= 7) {
-    levelUp();
+  } else if (experiencePoints >= 780 && levelCounter === 7) {
+    renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 600 && levelCounter <= 6) {
-    levelUp();
+  } else if (experiencePoints >= 580 && levelCounter === 6) {
+    renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 500 && levelCounter <= 5) {
-    levelUp();
+  } else if (experiencePoints >= 410 && levelCounter === 5) {
+    renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 400 && levelCounter <= 4) {
-    levelUp();
+  } else if (experiencePoints >= 270 && levelCounter === 4) {
+    renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 300 && levelCounter <= 3) {
-    levelUp();
+  } else if (experiencePoints >= 160 && levelCounter === 3) {
+    renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 200 && levelCounter <= 2) {
-    levelUp();
+  } else if (experiencePoints >= 80 && levelCounter === 2) {
+    renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 100 && levelCounter <= 1) {
-    levelUp();
+  } else if (experiencePoints >= 30 && levelCounter === 1) {
+    renderLevelUpModal();
     levelCounter++;
   }
 }
 
 function renderLevelUpModal() {
+  strengthRank.disabled = false;
+  dexterityRank.disabled = false;
+  faithRank.disabled = false;
+  specialRank.disabled = false;
+  passiveRank.disabled = false;
+
   let hero = heroChecker();
   levelUpModal.style.display = "block";
 
@@ -331,22 +334,22 @@ function renderLevelUpModal() {
 function levelUpHandler(boon) {
   let hero = heroChecker();
   hero.level++;
-  hero.attack++;
+  hero.attack += 2;
   hero.health += 10;
 
   if (boon === "STRENGTH") {
-    hero.strength++;
+    baseStrength++;
   } else if (boon === "DEXTERITY") {
-    hero.dexterity++;
+    baseDexterity++;
   } else if (boon === "FAITH") {
-    hero.faith++;
+    baseFaith++;
   } else if (boon === "SPECIAL") {
     switch (hero) {
       case paladin:
         holySmiteTracker += 0.5;
         break;
       case rogue:
-        shadowStrikeTracker += 5;
+        shadowStrikeTracker--;
         break;
       case priestess:
         greaterPrayerTracker += 10;
@@ -367,32 +370,38 @@ function levelUpHandler(boon) {
   }
 }
 
-function closeLevelUpModal() {
-  levelUpModal.style.display = "none";
-}
-
-function clearLevelUpModal() {
-  strengthRank.textContent = "";
-  dexterityRank.textContent = "";
-  faithRank.textContent = "";
-  specialRank.textContent = "";
-  passiveRank.textContent = "";
-  specialText.textContent = "";
-  passiveText.textContent = "";
-}
-
 function endLevelUp() {
-  setStatsHandler();
-  // verifyBoonChoice();
+  strengthRank.disabled = true;
+  dexterityRank.disabled = true;
+  faithRank.disabled = true;
+  specialRank.disabled = true;
+  passiveRank.disabled = true;
+
+  function clearLevelUpModal() {
+    strengthRank.textContent = "";
+    dexterityRank.textContent = "";
+    faithRank.textContent = "";
+    specialRank.textContent = "";
+    passiveRank.textContent = "";
+    specialText.textContent = "";
+    passiveText.textContent = "";
+  }
+
+  fadeOutAnimation(levelUpModal, 0000);
   setTimeout(() => {
-    closeLevelUpModal();
+    levelUpModal.style.display = "none";
+    levelUpModal.style.animation = "";
     clearLevelUpModal();
-  }, 2000);
+  }, 1950);
+
+
 
   updatePlayerTrackers();
 }
 
 function renderHeroStatsModal() {
+  levelUpModal.style.display = "block";
+
   let hero = heroChecker();
   // Image
   const heroImage = document.querySelector(".hero-stats-img");

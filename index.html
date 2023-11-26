@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles/style.css" />
     <!-- Scripts -->
     <script src="scripts/variables.js" defer></script>
+    <script src="scripts/audio.js" defer></script>
     <script src="scripts/log.js" defer></script>
     <script src="scripts/items.js" defer></script>
     <script src="scripts/events.js" defer></script>
@@ -28,25 +29,34 @@
     <!----------------- CHOOSE YOUR HERO MODAL ------------------->
 
     <div id="heroChoiceModal" class="modal">
-      <div class="modal-content">
-        <button id="siggurd">Holy Warrior Siggurd</button>
-        <button id="riven">Shadowcloak Riven</button>
-        <button id="liheth">Priestess Liheth</button>
+      <div class="hero-choice-modal-content">
+        <h1>Choose Your Character</h1>
+        <div class="character-images">
+          <div class="siggurd-image"></div>
+          <div class="riven-image"></div>
+          <div class="liheth-image"></div>
+        </div>
+        <div class="hero-choice-buttons">
+          <button id="siggurd">Holy Warrior Siggurd</button>
+          <button id="riven">Shadowcloak Riven</button>
+          <button id="liheth">Priestess Liheth</button>
+        </div>
       </div>
     </div>
 
     <!----------------- CATACOMB ENTRANCE MODAL  ------------------->
 
     <div id="catacombEntranceModal" class="modal">
-      <div class="modal-content">
+      <div class="catacomb-entrance-modal-content">
         <h2>The Great Catacombs</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
-          consectetur earum vel quisquam ad similique eius et molestiae
-          molestias aut obcaecati praesentium perferendis, facilis soluta magni
-          quia commodi, sint dicta?
-        </p>
-        <button id="greatCatacombsBtn">Continue</button>
+        <p>Beneath the surface lies the Great Catacombs, an expansive labyrinth created by an ancient civilization to honor the dead. This subterranean realm, covering hundreds of miles, hides the remnants of a lost culture. The catacombs remain shrouded in mystery, with unexplored passages hinting at an even larger expanse.</p>
+        <h3>Forsaken Dead</h3>
+        <p>Within the catacombs, a ceaseless darkness reigns, haunted by the restless dead. Skeletons, ghosts, and zombies roam freely, posing threats to those who venture into the depths. Scholars and historians seeking knowledge must navigate the perilous terrain armed with spells and weapons. The undead fiercely guard the catacombs' secrets, making exploration a treacherous endeavor.</p>
+        <h3>Dark Allure</h3>
+        <p>Despite the looming dangers, the Great Catacombs draw adventurers, scholars, and darker entities alike. Many seek untold treasures and hidden knowledge within its depths, braving the labyrinthine maze. Necromancers exploit the resting undead for dark rituals, graverobbers chase riches, and shadowy figures lie in wait for unsuspecting explorers. The catacombs become a melting pot of motives, where the living and the dead coexist in pursuit of their own destinies within the unknown realm.</p>
+        <div class="catacomb-entrance-button-container">
+          <button id="greatCatacombsBtn">Continue</button>
+        </div>
       </div>
     </div>
 
@@ -116,6 +126,17 @@
       </div>
     </div>
 
+    <!----------------- SETTINGS MODAL  ------------------->
+
+    <div id="settingsModal" class="modal">
+      <div class="modal-content">
+        <button id="volumeUp">Volume Up</button>
+        <button id="volumeDown">Volume Down</button>
+        <label for="volume">Volume:</label>
+        <progress id="volume" max="1" value="0.5"></progress>
+      </div>
+    </div>
+
     <!----------------- LEVEL UP MODAL  ------------------->
 
     <div id="levelUpModal" class="modal">
@@ -127,25 +148,25 @@
         <div class="level-up-bottom">
           <div class="attributes-container">
             <div id="strengthContainer">
-              <p id="strengthText">Strength</p>
+              <h3 id="strengthText">Strength</h3>
               <button id="strengthRank">I</button>
             </div>
             <div id="dexterityContainer">
-              <p id="dexterityText">Dexterity</p>
+              <h3 id="dexterityText">Dexterity</h3>
               <button id="dexterityRank">I</button>
             </div>
             <div id="faithContainer">
-              <p id="faithText">Faith</p>
+              <h3 id="faithText">Faith</h3>
               <button id="faithRank">I</button>
             </div>
           </div>
           <div class="abilities-container">
             <div id="specialContainer">
-              <p id="specialText">Special</p>
+              <h3 id="specialText">Special</h3>
               <button id="specialRank">I</button>
             </div>
             <div id="passiveContainer">
-              <p id="passiveText">Passive</p>
+              <h3 id="passiveText">Passive</h3>
               <button id="passiveRank">I</button>
             </div>
           </div>
@@ -204,6 +225,7 @@
     <!----------------- MAIN GAME WINDOW  ------------------->
 
     <div id="gameWindow" class="screen">
+      <audio id="myAudio" src=""></audio>
       <div id="fade"></div>
       <div class="game-window">
         <div class="top-content">
@@ -234,6 +256,7 @@
           </div>
           <div class="middle-right">
             <button id="inventoryBtn" class="inventory-btn">Inventory</button>
+            <button id="settingsBtn" class="settings-btn">Settings</button>
           </div>
         </div>
         <div class="damage-received-box">
