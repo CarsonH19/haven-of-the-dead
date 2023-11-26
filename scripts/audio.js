@@ -12,8 +12,9 @@ const volumeDownButton = document.getElementById("volumeDown");
 // let music;
 // let soundEffects;
 
-function loadAudio(src, loop = false) {
+function loadAudio(src, id, loop = false) {
   const audio = new Audio();
+  audio.id = id;
   audio.src = src;
   audio.loop = loop;
 
@@ -67,12 +68,100 @@ function updateVolumeDisplay(volume) {
 //   }, duration * 1000);
 // }
 
+function soundEffectHandler(object, type) {
+  // const hero = heroChecker();
+  let sound;
+
+  switch (type) {
+    case "SPAWN":
+      sound = object.soundEffects.spawn;
+      break;
+
+    case "MONSTER ATTACK":
+      sound = object.soundEffects.attack;
+      break;
+
+    case "TAKE DAMAGE":
+      sound = object.soundEffects.takeDamage;
+      break;
+
+    case "MONSTER DEATH":
+      sound = object.soundEffects.death;
+      break;
+
+    case "PLAYER ATTACK":
+      // if (hero === 'PALADIN') {
+
+      // } else if (hero === 'ROGUE') {
+
+      // } else if (hero === 'PRIESTESS' ) {
+
+      // }
+      // sound = object.soundFX.attack;
+      break;
+
+    case "PLAYER GUARD":
+      // sound = object.soundFX.attack;
+      break;
+
+    case "SPECIAL":
+      // sound = object.soundFX.attack;
+      break;
+
+    case "ITEM":
+      // sound = object.soundFX.attack;
+      break;
+  }
+
+  // Check if the AudioContext and GainNode are already created
+  if (!object.audioContext) {
+    object.audioContext = new (window.AudioContext ||
+      window.webkitAudioContext)();
+    object.gainNode = object.audioContext.createGain();
+
+    const source = object.audioContext.createMediaElementSource(sound);
+    source.connect(object.gainNode);
+    object.gainNode.connect(object.audioContext.destination);
+  }
+
+  // Set volume using the gain node
+  object.gainNode.gain.setValueAtTime(0.05, object.audioContext.currentTime);
+
+  // Play the audio
+  sound.play();
+}
+
+// function monsterSoundEffectHandler(monster, effect) {
+//   if (effect === 'ATTACK') {
+//     const attackSound = monster.soundEffects.attack;
+
+//     // Check if the AudioContext and GainNode are already created
+//     if (!monster.audioContext) {
+//       monster.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+//       monster.gainNode = monster.audioContext.createGain();
+
+//       const source = monster.audioContext.createMediaElementSource(attackSound);
+//       source.connect(monster.gainNode);
+//       monster.gainNode.connect(monster.audioContext.destination);
+//     }
+
+//     // Set volume using the gain node
+//     monster.gainNode.gain.setValueAtTime(0.1, monster.audioContext.currentTime);
+
+//     // Play the audio
+//     attackSound.play();
+//   }
+// }
+
 // ===============================
 //        AUDIO VARIABLES
 // ===============================
 
 // Heroes
-const daggerSoundFX = loadAudio("audio/Sever Metal Hit 2.mp3");
+const severMetalHit2 = loadAudio(
+  "audio/Sever Metal Hit 2.mp3",
+  "severMetalHit2"
+);
 
 // Monsters Spawn
 
@@ -80,13 +169,20 @@ const daggerSoundFX = loadAudio("audio/Sever Metal Hit 2.mp3");
 
 // Monster Death
 
-// Items 
+// Items
+const flameLicks2 = loadAudio("audio/Flame Licks 2.mp3", "flameLicks2");
 
-// Food 
+// Food
+const chewCrackersMouth = loadAudio(
+  "audio/Chew Crackers Mouth.mp3",
+  "chewCrackersMouth"
+);
 
 // Drink
-
-
+const gulpingWater24 = loadAudio(
+  "audio/Gulping Water 24.mp3",
+  "gulpingWater24"
+);
 
 // Ambience
 const droneDungeon = loadAudio("audio/Drone Dungeon.mp3", true);

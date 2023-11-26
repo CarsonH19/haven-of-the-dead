@@ -9,7 +9,7 @@ let catacombRooms = [
       backgroundImage: 'styles/images/corridor-two.png',
       music: droneDungeon,
       contents: {
-        monsters: [BROODMOTHER],
+        monsters: [SKELETAL_SOLDIER],
         items: [],
         events: null,
       },

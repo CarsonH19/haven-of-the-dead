@@ -104,6 +104,7 @@ function calculateCritHitChance() {
 }
 
 function monsterAttackHandler() {
+  const monster = currentRoom.contents.monsters[0];
   let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
 
   // ITEM: Bonechill Amulet - reduces Draugr attacks
@@ -143,6 +144,9 @@ function monsterAttackHandler() {
     writeToLogMonster(LOG_MONSTER_MISS, 'NO');
   }
   
+  // Monster Attack Sound Effect
+  soundEffectHandler(monster, 'MONSTER ATTACK');
+
   damagePlayer(monsterToPlayerDamage);
   monsterAbilityHandler(currentRoom.contents.monsters[0]);
   showDamage(monsterToPlayerDamage, "MONSTER");
@@ -599,8 +603,6 @@ function updatePlayerTrackers() {
     heroFaith.textContent = baseFaith;
   }
 
-  fadeIn(currentRoom.music, 3);
-
   updateHealthTrackers();
   updateHeroLevel();
   updateHeroExperience();
@@ -785,10 +787,6 @@ attackBtn.addEventListener("click", function () {
     setTimeout(monsterAttackHandler, 1200);
     setTimeout(isGameOver, 1500);
     updatePlayerTrackers();
-  }
-
-  if (heroChoice === 'ROGUE') {
-    daggerSoundFX.play();
   }
 });
 

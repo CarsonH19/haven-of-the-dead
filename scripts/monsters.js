@@ -79,6 +79,12 @@ const SKELETAL_SOLDIER = {
   name: "Skeletal Soldier",
   type: "UNDEAD",
   skulls: 2,
+  soundEffects: {
+    spawn: '',
+    attack: severMetalHit2,
+    takeDamage: '',
+    death: '',
+  },
 };
 
 const ARMORED_SKELETON = {
