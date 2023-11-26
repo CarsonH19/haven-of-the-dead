@@ -80,10 +80,6 @@ function soundEffectHandler(object, type) {
     case "MONSTER ATTACK":
       sound = object.soundEffects.attack;
       volume = 0.05;
-
-      if (object === BONE_TITAN) {
-        volume = 0.5;
-      }
       break;
 
     case "MONSTER ABILITY":
@@ -96,12 +92,19 @@ function soundEffectHandler(object, type) {
       break;
 
     case "PLAYER ATTACK":
+      sound = object.soundEffects.attack;
+      break;
+
+    case "PLAYER ABILITY":
+      sound = object.soundEffects.ability;
       break;
 
     case "PLAYER GUARD":
+      sound = object.soundEffects.guard;
       break;
 
-    case "SPECIAL":
+    case "PLAYER MISS":
+      sound = object.soundEffects.miss;
       break;
 
     case "ITEM":
@@ -143,9 +146,46 @@ function soundEffectHandler(object, type) {
 // ===============================
 
 // Heroes
+
+// Attacks
 const severMetalHit2 = loadAudio(
   "audio/sound-effects/Sever Metal Hit 2.mp3",
   "severMetalHit2"
+);
+
+const swordImpactRock1 = loadAudio(
+  "audio/sound-effects/Sword Impact Rock 1.mp3",
+  "swordImpactRock1"
+);
+
+const swordImpactRock2 = loadAudio(
+  "audio/sound-effects/Sword Impact Rock 2.mp3",
+  "swordImpactRock2"
+);
+
+const magicWandCast14 = loadAudio(
+  "audio/sound-effects/Magic Wand Cast 14.mp3",
+  "magicWandCast14"
+);
+
+// Miss
+const swordSwingWhoosh = loadAudio(
+  "audio/sound-effects/Sword Swing Whoosh.mp3",
+  "swordSwingWhoosh"
+);
+
+// Guard
+const swordHit4 = loadAudio("audio/sound-effects/Sword Hit 4.mp3", "swordHit4");
+
+// Abilities
+const magicSpellWhoosh14 = loadAudio(
+  "audio/sound-effects/Magic Spell Whoosh 14.mp3",
+  "magicSpellWhoosh14"
+);
+
+const magicalSpell = loadAudio(
+  "audio/sound-effects/Magical Spell.mp3",
+  "magicalSpell"
 );
 
 // Monsters Spawn
@@ -158,11 +198,12 @@ const boneCrunchCrack1 = loadAudio(
 // Monster Attack
 // severMetalHit2
 
-const fleshHit5 = loadAudio('audio/sound-effects/Flesh Hit 5.mp3', 'fleshHit5');
+const fleshHit5 = loadAudio("audio/sound-effects/Flesh Hit 5.mp3", "fleshHit5");
 
-
-const impactPunchBody2 = loadAudio('audio/sound-effects/Impact Punch Body 2.mp3', 'impactPunchBody2');
-
+const impactPunchBody2 = loadAudio(
+  "audio/sound-effects/Impact Punch Body 2.mp3",
+  "impactPunchBody2"
+);
 
 // Monster Death
 

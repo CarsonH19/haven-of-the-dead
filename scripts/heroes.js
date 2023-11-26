@@ -11,6 +11,12 @@ let paladin = {
   dexterity: 0,
   faith: 1,
   special: paladinHolySmite,
+  soundEffects: {
+    attack: swordImpactRock1,
+    miss: swordSwingWhoosh,
+    ability: magicSpellWhoosh14,
+    guard: swordHit4,
+  },
 };
 
 function setPaladinStats() {
@@ -56,6 +62,12 @@ let rogue = {
   dexterity: 2,
   faith: 0,
   special: rogueShadowStrike,
+  soundEffects: {
+    attack: '',
+    miss: swordSwingWhoosh,
+    ability: '',
+    guard: swordHit4,
+  },
 };
 
 function setRogueStats() {
@@ -139,6 +151,12 @@ let priestess = {
   dexterity: 1,
   faith: 2,
   special: priestessGreaterPrayer,
+  soundEffects: {
+    attack: magicWandCast14,
+    miss: '',
+    ability: magicalSpell,
+    guard: '',
+  },
 };
 
 function setPriestessStats() {

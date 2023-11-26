@@ -29,43 +29,32 @@ function playerAttackHandler(smite) {
       smite * (playerToMonsterDamage * baseCritModifier)
     );
     showDamage(totalDamage, "PLAYER", "CRIT");
-    writeToLogHero(
-      LOG_SMITE_CRITICAL,
-      'YES',
-      totalDamage
-    );
+    soundEffectHandler(heroChecker(), "PLAYER ABILITY");
+    writeToLogHero(LOG_SMITE_CRITICAL, "YES", totalDamage);
     // Smite Hit
   } else if (smite > 1) {
     totalDamage = playerToMonsterDamage * smite;
     showDamage(totalDamage, "PLAYER");
-    writeToLogHero(
-      LOG_SMITE,
-      'YES',
-      totalDamage
-    );
+    soundEffectHandler(heroChecker(), "PLAYER ABILITY");
+    writeToLogHero(LOG_SMITE, "YES", totalDamage);
     // Critical Hit
   } else if (criticalHitChance >= 20) {
     totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
     showDamage(totalDamage, "PLAYER", "CRIT");
-    writeToLogActions(
-      LOG_PLAYER_CRITICAL,
-      'YES',
-      totalDamage
-    );
+    soundEffectHandler(heroChecker(), "PLAYER ATTACK");
+    writeToLogActions(LOG_PLAYER_CRITICAL, "YES", totalDamage);
     // Normal Hit
   } else if (playerToMonsterDamage > 0) {
     totalDamage = playerToMonsterDamage;
     showDamage(totalDamage, "PLAYER");
-    writeToLogActions(
-      LOG_PLAYER_ATTACK,
-      'NO',
-      totalDamage
-    );
+    soundEffectHandler(heroChecker(), "PLAYER ATTACK");
+    writeToLogActions(LOG_PLAYER_ATTACK, "NO", totalDamage);
     // Miss (No Damage)
   } else if (playerToMonsterDamage <= 0) {
     totalDamage = 0;
     showDamage(totalDamage, "PLAYER");
-    writeToLogActions(LOG_PLAYER_MISS, 'NO');
+    soundEffectHandler(heroChecker(), "PLAYER MISS");
+    writeToLogActions(LOG_PLAYER_MISS, "NO");
   }
 
   damageMonster(totalDamage);
@@ -87,11 +76,7 @@ function dealMonsterDamage(damage) {
 
   if (heroChoice === "PRIESTESS" && damageDealt < burningDevotionTracker) {
     damageDealt = burningDevotionTracker;
-    writeToLogHero(
-      LOG_BURNING_DEVOTION,
-      'NO',
-      damageDealt
-    );
+    writeToLogHero(LOG_BURNING_DEVOTION, "NO", damageDealt);
   }
 
   return damageDealt;
@@ -126,26 +111,19 @@ function monsterAttackHandler() {
   // Rogue Passive Ability Checker
   if (heroChoice === "ROGUE" && evasionTracker >= monsterToPlayerDamage) {
     monsterToPlayerDamage = 0;
-    writeToLogHero(
-      LOG_EVASION,
-      'NO'
-    );
+    writeToLogHero(LOG_EVASION, "NO");
   }
 
   if (monsterToPlayerDamage > 0) {
     damageFlashAnimation();
 
-    writeToLogMonster(
-      LOG_MONSTER_ATTACK,
-      'NO',
-      monsterToPlayerDamage
-    );
+    writeToLogMonster(LOG_MONSTER_ATTACK, "NO", monsterToPlayerDamage);
   } else if (monsterToPlayerDamage <= 0) {
-    writeToLogMonster(LOG_MONSTER_MISS, 'NO');
+    writeToLogMonster(LOG_MONSTER_MISS, "NO");
   }
-  
+
   // Monster Attack Sound Effect
-  soundEffectHandler(monster, 'MONSTER ATTACK');
+  soundEffectHandler(monster, "MONSTER ATTACK");
 
   damagePlayer(monsterToPlayerDamage);
   monsterAbilityHandler(currentRoom.contents.monsters[0]);
@@ -241,50 +219,33 @@ function specialCooldownHandler() {
 // ===============================
 
 function guardHandler() {
-  const monsterToGuardDamage = calculateMonsterDamage();
-  const damageBlocked = Math.round(Math.random() * monsterToGuardDamage);
-  const damageTaken = monsterToGuardDamage - damageBlocked;
+  let monsterToGuardDamage = dealPlayerDamage(monsterAttackValue);
+  let damageBlocked = Math.round(Math.random() * monsterToGuardDamage);
+  damageBlocked += baseDexterity * 2;
+  let damageTaken = monsterToGuardDamage - damageBlocked;
 
-  playerHealthBar.value = +playerHealthBar.value - damageTaken;
-  currentPlayerHealth -= damageTaken;
-
-  console.log(damageBlocked);
-  console.log(damageTaken);
-
-  if (damageBlocked > 0) {
-    console.log("ONE");
-    writeToLogActions(
-      LOG_GUARD,
-      'NO',
-      damageBlocked + baseDexterity
-    );
-  } else if (damageBlocked <= 0 && damageTaken > 0) {
-    console.log("TWO");
-    writeToLogActions(
-      LOG_GUARD_FAIL,
-      'NO'
-    );
+  if (damageBlocked <= monsterToGuardDamage) {
+    soundEffectHandler(heroChecker(), "PLAYER GUARD");
+    writeToLogActions(LOG_GUARD, "NO", damageBlocked);
   }
 
   if (damageTaken > 0) {
     damageFlashAnimation();
-
-    writeToLogMonster(
-      LOG_MONSTER_ATTACK,
-      'NO',
-      damageTaken
-    );
+    showDamage(damageTaken, "MONSTER");
+    damagePlayer(damageTaken);
+    soundEffectHandler(heroChecker(), "MONSTER ATTACK");
+    writeToLogMonster(LOG_MONSTER_ATTACK, "NO", damageTaken);
   } else {
-    writeToLogMonster(
-      LOG_MONSTER_MISS,
-      'NO'
-    );
+    damagePlayer(0);
+    showDamage(0, "MONSTER");
+    writeToLogMonster(LOG_MONSTER_MISS, "NO");
   }
 
   // console.log(`Damage Received: ${monsterToGuardDamage}`);
   // console.log(`Damage Blocked: ${damageBlocked}`);
   // console.log(`Current Player Health ${currentPlayerHealth}`);
   // console.log(`Current Player Health Bar Value ${playerHealthBar.value}`);
+
   updatePlayerTrackers();
 }
 
@@ -331,10 +292,9 @@ function potionHandler() {
 
   potions.textContent = ` x ${potionCounter}`;
 
-
   healPlayer(potionHealValue);
-  soundEffectHandler(POTION, 'ITEM');
-  writeToLogActions(LOG_POTION, 'YES', potionHealValue);
+  soundEffectHandler(POTION, "ITEM");
+  writeToLogActions(LOG_POTION, "YES", potionHealValue);
 }
 
 // ===============================
@@ -350,7 +310,7 @@ function fleeHandler() {
 
   if (fleeChance >= 10) {
     console.log("Flee Successful");
-    writeToLogActions(LOG_FLEE, 'YES', currentRoom.name);
+    writeToLogActions(LOG_FLEE, "YES", currentRoom.name);
     getRandomRoom(catacombRooms);
     renderCurrentRoom(currentRoom);
   }
@@ -379,7 +339,7 @@ function isGameOver() {
     // ITEM: Bloodstone - Recovers health when monster dies
     isItemAttuned(BLOODSTONE, null);
 
-    soundEffectHandler(monster, 'MONSTER DEATH')
+    soundEffectHandler(monster, "MONSTER DEATH");
 
     gainExperience(currentRoom.contents.monsters[0].skulls);
     fadeOutAnimation(monsterContainer, 0000);
@@ -465,13 +425,13 @@ function renderCurrentRoom(currentRoom) {
       renderEvent(currentRoom.contents.events);
       switch (currentRoom.contents.events.eventType) {
         case "TRAP":
-          writeToLogEvent(LOG_TRAP_DESCRIPTION, 'YES');
+          writeToLogEvent(LOG_TRAP_DESCRIPTION, "YES");
           break;
         case "NPC":
-          writeToLogEvent(LOG_NPC_DESCRIPTION, 'YES');
+          writeToLogEvent(LOG_NPC_DESCRIPTION, "YES");
           break;
         case "MISC":
-          writeToLogEvent(LOG_MISC_DESCRIPTION, 'YES');
+          writeToLogEvent(LOG_MISC_DESCRIPTION, "YES");
           break;
       }
     }, 3000);
@@ -480,8 +440,8 @@ function renderCurrentRoom(currentRoom) {
   // Calls function if one exists
   if (currentRoom.function) {
     currentRoom.function();
-  }  
-  
+  }
+
   specialCooldownHandler();
   togglePlayerControls();
   setRoomSummary();
@@ -552,8 +512,6 @@ function renderBackground(link) {
     gameWindow.style.backgroundRepeat = "no-repeat";
     gameWindow.style.backgroundSize = "cover";
   };
-
-
 }
 
 function updatePlayerTrackers() {
@@ -581,19 +539,19 @@ function updatePlayerTrackers() {
     const xpToNextLevel = document.getElementById("xpToNextLevel");
 
     if (levelCounter === 1) {
-      xpToNextLevel.textContent = 30; 
+      xpToNextLevel.textContent = 30;
     } else if (levelCounter === 2) {
-      xpToNextLevel.textContent = 80; 
+      xpToNextLevel.textContent = 80;
     } else if (levelCounter === 3) {
-      xpToNextLevel.textContent = 160; 
+      xpToNextLevel.textContent = 160;
     } else if (levelCounter === 4) {
-      xpToNextLevel.textContent = 270; 
+      xpToNextLevel.textContent = 270;
     } else if (levelCounter === 5) {
       xpToNextLevel.textContent = 410;
     } else if (levelCounter === 6) {
-      xpToNextLevel.textContent = 580; 
+      xpToNextLevel.textContent = 580;
     } else if (levelCounter === 7) {
-      xpToNextLevel.textContent = 780; 
+      xpToNextLevel.textContent = 780;
     } else if (levelCounter === 8) {
       xpToNextLevel.textContent = 999;
     } else {
@@ -605,7 +563,7 @@ function updatePlayerTrackers() {
     const heroStrength = document.getElementById("heroStrength");
     const heroDexterity = document.getElementById("heroDexterity");
     const heroFaith = document.getElementById("heroFaith");
-  
+
     heroStrength.textContent = baseStrength;
     heroDexterity.textContent = baseDexterity;
     heroFaith.textContent = baseFaith;
@@ -834,6 +792,7 @@ specialBtn.addEventListener("click", () => {
     setTimeout(monsterAttackHandler, 1200);
   }
 
+  soundEffectHandler(heroChecker(), "PLAYER ABILITY");
   updatePlayerTrackers();
   specialCooldownHandler();
 });
@@ -895,7 +854,7 @@ continueButton.addEventListener("click", () => {
       currentRoom = CANDLELIGHT_SHRINE;
       renderCurrentRoom(CANDLELIGHT_SHRINE);
       guidingLightTracker = null;
-    } else if (rowdyWispTracker === "ARRIVE"){
+    } else if (rowdyWispTracker === "ARRIVE") {
       currentRoom = LAUGHING_COFFIN_ROOM;
       renderCurrentRoom(LAUGHING_COFFIN_ROOM);
       rowdyWispTracker = null;
@@ -903,7 +862,7 @@ continueButton.addEventListener("click", () => {
       currentRoom = BLOOD_ALTER;
       renderCurrentRoom(BLOOD_ALTER);
       unholyWispTracker = null;
-    } else if (restlessWispTracker === 'ARRIVE') {
+    } else if (restlessWispTracker === "ARRIVE") {
       currentRoom = LOST_LEGIONS_VALE;
       renderCurrentRoom(LOST_LEGIONS_VALE);
       restlessWispTracker = null;
@@ -914,13 +873,13 @@ continueButton.addEventListener("click", () => {
     }
   }, 1500);
 
-  soundEffectHandler(whooshLowAir ,'NEW ROOM');
+  soundEffectHandler(whooshLowAir, "NEW ROOM");
 });
 
-settingsButton.addEventListener('click', () => {
+settingsButton.addEventListener("click", () => {
   // openSettingsHandler();
-  settingsModal.style.display = 'block';
-})
+  settingsModal.style.display = "block";
+});
 
 volumeUpButton.addEventListener("click", () => adjustVolume(music, 0.05));
 volumeDownButton.addEventListener("click", () => adjustVolume(music, -0.05));
