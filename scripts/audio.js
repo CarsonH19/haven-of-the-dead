@@ -91,6 +91,10 @@ function soundEffectHandler(object, type) {
       sound = object.soundEffects.death;
       break;
 
+    case "MONSTER MISS":
+      sound = object;
+      break;
+
     case "PLAYER ATTACK":
       sound = object.soundEffects.attack;
       break;
@@ -111,9 +115,8 @@ function soundEffectHandler(object, type) {
       sound = object.soundEffect;
       break;
 
-    case "NEW ROOM":
+    default:
       sound = object;
-      break;
   }
 
   // Check if the AudioContext and GainNode are already created
@@ -163,6 +166,11 @@ const swordImpactRock2 = loadAudio(
   "swordImpactRock2"
 );
 
+const swordDraw2 = loadAudio(
+  "audio/sound-effects/Sword Draw 2.mp3",
+  "swordDraw2"
+);
+
 const magicWandCast14 = loadAudio(
   "audio/sound-effects/Magic Wand Cast 14.mp3",
   "magicWandCast14"
@@ -186,6 +194,11 @@ const magicSpellWhoosh14 = loadAudio(
 const magicalSpell = loadAudio(
   "audio/sound-effects/Magical Spell.mp3",
   "magicalSpell"
+);
+
+const ghostlyWhoosh = loadAudio(
+  "audio/sound-effects/Ghostly Whoosh.mp3",
+  "ghostlyWhoosh"
 );
 
 // Monsters Spawn
@@ -248,6 +261,12 @@ const chewCrackersMouth = loadAudio(
 const gulpingWater24 = loadAudio(
   "audio/sound-effects/Gulping Water 24.mp3",
   "gulpingWater24"
+);
+
+// Wisp
+const ghostBreathWithReverb = loadAudio(
+  "audio/sound-effects/Ghostly Breath With Reverb.mp3",
+  "ghostBreathWithReverb"
 );
 
 // Rooms

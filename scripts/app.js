@@ -111,19 +111,18 @@ function monsterAttackHandler() {
   // Rogue Passive Ability Checker
   if (heroChoice === "ROGUE" && evasionTracker >= monsterToPlayerDamage) {
     monsterToPlayerDamage = 0;
+    soundEffectHandler(swordSwingWhoosh, "MONSTER MISS");
     writeToLogHero(LOG_EVASION, "NO");
   }
 
   if (monsterToPlayerDamage > 0) {
     damageFlashAnimation();
-
+    soundEffectHandler(monster, "MONSTER ATTACK");
     writeToLogMonster(LOG_MONSTER_ATTACK, "NO", monsterToPlayerDamage);
   } else if (monsterToPlayerDamage <= 0) {
+    soundEffectHandler(swordSwingWhoosh, "MONSTER MISS");
     writeToLogMonster(LOG_MONSTER_MISS, "NO");
   }
-
-  // Monster Attack Sound Effect
-  soundEffectHandler(monster, "MONSTER ATTACK");
 
   damagePlayer(monsterToPlayerDamage);
   monsterAbilityHandler(currentRoom.contents.monsters[0]);
@@ -238,6 +237,7 @@ function guardHandler() {
   } else {
     damagePlayer(0);
     showDamage(0, "MONSTER");
+    soundEffectHandler(swordSwingWhoosh, "MONSTER MISS");
     writeToLogMonster(LOG_MONSTER_MISS, "NO");
   }
 
@@ -873,7 +873,7 @@ continueButton.addEventListener("click", () => {
     }
   }, 1500);
 
-  soundEffectHandler(whooshLowAir, "NEW ROOM");
+  soundEffectHandler(whooshLowAir);
 });
 
 settingsButton.addEventListener("click", () => {

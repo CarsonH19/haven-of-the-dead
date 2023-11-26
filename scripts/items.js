@@ -1076,6 +1076,7 @@ const SOULFLAME_CANDLE = {
 const GUIDING_LIGHT = {
   name: "Guiding Light",
   description: "",
+  soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "RARE",
   effect:
@@ -1120,6 +1121,7 @@ const GUIDING_LIGHT = {
 const ROWDY_WISP = {
   name: "Rowdy Wisp",
   description: "",
+  soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "RARE",
   effect:
@@ -1157,6 +1159,7 @@ const ROWDY_WISP = {
 const UNHOLY_WISP = {
   name: "Unholy Wisp",
   description: "",
+  soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "RARE",
   effect:
@@ -1194,6 +1197,7 @@ const UNHOLY_WISP = {
 const RESTLESS_WISP = {
   name: "Restless Wisp",
   description: "",
+  soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "RARE",
   effect: "When this item is used a wisp will guide you to Lost Legions Vale.",

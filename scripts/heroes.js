@@ -63,9 +63,9 @@ let rogue = {
   faith: 0,
   special: rogueShadowStrike,
   soundEffects: {
-    attack: '',
+    attack: swordDraw2,
     miss: swordSwingWhoosh,
-    ability: '',
+    ability: ghostlyWhoosh,
     guard: swordHit4,
   },
 };
@@ -153,9 +153,9 @@ let priestess = {
   special: priestessGreaterPrayer,
   soundEffects: {
     attack: magicWandCast14,
-    miss: '',
+    miss: swordSwingWhoosh,
     ability: magicalSpell,
-    guard: '',
+    guard: swordSwingWhoosh,
   },
 };
 
