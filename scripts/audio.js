@@ -69,8 +69,8 @@ function updateVolumeDisplay(volume) {
 // }
 
 function soundEffectHandler(object, type) {
-  // const hero = heroChecker();
   let sound;
+  let volume = 0.1;
 
   switch (type) {
     case "SPAWN":
@@ -79,6 +79,7 @@ function soundEffectHandler(object, type) {
 
     case "MONSTER ATTACK":
       sound = object.soundEffects.attack;
+      volume = 0.05;
       break;
 
     case "TAKE DAMAGE":
@@ -90,68 +91,39 @@ function soundEffectHandler(object, type) {
       break;
 
     case "PLAYER ATTACK":
-      // if (hero === 'PALADIN') {
-
-      // } else if (hero === 'ROGUE') {
-
-      // } else if (hero === 'PRIESTESS' ) {
-
-      // }
-      // sound = object.soundFX.attack;
       break;
 
     case "PLAYER GUARD":
-      // sound = object.soundFX.attack;
       break;
 
     case "SPECIAL":
-      // sound = object.soundFX.attack;
       break;
 
     case "ITEM":
-      // sound = object.soundFX.attack;
+      sound = object.soundEffect;
       break;
   }
 
   // Check if the AudioContext and GainNode are already created
   if (!object.audioContext) {
-    object.audioContext = new (window.AudioContext ||
-      window.webkitAudioContext)();
+    object.audioContext = new (window.AudioContext || window.webkitAudioContext)();
     object.gainNode = object.audioContext.createGain();
 
-    const source = object.audioContext.createMediaElementSource(sound);
-    source.connect(object.gainNode);
+    // Create a single MediaElementSourceNode
+    object.mediaElementSource = object.audioContext.createMediaElementSource(document.createElement('audio'));
+    object.mediaElementSource.connect(object.gainNode);
     object.gainNode.connect(object.audioContext.destination);
   }
 
   // Set volume using the gain node
-  object.gainNode.gain.setValueAtTime(0.05, object.audioContext.currentTime);
+  object.gainNode.gain.setValueAtTime(volume, object.audioContext.currentTime);
+
+  // Set the MediaElementSourceNode's mediaElement property to the current sound
+  object.mediaElementSource.mediaElement = sound;
 
   // Play the audio
   sound.play();
 }
-
-// function monsterSoundEffectHandler(monster, effect) {
-//   if (effect === 'ATTACK') {
-//     const attackSound = monster.soundEffects.attack;
-
-//     // Check if the AudioContext and GainNode are already created
-//     if (!monster.audioContext) {
-//       monster.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-//       monster.gainNode = monster.audioContext.createGain();
-
-//       const source = monster.audioContext.createMediaElementSource(attackSound);
-//       source.connect(monster.gainNode);
-//       monster.gainNode.connect(monster.audioContext.destination);
-//     }
-
-//     // Set volume using the gain node
-//     monster.gainNode.gain.setValueAtTime(0.1, monster.audioContext.currentTime);
-
-//     // Play the audio
-//     attackSound.play();
-//   }
-// }
 
 // ===============================
 //        AUDIO VARIABLES

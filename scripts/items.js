@@ -736,6 +736,7 @@ const POTION = {
   type: "CONSUMABLE",
   rarity: "COMMON",
   effect: "Restores 20 health points and can be used during combat.",
+  soundEffect: gulpingWater24,
   function: () => {
     potionHandler();
   },
@@ -747,6 +748,7 @@ const CRYPTBREAD = {
   type: "CONSUMABLE",
   rarity: "COMMON",
   effect: "Restores 10 health points when eaten.",
+  soundEffect: chewCrackersMouth,
   function: () => {
     healPlayer(10);
     //writeToLogItem
@@ -759,6 +761,7 @@ const BONE_MARROW_SOUP = {
   type: "CONSUMABLE",
   rarity: "COMMON",
   effect: "Restores 15 health points when eaten.",
+  soundEffect: gulpingWater24,
   function: () => {
     healPlayer(15);
     //writeToLogItem
@@ -771,6 +774,7 @@ const MARROWSTONE_CHEESE = {
   type: "CONSUMABLE",
   rarity: "RARE",
   effect: "Restores 20 health points when eaten.",
+  soundEffect: chewCrackersMouth,
   function: () => {
     healPlayer(25);
     //writeToLogItem
@@ -783,6 +787,7 @@ const TOMBSTONE_TRUFFLE = {
   type: "CONSUMABLE",
   rarity: "RARE",
   effect: "Restores 10 health points when eaten.",
+  soundEffect: chewCrackersMouth,
   function: () => {
     healPlayer(10);
     //writeToLogItem
@@ -807,8 +812,8 @@ const LICHROOT = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
-  effect:
-    "Can be used to permanently increase the potency of health potions by 5HP.",
+  effect: "Can be used to permanently increase the potency of health potions by 5HP.",
+  soundEffect: chewCrackersMouth,
   function: () => {
     potionHealValue += 5;
     //writeToLogItem
@@ -821,6 +826,7 @@ const GRAVEBLOOM = {
   type: "CONSUMABLE",
   rarity: "COMMON",
   effect: "Can be used for a chance to cure poison.",
+  soundEffect: chewCrackersMouth,
   function: () => {
     if (POISONED.duration !== null) {
       let randomNumber = Math.round(Math.random() * 10);
@@ -868,6 +874,7 @@ const BLACKHEART_BREW = {
   rarity: "RARE",
   effect:
     "Can be used to gain increased Strength, but decreased Dexterity for a short time.",
+  soundEffect: gulpingWater24,
   status: "You are drunk. Strength increased by 2 & Dexterity decreased by 1.",
   duration: null,
   function: () => {
@@ -1547,6 +1554,10 @@ function useConsumable(consumable) {
   }
 
   itemObject.function();
+
+  if (itemObject.soundEffect) {
+    soundEffectHandler(itemObject, 'ITEM');
+  }
 
   clearInventory();
   renderInventory();

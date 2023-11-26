@@ -329,9 +329,12 @@ function potionHandler() {
     potionBtn.disabled = true;
   }
 
-  healPlayer(potionHealValue);
-  writeToLogActions(LOG_POTION, 'YES', potionHealValue);
   potions.textContent = ` x ${potionCounter}`;
+
+
+  healPlayer(potionHealValue);
+  soundEffectHandler(POTION, 'ITEM');
+  writeToLogActions(LOG_POTION, 'YES', potionHealValue);
 }
 
 // ===============================
