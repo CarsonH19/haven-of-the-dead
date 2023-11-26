@@ -80,10 +80,15 @@ function soundEffectHandler(object, type) {
     case "MONSTER ATTACK":
       sound = object.soundEffects.attack;
       volume = 0.05;
+
+      if (object === BONE_TITAN) {
+        volume = 0.5;
+      }
       break;
 
-    case "TAKE DAMAGE":
-      sound = object.soundEffects.takeDamage;
+    case "MONSTER ABILITY":
+      sound = object.soundEffects.ability;
+      volume = 0.05;
       break;
 
     case "MONSTER DEATH":
@@ -103,7 +108,7 @@ function soundEffectHandler(object, type) {
       sound = object.soundEffect;
       break;
 
-    case 'NEW ROOM':
+    case "NEW ROOM":
       sound = object;
       break;
   }
@@ -145,9 +150,31 @@ const severMetalHit2 = loadAudio(
 
 // Monsters Spawn
 
+const boneCrunchCrack1 = loadAudio(
+  "audio/sound-effects/Bone Crunch Crack 1.mp3",
+  "boneCrunchCrack1"
+);
+
 // Monster Attack
+// severMetalHit2
+
+const fleshHit5 = loadAudio('audio/sound-effects/Flesh Hit 5.mp3', 'fleshHit5');
+
+
+const impactPunchBody2 = loadAudio('audio/sound-effects/Impact Punch Body 2.mp3', 'impactPunchBody2');
+
 
 // Monster Death
+
+const boneBreak7 = loadAudio(
+  "audio/sound-effects/Bone Break 7.mp3",
+  "boneBreak7"
+);
+
+const boneBreak8 = loadAudio(
+  "audio/sound-effects/Bone Break 8.mp3",
+  "boneBreak8"
+);
 
 // Items
 const flameLicks2 = loadAudio(
@@ -184,7 +211,10 @@ const gulpingWater24 = loadAudio(
 
 // Rooms
 
-const whooshLowAir = loadAudio('audio/sound-effects/Whoosh Low Air.mp3', 'whooshLowAir')
+const whooshLowAir = loadAudio(
+  "audio/sound-effects/Whoosh Low Air.mp3",
+  "whooshLowAir"
+);
 // const droneDungeon = loadAudio("audio/music/Drone Dungeon.mp3", true);
 
 // Music

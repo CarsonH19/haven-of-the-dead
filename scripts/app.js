@@ -361,6 +361,8 @@ function fleeHandler() {
 // ===============================
 
 function isGameOver() {
+  const monster = currentRoom.contents.monsters[0];
+
   if (currentPlayerHealth <= 0) {
     // ITEM: Soul Jar - resurrect with half HP
     isItemAttuned(SOUL_JAR, null);
@@ -376,6 +378,9 @@ function isGameOver() {
 
     // ITEM: Bloodstone - Recovers health when monster dies
     isItemAttuned(BLOODSTONE, null);
+
+    soundEffectHandler(monster, 'MONSTER DEATH')
+
     gainExperience(currentRoom.contents.monsters[0].skulls);
     fadeOutAnimation(monsterContainer, 0000);
     setTimeout(() => {

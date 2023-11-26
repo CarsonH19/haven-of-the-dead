@@ -73,6 +73,11 @@ const DECREPIT_SKELETON = {
   name: "Decrepit Skeleton",
   type: "UNDEAD",
   skulls: 1,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: impactPunchBody2,
+    death: boneBreak8,
+  },
 };
 
 const SKELETAL_SOLDIER = {
@@ -80,10 +85,9 @@ const SKELETAL_SOLDIER = {
   type: "UNDEAD",
   skulls: 2,
   soundEffects: {
-    spawn: '',
+    spawn: boneCrunchCrack1,
     attack: severMetalHit2,
-    takeDamage: '',
-    death: '',
+    death: boneBreak8,
   },
 };
 
@@ -91,6 +95,11 @@ const ARMORED_SKELETON = {
   name: "Armored Skeleton",
   type: "UNDEAD",
   skulls: 3,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: boneBreak8,
+  },
 };
 
 const BLAZING_SKELETON = {
@@ -118,6 +127,12 @@ const BONE_TITAN = {
   name: "Bone Titan",
   type: "UNDEAD",
   skulls: 7,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: fleshHit5,
+    death: boneBreak8,
+    ability: boneBreak7,
+  },
   function: () => {
     damageMonster(currentMonsterHealth);
     currentRoom.contents.monsters.push(
@@ -125,6 +140,8 @@ const BONE_TITAN = {
       DECREPIT_SKELETON,
       DECREPIT_SKELETON
     );
+
+    soundEffectHandler(BONE_TITAN, 'MONSTER ABILITY');
     //writeToLog(); crumbles and reforms into smaller skeletons
   },
 };
@@ -298,6 +315,8 @@ function startBattle() {
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
     isItemAttuned(ETHEREAL_CROWN);
   }, 1000);
+
+  soundEffectHandler(currentRoom.contents.monsters[0], 'SPAWN');
 }
 
 function checkForMonsters() {

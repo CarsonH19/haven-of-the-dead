@@ -14,17 +14,17 @@ let catacombRooms = [
         events: null,
       },
     },
-    {
-    roomName: "TEST ROOM TWO", // !FINISHED!
-    description: 'TEST =)',
-    backgroundImage: 'styles/images/corridor-two.png',
-    music: null,
-    contents: {
-      monsters: [BROODMOTHER],
-      items: [],
-      events: null,
-    },
-  },
+  //   {
+  //   roomName: "TEST ROOM TWO", // !FINISHED!
+  //   description: 'TEST =)',
+  //   backgroundImage: 'styles/images/corridor-two.png',
+  //   music: null,
+  //   contents: {
+  //     monsters: [BROODMOTHER],
+  //     items: [],
+  //     events: null,
+  //   },
+  // },
 ];
 
 
