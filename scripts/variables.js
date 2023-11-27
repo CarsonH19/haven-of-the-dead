@@ -523,6 +523,7 @@ const WEBBED = {
           WEBBED.duration = null;
           counter = 0;
           togglePlayerControls();
+          soundEffectHandler(fleshRip1);
           //writeToLog() You break free
           clearInterval(webbedInterval);
         } else {
@@ -530,7 +531,7 @@ const WEBBED = {
           monsterAttackHandler();
           //writeToLog() The spider attacks you while you struggle to break free
         }
-      }, 3000);
+      }, 2000);
 
       statusEffectHandler(WEBBED);
       renderStatusEffects(WEBBED);

@@ -9,7 +9,7 @@ let catacombRooms = [
       backgroundImage: 'styles/images/corridor-two.png',
       music: null,
       contents: {
-        monsters: [GNAWER, GNAWER, GNAWER],
+        monsters: [CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER],
         items: [],
         events: null,
       },

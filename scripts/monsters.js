@@ -161,7 +161,7 @@ const DRAUGR = {
     spawn: boneCrunchCrack1,
     attack: severMetalHit2,
     death: boneBreak8,
-    ability: null,
+    ability: iceCrackFreeze,
   },
   function: () => {
     CHILLED.function(5);

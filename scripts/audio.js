@@ -243,6 +243,8 @@ const iceCrackFreeze = loadAudio(
   "iceCrackFreeze"
 );
 
+const fleshRip1 = loadAudio("audio/sound-effects/Flesh Rip 1.mp3", "fleshRip1");
+
 // ===============================
 //        Monster Spawn
 // ===============================
