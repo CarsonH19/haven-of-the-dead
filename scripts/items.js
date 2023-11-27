@@ -1370,6 +1370,10 @@ function removeItem(itemName) {
   renderInventory();
 }
 
+// ===============================
+//      STATUS EFFECT LOGIC
+// ===============================
+
 function statusEffectHandler(item) {
   switch (item) {
     case WARDING_CANDLE:
@@ -1461,6 +1465,10 @@ function statusEffectHandler(item) {
       //writeToLogItem()
       baseAttack++;
       updatePlayerTrackers();
+      break;
+
+    case CHILLED:
+      //writeToLogItem() You are chilled and unable to use your special ability
       break;
   }
 }

@@ -144,6 +144,9 @@ function damagePlayer(damage) {
     playerHealthBar.value = +playerHealthBar.value - damage;
     currentPlayerHealth -= damage;
   }
+
+  damageFlashAnimation();
+  healthLowAnimation();
 }
 
 function showDamage(damage, source, critical) {

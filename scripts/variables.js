@@ -538,3 +538,52 @@ const WEBBED = {
 }; //,
 // };
 
+const CHILLED = {
+  name: "CHilled",
+  status: "You are unable to use your special ability.",
+  duration: null,
+  function: (length) => {
+    if (CHILLED.duration === null) {
+      CHILLED.statusDuration = roomCounter + length;
+      CHILLED.duration = `Duration: ${
+        CHILLED.statusDuration - roomCounter
+      } Rooms`;
+
+      // ITEM: Plagueward Pendant - Disease Immunity
+      // const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
+
+      if (!immune) {
+        let diseasedInterval = setInterval(() => {
+          if (CHILLED.statusDuration - roomCounter > 1) {
+            CHILLED.duration = `Duration: ${
+              CHILLED.statusDuration - roomCounter
+            } Rooms`;
+          } else {
+            CHILLED.duration = `Duration: ${
+              CHILLED.statusDuration - roomCounter
+            } Room`;
+          }
+
+          if (roomCounter >= CHILLED.statusDuration) {
+            CHILLED.duration = null;
+            CHILLED.statusDuration = null;
+
+            updatePlayerTrackers();
+            clearInterval(diseasedInterval);
+          }
+        }, 15000);
+
+        statusEffectHandler(CHILLED);
+        renderStatusEffects(CHILLED);
+      }
+    } else {
+      if (length > CHILLED.statusDuration - roomCounter) {
+        CHILLED.statusDuration = roomCounter + length;
+        CHILLED.duration = `Duration: ${
+          CHILLED.statusDuration - roomCounter
+        } Rooms`;
+        //writeToLog() Disease intensifies
+      }
+    }
+  },
+};

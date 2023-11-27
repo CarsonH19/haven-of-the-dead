@@ -207,7 +207,22 @@ const ghostlyWhoosh = loadAudio(
   "ghostlyWhoosh"
 );
 
+const magicSpellFire1 = loadAudio(
+  "audio/sound-effects/Magic Spell Fire 1.mp3",
+  "magicSpellFire1"
+);
+
 // Monsters Spawn
+
+const ratSqueak30 = loadAudio(
+  "audio/sound-effects/Rat Squeaks 30.mp3",
+  "ratSqueak30"
+);
+
+const ratSqueak9 = loadAudio(
+  "audio/sound-effects/Rat Squeaks 9.mp3",
+  "ratSqueak9"
+);
 
 const boneCrunchCrack1 = loadAudio(
   "audio/sound-effects/Bone Crunch Crack 1.mp3",
@@ -219,14 +234,68 @@ const swordFromSheath3 = loadAudio(
   "swordFromSheath3"
 );
 
+const spiderDaddyLong1 = loadAudio(
+  "audio/sound-effects/Spider Daddy Long 1.mp3",
+  "spiderDaddyLong1"
+);
+
+const spiderDaddyLong2 = loadAudio(
+  "audio/sound-effects/Spider Daddy Long 2.mp3",
+  "spiderDaddyLong2"
+);
+
+const ghostAppearance1 = loadAudio(
+  "audio/sound-effects/Ghost Appearance 1.mp3",
+  "ghostAppearance1"
+);
+
 // Monster Attack
 // severMetalHit2
+
+const impactFleshChop = loadAudio('audio/sound-effects/Impact Flesh Chop.mp3', 'impactFleshChop');
 
 const fleshHit5 = loadAudio("audio/sound-effects/Flesh Hit 5.mp3", "fleshHit5");
 
 const impactPunchBody2 = loadAudio(
   "audio/sound-effects/Impact Punch Body 2.mp3",
   "impactPunchBody2"
+);
+
+const spiderBiteFang3 = loadAudio(
+  "audio/sound-effects/Spider Bite Fang 3.mp3",
+  "spiderBiteFang3"
+);
+
+const spiderBiteFang4 = loadAudio(
+  "audio/sound-effects/Spider Bite Fang 4.mp3",
+  "spiderBiteFang4"
+);
+
+const knifeStab = loadAudio("audio/sound-effects/Knife Stab.mp3", "knifeStab");
+
+const skullHitShovel = loadAudio(
+  "audio/sound-effects/Skull Hit Shovel.mp3",
+  "skullHitShovel"
+);
+
+const whooshGhostBy1 = loadAudio(
+  "audio/sound-effects/Whoosh Ghost By 1.mp3",
+  "whooshGhostBy1"
+);
+
+const whooshGhostBy2 = loadAudio(
+  "audio/sound-effects/Whoosh Ghost By 2.mp3",
+  "whooshGhostBy2"
+);
+
+const whooshGhost = loadAudio(
+  "audio/sound-effects/Whoosh Ghost.mp3",
+  "whooshGhost"
+);
+
+const torchPassBy1 = loadAudio(
+  "audio/sound-effects/Torch Pass By 1.mp3",
+  "torchPassBy1"
 );
 
 // Monster Death
@@ -249,6 +318,23 @@ const armorMetalClanksToTheGround = loadAudio(
 const fightGrunt6 = loadAudio(
   "audio/sound-effects/Fight Grunt 6.mp3",
   "fightGrunt6"
+);
+
+const alienSpiderWeb3 = loadAudio(
+  "audio/sound-effects/Alien Spider Web 3.mp3",
+  "alienSpiderWeb3"
+);
+
+const insectsSpider3 = loadAudio(
+  "audio/sound-effects/Insects Spider.mp3",
+  "insectsSpider3"
+);
+
+const ghostHowl = loadAudio("audio/sound-effects/Ghost Howl.mp3", "ghostHowl");
+
+const ghostShriekWhoosh = loadAudio(
+  "audio/sound-effects/Ghost Shriek Whoosh.mp3",
+  "ghostShriekWhoosh"
 );
 
 // Items

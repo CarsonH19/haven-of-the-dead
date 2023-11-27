@@ -9,6 +9,11 @@ const GNAWER = {
   name: "Gnawer",
   type: "BEAST",
   skulls: 1,
+  soundEffects: {
+    spawn: ratSqueak9,
+    attack: impactFleshChop,
+    death: ratSqueak30,
+  },
   function: () => {
     DISEASED.function(3);
   },
@@ -22,6 +27,11 @@ const CRYPT_CRAWLER = {
   name: "Crypt Crawler",
   type: "BEAST",
   skulls: 1,
+  soundEffects: {
+    spawn: spiderDaddyLong1,
+    attack: spiderBiteFang3,
+    death: alienSpiderWeb3,
+  },
   function: () => {
     WEBBED.function(4);
   },
@@ -31,6 +41,11 @@ const COFFIN_SPIDER = {
   name: "Coffin Spider",
   type: "BEAST",
   skulls: 3,
+  soundEffects: {
+    spawn: spiderDaddyLong2,
+    attack: spiderBiteFang3,
+    death: alienSpiderWeb3,
+  },
   function: () => {
     WEBBED.function(5);
   },
@@ -40,6 +55,11 @@ const BROODMOTHER = {
   name: "Broodmother",
   type: "BEAST",
   skulls: 6,
+  soundEffects: {
+    spawn: spiderDaddyLong2,
+    attack: spiderBiteFang4,
+    death: insectsSpider3,
+  },
   hatchEggCounter: 0,
   function: () => {
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
@@ -65,7 +85,7 @@ const SCOUNDREL = {
   skulls: 2,
   soundEffects: {
     spawn: swordFromSheath3,
-    attack: impactPunchBody2,
+    attack: knifeStab,
     death: fightGrunt6,
   },
 };
@@ -111,14 +131,19 @@ const BLAZING_SKELETON = {
   name: "Blazing Skeleton",
   type: "UNDEAD",
   skulls: 3,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: torchPassBy1,
+    death: boneBreak8,
+    ability: magicSpellFire1,
+  },
   function: () => {
     //writeToLog() erupts in flames on death
     damagePlayer(15);
-    showDamage(15, "MONSTER");
     damageMonster(currentMonsterHealth);
+    showDamage(15, "MONSTER");
     updatePlayerTrackers();
-    damageFlashAnimation();
-    healthLowAnimation();
+    soundEffectHandler(BLAZING_SKELETON, 'MONSTER ABILITY');
   },
 };
 
@@ -126,6 +151,14 @@ const DRAUGR = {
   name: "Draugr",
   type: "UNDEAD",
   skulls: 6,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: boneBreak8,
+  },
+  function: () => {
+    
+  }
 };
 
 const BONE_TITAN = {
@@ -155,6 +188,10 @@ const FLOOD_OF_BONES = {
   name: "Flood of Bones",
   type: "UNDEAD",
   skulls: 8,
+  spawn: boneCrunchCrack1,
+    attack: fleshHit5,
+    death: boneBreak8,
+    ability: boneBreak7,
   function: () => {
     //writeToLog() if critical attack, spawns 2 decrepit skeletons
     currentRoom.contents.monsters.push(DECREPIT_SKELETON);
@@ -165,6 +202,10 @@ const BARON_OF_BONE = {
   name: "Baron of Bone",
   type: "UNDEAD",
   skulls: 9,
+  spawn: boneCrunchCrack1,
+    attack: fleshHit5,
+    death: boneBreak8,
+    ability: boneBreak7,
 };
 
 // ===============================
@@ -175,12 +216,22 @@ const SHADE = {
   name: "Shade",
   type: "UNDEAD",
   skulls: 1,
+  soundEffects: {
+    spawn: ghostAppearance1,
+    attack: getEvilSpiritAudio(),
+    death: ghostHowl,
+  },
 };
 
 const HAUNTING_SPIRIT = {
   name: "Haunting Spirit",
   type: "UNDEAD",
   skulls: 3,
+  soundEffects: {
+    spawn: ghostAppearance1,
+    attack: getEvilSpiritAudio(),
+    death: ghostHowl,
+  },
   function: () => {
     HAUNTED.function(); // applies the haunted condition
     //writeToLog() gives you the haunted condition... causes Shades to randomly appear and attack you.
@@ -191,10 +242,27 @@ const GRUDGE = {
   name: "Grudge",
   type: "UNDEAD",
   skulls: 5,
+  soundEffects: {
+    spawn: ghostAppearance1,
+    attack: getEvilSpiritAudio(),
+    death: ghostShriekWhoosh,
+  },
   function: () => {
     HAUNTED.function(); // applies the haunted condition
   },
 };
+
+function getEvilSpiritAudio() {
+  let audio = Math.floor(Math.random() * 3) + 1; 
+
+  if (audio === 1) {
+    return whooshGhost
+  } else if (audio === 2) {
+    return whooshGhostBy1
+  } else if (audio === 3) {
+    return whooshGhostBy2
+  }
+}
 
 // ===============================
 //             NPCs
@@ -204,36 +272,66 @@ const GRERVILS_BODY = {
   name: "Grervil's Body",
   type: "UNDEAD",
   skulls: 3,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: impactPunchBody2,
+    death: boneBreak8,
+  },
 };
 
 const HEADLESS_SKELETON = {
   name: "Headless Skeleton",
   type: "UNDEAD",
-  skulls: 1,
+  skulls: 3,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: impactPunchBody2,
+    death: boneBreak8,
+  },
 };
 
 const FORSAKEN_COMMANDER_STATS = {
   name: "Forsaken Commander",
   type: "UNDEAD",
   skulls: 6,
+  soundEffects: {
+    spawn: ghostAppearance1,
+    attack: getEvilSpiritAudio(),
+    death: ghostHowl,
+  },
 };
 
 const SPECTRAL_SOLDIER = {
   name: "Spectral Soldier",
   type: "UNDEAD",
   skulls: 2,
+  soundEffects: {
+    spawn: ghostAppearance1,
+    attack: getEvilSpiritAudio(),
+    death: ghostHowl,
+  },
 };
 
 const POSSESSED_EARVER = {
   name: "Graverobber Earver",
   type: "HUMANOID",
   skulls: 4,
+  soundEffects: {
+    spawn: ghostAppearance1,
+    attack: skullHitShovel,
+    death: fightGrunt6,
+  },
 };
 
 const IVAN_STATS = {
   name: "Ivan the Scoundrel",
   type: "HUMANOID",
   skulls: 6,
+  soundEffects: {
+    spawn: swordFromSheath3,
+    attack: knifeStab,
+    death: fightGrunt6,
+  },
   function: () => {
     // Ivan attacks and moves back behind another scoundrel
     let index = myArray.indexOf(IVAN_STATS);
@@ -243,6 +341,10 @@ const IVAN_STATS = {
     }
   },
 };
+
+// ===============================
+//        MONSTER LOGIC
+// ===============================
 
 function monsterSkullLevel(level) {
   switch (level) {
@@ -407,6 +509,16 @@ function monsterAbilityHandler(monster) {
         BROODMOTHER.function();
       } else {
         BROODMOTHER.hatchEggCounter++;
+      }
+      break;
+
+    case DRAUGR:
+      if (DRAUGR.freezeCounter === 3) {
+        console.log("Dragur Ability Called!");
+        DRAUGR.freezeCounter = 0;
+        DRAUGR.function();
+      } else {
+        DRAUGR.freezeCounter++;
       }
       break;
   }
