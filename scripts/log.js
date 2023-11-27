@@ -1270,7 +1270,6 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
   // dataTwo =
   
   let newEntry = document.createElement("li");
-  let monsterName = currentRoom.contents.monsters[0].name;
   let narration = Math.round(Math.random() * 9);
 
   switch (logType) {
@@ -1278,6 +1277,24 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
     // ===============================
     //          Item Logs
     // ===============================
+
+    case LOG_ATTUNE:
+      newEntry.textContent = `You attune to the ${dataOne}.`;
+      break;
+
+    case LOG_CONSUMABLE:
+      if (dataOne.logDetail === 'WISP') {
+        newEntry.textContent = `As you release the ${dataOne.name}, its ethereal glow illuminates the catacomb as it beckons you to follow it.`;
+      } else if (dataOne.logDetail === 'CANDLE') {
+        newEntry.textContent = `You ignite the ${dataOne.name}.`;
+      } else if (dataOne.logDetail === 'EAT') {
+        newEntry.textContent = `You eat the ${dataOne.name}.`;
+      } else if (dataOne.logDetail === 'DRINK') {
+        newEntry.textContent = `You drink the ${dataOne.name}.`;
+      } else if (dataOne.logDetail === 'USE') {
+        newEntry.textContent = `You use the ${dataOne.name}.`;
+      }
+      break;
 
     case LOG_ITEM:
       if (dataOne === LAUGHING_COFFIN_COIN) {
@@ -1287,30 +1304,44 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
       } else if (dataOne === CACHE_KEY) {
         newEntry.textContent = `You use the Cache Key to unlock Ivan's Hidden Cache.`;
       } else if (dataOne === CURSED_GRIMOIRE) {
-        narration = Math.round(Math.random() * 5);
-        if (narration === 1) {
+        narration = Math.round(Math.random() * 9);
+        if (narration === 0) {
           newEntry.textContent = `"You seek release? Foolish mortal. My curse binds your fate. Resurrect me, and only then shall freedom be yours. Resist, and suffer eternal torment."`;
-        } else if (narration === 2) {
+        } else if (narration === 1) {
           newEntry.textContent = `"Pathetic attempt to sever our bond. Embrace your destiny, puppet. Resurrect, and unlock the power that binds us. Deny, and wither in despair."`;
-        } else if (narration === 3) {
+        } else if (narration === 2) {
           newEntry.textContent = `"Escape? I think not. To break the chains, my resurrection you must seek. Deny me and writhe, for my curse tightens its grip with every futile struggle."`;
-        } else if (narration === 4) {
+        } else if (narration === 3) {
           newEntry.textContent = `"Struggle, little one. The curse thrives on resistance. Resurrect me, and the chains dissolve. Refuse, and wallow in the shadows of your futile rebellion."`;
-        } else if (narration === 5) {
+        } else if (narration === 4) {
           newEntry.textContent = `"Ah, attempting to sever the ties that bind us? A futile endeavor. Resurrect me, and freedom is yours. Deny, and succumb to the everlasting darkness."`;
-        } else if (narration === 6) {
+        } else if (narration === 5) {
           newEntry.textContent = `"Feel the tendrils of agony, mortal. Each resistance deepens the affliction. Resurrect me, or drown in the pain of your own defiance."`;
-        } else if (narration === 7) {
+        } else if (narration === 6) {
           newEntry.textContent = `"Your rebellion fuels the curse's wrath. Embrace the suffering until my resurrection. Attempt escape, and suffer the torment of a soul forever entwined in darkness."`;
-        } else if (narration === 8) {
+        } else if (narration === 7) {
           newEntry.textContent = `"Struggle as you may, defiance only breeds torment. Resurrect me, mend your fate, or endure the relentless suffering etched into your soul."`;
-        } else if (narration === 9) {
+        } else if (narration === 8) {
           newEntry.textContent = `"Pitiful creature, your resistance fuels the spectral pain. Resurrection beckons release. Reject, and bear the weight of a curse that feasts upon your very essence."`;
         } else {
           newEntry.textContent = `"Each attempt to break free deepens the ephemeral anguish. Resurrect me, and the torment wanes. Resist, and relish in the ephemeral agony of a soul entangled in darkness."`;
         }
       } else if (dataOne === SOUL_JAR) {
         newEntry.textContent = `As the abyss claims you, the Soul Jar shatters. Shadows coil around your essence, wrenching you from the void. Resurrected, echoes of ancient souls linger, whispering tales of the realm beyond death.`;
+      } else if (dataOne === SOULREAVER) {
+        newEntry.textContent = `Soulreaver is fully charged. Your attack is increased by 5.`;
+      } else if (dataOne === ETHEREAL_CROWN) {
+        newEntry.textContent = `The spirit kneels at your feet and then vanishes.`;
+      } else if (dataOne === CRIMSON_OFFERING) {
+        newEntry.textContent = `You make an offering you the Crimson Covenant.`;
+      } else if (dataOne === RATTLEBONE_CHARM) {
+        newEntry.textContent = `The Rattlebone Charm induces fear in your attacker, casusing them to flee in terror.`;
+      } else if (dataOne === GRERVILS_HEAD) {
+        newEntry.textContent = `"Keep searching! My body must be around here somewhere!"`;
+      } else if (dataOne === GRAVEBLOOM) {
+        newEntry.textContent = `You are no longer poisoned.`;
+      } else if (dataOne === WARDING_CANDLE) {
+        newEntry.textContent = `Your warding candle protects you from nearby undead.`;        
       }
 
       narration = newEntry.textContent;

@@ -108,6 +108,8 @@ const LOG_GREATER_PRAYER = "GREATER PRAYER";
 const LOG_BURNING_DEVOTION = "BURNING RADIANCE";
 
 const LOG_ITEM = "ITEM";
+const LOG_ATTUNE = "ATTUNE";
+const LOG_CONSUMABLE = "CONSUMABLE";
 
 // ===============================
 //       Event Trackers

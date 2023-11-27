@@ -385,7 +385,6 @@ const PLAGUEWARD_PENDANT = {
   rarity: "RARE",
   effect: "While attuned to this item it prevents you from being diseased.",
   function: () => {
-    // writeToLogItem()
     return "IMMUNE";
   },
 };
@@ -397,7 +396,6 @@ const GHOSTSHROUD_TALISMAN = {
   rarity: "RARE",
   effect: "While attuned to this item it prevents you from being haunted.",
   function: () => {
-    // writeToLogItem()
     return "IMMUNE";
   },
 };
@@ -409,7 +407,6 @@ const TOXINWEAVE_MASK = {
   rarity: "RARE",
   effect: "While attuned to this item it prevents you from being poisoned.",
   function: () => {
-    // writeToLogItem()
     return "IMMUNE";
   },
 };
@@ -462,6 +459,51 @@ const BRACELET_OF_THE_SERPENT = {
   },
 };
 
+const SKELETON_KEY = {
+  name: "Skeleton Key",
+  description: "",
+  soundEffect: skeletonKeyIn2,
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "This key can be used to unlock various locked rooms throughout the catacomb.",
+  function: () => {
+    writeToLogItem(LOG_ITEM, "YES", SKELETON_KEY, currentRoom.roomName);
+  },
+};
+
+const SOULREAVER = {
+  name: "Soulreaver",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect:
+    "While attuned to this item your damage increases by +1 for each consecutive attack up to a max of 5",
+  function: () => {
+    console.log("Soulreaver Counter: " + attackCounter);
+    if (attackCounter === 0) {
+      attackCounter++;
+      return 0;
+    } else if (attackCounter === 1) {
+      attackCounter++;
+      return 1;
+    } else if (attackCounter === 2) {
+      attackCounter++;
+      return 2;
+    } else if (attackCounter === 3) {
+      attackCounter++;
+      return 3;
+    } else if (attackCounter === 4) {
+      attackCounter++;
+      return 4;
+    } else if (attackCounter >= 5) {
+      attackCounter++;
+      writeToLogItem(LOG_ITEM, 'NO', SOULREAVER);
+      return 5;
+    }
+  },
+};
+
 // ===============================
 //         EPIC ITEMS
 // ===============================
@@ -488,42 +530,6 @@ const ETHEREAL_CROWN = {
   },
 };
 
-const SOULREAVER = {
-  name: "Soulreaver",
-  description: "",
-  type: "MAGIC",
-  rarity: "EPIC",
-  effect:
-    "While attuned to this item your damage increases by +1 for each consecutive attack up to a max of 5",
-  function: () => {
-    console.log("Soulreaver Counter: " + attackCounter);
-    if (attackCounter === 0) {
-      attackCounter++;
-      return 0;
-    } else if (attackCounter === 1) {
-      attackCounter++;
-      healPlayer(1);
-      return 1;
-    } else if (attackCounter === 2) {
-      attackCounter++;
-      healPlayer(2);
-      return 2;
-    } else if (attackCounter === 3) {
-      attackCounter++;
-      healPlayer(3);
-      return 3;
-    } else if (attackCounter === 4) {
-      attackCounter++;
-      healPlayer(4);
-      return 4;
-    } else if (attackCounter >= 5) {
-      attackCounter++;
-      healPlayer(5);
-      // writeToLogItem Soulreaver is fully charged & heals you
-      return 5;
-    }
-  },
-};
 
 const SOUL_JAR = {
   name: "Soul Jar",
@@ -554,13 +560,11 @@ const CRIMSON_OFFERING = {
   type: "MAGIC",
   rarity: "EPIC",
   effect:
-    "While attuned to this item you sacrifice 5 HP after each of your attacks, but you deal an additional 10 damage.",
+    "While attuned to this item you sacrifice 5HP after each of your attacks, but you deal an additional 10 damage.",
   function: () => {
-    currentPlayerHealth -= 5;
-    playerHealthBar.value -= 5;
-    damageFlashAnimation();
+    damagePlayer(5);
     isGameOver();
-    // writeToLogItem You make an offering and sacrifice 5 HP
+    writeToLogItem(LOG_ITEM, "YES", CRIMSON_OFFERING);
     return 10;
   },
 };
@@ -648,7 +652,7 @@ const RATTLEBONE_CHARM = {
           checkForMonsters();
           monsterContainer.style.display = "none";
         }, 2000);
-        //writeToLogItem
+        writeToLogItem(LOG_ITEM, 'YES', RATTLEBONE_CHARM);
       }
     }
   },
@@ -749,11 +753,11 @@ const CRYPTBREAD = {
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
+  logDetail: 'EAT',
   effect: "Restores 10 health points when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
     healPlayer(10);
-    //writeToLogItem
   },
 };
 
@@ -762,11 +766,11 @@ const BONE_MARROW_SOUP = {
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
+  logDetail: 'DRINK',
   effect: "Restores 15 health points when eaten.",
   soundEffect: gulpingWater24,
   function: () => {
     healPlayer(15);
-    //writeToLogItem
   },
 };
 
@@ -775,11 +779,11 @@ const MARROWSTONE_CHEESE = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
+  logDetail: 'EAT',
   effect: "Restores 20 health points when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
     healPlayer(25);
-    //writeToLogItem
   },
 };
 
@@ -788,11 +792,11 @@ const TOMBSTONE_TRUFFLE = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
+  logDetail: 'EAT',
   effect: "Restores 10 health points when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
     healPlayer(10);
-    //writeToLogItem
   },
 };
 
@@ -814,11 +818,11 @@ const LICHROOT = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
+  logDetail: 'EAT',
   effect: "Can be used to permanently increase the potency of health potions by 5HP.",
   soundEffect: chewCrackersMouth,
   function: () => {
     potionHealValue += 5;
-    //writeToLogItem
   },
 };
 
@@ -827,6 +831,7 @@ const GRAVEBLOOM = {
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
+  logDetail: 'EAT',
   effect: "Can be used for a chance to cure poison.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -838,10 +843,11 @@ const GRAVEBLOOM = {
         baseDexterity += 2;
         baseStrength += 2;
         clearInterval(poisonedInterval);
+        writeToLogItem(LOG_ITEM, 'YES', GRAVEBLOOM);
       }
-
-      //writeToLogItem() Posioned Cured!
     }
+
+    healPlayer(1);
   },
 };
 
@@ -851,10 +857,10 @@ const LESSER_SOULSTONE = {
   soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
   rarity: "COMMON",
+  logDetail: 'USE',
   effect: "Can be used to gain +5 experience.",
   function: () => {
     gainExperience(5);
-    //writeToLogItem
   },
 };
 
@@ -864,10 +870,10 @@ const GREATER_SOULSTONE = {
   soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
   rarity: "RARE",
+  logDetail: 'USE',
   effect: "Can be used to gain +20 experience.",
   function: () => {
     gainExperience(25);
-    //writeToLogItem
   },
 };
 
@@ -876,6 +882,7 @@ const BLACKHEART_BREW = {
   description: "A favored drink of the scoundrels at the Laughing Coffin.",
   type: "CONSUMABLE",
   rarity: "RARE",
+  logDetail: 'DRINK',
   effect:
     "Can be used to gain increased Strength, but decreased Dexterity for a short time.",
   soundEffect: gulpingWater24,
@@ -901,19 +908,6 @@ const BLACKHEART_BREW = {
   },
 };
 
-const SKELETON_KEY = {
-  name: "Skeleton Key",
-  description: "",
-  soundEffect: skeletonKeyIn2,
-  type: "MAGIC",
-  rarity: "RARE",
-  effect:
-    "This key can be used to unlock various locked rooms throughout the catacomb.",
-  function: () => {
-    writeToLogItem(LOG_ITEM, "YES", SKELETON_KEY, currentRoom.roomName);
-  },
-};
-
 // ===============================
 //           CANDLES
 // ===============================
@@ -924,6 +918,7 @@ const WARDING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "RARE",
+  logDetail: 'CANDLE',
   effect:
     "When this item is used there is a chance that evil spirits will flee from you. The candle burns out after clearing five rooms.",
   status: "There is a chance the undead will evade you.",
@@ -960,6 +955,7 @@ const SOOTHING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "COMMON",
+  logDetail: 'CANDLE',
   effect:
     "When this item is used you restore 10HP after clearing a room. The candle burns out after clearing five rooms.",
   status: "You regain some HP after clearing a room.",
@@ -996,6 +992,7 @@ const FLICKERING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "COMMON",
+  logDetail: 'CANDLE',
   effect:
     "When this item is used your chance to flee successfully becomes 100%. After fleeing three times the candle burns out.",
   status: "You always successfully flee.",
@@ -1021,6 +1018,7 @@ const BLAZING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "EPIC",
+  logDetail: 'CANDLE',
   effect:
     "When this item is used all of your attacks are critical hits. After five critical hits the candle burns out.",
   status: "All attacks made are critical hits.",
@@ -1046,6 +1044,7 @@ const SOULFLAME_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "EPIC",
+  logDetail: 'CANDLE',
   effect:
     "When this item is used the experience you gain is doubled. The candle burns out after gaining 100XP.",
   status: "All experience gained is doubled.",
@@ -1078,7 +1077,8 @@ const GUIDING_LIGHT = {
   description: "",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
-  rarity: "RARE",
+  rarity: "COMMON",
+  logDetail: 'WISP',
   effect:
     "When this item is used a light will guide you to the nearest Candlelight Shrine.",
   status: "Guiding you to a nearby Candlelight Shrine.",
@@ -1124,6 +1124,7 @@ const ROWDY_WISP = {
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "RARE",
+  logDetail: 'WISP',
   effect:
     "When this item is used a wisp will guide you to the Laughing Coffin Tavern.",
   status: "Guiding you to the Laughing Coffin.",
@@ -1162,6 +1163,7 @@ const UNHOLY_WISP = {
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "RARE",
+  logDetail: 'WISP',
   effect:
     "When this item is used a wisp will guide you to the nearest Blood Alter.",
   status: "Guiding you to the Blood Alter.",
@@ -1200,6 +1202,7 @@ const RESTLESS_WISP = {
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "RARE",
+  logDetail: 'WISP',
   effect: "When this item is used a wisp will guide you to Lost Legions Vale.",
   status: "Guiding you to Lost Legions Vale.",
   duration: null,
@@ -1340,12 +1343,12 @@ function attuneItem(itemName) {
   }
 
   if (itemObject.unequip) {
-    console.log("item function called!");
     itemObject.function();
   }
 
   clearInventory();
   renderInventory();
+  writeToLogItem(LOG_ATTUNE, 'YES', itemName);
 }
 
 function removeItem(itemName) {
@@ -1383,7 +1386,7 @@ function statusEffectHandler(item) {
               checkForMonsters();
               monsterContainer.style.display = "none";
             }, 2000);
-            //writeToLogItem
+            writeToLogItem(LOG_ITEM, 'YES', WARDING_CANDLE);
           }
         }
       }
@@ -1392,12 +1395,12 @@ function statusEffectHandler(item) {
     case SOOTHING_CANDLE:
       if (soothingCandleTracker === "LIT") {
         healPlayer(10);
+        writeToLogItem(LOG_ITEM, 'YES', SOOTHING_CANDLE);
       }
       break;
 
     case FLICKERING_CANDLE:
       if (flickeringCandleTracker > 0) {
-        //writeToLogItem
         flickeringCandleTracker--;
         return 10;
       }
@@ -1405,8 +1408,8 @@ function statusEffectHandler(item) {
 
     case BLAZING_CANDLE:
       if (blazingCandleTracker > 0) {
-        //writeToLogItem
         blazingCandleTracker--;
+        writeToLogItem(LOG_ITEM, 'YES', BLAZING_CANDLE);
         return 20;
       } else {
         return 0;
@@ -1414,7 +1417,6 @@ function statusEffectHandler(item) {
 
     case SOULFLAME_CANDLE:
       if (soulflameCandleTracker === "LIT") {
-        //writeToLogItem
         return 2;
       } else {
         return 1;
@@ -1422,7 +1424,6 @@ function statusEffectHandler(item) {
 
     case BLACKHEART_BREW:
       if (blackheartBrewTracker === "DRUNK") {
-        //writeToLogItem()
         baseDexterity--;
         baseStrength += 2;
         updatePlayerTrackers();
@@ -1562,9 +1563,9 @@ function useConsumable(consumable) {
   let itemObject = inventoryItems.find((inv) => inv.name === consumable);
 
   if (consumable !== "Health Potion") {
-    console.log(consumable);
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
+    writeToLogItem(LOG_CONSUMABLE, 'YES', itemObject);
   }
 
   itemObject.function();
@@ -1667,9 +1668,6 @@ function openInventoryHandler() {
 
 function closeInventoryHandler() {
   inventoryModal.style.display = "none";
-
-  // ITEM: Blackheart Brew - -1 Dex +1 Strength
-  statusEffectHandler(BLACKHEART_BREW);
 
   calculatePlayerMaxHealth();
   updatePlayerTrackers();
