@@ -143,6 +143,7 @@ function calculatePlayerMaxHealth() {
   let strengthBonusHealth = calculateStrengthBonusHealth();
   playerMaxHealth = baseHealth + strengthBonusHealth + bloodPactTracker;
 
+  // Checks for Diseased Condition
   if (DISEASED.duration !== null) {
     playerMaxHealth = playerMaxHealth * 0.8;
   }
@@ -539,7 +540,7 @@ const WEBBED = {
 // };
 
 const CHILLED = {
-  name: "CHilled",
+  name: "Chilled",
   status: "You are unable to use your special ability.",
   duration: null,
   function: (length) => {
@@ -549,11 +550,11 @@ const CHILLED = {
         CHILLED.statusDuration - roomCounter
       } Rooms`;
 
-      // ITEM: Plagueward Pendant - Disease Immunity
-      // const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
+      // ITEM: Chillbreaker Band - Chilled Immunity
+      const immune = isItemAttuned(CHILLBREAKER_BAND, null);
 
       if (!immune) {
-        let diseasedInterval = setInterval(() => {
+        let chilledInterval = setInterval(() => {
           if (CHILLED.statusDuration - roomCounter > 1) {
             CHILLED.duration = `Duration: ${
               CHILLED.statusDuration - roomCounter
@@ -569,7 +570,7 @@ const CHILLED = {
             CHILLED.statusDuration = null;
 
             updatePlayerTrackers();
-            clearInterval(diseasedInterval);
+            clearInterval(chilledInterval);
           }
         }, 15000);
 

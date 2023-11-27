@@ -31,9 +31,11 @@ const CRYPT_CRAWLER = {
     spawn: spiderDaddyLong1,
     attack: spiderBiteFang3,
     death: alienSpiderWeb3,
+    ability: spiderWebShoot7,
   },
   function: () => {
     WEBBED.function(4);
+    soundEffectHandler(CRYPT_CRAWLER, 'MONSTER ABILITY');
   },
 };
 
@@ -45,9 +47,11 @@ const COFFIN_SPIDER = {
     spawn: spiderDaddyLong2,
     attack: spiderBiteFang3,
     death: alienSpiderWeb3,
+    ability: spiderWebShoot7,
   },
   function: () => {
     WEBBED.function(5);
+    soundEffectHandler(COFFIN_SPIDER, 'MONSTER ABILITY');
   },
 };
 
@@ -59,10 +63,12 @@ const BROODMOTHER = {
     spawn: spiderDaddyLong2,
     attack: spiderBiteFang4,
     death: insectsSpider3,
+    ability: larvaEggHatch4,
   },
   hatchEggCounter: 0,
   function: () => {
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
+    soundEffectHandler(BROODMOTHER, 'MONSTER ABILITY');
   },
 };
 
@@ -155,9 +161,11 @@ const DRAUGR = {
     spawn: boneCrunchCrack1,
     attack: severMetalHit2,
     death: boneBreak8,
+    ability: null,
   },
   function: () => {
-    
+    CHILLED.function(5);
+    soundEffectHandler(DRAUGR, 'MONSTER ABILITY');
   }
 };
 
@@ -513,12 +521,9 @@ function monsterAbilityHandler(monster) {
       break;
 
     case DRAUGR:
-      if (DRAUGR.freezeCounter === 3) {
-        console.log("Dragur Ability Called!");
-        DRAUGR.freezeCounter = 0;
-        DRAUGR.function();
-      } else {
-        DRAUGR.freezeCounter++;
+      const chilledChance = Math.round(Math.random() * 9);
+      if (chilledChance >= 8) {
+        DRAUGR.function(5);
       }
       break;
   }

@@ -144,9 +144,9 @@ function soundEffectHandler(object, type) {
   sound.play();
 }
 
-// ===============================
-//        AUDIO VARIABLES
-// ===============================
+// =========================================================
+//                      AUDIO VARIABLES
+// =========================================================
 
 //
 
@@ -156,7 +156,10 @@ const heartbeatFastLow = loadAudio(
   true
 );
 
-// Attacks
+// ===============================
+//        Player Attacks
+// ===============================
+
 const severMetalHit2 = loadAudio(
   "audio/sound-effects/Sever Metal Hit 2.mp3",
   "severMetalHit2"
@@ -182,16 +185,25 @@ const magicWandCast14 = loadAudio(
   "magicWandCast14"
 );
 
-// Miss
+// ===============================
+//             Miss
+// ===============================
+
 const swordSwingWhoosh = loadAudio(
   "audio/sound-effects/Sword Swing Whoosh.mp3",
   "swordSwingWhoosh"
 );
 
-// Guard
+// ===============================
+//            Guard
+// ===============================
+
 const swordHit4 = loadAudio("audio/sound-effects/Sword Hit 4.mp3", "swordHit4");
 
-// Abilities
+// ===============================
+//       Player Abilities
+// ===============================
+
 const magicSpellWhoosh14 = loadAudio(
   "audio/sound-effects/Magic Spell Whoosh 14.mp3",
   "magicSpellWhoosh14"
@@ -207,13 +219,33 @@ const ghostlyWhoosh = loadAudio(
   "ghostlyWhoosh"
 );
 
+// ===============================
+//        Monster Abilities
+// ===============================
+
 const magicSpellFire1 = loadAudio(
   "audio/sound-effects/Magic Spell Fire 1.mp3",
   "magicSpellFire1"
 );
 
-// Monsters Spawn
+const spiderWebShoot7 = loadAudio(
+  "audio/sound-effects/Spider Web Shoot 7.mp3",
+  "spiderWebShoot7"
+);
 
+const larvaEggHatch4 = loadAudio(
+  "audio/sound-effects/Larva Egg Hatch 4.mp3",
+  "larvaEggHatch4"
+);
+
+const iceCrackFreeze = loadAudio(
+  "audio/sound-effects/Ice Crack Freeze.mp3",
+  "iceCrackFreeze"
+);
+
+// ===============================
+//        Monster Spawn
+// ===============================
 const ratSqueak30 = loadAudio(
   "audio/sound-effects/Rat Squeaks 30.mp3",
   "ratSqueak30"
@@ -249,10 +281,14 @@ const ghostAppearance1 = loadAudio(
   "ghostAppearance1"
 );
 
-// Monster Attack
-// severMetalHit2
+// ===============================
+//        Monster Attacks
+// ===============================
 
-const impactFleshChop = loadAudio('audio/sound-effects/Impact Flesh Chop.mp3', 'impactFleshChop');
+const impactFleshChop = loadAudio(
+  "audio/sound-effects/Impact Flesh Chop.mp3",
+  "impactFleshChop"
+);
 
 const fleshHit5 = loadAudio("audio/sound-effects/Flesh Hit 5.mp3", "fleshHit5");
 

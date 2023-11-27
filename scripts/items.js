@@ -401,11 +401,22 @@ const GHOSTSHROUD_TALISMAN = {
 };
 
 const TOXINWEAVE_MASK = {
-  name: "Toxinweave_Mask",
+  name: "Toxinweave Mask",
   description: "",
   type: "MAGIC",
   rarity: "RARE",
   effect: "While attuned to this item it prevents you from being poisoned.",
+  function: () => {
+    return "IMMUNE";
+  },
+};
+
+const CHILLBREAKER_BAND = {
+  name: "Chillbreaker Band",
+  description: "",
+  type: "MAGIC",
+  rarity: "RARE",
+  effect: "While attuned to this item it prevents you from being chilled.",
   function: () => {
     return "IMMUNE";
   },
@@ -1454,18 +1465,18 @@ function statusEffectHandler(item) {
       //writeToLogItem() You are caught in the spiders web
       break;
 
-    case BLOOD_PACT:
-      //writeToLogItem()
-      baseAttack += 5;
-      baseFaith -= 2;
-      updatePlayerTrackers();
-      break;
+    // case BLOOD_PACT:
+    //   //writeToLogItem()
+    //   baseAttack += 5;
+    //   baseFaith -= 2;
+    //   updatePlayerTrackers();
+    //   break;
 
-    case LEGIONS_GRACE:
-      //writeToLogItem()
-      baseAttack++;
-      updatePlayerTrackers();
-      break;
+    // case LEGIONS_GRACE:
+    //   //writeToLogItem()
+    //   baseAttack++;
+    //   updatePlayerTrackers();
+    //   break;
 
     case CHILLED:
       //writeToLogItem() You are chilled and unable to use your special ability

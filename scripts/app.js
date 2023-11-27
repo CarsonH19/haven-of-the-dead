@@ -476,6 +476,11 @@ function togglePlayerControls() {
     specialBtn.disabled = true;
   }
 
+  // Checks for Chilled Condition
+  if (CHILLED.duration !== null) {
+    specialBtn.disabled = true;
+  }
+
   if (eventModal.style.display === "block") {
     inventoryButton.disabled = true;
     potionBtn.disabled = true;
