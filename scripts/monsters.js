@@ -63,6 +63,11 @@ const SCOUNDREL = {
   name: "Scoundrel",
   type: "HUMANOID",
   skulls: 2,
+  soundEffects: {
+    spawn: swordFromSheath3,
+    attack: impactPunchBody2,
+    death: fightGrunt6,
+  },
 };
 
 // ===============================
@@ -98,7 +103,7 @@ const ARMORED_SKELETON = {
   soundEffects: {
     spawn: boneCrunchCrack1,
     attack: severMetalHit2,
-    death: boneBreak8,
+    death: armorMetalClanksToTheGround,
   },
 };
 

@@ -148,7 +148,13 @@ function soundEffectHandler(object, type) {
 //        AUDIO VARIABLES
 // ===============================
 
-// Heroes
+//
+
+const heartbeatFastLow = loadAudio(
+  "audio/sound-effects/Heartbeat Fast Low.mp3",
+  "heartbeatFastLow",
+  true
+);
 
 // Attacks
 const severMetalHit2 = loadAudio(
@@ -208,6 +214,11 @@ const boneCrunchCrack1 = loadAudio(
   "boneCrunchCrack1"
 );
 
+const swordFromSheath3 = loadAudio(
+  "audio/sound-effects/Sword From Sheath 3.mp3",
+  "swordFromSheath3"
+);
+
 // Monster Attack
 // severMetalHit2
 
@@ -228,6 +239,16 @@ const boneBreak7 = loadAudio(
 const boneBreak8 = loadAudio(
   "audio/sound-effects/Bone Break 8.mp3",
   "boneBreak8"
+);
+
+const armorMetalClanksToTheGround = loadAudio(
+  "audio/sound-effects/Armor Metal Clanks to Ground.mp3",
+  "armorMetalClanksToTheGround"
+);
+
+const fightGrunt6 = loadAudio(
+  "audio/sound-effects/Fight Grunt 6.mp3",
+  "fightGrunt6"
 );
 
 // Items
