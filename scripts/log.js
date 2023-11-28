@@ -1151,9 +1151,9 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       if (event === GRAVEROBBER_EARVER) {
         newEntry.textContent = `
         The air grows thick with malevolence as the stone door groans open. In that moment, a malevolent spirit surges into Earver, claiming him as its vessel. His eyes blaze with unholy fire, and the spade he wields becomes a weapon of doom, swinging towards you with deadly intent. `;
-      } else if (event === GRAVEROBBER_EARVER_TWO) {
+      } else if (event === GRAVEROBBER_EARVER_EVENT_TWO) {
         newEntry.textContent = `You decide to assist Graverobber Earver in his unholy quest to open the sarcophagus. The lid creaks open, but as the contents are revealed, a deafening roar echoes through the tomb. A monstrous abomination, the dreaded Bone Titan, awakens in a fury of giant bones, and it mercilessly strikes down Graverobber Earver before turning its baleful gaze upon you.`;
-      } else if (event === GRAVEROBBER_EARVER_THREE) {
+      } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
         newEntry.textContent = `"As Graverobber Earver's finally succeed in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their vengeful onslaught, he meets his untimely demise, leaving you to face the wrath of these risen guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Released from captivity, the scoundrel breathes thanks, but a looming arachnid descends, hungry eyes fixed on its newfound prey.`;

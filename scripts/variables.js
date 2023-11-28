@@ -21,7 +21,8 @@ let monsterAttackValue = 10;
 let currentPlayerHealth = null;
 
 let potionCounter = 3;
-document.getElementById("potionCount").textContent = ` x ${potionCounter}`;
+const potions = document.getElementById("potionCount");
+potions.textContent = ` x ${potionCounter}`;
 
 // ===============================
 //         Game Window
@@ -248,21 +249,6 @@ const heroStatsModal = document.getElementById("heroStatsModal");
 const roomNameElement = document.getElementById("catacombRoomName");
 let roomIndex; // DELETE?!
 let roomCounter = 0;
-
-const catacombEntrance = {
-  roomName: "Catacomb Entrance",
-  backgroundImage: "styles/images/catacomb-entrance.png",
-  music: null,
-  contents: {
-    monsters: [],
-    NPCs: null,
-    items: [],
-    consumables: [],
-    traps: null,
-  },
-};
-
-let currentRoom = catacombEntrance;
 
 // ===============================
 //      Inventory Variables

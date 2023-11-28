@@ -94,6 +94,10 @@ const SCOUNDREL = {
     attack: knifeStab,
     death: fightGrunt6,
   },
+  function: () => {
+    POISONED.function(3);
+    soundEffectHandler(SCOUNDREL, 'MONSTER ABILITY');
+  }
 };
 
 // ===============================
@@ -523,8 +527,14 @@ function monsterAbilityHandler(monster) {
     case DRAUGR:
       const chilledChance = Math.round(Math.random() * 9);
       if (chilledChance >= 8) {
-        DRAUGR.function(5);
+        DRAUGR.function();
       }
       break;
+
+    case SCOUNDREL:
+      const poisonDagger = Math.round(Math.random() * 9);
+      if (poisonDagger >= 9) {
+        SCOUNDREL.function();
+      }
   }
 }

@@ -177,6 +177,7 @@ const GRAVEROBBER_EARVER = {
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
+    getItem('RARE');
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
@@ -208,6 +209,7 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
+    getItem('RARE');
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
@@ -238,6 +240,7 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
+    getItem('RARE');
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
@@ -261,9 +264,9 @@ const IVAN_THE_SCOUNDREL = {
   functionOne: () => {
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
     IVAN_THE_SCOUNDREL.summary = `Amidst the severed limbs of the defeated arachnid, the scoundrel, grateful yet wary, hands over a cryptic key. "Treasures await within my hidden cache," he smirks. "Take what's yours."`;
-    currentRoom.contents.items.push(CACHE_KEY); // reward for saving him
-    currentRoom.contents.monsters.push(BROODMOTHER); // mini-boss
-    let addRoom = roomCounter + 10; // start room counter for event 2
+    currentRoom.contents.items.push(CACHE_KEY); 
+    currentRoom.contents.monsters.push(BROODMOTHER); 
+    let addRoom = roomCounter + 10; 
     let ivanInterval = setInterval(() => {
       if (roomCounter > addRoom) {
         catacombRooms.push(IVANS_CACHE);
@@ -277,7 +280,7 @@ const IVAN_THE_SCOUNDREL = {
   functionTwo: () => {
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
     IVAN_THE_SCOUNDREL.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
-    let addRoom = roomCounter + 5; // start room counter for to add traps
+    let addRoom = roomCounter + 5; 
     let ivanInterval = setInterval(() => {
       if (roomCounter > addRoom) {
         catacombRooms.push(
@@ -304,7 +307,7 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   functionOne: () => {
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
     IVAN_THE_SCOUNDREL_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
-    useConsumable("Ivan's Cache Key"); // deletes item from inventory
+    useConsumable("Ivan's Cache Key");
     POISONED.function();
     monsterAttackHandler();
     currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
@@ -320,7 +323,7 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   functionTwo: () => {
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
     IVAN_THE_SCOUNDREL_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
-    useConsumable("Ivan's Cache Key"); // deletes item from inventory
+    useConsumable("Ivan's Cache Key"); 
     currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
     currentRoom.contents.items.push(
       LAUGHING_COFFIN_COIN,

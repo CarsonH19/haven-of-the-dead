@@ -1474,7 +1474,7 @@ let rareItems = [
 
 let epicItems = [
   SOULREAVER,
-  CRIMSON_OFFERING,
+  HALLOWED_HOURGLASS,
   SOUL_JAR,
   BLAZING_CANDLE,
   SOULFLAME_CANDLE,
@@ -1638,18 +1638,18 @@ function statusEffectHandler(item) {
 
 function findItemChance() {
   if (currentRoom.contents.events === null) {
-    let randomNumber = Math.round(Math.random() * 20 + baseFaith);
+    let randomNumber = Math.round(Math.random() * 19 + baseFaith);
 
     // ITEM: Graverobber's Spade - Increase item find chance by 10%
     randomNumber += isItemAttuned(GRAVEROBBERS_SPADE, 0);
 
-    if (randomNumber > 10) {
+    if (randomNumber >= 10) {
       getItem("CONSUMABLE");
     }
 
-    if (randomNumber >= 20) {
-      let itemRarity = Math.round(Math.random() * 100 + baseFaith);
-      if (itemRarity >= 91) {
+    if (randomNumber >= 19) {
+      let itemRarity = Math.round(Math.random() * 99 + baseFaith);
+      if (itemRarity >= 95) {
         getItem("EPIC");
       } else if (itemRarity >= 61) {
         getItem("RARE");
@@ -1657,6 +1657,7 @@ function findItemChance() {
         getItem("COMMON");
       }
     }
+    
   }
 }
 
@@ -1856,6 +1857,12 @@ function clearInventory() {
 
 function addItemToInventory(item) {
   inventoryItems.push(item);
+
+  if (item === POTION) {
+    console.log('potion');
+    potionCounter++;
+    potions.textContent = ` x ${potionCounter}`;
+  }
 }
 
 function renderInventory() {

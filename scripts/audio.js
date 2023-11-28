@@ -31,43 +31,6 @@ function updateVolumeDisplay(volume) {
   volumeProgressBar.value = volume;
 }
 
-// function createAudioContext() {
-//   return new (window.AudioContext || window.webkitAudioContext)();
-// }
-
-// function connectNodes(audioContext, audio) {
-//   const gainNode = audioContext.createGain();
-//   const source = audioContext.createMediaElementSource(audio);
-
-//   source.connect(gainNode);
-//   gainNode.connect(audioContext.destination);
-
-//   return gainNode;
-// }
-
-// function fadeIn(audio, duration) {
-//   const audioContext = createAudioContext();
-//   const gainNode = connectNodes(audioContext, audio);
-
-//   gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-//   gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + duration);
-
-//   audio.play();
-// }
-
-// function fadeOut(audio, duration) {
-//   const audioContext = createAudioContext();
-//   const gainNode = connectNodes(audioContext, audio);
-
-//   gainNode.gain.setValueAtTime(1, audioContext.currentTime);
-//   gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + duration);
-
-//   setTimeout(() => {
-//     audio.pause();
-//     audio.src = audio.src; // Workaround for stopping the audio
-//   }, duration * 1000);
-// }
-
 function soundEffectHandler(object, type) {
   let sound;
   let volume = 0.1;
@@ -144,12 +107,86 @@ function soundEffectHandler(object, type) {
   sound.play();
 }
 
+// 
+// 
+// 
+
+let currentMusic = null;
+
+function playMusic(music) {
+  if (currentMusic) {
+    // If there is currently playing music, fade it out
+    fadeOut(currentMusic);
+  }
+
+  currentMusic = music;
+
+  // Set the volume to 0 before playing to allow fading in
+  music.volume = 0;
+  music.play();
+
+  // Fade in the music
+  fadeIn(music);
+}
+
+function fadeIn(audio) {
+  let volume = 0;
+  const fadeInInterval = setInterval(() => {
+    volume = Math.min(1, volume + 0.05);
+    audio.volume = volume;
+
+    if (volume >= 0.3) {
+      clearInterval(fadeInInterval);
+    }
+  }, 100);
+}
+
+function fadeOut(audio) {
+  let volume = 1;
+  const fadeOutInterval = setInterval(() => {
+    volume = Math.max(0, volume - 0.05);
+    audio.volume = volume;
+
+    if (volume <= 0) {
+      clearInterval(fadeOutInterval);
+      audio.pause();
+    }
+  }, 100);
+}
+
 // =========================================================
 //                      AUDIO VARIABLES
 // =========================================================
 
-//
+// ===============================
+//           MUSIC
+// ===============================
 
+const droneDungeon = loadAudio(
+  "audio/music/Drone Dungeon.mp3",
+  "droneDungeon",
+  true
+);
+
+const droneDarkHor1 = loadAudio(
+  "audio/music/Drone Dark Hor 1.mp3",
+  "droneDarkHor1",
+  true
+);
+
+const droneDarkMys24 = loadAudio(
+  "audio/music/Drone Dark Mys 24.mp3",
+  "droneDarkMys24",
+  true
+);
+
+const droneHaunting1 = loadAudio(
+  "audio/music/Drone Haunting 1.mp3",
+  "droneHaunting1",
+  true
+);
+
+// Low Health Ambiance
 const heartbeatFastLow = loadAudio(
   "audio/sound-effects/Heartbeat Fast Low.mp3",
   "heartbeatFastLow",
@@ -420,6 +457,5 @@ const whooshLowAir = loadAudio(
   "audio/sound-effects/Whoosh Low Air.mp3",
   "whooshLowAir"
 );
-// const droneDungeon = loadAudio("audio/music/Drone Dungeon.mp3", true);
 
 // Music

@@ -295,8 +295,6 @@ function calculateMonsterDamage() {
 // ===============================
 
 function potionHandler() {
-  const potions = document.getElementById("potionCount");
-
   let numberOfPotions = 0;
 
   for (let i = 0; i < inventoryItems.length; i++) {
@@ -390,8 +388,6 @@ heroChoiceModal.addEventListener("click", function (event) {
   const liheth = document.getElementById("liheth");
   const playerName = document.getElementById("playerName");
 
-  specialCooldownCounter = 0;
-
   if (
     event.target === siggurd ||
     event.target === riven ||
@@ -474,6 +470,7 @@ function renderCurrentRoom(currentRoom) {
   togglePlayerControls();
   setRoomSummary();
   renderBackground(currentRoom.backgroundImage);
+  playMusic(currentRoom.music);
   updatePlayerTrackers();
   checkForNewTier();
 }
