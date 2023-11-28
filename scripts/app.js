@@ -126,7 +126,6 @@ function monsterAttackHandler() {
 
   damagePlayer(monsterToPlayerDamage);
   monsterAbilityHandler(currentRoom.contents.monsters[0]);
-  showDamage(monsterToPlayerDamage, "MONSTER");
   updatePlayerTrackers();
   healthLowAnimation();
 }
@@ -137,6 +136,15 @@ function dealPlayerDamage(damage) {
 }
 
 function damagePlayer(damage) {
+  if (currentPlayerHealth <= 30) {
+    // ITEM - ACTIVIATE: Aegis of the Fallen - Immunity to all damage.
+    isItemAttuned(AEGIS_OF_THE_FALLEN, null);
+  }
+
+  if (AEGIS_STATUS_EFFECT.duration !== null) {
+    damage = 0;
+  }
+
   if (currentPlayerHealth - damage <= 0) {
     playerHealthBar.value = 0;
     currentPlayerHealth = 0;
@@ -145,6 +153,11 @@ function damagePlayer(damage) {
     currentPlayerHealth -= damage;
   }
 
+  if (damage > 0) {
+    damageFlashAnimation();
+  }
+
+  showDamage(damage, "MONSTER");
   damageFlashAnimation();
   healthLowAnimation();
 }
@@ -197,9 +210,23 @@ function showDamage(damage, source, critical) {
 //            Special
 // ===============================
 
-function specialCooldownHandler() {
+function specialCooldownHandler(reset) {
   const special = document.getElementById("specialCount");
-  if (specialCooldownCounter > 0) {
+
+  if (reset) {
+    if (heroChoice === "PALADIN") {
+      specialCooldownCounter = 7;
+    } else if (heroChoice === "ROGUE") {
+      specialCooldownCounter = shadowStrikeTracker;
+    } else if (heroChoice === "PRIESTESS") {
+      specialCooldownCounter = 13;
+    }
+
+    // ITEM: HALLOWED HOURGLASS - Reduces Cooldown by 1 
+    isItemAttuned(HALLOWED_HOURGLASS, null);
+  }
+
+  if (specialCooldownCounter > 0 && !reset) {
     specialCooldownCounter--;
     specialBtn.disabled = true;
     special.textContent = `Cooldown: ${specialCooldownCounter}`;
@@ -213,6 +240,11 @@ function specialCooldownHandler() {
       special.textContent = `Shadow Strike`;
     } else if (heroChoice === "PRIESTESS")
       special.textContent = `Greater Prayer`;
+  }
+
+  // ITEM COOLDOWNS
+  if (AEGIS_OF_THE_FALLEN.cooldown !== 0) {
+    AEGIS_OF_THE_FALLEN.cooldown--;
   }
 }
 
@@ -232,14 +264,11 @@ function guardHandler() {
   }
 
   if (damageTaken > 0) {
-    damageFlashAnimation();
-    showDamage(damageTaken, "MONSTER");
     damagePlayer(damageTaken);
     soundEffectHandler(heroChecker(), "MONSTER ATTACK");
     writeToLogMonster(LOG_MONSTER_ATTACK, "NO", damageTaken);
   } else {
     damagePlayer(0);
-    showDamage(0, "MONSTER");
     soundEffectHandler(swordSwingWhoosh, "MONSTER MISS");
     writeToLogMonster(LOG_MONSTER_MISS, "NO");
   }
@@ -264,10 +293,6 @@ function calculateMonsterDamage() {
 // ===============================
 //            Potion
 // ===============================
-
-let potionCounter = 3;
-
-document.getElementById("potionCount").textContent = ` x ${potionCounter}`;
 
 function potionHandler() {
   const potions = document.getElementById("potionCount");
@@ -751,6 +776,8 @@ function renderContinueButton() {
 // ===============================
 
 attackBtn.addEventListener("click", function () {
+  actionCounter++;
+
   playerAttackHandler();
   specialCooldownHandler();
 
@@ -765,7 +792,9 @@ attackBtn.addEventListener("click", function () {
 });
 
 guardBtn.addEventListener("click", () => {
+  actionCounter++;
   attackCounter = 0; // Item: Soulreaver
+
   specialCooldownHandler();
   playerControlsTimeout(1500);
   setTimeout(guardHandler, 1200);
@@ -774,6 +803,8 @@ guardBtn.addEventListener("click", () => {
 });
 
 specialBtn.addEventListener("click", () => {
+  actionCounter++;
+
   if (heroChoice === "PALADIN") {
     paladinHolySmite();
   } else if (heroChoice === "ROGUE") {
@@ -806,7 +837,9 @@ specialBtn.addEventListener("click", () => {
 });
 
 potionBtn.addEventListener("click", () => {
+  actionCounter++;
   attackCounter = 0; // Item: Soulreaver
+  
   potionHandler();
 
   if (currentRoom.contents.monsters.length > 0) {
@@ -820,7 +853,9 @@ potionBtn.addEventListener("click", () => {
 });
 
 fleeBtn.addEventListener("click", () => {
+  actionCounter++;
   attackCounter = 0; // Item: Soulreaver
+
   fleeHandler();
   specialCooldownHandler();
   playerControlsTimeout(1500);
@@ -852,6 +887,15 @@ roomSummaryButton.addEventListener("click", () => {
 });
 
 continueButton.addEventListener("click", () => {
+  attackCounter = 0; // Item: Soulreaver
+
+  // ITEM: Aegis of the Fallen - Reset if still active
+  if (AEGIS_STATUS_EFFECT.duration !== null) {
+    AEGIS_STATUS_EFFECT.duration = null;
+    AEGIS_STATUS_EFFECT.statusDuration = null;
+    clearInterval(aegisInterval);
+  }
+
   newRoomAnimation();
   closeContinueButton();
   updatePlayerTrackers();

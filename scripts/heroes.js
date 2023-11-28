@@ -34,7 +34,7 @@ function setPaladinStats() {
 
 function paladinHolySmite() {
   playerAttackHandler(holySmiteTracker);
-  specialCooldownCounter = 7;
+  specialCooldownHandler("RESET");
 }
 
 function paladinRadiantAura() {
@@ -84,8 +84,6 @@ function setRogueStats() {
 }
 
 function rogueShadowStrike() {
-  specialCooldownCounter = shadowStrikeTracker;
-
   // Guard
   setTimeout(() => {
     let monsterToGuardDamage = dealPlayerDamage(monsterAttackValue);
@@ -131,6 +129,7 @@ function rogueShadowStrike() {
   }
 
   damageMonster(totalDamage);
+  specialCooldownHandler("RESET");
   setTimeout(updatePlayerTrackers, 1250);
 }
 
@@ -174,10 +173,8 @@ function setPriestessStats() {
 
 function priestessGreaterPrayer() {
   healPlayer(greaterPrayerTracker);
-
+  specialCooldownHandler("RESET");
   writeToLogHero(LOG_GREATER_PRAYER, "YES", greaterPrayerTracker);
-
-  specialCooldownCounter = 9;
 }
 
 // See dealPlayerDamage for Priestess Passive Ability
@@ -422,8 +419,6 @@ function endLevelUp() {
 }
 
 function renderHeroStatsModal() {
-  levelUpModal.style.display = "block";
-
   let hero = heroChecker();
   // Image
   const heroImage = document.querySelector(".hero-stats-img");

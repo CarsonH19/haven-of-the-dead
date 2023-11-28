@@ -580,6 +580,44 @@ const CRIMSON_OFFERING = {
   },
 };
 
+const DARKGUARD_TRINKET = {
+  name: "Darkguard Trinket",
+  description: "",
+  type: "MAGIC",
+  rarity: "EPIC",
+  effect: "While attuned to this item it prevents you from being cursed.",
+  function: () => {
+    return "IMMUNE";
+  },
+};
+
+const HALLOWED_HOURGLASS = {
+  name: "Hallowed Hourglass",
+  description: "",
+  type: "MAGIC",
+  rarity: "EPIC",
+  effect: "While attuned to this item your special ability cooldown is reduced.",
+  function: () => {
+    specialCooldownCounter--;
+  },
+};
+
+const AEGIS_OF_THE_FALLEN = {
+  name: "Aegis of the Fallen",
+  description: "",
+  type: "MAGIC",
+  rarity: "EPIC",
+  effect: "While attuned to this item you become immune to damage for a brief time after falling below 30HP.",
+  cooldown: 0,
+  function: () => {
+    if (AEGIS_OF_THE_FALLEN.cooldown === 0) {
+      AEGIS_STATUS_EFFECT.function();
+      AEGIS_OF_THE_FALLEN.cooldown = 15;
+    } 
+  },
+};
+
+
 // ===============================
 //       LOCKED ROOM ITEMS
 // ===============================
@@ -672,8 +710,8 @@ const RATTLEBONE_CHARM = {
 const SPINE_OF_THE_NECROMANCER = {
   name: "Spine of the Necromance",
   description: "",
-  type: "EPIC",
-  rarity: "COMMON",
+  type: "MAGIC",
+  rarity: "EPIC",
   effect:
     "While attuned to this item you gain +9 Attack, but all stats are reduced by 1.",
   function: () => {
@@ -837,22 +875,132 @@ const LICHROOT = {
   },
 };
 
+const ROTBANE_FERN = {
+  name: "Rotbane Fern",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  logDetail: 'EAT',
+  effect: "Can be used for a chance to cure the diseased condition.",
+  soundEffect: chewCrackersMouth,
+  function: () => {
+    if (DISEASED.duration !== null) {
+      let randomNumber = Math.round(Math.random() * 9);
+
+      if (randomNumber >= 8) {
+        DISEASED.duration = null;
+        DISEASED.statusDuration = null;
+
+        updatePlayerTrackers();
+        clearInterval(diseasedInterval);
+        writeToLogItem(LOG_ITEM, 'YES', ROTBANE_FERN);
+      }
+    }
+
+    healPlayer(1);
+  },
+};
+
+const WITCHFIRE_ORCHID = {
+  name: "Witchfire Orchid",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  logDetail: 'EAT',
+  effect: "Can be used for a chance to cure the cursed condition.",
+  soundEffect: chewCrackersMouth,
+  function: () => {
+    if (CURSED.duration !== null) {
+      let randomNumber = Math.round(Math.random() * 9);
+
+      if (randomNumber >= 8) {
+        CURSED.duration = null;
+        CURSED.statusDuration = null;
+        baseDexterity += 2;
+        baseStrength += 2;
+
+        updatePlayerTrackers();
+        clearInterval(cursedInterval);
+        writeToLogItem(LOG_ITEM, 'YES', WITCHFIRE_ORCHID);
+      }
+    }
+
+    healPlayer(1);
+  },
+};
+
+const EMBERTHAW_PETAL = {
+  name: "Emberthaw Petal",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  logDetail: 'EAT',
+  effect: "Can be used for a chance to cure the chilled condition.",
+  soundEffect: chewCrackersMouth,
+  function: () => {
+    if (CHILLED.duration !== null) {
+      let randomNumber = Math.round(Math.random() * 9);
+
+      if (randomNumber >= 8) {
+        CHILLED.duration = null;
+        CHILLED.statusDuration = null;
+
+        updatePlayerTrackers();
+        clearInterval(chilledInterval);
+        writeToLogItem(LOG_ITEM, 'YES', EMBERTHAW_PETAL);
+      }
+    }
+
+    healPlayer(1);
+  },
+};
+
+const GHOSTLIGHT_LILY = {
+  name: "Ghostlight Lily",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "COMMON",
+  logDetail: 'EAT',
+  effect: "Can be used for a chance to cure the haunted condition.",
+  soundEffect: chewCrackersMouth,
+  function: () => {
+    if (HAUNTED.duration !== null) {
+      let randomNumber = Math.round(Math.random() * 9);
+
+      if (randomNumber >= 8) {
+        HAUNTED.duration = null;
+        HAUNTED.statusDuration = null;
+
+        clearInterval(hauntedInterval);
+        writeToLogItem(LOG_ITEM, 'YES', GHOSTLIGHT_LILY);
+      }
+    }
+
+    healPlayer(1);
+  },
+};
+
+
+
 const GRAVEBLOOM = {
   name: "Gravebloom",
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
   logDetail: 'EAT',
-  effect: "Can be used for a chance to cure poison.",
+  effect: "Can be used for a chance to cure the poisoned condition.",
   soundEffect: chewCrackersMouth,
   function: () => {
     if (POISONED.duration !== null) {
-      let randomNumber = Math.round(Math.random() * 10);
+      let randomNumber = Math.round(Math.random() * 9);
 
-      if (randomNumber >= 9) {
+      if (randomNumber >= 8) {
         POISONED.duration = null;
+        POISONED.statusDuration = null;
         baseDexterity += 2;
         baseStrength += 2;
+
+        updatePlayerTrackers();
         clearInterval(poisonedInterval);
         writeToLogItem(LOG_ITEM, 'YES', GRAVEBLOOM);
       }
@@ -1266,6 +1414,10 @@ let consumableItems = [
   BONE_MARROW_SOUP,
   LICHROOT,
   GRAVEBLOOM,
+  GHOSTLIGHT_LILY,
+  ROTBANE_FERN,
+  WITCHFIRE_ORCHID,
+  EMBERTHAW_PETAL,
   LESSER_SOULSTONE,
   GREATER_SOULSTONE,
   BLACKHEART_BREW,

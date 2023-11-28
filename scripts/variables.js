@@ -20,6 +20,9 @@ let monsterAttackValue = 10;
 
 let currentPlayerHealth = null;
 
+let potionCounter = 3;
+document.getElementById("potionCount").textContent = ` x ${potionCounter}`;
+
 // ===============================
 //         Game Window
 // ===============================
@@ -145,7 +148,7 @@ function calculatePlayerMaxHealth() {
 
   // Checks for Diseased Condition
   if (DISEASED.duration !== null) {
-    playerMaxHealth = playerMaxHealth * 0.8;
+    playerMaxHealth = playerMaxHealth * 0.75;
   }
 
   if (currentPlayerHealth > playerMaxHealth) {
@@ -229,6 +232,8 @@ let dexterityBoonRank = 1;
 let faithBoonRank = 1;
 let specialAbilityBoonRank = 1;
 let passiveAbilityBoonRank = 1;
+
+let actionCounter = 0;
 
 // ===============================
 //    Hero Stats Modal Variables
@@ -354,6 +359,44 @@ const LEGIONS_GRACE = {
 //   },
 // };
 
+const AEGIS_STATUS_EFFECT = {
+  name: "Aegis of the Fallen",
+  status: `You are immune to all damage.`,
+  duration: null,
+  statusDuration: null,
+  function: () => {
+    if (AEGIS_STATUS_EFFECT.duration === null) {
+      AEGIS_STATUS_EFFECT.statusDuration = actionCounter + 3;
+      AEGIS_STATUS_EFFECT.duration = `Duration: ${
+      AEGIS_STATUS_EFFECT.statusDuration - actionCounter
+      } Actions`;
+    }
+
+    let aegisInterval = setInterval(() => {
+      if (AEGIS_STATUS_EFFECT.statusDuration - actionCounter > 1) {
+        AEGIS_STATUS_EFFECT.duration = `Duration: ${
+          AEGIS_STATUS_EFFECT.statusDuration - actionCounter
+        } Actions`;
+      } else {
+        AEGIS_STATUS_EFFECT.duration = `Duration: ${
+          AEGIS_STATUS_EFFECT.statusDuration - actionCounter
+        } Action`;
+      }
+
+      if (actionCounter >= AEGIS_STATUS_EFFECT.statusDuration) {
+        AEGIS_STATUS_EFFECT.duration = null;
+        AEGIS_STATUS_EFFECT.statusDuration = null;
+
+        updatePlayerTrackers();
+        clearInterval(aegisInterval);
+      }
+    }, 3000);
+
+    statusEffectHandler(AEGIS_STATUS_EFFECT);
+    renderStatusEffects(AEGIS_STATUS_EFFECT);
+  },
+};
+
 const POISONED = {
   name: "Poisoned",
   status: "Your Strength and Dexterity are reduced by 2.",
@@ -444,7 +487,7 @@ const HAUNTED = {
 
 const DISEASED = {
   name: "Diseased",
-  status: "Your max health is reduced by 20%.",
+  status: "Your max health is reduced by 25%.",
   duration: null,
   function: (length) => {
     if (DISEASED.duration === null) {
@@ -485,6 +528,56 @@ const DISEASED = {
         DISEASED.statusDuration = roomCounter + length;
         DISEASED.duration = `Duration: ${
           DISEASED.statusDuration - roomCounter
+        } Rooms`;
+        //writeToLog() Disease intensifies
+      }
+    }
+  },
+};
+
+const CURSED = {
+  name: "Cursed",
+  status: "All damage taken is increased by 50%.",
+  duration: null,
+  function: (length) => {
+    if (CURSED.duration === null) {
+      CURSED.statusDuration = roomCounter + length;
+      CURSED.duration = `Duration: ${
+        CURSED.statusDuration - roomCounter
+      } Rooms`;
+
+      // ITEM: Darkguard Trinket - Cursed Immunity
+      const immune = isItemAttuned(DARKGUARD_TRINKET, null);
+
+      if (!immune) {
+        let cursedInterval = setInterval(() => {
+          if (CURSED.statusDuration - roomCounter > 1) {
+            CURSED.duration = `Duration: ${
+              CURSED.statusDuration - roomCounter
+            } Rooms`;
+          } else {
+            CURSED.duration = `Duration: ${
+              CURSED.statusDuration - roomCounter
+            } Room`;
+          }
+
+          if (roomCounter >= CURSED.statusDuration) {
+            CURSED.duration = null;
+            CURSED.statusDuration = null;
+
+            updatePlayerTrackers();
+            clearInterval(cursedInterval);
+          }
+        }, 15000);
+
+        statusEffectHandler(CURSED);
+        renderStatusEffects(CURSED);
+      }
+    } else {
+      if (length > CURSED.statusDuration - roomCounter) {
+        CURSED.statusDuration = roomCounter + length;
+        CURSED.duration = `Duration: ${
+          CURSED.statusDuration - roomCounter
         } Rooms`;
         //writeToLog() Disease intensifies
       }

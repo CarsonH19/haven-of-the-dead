@@ -640,9 +640,7 @@ const CRIMSON_COVENANT = {
     if (currentPlayerHealth >= 60) {
       CRIMSON_COVENANT.summary =
         "You partake in the sacrificial ritual of the Crimson Covenant, spilling your blood on the Blood Alter. Although weakened by the experience you feel a surge of vitality throughout your body.";
-      crimsonCovenantTracker++;
       bloodSacrificed += 50;
-      bloodPactTracker += 10;
 
       switch (crimsonCovenantTracker) {
         case 1:
@@ -655,6 +653,9 @@ const CRIMSON_COVENANT = {
 
         case 3:
           currentRoom.contents.items.push(CRIMSON_OFFERING);
+          break;
+
+        default:
           break;
       }
 
@@ -721,15 +722,15 @@ function lockedRoomHandler() {
       break;
 
     case 3:
-      monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, DRAUGR);
+      monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
       break;
 
     case 4:
-      monsters.push(ARMORED_SKELETON, DRAUGR, DRAUGR);
+      monsters.push(ARMORED_SKELETON, BONE_TITAN);
       break;
 
     case 5:
-      monsters.push(DRAUGR, DRAUGR, BONE_TITAN);
+      monsters.push(BONE_TITAN, BONE_TITAN);
       break;
   }
 
@@ -755,7 +756,7 @@ function trapEventHandler(baseStat, attribute) {
       writeToLogEvent(
         LOG_TRAP_PASS,
         "YES",
-        attribute // Dictates descriptive trap pass text. ${value}
+        attribute 
       );
       if (event.functionOne) {
         event.functionOne();
@@ -765,7 +766,7 @@ function trapEventHandler(baseStat, attribute) {
         writeToLogEvent(
           LOG_TRAP_FAIL,
           "YES",
-          attribute, // Dictates descriptive trap fail text. ${name}
+          attribute, 
           event.failDamage
         );
         console.log(event);
@@ -777,7 +778,7 @@ function trapEventHandler(baseStat, attribute) {
         writeToLogEvent(
           LOG_TRAP_FAIL,
           "YES",
-          attribute, // Dictates descriptive trap fail text. ${name}
+          attribute, 
           event.failDamage
         );
       }
