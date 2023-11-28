@@ -369,7 +369,7 @@ const LAUGHING_COFFIN_COIN = {
   name: "Laughing Coffin Coin",
   description: "",
   soundEffect: coinFlipLand,
-  type: "MAGIC",
+  type: "MISC",
   rarity: "RARE",
   effect:
     "Taken from Ivan the Scoundrel, it may be of some value to other scoundrels.",
@@ -509,7 +509,7 @@ const SOULREAVER = {
       return 4;
     } else if (attackCounter >= 5) {
       attackCounter++;
-      writeToLogItem(LOG_ITEM, 'NO', SOULREAVER);
+      writeToLogItem(LOG_ITEM, "NO", SOULREAVER);
       return 5;
     }
   },
@@ -540,7 +540,6 @@ const ETHEREAL_CROWN = {
     }
   },
 };
-
 
 const SOUL_JAR = {
   name: "Soul Jar",
@@ -596,7 +595,8 @@ const HALLOWED_HOURGLASS = {
   description: "",
   type: "MAGIC",
   rarity: "EPIC",
-  effect: "While attuned to this item your special ability cooldown is reduced.",
+  effect:
+    "While attuned to this item your special ability cooldown is reduced.",
   function: () => {
     specialCooldownCounter--;
   },
@@ -607,16 +607,16 @@ const AEGIS_OF_THE_FALLEN = {
   description: "",
   type: "MAGIC",
   rarity: "EPIC",
-  effect: "While attuned to this item you become immune to damage for a brief time after falling below 30HP.",
+  effect:
+    "While attuned to this item you become immune to damage for a brief time after falling below 30HP.",
   cooldown: 0,
   function: () => {
     if (AEGIS_OF_THE_FALLEN.cooldown === 0) {
       AEGIS_STATUS_EFFECT.function();
       AEGIS_OF_THE_FALLEN.cooldown = 15;
-    } 
+    }
   },
 };
-
 
 // ===============================
 //       LOCKED ROOM ITEMS
@@ -701,7 +701,7 @@ const RATTLEBONE_CHARM = {
           checkForMonsters();
           monsterContainer.style.display = "none";
         }, 2000);
-        writeToLogItem(LOG_ITEM, 'YES', RATTLEBONE_CHARM);
+        writeToLogItem(LOG_ITEM, "YES", RATTLEBONE_CHARM);
       }
     }
   },
@@ -802,7 +802,7 @@ const CRYPTBREAD = {
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
-  logDetail: 'EAT',
+  logDetail: "EAT",
   effect: "Restores 10 health points when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -815,7 +815,7 @@ const BONE_MARROW_SOUP = {
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
-  logDetail: 'DRINK',
+  logDetail: "DRINK",
   effect: "Restores 15 health points when eaten.",
   soundEffect: gulpingWater24,
   function: () => {
@@ -828,7 +828,7 @@ const MARROWSTONE_CHEESE = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
-  logDetail: 'EAT',
+  logDetail: "EAT",
   effect: "Restores 20 health points when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -841,7 +841,7 @@ const TOMBSTONE_TRUFFLE = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
-  logDetail: 'EAT',
+  logDetail: "EAT",
   effect: "Restores 10 health points when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -867,8 +867,9 @@ const LICHROOT = {
   description: "",
   type: "CONSUMABLE",
   rarity: "RARE",
-  logDetail: 'EAT',
-  effect: "Can be used to permanently increase the potency of health potions by 5HP.",
+  logDetail: "EAT",
+  effect:
+    "Can be used to permanently increase the potency of health potions by 5HP.",
   soundEffect: chewCrackersMouth,
   function: () => {
     potionHealValue += 5;
@@ -880,7 +881,7 @@ const ROTBANE_FERN = {
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
-  logDetail: 'EAT',
+  logDetail: "EAT",
   effect: "Can be used for a chance to cure the diseased condition.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -893,7 +894,7 @@ const ROTBANE_FERN = {
 
         updatePlayerTrackers();
         clearInterval(diseasedInterval);
-        writeToLogItem(LOG_ITEM, 'YES', ROTBANE_FERN);
+        writeToLogItem(LOG_ITEM, "YES", ROTBANE_FERN);
       }
     }
 
@@ -906,7 +907,7 @@ const WITCHFIRE_ORCHID = {
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
-  logDetail: 'EAT',
+  logDetail: "EAT",
   effect: "Can be used for a chance to cure the cursed condition.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -921,7 +922,7 @@ const WITCHFIRE_ORCHID = {
 
         updatePlayerTrackers();
         clearInterval(cursedInterval);
-        writeToLogItem(LOG_ITEM, 'YES', WITCHFIRE_ORCHID);
+        writeToLogItem(LOG_ITEM, "YES", WITCHFIRE_ORCHID);
       }
     }
 
@@ -934,7 +935,7 @@ const EMBERTHAW_PETAL = {
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
-  logDetail: 'EAT',
+  logDetail: "EAT",
   effect: "Can be used for a chance to cure the chilled condition.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -947,7 +948,7 @@ const EMBERTHAW_PETAL = {
 
         updatePlayerTrackers();
         clearInterval(chilledInterval);
-        writeToLogItem(LOG_ITEM, 'YES', EMBERTHAW_PETAL);
+        writeToLogItem(LOG_ITEM, "YES", EMBERTHAW_PETAL);
       }
     }
 
@@ -960,7 +961,7 @@ const GHOSTLIGHT_LILY = {
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
-  logDetail: 'EAT',
+  logDetail: "EAT",
   effect: "Can be used for a chance to cure the haunted condition.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -972,7 +973,7 @@ const GHOSTLIGHT_LILY = {
         HAUNTED.statusDuration = null;
 
         clearInterval(hauntedInterval);
-        writeToLogItem(LOG_ITEM, 'YES', GHOSTLIGHT_LILY);
+        writeToLogItem(LOG_ITEM, "YES", GHOSTLIGHT_LILY);
       }
     }
 
@@ -980,14 +981,12 @@ const GHOSTLIGHT_LILY = {
   },
 };
 
-
-
 const GRAVEBLOOM = {
   name: "Gravebloom",
   description: "",
   type: "CONSUMABLE",
   rarity: "COMMON",
-  logDetail: 'EAT',
+  logDetail: "EAT",
   effect: "Can be used for a chance to cure the poisoned condition.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -1002,7 +1001,7 @@ const GRAVEBLOOM = {
 
         updatePlayerTrackers();
         clearInterval(poisonedInterval);
-        writeToLogItem(LOG_ITEM, 'YES', GRAVEBLOOM);
+        writeToLogItem(LOG_ITEM, "YES", GRAVEBLOOM);
       }
     }
 
@@ -1016,7 +1015,7 @@ const LESSER_SOULSTONE = {
   soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
   rarity: "COMMON",
-  logDetail: 'USE',
+  logDetail: "USE",
   effect: "Can be used to gain +5 experience.",
   function: () => {
     gainExperience(5);
@@ -1029,7 +1028,7 @@ const GREATER_SOULSTONE = {
   soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
   rarity: "RARE",
-  logDetail: 'USE',
+  logDetail: "USE",
   effect: "Can be used to gain +20 experience.",
   function: () => {
     gainExperience(25);
@@ -1041,7 +1040,7 @@ const BLACKHEART_BREW = {
   description: "A favored drink of the scoundrels at the Laughing Coffin.",
   type: "CONSUMABLE",
   rarity: "RARE",
-  logDetail: 'DRINK',
+  logDetail: "DRINK",
   effect:
     "Can be used to gain increased Strength, but decreased Dexterity for a short time.",
   soundEffect: gulpingWater24,
@@ -1077,7 +1076,7 @@ const WARDING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "RARE",
-  logDetail: 'CANDLE',
+  logDetail: "CANDLE",
   effect:
     "When this item is used there is a chance that evil spirits will flee from you. The candle burns out after clearing five rooms.",
   status: "There is a chance the undead will evade you.",
@@ -1114,7 +1113,7 @@ const SOOTHING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "COMMON",
-  logDetail: 'CANDLE',
+  logDetail: "CANDLE",
   effect:
     "When this item is used you restore 10HP after clearing a room. The candle burns out after clearing five rooms.",
   status: "You regain some HP after clearing a room.",
@@ -1151,7 +1150,7 @@ const FLICKERING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "COMMON",
-  logDetail: 'CANDLE',
+  logDetail: "CANDLE",
   effect:
     "When this item is used your chance to flee successfully becomes 100%. After fleeing three times the candle burns out.",
   status: "You always successfully flee.",
@@ -1177,7 +1176,7 @@ const BLAZING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "EPIC",
-  logDetail: 'CANDLE',
+  logDetail: "CANDLE",
   effect:
     "When this item is used all of your attacks are critical hits. After five critical hits the candle burns out.",
   status: "All attacks made are critical hits.",
@@ -1203,7 +1202,7 @@ const SOULFLAME_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "EPIC",
-  logDetail: 'CANDLE',
+  logDetail: "CANDLE",
   effect:
     "When this item is used the experience you gain is doubled. The candle burns out after gaining 100XP.",
   status: "All experience gained is doubled.",
@@ -1237,7 +1236,7 @@ const GUIDING_LIGHT = {
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "COMMON",
-  logDetail: 'WISP',
+  logDetail: "WISP",
   effect:
     "When this item is used a light will guide you to the nearest Candlelight Shrine.",
   status: "Guiding you to a nearby Candlelight Shrine.",
@@ -1283,7 +1282,7 @@ const ROWDY_WISP = {
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "RARE",
-  logDetail: 'WISP',
+  logDetail: "WISP",
   effect:
     "When this item is used a wisp will guide you to the Laughing Coffin Tavern.",
   status: "Guiding you to the Laughing Coffin.",
@@ -1322,7 +1321,7 @@ const UNHOLY_WISP = {
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "RARE",
-  logDetail: 'WISP',
+  logDetail: "WISP",
   effect:
     "When this item is used a wisp will guide you to the nearest Blood Alter.",
   status: "Guiding you to the Blood Alter.",
@@ -1361,7 +1360,7 @@ const RESTLESS_WISP = {
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "RARE",
-  logDetail: 'WISP',
+  logDetail: "WISP",
   effect: "When this item is used a wisp will guide you to Lost Legions Vale.",
   status: "Guiding you to Lost Legions Vale.",
   duration: null,
@@ -1511,7 +1510,7 @@ function attuneItem(itemName) {
 
   clearInventory();
   renderInventory();
-  writeToLogItem(LOG_ATTUNE, 'YES', itemName);
+  writeToLogItem(LOG_ATTUNE, "YES", itemName);
 }
 
 function removeItem(itemName) {
@@ -1553,7 +1552,7 @@ function statusEffectHandler(item) {
               checkForMonsters();
               monsterContainer.style.display = "none";
             }, 2000);
-            writeToLogItem(LOG_ITEM, 'YES', WARDING_CANDLE);
+            writeToLogItem(LOG_ITEM, "YES", WARDING_CANDLE);
           }
         }
       }
@@ -1562,7 +1561,7 @@ function statusEffectHandler(item) {
     case SOOTHING_CANDLE:
       if (soothingCandleTracker === "LIT") {
         healPlayer(10);
-        writeToLogItem(LOG_ITEM, 'YES', SOOTHING_CANDLE);
+        writeToLogItem(LOG_ITEM, "YES", SOOTHING_CANDLE);
       }
       break;
 
@@ -1576,7 +1575,7 @@ function statusEffectHandler(item) {
     case BLAZING_CANDLE:
       if (blazingCandleTracker > 0) {
         blazingCandleTracker--;
-        writeToLogItem(LOG_ITEM, 'YES', BLAZING_CANDLE);
+        writeToLogItem(LOG_ITEM, "YES", BLAZING_CANDLE);
         return 20;
       } else {
         return 0;
@@ -1657,7 +1656,6 @@ function findItemChance() {
         getItem("COMMON");
       }
     }
-    
   }
 }
 
@@ -1737,13 +1735,13 @@ function useConsumable(consumable) {
   if (consumable !== "Health Potion") {
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
-    writeToLogItem(LOG_CONSUMABLE, 'YES', itemObject);
+    writeToLogItem(LOG_CONSUMABLE, "YES", itemObject);
   }
 
   itemObject.function();
 
   if (itemObject.soundEffect) {
-    soundEffectHandler(itemObject, 'ITEM');
+    soundEffectHandler(itemObject, "ITEM");
   }
 
   clearInventory();
@@ -1859,7 +1857,7 @@ function addItemToInventory(item) {
   inventoryItems.push(item);
 
   if (item === POTION) {
-    console.log('potion');
+    console.log("potion");
     potionCounter++;
     potions.textContent = ` x ${potionCounter}`;
   }
@@ -1901,7 +1899,10 @@ function renderInventory() {
       itemBox.appendChild(tooltipText);
       itemBox.appendChild(itemButton);
 
-      if (inventoryItems[i].type === "MAGIC") {
+      if (
+        inventoryItems[i].type === "MAGIC" ||
+        inventoryItems[i].type === "MISC"
+      ) {
         magicItemsBox.appendChild(itemBox);
       } else {
         consumablesBox.appendChild(itemBox);
@@ -2001,7 +2002,18 @@ inventoryModal.addEventListener("click", (event) => {
   const buttons = document.getElementsByTagName("button"); // Use the plural 'buttons' to represent a collection
 
   for (let i = 0; i < buttons.length; i++) {
-    if (magicItemsBox.contains(event.target) && event.target === buttons[i]) {
+    let itemObject = inventoryItems.find((inv) => inv.name === buttons[i].id);
+
+    if (
+      magicItemsBox.contains(event.target) &&
+      event.target === buttons[i] &&
+      itemObject.type === "MISC"
+    ) {
+      writeToLogItem(LOG_CANT_ATTUNE, "YES", buttons[i].id);
+    } else if (
+      magicItemsBox.contains(event.target) &&
+      event.target === buttons[i]
+    ) {
       attuneItem(buttons[i].id);
     }
 

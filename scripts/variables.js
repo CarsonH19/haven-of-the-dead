@@ -113,6 +113,7 @@ const LOG_BURNING_DEVOTION = "BURNING RADIANCE";
 
 const LOG_ITEM = "ITEM";
 const LOG_ATTUNE = "ATTUNE";
+const LOG_CANT_ATTUNE = "CANT ATTUNE";
 const LOG_CONSUMABLE = "CONSUMABLE";
 
 // ===============================

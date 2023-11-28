@@ -1,6 +1,6 @@
-  // ==============================================================
-  //                         ACTIONS
-  // ==============================================================
+// ==============================================================
+//                         ACTIONS
+// ==============================================================
 
 function writeToLogActions(logType, narrate, dataOne) {
   let newEntry = document.createElement("li");
@@ -12,7 +12,6 @@ function writeToLogActions(logType, narrate, dataOne) {
   }
 
   switch (logType) {
-
     // ===============================
     //     Player Attack Logs
     // ===============================
@@ -94,7 +93,6 @@ function writeToLogActions(logType, narrate, dataOne) {
     // ===============================
 
     case LOG_PLAYER_CRITICAL:
-
       if (heroChoice === "PALADIN") {
         if (narration === 1) {
           narration = `Your greatsword blazes with an overwhelming brilliance, obliterating the ${monsterName}'s resistance and leaving nothing but radiant aftermath.`;
@@ -170,9 +168,9 @@ function writeToLogActions(logType, narrate, dataOne) {
     //     Player Miss Event
     // ===============================
 
-      case LOG_PLAYER_MISS:
-        newEntry.textContent = `You fail to attack the ${monsterName}!`; 
-        break;
+    case LOG_PLAYER_MISS:
+      newEntry.textContent = `You fail to attack the ${monsterName}!`;
+      break;
 
     // ===============================
     //              Guard
@@ -402,84 +400,80 @@ function writeToLogActions(logType, narrate, dataOne) {
         }
       }
 
-      newEntry.textContent = `You flee from the ${currentRoom.roomName}!`; 
+      newEntry.textContent = `You flee from the ${currentRoom.roomName}!`;
       break;
   }
 
-    log.insertBefore(newEntry, log.firstChild);
-    const newEntryClone = newEntry.cloneNode(true);
-    logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+  log.insertBefore(newEntry, log.firstChild);
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
-    if (narrate === 'YES') {
-      writeToNarrative(narration);
-    }
+  if (narrate === "YES") {
+    writeToNarrative(narration);
+  }
 
-    checkLogSize();
+  checkLogSize();
 }
 
-  // ==============================================================
-  //                         MONSTERS
-  // ==============================================================
-
-
+// ==============================================================
+//                         MONSTERS
+// ==============================================================
 
 function writeToLogMonster(logType, narrate, dataOne) {
   let newEntry = document.createElement("li");
   let monsterName = currentRoom.contents.monsters[0].name;
   let narration = Math.round(Math.random() * 9);
 
-    switch (logType) {
+  switch (logType) {
+    // ===============================
+    //      Monster Attack Log
+    // ===============================
 
-      // ===============================
-      //      Monster Attack Log
-      // ===============================
+    case LOG_MONSTER_ATTACK:
+      newEntry.textContent = `The ${monsterName} deals ${dataOne} damage to you!`;
+      break;
 
-      case LOG_MONSTER_ATTACK:
-        newEntry.textContent = `The ${monsterName} deals ${dataOne} damage to you!`;
-        break;  
+    // ===============================
+    //      Monster Miss Log
+    // ===============================
 
-      // ===============================
-      //      Monster Miss Log
-      // ===============================
+    case LOG_MONSTER_MISS:
+      newEntry.textContent = `The ${monsterName} fails to attack you!`;
+      break;
 
-      case LOG_MONSTER_MISS:
-      newEntry.textContent = `The ${monsterName} fails to attack you!`; 
-      break; 
+    // ===============================
+    //      Monster Ability Log
+    // ===============================
 
-      // ===============================
-      //      Monster Ability Log
-      // ===============================
+    case LOG_MONSTER_ABILITY:
+      newEntry.textContent = `The ${monsterName} deals ${dataOne} damage to you!`;
+      break;
+  }
 
-      case LOG_MONSTER_ABILITY:
-        newEntry.textContent = `The ${monsterName} deals ${dataOne} damage to you!`;
-        break;  
-    }
+  log.insertBefore(newEntry, log.firstChild);
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
-    log.insertBefore(newEntry, log.firstChild);
-    const newEntryClone = newEntry.cloneNode(true);
-    logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+  if (narrate === "YES") {
+    writeToNarrative(newEntry.textContent);
+  }
 
-    if (narrate === 'YES') {
-      writeToNarrative(newEntry.textContent);
-    }
-
-    checkLogSize();
+  checkLogSize();
 }
 
-  // ==============================================================
-  //                         HEROES
-  // ==============================================================
+// ==============================================================
+//                         HEROES
+// ==============================================================
 
 function writeToLogHero(logType, narrate, dataOne, dataTwo) {
   // dataOne =
-  // dataTwo = 
+  // dataTwo =
 
   let newEntry = document.createElement("li");
   let monsterName = currentRoom.contents.monsters[0].name;
   let narration = Math.round(Math.random() * 9);
 
-    switch (logType) {
-
+  switch (logType) {
     // ===============================
     //           Level Up
     // ===============================
@@ -556,184 +550,182 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
       newEntry.textContent = `${narration}" Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
       break;
 
-      // ===============================
-      //         Paladin Logs
-      // ===============================
+    // ===============================
+    //         Paladin Logs
+    // ===============================
 
-      // Paladin Ability
-      case LOG_SMITE:
-        if (narration === 1) {
-          narration = `"In the name of the divine, your foe shall know the burning light!"`;
-        } else if (narration === 2) {
-          narration = `"With righteous fury, the smite of holiness purges all evil."`;
-        } else if (narration === 3) {
-          narration = `"May the heavens guide your strike, champion of the light!"`;
-        } else if (narration === 4) {
-          narration = `"A blinding radiance erupts as your smite pierces the darkness."`;
-        } else if (narration === 5) {
-          narration = `"The darkness recoils in the face of your holy onslaught."`;
-        } else if (narration === 6) {
-          narration = `"Behold the power of the sacred, as it lays waste to the unholy!"`;
-        } else if (narration === 7) {
-          narration = `"With each swing, the smite of righteousness carves a path of purity."`;
-        } else if (narration === 8) {
-          narration = `"The echoes of angels resonate as your smite strikes true."`;
-        } else if (narration === 9) {
-          narration = `"The unholy tremble as the light of righteousness descends upon them."`;
-        } else {
-          narration = `"Through the strength of faith, your smite brings judgment upon the wicked."`;
-        }
-  
-        newEntry.textContent = `Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
-        break;
-  
-      
-      case LOG_SMITE_CRITICAL:
-        if (narration === 1) {
-          narration =
-            "In the blazing name of the sun, I smite you, let its fire cleanse your soul!";
-        } else if (narration === 2) {
-          narration =
-            "By the searing light of the sun, I reduce your wickedness to cinders!";
-        } else if (narration === 3) {
-          narration = "The sun's wrath is an inferno, and you shall be consumed!";
-        } else if (narration === 4) {
-          narration =
-            "May the sun's fire consume your wickedness, leaving only ashes!";
-        } else if (narration === 5) {
-          narration = "By the sun's radiant might, I sear your malevolence!";
-        } else if (narration === 6) {
-          narration =
-            "Feel the scorching embrace of the sun's fury, wretched foe!";
-        } else if (narration === 7) {
-          narration =
-            "In the sun's brilliant embrace, I strike you down, leaving only embers!";
-        } else if (narration === 8) {
-          narration =
-            "By the fiery embrace of the sun, I brand you with holy fury!";
-        } else if (narration === 9) {
-          narration =
-            "In the name of the sun, I command you to burn in righteous fire!";
-        } else {
-          narration =
-            "From the sun's heart, a torrent of flames to consume your wickedness!";
-        }
-        newEntry.textContent = `${narration} Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
-        break;
-  
-      // Paladin Passive
-      case LOG_RADIANT_AURA:
-        newEntry.textContent = `Your Radiant Aura destroys the ${monsterName}!`; 
-        break;
-  
-      // ===============================
-      //         Rogue Logs
-      // ===============================
-  
-      // Rogue Ability
-      case LOG_SHADOW_STRIKE:
-        if (narration === 1) {
-          narration = `“Embrace the shadows, for they shall be your silent accomplice.”`;
-        } else if (narration === 2) {
-          narration = `“From the darkness I strike, a phantom in the night.”`;
-        } else if (narration === 3) {
-          narration = `“Witness the dance of shadows, and despair.”`;
-        } else if (narration === 4) {
-          narration = `“In shadows we find our strength, in silence we claim our victory.”`;
-        } else if (narration === 5) {
-          narration = `“The night is my ally, and together we shall prevail.”`;
-        } else if (narration === 6) {
-          narration = `“Fade into shadow, emerge in triumph.”`;
-        } else if (narration === 7) {
-          narration = `“They'll never see it coming… until it's too late.”`;
-        } else if (narration === 8) {
-          narration = `“Where there is shadow, there is opportunity.”`;
-        } else if (narration === 9) {
-          narration = `“From the depths of darkness, I arise to strike!”`;
-        } else {
-          narration = `“In the heart of the night, I am the unseen blade.”`;
-        }
+    // Paladin Ability
+    case LOG_SMITE:
+      if (narration === 1) {
+        narration = `"In the name of the divine, your foe shall know the burning light!"`;
+      } else if (narration === 2) {
+        narration = `"With righteous fury, the smite of holiness purges all evil."`;
+      } else if (narration === 3) {
+        narration = `"May the heavens guide your strike, champion of the light!"`;
+      } else if (narration === 4) {
+        narration = `"A blinding radiance erupts as your smite pierces the darkness."`;
+      } else if (narration === 5) {
+        narration = `"The darkness recoils in the face of your holy onslaught."`;
+      } else if (narration === 6) {
+        narration = `"Behold the power of the sacred, as it lays waste to the unholy!"`;
+      } else if (narration === 7) {
+        narration = `"With each swing, the smite of righteousness carves a path of purity."`;
+      } else if (narration === 8) {
+        narration = `"The echoes of angels resonate as your smite strikes true."`;
+      } else if (narration === 9) {
+        narration = `"The unholy tremble as the light of righteousness descends upon them."`;
+      } else {
+        narration = `"Through the strength of faith, your smite brings judgment upon the wicked."`;
+      }
 
-        newEntry.textContent = `${narration} Your Shadow Strike deals ${dataOne} damage to the ${monsterName}!`;
-        break;
-  
-      // Rogue Passive
-      case LOG_EVASION:
-        newEntry.textContent = `You evade the ${monsterName}'s attack!`;
-        break;
-  
-      // ===============================
-      //        Priestess Logs
-      // ===============================
-  
-      // Priestess Ability
-      case LOG_GREATER_PRAYER:
-        if (narration === 1) {
-          narration =
-            "As her voice resonates, a surge of healing light envelops her.";
-        } else if (narration === 2) {
-          narration =
-            "With devout grace, the priestess channels divine energy, mending her wounds.";
-        } else if (narration === 3) {
-          narration =
-            "The air shimmers with a soothing aura, knitting flesh and spirit together.";
-        } else if (narration === 4) {
-          narration =
-            "In a sacred incantation, the priestess bestows renewed vitality upon herself.";
-        } else if (narration === 5) {
-          narration =
-            "The priestess' Greater Prayer flows like a river of life, revitalizing all in its path.";
-        } else if (narration === 6) {
-          narration =
-            "With unwavering faith, the priestess mends the wounded, banishing pain and despair.";
-        } else if (narration === 7) {
-          narration =
-            "A gentle radiance emanates from the priestess, filling the area with healing energy.";
-        } else if (narration === 8) {
-          narration =
-            "As the priestess prays fervently, wounds close and strength is restored to the weary.";
-        } else if (narration === 9) {
-          narration =
-            "The echoes of the priestess' prayer reverberate, bringing solace and renewal to all.";
-        } else {
-          narration =
-            "Through her sacred incantation, the priestess invokes a torrent of healing energies.";
-        }
-  
-        newEntry.textContent = `${narration} Your Greater Prayer restores ${dataOne} health!`;
-        break;
-  
-      // Priestess Passive
-      case LOG_BURNING_DEVOTION:
-        newEntry.textContent = `Your Burning Devotion guides your attack. You deal ${dataOne} damage to the ${monsterName}!`;
-        break;
+      newEntry.textContent = `Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
+      break;
+
+    case LOG_SMITE_CRITICAL:
+      if (narration === 1) {
+        narration =
+          "In the blazing name of the sun, I smite you, let its fire cleanse your soul!";
+      } else if (narration === 2) {
+        narration =
+          "By the searing light of the sun, I reduce your wickedness to cinders!";
+      } else if (narration === 3) {
+        narration = "The sun's wrath is an inferno, and you shall be consumed!";
+      } else if (narration === 4) {
+        narration =
+          "May the sun's fire consume your wickedness, leaving only ashes!";
+      } else if (narration === 5) {
+        narration = "By the sun's radiant might, I sear your malevolence!";
+      } else if (narration === 6) {
+        narration =
+          "Feel the scorching embrace of the sun's fury, wretched foe!";
+      } else if (narration === 7) {
+        narration =
+          "In the sun's brilliant embrace, I strike you down, leaving only embers!";
+      } else if (narration === 8) {
+        narration =
+          "By the fiery embrace of the sun, I brand you with holy fury!";
+      } else if (narration === 9) {
+        narration =
+          "In the name of the sun, I command you to burn in righteous fire!";
+      } else {
+        narration =
+          "From the sun's heart, a torrent of flames to consume your wickedness!";
+      }
+      newEntry.textContent = `${narration} Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
+      break;
+
+    // Paladin Passive
+    case LOG_RADIANT_AURA:
+      newEntry.textContent = `Your Radiant Aura destroys the ${monsterName}!`;
+      break;
+
+    // ===============================
+    //         Rogue Logs
+    // ===============================
+
+    // Rogue Ability
+    case LOG_SHADOW_STRIKE:
+      if (narration === 1) {
+        narration = `“Embrace the shadows, for they shall be your silent accomplice.”`;
+      } else if (narration === 2) {
+        narration = `“From the darkness I strike, a phantom in the night.”`;
+      } else if (narration === 3) {
+        narration = `“Witness the dance of shadows, and despair.”`;
+      } else if (narration === 4) {
+        narration = `“In shadows we find our strength, in silence we claim our victory.”`;
+      } else if (narration === 5) {
+        narration = `“The night is my ally, and together we shall prevail.”`;
+      } else if (narration === 6) {
+        narration = `“Fade into shadow, emerge in triumph.”`;
+      } else if (narration === 7) {
+        narration = `“They'll never see it coming… until it's too late.”`;
+      } else if (narration === 8) {
+        narration = `“Where there is shadow, there is opportunity.”`;
+      } else if (narration === 9) {
+        narration = `“From the depths of darkness, I arise to strike!”`;
+      } else {
+        narration = `“In the heart of the night, I am the unseen blade.”`;
+      }
+
+      newEntry.textContent = `${narration} Your Shadow Strike deals ${dataOne} damage to the ${monsterName}!`;
+      break;
+
+    // Rogue Passive
+    case LOG_EVASION:
+      newEntry.textContent = `You evade the ${monsterName}'s attack!`;
+      break;
+
+    // ===============================
+    //        Priestess Logs
+    // ===============================
+
+    // Priestess Ability
+    case LOG_GREATER_PRAYER:
+      if (narration === 1) {
+        narration =
+          "As her voice resonates, a surge of healing light envelops her.";
+      } else if (narration === 2) {
+        narration =
+          "With devout grace, the priestess channels divine energy, mending her wounds.";
+      } else if (narration === 3) {
+        narration =
+          "The air shimmers with a soothing aura, knitting flesh and spirit together.";
+      } else if (narration === 4) {
+        narration =
+          "In a sacred incantation, the priestess bestows renewed vitality upon herself.";
+      } else if (narration === 5) {
+        narration =
+          "The priestess' Greater Prayer flows like a river of life, revitalizing all in its path.";
+      } else if (narration === 6) {
+        narration =
+          "With unwavering faith, the priestess mends the wounded, banishing pain and despair.";
+      } else if (narration === 7) {
+        narration =
+          "A gentle radiance emanates from the priestess, filling the area with healing energy.";
+      } else if (narration === 8) {
+        narration =
+          "As the priestess prays fervently, wounds close and strength is restored to the weary.";
+      } else if (narration === 9) {
+        narration =
+          "The echoes of the priestess' prayer reverberate, bringing solace and renewal to all.";
+      } else {
+        narration =
+          "Through her sacred incantation, the priestess invokes a torrent of healing energies.";
+      }
+
+      newEntry.textContent = `${narration} Your Greater Prayer restores ${dataOne} health!`;
+      break;
+
+    // Priestess Passive
+    case LOG_BURNING_DEVOTION:
+      newEntry.textContent = `Your Burning Devotion guides your attack. You deal ${dataOne} damage to the ${monsterName}!`;
+      break;
   }
 
-    log.insertBefore(newEntry, log.firstChild);
-    const newEntryClone = newEntry.cloneNode(true);
-    logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+  log.insertBefore(newEntry, log.firstChild);
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
-    if (narrate === 'YES') {
-      writeToNarrative(narration);
-    }
+  if (narrate === "YES") {
+    writeToNarrative(narration);
+  }
 
-    checkLogSize();
+  checkLogSize();
 }
 
-  // ==============================================================
-  //                         EVENTS
-  // ==============================================================
+// ==============================================================
+//                         EVENTS
+// ==============================================================
 
 function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
-  // dataOne = 
+  // dataOne =
   // dataTwo =
 
   let newEntry = document.createElement("li");
   let narration = Math.round(Math.random() * 9);
   let event = currentRoom.contents.events;
 
-  switch(logType) {
-
+  switch (logType) {
     // ===============================
     //     SAFE ROOM EVENT LOGS
     // ===============================
@@ -1161,16 +1153,16 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `As the key turns, a malevolent hiss escapes as deadly poison gas clouds your senses. Weakening, you realize the scoundrel's gratitude was a ruse. Ivan and his accomplices emerge, encircling you like prey in ambush. Peril looms in their treacherous laughter."`;
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. They turn towards you, their hollow sockets fixed on your bold presence.`;
-      } else if  (event === FORSAKEN_COMMANDER) {
-        if (dataOne === 'ONE') {
+      } else if (event === FORSAKEN_COMMANDER) {
+        if (dataOne === "ONE") {
           newEntry.textContent = `Valiant adventurer, my legion haunts these depths, bound by an unholy curse. Free them from the chains of undeath. Venture forth, quell the skeletal uprising, and usher my warriors into the eternal rest they deserve.`;
-        } else if (dataOne === 'TWO') {
+        } else if (dataOne === "TWO") {
           newEntry.textContent = `The ethereal voice echoes, but its spectral words elude your comprehension. The spirit's frustration intensifies, and anger darkens its gaze. Enraged, it lashes out with a vengeful force.`;
         }
       } else if (event === GRERVIL_THE_BODILESS) {
-        if (dataOne === 'ONE') {
+        if (dataOne === "ONE") {
           newEntry.textContent = `You speak with Grervil`;
-        } else if (dataOne === 'TWO') {
+        } else if (dataOne === "TWO") {
           newEntry.textContent = `You attempt to speak, but can't understand`;
         }
       }
@@ -1262,18 +1254,17 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
 }
 
 // ==============================================================
-//                         ITEMS 
+//                         ITEMS
 // ==============================================================
 
 function writeToLogItem(logType, narrate, dataOne, dataTwo) {
-  // dataOne = 
+  // dataOne =
   // dataTwo =
-  
+
   let newEntry = document.createElement("li");
   let narration = Math.round(Math.random() * 9);
 
   switch (logType) {
-  
     // ===============================
     //          Item Logs
     // ===============================
@@ -1282,16 +1273,20 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
       newEntry.textContent = `You attune to the ${dataOne}.`;
       break;
 
+    case LOG_CANT_ATTUNE:
+      newEntry.textContent = `The ${dataOne} cannot be attuned to.`;
+      break;
+
     case LOG_CONSUMABLE:
-      if (dataOne.logDetail === 'WISP') {
+      if (dataOne.logDetail === "WISP") {
         newEntry.textContent = `As you release the ${dataOne.name}, its ethereal glow illuminates the catacomb as it beckons you to follow it.`;
-      } else if (dataOne.logDetail === 'CANDLE') {
+      } else if (dataOne.logDetail === "CANDLE") {
         newEntry.textContent = `You ignite the ${dataOne.name}.`;
-      } else if (dataOne.logDetail === 'EAT') {
+      } else if (dataOne.logDetail === "EAT") {
         newEntry.textContent = `You eat the ${dataOne.name}.`;
-      } else if (dataOne.logDetail === 'DRINK') {
+      } else if (dataOne.logDetail === "DRINK") {
         newEntry.textContent = `You drink the ${dataOne.name}.`;
-      } else if (dataOne.logDetail === 'USE') {
+      } else if (dataOne.logDetail === "USE") {
         newEntry.textContent = `You use the ${dataOne.name}.`;
       }
       break;
@@ -1341,7 +1336,7 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
       } else if (dataOne === GRAVEBLOOM) {
         newEntry.textContent = `You are no longer poisoned.`;
       } else if (dataOne === WARDING_CANDLE) {
-        newEntry.textContent = `Your warding candle protects you from nearby undead.`;        
+        newEntry.textContent = `Your warding candle protects you from nearby undead.`;
       }
 
       narration = newEntry.textContent;
@@ -1360,47 +1355,46 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
 }
 
 // ==============================================================
-//                         STATUS EFFECTS 
+//                         STATUS EFFECTS
 // ==============================================================
 
 function writeToLogStatusEffect(logType, narrate, dataOne, dataTwo) {
-  // dataOne = 
+  // dataOne =
   // dataTwo =
-  
+
   let newEntry = document.createElement("li");
   let monsterName = currentRoom.contents.monsters[0].name;
   let narration = Math.round(Math.random() * 9);
 
-  switch (logType) {
-  
+  switch (
+    logType
+
     // ===============================
     //       Status Effect Logs
     // ===============================
-
+  ) {
   }
 }
 
-    // // ===============================
-    // //          Room Events
-    // // ===============================
-    //   case LOG_ROOM:
-    //     if (currentRoom === LOST_LEGIONS_VALE) {
-    //       newEntry.textContent = `An expansive chamber unveils the remnants of a long-forgotten battle. Echoes of ancient conflict stir as skeletal warriors awaken. The air quivers with the chilling resonance of an eternal struggle, and the bones of the fallen rise once more.`;
-    //     } else if (currentRoom.contents.monsters[0] === GRERVILS_BODY) {
-    //       newEntry.textContent = `STOP! WAIT!`;
-    //     }
+// // ===============================
+// //          Room Events
+// // ===============================
+//   case LOG_ROOM:
+//     if (currentRoom === LOST_LEGIONS_VALE) {
+//       newEntry.textContent = `An expansive chamber unveils the remnants of a long-forgotten battle. Echoes of ancient conflict stir as skeletal warriors awaken. The air quivers with the chilling resonance of an eternal struggle, and the bones of the fallen rise once more.`;
+//     } else if (currentRoom.contents.monsters[0] === GRERVILS_BODY) {
+//       newEntry.textContent = `STOP! WAIT!`;
+//     }
 
-    //   narration = newEntry.textContent;
-    //   break;
-
-
+//   narration = newEntry.textContent;
+//   break;
 
 // ==============================================================
 //                  LOG & NARRATIVE LOGIC
 // ==============================================================
 
 function writeToNarrative(narration) {
-  console.log(narration)
+  console.log(narration);
   let newNarration = document.createElement("li");
   newNarration.textContent = narration;
 
