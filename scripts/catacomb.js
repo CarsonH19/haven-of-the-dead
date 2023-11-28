@@ -172,7 +172,7 @@ let catacombRooms = [
       "The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.",
     summary: "",
     backgroundImage: "styles/images/corridor-two.png",
-    music: null,
+    music: droneDarkMys24,
     contents: {
       monsters: [],
       items: [],

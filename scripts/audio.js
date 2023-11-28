@@ -116,11 +116,19 @@ let currentMusic = null;
 function playMusic(music) {
   if (currentMusic) {
     // If there is currently playing music, fade it out
-    fadeOut(currentMusic);
+    fadeOut(currentMusic, () => {
+      // Callback: Start the new music after the old one has faded out
+      playNewMusic(music);
+    });
+  } else {
+    // If no music is currently playing, just start the new one
+    playNewMusic(music);
   }
 
   currentMusic = music;
+}
 
+function playNewMusic(music) {
   // Set the volume to 0 before playing to allow fading in
   music.volume = 0;
   music.play();
@@ -130,26 +138,29 @@ function playMusic(music) {
 }
 
 function fadeIn(audio) {
-  let volume = 0;
-  const fadeInInterval = setInterval(() => {
-    volume = Math.min(1, volume + 0.05);
-    audio.volume = volume;
+  audio.volume = 0;
+  audio.play();
 
-    if (volume >= 0.3) {
+  const fadeInInterval = setInterval(() => {
+    audio.volume = Math.min(1, audio.volume + 0.05);
+
+    if (audio.volume >= 0.3) {
       clearInterval(fadeInInterval);
     }
   }, 100);
 }
 
-function fadeOut(audio) {
-  let volume = 1;
+function fadeOut(audio, callback) {
   const fadeOutInterval = setInterval(() => {
-    volume = Math.max(0, volume - 0.05);
-    audio.volume = volume;
+    audio.volume = Math.max(0, audio.volume - 0.05);
 
-    if (volume <= 0) {
+    if (audio.volume <= 0) {
       clearInterval(fadeOutInterval);
       audio.pause();
+      audio.currentTime = 0; // Reset audio position to the beginning
+      if (callback) {
+        callback();
+      }
     }
   }, 100);
 }
