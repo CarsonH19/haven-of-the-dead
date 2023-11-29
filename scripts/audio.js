@@ -107,9 +107,9 @@ function soundEffectHandler(object, type) {
   sound.play();
 }
 
-// 
-// 
-// 
+//
+//
+//
 
 let currentMusic = null;
 
@@ -142,9 +142,9 @@ function fadeIn(audio) {
   audio.play();
 
   const fadeInInterval = setInterval(() => {
-    audio.volume = Math.min(1, audio.volume + 0.05);
+    audio.volume = Math.min(1, audio.volume + 0.02);
 
-    if (audio.volume >= 0.3) {
+    if (audio.volume >= 0.2) {
       clearInterval(fadeInInterval);
     }
   }, 100);
@@ -152,7 +152,7 @@ function fadeIn(audio) {
 
 function fadeOut(audio, callback) {
   const fadeOutInterval = setInterval(() => {
-    audio.volume = Math.max(0, audio.volume - 0.05);
+    audio.volume = Math.max(0, audio.volume - 0.03);
 
     if (audio.volume <= 0) {
       clearInterval(fadeOutInterval);
@@ -172,6 +172,45 @@ function fadeOut(audio, callback) {
 // ===============================
 //           MUSIC
 // ===============================
+
+const deepTunnels = loadAudio(
+  "audio/music/Deep Tunnels.mp3",
+  "deepTunnels",
+  true
+);
+
+const edgeOfFear = loadAudio(
+  "audio/music/Edge of Fear.mp3",
+  "edgeOfFear",
+  true
+);
+
+const passedDanger = loadAudio(
+  "audio/music/Passed Danger.mp3",
+  "passedDanger",
+  true
+);
+
+const spiderInvasion = loadAudio(
+  "audio/music/Spider Invasion.mp3",
+  "spiderInvasion",
+  true
+);
+
+const imminentDarkness = loadAudio(
+  "audio/music/Imminent Darkness.mp3",
+  "imminentDarkness",
+  true
+);
+
+const hauntedOutpost = loadAudio(
+  "audio/music/Haunted Outpost.mp3",
+  "hauntedOutpost",
+  true
+);
+
+// 
+// 
 
 const droneDungeon = loadAudio(
   "audio/music/Drone Dungeon.mp3",

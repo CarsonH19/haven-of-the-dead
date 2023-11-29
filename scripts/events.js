@@ -181,7 +181,7 @@ const GRAVEROBBER_EARVER = {
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
-    writeToLog(LOG_NPC_OPTION_TWO, "YES");
+    writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
     let currentRoomCounter = roomCounter + 10;
     console.log(`currentRoomCounter: ${currentRoomCounter}`);
     let earverInterval = setInterval(() => {

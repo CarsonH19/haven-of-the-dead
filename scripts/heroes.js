@@ -122,14 +122,17 @@ function rogueShadowStrike() {
     totalDamage = playerToMonsterDamage;
     showDamage(totalDamage, "PLAYER");
     writeToLogHero(LOG_SHADOW_STRIKE, "YES", totalDamage);
+     // Attack Misses
   } else {
-    // Attack Misses
+    totalDamage = 0;
     showDamage(totalDamage, "PLAYER");
     writeToLogHero(LOG_PLAYER_MISS, "NO");
   }
 
+
   damageMonster(totalDamage);
   specialCooldownHandler("RESET");
+  playerControlsTimeout(1500);
   setTimeout(updatePlayerTrackers, 1250);
 }
 

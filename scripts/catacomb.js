@@ -69,7 +69,7 @@ let catacombRooms = [
     description:
       "The Clawed Caverns echo with the sinister skittering of unseen claws. Jagged stalactites hang like fangs, ready to pierce the unwary.",
     backgroundImage: "styles/images/corridor-two.png",
-    music: droneDungeon,
+    music: deepTunnels,
     contents: {
       monsters: [GNAWER, GNAWER],
       items: [MARROWSTONE_CHEESE],
@@ -81,7 +81,7 @@ let catacombRooms = [
     description:
       "The Vermins' Vestibule teems with shadowy shapes, a breeding ground for swarms of relentless vermin. The air is thick with anticipation, as unseen forces prepare to unleash their tiny terrors upon intruders.",
     backgroundImage: "styles/images/corridor-two.png",
-    music: droneDarkMys24,
+    music: deepTunnels,
     contents: {
       monsters: [],
       items: [],
@@ -93,7 +93,7 @@ let catacombRooms = [
     description:
       "In the Gnawers' Nest, the scent of fur and decay hangs heavy. A multitude of gnawers skulk, eyes gleaming in the darkness. The air resonates with the unsettling symphony of their hungry whispers.",
     backgroundImage: "styles/images/corridor-two.png",
-    music: droneDungeon,
+    music: deepTunnels,
     contents: {
       monsters: [GNAWER, GNAWER, GNAWER, GNAWER],
       items: [],
@@ -105,7 +105,7 @@ let catacombRooms = [
     description:
       "The Webspun Passage, a silken maze woven by colossal spiders. Threads glisten, hinting at unseen arachnid architects. Each step stirs a web, the air pulsating with the potential of an eight-legged guardian's descent.",
     backgroundImage: "styles/images/corridor-two.png",
-    music: droneDarkMys24,
+    music: spiderInvasion,
     contents: {
       monsters: [],
       items: [],
@@ -117,7 +117,7 @@ let catacombRooms = [
     description:
       "Within the Creeping Coffin, ancient sarcophagi loom like silent sentinels. Coffin spiders, their legs tapping a macabre rhythm, await an unsuspecting intruder. The air is heavy with the scent of ancient dread.",
     backgroundImage: "styles/images/corridor-two.png",
-    music: droneDungeon,
+    music: spiderInvasion,
     contents: {
       monsters: [],
       items: [],
@@ -172,7 +172,7 @@ let catacombRooms = [
       "The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.",
     summary: "",
     backgroundImage: "styles/images/corridor-two.png",
-    music: droneDarkMys24,
+    music: spiderInvasion,
     contents: {
       monsters: [],
       items: [],
@@ -184,7 +184,7 @@ let catacombRooms = [
     description:
       "The Hatchery pulsates with an eerie hum. Walls, lined with unhatched eggs, house a crawling horde of crypt crawlers. The air is thick with the anticipation of countless tiny legs skittering across the cold stone floor.",
     backgroundImage: "styles/images/corridor-two.png",
-    music: droneDarkHor1,
+    music: spiderInvasion,
     contents: {
       monsters: [
         CRYPT_CRAWLER,
@@ -202,7 +202,7 @@ let catacombRooms = [
     description:
       "The Broodmother's Nest looms with arachnid grace. A colossal web, woven with uncanny precision, cradles the monstrous broodmother. Her presence sends shivers, and the air is thick with the scent of impending danger.",
     backgroundImage: "styles/images/corridor-two.png",
-    music: droneDarkHor1,
+    music: spiderInvasion,
     contents: {
       monsters: [BROODMOTHER],
       items: [],
@@ -217,7 +217,7 @@ let catacombRooms = [
     description:
       "The Skull-lined Corridor echoes with the rattling steps of skeletal sentinels. Walls adorned with grimacing skulls watch as decrepit skeletons and skeletal soldiers patrol with an eerie, mechanical precision.",
     backgroundImage: "styles/images/corridor-one.png",
-    music: droneDarkHor1,
+    music: edgeOfFear,
     contents: {
       monsters: [DECREPIT_SKELETON, SKELETAL_SOLDIER, DECREPIT_SKELETON],
       items: [BONE_MARROW_SOUP, GUIDING_LIGHT],
@@ -229,7 +229,7 @@ let catacombRooms = [
     description:
       "The Bone-laden Passage exudes the stench of ancient decay. Shadows dance on walls adorned with skeletal remains. Skeletal soldiers stand guard, wielding rusty weapons, while a decrepit skeleton cradles a precious lesser soulstone.",
     backgroundImage: "styles/images/corridor-one.png",
-    music: droneDarkHor1,
+    music: edgeOfFear,
     contents: {
       monsters: [SKELETAL_SOLDIER, DECREPIT_SKELETON],
       items: [LESSER_SOULSTONE, ROTBANE_FERN],
@@ -241,7 +241,7 @@ let catacombRooms = [
     description:
       "In Skeletons' Rest, decrepit skeletons lie in silent repose. The air is thick with the musty scent of gravebloom, a prized possession amidst the remains. An eerie tranquility belies the dormant threat within the bones.",
     backgroundImage: "styles/images/corridor-one.png",
-    music: droneDarkHor1,
+    music: edgeOfFear,
     contents: {
       monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, DECREPIT_SKELETON],
       items: [GRAVEBLOOM],
@@ -253,7 +253,7 @@ let catacombRooms = [
     description:
       "The Skeletonarium echoes with the metallic clank of skeletal soldiers. Armor-clad and relentless, they guard this chamber of bones. A skeleton key glimmers amid the remains.",
     backgroundImage: "styles/images/chamber-one.png",
-    music: droneDarkHor1,
+    music: edgeOfFear,
     contents: {
       monsters: [SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON],
       items: [SKELETON_KEY, GHOSTLIGHT_LILY],
@@ -292,7 +292,7 @@ let catacombRooms = [
     description:
       "Within the Skeletal Sepulcher, shadows dance on crumbling bone. Decrepit skeletons stir, guarding their final resting place. A chill pervades as skeletal soldiers stand sentinel.",
     backgroundImage: "styles/images/chamber-one.png",
-    music: droneHaunting1,
+    music: edgeOfFear,
     contents: {
       monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, SKELETAL_SOLDIER],
       items: [BONE_MARROW_SOUP],
@@ -307,7 +307,7 @@ let catacombRooms = [
     description:
       "The Marrowrest Tomb exhales an eerie silence. No living soul stirs, yet the air shivers with the unseen presence of the Graverobber Earver. Unhallowed secrets lie waiting to be unearthed in this solemn sepulcher.",
     backgroundImage: "styles/images/chamber-one.png",
-    music: droneHaunting1,
+    music: imminentDarkness,
     contents: {
       monsters: [],
       items: [],
@@ -334,7 +334,7 @@ let catacombRooms = [
     description:
       "Skullcarver's Passage winds through the heart of bone. A colossal bone titan looms, its presence carving fear into the marrow of adventurers.",
     backgroundImage: "styles/images/corridor-one.png",
-    music: droneHaunting1,
+    music: passedDanger,
     contents: {
       monsters: [BONE_TITAN],
       items: [SKELETON_KEY, CRYPTBREAD],
@@ -349,7 +349,7 @@ let catacombRooms = [
     description:
       "The Haunted Hall breathes with ethereal whispers, its walls adorned with drifting specters. A chilling presence lingers, and the air shivers with the haunting melody of unseen spirits.",
     backgroundImage: "styles/images/corridor-one.png",
-    music: droneHaunting1,
+    music: hauntedOutpost,
     contents: {
       monsters: [HAUNTING_SPIRIT],
       items: [],
@@ -364,7 +364,7 @@ let catacombRooms = [
     description:
       "Within the Echoing Vestibule, shadows seem to converse in ghostly murmurs. A lone haunting spirit glides through the mist, leaving echoes of melancholy. The air is heavy with the presence of lingering sorrow.",
     backgroundImage: "styles/images/corridor-one.png",
-    music: droneHaunting1,
+    music: hauntedOutpost,
     contents: {
       monsters: [HAUNTING_SPIRIT],
       items: [GHOSTLIGHT_LILY],
@@ -388,7 +388,7 @@ let catacombRooms = [
     description:
       "The Whispering Hollow breathes with an eerie hush. Shadows dance, concealing elusive shades. Faint whispers beckon, emanating from a lone shade guarding a mysterious whispering amulet, its power shrouded in enigma.",
     backgroundImage: "styles/images/corridor-one.png",
-    music: droneHaunting1,
+    music: imminentDarkness,
     contents: {
       monsters: [SHADE],
       items: [WHISPERING_AMULET],
@@ -400,7 +400,7 @@ let catacombRooms = [
     description:
       "Within the Rattling Hollow, bones assemble in macabre unity. An unsettling rattle permeates the air as a flood of bones, animated and vengeful, guards this chamber. Brave souls may find rare treasures amidst the bone-strewn chaos.",
     backgroundImage: "styles/images/rattling-hollow.png",
-    music: droneHaunting1,
+    music: passedDanger,
     contents: {
       monsters: [FLOOD_OF_BONES],
       items: [],
