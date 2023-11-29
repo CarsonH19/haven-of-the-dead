@@ -129,11 +129,13 @@ body {
 /* Status Effects */
 
 .middle-left {
-  width: 10vw;
+  width: 5vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
+  gap: 5px
 }
 
 .middle-left div {
@@ -226,7 +228,17 @@ body {
 }
 
 .middle-right {
-  width: 10vw;
+  width: 5vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5px
+}
+
+.middle-right button {
+  width: 100%;
 }
 
 .narrative-text {
@@ -921,7 +933,32 @@ progress[value]::-moz-progress-bar {
   left: 50%;
 }
 
-.tooltipText li {
+.statusTooltipText {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  visibility: hidden;
+  min-width: 100px; /* Set a minimum width */
+  width: auto; /* Allow the width to adjust based on content */
+  min-height: 80px; /* Set a minimum height */
+  background-color: #000;
+  color: #fff;
+  text-align: left;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  padding: 5px 0;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 3;
+  position: absolute;
+  left: 250%;
+}
+
+
+
+.tooltipText li, 
+.statusTooltipText li {
   list-style: none;
 }
 

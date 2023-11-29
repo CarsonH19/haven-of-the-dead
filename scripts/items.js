@@ -1776,7 +1776,7 @@ function renderStatusEffects(effect) {
   // Status Effect Tooltip
   newEffect.classList.add("tooltip");
   const tooltipText = document.createElement("ul");
-  tooltipText.classList.add("tooltipText");
+  tooltipText.classList.add("statusTooltipText");
   newEffect.appendChild(tooltipText);
 
   const tooltipNoteName = document.createElement("li");
@@ -1814,14 +1814,14 @@ function renderStatusEffects(effect) {
 
   document.querySelectorAll(".tooltip").forEach(function (element) {
     element.addEventListener("mouseover", function () {
-      const tooltipText = this.querySelector(".tooltipText");
+      const tooltipText = this.querySelector(".statusTooltipText");
 
       tooltipText.style.visibility = "visible";
       tooltipText.style.opacity = "1";
     });
 
     element.addEventListener("mouseout", function () {
-      const tooltipText = this.querySelector(".tooltipText");
+      const tooltipText = this.querySelector(".statusTooltipText");
       tooltipText.style.visibility = "hidden";
       tooltipText.style.opacity = "0";
     });
