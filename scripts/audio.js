@@ -173,11 +173,15 @@ function fadeOut(audio, callback) {
 //           MUSIC
 // ===============================
 
+// Gnawer
+
 const deepTunnels = loadAudio(
   "audio/music/Deep Tunnels.mp3",
   "deepTunnels",
   true
 );
+
+// Skeletons
 
 const edgeOfFear = loadAudio(
   "audio/music/Edge of Fear.mp3",
@@ -185,15 +189,33 @@ const edgeOfFear = loadAudio(
   true
 );
 
+const pileOfBones = loadAudio(
+  "audio/music/Pile of Bones.mp3",
+  "pileOfBones",
+  true
+);
+
+// Boss
+
 const passedDanger = loadAudio(
   "audio/music/Passed Danger.mp3",
   "passedDanger",
   true
 );
 
+// Spiders
+
 const spiderInvasion = loadAudio(
   "audio/music/Spider Invasion.mp3",
   "spiderInvasion",
+  true
+);
+
+// Ghost
+
+const fightThrough = loadAudio(
+  "audio/music/Fight Through.mp3",
+  "fightThrough",
   true
 );
 
@@ -209,8 +231,29 @@ const hauntedOutpost = loadAudio(
   true
 );
 
-// 
-// 
+// Scoundrel
+
+const hiddenCapacity = loadAudio(
+  "audio/music/Hidden Capacity.mp3",
+  "hiddenCapacity",
+  true
+);
+
+// Laughing Coffin Event
+const unfinishedBusiness = loadAudio(
+  "audio/music/Unfinished Business.mp3",
+  "unfinishedBusiness",
+  true
+);
+
+// Coffin Spider Event
+const threeThousandYearsOld = loadAudio(
+  "audio/music/3000 Years Old.mp3",
+  "threeThousandYearsOld",
+  true
+);
+
+// Misc. Ambiance
 
 const droneDungeon = loadAudio(
   "audio/music/Drone Dungeon.mp3",
@@ -237,6 +280,7 @@ const droneHaunting1 = loadAudio(
 );
 
 // Low Health Ambiance
+
 const heartbeatFastLow = loadAudio(
   "audio/sound-effects/Heartbeat Fast Low.mp3",
   "heartbeatFastLow",
@@ -421,6 +465,11 @@ const whooshGhost = loadAudio(
 const torchPassBy1 = loadAudio(
   "audio/sound-effects/Torch Pass By 1.mp3",
   "torchPassBy1"
+);
+
+const fleshStab3 = loadAudio(
+  "audio/sound-effects/Flesh Stab 3.mp3",
+  "fleshStab3"
 );
 
 // Monster Death

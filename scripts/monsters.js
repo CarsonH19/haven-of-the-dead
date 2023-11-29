@@ -93,6 +93,7 @@ const SCOUNDREL = {
     spawn: swordFromSheath3,
     attack: knifeStab,
     death: fightGrunt6,
+    ability: fleshStab3,
   },
   function: () => {
     POISONED.function(3);

@@ -158,7 +158,7 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  flex-grow: 1; /* This will allow the middle div to grow and take up any available space */
+  flex-grow: 1; 
   width: 30vw;
   height: 30vh;
   padding: 20px 40px 20px 40px;
@@ -197,8 +197,8 @@ body {
 }
 
 .critical {
-  color: #ad0505; /* Set the color for critical hits */
-  font-weight: bold; /* Add any additional styling for critical hits */
+  color: #ad0505; 
+  font-weight: bold; 
   animation: critical-hit 0.5s, damage-shake 0.5;
 }
 

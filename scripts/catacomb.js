@@ -34,7 +34,7 @@
 const catacombEntrance = {
   roomName: "Catacomb Entrance",
   backgroundImage: "styles/images/catacomb-entrance.png",
-  music: droneDarkMys24,
+  music: droneDarkHor1,
   contents: {
     monsters: [],
     items: [],
@@ -130,7 +130,7 @@ let catacombRooms = [
       "The Sneakshade Sanctum conceals rogue figures in the shadows. Sinister scoundrels lurk, their eyes glinting with mischief. The sanctum exudes an eerie calm, belying the imminent threat of unseen daggers.",
     summary: "",
     backgroundImage: "styles/images/corridor-one.png",
-    music: droneDungeon,
+    music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL],
       items: [],
@@ -143,7 +143,7 @@ let catacombRooms = [
       "The Devious Alvove conceals its secrets in shadows. A lone scoundrel lurks, eyes gleaming with mischief. A tempting aroma of Blackheart Brew wafts through the air, promising both delight and danger to those who venture forth.",
     summary: "",
     backgroundImage: "styles/images/corridor-one.png",
-    music: droneDarkMys24,
+    music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL],
       items: [BLACKHEART_BREW],
@@ -156,7 +156,7 @@ let catacombRooms = [
       "In the Rogue's Refuge, whispers of ill intent fill the air. Multiple scoundrels, masters of deception, plot amidst the concealed corners.",
     summary: "",
     backgroundImage: "styles/images/corridor-one.png",
-    music: droneDarkMys24,
+    music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL, SCOUNDREL],
       items: [LAUGHING_COFFIN_COIN],
@@ -319,7 +319,7 @@ let catacombRooms = [
     description:
       "In the Ivory Crypt, delicate filigree adorns crypt walls. An ethereal silence lingers, broken only by the occasional skittering. The air is charged with the unsettling energy of the crypt's secrets.",
     backgroundImage: "styles/images/chamber-one.png",
-    music: droneDarkMys24,
+    music: threeThousandYearsOld,
     contents: {
       monsters: [],
       items: [],
@@ -376,7 +376,7 @@ let catacombRooms = [
     description:
       "The Forgotten Passage is cloaked in darkness, a haven for lurking scoundrels. Their eyes gleaming with mischief.",
     backgroundImage: "styles/images/corridor-two.png",
-    music: droneHaunting1,
+    music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL],
       items: [POTION, POTION],
