@@ -1568,7 +1568,9 @@ function statusEffectHandler(item) {
     case FLICKERING_CANDLE:
       if (flickeringCandleTracker > 0) {
         flickeringCandleTracker--;
-        return 10;
+        return 99;
+      } else {
+        return 0;
       }
       break;
 
@@ -2021,6 +2023,7 @@ closeInventoryButton.addEventListener("click", () => {
   closeInventoryHandler();
   clearInventory();
   calculatePlayerMaxHealth();
+  checkForLevelUp();
   updatePlayerTrackers();
 });
 

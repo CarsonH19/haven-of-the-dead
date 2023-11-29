@@ -222,7 +222,7 @@ function specialCooldownHandler(reset) {
       specialCooldownCounter = 13;
     }
 
-    // ITEM: HALLOWED HOURGLASS - Reduces Cooldown by 1 
+    // ITEM: HALLOWED HOURGLASS - Reduces Cooldown by 1
     isItemAttuned(HALLOWED_HOURGLASS, null);
   }
 
@@ -334,11 +334,21 @@ function fleeHandler() {
   // ITEM: FLickering Candle - 100% flee chance
   fleeChance += statusEffectHandler(FLICKERING_CANDLE);
 
+  console.log(fleeChance);
+
   if (fleeChance >= 10) {
     console.log("Flee Successful");
     writeToLogActions(LOG_FLEE, "YES", currentRoom.name);
-    getRandomRoom(catacombRooms);
-    renderCurrentRoom(currentRoom);
+    setTimeout(() => {
+      newRoomAnimation();
+      setTimeout(() => {
+        getRandomRoom(catacombRooms);
+        renderCurrentRoom(currentRoom);
+      }, 1500);
+    }, 2000);
+  } else { 
+    setTimeout(monsterAttackHandler, 1200);
+    isGameOver();
   }
 }
 
@@ -834,7 +844,7 @@ specialBtn.addEventListener("click", () => {
 potionBtn.addEventListener("click", () => {
   actionCounter++;
   attackCounter = 0; // Item: Soulreaver
-  
+
   potionHandler();
 
   if (currentRoom.contents.monsters.length > 0) {
@@ -854,8 +864,6 @@ fleeBtn.addEventListener("click", () => {
   fleeHandler();
   specialCooldownHandler();
   playerControlsTimeout(1500);
-  setTimeout(monsterAttackHandler, 1200);
-  isGameOver();
   updatePlayerTrackers();
 });
 
