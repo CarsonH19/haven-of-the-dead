@@ -50,18 +50,28 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
   border: 5px solid var(--accent);
   background-image: url();
   background-repeat: no-repeat;
   background-size: cover;
 }
 
+#backgroundImage {
+  /* Add the following styles to your existing styles */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .top-content {
   display: flex;
   justify-content: space-between;
-  height: 15%;
+  height: 20%;
+  margin-left: 20px;
 }
 
 .monster-container {
@@ -111,8 +121,9 @@ body {
 
 .middle-content {
   display: flex;
-  justify-content: space-between; /* This will push the left and right divs to the edges */
-  align-items: center; /* This will vertically center the elements */
+  justify-content: space-between; 
+  align-items: center; 
+  height: 70%;
 }
 
 /* Status Effects */
@@ -158,17 +169,22 @@ body {
 .damage-dealt-box {
   width: 33%;
   min-width: 300px;
-  height: 10vh;
+  height: 15vh;
   align-self: flex-end;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
 }
 
-.critical {
-  color: #ad0505; /* Set the color for critical hits */
-  font-weight: bold; /* Add any additional styling for critical hits */
-  animation: critical-hit 0.5s, damage-shake 0.5;
+.damage-received-box {
+  width: 33%;
+  min-width: 300px;
+  height: 15vh;
+  align-self: flex-start;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 .damage {
@@ -180,16 +196,11 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.damage-received-box {
-  width: 33%;
-  min-width: 300px;
-  height: 10vh;
-  align-self: flex-start;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
+.critical {
+  color: #ad0505; /* Set the color for critical hits */
+  font-weight: bold; /* Add any additional styling for critical hits */
+  animation: critical-hit 0.5s, damage-shake 0.5;
 }
-
 
 @keyframes critical-hit {
   0% { transform: scale(1); }
@@ -426,13 +437,13 @@ progress[value] {
 
 progress[value]::-webkit-progress-value {
   background-color: #ad0505;
-  transition: all 0.5s ease-out;
+  transition: all 0.2s ease-out;
 
 }
 
 progress[value]::-moz-progress-bar {
   background-color: #ad0505;
-  transition: all 0.5s ease-out;
+  transition: all 0.2s ease-out;
 }
 
 /* 

@@ -228,39 +228,41 @@
       <audio id="myAudio" src=""></audio>
       <div id="fade"></div>
       <div class="game-window">
-        <div class="top-content">
-          <div class="name-and-counter">
-            <h2 id="catacombRoomName"></h2>
-            <h4 id="roomsCleared">Rooms Cleared: 0</h4>
+        <div id="backgroundImage">
+          <div class="top-content">
+            <div class="name-and-counter">
+              <h2 id="catacombRoomName"></h2>
+              <h4 id="roomsCleared">Rooms Cleared: 0</h4>
+            </div>
+            <div id="monsterContainer" class="monster-container">
+                <div class="monster-display">
+                  <h3 id="monster-name">Monster</h3>
+                  <h3 id="skull-level"></h3>
+                </div>
+                <div class="monster-health-bar">
+                  <p><span><span id="monsterCurrentHP">0</span> / <span
+                    id="monsterMaxHP">0</span></p>
+                  <progress id="monster-health" max="100" value="100">100%</progress>
+                </div>
+            </div>
           </div>
-          <div id="monsterContainer" class="monster-container">
-              <div class="monster-display">
-                <h3 id="monster-name">Monster</h3>
-                <h3 id="skull-level"></h3>
-              </div>
-              <div class="monster-health-bar">
-                <p><span><span id="monsterCurrentHP">0</span> / <span
-                  id="monsterMaxHP">0</span></p>
-                <progress id="monster-health" max="100" value="100">100%</progress>
-              </div>
+          <div class="damage-dealt-box">
+            <ul id="damageDealt" class="damage"></ul>
           </div>
-        </div>
-        <div class="damage-dealt-box">
-          <ul id="damageDealt" class="damage"></ul>
-        </div>
-        <div class="middle-content">
-          <div class="middle-left"></div>
-          <div class="middle-center">
-            <ul id="narrativeText" class="narrative-text"></ul>
-            <div class="wisp"></div>
+          <div class="middle-content">
+            <div class="middle-left"></div>
+            <div class="middle-center">
+              <ul id="narrativeText" class="narrative-text"></ul>
+              <div class="wisp"></div>
+            </div>
+            <div class="middle-right">
+              <button id="inventoryBtn" class="inventory-btn">Inventory</button>
+              <button id="settingsBtn" class="settings-btn">Settings</button>
+            </div>
           </div>
-          <div class="middle-right">
-            <button id="inventoryBtn" class="inventory-btn">Inventory</button>
-            <button id="settingsBtn" class="settings-btn">Settings</button>
+          <div class="damage-received-box">
+            <ul id="damageReceived" class="damage"></ul>
           </div>
-        </div>
-        <div class="damage-received-box">
-          <ul id="damageReceived" class="damage"></ul>
         </div>
         <div class="bottom-content">
           <div id="playerContainer" class="player-container">

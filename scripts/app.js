@@ -538,9 +538,7 @@ function renderBackground(link) {
   const image = new Image();
   image.src = link;
   image.onload = () => {
-    gameWindow.style.backgroundImage = `url(${link})`;
-    gameWindow.style.backgroundRepeat = "no-repeat";
-    gameWindow.style.backgroundSize = "cover";
+    roomImage.style.backgroundImage = `url(${link})`;
   };
 }
 
