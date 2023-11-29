@@ -1783,7 +1783,7 @@ function renderStatusEffects(effect) {
   const tooltipNoteDuration = document.createElement("li");
   const tooltipNoteStatus = document.createElement("li");
   tooltipNoteName.textContent = effect.name;
-  tooltipNoteName.style.fontWeight = '800';
+  tooltipNoteName.style.fontWeight = "800";
 
   tooltipNoteDuration.textContent = effect.duration;
 
@@ -1897,7 +1897,7 @@ function renderInventory() {
       const tooltipTextRarity = document.createElement("li");
       const tooltipTextEffect = document.createElement("li");
       tooltipTextName.textContent = `${inventoryItems[i].name}`;
-      tooltipTextName.style.fontWeight = '800';
+      tooltipTextName.style.fontWeight = "800";
       tooltipTextRarity.textContent = `${inventoryItems[i].rarity}`;
       tooltipTextEffect.textContent = `${inventoryItems[i].effect}`;
 
@@ -1946,15 +1946,35 @@ function renderInventory() {
 
   for (let i = 0; i < attunedItems.length; i++) {
     const itemBox = document.createElement("div");
+    itemBox.classList.add("itemTooltip");
+
     const itemButton = document.createElement("button");
     itemButton.textContent = attunedItems[i].name;
     itemButton.setAttribute("id", attunedItems[i].name);
-    itemBox.classList.add("itemTooltip");
-    const tooltipText = document.createElement("span");
-    tooltipText.classList.add("tooltipText");
-    tooltipText.textContent = attunedItems[i].effect;
 
+    const tooltipText = document.createElement("ul");
+    tooltipText.classList.add("tooltipText");
     itemBox.appendChild(tooltipText);
+
+    const tooltipTextName = document.createElement("li");
+    const tooltipTextRarity = document.createElement("li");
+    const tooltipTextEffect = document.createElement("li");
+    tooltipTextName.textContent = `${attunedItems[i].name}`;
+    tooltipTextName.style.fontWeight = "800";
+    tooltipTextRarity.textContent = `${attunedItems[i].rarity}`;
+    tooltipTextEffect.textContent = `${attunedItems[i].effect}`;
+
+    if (attunedItems[i].rarity === "Epic") {
+      tooltipTextRarity.classList.add("epic-item");
+    } else if (attunedItems[i].rarity === "Rare") {
+      tooltipTextRarity.classList.add("rare-item");
+    } else {
+      tooltipTextRarity.classList.add("common-item");
+    }
+
+    tooltipText.appendChild(tooltipTextName);
+    tooltipText.appendChild(tooltipTextRarity);
+    tooltipText.appendChild(tooltipTextEffect);
     itemBox.appendChild(itemButton);
 
     if (!slotOne.hasChildNodes()) {
@@ -1973,7 +1993,6 @@ function renderInventory() {
   document.querySelectorAll(".itemTooltip").forEach(function (element) {
     element.addEventListener("mouseover", function () {
       const tooltipText = this.querySelector(".tooltipText");
-
       tooltipText.style.visibility = "visible";
       tooltipText.style.opacity = "1";
     });
