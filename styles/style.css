@@ -901,29 +901,37 @@ progress[value]::-moz-progress-bar {
   font-size: 0.7rem;
 }
 
-.tooltip {
+.itemTooltip {
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.statusTooltip {
   position: relative;
   cursor: pointer;
   z-index: 1;
 }
 
 .tooltip:hover {
-  box-shadow: 0px 0px 10px 5px white;
+  box-shadow: 0px 0px 15px 5px var(--background);
 }
 
 .tooltipText {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 5px;
   visibility: hidden;
-  width: 120px;
-  height: 120px;
-  background-color: #000;
-  color: #fff;
-  text-align: center;
+  min-width: 130px; /* Set a minimum width */
+  width: auto; /* Allow the width to adjust based on content */
+  min-height: 80px; /* Set a minimum height */
+  background-color: var(--accent);
+  color: lightgray;
+  text-align: left;
   font-size: 0.8rem;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 5px;
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
@@ -933,20 +941,32 @@ progress[value]::-moz-progress-bar {
   left: 50%;
 }
 
+.common-item {
+  color: var(--header);
+}
+
+.rare-item {
+  color: rgb(107, 127, 255);
+}
+
+.epic-item {
+  color: rgb(187, 120, 255);
+}
+
 .statusTooltipText {
   display: flex;
   flex-direction: column;
   gap: 5px;
   visibility: hidden;
-  min-width: 100px; /* Set a minimum width */
+  min-width: 120px; /* Set a minimum width */
   width: auto; /* Allow the width to adjust based on content */
   min-height: 80px; /* Set a minimum height */
-  background-color: #000;
-  color: #fff;
+  background-color: var(--accent);
+  color: lightgray;
   text-align: left;
   font-size: 0.8rem;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 5px;
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;

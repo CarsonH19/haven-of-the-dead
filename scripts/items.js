@@ -82,7 +82,7 @@ const EVERTORCH = {
   description:
     "This torch emits an ethereal luminescent glow in the presence of danger.",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect:
     "While attuned, you have a greater chance of successfully avoiding traps.",
   function: () => {
@@ -94,7 +94,7 @@ const FLASK_OF_LIGHT = {
   name: "Flask of Light",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect:
     "While attuned to this item evil spirits are weakened by your presence.",
   function: () => {
@@ -113,7 +113,7 @@ const GRAVEROBBERS_SPADE = {
   name: "Graverobber's Spade",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect: "While attuned to this item you are more likely to find items.",
   function: () => {
     return 2;
@@ -124,7 +124,7 @@ const CHARM_OF_HEALING = {
   name: "Charm of Healing",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect:
     "While attuned to this item you recover 10 points of health after each room you clear.",
   function: () => {
@@ -136,7 +136,7 @@ const RING_OF_THE_RODENT = {
   name: "Ring of the Rodent",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect:
     "While attuned to this item you have a higher chance to flee successfully. The greater your dexterity, the higher the chance becomes.",
   function: () => {
@@ -148,7 +148,7 @@ const MIST_VEIL_CLOAK = {
   name: "Mist Veil Cloak",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect:
     "While attuned to this item you have a slight chance of completely evading enemy attacks.",
   function: () => {
@@ -167,7 +167,7 @@ const SHADOWSTEP_BOOTS = {
   name: "Shadowstep Boots",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect: "While attuned to this item your dexterity increases by 1.",
   function: () => {
     baseDexterity++;
@@ -181,7 +181,7 @@ const TITANS_GAUNTLETS = {
   name: "Titan's Gauntlets",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect: "While attuned to this item your strength increases by 1.",
   function: () => {
     baseStrength++;
@@ -195,7 +195,7 @@ const HOLY_RELIC = {
   name: "Holy Relic",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect: "While attuned to this item your faith increases by 1.",
   function: () => {
     baseFaith++;
@@ -209,7 +209,7 @@ const SACRIFICIAL_BLADE = {
   name: "Sacrificial Blade",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect:
     "While attuned to this item your attack increases by 3, but your faith decreases by 1.",
   function: () => {
@@ -241,7 +241,7 @@ const BLOODSTONE = {
   name: "Bloodstone",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect:
     "When attuned to this item you recover a small amount of health after defeating a creature.",
   function: () => {
@@ -286,7 +286,7 @@ const WRAITHBANE = {
   name: "Wraithbane",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect:
     "While attuned to this item your attacks deal additional damage against evil spirits.",
   function: () => {
@@ -307,7 +307,7 @@ const SUNSTONE = {
   name: "Sunstone",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect:
     "While attuned to this item undead creatures take damage at the start of battle.",
   function: () => {
@@ -324,7 +324,7 @@ const WHISPERING_AMULET = {
   name: "Whispering Amulet",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect:
     "While attuned to this item you can communicate with some undead creatures.",
   function: () => {},
@@ -334,7 +334,7 @@ const CURSED_MIRROR = {
   name: "Cursed Mirror",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect:
     "While attuned to this item a portion of all damage received is reflected back to the attacker.",
   function: () => {
@@ -347,7 +347,7 @@ const REVENANTS_RAGE = {
   name: "Revenant's Rage",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect:
     "While attuned to this item you deal more damage when your health reaches critical levels.",
   function: () => {
@@ -370,7 +370,7 @@ const LAUGHING_COFFIN_COIN = {
   description: "",
   soundEffect: coinFlipLand,
   type: "MISC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect:
     "Taken from Ivan the Scoundrel, it may be of some value to other scoundrels.",
   function: () => {
@@ -382,7 +382,7 @@ const PLAGUEWARD_PENDANT = {
   name: "Plagueward Pendant",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect: "While attuned to this item it prevents you from being diseased.",
   function: () => {
     return "IMMUNE";
@@ -393,7 +393,7 @@ const GHOSTSHROUD_TALISMAN = {
   name: "Ghostshroud Talisman",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect: "While attuned to this item it prevents you from being haunted.",
   function: () => {
     return "IMMUNE";
@@ -404,7 +404,7 @@ const TOXINWEAVE_MASK = {
   name: "Toxinweave Mask",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect: "While attuned to this item it prevents you from being poisoned.",
   function: () => {
     return "IMMUNE";
@@ -415,7 +415,7 @@ const CHILLBREAKER_BAND = {
   name: "Chillbreaker Band",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect: "While attuned to this item it prevents you from being chilled.",
   function: () => {
     return "IMMUNE";
@@ -426,7 +426,7 @@ const BERSERKER_PAULDRONS = {
   name: "Berserker Pauldrons",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect: "While attuned to this item you gain +2 Strength, but -1 Faith.",
   function: () => {
     baseStrength += 2;
@@ -442,7 +442,7 @@ const TOME_OF_DEVOTION = {
   name: "Tome of Devotion",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect: "While attuned to this item you gain +2 Faith, but -1 Dexterity.",
   function: () => {
     baseFaith += 2;
@@ -458,7 +458,7 @@ const BRACELET_OF_THE_SERPENT = {
   name: "Bracelet of the Serpent",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect: "While attuned to this item you gain +2 Dexterity, but -1 Strength.",
   function: () => {
     baseDexterity += 2;
@@ -475,7 +475,7 @@ const SKELETON_KEY = {
   description: "",
   soundEffect: skeletonKeyIn2,
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect:
     "This key can be used to unlock various locked rooms throughout the catacomb.",
   function: () => {
@@ -487,7 +487,7 @@ const SOULREAVER = {
   name: "Soulreaver",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect:
     "While attuned to this item your damage increases by +1 for each consecutive attack up to a max of 5",
   function: () => {
@@ -523,7 +523,7 @@ const ETHEREAL_CROWN = {
   name: "Ethereal Crown",
   description: "",
   type: "MAGIC",
-  rarity: "EPIC",
+  rarity: "Epic",
   effect: "While attuned to this item evil spirits will not attack you.",
   function: () => {
     if (
@@ -545,7 +545,7 @@ const SOUL_JAR = {
   name: "Soul Jar",
   description: "",
   type: "MAGIC",
-  rarity: "EPIC",
+  rarity: "Epic",
   effect:
     "While attuned to this item if you die, you'll be resurrected with half your HP. This item is then destroyed.",
   function: () => {
@@ -568,7 +568,7 @@ const CRIMSON_OFFERING = {
   name: "Crimson Offering",
   description: "",
   type: "MAGIC",
-  rarity: "EPIC",
+  rarity: "Epic",
   effect:
     "While attuned to this item you sacrifice 5HP after each of your attacks, but you deal an additional 10 damage.",
   function: () => {
@@ -583,7 +583,7 @@ const DARKGUARD_TRINKET = {
   name: "Darkguard Trinket",
   description: "",
   type: "MAGIC",
-  rarity: "EPIC",
+  rarity: "Epic",
   effect: "While attuned to this item it prevents you from being cursed.",
   function: () => {
     return "IMMUNE";
@@ -594,7 +594,7 @@ const HALLOWED_HOURGLASS = {
   name: "Hallowed Hourglass",
   description: "",
   type: "MAGIC",
-  rarity: "EPIC",
+  rarity: "Epic",
   effect:
     "While attuned to this item your special ability cooldown is reduced.",
   function: () => {
@@ -606,7 +606,7 @@ const AEGIS_OF_THE_FALLEN = {
   name: "Aegis of the Fallen",
   description: "",
   type: "MAGIC",
-  rarity: "EPIC",
+  rarity: "Epic",
   effect:
     "While attuned to this item you become immune to damage for a brief time after falling below 30HP.",
   cooldown: 0,
@@ -626,7 +626,7 @@ const BONEMAIL = {
   name: "Bonemail",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect: "While attuned to this item your max health is increased by 20HP.",
   function: () => {
     baseHealth += 20;
@@ -640,7 +640,7 @@ const RIBCAGE_DEFENDER = {
   name: "Ribcage Defender",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect: "While attuned to this item your max health is increased by 30HP.",
   function: () => {
     baseHealth += 30;
@@ -654,7 +654,7 @@ const SKULLCRUSHER_HELM = {
   name: "Skullcrusher Helm",
   description: "",
   type: "MAGIC",
-  rarity: "RARE",
+  rarity: "Rare",
   effect:
     "While attuned to this item your max health is increased by 20HP and you gain +1 Strength.",
   function: () => {
@@ -669,7 +669,7 @@ const BONECHILL_AMULET = {
   name: "Bone Chill Amulet",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect:
     "While attuned to this item you have resistance against draugr attacks.",
   function: () => {
@@ -685,7 +685,7 @@ const RATTLEBONE_CHARM = {
   name: "Rattlebone Charm",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect:
     "While attuned to this item there is a chance that humans will flee from you.",
   function: () => {
@@ -711,7 +711,7 @@ const SPINE_OF_THE_NECROMANCER = {
   name: "Spine of the Necromance",
   description: "",
   type: "MAGIC",
-  rarity: "EPIC",
+  rarity: "Epic",
   effect:
     "While attuned to this item you gain +9 Attack, but all stats are reduced by 1.",
   function: () => {
@@ -745,7 +745,7 @@ const CURSED_GRIMOIRE = {
   name: "Cursed Grimoire",
   description: "",
   type: "MAGIC",
-  rarity: "EPIC",
+  rarity: "Epic",
   effect: "This item is cursed and cannot be unattuned.",
   function: () => {
     currentPlayerHealth--;
@@ -760,7 +760,7 @@ const CACHE_KEY = {
   description: "",
   soundEffect: skeletonKeyIn2,
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect:
     "Given to you by Ivan the Scoundrel, he said it unlocks a chamber within the catacombs were his hidden cache is kept.",
   function: () => {
@@ -773,7 +773,7 @@ const GRERVILS_HEAD = {
   name: "Grervil's Head",
   description: "",
   type: "MAGIC",
-  rarity: "COMMON",
+  rarity: "Common",
   effect: "Head of the talking skull, Grervil.",
   function: () => {
     // Obtained after meeting Grervil agreeing to help him find his body.
@@ -789,7 +789,7 @@ const POTION = {
   name: "Health Potion",
   description: "A small bottle of glowing red liquid.",
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   effect: "Restores 20 health points and can be used during combat.",
   soundEffect: gulpingWater24,
   function: () => {
@@ -801,7 +801,7 @@ const CRYPTBREAD = {
   name: "Cryptbread",
   description: "",
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   logDetail: "EAT",
   effect: "Restores 10 health points when eaten.",
   soundEffect: chewCrackersMouth,
@@ -814,7 +814,7 @@ const BONE_MARROW_SOUP = {
   name: "Bone Marrow Soup",
   description: "",
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   logDetail: "DRINK",
   effect: "Restores 15 health points when eaten.",
   soundEffect: gulpingWater24,
@@ -827,7 +827,7 @@ const MARROWSTONE_CHEESE = {
   name: "Marrowstone Cheese",
   description: "",
   type: "CONSUMABLE",
-  rarity: "RARE",
+  rarity: "Rare",
   logDetail: "EAT",
   effect: "Restores 20 health points when eaten.",
   soundEffect: chewCrackersMouth,
@@ -840,7 +840,7 @@ const TOMBSTONE_TRUFFLE = {
   name: "Tombstone Truffle",
   description: "",
   type: "CONSUMABLE",
-  rarity: "RARE",
+  rarity: "Rare",
   logDetail: "EAT",
   effect: "Restores 10 health points when eaten.",
   soundEffect: chewCrackersMouth,
@@ -866,7 +866,7 @@ const LICHROOT = {
   name: "Lichroot",
   description: "",
   type: "CONSUMABLE",
-  rarity: "RARE",
+  rarity: "Rare",
   logDetail: "EAT",
   effect:
     "Can be used to permanently increase the potency of health potions by 5HP.",
@@ -880,7 +880,7 @@ const ROTBANE_FERN = {
   name: "Rotbane Fern",
   description: "",
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   logDetail: "EAT",
   effect: "Can be used for a chance to cure the diseased condition.",
   soundEffect: chewCrackersMouth,
@@ -906,7 +906,7 @@ const WITCHFIRE_ORCHID = {
   name: "Witchfire Orchid",
   description: "",
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   logDetail: "EAT",
   effect: "Can be used for a chance to cure the cursed condition.",
   soundEffect: chewCrackersMouth,
@@ -934,7 +934,7 @@ const EMBERTHAW_PETAL = {
   name: "Emberthaw Petal",
   description: "",
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   logDetail: "EAT",
   effect: "Can be used for a chance to cure the chilled condition.",
   soundEffect: chewCrackersMouth,
@@ -960,7 +960,7 @@ const GHOSTLIGHT_LILY = {
   name: "Ghostlight Lily",
   description: "",
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   logDetail: "EAT",
   effect: "Can be used for a chance to cure the haunted condition.",
   soundEffect: chewCrackersMouth,
@@ -985,7 +985,7 @@ const GRAVEBLOOM = {
   name: "Gravebloom",
   description: "",
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   logDetail: "EAT",
   effect: "Can be used for a chance to cure the poisoned condition.",
   soundEffect: chewCrackersMouth,
@@ -1014,7 +1014,7 @@ const LESSER_SOULSTONE = {
   description: "",
   soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   logDetail: "USE",
   effect: "Can be used to gain +5 experience.",
   function: () => {
@@ -1027,7 +1027,7 @@ const GREATER_SOULSTONE = {
   description: "",
   soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
-  rarity: "RARE",
+  rarity: "Rare",
   logDetail: "USE",
   effect: "Can be used to gain +20 experience.",
   function: () => {
@@ -1039,7 +1039,7 @@ const BLACKHEART_BREW = {
   name: "Blackheart Brew",
   description: "A favored drink of the scoundrels at the Laughing Coffin.",
   type: "CONSUMABLE",
-  rarity: "RARE",
+  rarity: "Rare",
   logDetail: "DRINK",
   effect:
     "Can be used to gain increased Strength, but decreased Dexterity for a short time.",
@@ -1075,7 +1075,7 @@ const WARDING_CANDLE = {
   description: "",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
-  rarity: "RARE",
+  rarity: "Rare",
   logDetail: "CANDLE",
   effect:
     "When this item is used there is a chance that evil spirits will flee from you. The candle burns out after clearing five rooms.",
@@ -1112,7 +1112,7 @@ const SOOTHING_CANDLE = {
   description: "",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   logDetail: "CANDLE",
   effect:
     "When this item is used you restore 10HP after clearing a room. The candle burns out after clearing five rooms.",
@@ -1149,7 +1149,7 @@ const FLICKERING_CANDLE = {
   description: "",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   logDetail: "CANDLE",
   effect:
     "When this item is used your chance to flee successfully becomes 100%. After fleeing three times the candle burns out.",
@@ -1175,7 +1175,7 @@ const BLAZING_CANDLE = {
   description: "",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
-  rarity: "EPIC",
+  rarity: "Epic",
   logDetail: "CANDLE",
   effect:
     "When this item is used all of your attacks are critical hits. After five critical hits the candle burns out.",
@@ -1201,7 +1201,7 @@ const SOULFLAME_CANDLE = {
   description: "",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
-  rarity: "EPIC",
+  rarity: "Epic",
   logDetail: "CANDLE",
   effect:
     "When this item is used the experience you gain is doubled. The candle burns out after gaining 100XP.",
@@ -1235,7 +1235,7 @@ const GUIDING_LIGHT = {
   description: "",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
-  rarity: "COMMON",
+  rarity: "Common",
   logDetail: "WISP",
   effect:
     "When this item is used a light will guide you to the nearest Candlelight Shrine.",
@@ -1281,7 +1281,7 @@ const ROWDY_WISP = {
   description: "",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
-  rarity: "RARE",
+  rarity: "Rare",
   logDetail: "WISP",
   effect:
     "When this item is used a wisp will guide you to the Laughing Coffin Tavern.",
@@ -1320,7 +1320,7 @@ const UNHOLY_WISP = {
   description: "",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
-  rarity: "RARE",
+  rarity: "Rare",
   logDetail: "WISP",
   effect:
     "When this item is used a wisp will guide you to the nearest Blood Alter.",
@@ -1359,7 +1359,7 @@ const RESTLESS_WISP = {
   description: "",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
-  rarity: "RARE",
+  rarity: "Rare",
   logDetail: "WISP",
   effect: "When this item is used a wisp will guide you to Lost Legions Vale.",
   status: "Guiding you to Lost Legions Vale.",
@@ -1649,11 +1649,11 @@ function findItemChance() {
     if (randomNumber >= 19) {
       let itemRarity = Math.round(Math.random() * 99 + baseFaith);
       if (itemRarity >= 95) {
-        getItem("EPIC");
+        getItem("Epic");
       } else if (itemRarity >= 61) {
-        getItem("RARE");
+        getItem("Rare");
       } else {
-        getItem("COMMON");
+        getItem("Common");
       }
     }
   }
@@ -1661,7 +1661,7 @@ function findItemChance() {
 
 function getItem(rarity) {
   switch (rarity) {
-    case "EPIC":
+    case "Epic":
       const epicIndex = Math.round(Math.random() * epicItems.length);
       foundItem = epicItems[epicIndex];
       epicItems.splice(epicIndex, 1);
@@ -1669,7 +1669,7 @@ function getItem(rarity) {
       console.log("Epic Item Found!");
       break;
 
-    case "RARE":
+    case "Rare":
       const rareIndex = Math.round(Math.random() * rareItems.length);
       foundItem = rareItems[rareIndex];
       rareItems.splice(rareIndex, 1);
@@ -1677,7 +1677,7 @@ function getItem(rarity) {
       console.log("Rare Item Found!");
       break;
 
-    case "COMMON":
+    case "Common":
       const commonIndex = Math.round(Math.random() * commonItems.length);
       foundItem = commonItems[commonIndex];
       commonItems.splice(commonIndex, 1);
@@ -1689,11 +1689,11 @@ function getItem(rarity) {
       let itemRarity = Math.round(Math.random() * 100 + baseFaith);
 
       if (itemRarity >= 91) {
-        getItem("EPIC");
+        getItem("Epic");
       } else if (itemRarity >= 61) {
-        getItem("RARE");
+        getItem("Rare");
       } else {
-        getItem("COMMON");
+        getItem("Common");
       }
       break;
 
@@ -1774,7 +1774,7 @@ function renderStatusEffects(effect) {
   middleLeft.appendChild(newEffect);
 
   // Status Effect Tooltip
-  newEffect.classList.add("tooltip");
+  newEffect.classList.add("statusTooltip");
   const tooltipText = document.createElement("ul");
   tooltipText.classList.add("statusTooltipText");
   newEffect.appendChild(tooltipText);
@@ -1783,6 +1783,8 @@ function renderStatusEffects(effect) {
   const tooltipNoteDuration = document.createElement("li");
   const tooltipNoteStatus = document.createElement("li");
   tooltipNoteName.textContent = effect.name;
+  tooltipNoteName.style.fontWeight = '800';
+
   tooltipNoteDuration.textContent = effect.duration;
 
   // Updates & Check Effect Duration
@@ -1812,7 +1814,7 @@ function renderStatusEffects(effect) {
     // Add other properties as needed
   });
 
-  document.querySelectorAll(".tooltip").forEach(function (element) {
+  document.querySelectorAll(".statusTooltip").forEach(function (element) {
     element.addEventListener("mouseover", function () {
       const tooltipText = this.querySelector(".statusTooltipText");
 
@@ -1886,17 +1888,34 @@ function renderInventory() {
       renderedItems[itemName] = 1;
 
       const itemBox = document.createElement("div");
-      itemBox.classList.add("tooltip");
-      const tooltipText = document.createElement("span");
+      itemBox.classList.add("itemTooltip");
+      const tooltipText = document.createElement("ul");
       tooltipText.classList.add("tooltipText");
-      tooltipText.textContent = inventoryItems[i].effect;
+      itemBox.appendChild(tooltipText);
+
+      const tooltipTextName = document.createElement("li");
+      const tooltipTextRarity = document.createElement("li");
+      const tooltipTextEffect = document.createElement("li");
+      tooltipTextName.textContent = `${inventoryItems[i].name}`;
+      tooltipTextName.style.fontWeight = '800';
+      tooltipTextRarity.textContent = `${inventoryItems[i].rarity}`;
+      tooltipTextEffect.textContent = `${inventoryItems[i].effect}`;
+
+      if (inventoryItems[i].rarity === "Epic") {
+        tooltipTextRarity.classList.add("epic-item");
+      } else if (inventoryItems[i].rarity === "Rare") {
+        tooltipTextRarity.classList.add("rare-item");
+      } else {
+        tooltipTextRarity.classList.add("common-item");
+      }
+
       const itemButton = document.createElement("button");
-
       itemButton.textContent = itemName;
-
       itemButton.setAttribute("id", itemName);
 
-      itemBox.appendChild(tooltipText);
+      tooltipText.appendChild(tooltipTextName);
+      tooltipText.appendChild(tooltipTextRarity);
+      tooltipText.appendChild(tooltipTextEffect);
       itemBox.appendChild(itemButton);
 
       if (
@@ -1930,7 +1949,7 @@ function renderInventory() {
     const itemButton = document.createElement("button");
     itemButton.textContent = attunedItems[i].name;
     itemButton.setAttribute("id", attunedItems[i].name);
-    itemBox.classList.add("tooltip");
+    itemBox.classList.add("itemTooltip");
     const tooltipText = document.createElement("span");
     tooltipText.classList.add("tooltipText");
     tooltipText.textContent = attunedItems[i].effect;
@@ -1951,21 +1970,9 @@ function renderInventory() {
     }
   }
 
-  document.querySelectorAll(".tooltip").forEach(function (element) {
+  document.querySelectorAll(".itemTooltip").forEach(function (element) {
     element.addEventListener("mouseover", function () {
       const tooltipText = this.querySelector(".tooltipText");
-      const rect = tooltipText.getBoundingClientRect();
-      const modalRect = document
-        .querySelector(".inventory-modal-content")
-        .getBoundingClientRect();
-
-      if (rect.right > modalRect.right) {
-        tooltipText.style.left = "auto";
-        tooltipText.style.right = "0";
-      } else if (rect.left < modalRect.left) {
-        tooltipText.style.left = "0";
-        tooltipText.style.right = "auto";
-      }
 
       tooltipText.style.visibility = "visible";
       tooltipText.style.opacity = "1";
