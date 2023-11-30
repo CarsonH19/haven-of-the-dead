@@ -20,38 +20,30 @@ h4 {
 }
 
 body {
-  margin: 0px;
-  width: 100vw;
-  height: 100vh;
+  margin: 0;
+  font-size: 16px;
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
   color: var(--text);
 }
 
-/* 
-==========================================
-               Game Window
-==========================================
-*/
-
-
+/* Game Window */
 .game-window {
-  width: 100vw;
-  max-width: 1260px;
-  max-height: 847px;
-  height: 100vh;
+  width: 100%; /* Adjusted for responsiveness */
+  max-width: 662px; /* Set a max-width to prevent it from becoming too wide on large screens */
+  height: auto; /* Adjusted for responsiveness */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border: 5px solid var(--accent);
-  background-image: url();
+  background-image: url(); /* Add your background image here */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -61,17 +53,30 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
+/* Media Query for Mobile Devices */
+@media screen and (max-width: 767px) {
+  body {
+    padding: 10px; /* Adjusted padding for smaller screens */
+  }
+
+  .game-window {
+    width: 100%;
+    max-width: none; /* Remove max-width on smaller screens */
+  }
+}
+
 .top-content {
   display: flex;
   justify-content: space-between;
   height: 20%;
-  margin-left: 20px;
+  margin-left: 0px;
 }
 
 .monster-container {
@@ -80,15 +85,15 @@ body {
   align-self: flex-end;
   justify-content: space-between;
   width: 33%;
-  min-width: 300px;
+  /* min-width: 300px; */
   height: 100%;
   border: 4px solid var(--accent);
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
-  padding: 10px;
+  padding: 1vw;
 }
 
 
@@ -267,7 +272,7 @@ body {
 
 .bottom-content {
   width: 100%;
-  min-width: 1000px;
+  /* min-width: 1000px; */
   height: 23%;
   min-height: 180px;
   border: 4px solid var(--accent);
@@ -282,7 +287,7 @@ body {
   flex: 1;
   width: 33%;
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -294,9 +299,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 33%;
+  width: 40%;
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -352,7 +357,7 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;  padding: 6px;
@@ -480,7 +485,7 @@ progress[value]::-moz-progress-bar {
   text-align: left;
   gap: 0px;
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -504,7 +509,7 @@ progress[value]::-moz-progress-bar {
   text-align: left;
   gap: 0px;
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -550,7 +555,7 @@ progress[value]::-moz-progress-bar {
   text-align: left;
   gap: 0px;
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -720,7 +725,7 @@ progress[value]::-moz-progress-bar {
   flex-direction: column;
   gap: 0px;
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
@@ -999,7 +1004,7 @@ progress[value]::-moz-progress-bar {
   gap: 0px;
   align-items:flex-start;
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -1102,7 +1107,7 @@ progress[value]::-moz-progress-bar {
   justify-content: flex-start; 
   align-items:flex-start;
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
