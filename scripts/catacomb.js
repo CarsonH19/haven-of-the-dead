@@ -33,7 +33,7 @@
 
 const catacombEntrance = {
   roomName: "Catacomb Entrance",
-  backgroundImage: "styles/background-images/catacomb-entrance.jpg",
+  backgroundImage: "styles/images/catacomb-entrance.png",
   music: droneDarkHor1,
   contents: {
     monsters: [],
@@ -68,7 +68,7 @@ let catacombRooms = [
     roomName: "Clawed Caverns",
     description:
       "The Clawed Caverns echo with the sinister skittering of unseen claws. Jagged stalactites hang like fangs, ready to pierce the unwary.",
-    backgroundImage: "styles/background-images/ratroom2.jpg",
+    backgroundImage: "styles/images/corridor-two.png",
     music: deepTunnels,
     contents: {
       monsters: [GNAWER, GNAWER],
@@ -80,7 +80,7 @@ let catacombRooms = [
     roomName: "Vermins' Vestibule",
     description:
       "The Vermins' Vestibule teems with shadowy shapes, a breeding ground for swarms of relentless vermin. The air is thick with anticipation, as unseen forces prepare to unleash their tiny terrors upon intruders.",
-    backgroundImage: "styles/background-images/ratroom3.jpg",
+    backgroundImage: "styles/images/corridor-two.png",
     music: deepTunnels,
     contents: {
       monsters: [],
@@ -92,7 +92,7 @@ let catacombRooms = [
     roomName: "Gnawers' Nest",
     description:
       "In the Gnawers' Nest, the scent of fur and decay hangs heavy. A multitude of gnawers skulk, eyes gleaming in the darkness. The air resonates with the unsettling symphony of their hungry whispers.",
-    backgroundImage: "styles/background-images/ratroom4.jpg",
+    backgroundImage: "styles/images/corridor-two.png",
     music: deepTunnels,
     contents: {
       monsters: [GNAWER, GNAWER, GNAWER, GNAWER],
@@ -104,7 +104,7 @@ let catacombRooms = [
     roomName: "Webspun Passage",
     description:
       "The Webspun Passage, a silken maze woven by colossal spiders. Threads glisten, hinting at unseen arachnid architects. Each step stirs a web, the air pulsating with the potential of an eight-legged guardian's descent.",
-    backgroundImage: "styles/background-images/webspun-passage.jpg",
+    backgroundImage: "styles/images/corridor-two.png",
     music: spiderInvasion,
     contents: {
       monsters: [],
@@ -116,7 +116,7 @@ let catacombRooms = [
     roomName: "Creeping Coffin",
     description:
       "Within the Creeping Coffin, ancient sarcophagi loom like silent sentinels. Coffin spiders, their legs tapping a macabre rhythm, await an unsuspecting intruder. The air is heavy with the scent of ancient dread.",
-    backgroundImage: "styles/background-images/coffins1.jpg",
+    backgroundImage: "styles/images/corridor-two.png",
     music: spiderInvasion,
     contents: {
       monsters: [],
@@ -138,11 +138,11 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Devious Alcove",
+    roomName: "Devious Alvove",
     description:
       "The Devious Alvove conceals its secrets in shadows. A lone scoundrel lurks, eyes gleaming with mischief. A tempting aroma of Blackheart Brew wafts through the air, promising both delight and danger to those who venture forth.",
     summary: "",
-    backgroundImage: "styles/background-images/scoundrel1.jpg",
+    backgroundImage: "styles/images/corridor-one.png",
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL],
@@ -155,7 +155,7 @@ let catacombRooms = [
     description:
       "In the Rogue's Refuge, whispers of ill intent fill the air. Multiple scoundrels, masters of deception, plot amidst the concealed corners.",
     summary: "",
-    backgroundImage: "styles/background-images/scoundrel1.jpg",
+    backgroundImage: "styles/images/corridor-one.png",
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL, SCOUNDREL],
@@ -171,7 +171,7 @@ let catacombRooms = [
     description:
       "The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.",
     summary: "",
-    backgroundImage: "styles/background-images/webspun-passage.jpg",
+    backgroundImage: "styles/images/corridor-two.png",
     music: spiderInvasion,
     contents: {
       monsters: [],
@@ -183,7 +183,7 @@ let catacombRooms = [
     roomName: "The Hatchery",
     description:
       "The Hatchery pulsates with an eerie hum. Walls, lined with unhatched eggs, house a crawling horde of crypt crawlers. The air is thick with the anticipation of countless tiny legs skittering across the cold stone floor.",
-    backgroundImage: "styles/background-images/webspun-passage.jpg",
+    backgroundImage: "styles/images/corridor-two.png",
     music: spiderInvasion,
     contents: {
       monsters: [
@@ -201,7 +201,7 @@ let catacombRooms = [
     roomName: "Broodmother's Nest",
     description:
       "The Broodmother's Nest looms with arachnid grace. A colossal web, woven with uncanny precision, cradles the monstrous broodmother. Her presence sends shivers, and the air is thick with the scent of impending danger.",
-    backgroundImage: "styles/background-images/webspun-passage.jpg",
+    backgroundImage: "styles/images/corridor-two.png",
     music: spiderInvasion,
     contents: {
       monsters: [BROODMOTHER],
@@ -216,7 +216,7 @@ let catacombRooms = [
     roomName: "Skull-lined Corridor",
     description:
       "The Skull-lined Corridor echoes with the rattling steps of skeletal sentinels. Walls adorned with grimacing skulls watch as decrepit skeletons and skeletal soldiers patrol with an eerie, mechanical precision.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/corridor-one.png",
     music: edgeOfFear,
     contents: {
       monsters: [DECREPIT_SKELETON, SKELETAL_SOLDIER, DECREPIT_SKELETON],
@@ -228,7 +228,7 @@ let catacombRooms = [
     roomName: "Bone-laden Passage",
     description:
       "The Bone-laden Passage exudes the stench of ancient decay. Shadows dance on walls adorned with skeletal remains. Skeletal soldiers stand guard, wielding rusty weapons, while a decrepit skeleton cradles a precious lesser soulstone.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/corridor-one.png",
     music: edgeOfFear,
     contents: {
       monsters: [SKELETAL_SOLDIER, DECREPIT_SKELETON],
@@ -240,7 +240,7 @@ let catacombRooms = [
     roomName: "Skeletons' Rest",
     description:
       "In Skeletons' Rest, decrepit skeletons lie in silent repose. The air is thick with the musty scent of gravebloom, a prized possession amidst the remains. An eerie tranquility belies the dormant threat within the bones.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/corridor-one.png",
     music: edgeOfFear,
     contents: {
       monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, DECREPIT_SKELETON],
@@ -252,7 +252,7 @@ let catacombRooms = [
     roomName: "Skeletonarium",
     description:
       "The Skeletonarium echoes with the metallic clank of skeletal soldiers. Armor-clad and relentless, they guard this chamber of bones. A skeleton key glimmers amid the remains.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/chamber-one.png",
     music: edgeOfFear,
     contents: {
       monsters: [SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON],
@@ -267,7 +267,7 @@ let catacombRooms = [
     roomName: "Bonevault",
     description:
       "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/rattling-hollow.png",
     music: droneDarkHor1,
     contents: {
       monsters: [],
@@ -279,7 +279,7 @@ let catacombRooms = [
     roomName: "Bonevault",
     description:
       "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/rattling-hollow.png",
     music: droneDarkHor1,
     contents: {
       monsters: [],
@@ -291,7 +291,7 @@ let catacombRooms = [
     roomName: "Skeletal Sepulcher",
     description:
       "Within the Skeletal Sepulcher, shadows dance on crumbling bone. Decrepit skeletons stir, guarding their final resting place. A chill pervades as skeletal soldiers stand sentinel.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/chamber-one.png",
     music: edgeOfFear,
     contents: {
       monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, SKELETAL_SOLDIER],
@@ -306,7 +306,7 @@ let catacombRooms = [
     roomName: "Marrowrest Tomb",
     description:
       "The Marrowrest Tomb exhales an eerie silence. No living soul stirs, yet the air shivers with the unseen presence of the Graverobber Earver. Unhallowed secrets lie waiting to be unearthed in this solemn sepulcher.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/chamber-one.png",
     music: imminentDarkness,
     contents: {
       monsters: [],
@@ -318,7 +318,7 @@ let catacombRooms = [
     roomName: "Ivory Crypt",
     description:
       "In the Ivory Crypt, delicate filigree adorns crypt walls. An ethereal silence lingers, broken only by the occasional skittering. The air is charged with the unsettling energy of the crypt's secrets.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/chamber-one.png",
     music: threeThousandYearsOld,
     contents: {
       monsters: [],
@@ -333,7 +333,7 @@ let catacombRooms = [
     roomName: "Skullcarver's Passage",
     description:
       "Skullcarver's Passage winds through the heart of bone. A colossal bone titan looms, its presence carving fear into the marrow of adventurers.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/corridor-one.png",
     music: passedDanger,
     contents: {
       monsters: [BONE_TITAN],
@@ -348,7 +348,7 @@ let catacombRooms = [
     roomName: "Haunted Hall",
     description:
       "The Haunted Hall breathes with ethereal whispers, its walls adorned with drifting specters. A chilling presence lingers, and the air shivers with the haunting melody of unseen spirits.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/corridor-one.png",
     music: hauntedOutpost,
     contents: {
       monsters: [HAUNTING_SPIRIT],
@@ -363,7 +363,7 @@ let catacombRooms = [
     roomName: "Echoing Vestibule",
     description:
       "Within the Echoing Vestibule, shadows seem to converse in ghostly murmurs. A lone haunting spirit glides through the mist, leaving echoes of melancholy. The air is heavy with the presence of lingering sorrow.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/corridor-one.png",
     music: hauntedOutpost,
     contents: {
       monsters: [HAUNTING_SPIRIT],
@@ -375,7 +375,7 @@ let catacombRooms = [
     roomName: "Forgotten Passage",
     description:
       "The Forgotten Passage is cloaked in darkness, a haven for lurking scoundrels. Their eyes gleaming with mischief.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/corridor-two.png",
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL],
@@ -387,7 +387,7 @@ let catacombRooms = [
     roomName: "Whispering Hollow",
     description:
       "The Whispering Hollow breathes with an eerie hush. Shadows dance, concealing elusive shades. Faint whispers beckon, emanating from a lone shade guarding a mysterious whispering amulet, its power shrouded in enigma.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/corridor-one.png",
     music: imminentDarkness,
     contents: {
       monsters: [SHADE],
@@ -399,7 +399,7 @@ let catacombRooms = [
     roomName: "Rattling Hollow",
     description:
       "Within the Rattling Hollow, bones assemble in macabre unity. An unsettling rattle permeates the air as a flood of bones, animated and vengeful, guards this chamber. Brave souls may find rare treasures amidst the bone-strewn chaos.",
-    backgroundImage: "styles/background-images/sneakshade-sanctum.jpg",
+    backgroundImage: "styles/images/rattling-hollow.png",
     music: passedDanger,
     contents: {
       monsters: [FLOOD_OF_BONES],
@@ -1076,20 +1076,6 @@ const IVAN_TRAP_ROOM_THREE = {
   },
 };
 
-// Scholar Hendra
-const SUMMONING_ROOM = {
-  roomName: "Summoning Roon",
-  description: "Where demons are summoned",
-  backgroundImage: "styles\images\chamber-one.png",
-  music: hauntedOutpost,
-  contents: {
-    monsters: [],
-    items: [],
-    events: SCHOLAR_HENDRA_EVENT_TWO,
-  },
-};
-
-
 // ===============================
 //         Boss Rooms
 // ===============================
@@ -1139,7 +1125,7 @@ function findRandomUndeadRoom() {
 function checkCurrentRoom() {
   const roomMonsters = currentRoom.contents.monsters;
 
-  // Check if player is Haunted
+  // Check if player is haunted
   if (roomMonsters[0].type === "UNDEAD" && HAUNTED.duration !== null) {
     let randomSpirits = Math.round(Math.random() * 2);
     console.log("UNDEAD FOUND");
@@ -1157,32 +1143,6 @@ function checkCurrentRoom() {
       case 2:
         roomMonsters.unshift(HAUNTING_SPIRIT);
         break;
-    }
-  }
-
-  // Check if player is Fiendsworn
-  if (FIENDSWORN.active !== null) {
-    if (
-      currentRoom.contents.monsters[0] === CULTIST ||
-      currentRoom.contents.monsters[0] === FIENDSWORN_CULTIST
-    ) {
-        fadeOutAnimation(monsterContainer, 0000);
-        setTimeout(() => {
-          checkForMonsters();
-          monsterContainer.style.display = "none";
-        }, 2000);
-        writeToLogItem(LOG_STATUS, "YES", FIENDSWORN);
-      }
-    }
-
-  // Check if player is Branded
-  if (roomMonsters[0].length > 0 && BRANDED.active !== null) {
-    let randomDemon = Math.round(Math.random() * 6);
-    console.log("DEMON");
-    console.log(randomDemon);
-
-    if (randomDemon >= 6) {
-      roomMonsters.unshift(DEMON);
     }
   }
 }
