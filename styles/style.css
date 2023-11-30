@@ -20,8 +20,9 @@ h4 {
 }
 
 body {
-  margin: 0;
-  font-size: 16px;
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -34,16 +35,22 @@ body {
   color: var(--text);
 }
 
-/* Game Window */
+/* 
+==========================================
+               Game Window
+==========================================
+*/
+
+
 .game-window {
-  width: 100%; /* Adjusted for responsiveness */
-  max-width: 662px; /* Set a max-width to prevent it from becoming too wide on large screens */
-  height: auto; /* Adjusted for responsiveness */
+  width: 60vw;
+  min-width: 662px;
+  height: 100vh; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border: 5px solid var(--accent);
-  background-image: url(); /* Add your background image here */
+  background-image: url();
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -60,23 +67,11 @@ body {
   justify-content: space-between;
 }
 
-/* Media Query for Mobile Devices */
-@media screen and (max-width: 767px) {
-  body {
-    padding: 10px; /* Adjusted padding for smaller screens */
-  }
-
-  .game-window {
-    width: 100%;
-    max-width: none; /* Remove max-width on smaller screens */
-  }
-}
-
 .top-content {
   display: flex;
   justify-content: space-between;
   height: 20%;
-  margin-left: 0px;
+  margin-left: 20px;
 }
 
 .monster-container {
@@ -85,7 +80,7 @@ body {
   align-self: flex-end;
   justify-content: space-between;
   width: 33%;
-  /* min-width: 300px; */
+  min-width: 300px;
   height: 100%;
   border: 4px solid var(--accent);
   background-color: var(--background);
@@ -93,7 +88,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
-  padding: 1vw;
+  padding: 10px;
 }
 
 
