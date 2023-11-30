@@ -1076,6 +1076,20 @@ const IVAN_TRAP_ROOM_THREE = {
   },
 };
 
+// Scholar Hendra
+const SUMMONING_ROOM = {
+  roomName: "Summoning Roon",
+  description: "Where demons are summoned",
+  backgroundImage: "styles\images\chamber-one.png",
+  music: hauntedOutpost,
+  contents: {
+    monsters: [],
+    items: [],
+    events: SCHOLAR_HENDRA_EVENT_TWO,
+  },
+};
+
+
 // ===============================
 //         Boss Rooms
 // ===============================
@@ -1125,7 +1139,7 @@ function findRandomUndeadRoom() {
 function checkCurrentRoom() {
   const roomMonsters = currentRoom.contents.monsters;
 
-  // Check if player is haunted
+  // Check if player is Haunted
   if (roomMonsters[0].type === "UNDEAD" && HAUNTED.duration !== null) {
     let randomSpirits = Math.round(Math.random() * 2);
     console.log("UNDEAD FOUND");
@@ -1143,6 +1157,32 @@ function checkCurrentRoom() {
       case 2:
         roomMonsters.unshift(HAUNTING_SPIRIT);
         break;
+    }
+  }
+
+  // Check if player is Fiendsworn
+  if (FIENDSWORN.active !== null) {
+    if (
+      currentRoom.contents.monsters[0] === CULTIST ||
+      currentRoom.contents.monsters[0] === FIENDSWORN_CULTIST
+    ) {
+        fadeOutAnimation(monsterContainer, 0000);
+        setTimeout(() => {
+          checkForMonsters();
+          monsterContainer.style.display = "none";
+        }, 2000);
+        writeToLogItem(LOG_STATUS, "YES", FIENDSWORN);
+      }
+    }
+
+  // Check if player is Branded
+  if (roomMonsters[0].length > 0 && BRANDED.active !== null) {
+    let randomDemon = Math.round(Math.random() * 6);
+    console.log("DEMON");
+    console.log(randomDemon);
+
+    if (randomDemon >= 6) {
+      roomMonsters.unshift(DEMON);
     }
   }
 }

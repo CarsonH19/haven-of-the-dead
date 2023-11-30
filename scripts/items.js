@@ -411,6 +411,17 @@ const TOXINWEAVE_MASK = {
   },
 };
 
+const SILKSTRIDERS = {
+  name: "Silkstriders",
+  description: "",
+  type: "MAGIC",
+  rarity: "Rare",
+  effect: "While attuned to this item you can't be webbed by spiders.",
+  function: () => {
+    return "IMMUNE";
+  },
+};
+
 const CHILLBREAKER_BAND = {
   name: "Chillbreaker Band",
   description: "",
@@ -1242,11 +1253,14 @@ const GUIDING_LIGHT = {
   status: "Guiding you to a nearby Candlelight Shrine.",
   duration: null,
   function: () => {
-    const wisp = document.querySelector(".wisp");
-    CANDLELIGHT_SHRINE.contents.events = SAFE_ROOM;
-    let randomNumber = Math.round(Math.random() * 5) + 1;
-    let itemDuration = roomCounter + randomNumber;
-    GUIDING_LIGHT.duration = "Searching";
+    if (FIENDSWORN.active !== null) {
+      // writeToLog() The light refuses to guide someone sworn to evil
+    } else {
+      const wisp = document.querySelector(".wisp");
+      CANDLELIGHT_SHRINE.contents.events = SAFE_ROOM;
+      let randomNumber = Math.round(Math.random() * 5) + 1;
+      let itemDuration = roomCounter + randomNumber;
+      GUIDING_LIGHT.duration = "Searching";
 
     let guidingLightInterval = setInterval(() => {
       if (itemDuration - roomCounter > 1) {
@@ -1273,7 +1287,8 @@ const GUIDING_LIGHT = {
     root.style.setProperty("--orb", "#fff3b4");
 
     renderStatusEffects(GUIDING_LIGHT);
-  },
+  }
+    }
 };
 
 const ROWDY_WISP = {
@@ -1633,6 +1648,35 @@ function statusEffectHandler(item) {
 
     case CHILLED:
       //writeToLogItem() You are chilled and unable to use your special ability
+      break;
+
+    case FIENDSWORN:
+      if (FIENDSWORN.active !== null) {
+        if (
+          currentRoom.contents.monsters[0] === CULTIST ||
+          currentRoom.contents.monsters[0] === FIENDSWORN_CULTIST
+        ) {
+            fadeOutAnimation(monsterContainer, 0000);
+            setTimeout(() => {
+              checkForMonsters();
+              monsterContainer.style.display = "none";
+            }, 2000);
+            writeToLogItem(LOG_STATUS, "YES", FIENDSWORN);
+          }
+        }
+      break;
+
+    case BRANDED:
+      if (roomMonsters[0].length > 0 && BRANDED.active !== null) {
+        let randomDemon = Math.round(Math.random() * 6);
+        console.log("DEMON");
+        console.log(randomDemon);
+    
+        if (randomDemon >= 6) {
+          roomMonsters.unshift(DEMON);
+          writeToLogItem(LOG_STATUS, "YES", BRANDED);
+        }
+      }
       break;
   }
 }

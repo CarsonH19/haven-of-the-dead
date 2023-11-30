@@ -283,31 +283,31 @@ let soulflameCandleTracker;
 // Misc.
 let blackheartBrewTracker;
 
-// ===============================
-//     Status Effects
-// ===============================
+// ==============================================================
+//                      Status Effects
+// ==============================================================
 
-const LEGIONS_GRACE = {
-  name: "Legion's Grace",
-  status: `Base Attack increased by 1. The more soldiers laid to rest the greater the legion's grace becomes.`,
-  duration: null,
-  function: () => {
-    let legionTracker = 27;
-    let attackBoost = 1;
-    LEGIONS_GRACE.duration = `0 soldiers put to rest`;
-    setInterval(() => {
-      LEGIONS_GRACE.duration = `${legionTracker} soldiers put to rest`;
-      LEGIONS_GRACE.status = `Base Attack increased by ${attackBoost}. The more soldiers laid to rest, the greater the legion's grace becomes.`;
-      if (legionTracker % 30 === 0) {
-        statusEffectHandler(LEGIONS_GRACE);
-        attackBoost++;
-      }
-    }, 5000);
+// const LEGIONS_GRACE = {
+//   name: "Legion's Grace",
+//   status: `Base Attack increased by 1. The more soldiers laid to rest the greater the legion's grace becomes.`,
+//   duration: null,
+//   function: () => {
+//     let legionTracker = 27;
+//     let attackBoost = 1;
+//     LEGIONS_GRACE.duration = `0 soldiers put to rest`;
+//     setInterval(() => {
+//       LEGIONS_GRACE.duration = `${legionTracker} soldiers put to rest`;
+//       LEGIONS_GRACE.status = `Base Attack increased by ${attackBoost}. The more soldiers laid to rest, the greater the legion's grace becomes.`;
+//       if (legionTracker % 30 === 0) {
+//         statusEffectHandler(LEGIONS_GRACE);
+//         attackBoost++;
+//       }
+//     }, 5000);
 
-    statusEffectHandler(LEGIONS_GRACE);
-    renderStatusEffects(LEGIONS_GRACE);
-  },
-};
+//     statusEffectHandler(LEGIONS_GRACE);
+//     renderStatusEffects(LEGIONS_GRACE);
+//   },
+// };
 
 // const BLOOD_PACT = {
 //   name: "Blood Pact",
@@ -347,6 +347,10 @@ const LEGIONS_GRACE = {
 //   },
 // };
 
+// ===============================
+//      Item Status Effects
+// ===============================
+
 const AEGIS_STATUS_EFFECT = {
   name: "Aegis of the Fallen",
   status: `You are immune to all damage.`,
@@ -384,6 +388,10 @@ const AEGIS_STATUS_EFFECT = {
     renderStatusEffects(AEGIS_STATUS_EFFECT);
   },
 };
+
+// ===============================
+//    Condition Status Effects
+// ===============================
 
 const POISONED = {
   name: "Poisoned",
@@ -477,6 +485,7 @@ const DISEASED = {
   name: "Diseased",
   status: "Your max health is reduced by 25%.",
   duration: null,
+  statusDuration: null,
   function: (length) => {
     if (DISEASED.duration === null) {
       DISEASED.statusDuration = roomCounter + length;
@@ -527,6 +536,7 @@ const CURSED = {
   name: "Cursed",
   status: "All damage taken is increased by 50%.",
   duration: null,
+  statusDuration: null,
   function: (length) => {
     if (CURSED.duration === null) {
       CURSED.statusDuration = roomCounter + length;
@@ -591,10 +601,10 @@ const WEBBED = {
 
       // ADD SPIDER WEB IMAGE
 
-      // // ITEM: Plagueward Pendant - Poison Immunity
-      // const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
+      // ITEM: Silkstriders - Webbed Immunity
+      const immune = isItemAttuned(SILKSTRIDERS, null);
 
-      // if (!immune) {
+      if (!immune) {
       let webbedInterval = setInterval(() => {
         let breakFreeChance = Math.round(Math.random() * webStrength);
         breakFreeChance += baseStrength + counter;
@@ -617,14 +627,15 @@ const WEBBED = {
       statusEffectHandler(WEBBED);
       renderStatusEffects(WEBBED);
     }
-  },
-}; //,
-// };
+  }
+},
+};
 
 const CHILLED = {
   name: "Chilled",
   status: "You are unable to use your special ability.",
   duration: null,
+  statusDuration: null,
   function: (length) => {
     if (CHILLED.duration === null) {
       CHILLED.statusDuration = roomCounter + length;
@@ -669,4 +680,34 @@ const CHILLED = {
       }
     }
   },
+};
+
+// ===============================
+//    Permanent Status Effects
+// ===============================
+
+const FIENDSWORN = {
+  name: "Fiendsworn",
+  status: "You have become sworn to a demonic entity.",
+  active: null,
+  function: () => {
+    if (FIENDSWORN.active === null) {
+      FIENDSWORN.active = 'Permanent';
+        statusEffectHandler(FIENDSWORN);
+        renderStatusEffects(FIENDSWORN);
+      }
+    },
+};
+
+const BRANDED = {
+  name: "Branded",
+  status: "You have been branded by a demonic entity.",
+  active: null,
+  function: () => {
+    if (BRANDED.active === null) {
+      BRANDED.active = 'Permanent';
+        statusEffectHandler(BRANDED);
+        renderStatusEffects(BRANDED);
+      }
+    },
 };

@@ -102,6 +102,44 @@ const SCOUNDREL = {
 };
 
 // ===============================
+//        Cultists & Demons
+// ===============================
+
+const CULTIST = {
+  name: "Cultist",
+  type: "HUMANOID",
+  skulls: 3,
+  soundEffects: {
+    spawn: swordFromSheath3,
+    attack: knifeStab,
+    death: fightGrunt6,
+  },
+};
+
+const FIENDSWORN_CULTIST = {
+  name: "Fiendsworn Cultist",
+  type: "HUMANOID",
+  skulls: 5,
+  soundEffects: {
+    spawn: '',
+    attack: '',
+    death: '',
+  },
+};
+
+const DEMON = {
+  name: "Demon",
+  type: "DEMON",
+  skulls: 7,
+  soundEffects: {
+    spawn: '',
+    attack: '',
+    death: '',
+  },
+  function: () => {},
+};
+
+// ===============================
 //           Skeletons
 // ===============================
 

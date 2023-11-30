@@ -42,8 +42,6 @@ const SAFE_ROOM = {
   summary: `You rest at the Candlelight Shrine. The sacred flames stand sentinel, offering solace in the heart of the endless catacomb.`,
   optionOne: null,
   optionTwo: null,
-  passValue: null,
-  failDamage: null,
   functionOne: () => {
     setTimeout(() => {
       getItem("CANDLE");
@@ -70,8 +68,6 @@ const SPIKE_WALLS = {
   optionTwo: "Dexterity",
   passValue: 7,
   failDamage: 30,
-  functionOne: null,
-  functionTwo: null,
 };
 
 const SPIDER_WEB = {
@@ -104,8 +100,6 @@ const GAS_CHAMBER = {
   optionTwo: "Faith",
   passValue: 6,
   failDamage: 25,
-  functionOne: null,
-  functionTwo: null,
 };
 
 const SWARM_OF_VERMIN = {
@@ -117,8 +111,6 @@ const SWARM_OF_VERMIN = {
   optionTwo: "Faith",
   passValue: 5,
   failDamage: 20,
-  functionOne: null,
-  functionTwo: null,
 };
 
 const SKELETAL_HANDS = {
@@ -130,8 +122,6 @@ const SKELETAL_HANDS = {
   optionTwo: "Dexterity",
   passValue: 6,
   failDamage: 25,
-  functionOne: null,
-  functionTwo: null,
 };
 
 const SPIKE_PITFALL = {
@@ -143,8 +133,6 @@ const SPIKE_PITFALL = {
   optionTwo: "Faith",
   passValue: 6,
   failDamage: 25,
-  functionOne: null,
-  functionTwo: null,
 };
 
 const PENDULUM_BLADES = {
@@ -156,8 +144,6 @@ const PENDULUM_BLADES = {
   optionTwo: "Faith",
   passValue: 6,
   failDamage: 25,
-  functionOne: null,
-  functionTwo: null,
 };
 
 // ===============================
@@ -259,8 +245,6 @@ const IVAN_THE_SCOUNDREL = {
   summary: "",
   optionOne: "Release",
   optionTwo: "Leave",
-  passValue: null,
-  failDamage: null,
   functionOne: () => {
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
     IVAN_THE_SCOUNDREL.summary = `Amidst the severed limbs of the defeated arachnid, the scoundrel, grateful yet wary, hands over a cryptic key. "Treasures await within my hidden cache," he smirks. "Take what's yours."`;
@@ -336,6 +320,9 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   },
 };
 
+//
+//
+
 const SCHOLAR_HENDRA = {
   name: "Scholar Hendra",
   eventType: "NPC",
@@ -343,8 +330,6 @@ const SCHOLAR_HENDRA = {
     "Upon a bone-forged altar, a desperate woman struggles to shield her grimoire from encroaching skeletal horrors. Her cries for help echo through the chamber. Will you aid her in vanquishing the undead horde or ignore her cries?",
   optionOne: "Help",
   optionTwo: "Ignore",
-  passValue: null,
-  failDamage: null,
   functionOne: () => {
     currentRoom.contents.monsters.push(
       DECREPIT_SKELETON,
@@ -376,6 +361,55 @@ const SCHOLAR_HENDRA = {
   },
 };
 
+const SCHOLAR_HENDRA_EVENT_TWO = {
+  name: "Scholar Hendra's Plan",
+  eventType: "NPC",
+  description: '',
+  optionOne: "Help",
+  optionTwo: "Ignore",
+  functionOne: () => {},
+  functionTwo: () => {},
+};
+
+
+const SUMMONING_MORGRIMM = {
+  name: "Morgrimm the Malignant",
+  eventType: "MISC",
+  description: 'Upon entering the summoning chamber, the grimoire hovers hovers from your possesion an opens itself on a pedistal nearby.',
+  optionOne: "Read",
+  optionTwo: "Refuse",
+  functionOne: () => {
+    SUMMONING_MORGRIMM.description = 'You summon Morgrimm and become Fiendsworn.';
+    // can no longer benefit from Candlelight Shrines
+    FIENDSWORN_CULTIST.function();
+    // Remove Cursed Grimoire
+    const index = inventoryItems.indexOf(CURSED_GRIMOIRE);
+    inventoryItems.splice(index, 1);
+    setRoomSummary();
+    writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
+  },
+  functionTwo: () => {
+    SUMMONING_MORGRIMM.description = 'You refuse to summon Morgrimm and become Branded.';
+    // become branded and demons begin to follow you  
+    // must fight fiendsworn_cultists
+    // Remove Cursed Grimoire
+    BRANDED.function();
+    const index = inventoryItems.indexOf(CURSED_GRIMOIRE);
+    inventoryItems.splice(index, 1);
+    currentRoom.contents.monsters.push(
+      FIENDSWORN_CULTIST,
+      FIENDSWORN_CULTIST,
+      FIENDSWORN_CULTIST
+    );
+    setRoomSummary();
+    startBattle();
+    writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
+  },
+};
+
+//
+//
+
 const FORSAKEN_COMMANDER = {
   name: "Forsaken Commander",
   eventType: "NPC",
@@ -383,8 +417,6 @@ const FORSAKEN_COMMANDER = {
     "A spectral commander, draped in ethereal sorrow, materializes before you. Its mournful plea echoes through the chamber. Will you heed its desperate entreaty.",
   optionOne: "Listen",
   optionTwo: "Ignore",
-  passValue: null,
-  failDamage: null,
   functionOne: () => {
     if (attunedItems.includes(WHISPERING_AMULET)) {
       currentRoom.contents.items.push(RESTLESS_WISP);
@@ -547,8 +579,6 @@ const COFFIN_SPIDER_EVENT = {
     "You find a large ornately decorated coffin. Something valuable may be hidden inside.  What will you do?",
   optionOne: "Open",
   optionTwo: "Ignore",
-  passValue: null,
-  failDamage: null,
   functionOne: () => {
     let randomNumber = Math.round(Math.random() * 10);
     if (randomNumber >= 7) {
@@ -688,8 +718,6 @@ const LOCKED_ROOM = {
   description: "You discover a locked room. Do you wish to open it.",
   optionOne: "Unlock",
   optionTwo: "Leave",
-  passValue: null,
-  failDamage: null,
   functionOne: () => {
     if (inventoryItems.includes(SKELETON_KEY)) {
       useConsumable("Skeleton Key"); // removes item from inventory
