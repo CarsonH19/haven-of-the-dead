@@ -28,7 +28,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: var(--background);
-  background-image: url(skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -43,9 +43,10 @@ body {
 
 
 .game-window {
-  width: 60vw;
-  min-width: 662px;
-  height: 100vh; 
+  width: 100vw;
+  max-width: 1260px;
+  max-height: 847px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -60,7 +61,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -84,7 +84,7 @@ body {
   height: 100%;
   border: 4px solid var(--accent);
   background-color: var(--background);
-  background-image: url(skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -267,7 +267,7 @@ body {
 
 .bottom-content {
   width: 100%;
-  /* min-width: 1000px; */
+  min-width: 1000px;
   height: 23%;
   min-height: 180px;
   border: 4px solid var(--accent);
@@ -282,7 +282,7 @@ body {
   flex: 1;
   width: 33%;
   background-color: var(--background);
-  background-image: url(skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -294,9 +294,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 40%;
+  width: 33%;
   background-color: var(--background);
-  background-image: url(skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -352,7 +352,7 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: var(--background);
-  background-image: url(skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;  padding: 6px;
@@ -480,7 +480,7 @@ progress[value]::-moz-progress-bar {
   text-align: left;
   gap: 0px;
   background-color: var(--background);
-  background-image: url(skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -504,7 +504,7 @@ progress[value]::-moz-progress-bar {
   text-align: left;
   gap: 0px;
   background-color: var(--background);
-  background-image: url(skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -550,7 +550,7 @@ progress[value]::-moz-progress-bar {
   text-align: left;
   gap: 0px;
   background-color: var(--background);
-  background-image: url(skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -720,7 +720,7 @@ progress[value]::-moz-progress-bar {
   flex-direction: column;
   gap: 0px;
   background-color: var(--background);
-  background-image: url(skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
@@ -999,7 +999,7 @@ progress[value]::-moz-progress-bar {
   gap: 0px;
   align-items:flex-start;
   background-color: var(--background);
-  background-image: url(skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -1102,7 +1102,7 @@ progress[value]::-moz-progress-bar {
   justify-content: flex-start; 
   align-items:flex-start;
   background-color: var(--background);
-  background-image: url(skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
