@@ -5,15 +5,14 @@
 // Common Items
 // - Evertorch
 // - Flask of Light
-// - Bonemail
 // - Graverobber's Spade - Graverobber Earver
 // - Charm of Healing
-// - Mist Veil Cloak
 // - Shadowstep Boots
 // - Titan's Gauntlets
 // - Holy Relic
 
 // Rare Items
+// - Mist Veil Cloak
 // - Bloodstone
 // - Wraithbane
 // - Sunstone
@@ -44,6 +43,7 @@
 // - Bone Marrow Soup
 // - Marrowstone Cheese
 // - Tombestone Truffle
+// - Spider Egg Yolk
 
 //  Misc. Consumables
 // - Lichroot
@@ -144,25 +144,6 @@ const RING_OF_THE_RODENT = {
   },
 };
 
-const MIST_VEIL_CLOAK = {
-  name: "Mist Veil Cloak",
-  description: "",
-  type: "MAGIC",
-  rarity: "Common",
-  effect:
-    "While attuned to this item you have a slight chance of completely evading enemy attacks.",
-  function: () => {
-    let randomNumber = Math.round(Math.random() * 20);
-    if (randomNumber === 20) {
-      console.log(`Attack evaded with Mist Veil Cloak!`);
-      return 0;
-    } else {
-      console.log(`Attack NOT evaded...`);
-      return 1;
-    }
-  },
-};
-
 const SHADOWSTEP_BOOTS = {
   name: "Shadowstep Boots",
   description: "",
@@ -236,6 +217,25 @@ const SACRIFICIAL_BLADE = {
 //     effect:
 //     function:
 //  }
+
+const MIST_VEIL_CLOAK = {
+  name: "Mist Veil Cloak",
+  description: "",
+  type: "MAGIC",
+  rarity: "Rare",
+  effect:
+    "While attuned to this item you have a slight chance of completely evading enemy attacks.",
+  function: () => {
+    let randomNumber = Math.round(Math.random() * 20);
+    if (randomNumber >= 19) {
+      console.log(`Attack evaded with Mist Veil Cloak!`);
+      return 0;
+    } else {
+      console.log(`Attack NOT evaded...`);
+      return 1;
+    }
+  },
+};
 
 const BLOODSTONE = {
   name: "Bloodstone",
@@ -478,6 +478,22 @@ const BRACELET_OF_THE_SERPENT = {
   unequip: () => {
     baseDexterity -= 2;
     baseStrength += 1;
+  },
+};
+
+const FANGWEAVE_ARMOR = {
+  name: "Fangweave Armor",
+  description: "",
+  type: "MAGIC",
+  rarity: "Rare",
+  effect: "While attuned to this item you gain +1 Dexterity, and +20HP.",
+  function: () => {
+    baseDexterity += 1;
+    baseHealth += 20;
+  },
+  unequip: () => {
+    baseDexterity -= 1;
+    baseHealth -= 20;
   },
 };
 
@@ -855,6 +871,19 @@ const TOMBSTONE_TRUFFLE = {
   logDetail: "EAT",
   effect: "Restores 10 health points when eaten.",
   soundEffect: chewCrackersMouth,
+  function: () => {
+    healPlayer(10);
+  },
+};
+
+const SPIDER_EGG_YOLK = {
+  name: "Spider Egg Yolk",
+  description: "",
+  type: "CONSUMABLE",
+  rarity: "Rare",
+  logDetail: "EAT",
+  effect: "Restores 10 health points when eaten.",
+  soundEffect: gulpingWater24,
   function: () => {
     healPlayer(10);
   },
@@ -1262,33 +1291,35 @@ const GUIDING_LIGHT = {
       let itemDuration = roomCounter + randomNumber;
       GUIDING_LIGHT.duration = "Searching";
 
-    let guidingLightInterval = setInterval(() => {
-      if (itemDuration - roomCounter > 1) {
-        GUIDING_LIGHT.duration = `Duration: ${
-          itemDuration - roomCounter
-        } Rooms`;
-      } else {
-        GUIDING_LIGHT.duration = `Duration: ${itemDuration - roomCounter} Room`;
-      }
+      let guidingLightInterval = setInterval(() => {
+        if (itemDuration - roomCounter > 1) {
+          GUIDING_LIGHT.duration = `Duration: ${
+            itemDuration - roomCounter
+          } Rooms`;
+        } else {
+          GUIDING_LIGHT.duration = `Duration: ${
+            itemDuration - roomCounter
+          } Room`;
+        }
 
-      if (roomCounter >= itemDuration) {
-        guidingLightTracker = "ARRIVE";
-        wisp.classList.remove("orb");
-        GUIDING_LIGHT.duration = null;
-        clearInterval(guidingLightInterval);
-      } else {
-        guidingLightTracker = "GUIDING";
-      }
-    }, 15000);
+        if (roomCounter >= itemDuration) {
+          guidingLightTracker = "ARRIVE";
+          wisp.classList.remove("orb");
+          GUIDING_LIGHT.duration = null;
+          clearInterval(guidingLightInterval);
+        } else {
+          guidingLightTracker = "GUIDING";
+        }
+      }, 15000);
 
-    wisp.classList.add("orb");
+      wisp.classList.add("orb");
 
-    const root = document.documentElement;
-    root.style.setProperty("--orb", "#fff3b4");
+      const root = document.documentElement;
+      root.style.setProperty("--orb", "#fff3b4");
 
-    renderStatusEffects(GUIDING_LIGHT);
-  }
+      renderStatusEffects(GUIDING_LIGHT);
     }
+  },
 };
 
 const ROWDY_WISP = {
@@ -1420,13 +1451,12 @@ let attunedItems = [];
 
 let inventoryItems = [GUIDING_LIGHT, POTION, POTION, POTION];
 
-let consumableItems = [
+let commonConsumables = [
   POTION,
   MARROWSTONE_CHEESE,
   TOMBSTONE_TRUFFLE,
   CRYPTBREAD,
   BONE_MARROW_SOUP,
-  LICHROOT,
   GRAVEBLOOM,
   GHOSTLIGHT_LILY,
   ROTBANE_FERN,
@@ -1435,6 +1465,15 @@ let consumableItems = [
   LESSER_SOULSTONE,
   GREATER_SOULSTONE,
   BLACKHEART_BREW,
+];
+
+let rareConsumables = [
+  LICHROOT,
+  GREATER_SOULSTONE,
+  GUIDING_LIGHT,
+  UNHOLY_WISP,
+  RESTLESS_WISP,
+  ROWDY_WISP,
 ];
 
 let candleItems = [
@@ -1456,12 +1495,49 @@ let bonevaultItems = [
   SPINE_OF_THE_NECROMANCER,
 ];
 
+let humanoidCommonLoot = [
+  FLASK_OF_LIGHT,
+  SHADOWSTEP_BOOTS,
+  TITANS_GAUNTLETS,
+  SILKSTRIDERS,
+];
+
+let humanoidRareLoot = [
+  SUNSTONE,
+  BRACELET_OF_THE_SERPENT,
+  MIST_VEIL_CLOAK,
+  PLAGUEWARD_PENDANT,
+  TOME_OF_DEVOTION,
+  TOXINWEAVE_MASK,
+];
+
+let beastCommonLoot = [];
+
+let beastRareLoot = [];
+
+let undeadCommonLoot = [
+  EVERTORCH,
+  HOLY_RELIC,
+  TITANS_GAUNTLETS,
+  CHARM_OF_HEALING,
+  RING_OF_THE_RODENT,
+];
+
+let undeadRareLoot = [
+  GHOSTSHROUD_TALISMAN,
+  SOULREAVER,
+  BERSERKER_PAULDRONS,
+  CHILLBREAKER_BAND,
+  REVENANTS_RAGE,
+  CURSED_MIRROR,
+  WRAITHBANE,
+];
+
 let commonItems = [
   EVERTORCH,
   FLASK_OF_LIGHT,
   RING_OF_THE_RODENT,
   CHARM_OF_HEALING,
-  MIST_VEIL_CLOAK,
   SOOTHING_CANDLE,
   FLICKERING_CANDLE,
   SHADOWSTEP_BOOTS,
@@ -1470,6 +1546,7 @@ let commonItems = [
 ];
 
 let rareItems = [
+  MIST_VEIL_CLOAK,
   WRAITHBANE,
   SUNSTONE,
   CURSED_MIRROR,
@@ -1545,140 +1622,6 @@ function removeItem(itemName) {
 
   clearInventory();
   renderInventory();
-}
-
-// ===============================
-//      STATUS EFFECT LOGIC
-// ===============================
-
-function statusEffectHandler(item) {
-  switch (item) {
-    case WARDING_CANDLE:
-      if (wardingCandleTracker === "LIT") {
-        if (
-          currentRoom.contents.monsters[0].type === "UNDEAD" &&
-          currentRoom.contents.monsters[0].skulls <= 6
-        ) {
-          let randomNumber = Math.round(Math.random() * 10);
-
-          if (randomNumber >= 5) {
-            fadeOutAnimation(monsterContainer, 0000);
-            setTimeout(() => {
-              checkForMonsters();
-              monsterContainer.style.display = "none";
-            }, 2000);
-            writeToLogItem(LOG_ITEM, "YES", WARDING_CANDLE);
-          }
-        }
-      }
-      break;
-
-    case SOOTHING_CANDLE:
-      if (soothingCandleTracker === "LIT") {
-        healPlayer(10);
-        writeToLogItem(LOG_ITEM, "YES", SOOTHING_CANDLE);
-      }
-      break;
-
-    case FLICKERING_CANDLE:
-      if (flickeringCandleTracker > 0) {
-        flickeringCandleTracker--;
-        return 99;
-      } else {
-        return 0;
-      }
-      break;
-
-    case BLAZING_CANDLE:
-      if (blazingCandleTracker > 0) {
-        blazingCandleTracker--;
-        writeToLogItem(LOG_ITEM, "YES", BLAZING_CANDLE);
-        return 20;
-      } else {
-        return 0;
-      }
-
-    case SOULFLAME_CANDLE:
-      if (soulflameCandleTracker === "LIT") {
-        return 2;
-      } else {
-        return 1;
-      }
-
-    case BLACKHEART_BREW:
-      if (blackheartBrewTracker === "DRUNK") {
-        baseDexterity--;
-        baseStrength += 2;
-        updatePlayerTrackers();
-      }
-      break;
-
-    case POISONED:
-      baseDexterity -= 2;
-      baseStrength -= 2;
-      updatePlayerTrackers();
-      //writeToLogItem() You've been poisoned!
-      break;
-
-    case HAUNTED:
-      //writeToLogItem() You've been haunted!
-      break;
-
-    case DISEASED:
-      updatePlayerTrackers();
-      //writeToLogItem() You've been diseased!
-      break;
-
-    case WEBBED:
-      //writeToLogItem() You are caught in the spiders web
-      break;
-
-    // case BLOOD_PACT:
-    //   //writeToLogItem()
-    //   baseAttack += 5;
-    //   baseFaith -= 2;
-    //   updatePlayerTrackers();
-    //   break;
-
-    // case LEGIONS_GRACE:
-    //   //writeToLogItem()
-    //   baseAttack++;
-    //   updatePlayerTrackers();
-    //   break;
-
-    case CHILLED:
-      //writeToLogItem() You are chilled and unable to use your special ability
-      break;
-
-    case FIENDSWORN:
-      if (FIENDSWORN.active !== null) {
-        if (
-          currentRoom.contents.monsters[0] === CULTIST ||
-          currentRoom.contents.monsters[0] === FIENDSWORN_CULTIST
-        ) {
-            fadeOutAnimation(monsterContainer, 0000);
-            setTimeout(() => {
-              checkForMonsters();
-              monsterContainer.style.display = "none";
-            }, 2000);
-            writeToLogItem(LOG_STATUS, "YES", FIENDSWORN);
-          }
-        }
-      break;
-
-    case BRANDED:
-      if (roomMonsters[0].length > 0 && BRANDED.active !== null) {
-        let randomDemon = Math.round(Math.random() * 6);
-        console.log("DEMON");
-        console.log(randomDemon);
-    
-        if (randomDemon >= 6) {
-          roomMonsters.unshift(DEMON);
-          writeToLogItem(LOG_STATUS, "YES", BRANDED);
-        }
-      }
-      break;
-  }
 }
 
 function findItemChance() {
@@ -1794,6 +1737,90 @@ function useConsumable(consumable) {
   renderInventory();
 }
 
+function lootItems(lootGroup) {
+  if (currentRoom.contents.events === null) {
+    let room = currentRoom.contents.items;
+    let commonLoot;
+    let rareLoot;
+    let foundItem;
+    let foundConsumable;
+
+    let lootItemChance = Math.round(Math.random() * 100);
+    lootItemChance += baseFaith * 2;
+
+    let lootConsumableChance = Math.round(Math.random() * 100);
+    lootConsumableChance += baseFaith * 2;
+
+    // ITEM: Graverobber's Spade - Increase item find chance by 10%
+    lootItemChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
+    lootConsumableChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
+
+    switch (lootGroup) {
+      case "BEAST":
+        commonLoot = beastCommonLoot;
+        rareLoot = beastRareLoot;
+        break;
+
+      case "HUMANOID":
+        commonLoot = humanoidCommonLoot;
+        rareLoot = humanoidRareLoot;
+
+        if (lootItemChance > 90) {
+          room.push(LAUGHING_COFFIN_COIN);
+        }
+
+        break;
+
+      case "UNDEAD":
+        commonLoot = undeadCommonLoot;
+        rareLoot = undeadRareLoot;
+
+        if (lootItemChance > 90) {
+          room.push(SKELETON_KEY);
+        }
+
+        break;
+
+      default:
+        break;
+    }
+
+    console.log(lootItemChance);
+
+    // Loot Items
+    if (lootItemChance > 95 && rareLoot.length > 0) {
+      const rareIndex = Math.floor(Math.random() * rareLoot.length);
+      foundItem = rareLoot[rareIndex];
+      rareLoot.splice(rareIndex, 1);
+      room.push(foundItem);
+      console.log(foundItem);
+    } else if (lootItemChance > 90 && commonLoot.length > 0) {
+      const commonIndex = Math.floor(Math.random() * commonLoot.length);
+      foundItem = commonLoot[commonIndex];
+      commonLoot.splice(commonIndex, 1);
+      room.push(foundItem);
+      console.log(foundItem);
+    }
+
+    // Loot Consuables
+    if (lootConsumableChance > 95) {
+      const rareConsumablesIndex = Math.floor(
+        Math.random() * rareConsumables.length
+      );
+      foundConsumable = rareConsumables[rareConsumablesIndex];
+      room.push(foundConsumable);
+      console.log(foundConsumable);
+    } else if (lootConsumableChance > 70) {
+      const commonConsumablesIndex = Math.floor(
+        Math.random() * commonConsumables.length
+      );
+      foundConsumable = commonConsumables[commonConsumablesIndex];
+      room.push(foundConsumable);
+      console.log(foundConsumable);
+    }
+  }
+}
+
 // List to store active effects
 const activeEffects = [];
 
@@ -1874,6 +1901,140 @@ function renderStatusEffects(effect) {
       tooltipText.style.opacity = "0";
     });
   });
+}
+
+// ===============================
+//      STATUS EFFECT LOGIC
+// ===============================
+
+function statusEffectHandler(item) {
+  switch (item) {
+    case WARDING_CANDLE:
+      if (wardingCandleTracker === "LIT") {
+        if (
+          currentRoom.contents.monsters[0].type === "UNDEAD" &&
+          currentRoom.contents.monsters[0].skulls <= 6
+        ) {
+          let randomNumber = Math.round(Math.random() * 10);
+
+          if (randomNumber >= 5) {
+            fadeOutAnimation(monsterContainer, 0000);
+            setTimeout(() => {
+              checkForMonsters();
+              monsterContainer.style.display = "none";
+            }, 2000);
+            writeToLogItem(LOG_ITEM, "YES", WARDING_CANDLE);
+          }
+        }
+      }
+      break;
+
+    case SOOTHING_CANDLE:
+      if (soothingCandleTracker === "LIT") {
+        healPlayer(10);
+        writeToLogItem(LOG_ITEM, "YES", SOOTHING_CANDLE);
+      }
+      break;
+
+    case FLICKERING_CANDLE:
+      if (flickeringCandleTracker > 0) {
+        flickeringCandleTracker--;
+        return 99;
+      } else {
+        return 0;
+      }
+      break;
+
+    case BLAZING_CANDLE:
+      if (blazingCandleTracker > 0) {
+        blazingCandleTracker--;
+        writeToLogItem(LOG_ITEM, "YES", BLAZING_CANDLE);
+        return 20;
+      } else {
+        return 0;
+      }
+
+    case SOULFLAME_CANDLE:
+      if (soulflameCandleTracker === "LIT") {
+        return 2;
+      } else {
+        return 1;
+      }
+
+    case BLACKHEART_BREW:
+      if (blackheartBrewTracker === "DRUNK") {
+        baseDexterity--;
+        baseStrength += 2;
+        updatePlayerTrackers();
+      }
+      break;
+
+    case POISONED:
+      baseDexterity -= 2;
+      baseStrength -= 2;
+      updatePlayerTrackers();
+      //writeToLogItem() You've been poisoned!
+      break;
+
+    case HAUNTED:
+      //writeToLogItem() You've been haunted!
+      break;
+
+    case DISEASED:
+      updatePlayerTrackers();
+      //writeToLogItem() You've been diseased!
+      break;
+
+    case WEBBED:
+      //writeToLogItem() You are caught in the spiders web
+      break;
+
+    // case BLOOD_PACT:
+    //   //writeToLogItem()
+    //   baseAttack += 5;
+    //   baseFaith -= 2;
+    //   updatePlayerTrackers();
+    //   break;
+
+    // case LEGIONS_GRACE:
+    //   //writeToLogItem()
+    //   baseAttack++;
+    //   updatePlayerTrackers();
+    //   break;
+
+    case CHILLED:
+      //writeToLogItem() You are chilled and unable to use your special ability
+      break;
+
+    case FIENDSWORN:
+      if (FIENDSWORN.active !== null) {
+        if (
+          currentRoom.contents.monsters[0] === CULTIST ||
+          currentRoom.contents.monsters[0] === FIENDSWORN_CULTIST
+        ) {
+          fadeOutAnimation(monsterContainer, 0000);
+          setTimeout(() => {
+            checkForMonsters();
+            monsterContainer.style.display = "none";
+          }, 2000);
+          writeToLogItem(LOG_STATUS, "YES", FIENDSWORN);
+        }
+      }
+      break;
+
+    case BRANDED:
+      if (roomMonsters[0].length > 0 && BRANDED.active !== null) {
+        let randomDemon = Math.round(Math.random() * 6);
+        console.log("DEMON");
+        console.log(randomDemon);
+
+        if (randomDemon >= 6) {
+          roomMonsters.unshift(DEMON);
+          writeToLogItem(LOG_STATUS, "YES", BRANDED);
+        }
+      }
+      break;
+  }
 }
 
 // ===============================

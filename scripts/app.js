@@ -346,7 +346,7 @@ function fleeHandler() {
         renderCurrentRoom(currentRoom);
       }, 1500);
     }, 2000);
-  } else { 
+  } else {
     setTimeout(monsterAttackHandler, 1200);
     isGameOver();
   }
@@ -449,8 +449,13 @@ function renderCurrentRoom(currentRoom) {
   }
 
   // Search for items in each room.
-  if (currentRoom !== catacombEntrance) {
-    findItemChance();
+  if (
+    currentRoom !== catacombEntrance &&
+    currentRoom.contents.monsters.length > 0
+  ) {
+    const lootGroup = currentRoom.contents.monsters[0].type;
+    lootItems(lootGroup);
+    // findItemChance();
   }
 
   // Renders Event Modal

@@ -44,7 +44,7 @@ body {
 
 .game-window {
   width: 100vw;
-  max-width: 1260px;
+  max-width: 1160px;
   max-height: 847px;
   height: 100vh;
   display: flex;
@@ -521,10 +521,7 @@ progress[value]::-moz-progress-bar {
 
 .catacomb-entrance-modal-content h2 {
   align-self: center;
-}
-
-.catacomb-entrance-modal-content h3 {
-  margin-bottom: 0px;
+  margin: 0px;
 }
 
 .catacomb-entrance-modal-content p {

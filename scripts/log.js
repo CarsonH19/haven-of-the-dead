@@ -1004,7 +1004,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else if (narration === 3) {
             newEntry.textContent = `You push back against the sea of rats with all your might, but they manage to break through your defenses. Their sharp bites inflict ${dataTwo} damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `You try to use your strength to create some breathing room, but the rats are unrelenting. They swarm over you, leaving you with painful bites and ${dataTwo} damage.`;
+            newEntry.textContent = `You try to use your strength to create some breathing room, but the rats are unrelenting. They swarm over you, leaving you with painful bites. You take ${dataTwo} damage.`;
           } else {
             newEntry.textContent = `Despite your best efforts, the rats swarm over you, sinking their teeth in. You take ${dataTwo} damage.`;
           }

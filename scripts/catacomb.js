@@ -72,7 +72,7 @@ let catacombRooms = [
     music: deepTunnels,
     contents: {
       monsters: [GNAWER, GNAWER],
-      items: [MARROWSTONE_CHEESE],
+      items: [],
       events: null,
     },
   },
@@ -146,7 +146,7 @@ let catacombRooms = [
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL],
-      items: [BLACKHEART_BREW],
+      items: [],
       events: null,
     },
   },
@@ -159,11 +159,8 @@ let catacombRooms = [
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL, SCOUNDREL],
-      items: [LAUGHING_COFFIN_COIN],
+      items: [],
       events: null,
-    },
-    function: () => {
-      getItem("COMMON");
     },
   },
   {
@@ -208,9 +205,6 @@ let catacombRooms = [
       items: [],
       events: null,
     },
-    function: () => {
-      getItem("COMMON");
-    },
   },
   {
     roomName: "Skull-lined Corridor",
@@ -220,7 +214,7 @@ let catacombRooms = [
     music: edgeOfFear,
     contents: {
       monsters: [DECREPIT_SKELETON, SKELETAL_SOLDIER, DECREPIT_SKELETON],
-      items: [BONE_MARROW_SOUP, GUIDING_LIGHT],
+      items: [GUIDING_LIGHT],
       events: null,
     },
   },
@@ -232,7 +226,7 @@ let catacombRooms = [
     music: edgeOfFear,
     contents: {
       monsters: [SKELETAL_SOLDIER, DECREPIT_SKELETON],
-      items: [LESSER_SOULSTONE, ROTBANE_FERN],
+      items: [ROTBANE_FERN],
       events: null,
     },
   },
@@ -258,9 +252,6 @@ let catacombRooms = [
       monsters: [SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON],
       items: [SKELETON_KEY, GHOSTLIGHT_LILY],
       events: null,
-    },
-    function: () => {
-      getItem("COMMON");
     },
   },
   {
@@ -297,9 +288,6 @@ let catacombRooms = [
       monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, SKELETAL_SOLDIER],
       items: [BONE_MARROW_SOUP],
       events: null,
-      function: () => {
-        getItem('CONSUMABLE');
-      }
     },
   },
   {
@@ -324,9 +312,6 @@ let catacombRooms = [
       monsters: [],
       items: [],
       events: COFFIN_SPIDER_EVENT,
-      function: () => {
-        getItem('CONSUMABLE');
-      }
     },
   },
   {
@@ -337,11 +322,8 @@ let catacombRooms = [
     music: passedDanger,
     contents: {
       monsters: [BONE_TITAN],
-      items: [SKELETON_KEY, CRYPTBREAD],
+      items: [SKELETON_KEY],
       events: null,
-      function: () => {
-        getItem('CONSUMABLE');
-      }
     },
   },
   {
@@ -354,9 +336,6 @@ let catacombRooms = [
       monsters: [HAUNTING_SPIRIT],
       items: [],
       events: null,
-      function: () => {
-        getItem('WISP');
-      }
     },
   },
   {
@@ -379,7 +358,7 @@ let catacombRooms = [
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL],
-      items: [POTION, POTION],
+      items: [],
       events: null,
     },
   },
@@ -405,9 +384,6 @@ let catacombRooms = [
       monsters: [FLOOD_OF_BONES],
       items: [],
       events: null,
-    },
-    function: () => {
-      getItem("RARE");
     },
   },
 ];
@@ -971,8 +947,8 @@ const LAUGHING_COFFIN_ROOM = {
   roomName: "The Laughing Coffin Tavern",
   description:
     "The Laughing Coffin tavern stands as a sanctuary, welcoming scoundrels and coin-bearers alike. Here, amid the shadows, an unexpected haven emerges—a place to relax, where whispered secrets and clinking coins intertwine in the dim-lit embrace of this clandestine refuge.",
-  backgroundImage: "styles/images/corridor-two.png",
-  music: null,
+  backgroundImage: "styles/images/backgrounds/laughing-coffin.jpg",
+  music: unfinishedBusiness,
   contents: {
     monsters: [],
     items: [],
@@ -985,8 +961,8 @@ const BLOOD_ALTER = {
   description:
     "The altar, carved from the cold, black stone native to the catacombs, stands in a chamber illuminated only by the eerie glow of blood-red torches. The walls are adorned with morbid murals, depicting the Lord of Crimson, the deity of blood and life.",
   summary: "",
-  backgroundImage: "styles/images/corridor-one.png",
-  music: null,
+  backgroundImage: "styles/images/backgrounds/crimson-covenant.jpg",
+  music: imminentDarkness,
   contents: {
     monsters: [],
     items: [],
