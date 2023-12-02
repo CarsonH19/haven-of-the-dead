@@ -132,8 +132,8 @@ const CHARM_OF_HEALING = {
   },
 };
 
-const RING_OF_THE_RODENT = {
-  name: "Ring of the Rodent",
+const RING_OF_SKITTERING = {
+  name: "Ring of Skittering",
   description: "",
   type: "MAGIC",
   rarity: "Common",
@@ -1464,7 +1464,6 @@ let commonConsumables = [
   EMBERTHAW_PETAL,
   LESSER_SOULSTONE,
   GREATER_SOULSTONE,
-  BLACKHEART_BREW,
 ];
 
 let rareConsumables = [
@@ -1495,6 +1494,10 @@ let bonevaultItems = [
   SPINE_OF_THE_NECROMANCER,
 ];
 
+let beastCommonLoot = [RING_OF_SKITTERING, SILKSTRIDERS];
+
+let beastRareLoot = [PLAGUEWARD_PENDANT, FANGWEAVE_ARMOR];
+
 let humanoidCommonLoot = [
   FLASK_OF_LIGHT,
   SHADOWSTEP_BOOTS,
@@ -1511,16 +1514,11 @@ let humanoidRareLoot = [
   TOXINWEAVE_MASK,
 ];
 
-let beastCommonLoot = [];
-
-let beastRareLoot = [];
-
 let undeadCommonLoot = [
   EVERTORCH,
   HOLY_RELIC,
   TITANS_GAUNTLETS,
   CHARM_OF_HEALING,
-  RING_OF_THE_RODENT,
 ];
 
 let undeadRareLoot = [
@@ -1536,7 +1534,7 @@ let undeadRareLoot = [
 let commonItems = [
   EVERTORCH,
   FLASK_OF_LIGHT,
-  RING_OF_THE_RODENT,
+  RING_OF_SKITTERING,
   CHARM_OF_HEALING,
   SOOTHING_CANDLE,
   FLICKERING_CANDLE,
@@ -1555,7 +1553,6 @@ let rareItems = [
   GUIDING_LIGHT,
   ROWDY_WISP,
   LAUGHING_COFFIN_COIN,
-  PLAGUEWARD_PENDANT,
   TOXINWEAVE_MASK,
   GHOSTSHROUD_TALISMAN,
   BERSERKER_PAULDRONS,
