@@ -1402,7 +1402,7 @@ function writeToNarrative(narration) {
 
   setTimeout(() => {
     narrativeText.removeChild(narrativeText.lastElementChild);
-  }, 7000);
+  }, 6950);
 
   fadeOutAnimation(newNarration, 5000);
   fadeInAnimation(newNarration);

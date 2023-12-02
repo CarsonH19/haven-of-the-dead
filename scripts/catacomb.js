@@ -366,7 +366,7 @@ let catacombRooms = [
     roomName: "Whispering Hollow",
     description:
       "The Whispering Hollow breathes with an eerie hush. Shadows dance, concealing elusive shades. Faint whispers beckon, emanating from a lone shade guarding a mysterious whispering amulet, its power shrouded in enigma.",
-    backgroundImage: "styles/images/backgrounds/ghost-room-3.jpg",
+    backgroundImage: "styles/images/backgrounds/ghost-room-4.jpg",
     music: imminentDarkness,
     contents: {
       monsters: [SHADE],

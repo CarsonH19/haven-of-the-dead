@@ -239,10 +239,12 @@ const FLOOD_OF_BONES = {
   name: "Flood of Bones",
   type: "UNDEAD",
   skulls: 8,
-  spawn: boneCrunchCrack1,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
     attack: fleshHit5,
     death: boneBreak8,
     ability: boneBreak7,
+  },
   function: () => {
     //writeToLog() if critical attack, spawns 2 decrepit skeletons
     currentRoom.contents.monsters.push(DECREPIT_SKELETON);

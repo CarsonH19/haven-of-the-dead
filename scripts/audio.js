@@ -142,9 +142,9 @@ function fadeIn(audio) {
   audio.play();
 
   const fadeInInterval = setInterval(() => {
-    audio.volume = Math.min(1, audio.volume + 0.02);
+    audio.volume = Math.min(1, audio.volume + 0.005);
 
-    if (audio.volume >= 0.2) {
+    if (audio.volume >= 0.05) {
       clearInterval(fadeInInterval);
     }
   }, 100);
@@ -152,7 +152,7 @@ function fadeIn(audio) {
 
 function fadeOut(audio, callback) {
   const fadeOutInterval = setInterval(() => {
-    audio.volume = Math.max(0, audio.volume - 0.03);
+    audio.volume = Math.max(0, audio.volume - 0.05);
 
     if (audio.volume <= 0) {
       clearInterval(fadeOutInterval);
