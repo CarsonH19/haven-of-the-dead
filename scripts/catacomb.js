@@ -33,7 +33,7 @@
 
 const catacombEntrance = {
   roomName: "Catacomb Entrance",
-  backgroundImage: "styles/images/catacomb-entrance.png",
+  backgroundImage: "styles/images/backgrounds/event-rooms/catacomb-entrance.jpg",
   music: droneDarkHor1,
   contents: {
     monsters: [],
@@ -68,7 +68,7 @@ let catacombRooms = [
     roomName: "Clawed Caverns",
     description:
       "The Clawed Caverns echo with the sinister skittering of unseen claws. Jagged stalactites hang like fangs, ready to pierce the unwary.",
-    backgroundImage: "styles/images/backgrounds/rat-room-1.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/rat-room-1.jpg",
     music: deepTunnels,
     contents: {
       monsters: [GNAWER, GNAWER],
@@ -77,22 +77,10 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Vermins' Vestibule",
-    description:
-      "The Vermins' Vestibule teems with shadowy shapes, a breeding ground for swarms of relentless vermin. The air is thick with anticipation, as unseen forces prepare to unleash their tiny terrors upon intruders.",
-    backgroundImage: "styles/images/backgrounds/rat-room-2.jpg",
-    music: deepTunnels,
-    contents: {
-      monsters: [],
-      items: [],
-      events: SWARM_OF_VERMIN,
-    },
-  },
-  {
     roomName: "Gnawers' Nest",
     description:
       "In the Gnawers' Nest, the scent of fur and decay hangs heavy. A multitude of gnawers skulk, eyes gleaming in the darkness. The air resonates with the unsettling symphony of their hungry whispers.",
-    backgroundImage: "styles/images/backgrounds/rat-room-2.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/rat-room-2.jpg",
     music: deepTunnels,
     contents: {
       monsters: [GNAWER, GNAWER, GNAWER, GNAWER],
@@ -101,35 +89,11 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Webspun Passage",
-    description:
-      "The Webspun Passage, a silken maze woven by colossal spiders. Threads glisten, hinting at unseen arachnid architects. Each step stirs a web, the air pulsating with the potential of an eight-legged guardian's descent.",
-    backgroundImage: "styles/images/backgrounds/spider-room-1.jpg",
-    music: spiderInvasion,
-    contents: {
-      monsters: [],
-      items: [],
-      events: SPIDER_WEB,
-    },
-  },
-  {
-    roomName: "Creeping Coffin",
-    description:
-      "Within the Creeping Coffin, ancient sarcophagi loom like silent sentinels. Coffin spiders, their legs tapping a macabre rhythm, await an unsuspecting intruder. The air is heavy with the scent of ancient dread.",
-    backgroundImage: "styles/images/corridor-two.png",
-    music: spiderInvasion,
-    contents: {
-      monsters: [],
-      items: [],
-      events: COFFIN_SPIDER_EVENT,
-    },
-  },
-  {
     roomName: "Sneakshade Sanctum",
     description:
       "The Sneakshade Sanctum conceals rogue figures in the shadows. Sinister scoundrels lurk, their eyes glinting with mischief. The sanctum exudes an eerie calm, belying the imminent threat of unseen daggers.",
     summary: "",
-    backgroundImage: "styles/images/backgrounds/scoundrel-room-3.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/scoundrel-room-1.jpg",
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL],
@@ -142,7 +106,7 @@ let catacombRooms = [
     description:
       "The Devious Alvove conceals its secrets in shadows. A lone scoundrel lurks, eyes gleaming with mischief. A tempting aroma of Blackheart Brew wafts through the air, promising both delight and danger to those who venture forth.",
     summary: "",
-    backgroundImage: "styles/images/backgrounds/scoundrel-room-1.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/scoundrel-room-2.jpg",
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL],
@@ -155,7 +119,7 @@ let catacombRooms = [
     description:
       "In the Rogue's Refuge, whispers of ill intent fill the air. Multiple scoundrels, masters of deception, plot amidst the concealed corners.",
     summary: "",
-    backgroundImage: "styles/images/backgrounds/scoundrel-room-2.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/scoundrel-room-3.jpg",
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL, SCOUNDREL],
@@ -164,23 +128,10 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Cobwebbed Crypt",
-    description:
-      "The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.",
-    summary: "",
-    backgroundImage: "styles/images/backgrounds/spider-room-1.jpg",
-    music: spiderInvasion,
-    contents: {
-      monsters: [],
-      items: [],
-      events: IVAN_THE_SCOUNDREL,
-    },
-  },
-  {
     roomName: "The Hatchery",
     description:
       "The Hatchery pulsates with an eerie hum. Walls, lined with unhatched eggs, house a crawling horde of crypt crawlers. The air is thick with the anticipation of countless tiny legs skittering across the cold stone floor.",
-    backgroundImage: "styles/images/backgrounds/spider-room-1.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/spider-room-1.jpg",
     music: spiderInvasion,
     contents: {
       monsters: [
@@ -198,7 +149,7 @@ let catacombRooms = [
     roomName: "Broodmother's Nest",
     description:
       "The Broodmother's Nest looms with arachnid grace. A colossal web, woven with uncanny precision, cradles the monstrous broodmother. Her presence sends shivers, and the air is thick with the scent of impending danger.",
-    backgroundImage: "styles/images/backgrounds/spider-room-1.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/spider-room-2.jpg",
     music: spiderInvasion,
     contents: {
       monsters: [BROODMOTHER],
@@ -210,7 +161,7 @@ let catacombRooms = [
     roomName: "Skull-lined Corridor",
     description:
       "The Skull-lined Corridor echoes with the rattling steps of skeletal sentinels. Walls adorned with grimacing skulls watch as decrepit skeletons and skeletal soldiers patrol with an eerie, mechanical precision.",
-    backgroundImage: "styles/images/backgrounds/passage-1.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/skull-lned-corridor.jpg",
     music: edgeOfFear,
     contents: {
       monsters: [DECREPIT_SKELETON, SKELETAL_SOLDIER, DECREPIT_SKELETON],
@@ -222,7 +173,7 @@ let catacombRooms = [
     roomName: "Bone-laden Passage",
     description:
       "The Bone-laden Passage exudes the stench of ancient decay. Shadows dance on walls adorned with skeletal remains. Skeletal soldiers stand guard, wielding rusty weapons, while a decrepit skeleton cradles a precious lesser soulstone.",
-    backgroundImage: "styles/images/backgrounds/skeleton-room-1.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/bone-laden-passage.jpg",
     music: edgeOfFear,
     contents: {
       monsters: [SKELETAL_SOLDIER, DECREPIT_SKELETON],
@@ -255,63 +206,15 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Bonevault",
-    description:
-      "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
-    backgroundImage: "styles/images/rattling-hollow.png",
-    music: droneDarkHor1,
-    contents: {
-      monsters: [],
-      items: [],
-      events: LOCKED_ROOM,
-    },
-  },
-  {
-    roomName: "Bonevault",
-    description:
-      "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
-    backgroundImage: "styles/images/rattling-hollow.png",
-    music: droneDarkHor1,
-    contents: {
-      monsters: [],
-      items: [],
-      events: LOCKED_ROOM,
-    },
-  },
-  {
     roomName: "Skeletal Sepulcher",
     description:
       "Within the Skeletal Sepulcher, shadows dance on crumbling bone. Decrepit skeletons stir, guarding their final resting place. A chill pervades as skeletal soldiers stand sentinel.",
-    backgroundImage: "styles/images/backgrounds/skeleton-room-4.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/skeletal-sepulcher.jpg",
     music: edgeOfFear,
     contents: {
       monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, SKELETAL_SOLDIER],
       items: [BONE_MARROW_SOUP],
       events: null,
-    },
-  },
-  {
-    roomName: "Marrowrest Tomb",
-    description:
-      "The Marrowrest Tomb exhales an eerie silence. No living soul stirs, yet the air shivers with the unseen presence of the Graverobber Earver. Unhallowed secrets lie waiting to be unearthed in this solemn sepulcher.",
-    backgroundImage: "styles/images/chamber-one.png",
-    music: imminentDarkness,
-    contents: {
-      monsters: [],
-      items: [],
-      events: GRAVEROBBER_EARVER,
-    },
-  },
-  {
-    roomName: "Ivory Crypt",
-    description:
-      "In the Ivory Crypt, delicate filigree adorns crypt walls. An ethereal silence lingers, broken only by the occasional skittering. The air is charged with the unsettling energy of the crypt's secrets.",
-    backgroundImage: "styles/images/chamber-one.png",
-    music: threeThousandYearsOld,
-    contents: {
-      monsters: [],
-      items: [],
-      events: COFFIN_SPIDER_EVENT,
     },
   },
   {
@@ -354,7 +257,7 @@ let catacombRooms = [
     roomName: "Forgotten Passage",
     description:
       "The Forgotten Passage is cloaked in darkness, a haven for lurking scoundrels. Their eyes gleaming with mischief.",
-    backgroundImage: "styles/images/backgrounds/passage-1.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/forgotten-passage.jpg",
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL],
@@ -378,12 +281,109 @@ let catacombRooms = [
     roomName: "Rattling Hollow",
     description:
       "Within the Rattling Hollow, bones assemble in macabre unity. An unsettling rattle permeates the air as a flood of bones, animated and vengeful, guards this chamber. Brave souls may find rare treasures amidst the bone-strewn chaos.",
-    backgroundImage: "styles/images/backgrounds/flood-of-bones.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-one/flood-of-bones.jpg",
     music: passedDanger,
     contents: {
       monsters: [FLOOD_OF_BONES],
       items: [],
       events: null,
+    },
+  },
+  {
+    roomName: "Vermins' Vestibule",
+    description:
+      "The Vermins' Vestibule teems with shadowy shapes, a breeding ground for swarms of relentless vermin. The air is thick with anticipation, as unseen forces prepare to unleash their tiny terrors upon intruders.",
+    backgroundImage: "styles/images/backgrounds/rat-room-2.jpg",
+    music: deepTunnels,
+    contents: {
+      monsters: [],
+      items: [],
+      events: SWARM_OF_VERMIN,
+    },
+  },
+  {
+    roomName: "Marrowrest Tomb",
+    description:
+      "The Marrowrest Tomb exhales an eerie silence. No living soul stirs, yet the air shivers with the unseen presence of the Graverobber Earver. Unhallowed secrets lie waiting to be unearthed in this solemn sepulcher.",
+    backgroundImage: "styles/images/chamber-one.png",
+    music: imminentDarkness,
+    contents: {
+      monsters: [],
+      items: [],
+      events: GRAVEROBBER_EARVER,
+    },
+  },
+  {
+    roomName: "Bonevault",
+    description:
+      "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
+    backgroundImage: "styles/images/rattling-hollow.png",
+    music: droneDarkHor1,
+    contents: {
+      monsters: [],
+      items: [],
+      events: LOCKED_ROOM,
+    },
+  },
+  {
+    roomName: "Bonevault",
+    description:
+      "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
+    backgroundImage: "styles/images/rattling-hollow.png",
+    music: droneDarkHor1,
+    contents: {
+      monsters: [],
+      items: [],
+      events: LOCKED_ROOM,
+    },
+  },
+  {
+    roomName: "Webspun Passage",
+    description:
+      "The Webspun Passage, a silken maze woven by colossal spiders. Threads glisten, hinting at unseen arachnid architects. Each step stirs a web, the air pulsating with the potential of an eight-legged guardian's descent.",
+    backgroundImage: "styles/images/backgrounds/spider-room-1.jpg",
+    music: spiderInvasion,
+    contents: {
+      monsters: [],
+      items: [],
+      events: SPIDER_WEB,
+    },
+  },
+  {
+    roomName: "Creeping Coffin",
+    description:
+      "Within the Creeping Coffin, ancient sarcophagi loom like silent sentinels. Coffin spiders, their legs tapping a macabre rhythm, await an unsuspecting intruder. The air is heavy with the scent of ancient dread.",
+    backgroundImage: "styles/images/corridor-two.png",
+    music: spiderInvasion,
+    contents: {
+      monsters: [],
+      items: [],
+      events: COFFIN_SPIDER_EVENT,
+    },
+  },
+  {
+    roomName: "Ivory Crypt",
+    description:
+      "In the Ivory Crypt, delicate filigree adorns crypt walls. An ethereal silence lingers, broken only by the occasional skittering. The air is charged with the unsettling energy of the crypt's secrets.",
+    backgroundImage: "styles/images/chamber-one.png",
+    music: threeThousandYearsOld,
+    contents: {
+      monsters: [],
+      items: [],
+      events: COFFIN_SPIDER_EVENT,
+    },
+  },
+  {
+    roomName: "Cobwebbed Crypt",
+    description:
+      "The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.",
+    summary: "",
+    backgroundImage: "styles/images/backgrounds/spider-room-1.jpg",
+    music: spiderInvasion,
+    contents: {
+      monsters: [],
+      items: [],
+      events: IVAN_THE_SCOUNDREL,
     },
   },
 ];
