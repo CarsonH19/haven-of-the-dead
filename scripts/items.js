@@ -116,7 +116,7 @@ const GRAVEROBBERS_SPADE = {
   rarity: "Common",
   effect: "While attuned to this item you are more likely to find items.",
   function: () => {
-    return 2;
+    return 5;
   },
 };
 
@@ -186,20 +186,18 @@ const HOLY_RELIC = {
   },
 };
 
-const SACRIFICIAL_BLADE = {
-  name: "Sacrificial Blade",
+const RITUAL_BLADE = {
+  name: "Ritual Blade",
   description: "",
   type: "MAGIC",
   rarity: "Common",
   effect:
     "While attuned to this item your attack increases by 3, but your faith decreases by 1.",
   function: () => {
-    console.log("stats added!");
     baseAttack += 3;
     baseFaith--;
   },
   unequip: () => {
-    console.log("stats removed!");
     baseAttack -= 3;
     baseFaith++;
   },
@@ -327,7 +325,16 @@ const WHISPERING_AMULET = {
   rarity: "Rare",
   effect:
     "While attuned to this item you can communicate with some undead creatures.",
-  function: () => {},
+  function: () => {
+    // Adds Grervil's Room While Wearing
+    console.log('CALLED');
+    // catacombRooms.push(SKULL_CHAMBER);
+  },
+  unequip: () => {
+    // Removes Grervil's Room When Unequipped
+    let indexToRemove = catacombRooms.findIndex(room => room.roomName === "Skull-filled Chamber");
+    catacombRooms = [...catacombRooms.slice(0, indexToRemove), ...catacombRooms.slice(indexToRemove + 1)];
+  },
 };
 
 const CURSED_MIRROR = {
@@ -501,7 +508,7 @@ const SKELETON_KEY = {
   name: "Skeleton Key",
   description: "",
   soundEffect: skeletonKeyIn2,
-  type: "MAGIC",
+  type: "MISC",
   rarity: "Rare",
   effect:
     "This key can be used to unlock various locked rooms throughout the catacomb.",
@@ -768,10 +775,21 @@ const SPINE_OF_THE_NECROMANCER = {
 //     function:
 //  }
 
+const WAR_TORN_BANNER = {
+  name: "War Torn Banner",
+  description: "",
+  type: "MAGIC",
+  rarity: "Rare",
+  effect: "While attuned to this item, the Forsaken Commander's legion will rise to battle you.",
+  function: () => {
+    writeToLogItem(LOG_ITEM, "YES", WAR_TORN_BANNER);
+  },
+};
+
 const CURSED_GRIMOIRE = {
   name: "Cursed Grimoire",
   description: "",
-  type: "MAGIC",
+  type: "MISC",
   rarity: "Epic",
   effect: "This item is cursed and cannot be unattuned.",
   function: () => {
@@ -786,7 +804,7 @@ const CACHE_KEY = {
   name: "Ivan's Cache Key",
   description: "",
   soundEffect: skeletonKeyIn2,
-  type: "MAGIC",
+  type: "MISC",
   rarity: "Common",
   effect:
     "Given to you by Ivan the Scoundrel, he said it unlocks a chamber within the catacombs were his hidden cache is kept.",
@@ -799,7 +817,7 @@ const CACHE_KEY = {
 const GRERVILS_HEAD = {
   name: "Grervil's Head",
   description: "",
-  type: "MAGIC",
+  type: "MISC",
   rarity: "Common",
   effect: "Head of the talking skull, Grervil.",
   function: () => {
@@ -1415,11 +1433,19 @@ const RESTLESS_WISP = {
     let randomNumber = Math.round(Math.random() * 5) + 1;
     let wispDuration = roomCounter + randomNumber;
     RESTLESS_WISP.duration = "Searching";
+    
+    // Clear room if player fleed in the past 
+    LOST_LEGIONS_VALE.contents.monsters = [];
 
-    // LOST_LEGIONS_VALE.contents.monsters.push(SKELETAL_CAPTAIN); // ADD BOSS?!
-
-    for (let i = 0; i < 5; i++) {
-      LOST_LEGIONS_VALE.contents.monsters.push(SKELETAL_SOLDIER);
+    // Check if War Torn Banner is equipped
+    if (attunedItems.includes(WAR_TORN_BANNER)) {
+      for (let i = 0; i < 5; i++) {
+        LOST_LEGIONS_VALE.contents.monsters.push(LEGIONNAIRE);
+      }
+    } else {
+      for (let i = 0; i < 5; i++) {
+        LOST_LEGIONS_VALE.contents.monsters.push(SKELETAL_SOLDIER);
+      }
     }
 
     let restlessWispInterval = setInterval(() => {
@@ -1585,21 +1611,25 @@ function isItemAttuned(item, defaultValue) {
 
 function attuneItem(itemName) {
   // itemName must be the item's string name
-  itemObject = inventoryItems.find((inv) => inv.name === itemName);
+  const itemObject = inventoryItems.find((inv) => inv.name === itemName);
 
-  if (itemObject) {
+  // Check if the item is not already attuned
+  if (itemObject && !attunedItems.includes(itemObject)) {
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
     attunedItems.push(itemObject);
-  }
 
-  if (itemObject.unequip) {
-    itemObject.function();
-  }
+    if (itemObject.unequip) {
+      itemObject.function();
+    }
 
-  clearInventory();
-  renderInventory();
-  writeToLogItem(LOG_ATTUNE, "YES", itemName);
+    clearInventory();
+    renderInventory();
+    writeToLogItem(LOG_ATTUNE, "YES", itemName);
+  } else {
+    // Handle case where the item is already attuned
+    writeToLogItem(LOG_CANT_ATTUNE, "YES", itemName, "DUPLICATE");
+  }
 }
 
 function removeItem(itemName) {
@@ -1621,29 +1651,29 @@ function removeItem(itemName) {
   renderInventory();
 }
 
-function findItemChance() {
-  if (currentRoom.contents.events === null) {
-    let randomNumber = Math.round(Math.random() * 19 + baseFaith);
+// function findItemChance() {
+//   if (currentRoom.contents.events === null) {
+//     let randomNumber = Math.round(Math.random() * 19 + baseFaith);
 
-    // ITEM: Graverobber's Spade - Increase item find chance by 10%
-    randomNumber += isItemAttuned(GRAVEROBBERS_SPADE, 0);
+//     // ITEM: Graverobber's Spade - Increase item find chance by 10%
+//     randomNumber += isItemAttuned(GRAVEROBBERS_SPADE, 0);
 
-    if (randomNumber >= 10) {
-      getItem("CONSUMABLE");
-    }
+//     if (randomNumber >= 10) {
+//       getItem("CONSUMABLE");
+//     }
 
-    if (randomNumber >= 19) {
-      let itemRarity = Math.round(Math.random() * 99 + baseFaith);
-      if (itemRarity >= 95) {
-        getItem("Epic");
-      } else if (itemRarity >= 61) {
-        getItem("Rare");
-      } else {
-        getItem("Common");
-      }
-    }
-  }
-}
+//     if (randomNumber >= 19) {
+//       let itemRarity = Math.round(Math.random() * 99 + baseFaith);
+//       if (itemRarity >= 95) {
+//         getItem("Epic");
+//       } else if (itemRarity >= 61) {
+//         getItem("Rare");
+//       } else {
+//         getItem("Common");
+//       }
+//     }
+//   }
+// }
 
 function getItem(rarity) {
   switch (rarity) {
@@ -1748,6 +1778,7 @@ function lootItems(lootGroup) {
     let lootConsumableChance = Math.round(Math.random() * 100);
     lootConsumableChance += baseFaith * 2;
 
+
     // ITEM: Graverobber's Spade - Increase item find chance by 10%
     lootItemChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
     lootConsumableChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
@@ -1782,7 +1813,6 @@ function lootItems(lootGroup) {
         break;
     }
 
-    console.log(lootItemChance);
 
     // Loot Items
     if (lootItemChance > 95 && rareLoot.length > 0) {
@@ -1798,6 +1828,7 @@ function lootItems(lootGroup) {
       room.push(foundItem);
       console.log(foundItem);
     }
+    console.log(lootConsumableChance);
 
     // Loot Consuables
     if (lootConsumableChance > 95) {
@@ -1993,11 +2024,9 @@ function statusEffectHandler(item) {
     //   updatePlayerTrackers();
     //   break;
 
-    // case LEGIONS_GRACE:
-    //   //writeToLogItem()
-    //   baseAttack++;
-    //   updatePlayerTrackers();
-    //   break;
+    case LEGIONS_GRACE:
+      //writeToLogItem()
+      break;
 
     case CHILLED:
       //writeToLogItem() You are chilled and unable to use your special ability
@@ -2240,7 +2269,7 @@ inventoryModal.addEventListener("click", (event) => {
       event.target === buttons[i] &&
       itemObject.type === "MISC"
     ) {
-      writeToLogItem(LOG_CANT_ATTUNE, "YES", buttons[i].id);
+      writeToLogItem(LOG_CANT_ATTUNE, "YES", buttons[i].id, "MISC");
     } else if (
       magicItemsBox.contains(event.target) &&
       event.target === buttons[i]

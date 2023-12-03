@@ -437,12 +437,17 @@ function renderCurrentRoom(currentRoom) {
   roomNameElement.textContent = currentRoom.roomName;
   previousExperience = experiencePoints;
 
+  // Calls function if one exists
+  if (currentRoom.function) {
+    currentRoom.function();
+  }
+
   // Renders monsters if there are monsters in the room.
   if (
     currentRoom.contents.monsters.length > 0 &&
     currentRoom.contents.events === null
   ) {
-    checkCurrentRoom(); // Used for the haunted condition
+    checkCurrentRoom(); // Used to add specific monsters
     setTimeout(startBattle(currentRoom), 2000);
   } else {
     monsterContainer.style.display = "none";
@@ -474,11 +479,6 @@ function renderCurrentRoom(currentRoom) {
           break;
       }
     }, 3000);
-  }
-
-  // Calls function if one exists
-  if (currentRoom.function) {
-    currentRoom.function();
   }
 
   specialCooldownHandler();

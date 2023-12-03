@@ -1142,28 +1142,22 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     case LOG_NPC_OPTION_ONE:
       if (event === GRAVEROBBER_EARVER) {
         newEntry.textContent = `
-        The air grows thick with malevolence as the stone door groans open. In that moment, a malevolent spirit surges into Earver, claiming him as its vessel. His eyes blaze with unholy fire, and the spade he wields becomes a weapon of doom, swinging towards you with deadly intent. `;
+        The stone door groans open, and in that moment, a malevolent spirit surges into Earver, claiming him as its vessel. His eyes blaze with unholy fire, and the spade he wields becomes his weapon, swinging towards you with deadly intent. `;
       } else if (event === GRAVEROBBER_EARVER_EVENT_TWO) {
-        newEntry.textContent = `You decide to assist Graverobber Earver in his unholy quest to open the sarcophagus. The lid creaks open, but as the contents are revealed, a deafening roar echoes through the tomb. A monstrous abomination, the dreaded Bone Titan, awakens in a fury of giant bones, and it mercilessly strikes down Graverobber Earver before turning its baleful gaze upon you.`;
+        newEntry.textContent = `You assist Graverobber Earver in his quest to open the sarcophagus. The lid creaks open, but as the contents are revealed, a deafening roar echoes through the catacomb. A monstrous abomination, awakens in a fury of flailing bones, and mercilessly strikes down Graverobber Earver before turning its baleful gaze upon you.`;
       } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
-        newEntry.textContent = `"As Graverobber Earver's finally succeed in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their vengeful onslaught, he meets his untimely demise, leaving you to face the wrath of these risen guardians."`;
+        newEntry.textContent = `"You aid Graverobber Earver's in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their onslaught, he meets his untimely demise, leaving you to face these undead guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Released from captivity, the scoundrel breathes thanks, but a looming arachnid descends, hungry eyes fixed on its newfound prey.`;
-      } else if (event === IVAN_THE_SCOUNDREL_TWO) {
+      } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
         newEntry.textContent = `As the key turns, a malevolent hiss escapes as deadly poison gas clouds your senses. Weakening, you realize the scoundrel's gratitude was a ruse. Ivan and his accomplices emerge, encircling you like prey in ambush. Peril looms in their treacherous laughter."`;
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. They turn towards you, their hollow sockets fixed on your bold presence.`;
       } else if (event === FORSAKEN_COMMANDER) {
-        if (dataOne === "ONE") {
-          newEntry.textContent = `Valiant adventurer, my legion haunts these depths, bound by an unholy curse. Free them from the chains of undeath. Venture forth, quell the skeletal uprising, and usher my warriors into the eternal rest they deserve.`;
-        } else if (dataOne === "TWO") {
-          newEntry.textContent = `The ethereal voice echoes, but its spectral words elude your comprehension. The spirit's frustration intensifies, and anger darkens its gaze. Enraged, it lashes out with a vengeful force.`;
-        }
+          newEntry.textContent = `The spectral commander's mournful visage brightens. 'A noble soul, break their chains and usher the forsaken into the eternal rest they deserve.`;
       } else if (event === GRERVIL_THE_BODILESS) {
         if (dataOne === "ONE") {
-          newEntry.textContent = `You speak with Grervil`;
-        } else if (dataOne === "TWO") {
-          newEntry.textContent = `You attempt to speak, but can't understand`;
+          newEntry.textContent = `Grervil's skeletal gratitude echoes as you carry the talking skull. "Thanks, seeker. Onward to reclaim my body, and the catacomb's secrets shall unfold in your favor."`;
         }
       }
 
@@ -1173,20 +1167,20 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     case LOG_NPC_OPTION_TWO:
       if (event === GRAVEROBBER_EARVER) {
         newEntry.textContent = `Declining Graverobber Earver's offer, you descend further into the catacomb. His desperate struggles to breach the ancient stone door reverberate through the passageway.`;
-      } else if (event === GRAVEROBBER_EARVER_TWO) {
+      } else if (event === GRAVEROBBER_EARVER_EVENT_TWO) {
         newEntry.textContent = `Refusing Graverobber Earver's proposition, you venture deeper into the catacomb. The echoes of Earver's relentless attempts to pry open the ancient stone sarcophagus resonate through the passageway.`;
-      } else if (event === GRAVEROBBER_EARVER_THREE) {
+      } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
         newEntry.textContent = `As you stand resolute in your refusal to aid GraverobberEarver, the crypt door remains sealed, shunning the desecration of the king's final resting place. In the solemn silence that follows, a radiant light emanates from the heart of the chamber. The spectral king, recognizing your honor, presents you with his ethereal crown, a symbol of his gratitude and a powerful artifact.`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Refusing the scoundrel's plea, he hisses, "You'll rue this day. My revenge will echo through these cursed catacombs." The shadows deepen, foretelling the ominous path ahead.`;
-      } else if (event === IVAN_THE_SCOUNDREL_TWO) {
+      } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
         newEntry.textContent = `Discovering the concealed cache, caution grips you as Ivan's offer of kindness grows suspicious. Suddenly, shadows and an ambush unfolds. With weapons unsheathed, Ivan and his cohorts emerge, revealing your instincts not to trust him were right all along.`;
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `After the skeletons mercilessly strike down Hendra, their hollow gaze fixate on you.`;
       } else if (event === FORSAKEN_COMMANDER) {
-        newEntry.textContent = `As you disregard the spirit's plea, an ominous chill fills the catacomb. Skeletal apparitions rise with a malevolent purpose. In the darkness, an onslaught ensues, the consequence of denying the restless spirit.`;
+        newEntry.textContent = `The spectral commander's eyes flare with anguish. 'Your defiance condemns my legion to eternal torment. The wrath of the forsaken will fall upon you!`;
       } else if (event === GRERVIL_THE_BODILESS) {
-        newEntry.textContent = `You ignore the chattering skull.`;
+        newEntry.textContent = `"As you deny Grervil's plea, the disembodied skull's whispers fade into a haunting lament. Unable to move and unbound from your aid, it remains motionless upon its bone throne."`;
       }
 
       narration = newEntry.textContent;
@@ -1211,20 +1205,20 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           newEntry.textContent = `The scoundrels' eyes narrow, skepticism etched across their faces. "Show it then!" demands the leader, tension thickening. Your bluff exposed, the atmosphere ignites with menace. "Seems our new friend needs a harsh lesson," sneers another, drawing a blade.`;
         }
       } else if (event === LOCKED_ROOM) {
-        if (dataOne === "ONE") {
-          newEntry.textContent = `${currentRoom.description}`;
-        } else if (dataOne === "TWO") {
-          if (heroChoice === "PALADIN") {
-            newEntry.textContent = `"The divine light guides my path through these cryptic depths, revealing the way even in the absence of a key."`;
-          } else if (heroChoice === "ROGUE") {
-            newEntry.textContent = `"The key eludes us, but shadows conceal more than keys reveal."`;
-          } else if (heroChoice === "PRIESTESS") {
-            newEntry.textContent = `"In the absence of a key, divine guidance shall illuminate my path forward."`;
-          }
+        if (heroChoice === "PALADIN") {
+          newEntry.textContent = `"The divine light guides my path through these cryptic depths, revealing the way even in the absence of a key."`;
+        } else if (heroChoice === "ROGUE") {
+          newEntry.textContent = `"The key eludes us, but shadows conceal more than keys reveal."`;
+        } else if (heroChoice === "PRIESTESS") {
+          newEntry.textContent = `"In the absence of a key, divine guidance shall illuminate my path forward."`;
         }
       } else if (event === CRIMSON_COVENANT) {
-        newEntry.textContent = `As your blood mingles with the sacrificial stream, an otherworldly energy surges through the catacomb. The hooded figures bow in silent acknowledgment. A newfound power courses through you, but at what cost?`;
-      }
+        if (dataOne === "JOIN") {
+        newEntry.textContent = `As your blood mingles with the sacrificial stream, an otherworldly energy surges through the catacomb. The hooded figures bow in silent acknowledgment.`;
+        } else if (dataOne === "LOW HEALTH") {
+          newEntry.textContent = `Too weak to make a sacrifice, you step away from the ritual. The hooded figures pause. The catacomb's air tightens with an unsettling stillness. The chanting falters, and the figures regard you with an ominous silence as you descend into the catacomb.`;
+        }
+      } 
 
       narration = newEntry.textContent;
       break;
@@ -1233,9 +1227,9 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       if (event === LAUGHING_COFFIN_EVENT) {
         newEntry.textContent = `With a Laughing Coffin Coin in hand, the den of rogues turns their eyes upon you. "Got the token, have you?" one grins, only to scowl as you hesitate. "Wasting our time, are you?" another scoffs. "If you ain't here to play, stranger, best you leave before we make you regret it."`;
       } else if (event === LOCKED_ROOM) {
-        newEntry.textContent = `As you press on through the catacomb, the chamber remains tightly sealed, its secrets remain a mystery.`;
+        newEntry.textContent = `The chamber remains tightly sealed, and its secrets a mystery.`;
       } else if (event === CRIMSON_COVENANT) {
-        newEntry.textContent = `You step back from the altar, rejecting the sinister invitation. The hooded figures pause, their crimson eyes piercing the darkness. The catacomb's air tightens with an unsettling stillness. he chanting falters, and the figures regard you with an ominous silence as you descend further into the catacomb.`;
+        newEntry.textContent = `You step back from the altar, rejecting the sinister invitation. The hooded figures pause. The catacomb's air tightens with an unsettling stillness. The chanting falters, and the figures regard you with an ominous silence as you descend into the catacomb.`;
       }
 
       narration = newEntry.textContent;
@@ -1274,7 +1268,12 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
       break;
 
     case LOG_CANT_ATTUNE:
-      newEntry.textContent = `The ${dataOne} cannot be attuned to.`;
+      if (dataTwo === "MISC") {
+        newEntry.textContent = `${dataOne} cannot be attuned to.`;
+      } else if (dataTwo === "DUPLICATE") {
+        newEntry.textContent = `You can only attune to a single ${dataOne} at a time.`;
+      }
+
       break;
 
     case LOG_CONSUMABLE:
@@ -1294,6 +1293,8 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
     case LOG_ITEM:
       if (dataOne === LAUGHING_COFFIN_COIN) {
         newEntry.textContent = `You pay a Laughing Coffin Coin and enter the tavern.`;
+      } else if (dataOne === GRERVILS_HEAD) {
+        newEntry.textContent = `You unearthed Grervil's skeletal body. 'My form returns,' Grervil hisses. With an unsettling gratitude, he bestows a wisp before vanishing into the catacombs's depths.`;
       } else if (dataOne === SKELETON_KEY) {
         newEntry.textContent = `You use a Skeleton Key to unlock the ${dataTwo}`;
       } else if (dataOne === CACHE_KEY) {

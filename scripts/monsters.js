@@ -35,7 +35,7 @@ const CRYPT_CRAWLER = {
   },
   function: () => {
     WEBBED.function(4);
-    soundEffectHandler(CRYPT_CRAWLER, 'MONSTER ABILITY');
+    soundEffectHandler(CRYPT_CRAWLER, "MONSTER ABILITY");
   },
 };
 
@@ -51,7 +51,7 @@ const COFFIN_SPIDER = {
   },
   function: () => {
     WEBBED.function(5);
-    soundEffectHandler(COFFIN_SPIDER, 'MONSTER ABILITY');
+    soundEffectHandler(COFFIN_SPIDER, "MONSTER ABILITY");
   },
 };
 
@@ -68,7 +68,7 @@ const BROODMOTHER = {
   hatchEggCounter: 0,
   function: () => {
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
-    soundEffectHandler(BROODMOTHER, 'MONSTER ABILITY');
+    soundEffectHandler(BROODMOTHER, "MONSTER ABILITY");
   },
 };
 
@@ -97,8 +97,8 @@ const SCOUNDREL = {
   },
   function: () => {
     POISONED.function(3);
-    soundEffectHandler(SCOUNDREL, 'MONSTER ABILITY');
-  }
+    soundEffectHandler(SCOUNDREL, "MONSTER ABILITY");
+  },
 };
 
 // ===============================
@@ -121,9 +121,9 @@ const FIENDSWORN_CULTIST = {
   type: "HUMANOID",
   skulls: 5,
   soundEffects: {
-    spawn: '',
-    attack: '',
-    death: '',
+    spawn: "",
+    attack: "",
+    death: "",
   },
 };
 
@@ -132,9 +132,9 @@ const DEMON = {
   type: "DEMON",
   skulls: 7,
   soundEffects: {
-    spawn: '',
-    attack: '',
-    death: '',
+    spawn: "",
+    attack: "",
+    death: "",
   },
   function: () => {},
 };
@@ -192,7 +192,7 @@ const BLAZING_SKELETON = {
     damageMonster(currentMonsterHealth);
     showDamage(15, "MONSTER");
     updatePlayerTrackers();
-    soundEffectHandler(BLAZING_SKELETON, 'MONSTER ABILITY');
+    soundEffectHandler(BLAZING_SKELETON, "MONSTER ABILITY");
   },
 };
 
@@ -208,8 +208,8 @@ const DRAUGR = {
   },
   function: () => {
     CHILLED.function(5);
-    soundEffectHandler(DRAUGR, 'MONSTER ABILITY');
-  }
+    soundEffectHandler(DRAUGR, "MONSTER ABILITY");
+  },
 };
 
 const BONE_TITAN = {
@@ -230,7 +230,7 @@ const BONE_TITAN = {
       DECREPIT_SKELETON
     );
 
-    soundEffectHandler(BONE_TITAN, 'MONSTER ABILITY');
+    soundEffectHandler(BONE_TITAN, "MONSTER ABILITY");
     //writeToLog(); crumbles and reforms into smaller skeletons
   },
 };
@@ -256,9 +256,9 @@ const BARON_OF_BONE = {
   type: "UNDEAD",
   skulls: 9,
   spawn: boneCrunchCrack1,
-    attack: fleshHit5,
-    death: boneBreak8,
-    ability: boneBreak7,
+  attack: fleshHit5,
+  death: boneBreak8,
+  ability: boneBreak7,
 };
 
 // ===============================
@@ -286,8 +286,7 @@ const HAUNTING_SPIRIT = {
     death: ghostHowl,
   },
   function: () => {
-    HAUNTED.function(); // applies the haunted condition
-    //writeToLog() gives you the haunted condition... causes Shades to randomly appear and attack you.
+    HAUNTED.function();
   },
 };
 
@@ -301,19 +300,19 @@ const GRUDGE = {
     death: ghostShriekWhoosh,
   },
   function: () => {
-    HAUNTED.function(); // applies the haunted condition
+    HAUNTED.function();
   },
 };
 
 function getEvilSpiritAudio() {
-  let audio = Math.floor(Math.random() * 3) + 1; 
+  let audio = Math.floor(Math.random() * 3) + 1;
 
   if (audio === 1) {
-    return whooshGhost
+    return whooshGhost;
   } else if (audio === 2) {
-    return whooshGhostBy1
+    return whooshGhostBy1;
   } else if (audio === 3) {
-    return whooshGhostBy2
+    return whooshGhostBy2;
   }
 }
 
@@ -354,14 +353,14 @@ const FORSAKEN_COMMANDER_STATS = {
   },
 };
 
-const SPECTRAL_SOLDIER = {
-  name: "Spectral Soldier",
+const LEGIONNAIRE = {
+  name: "Undead Legionnaire",
   type: "UNDEAD",
-  skulls: 2,
+  skulls: 4,
   soundEffects: {
-    spawn: ghostAppearance1,
-    attack: getEvilSpiritAudio(),
-    death: ghostHowl,
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: armorMetalClanksToTheGround,
   },
 };
 
@@ -373,6 +372,9 @@ const POSSESSED_EARVER = {
     spawn: ghostAppearance1,
     attack: skullHitShovel,
     death: fightGrunt6,
+  },
+  function: () => {
+    HAUNTED.function();
   },
 };
 
@@ -471,17 +473,27 @@ function startBattle() {
 
     // ITEM: Rattlebone Charm - Chance for humanoids to flee.
     isItemAttuned(RATTLEBONE_CHARM);
-    
+
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
     isItemAttuned(ETHEREAL_CROWN);
   }, 1000);
 
-  soundEffectHandler(currentRoom.contents.monsters[0], 'SPAWN');
+  soundEffectHandler(currentRoom.contents.monsters[0], "SPAWN");
 }
 
 function checkForMonsters() {
+  // If Skeletal Warrior Adds to Legion Tracker
+  if (
+    currentRoom.contents.monsters[0] === SKELETAL_SOLDIER ||
+    currentRoom.contents.monsters[0] === ARMORED_SKELETON
+  ) {
+    legionTracker++;
+  }
+
+  // Removes Monster From Rooms Monsters Arry
   currentRoom.contents.monsters.shift();
 
+  // Checks for more monsters
   if (currentRoom.contents.monsters.length > 0) {
     startBattle();
     console.log("Another Monster!");
@@ -529,6 +541,14 @@ function monsterAbilityHandler(monster) {
       if (grudgeHauntChance === 20) {
         console.log("Grudge Ability Called!");
         GRUDGE.function();
+      }
+      break;
+
+    case POSSESSED_EARVER:
+      let earverHauntChance = Math.round(Math.random() * 20);
+      if (earverHauntChance === 20) {
+        console.log("Earver Ability Called!");
+        POSSESSED_EARVER.function();
       }
       break;
 

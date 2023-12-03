@@ -38,21 +38,17 @@ const SAFE_ROOM = {
   name: "Safe Room",
   eventType: "SAFE ROOM",
   description:
-    "Before you lies the Candlelight Shrine, a haven untainted by darkness. Here, malevolence recoils, granting you respite. Embrace the flickering sanctuary, and let the shadows fade as you rest, shielded from the evil that prowls beyond its sacred glow.",
-  summary: `You rest at the Candlelight Shrine. The sacred flames stand sentinel, offering solace in the heart of the endless catacomb.`,
-  optionOne: null,
-  optionTwo: null,
+    "You arrive at Candlelight Shrine, a haven untainted by darkness. Here, malevolence recoils, granting you respite. Embrace the flickering sanctuary, and let the shadows fade as you rest, shielded from the evil that prowls beyond its sacred glow.",
+  summary: `You rested at the Candlelight Shrine. The sacred flames stood sentinel, offering you solace in the heart of the catacomb.`,
   functionOne: () => {
     setTimeout(() => {
       getItem("CANDLE");
       healPlayer(calculatePlayerMaxHealth());
       setRoomSummary();
       newRoomAnimation(); // creates passing of time effect
-      setTimeout(renderRoomSummaryModal, 4000);
-      //writeToLogEvent() restored to full health and found a candle
+      setTimeout(renderRoomSummaryModal, 5000);
     });
   },
-  functionTwo: null,
 };
 
 // ===============================
@@ -154,30 +150,36 @@ const GRAVEROBBER_EARVER = {
   name: "Graverobber Earver",
   eventType: "NPC",
   description:
-    "Amidst the haunting mist, you stumble upon Graverobber Earver, a sinister figure, hell-bent on breaching an ancient tomb. He beckons you to join his sinister endeavor, promising untold treasures from the cursed depths if you dare to embrace the darkness.",
+    "You stumble upon Graverobber Earver, a sinister figure, hell-bent on breaching an ancient tomb. He beckons you to join his sinister endeavor, promising untold treasures from the tomb.",
+  summary: "",
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
+    GRAVEROBBER_EARVER.summary =
+      "After helping Graverobber Earver open the tomb, he was possessed by an evil spirit and attacked you. Forced to defend yourself, you struck down the grave robber.";
     currentRoom.contents.monsters.push(POSSESSED_EARVER);
     currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
-    getItem('RARE');
+    setRoomSummary();
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
-    writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
+    GRAVEROBBER_EARVER.summary =
+      "You refused to help Graverobber Earver open the sealed tomb.";
     let currentRoomCounter = roomCounter + 10;
-    console.log(`currentRoomCounter: ${currentRoomCounter}`);
+
     let earverInterval = setInterval(() => {
-      console.log(`currentRoomCounter: ${currentRoomCounter}`);
       if (roomCounter > currentRoomCounter) {
         console.log("Room Added");
         catacombRooms.push(GRAVEROBBER_EARVER_ROOM_TWO);
         clearInterval(earverInterval);
       }
     }, 60000);
+
+    setRoomSummary();
+    writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
@@ -190,16 +192,21 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
+    GRAVEROBBER_EARVER.summary =
+      "You agreed to help Graverobber Earver open the sarcophagus, awakening a large undead creature which struck Earver down and nearly you as well.";
+
     currentRoom.contents.monsters.push(BONE_TITAN);
     currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
-    getItem('RARE');
+    setRoomSummary();
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
-    writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
+    GRAVEROBBER_EARVER.summary =
+      "Again, you refused to help Graverobber Earver desecrate a burial.";
+
     let currentRoomCounter = roomCounter + 10;
     let earverInterval = setInterval(() => {
       console.log(`currentRoomCounter: ${currentRoomCounter}`);
@@ -209,6 +216,9 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
         clearInterval(earverInterval);
       }
     }, 60000);
+
+    setRoomSummary();
+    writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
@@ -221,15 +231,21 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
+    GRAVEROBBER_EARVER.summary =
+      "You agreed to help Graverobber Earver open the tomb, unleashing powerful undead warriors which struck Earver down and nearly you as well.";
+
     currentRoom.contents.monsters.push(DRAUGR, DRAUGR, DRAUGR);
     currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
-    getItem('RARE');
+    setRoomSummary();
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
+    GRAVEROBBER_EARVER.summary =
+      "Yet again, you refused to help Graverobber Earver. In recognition of your virtue, the spirit of a long dead king gifted his Ethereal Crown to you.";
+
     currentRoom.contents.items.push(ETHEREAL_CROWN);
     setRoomSummary();
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
@@ -248,9 +264,9 @@ const IVAN_THE_SCOUNDREL = {
   functionOne: () => {
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
     IVAN_THE_SCOUNDREL.summary = `Amidst the severed limbs of the defeated arachnid, the scoundrel, grateful yet wary, hands over a cryptic key. "Treasures await within my hidden cache," he smirks. "Take what's yours."`;
-    currentRoom.contents.items.push(CACHE_KEY); 
-    currentRoom.contents.monsters.push(BROODMOTHER); 
-    let addRoom = roomCounter + 10; 
+    currentRoom.contents.items.push(CACHE_KEY);
+    currentRoom.contents.monsters.push(BROODMOTHER);
+    let addRoom = roomCounter + 10;
     let ivanInterval = setInterval(() => {
       if (roomCounter > addRoom) {
         catacombRooms.push(IVANS_CACHE);
@@ -264,7 +280,7 @@ const IVAN_THE_SCOUNDREL = {
   functionTwo: () => {
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
     IVAN_THE_SCOUNDREL.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
-    let addRoom = roomCounter + 5; 
+    let addRoom = roomCounter + 5;
     let ivanInterval = setInterval(() => {
       if (roomCounter > addRoom) {
         catacombRooms.push(
@@ -307,7 +323,7 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   functionTwo: () => {
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
     IVAN_THE_SCOUNDREL_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
-    useConsumable("Ivan's Cache Key"); 
+    useConsumable("Ivan's Cache Key");
     currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
     currentRoom.contents.items.push(
       LAUGHING_COFFIN_COIN,
@@ -364,22 +380,23 @@ const SCHOLAR_HENDRA = {
 const SCHOLAR_HENDRA_EVENT_TWO = {
   name: "Scholar Hendra's Plan",
   eventType: "NPC",
-  description: '',
+  description: "",
   optionOne: "Help",
   optionTwo: "Ignore",
   functionOne: () => {},
   functionTwo: () => {},
 };
 
-
 const SUMMONING_MORGRIMM = {
   name: "Morgrimm the Malignant",
   eventType: "MISC",
-  description: 'Upon entering the summoning chamber, the grimoire hovers hovers from your possesion an opens itself on a pedistal nearby.',
+  description:
+    "Upon entering the summoning chamber, the grimoire hovers hovers from your possesion an opens itself on a pedistal nearby.",
   optionOne: "Read",
   optionTwo: "Refuse",
   functionOne: () => {
-    SUMMONING_MORGRIMM.description = 'You summon Morgrimm and become Fiendsworn.';
+    SUMMONING_MORGRIMM.description =
+      "You summon Morgrimm and become Fiendsworn.";
     // can no longer benefit from Candlelight Shrines
     FIENDSWORN_CULTIST.function();
     // Remove Cursed Grimoire
@@ -389,8 +406,9 @@ const SUMMONING_MORGRIMM = {
     writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
-    SUMMONING_MORGRIMM.description = 'You refuse to summon Morgrimm and become Branded.';
-    // become branded and demons begin to follow you  
+    SUMMONING_MORGRIMM.description =
+      "You refuse to summon Morgrimm and become Branded.";
+    // become branded and demons begin to follow you
     // must fight fiendsworn_cultists
     // Remove Cursed Grimoire
     BRANDED.function();
@@ -413,36 +431,26 @@ const SUMMONING_MORGRIMM = {
 const FORSAKEN_COMMANDER = {
   name: "Forsaken Commander",
   eventType: "NPC",
-  description:
-    "A spectral commander, draped in ethereal sorrow, materializes before you. Its mournful plea echoes through the chamber. Will you heed its desperate entreaty.",
-  optionOne: "Listen",
-  optionTwo: "Ignore",
+  description: `A spectral commander, draped in ethereal sorrow, materializes before you. "Valiant adventurer, my legion walk these depths, bound by an unholy curse. Will you them from the chains of undeath?"`,
+  optionOne: "Accept",
+  optionTwo: "Refuse",
   functionOne: () => {
-    if (attunedItems.includes(WHISPERING_AMULET)) {
-      currentRoom.contents.items.push(RESTLESS_WISP);
-      LEGIONS_GRACE.function(); // Applies Legion's Grace status effect
-      setTimeout(renderRoomSummaryModal, 5000);
-      setRoomSummary();
-      writeToLogEvent(LOG_NPC_OPTION_ONE, "YES", "ONE");
-    } else {
-      currentRoom.contents.monsters.push(
-        SPECTRAL_SOLDIER,
-        SPECTRAL_SOLDIER,
-        FORSAKEN_COMMANDER_STATS
-      );
-      currentRoom.contents.items.push(WRAITHBANE);
-      setRoomSummary();
-      startBattle();
-      writeToLogEvent(LOG_NPC_OPTION_ONE, "YES", "TWO");
-    }
+    currentRoom.contents.items.push(RESTLESS_WISP);
+    currentRoom.contents.items.push(WAR_TORN_BANNER);
+
+    // LEGIONS_GRACE.function(); // Applies Legion's Grace status effect
+
+    setTimeout(renderRoomSummaryModal, 5000);
+    setRoomSummary();
+    writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
     currentRoom.contents.monsters.push(
-      SPECTRAL_SOLDIER,
-      SPECTRAL_SOLDIER,
+      LEGIONNAIRE,
+      LEGIONNAIRE,
       FORSAKEN_COMMANDER_STATS
     );
-    currentRoom.contents.items.push(WRAITHBANE);
+    currentRoom.contents.items.push(AEGIS_OF_THE_FALLEN);
     setRoomSummary();
     startBattle();
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
@@ -452,22 +460,26 @@ const FORSAKEN_COMMANDER = {
 const GRERVIL_THE_BODILESS = {
   name: "Grervil the Bodiless",
   eventType: "NPC",
-  description:
-    "You find a skull sitting atop a stone sarcophagus. Its chattering teeth almost sound like words. Do you approach to hear better?",
-  summary: "", // Outcome depends on choice
-  optionOne: "Approach",
-  optionTwo: "Ignore",
+  description: `Emerging from beneath a pile of bones, the talking skull, Grervil, beckons with ghostly whispers. "Adventurer, take me with you. Help me find my wandering body, and the secrets of the catacomb shall be yours."`,
+  summary: "",
+  optionOne: "Take",
+  optionTwo: "Leave",
   functionOne: () => {
     if (attunedItems.includes(WHISPERING_AMULET)) {
+      GRERVIL_THE_BODILESS.summary =
+        "Grervil the Bodiless joins you on your journey through the catacomb, in search of his wandering body.";
+
       const randomUndeadRoom = findRandomUndeadRoom();
       randomUndeadRoom.contents.monsters.push(GRERVILS_BODY);
+      inventoryItems.push(GRERVILS_HEAD);
 
       grervilsQuestInterval = setInterval(() => {
         if (currentRoom.contents.monsters[0] === GRERVILS_BODY) {
-          currentRoom.description = `You found Grervil's Body while exploring the ${currentRoom.roomName}. Reuniting the skull with its body he gives you a key ring with several keys before running off.`;
+          currentRoom.contents.events = GRERVILS_BODY_EVENT;
           currentRoom.contents.items.push(SKELETON_KEY); // ADD MORE ITEMS FOR REWARD!!!
           playerControlsTimeout(7000);
           useConsumable("Grervil's Head"); // removes item from inventory
+          writeToLogItem(GRERVILS_HEAD, "YES");
 
           setTimeout(() => {
             fadeOutAnimation(monsterContainer);
@@ -478,39 +490,33 @@ const GRERVIL_THE_BODILESS = {
           }, 5000);
 
           setTimeout(setRoomSummary, 7500);
-          // writeToLogEvent(LOG_ROOM, 'YES); FIX THIS !!!!!!
           clearInterval(grervilsQuestInterval);
         }
       }, 3000);
 
-      GRERVIL_THE_BODILESS.summary =
-        "Grervil the Bodiless joins you on your journey within the catacomb, in search of his wandering body.";
-      inventoryItems.push(GRERVILS_HEAD);
-
       setRoomSummary();
       setTimeout(renderRoomSummaryModal, 5000);
-      writeToLogEvent(LOG_NPC_OPTION_ONE, "YES", "ONE");
-    } else {
-      const randomUndeadRoom = findRandomUndeadRoom();
-      randomUndeadRoom.contents.monsters.push(HEADLESS_SKELETON);
-
-      GRERVIL_THE_BODILESS.summary = `Unable to understanding the chattering skull you simply walk away.`;
-
-      setRoomSummary();
-      setTimeout(renderRoomSummaryModal, 5000);
-      writeToLogEvent(LOG_NPC_OPTION_ONE, "YES", "TWO");
+      writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
     }
   },
   functionTwo: () => {
+    GRERVIL_THE_BODILESS.summary = `You refused to aid Grervil find his wandering body, abandoning the talking skull where he was found.`;
+
     const randomUndeadRoom = findRandomUndeadRoom();
     randomUndeadRoom.contents.monsters.push(HEADLESS_SKELETON);
-
-    GRERVIL_THE_BODILESS.summary = `Unable to understanding the chattering skull you simply walk away.`;
 
     setRoomSummary();
     setTimeout(renderRoomSummaryModal, 5000);
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
+};
+
+const GRERVILS_BODY_EVENT = {
+  name: "Grervil's Body Found",
+  eventType: "NPC",
+  description: null,
+  summary: `While exploring the catacomb, you unearthed Grervil's skeletal body. The skeleton gave you a wisp before departing into the catacombs's depths.`,
+  function: () => {},
 };
 
 // const TRADER_BAZRIM = {
@@ -665,19 +671,19 @@ const CRIMSON_COVENANT = {
   name: "Crimson Covenant",
   eventType: "MISC",
   description:
-    "Before you, an altar looms, encircled by hooded figures in blood-stained robes. With chilling devotion, they cut their wrists, offering crimson tributes to the ominous altar. Echoing chants fill the catacomb—a haunting invitation. Will you join their sacrificial ritual at the blood altar?",
+    "Before you sits a lady in white, encircled by hooded figures in blood-stained robes. With chilling devotion, they cut their wrists, offering crimson tributes to her. Echoing chants fill the catacomb—a haunting invitation. Will you join their ritual at the blood altar?",
   summary: "",
   optionOne: "Join",
   optionTwo: "Refuse",
   functionOne: () => {
     if (currentPlayerHealth >= 60) {
       CRIMSON_COVENANT.summary =
-        "You partake in the sacrificial ritual of the Crimson Covenant, spilling your blood on the Blood Alter. Although weakened by the experience you feel a surge of vitality throughout your body.";
-      bloodSacrificed += 50;
+        "You partook in the ritual of the Crimson Covenant, and spilled your blood. Although weakened by the experience you feel a surge of vitality throughout your body.";
+      bloodSacrificed += 10;
 
       switch (crimsonCovenantTracker) {
         case 1:
-          currentRoom.contents.items.push(SACRIFICIAL_BLADE);
+          currentRoom.contents.items.push(RITUAL_BLADE);
           break;
 
         case 2:
@@ -695,13 +701,20 @@ const CRIMSON_COVENANT = {
       damagePlayer(50);
       damageFlashAnimation();
       setRoomSummary();
-      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
+      CRIMSON_COVENANT.summary =
+        "You participated in the ritual, spilling your blood alongside the other members of the Crimson Covenant.";
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "JOIN");
+      setTimeout(renderRoomSummaryModal, 5000);
+    } else {
+      CRIMSON_COVENANT.summary =
+        "You were too weak to participate in the Crimson Covenant's ritual.";
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "LOW HEALTH");
       setTimeout(renderRoomSummaryModal, 5000);
     }
   },
   functionTwo: () => {
     CRIMSON_COVENANT.summary =
-      "You refuse to partake in the sacrificial ritual of the Crimson Covenant.";
+      "You refused to participate in the Crimson Covenant's ritual.";
     setRoomSummary();
     writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
     setTimeout(renderRoomSummaryModal, 5000);
@@ -715,22 +728,29 @@ const CRIMSON_COVENANT = {
 const LOCKED_ROOM = {
   name: "Locked Room",
   eventType: "MISC",
-  description: "You discover a locked room. Do you wish to open it.",
+  description: "You discover a locked room. Do you wish to open it?",
+  summary: "",
   optionOne: "Unlock",
   optionTwo: "Leave",
   functionOne: () => {
     if (inventoryItems.includes(SKELETON_KEY)) {
+      LOCKED_ROOM.summary = "You used a Skeleton Key to unlock the Bonevault.";
       useConsumable("Skeleton Key"); // removes item from inventory
       lockedRoomHandler();
-      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "ONE");
+      setRoomSummary();
+      // Skeleton Key Logs Information
     } else {
-      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "TWO");
+      LOCKED_ROOM.summary = "You didn't have a key to unlock the Bonevault.";
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
       setTimeout(renderRoomSummaryModal, 5000);
+      setRoomSummary();
     }
   },
   functionTwo: () => {
+    LOCKED_ROOM.summary = "You didn't unlock the Bonevault.";
     writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
     setTimeout(renderRoomSummaryModal, 5000);
+    setRoomSummary();
   },
 };
 
@@ -741,31 +761,30 @@ function lockedRoomHandler() {
 
   switch (room) {
     case 0:
-      monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
       break;
 
     case 1:
-      monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, ARMORED_SKELETON);
+      monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
       break;
 
     case 2:
-      monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
+      monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, ARMORED_SKELETON);
       break;
 
     case 3:
-      monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
+      monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
       break;
 
     case 4:
-      monsters.push(ARMORED_SKELETON, BONE_TITAN);
+      monsters.push(BONE_TITAN);
       break;
 
     case 5:
-      monsters.push(BONE_TITAN, BONE_TITAN);
+      monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, BONE_TITAN);
       break;
   }
 
-  items.push(BONE_MARROW_SOUP, POTION, POTION);
+  items.push(MARROWSTONE_CHEESE, CRYPTBREAD, POTION, POTION);
   getItem("BONEVAULT");
   startBattle();
   setRoomSummary();
@@ -784,34 +803,17 @@ function trapEventHandler(baseStat, attribute) {
 
   if (event.eventType === "TRAP") {
     if (randomNumber >= event.passValue) {
-      writeToLogEvent(
-        LOG_TRAP_PASS,
-        "YES",
-        attribute 
-      );
+      writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
       if (event.functionOne) {
         event.functionOne();
       }
     } else {
       if (event === SPIDER_WEB) {
-        writeToLogEvent(
-          LOG_TRAP_FAIL,
-          "YES",
-          attribute, 
-          event.failDamage
-        );
-        console.log(event);
-        console.log(attribute);
-        console.log(event.failDamage);
+        writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
       } else {
         playerHealthBar.value -= event.failDamage;
         currentPlayerHealth -= event.failDamage;
-        writeToLogEvent(
-          LOG_TRAP_FAIL,
-          "YES",
-          attribute, 
-          event.failDamage
-        );
+        writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
       }
       if (event.functionTwo) {
         event.functionTwo();
@@ -826,7 +828,7 @@ function trapEventHandler(baseStat, attribute) {
   setTimeout(() => {
     eventModal.style.display = "none";
   }, 1900);
-  renderRoomSummaryModal(); //Is this needed????!!
+  setTimeout(renderRoomSummaryModal, 5000);
 }
 
 function generalEventHandler(option) {

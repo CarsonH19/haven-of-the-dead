@@ -121,10 +121,15 @@ const LOG_CONSUMABLE = "CONSUMABLE";
 // ===============================
 //       Event Trackers
 // ===============================
+ 
+// Legion's Grace
+let legionTracker = 0;
+let legionAttackBoost = Math.floor(legionTracker/30);
 
-let bloodSacrificed = 0;
+// Crimson Covenant
+let crimsonCovenantBoon = 0;
 let crimsonCovenantTracker = 0;
-let bloodPactTracker = 0;
+// let bloodPactTracker = 0; REMOVE?!?
 
 // ===============================
 //        Hero Variables
@@ -148,19 +153,23 @@ function calculateStrengthBonusHealth() {
 
 function calculatePlayerMaxHealth() {
   let strengthBonusHealth = calculateStrengthBonusHealth();
-  playerMaxHealth = baseHealth + strengthBonusHealth + bloodPactTracker;
+  playerMaxHealth = baseHealth + strengthBonusHealth;
+
+  playerMaxHealth += crimsonCovenantBoon;
 
   // Checks for Diseased Condition
   if (DISEASED.duration !== null) {
     playerMaxHealth = playerMaxHealth * 0.75;
   }
 
+  // Prevents Healing Above Max
   if (currentPlayerHealth > playerMaxHealth) {
     currentPlayerHealth = playerMaxHealth;
     playerHealthBar.value = playerMaxHealth;
     playerHealthBar.max = playerMaxHealth;
   }
 
+  // Sets Max Health at the Start
   if (currentRoom === catacombEntrance) {
     playerHealthBar.max = playerMaxHealth;
     playerHealthBar.value = playerMaxHealth;
@@ -288,27 +297,27 @@ let blackheartBrewTracker;
 //                      Status Effects
 // ==============================================================
 
-// const LEGIONS_GRACE = {
-//   name: "Legion's Grace",
-//   status: `Base Attack increased by 1. The more soldiers laid to rest the greater the legion's grace becomes.`,
-//   duration: null,
-//   function: () => {
-//     let legionTracker = 27;
-//     let attackBoost = 1;
-//     LEGIONS_GRACE.duration = `0 soldiers put to rest`;
-//     setInterval(() => {
-//       LEGIONS_GRACE.duration = `${legionTracker} soldiers put to rest`;
-//       LEGIONS_GRACE.status = `Base Attack increased by ${attackBoost}. The more soldiers laid to rest, the greater the legion's grace becomes.`;
-//       if (legionTracker % 30 === 0) {
-//         statusEffectHandler(LEGIONS_GRACE);
-//         attackBoost++;
-//       }
-//     }, 5000);
+const LEGIONS_GRACE = {
+  name: "Legion's Grace",
+  status: `Base Attack +${legionAttackBoost}.`,
+  duration: null,
+  function: () => {
+    LEGIONS_GRACE.duration = `Legionnaires laid to rest: ${legionTracker}`;
 
-//     statusEffectHandler(LEGIONS_GRACE);
-//     renderStatusEffects(LEGIONS_GRACE);
-//   },
-// };
+    setInterval(() => {
+      LEGIONS_GRACE.duration = `${legionTracker} soldiers put to rest`;
+      LEGIONS_GRACE.status = `Base Attack increased by ${legionAttackBoost}. The more soldiers laid to rest, the greater the legion's grace becomes.`;
+      if (legionTracker % 30 === 0) {
+        attackBoost = Math.floor(legionTracker/30);
+        baseAttack = baseAttack + legionAttackBoost;
+        updatePlayerTrackers();
+      }
+    }, 5000);
+
+    statusEffectHandler(LEGIONS_GRACE);
+    renderStatusEffects(LEGIONS_GRACE);
+  },
+};
 
 // const BLOOD_PACT = {
 //   name: "Blood Pact",
