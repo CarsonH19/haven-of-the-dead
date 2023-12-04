@@ -788,11 +788,12 @@ const RATTLEBONE_WHISTLE = {
     ) {
       let randomNumber = Math.round(Math.random() * 10);
 
-      if (randomNumber >= 5) {
+      if (randomNumber >= 7) {
         fadeOutAnimation(monsterContainer, 0000);
         setTimeout(() => {
-          checkForMonsters();
           monsterContainer.style.display = "none";
+          playerControlsTimeout(2000);
+          checkForMonsters();
         }, 2000);
         writeToLogItem(LOG_ITEM, "YES", RATTLEBONE_WHISTLE);
       }

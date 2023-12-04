@@ -610,7 +610,7 @@ const COFFIN_SPIDER_EVENT = {
 const LAUGHING_COFFIN_EVENT = {
   name: "The Laughing Coffin",
   eventType: "MISC",
-  description: `The Laughing Coffin tavern, sanctuary for underworld denizens. Its creaking sign, carved with a skeletal grin, entices the bold. Amid dim-lit haze, dubious characters eye you, inviting pay to join their revelry. The air, thick with whispered schemes, hints at the consequences of refusing. Pay the toll or risk the ire of its wicked patrons.`,
+  description: `The Laughing Coffin tavern, sanctuary for underworld denizens. Amid dim-lit haze, dubious characters eye you, inviting pay to join their revelry. The air, thick with whispered schemes, hints at the consequences of refusing. Will you pay coin or risk the ire of its wicked patrons.`,
   summary: "",
   optionOne: "Pay",
   optionTwo: "Refuse",
@@ -676,10 +676,10 @@ const CRIMSON_COVENANT = {
   optionOne: "Join",
   optionTwo: "Refuse",
   functionOne: () => {
-    if (currentPlayerHealth >= 60) {
+    if (currentPlayerHealth >= 51) {
       CRIMSON_COVENANT.summary =
         "You partook in the ritual of the Crimson Covenant, and spilled your blood. Although weakened by the experience you feel a surge of vitality throughout your body.";
-      bloodSacrificed += 10;
+      crimsonCovenantBoon += 10;
 
       switch (crimsonCovenantTracker) {
         case 1:

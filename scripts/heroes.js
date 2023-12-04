@@ -212,12 +212,12 @@ function healPlayer(healValue) {
 function healthLowAnimation() {
   if (currentPlayerHealth <= 30) {
     playerHealthBar.classList.add("health-bar-critical");
-    gameWindow.classList.add("flash-low-health");
+    roomImage.classList.add("flash-low-health");
     heartbeatFastLow.volume = 0.3;
     heartbeatFastLow.play();
   } else {
     playerHealthBar.classList.remove("health-bar-critical");
-    gameWindow.classList.remove("flash-low-health");
+    roomImage.classList.remove("flash-low-health");
     heartbeatFastLow.pause();
 
   }

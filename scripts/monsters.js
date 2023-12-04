@@ -482,10 +482,9 @@ function startBattle() {
 }
 
 function checkForMonsters() {
-  // If Skeletal Warrior Adds to Legion Tracker
+  // If Legionnaire Adds to Legion Tracker
   if (
-    currentRoom.contents.monsters[0] === SKELETAL_SOLDIER ||
-    currentRoom.contents.monsters[0] === ARMORED_SKELETON
+    currentRoom.contents.monsters[0] === LEGIONNAIRE
   ) {
     legionTracker++;
   }

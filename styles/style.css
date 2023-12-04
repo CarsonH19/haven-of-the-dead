@@ -723,10 +723,12 @@ progress[value]::-moz-progress-bar {
   background-blend-mode: overlay;  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  width: 60%;
-  min-width: 625px;
-  height: 70%;
-  min-height: 600px;
+  width: 600px;
+  height: 600px;
+  /* min-width: 625px; */
+  /* min-height: 600px; */
+  /* max-width: 1160px;
+  max-height: 847px; */
 }
 
 .inventory-modal-content h2 {
@@ -778,13 +780,13 @@ progress[value]::-moz-progress-bar {
 }
 
 .attuned-box h4 {
-  margin: 1vh;
+  margin: 1vh 1vh 0vh 1vh;
 }
 
 .slots {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   /* border: 1px solid red; */
   margin: 10px;
@@ -820,12 +822,12 @@ progress[value]::-moz-progress-bar {
 }
 
 .magic-items-box h4 {
-  margin: 1vh;
+  margin: 1vh 1vh 0vh 1vh;
 }
 
 .magic-items {
   /* border: 1px solid red; */
-  margin: 10px;
+  margin: 0vh 1vh 1vh 1vh;
   height: 80%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); 
@@ -869,7 +871,7 @@ progress[value]::-moz-progress-bar {
 
 .consumables {
   /* border: 1px solid red; */
-  margin: 10px;
+  margin: 0vh 1vh 1vh 1vh;
   height: 80%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); /* Set the minimum column width to 150px, but allow them to grow */
@@ -887,7 +889,7 @@ progress[value]::-moz-progress-bar {
 }
 
 .consumables-box h4 {
-  margin: 1vh;
+  margin: 1vh 1vh 0vh 1vh;
 }
 
 .item-counter {

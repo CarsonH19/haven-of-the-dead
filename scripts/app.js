@@ -69,6 +69,10 @@ function damageMonster(damage) {
     monsterHealthBar.value = +monsterHealthBar.value - damage;
     currentMonsterHealth -= damage;
   }
+
+  // if (damage > 0) {
+  //   damageFlashAnimation("MONSTER");
+  // }
 }
 
 function dealMonsterDamage(damage) {
@@ -116,7 +120,6 @@ function monsterAttackHandler() {
   }
 
   if (monsterToPlayerDamage > 0) {
-    damageFlashAnimation();
     soundEffectHandler(monster, "MONSTER ATTACK");
     writeToLogMonster(LOG_MONSTER_ATTACK, "NO", monsterToPlayerDamage);
   } else if (monsterToPlayerDamage <= 0) {
@@ -127,7 +130,6 @@ function monsterAttackHandler() {
   damagePlayer(monsterToPlayerDamage);
   monsterAbilityHandler(currentRoom.contents.monsters[0]);
   updatePlayerTrackers();
-  healthLowAnimation();
 }
 
 function dealPlayerDamage(damage) {
@@ -154,11 +156,10 @@ function damagePlayer(damage) {
   }
 
   if (damage > 0) {
-    damageFlashAnimation();
+    damageFlashAnimation("PLAYER");
   }
 
   showDamage(damage, "MONSTER");
-  damageFlashAnimation();
   healthLowAnimation();
 }
 
@@ -626,12 +627,26 @@ function newRoomAnimation() {
   }, 2000);
 }
 
-function damageFlashAnimation() {
-  gameWindow.classList.add("flash");
+function damageFlashAnimation(target) {
 
-  setTimeout(() => {
-    gameWindow.classList.remove("flash"); // Remove the class after the animation is complete
-  }, 500); // Adjust this timing to match the animation duration
+  switch (target) {
+    case "PLAYER":
+      roomImage.classList.add("flash");
+
+      setTimeout(() => {
+        roomImage.classList.remove("flash");
+      }, 1000);
+      break;
+
+    // case "MONSTER":
+    //   monsterContainer.classList.add("flash");
+
+    //   setTimeout(() => {
+    //     monsterContainer.classList.remove("flash");
+    //   }, 500);
+    //   break; 
+  }
+   
 }
 
 // ===============================
