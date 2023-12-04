@@ -779,11 +779,15 @@ const WAR_TORN_BANNER = {
   name: "War Torn Banner",
   description: "",
   type: "MAGIC",
-  rarity: "Rare",
-  effect: "While attuned to this item, the Forsaken Commander's legion will rise to battle you.",
+  rarity: "Epic",
+  effect: "While attuned to this item, Legion's Grace will be active. However, undead legionnaires will seek you.",
   function: () => {
+    LEGIONS_GRACE.function();
     writeToLogItem(LOG_ITEM, "YES", WAR_TORN_BANNER);
   },
+  unequip: () => {
+    LEGIONS_GRACE.duration = null;
+  }
 };
 
 const CURSED_GRIMOIRE = {
@@ -833,6 +837,7 @@ const GRERVILS_HEAD = {
 const POTION = {
   name: "Health Potion",
   description: "A small bottle of glowing red liquid.",
+  image: "styles/images/items/potion.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
   effect: "Restores 20 health points and can be used during combat.",
@@ -845,6 +850,7 @@ const POTION = {
 const CRYPTBREAD = {
   name: "Cryptbread",
   description: "",
+  image: "styles/images/items/cryptbread.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
   logDetail: "EAT",
@@ -858,6 +864,7 @@ const CRYPTBREAD = {
 const BONE_MARROW_SOUP = {
   name: "Bone Marrow Soup",
   description: "",
+  image: "styles/images/items/bonemarrow-soup.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
   logDetail: "DRINK",
@@ -871,6 +878,7 @@ const BONE_MARROW_SOUP = {
 const MARROWSTONE_CHEESE = {
   name: "Marrowstone Cheese",
   description: "",
+  image: "styles/images/items/marrowstone-cheese.jpg",
   type: "CONSUMABLE",
   rarity: "Rare",
   logDetail: "EAT",
@@ -884,6 +892,7 @@ const MARROWSTONE_CHEESE = {
 const TOMBSTONE_TRUFFLE = {
   name: "Tombstone Truffle",
   description: "",
+  image: "styles/images/items/tombstone-truffle.jpg",
   type: "CONSUMABLE",
   rarity: "Rare",
   logDetail: "EAT",
@@ -923,6 +932,7 @@ const SPIDER_EGG_YOLK = {
 const LICHROOT = {
   name: "Lichroot",
   description: "",
+  image: "styles/images/items/lichroot.jpg",
   type: "CONSUMABLE",
   rarity: "Rare",
   logDetail: "EAT",
@@ -1070,6 +1080,7 @@ const GRAVEBLOOM = {
 const LESSER_SOULSTONE = {
   name: "Lesser Soulstone",
   description: "",
+  image: "styles/images/items/soulstone.jpg",
   soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
   rarity: "Common",
@@ -1083,6 +1094,7 @@ const LESSER_SOULSTONE = {
 const GREATER_SOULSTONE = {
   name: "Greater Soulstone",
   description: "",
+  image: "styles/images/items/soulstone.jpg",
   soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
   rarity: "Rare",
@@ -1096,6 +1108,7 @@ const GREATER_SOULSTONE = {
 const BLACKHEART_BREW = {
   name: "Blackheart Brew",
   description: "A favored drink of the scoundrels at the Laughing Coffin.",
+  image: "styles/images/items/balckheart-brew.jpg",
   type: "CONSUMABLE",
   rarity: "Rare",
   logDetail: "DRINK",
@@ -1291,6 +1304,7 @@ const SOULFLAME_CANDLE = {
 const GUIDING_LIGHT = {
   name: "Guiding Light",
   description: "",
+  image: "styles/images/items/guiding-light.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Common",
@@ -1343,6 +1357,7 @@ const GUIDING_LIGHT = {
 const ROWDY_WISP = {
   name: "Rowdy Wisp",
   description: "",
+  image: "styles/images/items/rowdy-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Rare",
@@ -1382,6 +1397,7 @@ const ROWDY_WISP = {
 const UNHOLY_WISP = {
   name: "Unholy Wisp",
   description: "",
+  image: "styles/images/items/unholy-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Rare",
@@ -1421,6 +1437,7 @@ const UNHOLY_WISP = {
 const RESTLESS_WISP = {
   name: "Restless Wisp",
   description: "",
+  image: "styles/images/items/restless-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Rare",
@@ -2143,8 +2160,14 @@ function renderInventory() {
       }
 
       const itemButton = document.createElement("button");
-      itemButton.textContent = itemName;
       itemButton.setAttribute("id", itemName);
+
+      if (inventoryItems[i].image) {
+        itemButton.style.backgroundImage = `url('${inventoryItems[i].image}')`;
+        itemButton.style.backgroundSize = "cover";
+      } else {
+        itemButton.textContent = itemName;
+      }
 
       tooltipText.appendChild(tooltipTextName);
       tooltipText.appendChild(tooltipTextRarity);

@@ -305,8 +305,8 @@ const LEGIONS_GRACE = {
     LEGIONS_GRACE.duration = `Legionnaires laid to rest: ${legionTracker}`;
 
     setInterval(() => {
-      LEGIONS_GRACE.duration = `${legionTracker} soldiers put to rest`;
-      LEGIONS_GRACE.status = `Base Attack increased by ${legionAttackBoost}. The more soldiers laid to rest, the greater the legion's grace becomes.`;
+      LEGIONS_GRACE.duration = `${legionTracker} Legionnaires defeated`;
+      LEGIONS_GRACE.status = `Base Attack increased by ${legionAttackBoost}. The more Legionnaires laid to rest, the greater the Legion's Grace becomes.`;
       if (legionTracker % 30 === 0) {
         attackBoost = Math.floor(legionTracker/30);
         baseAttack = baseAttack + legionAttackBoost;
