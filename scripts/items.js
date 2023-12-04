@@ -109,6 +109,7 @@ const EVERTORCH = {
   name: "Evertorch",
   description:
     "This torch emits an ethereal luminescent glow in the presence of danger.",
+  image: "styles/images/items/evertorch.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect:
@@ -151,6 +152,7 @@ const GRAVEROBBERS_SPADE = {
 const CHARM_OF_HEALING = {
   name: "Charm of Healing",
   description: "",
+  image: "styles/images/items/charm-of-healing.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect:
@@ -163,6 +165,7 @@ const CHARM_OF_HEALING = {
 const RING_OF_SKITTERING = {
   name: "Ring of Skittering",
   description: "",
+  image: "styles/images/items/skittering-ring.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect:
@@ -203,6 +206,7 @@ const TITANS_FEMUR = {
 const HOLY_RELIC = {
   name: "Holy Relic",
   description: "",
+  image: "styles/images/items/holy-relic.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect: "While attuned to this item your faith increases by 1.",
@@ -217,6 +221,7 @@ const HOLY_RELIC = {
 const RITUAL_BLADE = {
   name: "Ritual Blade",
   description: "",
+  image: "styles/images/items/ritual-blade.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect:
@@ -332,6 +337,7 @@ const WRAITHBANE = {
 const SUNSTONE = {
   name: "Sunstone",
   description: "",
+  image: "styles/images/items/sunstone.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:
@@ -349,6 +355,7 @@ const SUNSTONE = {
 const WHISPERING_AMULET = {
   name: "Whispering Amulet",
   description: "",
+  image: "styles/images/items/whispering-amulet.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:
@@ -408,6 +415,7 @@ const REVENANTS_RAGE = {
 const LAUGHING_COFFIN_COIN = {
   name: "Laughing Coffin Coin",
   description: "",
+  image: "styles/images/items/laughing-coffin-coin.jpg",
   soundEffect: coinFlipLand,
   type: "MISC",
   rarity: "Rare",
@@ -540,6 +548,7 @@ const FANGWEAVE_ARMOR = {
 const SKELETON_KEY = {
   name: "Skeleton Key",
   description: "",
+  image: "styles/images/items/skeleton-key.jpg",
   soundEffect: skeletonKeyIn2,
   type: "MISC",
   rarity: "Rare",
@@ -722,6 +731,7 @@ const BONEMAIL = {
 const RIBCAGE_DEFENDER = {
   name: "Ribcage Defender",
   description: "",
+  image: "styles/images/items/ribcage-defender.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item your max health is increased by 30HP.",
@@ -1007,6 +1017,7 @@ const ROTBANE_FERN = {
 const WITCHFIRE_ORCHID = {
   name: "Witchfire Orchid",
   description: "",
+  image: "styles/images/items/witchfire-orchid.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
   logDetail: "EAT",
@@ -1035,6 +1046,7 @@ const WITCHFIRE_ORCHID = {
 const EMBERTHAW_PETAL = {
   name: "Emberthaw Petal",
   description: "",
+  image: "styles/images/items/emberthaw-petal.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
   logDetail: "EAT",
@@ -1061,6 +1073,7 @@ const EMBERTHAW_PETAL = {
 const GHOSTLIGHT_LILY = {
   name: "Ghostlight Lily",
   description: "",
+  image: "styles/images/items/ghostlight-lily.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
   logDetail: "EAT",
@@ -1086,6 +1099,7 @@ const GHOSTLIGHT_LILY = {
 const GRAVEBLOOM = {
   name: "Gravebloom",
   description: "",
+  image: "styles/images/items/gravebloom.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
   logDetail: "EAT",
@@ -1178,6 +1192,7 @@ const BLACKHEART_BREW = {
 const WARDING_CANDLE = {
   name: "Warding Candle",
   description: "",
+  image: "styles/images/items/warding-candle.jpg",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "Rare",
@@ -1215,6 +1230,7 @@ const WARDING_CANDLE = {
 const SOOTHING_CANDLE = {
   name: "Soothing Candle",
   description: "",
+  image: "styles/images/items/soothing-candle.jpg",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "Common",
@@ -1252,6 +1268,7 @@ const SOOTHING_CANDLE = {
 const FLICKERING_CANDLE = {
   name: "Flickering Candle",
   description: "",
+  image: "styles/images/items/flickering-candle.jpg",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "Common",
@@ -1278,6 +1295,7 @@ const FLICKERING_CANDLE = {
 const BLAZING_CANDLE = {
   name: "Blazing Candle",
   description: "",
+  image: "styles/images/items/blazing-candle.jpg",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "Epic",
@@ -1304,6 +1322,7 @@ const BLAZING_CANDLE = {
 const SOULFLAME_CANDLE = {
   name: "Soulflame Candle",
   description: "",
+  image: "styles/images/items/soulflame-candle.jpg",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "Epic",
