@@ -1330,7 +1330,7 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `The spirit kneels at your feet and then vanishes.`;
       } else if (dataOne === CRIMSON_OFFERING) {
         newEntry.textContent = `You make an offering you the Crimson Covenant.`;
-      } else if (dataOne === RATTLEBONE_CHARM) {
+      } else if (dataOne === RATTLEBONE_WHISTLE) {
         newEntry.textContent = `The Rattlebone Charm induces fear in your attacker, casusing them to flee in terror.`;
       } else if (dataOne === GRERVILS_HEAD) {
         newEntry.textContent = `"Keep searching! My body must be around here somewhere!"`;

@@ -472,7 +472,7 @@ function startBattle() {
     statusEffectHandler(WARDING_CANDLE);
 
     // ITEM: Rattlebone Charm - Chance for humanoids to flee.
-    isItemAttuned(RATTLEBONE_CHARM);
+    isItemAttuned(RATTLEBONE_WHISTLE);
 
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
     isItemAttuned(ETHEREAL_CROWN);

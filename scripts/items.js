@@ -3,66 +3,94 @@
 // ===============================
 
 // Common Items
-// - Evertorch
-// - Flask of Light
+// - *Evertorch
+// - *Flask of Light
 // - Graverobber's Spade - Graverobber Earver
-// - Charm of Healing
+// - *Charm of Healing
 // - Shadowstep Boots
-// - Titan's Gauntlets
+// - *Ring of Skittering
+// - Titan's Femur
 // - Holy Relic
+// - *Ritual Blade - Crimson Covenant
 
 // Rare Items
 // - Mist Veil Cloak
-// - Bloodstone
+// - Bloodstone - Crimson Covenant
 // - Wraithbane
-// - Sunstone
+// - *Sunstone
 // - Whispering Amulet
 // - Cursed Mirror
 // - Revenant's Rage
-// - Laughing Coffin Coin
-// - Plagueward Charm
+// - Plagueward Pendant
+// - Ghostshroud Talisman
+// - Toxinweave Mask
+// - Silkstriders
+// - Chillbreaker Band
+// - Berserker Pauldrons
+// - Tome of Devotion
+// - Bracelet of the Serpent
+// - Fangweave Armor
+// - Soulreaver
 
 // Epic Items
 // - Ethereal Crown - Graverobber Earver Event Three
-// - Soulreaver
 // - Soul Jar
-// - Crimson Offering
+// - Crimson Offering - Crimson Covenant
+// - Darkguard Trinket
+// - Hallowed Hourglass
+// - Aegis of the Fallen - Forsaken Commander
+// - War Torn Banner - Forsaken Commander
 
-// Quest Items
-// - Cursed Grimoire - Scholar Hendra
-// - Cache Key - Ivan the Scoundrel
-// - Grervil's Head
+// Bonevault Items
+// - Bonemail
+// - *Ribcage Defender
+// - Skull Crusher Helm
+// - Bonechill Amulet
+// - Rattlebone Whistle
+// - Spine of the Necromancer
 
 // ===============================
 //          CONSUMABLES
 // ===============================
 
-// Food & Drink
-// - Potion
-// - Cryptbread
-// - Bone Marrow Soup
-// - Marrowstone Cheese
-// - Tombestone Truffle
+// Consumables
+// - *Potion
+// - *Cryptbread
+// - *Bone Marrow Soup
+// - *Tombstone Truffle
 // - Spider Egg Yolk
-
-//  Misc. Consumables
-// - Lichroot
+// - *Lichroot
+// - *Rotbane Fern
+// - *Witchfire Orchid
+// - *Emberthaw Petal
+// - *Ghostlitght Lily
+// - *Gravebloom
 // - Lesser Soulstone
-// - Greater Soulstone
-// - Blackheart Brew
+// - *Greater Soulstone
+// - *Blackheart Brew
+
+// Misc Items
+// *Laughing Coffin Coin
+// *Skeleton Key
+
+// Quest Items
+// - Cursed Grimoire - Scholar Hendra
+// - Cache Key - Ivan the Scoundrel
+// - Grervil's Head - Grervil the Bodiless
 
 // Candles
-// - Warding Candle
-// - Soothing Candle
-// - Flickering Candle
-// - Blazing Candle
-// - Soulflame Candle
+// - *Warding Candle
+// - *Soothing Candle
+// - *Flickering Candle
+// - *Blazing Candle
+// - *Soulflame Candle
 
 // Wisps
-// Guiding Light
-// Rowdy Wisp
-// Unholy Wisp
-// Restless Wisp
+// - *Guiding Light
+// - *Rowdy Wisp
+// - *Unholy Wisp
+// - *Restless Wisp
+// - *Wicked Wisp
 
 // ===============================
 //        COMMON ITEMS
@@ -158,8 +186,8 @@ const SHADOWSTEP_BOOTS = {
   },
 };
 
-const TITANS_GAUNTLETS = {
-  name: "Titan's Gauntlets",
+const TITANS_FEMUR = {
+  name: "Titan's Femur",
   description: "",
   type: "MAGIC",
   rarity: "Common",
@@ -327,13 +355,18 @@ const WHISPERING_AMULET = {
     "While attuned to this item you can communicate with some undead creatures.",
   function: () => {
     // Adds Grervil's Room While Wearing
-    console.log('CALLED');
+    console.log("CALLED");
     // catacombRooms.push(SKULL_CHAMBER);
   },
   unequip: () => {
     // Removes Grervil's Room When Unequipped
-    let indexToRemove = catacombRooms.findIndex(room => room.roomName === "Skull-filled Chamber");
-    catacombRooms = [...catacombRooms.slice(0, indexToRemove), ...catacombRooms.slice(indexToRemove + 1)];
+    let indexToRemove = catacombRooms.findIndex(
+      (room) => room.roomName === "Skull-filled Chamber"
+    );
+    catacombRooms = [
+      ...catacombRooms.slice(0, indexToRemove),
+      ...catacombRooms.slice(indexToRemove + 1),
+    ];
   },
 };
 
@@ -652,6 +685,22 @@ const AEGIS_OF_THE_FALLEN = {
   },
 };
 
+const WAR_TORN_BANNER = {
+  name: "War Torn Banner",
+  description: "",
+  type: "MAGIC",
+  rarity: "Epic",
+  effect:
+    "While attuned to this item, Legion's Grace will be active. However, undead legionnaires will seek you.",
+  function: () => {
+    LEGIONS_GRACE.function();
+    writeToLogItem(LOG_ITEM, "YES", WAR_TORN_BANNER);
+  },
+  unequip: () => {
+    LEGIONS_GRACE.duration = null;
+  },
+};
+
 // ===============================
 //       LOCKED ROOM ITEMS
 // ===============================
@@ -715,11 +764,11 @@ const BONECHILL_AMULET = {
   },
 };
 
-const RATTLEBONE_CHARM = {
-  name: "Rattlebone Charm",
+const RATTLEBONE_WHISTLE = {
+  name: "Rattlebone Whistle",
   description: "",
   type: "MAGIC",
-  rarity: "Common",
+  rarity: "Rare",
   effect:
     "While attuned to this item there is a chance that humans will flee from you.",
   function: () => {
@@ -735,7 +784,7 @@ const RATTLEBONE_CHARM = {
           checkForMonsters();
           monsterContainer.style.display = "none";
         }, 2000);
-        writeToLogItem(LOG_ITEM, "YES", RATTLEBONE_CHARM);
+        writeToLogItem(LOG_ITEM, "YES", RATTLEBONE_WHISTLE);
       }
     }
   },
@@ -774,21 +823,6 @@ const SPINE_OF_THE_NECROMANCER = {
 //     effect:
 //     function:
 //  }
-
-const WAR_TORN_BANNER = {
-  name: "War Torn Banner",
-  description: "",
-  type: "MAGIC",
-  rarity: "Epic",
-  effect: "While attuned to this item, Legion's Grace will be active. However, undead legionnaires will seek you.",
-  function: () => {
-    LEGIONS_GRACE.function();
-    writeToLogItem(LOG_ITEM, "YES", WAR_TORN_BANNER);
-  },
-  unequip: () => {
-    LEGIONS_GRACE.duration = null;
-  }
-};
 
 const CURSED_GRIMOIRE = {
   name: "Cursed Grimoire",
@@ -1450,8 +1484,8 @@ const RESTLESS_WISP = {
     let randomNumber = Math.round(Math.random() * 5) + 1;
     let wispDuration = roomCounter + randomNumber;
     RESTLESS_WISP.duration = "Searching";
-    
-    // Clear room if player fleed in the past 
+
+    // Clear room if player fleed in the past
     LOST_LEGIONS_VALE.contents.monsters = [];
 
     // Check if War Torn Banner is equipped
@@ -1533,7 +1567,7 @@ let bonevaultItems = [
   RIBCAGE_DEFENDER,
   SKULLCRUSHER_HELM,
   BONECHILL_AMULET,
-  RATTLEBONE_CHARM,
+  RATTLEBONE_WHISTLE,
   SPINE_OF_THE_NECROMANCER,
 ];
 
@@ -1544,7 +1578,7 @@ let beastRareLoot = [PLAGUEWARD_PENDANT, FANGWEAVE_ARMOR];
 let humanoidCommonLoot = [
   FLASK_OF_LIGHT,
   SHADOWSTEP_BOOTS,
-  TITANS_GAUNTLETS,
+  TITANS_FEMUR,
   SILKSTRIDERS,
 ];
 
@@ -1557,12 +1591,7 @@ let humanoidRareLoot = [
   TOXINWEAVE_MASK,
 ];
 
-let undeadCommonLoot = [
-  EVERTORCH,
-  HOLY_RELIC,
-  TITANS_GAUNTLETS,
-  CHARM_OF_HEALING,
-];
+let undeadCommonLoot = [EVERTORCH, HOLY_RELIC, TITANS_FEMUR, CHARM_OF_HEALING];
 
 let undeadRareLoot = [
   GHOSTSHROUD_TALISMAN,
@@ -1582,7 +1611,7 @@ let commonItems = [
   SOOTHING_CANDLE,
   FLICKERING_CANDLE,
   SHADOWSTEP_BOOTS,
-  TITANS_GAUNTLETS,
+  TITANS_FEMUR,
   HOLY_RELIC,
 ];
 
@@ -1795,7 +1824,6 @@ function lootItems(lootGroup) {
     let lootConsumableChance = Math.round(Math.random() * 100);
     lootConsumableChance += baseFaith * 2;
 
-
     // ITEM: Graverobber's Spade - Increase item find chance by 10%
     lootItemChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
     lootConsumableChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
@@ -1829,7 +1857,6 @@ function lootItems(lootGroup) {
       default:
         break;
     }
-
 
     // Loot Items
     if (lootItemChance > 95 && rareLoot.length > 0) {
@@ -2165,6 +2192,7 @@ function renderInventory() {
       if (inventoryItems[i].image) {
         itemButton.style.backgroundImage = `url('${inventoryItems[i].image}')`;
         itemButton.style.backgroundSize = "cover";
+        itemButton.style.color = "lightgrey";
       } else {
         itemButton.textContent = itemName;
       }
@@ -2205,8 +2233,15 @@ function renderInventory() {
     itemBox.classList.add("itemTooltip");
 
     const itemButton = document.createElement("button");
-    itemButton.textContent = attunedItems[i].name;
     itemButton.setAttribute("id", attunedItems[i].name);
+
+    if (inventoryItems[i].image) {
+      itemButton.style.backgroundImage = `url('${attunedItems[i].image}')`;
+      itemButton.style.backgroundSize = "cover";
+      itemButton.style.color = "lightgrey";
+    } else {
+      itemButton.textContent = attunedItems[i].name;
+    }
 
     const tooltipText = document.createElement("ul");
     tooltipText.classList.add("tooltipText");
