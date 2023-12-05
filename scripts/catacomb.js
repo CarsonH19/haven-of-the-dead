@@ -477,10 +477,10 @@ let tierTwoRooms = [
     description:
       "The Vile Cavern emanates an eerie green glow, casting twisted shadows. Gnawers prowl in the half-light, their hunger almost tangible in this vile expanse.",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/vile-cavern.jpg",
     music: null,
     contents: {
-      monsters: [GNAWER, GNAWER, GNAWER],
+      monsters: [GNAWER, GNAWER, GNAWER, GNAWER],
       items: [],
       events: null,
     },
@@ -490,7 +490,7 @@ let tierTwoRooms = [
     description:
       "The Darkened Fane, a solemn sanctuary veiled in shadow, echoes with the whispers of unseen shades. The air is charged with a spectral energy as shades drift silently, haunting the sacred space with their ethereal presence.",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/darkened-fane.jpg",
     music: null,
     contents: {
       monsters: [SHADE, SHADE, SHADE],
@@ -547,7 +547,7 @@ let tierTwoRooms = [
     description:
       "Gravemist Hall, veiled in a perpetual fog, echoes with the melancholic echoes of the deceased. Shadows dance among gravestones as a lone shade guards the entrance, its eyes gleaming with spectral vigilance.",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/gravemist-hall.jpg",
     music: null,
     contents: {
       monsters: [HAUNTING_SPIRIT],
@@ -560,7 +560,7 @@ let tierTwoRooms = [
     description:
       "Skullshade Sanctum exudes an ominous aura. Shades, skeletal soldiers, and the clinking of bone armor create an unholy symphony. The air is thick with the whispers of the fallen, warning intruders of impending doom.",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/skullshade-sanctum.jpg",
     music: null,
     contents: {
       monsters: [SHADE, SKELETAL_SOLDIER, SHADE, SKELETAL_SOLDIER],
@@ -642,7 +642,7 @@ let tierTwoRooms = [
     description:
       "In the Haunted Hallow, haunting spirits materialize, their ghostly forms flickering in the dim light. The air is charged with otherworldly energy, as the ethereal inhabitants silently observe intruders.",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/haunted-hallow.jpg",
     music: null,
     contents: {
       monsters: [HAUNTING_SPIRIT, HAUNTING_SPIRIT],
@@ -958,7 +958,7 @@ const GRAVEROBBER_EARVER_ROOM_TWO = {
   roomName: "Gilded Sarcophagus",
   description: "A large stone sarcophagus.",
   summary: "",
-  backgroundImage: "",
+  backgroundImage: "styles/images/backgrounds/event-rooms/graverobber-earver-2.jpg",
   music: imminentDarkness,
   contents: {
     monsters: [],
