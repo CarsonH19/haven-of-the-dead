@@ -26,10 +26,6 @@ function setPaladinStats() {
   baseDexterity = paladin.dexterity;
   baseFaith = paladin.faith;
   specialAbility = paladin.special;
-
-  criticalDamage = calculateCritDamage();
-  strengthBonusHealth = calculateStrengthBonusHealth();
-  playerMaxHealth = calculatePlayerMaxHealth();
 }
 
 function paladinHolySmite() {
@@ -77,10 +73,6 @@ function setRogueStats() {
   baseDexterity = rogue.dexterity;
   baseFaith = rogue.faith;
   specialAbility = rogue.special;
-
-  criticalDamage = calculateCritDamage();
-  strengthBonusHealth = calculateStrengthBonusHealth();
-  playerMaxHealth = calculatePlayerMaxHealth();
 }
 
 function rogueShadowStrike() {
@@ -168,10 +160,6 @@ function setPriestessStats() {
   baseDexterity = priestess.dexterity;
   baseFaith = priestess.faith;
   specialAbility = priestess.special;
-
-  criticalDamage = calculateCritDamage();
-  strengthBonusHealth = calculateStrengthBonusHealth();
-  playerMaxHealth = calculatePlayerMaxHealth();
 }
 
 function priestessGreaterPrayer() {
@@ -182,15 +170,17 @@ function priestessGreaterPrayer() {
 
 // See dealPlayerDamage for Priestess Passive Ability
 
-function setStatsHandler() {
-  if (heroChoice === "PALADIN") {
-    setPaladinStats();
-  } else if (heroChoice === "ROGUE") {
-    setRogueStats();
-  } else if (heroChoice === "PRIESTESS") {
-    setPriestessStats();
-  }
-}
+// function setPlayerStats() {
+//   if (heroChoice === "PALADIN") {
+//     setPaladinStats();
+//   } else if (heroChoice === "ROGUE") {
+//     setRogueStats();
+//   } else if (heroChoice === "PRIESTESS") {
+//     setPriestessStats();
+//   }
+
+//   updateStats("ALL");
+// }
 
 // ===============================
 //             Health
@@ -446,9 +436,9 @@ function renderHeroStatsModal() {
   let heroStatsStrength = document.getElementById("heroStatsStrength");
   heroStatsStrength.textContent = baseStrength;
   const heroBonusHealth = document.getElementById("heroBonusHealth");
-  heroBonusHealth.textContent = `+${strengthBonusHealth}`;
+  heroBonusHealth.textContent = `+${baseStrength * 10}`;
   const heroCritHitDamage = document.getElementById("heroCritHitDamage");
-  let heroCritDamageMod = calculateBaseCritModifier() * 100;
+  let heroCritDamageMod = calculateCritDamageModifier() * 100;
   heroCritHitDamage.textContent = `${heroCritDamageMod}%`;
   // Dexterity
   let heroStatsDexterity = document.getElementById("heroStatsDexterity");

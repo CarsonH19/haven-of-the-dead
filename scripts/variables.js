@@ -25,6 +25,8 @@ let potionCounter = 3;
 const potions = document.getElementById("potionCount");
 potions.textContent = ` x ${potionCounter}`;
 
+let criticalHit;
+
 // ===============================
 //         Game Window
 // ===============================
@@ -70,6 +72,166 @@ const eventButtonTwo = document.getElementById("eventButtonTwo");
 
 const heroChoiceModal = document.getElementById("heroChoiceModal");
 
+// =============================== 
+//           STRENGTH
+// ===============================
+let baseStrength;
+
+// Max Health // +10 per Str
+let baseHealth;
+let playerMaxHealth;
+
+function calculatePlayerMaxHealth() {
+  let strengthBonusHealth = baseStrength * 10;
+  playerMaxHealth = baseHealth + strengthBonusHealth;
+  playerMaxHealth += crimsonCovenantBoon;
+
+  // Checks for Diseased Condition
+  if (DISEASED.duration !== null) {
+    playerMaxHealth = playerMaxHealth * 0.75;
+  }
+  // Prevents Healing Above Max
+  if (currentPlayerHealth > playerMaxHealth) {
+    currentPlayerHealth = playerMaxHealth;
+    playerHealthBar.value = playerMaxHealth;
+    playerHealthBar.max = playerMaxHealth;
+  }
+  // Sets Max Health at the Start
+  if (currentRoom === catacombEntrance) {
+    playerHealthBar.max = playerMaxHealth;
+    playerHealthBar.value = playerMaxHealth;
+    currentPlayerHealth = playerMaxHealth;
+  } else {
+    playerHealthBar.max = playerMaxHealth;
+  }
+
+  return playerMaxHealth;
+}
+
+// Critical Hit Damage // x0.3 per Str
+let critDamageModifier;
+
+function calculateCritDamageModifier() {
+  critDamageModifier = 1.5 + (baseStrength * 0.3);
+  return critDamageModifier;
+}
+
+// ===============================
+//           DEXTERITY
+// ===============================
+let baseDexterity;
+
+// Crit Hit Chance // +5% per Dex
+let critHitChance;
+
+function calculateCritHitChance() {
+  critHitChance = baseDexterity;
+  return critHitChance;
+}
+
+// Guard Bonus // +1 Damage Avoided Per Dex
+let guardBonus;
+
+function calculateGuardBonus() {
+  guardBonus = baseDexterity;
+  return guardBonus;
+}
+
+// Flee Chance // +5% per Dex
+let  fleeChance;
+
+function calculateFleeChance() {
+  fleeChance = baseDexterity; 
+  return fleeChance;
+}
+
+
+
+// ===============================
+//            FAITH
+// ===============================
+let baseFaith;
+
+// Item Find Chance
+let itemFindChance;
+
+function calculateItemFindChance() {
+  itemFindChance = baseFaith * 5;
+  isItemAttuned(GRAVEROBBERS_SPADE);
+
+  return itemFindChance;
+}
+
+// Experience Modifier
+let experienceModifier;
+function calculateExperienceModifier() {
+  experienceModifier = baseFaith * 0.2;
+  return experienceModifier;
+}
+
+
+// ===============================
+//            STATS
+// ===============================
+
+let attunedItems = [];
+
+function updateStats(stat, number = 0) {
+
+  switch (stat) {
+    case "STRENGTH":
+      baseStrength = baseStrength + number;
+
+      if (baseStrength < 0) {
+        baseStrength = 0;
+      }
+
+      playerMaxHealth = calculatePlayerMaxHealth();
+      critDamageModifier = calculateCritDamageModifier();
+      break;
+
+    case "DEXTERITY":
+      baseDexterity = baseDexterity + number;
+
+      if (baseDexterity < 0) {
+        baseDexterity = 0;
+      }
+
+      critHitChance = calculateCritHitChance()
+      guardBonus = calculateGuardBonus()
+      fleeChance = calculateFleeChance();
+      break;
+
+    case "FAITH":
+      baseFaith = baseFaith + number;
+
+      if (baseFaith < 0) {
+        baseFaith = 0;
+      }
+
+      findItemChance = calculateItemFindChance();
+      experienceModifier = calculateExperienceModifier();
+      break;
+
+    case "ALL":
+      updateStats("STRENGTH");
+      updateStats("DEXTERITY");
+      updateStats("FAITH");
+      break;
+  }
+
+  updatePlayerTrackers();
+}
+
+function applyItemStatChanges() {
+  for (let i = 0; i < attunedItems.length; i++) {
+    if (attunedItems[i].unequip) {
+      attunedItems[i].function();
+      console.log("CALLED");
+    }
+  }
+}
+
 // ===============================
 //        Log Variables
 // ===============================
@@ -85,7 +247,7 @@ const LOG_PLAYER_ATTACK = "PLAYER_ATTACK";
 const LOG_PLAYER_MISS = "PLAYER MISS";
 const LOG_PLAYER_CRITICAL = "PLAYER CRITICAL ATTACK";
 const LOG_GUARD = "GUARD";
-const LOG_GUARD_FAIL = "GAURD FAIL";
+const LOG_GUARD_FAIL = "GUARD FAIL";
 const LOG_POTION = "POTION";
 const LOG_FLEE = "FLEE";
 const LOG_LEVEL = "LEVEL UP";
@@ -137,73 +299,8 @@ let crimsonCovenantTracker = 0;
 
 let heroChoice;
 let baseAttack;
-let baseHealth;
 let potionHealValue = 20;
 let specialCooldownCounter = 0;
-let criticalHitChance;
-
-// Strength
-let baseStrength;
-let strengthBonusHealth = calculateStrengthBonusHealth();
-let playerMaxHealth = baseHealth + calculateStrengthBonusHealth();
-
-function calculateStrengthBonusHealth() {
-  return baseStrength * 10;
-}
-
-function calculatePlayerMaxHealth() {
-  let strengthBonusHealth = calculateStrengthBonusHealth();
-  playerMaxHealth = baseHealth + strengthBonusHealth;
-
-  playerMaxHealth += crimsonCovenantBoon;
-
-  // Checks for Diseased Condition
-  if (DISEASED.duration !== null) {
-    playerMaxHealth = playerMaxHealth * 0.75;
-  }
-
-  // Prevents Healing Above Max
-  if (currentPlayerHealth > playerMaxHealth) {
-    currentPlayerHealth = playerMaxHealth;
-    playerHealthBar.value = playerMaxHealth;
-    playerHealthBar.max = playerMaxHealth;
-  }
-
-  // Sets Max Health at the Start
-  if (currentRoom === catacombEntrance) {
-    playerHealthBar.max = playerMaxHealth;
-    playerHealthBar.value = playerMaxHealth;
-    currentPlayerHealth = playerMaxHealth;
-  } else {
-    playerHealthBar.max = playerMaxHealth;
-  }
-
-  return playerMaxHealth;
-}
-
-let strengthCritIncrease = calculateStrCritIncrease();
-let baseCritModifier = 1.5 + calculateBaseCritModifier();
-let criticalDamage;
-
-function calculateStrCritIncrease() {
-  return 0.3 * baseStrength;
-}
-
-function calculateBaseCritModifier() {
-  return 1.5 + strengthCritIncrease;
-}
-
-function calculateCritDamage() {
-  strengthCritIncrease = calculateStrCritIncrease();
-  baseCritModifier = calculateBaseCritModifier();
-  return Math.round(baseAttack * baseCritModifier);
-}
-
-// Dexterity
-let baseDexterity;
-
-// Faith
-let baseFaith;
 
 // Paladin
 let holySmiteTracker = 2.0;
@@ -214,6 +311,9 @@ let shadowStrikeTracker = 6;
 let evasionTracker = 2;
 
 // Priestess
+// N/A
+
+
 
 // ===============================
 //   Boons & Leveling Variables
@@ -433,9 +533,9 @@ const POISONED = {
           if (roomCounter >= POISONED.statusDuration) {
             POISONED.duration = null;
             POISONED.statusDuration = null;
-            baseDexterity += 2;
-            baseStrength += 2;
-
+            
+            updateStats("STRENGTH", 2);
+            updateStats("DEXTERITY", 2);
             updatePlayerTrackers();
             clearInterval(poisonedInterval);
           }
@@ -721,3 +821,4 @@ const BRANDED = {
       }
     },
 };
+

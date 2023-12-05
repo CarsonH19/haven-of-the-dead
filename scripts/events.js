@@ -759,30 +759,32 @@ function lockedRoomHandler() {
   let items = currentRoom.contents.items;
   let room = Math.round(Math.random() * 5);
 
-  switch (room) {
-    case 0:
-      break;
-
-    case 1:
-      monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
-      break;
-
-    case 2:
-      monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, ARMORED_SKELETON);
-      break;
-
-    case 3:
-      monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
-      break;
-
-    case 4:
-      monsters.push(BONE_TITAN);
-      break;
-
-    case 5:
-      monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, BONE_TITAN);
-      break;
-  }
+  setTimeout(() => {
+    switch (room) {
+      case 0:
+        break;
+  
+      case 1:
+        monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
+        break;
+  
+      case 2:
+        monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, ARMORED_SKELETON);
+        break;
+  
+      case 3:
+        monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
+        break;
+  
+      case 4:
+        monsters.push(BONE_TITAN);
+        break;
+  
+      case 5:
+        monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, BONE_TITAN);
+        break;
+    }
+  }, 1500);
 
   items.push(MARROWSTONE_CHEESE, CRYPTBREAD, POTION, POTION);
   getItem("BONEVAULT");

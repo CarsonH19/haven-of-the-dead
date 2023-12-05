@@ -8,7 +8,7 @@ function playerAttackHandler(smite) {
     paladinRadiantAura();
   }
 
-  criticalHitChance = calculateCritHitChance();
+  criticalHit = checkForCritcalHit();
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
   let totalDamage;
 
@@ -21,12 +21,12 @@ function playerAttackHandler(smite) {
   // ITEM: Soulreaver - damage++ for each consecutive attack
   playerToMonsterDamage += isItemAttuned(SOULREAVER, 0);
   // ITEM: Blazing Candle - all attacks are critical hits
-  criticalHitChance += statusEffectHandler(BLAZING_CANDLE);
+  criticalHit += statusEffectHandler(BLAZING_CANDLE);
 
   // Smite Critical Hit
-  if (criticalHitChance >= 20 && smite > 1) {
+  if (criticalHit >= 20 && smite > 1) {
     totalDamage = Math.round(
-      smite * (playerToMonsterDamage * baseCritModifier)
+      smite * (playerToMonsterDamage * calculateCritDamageModifier())
     );
     showDamage(totalDamage, "PLAYER", "CRIT");
     soundEffectHandler(heroChecker(), "PLAYER ABILITY");
@@ -38,8 +38,8 @@ function playerAttackHandler(smite) {
     soundEffectHandler(heroChecker(), "PLAYER ABILITY");
     writeToLogHero(LOG_SMITE, "YES", totalDamage);
     // Critical Hit
-  } else if (criticalHitChance >= 20) {
-    totalDamage = Math.round(playerToMonsterDamage * baseCritModifier);
+  } else if (criticalHit >= 20) {
+    totalDamage = Math.round(playerToMonsterDamage * calculateCritDamageModifier());
     showDamage(totalDamage, "PLAYER", "CRIT");
     soundEffectHandler(heroChecker(), "PLAYER ATTACK");
     writeToLogActions(LOG_PLAYER_CRITICAL, "YES", totalDamage);
@@ -61,6 +61,14 @@ function playerAttackHandler(smite) {
   updatePlayerTrackers();
 }
 
+function checkForCritcalHit() {
+  return Math.round(Math.random() * 20) + calculateCritHitChance();
+}
+
+function calculateTotalCritDamage() {
+  return Math.round(baseAttack * calculateCritDamageModifier());
+}
+
 function damageMonster(damage) {
   if (currentMonsterHealth - damage <= 0) {
     monsterHealthBar.value = 0;
@@ -70,9 +78,6 @@ function damageMonster(damage) {
     currentMonsterHealth -= damage;
   }
 
-  // if (damage > 0) {
-  //   damageFlashAnimation("MONSTER");
-  // }
 }
 
 function dealMonsterDamage(damage) {
@@ -80,16 +85,11 @@ function dealMonsterDamage(damage) {
 
   if (heroChoice === "PRIESTESS" && damageDealt < burningDevotionTracker) {
     damageDealt = burningDevotionTracker;
+
     writeToLogHero(LOG_BURNING_DEVOTION, "NO", damageDealt);
   }
 
   return damageDealt;
-}
-
-function calculateCritHitChance() {
-  let number = Math.round(Math.random() * 20) + baseDexterity;
-
-  return number;
 }
 
 function monsterAttackHandler() {
@@ -153,6 +153,11 @@ function damagePlayer(damage) {
   } else {
     playerHealthBar.value = +playerHealthBar.value - damage;
     currentPlayerHealth -= damage;
+  }
+
+  // Check for Cursed Condition
+  if (CURSED.duration !== null) {
+    damage = damage * 2;
   }
 
   if (damage > 0) {
@@ -328,17 +333,14 @@ function potionHandler() {
 //             Flee
 // ===============================
 function fleeHandler() {
-  let fleeChance = Math.round(Math.random() * 10) + baseFaith;
+  let fleeAttempt = Math.round(Math.random() * 10) + baseFaith;
 
   // ITEM: Ring of the Rodent - Increased flee chance
-  fleeChance += isItemAttuned(RING_OF_THE_RODENT, 0);
+  fleeAttempt += isItemAttuned(RING_OF_THE_RODENT, 0);
   // ITEM: FLickering Candle - 100% flee chance
-  fleeChance += statusEffectHandler(FLICKERING_CANDLE);
+  fleeAttempt += statusEffectHandler(FLICKERING_CANDLE);
 
-  console.log(fleeChance);
-
-  if (fleeChance >= 10) {
-    console.log("Flee Successful");
+  if (fleeAttempt >= 10) {
     writeToLogActions(LOG_FLEE, "YES", currentRoom.name);
     setTimeout(() => {
       newRoomAnimation();
@@ -394,27 +396,27 @@ function isGameOver() {
 heroChoiceModal.style.display = "block";
 
 heroChoiceModal.addEventListener("click", function (event) {
-  const siggurd = document.getElementById("siggurd");
-  const riven = document.getElementById("riven");
-  const liheth = document.getElementById("liheth");
+  const SIGGURD = document.getElementById("siggurd");
+  const RIVEN = document.getElementById("riven");
+  const LIHETH = document.getElementById("liheth");
   const playerName = document.getElementById("playerName");
 
   if (
-    event.target === siggurd ||
-    event.target === riven ||
-    event.target === liheth
+    event.target === SIGGURD ||
+    event.target === RIVEN ||
+    event.target === LIHETH
   ) {
     document.getElementById("heroChoiceModal").style.display = "none";
 
-    if (event.target === siggurd) {
+    if (event.target === SIGGURD) {
       heroChoice = "PALADIN";
       playerName.textContent = paladin.name;
       setPaladinStats();
-    } else if (event.target === riven) {
+    } else if (event.target === RIVEN) {
       heroChoice = "ROGUE";
       playerName.textContent = rogue.name;
       setRogueStats();
-    } else if (event.target === liheth) {
+    } else if (event.target === LIHETH) {
       heroChoice = "PRIESTESS";
       playerName.textContent = priestess.name;
       setPriestessStats();
@@ -425,6 +427,8 @@ heroChoiceModal.addEventListener("click", function (event) {
     setTimeout(function () {
       catacombEntranceModal.style.display = "block";
     }, 3000);
+
+    updateStats("ALL");
   }
 });
 

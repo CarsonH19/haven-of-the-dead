@@ -467,25 +467,20 @@ function startBattle() {
 
     // ITEM: Sunstone - Damages undead creatures.
     isItemAttuned(SUNSTONE);
-
-    // ITEM: Warding Candle - Chance for evil spirits to flee.
-    statusEffectHandler(WARDING_CANDLE);
-
-    // ITEM: Rattlebone Charm - Chance for humanoids to flee.
+    // ITEM: Rattlebone Whistle - Chance for humanoids to flee.
     isItemAttuned(RATTLEBONE_WHISTLE);
-
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
     isItemAttuned(ETHEREAL_CROWN);
+    // ITEM: Warding Candle - Chance for evil spirits to flee.
+    statusEffectHandler(WARDING_CANDLE);
   }, 1000);
 
   soundEffectHandler(currentRoom.contents.monsters[0], "SPAWN");
 }
 
 function checkForMonsters() {
-  // If Legionnaire Adds to Legion Tracker
-  if (
-    currentRoom.contents.monsters[0] === LEGIONNAIRE
-  ) {
+  // If Legionnaire Killed Adds to Legion Tracker
+  if (currentRoom.contents.monsters[0] === LEGIONNAIRE) {
     legionTracker++;
   }
 
@@ -495,7 +490,6 @@ function checkForMonsters() {
   // Checks for more monsters
   if (currentRoom.contents.monsters.length > 0) {
     startBattle();
-    console.log("Another Monster!");
   } else {
     console.log("RENDER SUMMARY CALLED!");
     attackCounter = 0; // Item: Soulreaver
@@ -521,7 +515,7 @@ function monsterAbilityHandler(monster) {
       break;
 
     case FLOOD_OF_BONES:
-      if (criticalHitChance >= 20) {
+      if (criticalHit >= 20) {
         console.log("Flood of Bones Ability Called!");
         FLOOD_OF_BONES.function();
       }
@@ -571,7 +565,6 @@ function monsterAbilityHandler(monster) {
         console.log("Coffin Spider Ability Called!");
         setTimeout(CRYPT_CRAWLER.function, 300);
       }
-
       break;
 
     case BROODMOTHER:

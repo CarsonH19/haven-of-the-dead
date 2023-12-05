@@ -145,8 +145,11 @@ const GRAVEROBBERS_SPADE = {
   rarity: "Common",
   effect: "While attuned to this item you are more likely to find items.",
   function: () => {
-    return 5;
+    itemFindChance += 5;
   },
+  unequip: () => {
+    itemFindChance -= 5;
+  }
 };
 
 const CHARM_OF_HEALING = {
@@ -171,8 +174,11 @@ const RING_OF_SKITTERING = {
   effect:
     "While attuned to this item you have a higher chance to flee successfully. The greater your dexterity, the higher the chance becomes.",
   function: () => {
-    return 1 + baseDexterity;
+    fleeChance += 10;
   },
+  unequip: () => {
+    fleeChance -= 10;
+  }
 };
 
 const SHADOWSTEP_BOOTS = {
@@ -182,10 +188,10 @@ const SHADOWSTEP_BOOTS = {
   rarity: "Common",
   effect: "While attuned to this item your dexterity increases by 1.",
   function: () => {
-    baseDexterity++;
+    updateStats("DEXTERITY", 1);
   },
   unequip: () => {
-    baseDexterity--;
+    updateStats("DEXTERITY", -1);
   },
 };
 
@@ -196,10 +202,10 @@ const TITANS_FEMUR = {
   rarity: "Common",
   effect: "While attuned to this item your strength increases by 1.",
   function: () => {
-    baseStrength++;
+    updateStats("STRENGTH", 1);
   },
   unequip: () => {
-    baseStrength--;
+    updateStats("STRENGTH", -1);
   },
 };
 
@@ -211,10 +217,10 @@ const HOLY_RELIC = {
   rarity: "Common",
   effect: "While attuned to this item your faith increases by 1.",
   function: () => {
-    baseFaith++;
+    updateStats("FAITH", 1);
   },
   unequip: () => {
-    baseFaith--;
+    updateStats("FAITH", -1);
   },
 };
 
@@ -228,11 +234,11 @@ const RITUAL_BLADE = {
     "While attuned to this item your attack increases by 3, but your faith decreases by 1.",
   function: () => {
     baseAttack += 3;
-    baseFaith--;
+    updateStats("FAITH", -1);
   },
   unequip: () => {
     baseAttack -= 3;
-    baseFaith++;
+    updateStats("FAITH", 1);
   },
 };
 
@@ -277,39 +283,45 @@ const BLOODSTONE = {
     "When attuned to this item you recover a small amount of health after defeating a creature.",
   function: () => {
     let monsterLevel = currentRoom.contents.monsters[0].skulls;
-    let healthRecovered;
 
     switch (monsterLevel) {
       case 1:
-        healthRecovered = 2;
+        healPlayer(2);
         break;
+
       case 2:
-        healthRecovered = 4;
+        healPlayer(4);
         break;
+
       case 3:
-        healthRecovered = 6;
+        healPlayer(6);
         break;
+
       case 4:
-        healthRecovered = 8;
+        healPlayer(8);
         break;
+
       case 5:
-        healthRecovered = 10;
+        healPlayer(10);   
         break;
+
       case 6:
-        healthRecovered = 15;
+        healPlayer(15);  
         break;
+
       case 7:
-        healthRecovered = 20;
+        healPlayer(15);
         break;
+
       case 8:
-        healthRecovered = 30;
+        healPlayer(30);
         break;
+
       case 9:
-        healthRecovered = 40;
+        healPlayer(40);
         break;
     }
 
-    healPlayer(healthRecovered);
   },
 };
 
@@ -488,12 +500,12 @@ const BERSERKER_PAULDRONS = {
   rarity: "Rare",
   effect: "While attuned to this item you gain +2 Strength, but -1 Faith.",
   function: () => {
-    baseStrength += 2;
-    baseFaith -= 1;
+    updateStats("STRENGTH", 2)
+    updateStats("FAITH", -1)
   },
   unequip: () => {
-    baseStrength -= 2;
-    baseFaith += 1;
+    updateStats("STRENGTH", -2)
+    updateStats("FAITH", 1)
   },
 };
 
@@ -504,12 +516,12 @@ const TOME_OF_DEVOTION = {
   rarity: "Rare",
   effect: "While attuned to this item you gain +2 Faith, but -1 Dexterity.",
   function: () => {
-    baseFaith += 2;
-    baseDexterity -= 1;
+    updateStats("FAITH", 2);
+    updateStats("DEXTERITY", -1);
   },
   unequip: () => {
-    baseFaith -= 2;
-    baseDexterity += 1;
+    updateStats("FAITH", -2);
+    updateStats("DEXTERITY", 1);
   },
 };
 
@@ -520,12 +532,12 @@ const BRACELET_OF_THE_SERPENT = {
   rarity: "Rare",
   effect: "While attuned to this item you gain +2 Dexterity, but -1 Strength.",
   function: () => {
-    baseDexterity += 2;
-    baseStrength -= 1;
+    updateStats("DEXTERITY", 2)
+    updateStats("STRENGTH", -1)
   },
   unequip: () => {
-    baseDexterity -= 2;
-    baseStrength += 1;
+    updateStats("DEXTERITY", -2)
+    updateStats("STRENGTH", 1)
   },
 };
 
@@ -536,11 +548,11 @@ const FANGWEAVE_ARMOR = {
   rarity: "Rare",
   effect: "While attuned to this item you gain +1 Dexterity, and +20HP.",
   function: () => {
-    baseDexterity += 1;
+    updateStats("DEXTERITY", 1)
     baseHealth += 20;
   },
   unequip: () => {
-    baseDexterity -= 1;
+    updateStats("DEXTERITY", -1)
     baseHealth -= 20;
   },
 };
@@ -810,15 +822,15 @@ const SPINE_OF_THE_NECROMANCER = {
     "While attuned to this item you gain +9 Attack, but all stats are reduced by 1.",
   function: () => {
     baseAttack += 9;
-    baseStrength -= 1;
-    baseDexterity -= 1;
-    baseFaith -= 1;
+    updateStats("STRENGTH", -1);
+    updateStats("DEXTERITY", -1);
+    updateStats("FAITH", -1);
   },
   unequip: () => {
     baseAttack -= 9;
-    baseStrength += 1;
-    baseDexterity += 1;
-    baseFaith += 1;
+    updateStats("STRENGTH", 1);
+    updateStats("DEXTERITY", 1);
+    updateStats("FAITH", 1);
   },
 };
 
@@ -842,9 +854,7 @@ const CURSED_GRIMOIRE = {
   rarity: "Epic",
   effect: "This item is cursed and cannot be unattuned.",
   function: () => {
-    currentPlayerHealth--;
-    playerHealthBar.value--;
-    damageFlashAnimation();
+    damagePlayer(1);
     writeToLogItem(LOG_ITEM, "YES", CURSED_GRIMOIRE);
   },
 };
@@ -1031,8 +1041,8 @@ const WITCHFIRE_ORCHID = {
       if (randomNumber >= 8) {
         CURSED.duration = null;
         CURSED.statusDuration = null;
-        baseDexterity += 2;
-        baseStrength += 2;
+        // baseDexterity += 2;
+        // baseStrength += 2;
 
         updatePlayerTrackers();
         clearInterval(cursedInterval);
@@ -1544,8 +1554,6 @@ const RESTLESS_WISP = {
 //    Item & Inventory Arrays
 // ===============================
 
-let attunedItems = [];
-
 let inventoryItems = [GUIDING_LIGHT, POTION, POTION, POTION];
 
 let commonConsumables = [
@@ -1839,14 +1847,21 @@ function lootItems(lootGroup) {
     let foundConsumable;
 
     let lootItemChance = Math.round(Math.random() * 100);
-    lootItemChance += baseFaith * 2;
+    lootItemChance += itemFindChance;
 
     let lootConsumableChance = Math.round(Math.random() * 100);
-    lootConsumableChance += baseFaith * 2;
+    lootConsumableChance += itemFindChance;
 
-    // ITEM: Graverobber's Spade - Increase item find chance by 10%
-    lootItemChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
-    lootConsumableChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
+    // // ITEM: Graverobber's Spade - Increase item find chance by 5%
+    // lootItemChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
+    // lootConsumableChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
+
+    // function calculateItemFindChance() {
+    //   itemFindChance = baseFaith * 2;
+    
+    //   // ITEM: Graverobber's Spade - Increase item find chance by 5%
+    //   itemFindChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
+    // }
 
     switch (lootGroup) {
       case "BEAST":
@@ -1935,7 +1950,15 @@ function renderStatusEffects(effect) {
 
   // New Status Effect
   const newEffect = document.createElement("div");
-  newEffect.textContent = effect.name;
+
+  // Render Image
+  if (effect.image) {
+    newEffect.style.backgroundImage = `url('${effect.image}')`;
+    newEffect.style.backgroundSize = "cover";
+  } else {
+    newEffect.textContent = effect.name;
+  }
+
   middleLeft.appendChild(newEffect);
 
   // Status Effect Tooltip
@@ -1951,6 +1974,8 @@ function renderStatusEffects(effect) {
   tooltipNoteName.style.fontWeight = "800";
 
   tooltipNoteDuration.textContent = effect.duration;
+
+  
 
   // Updates & Check Effect Duration
   let newEffectInterval = setInterval(() => {
@@ -2055,15 +2080,15 @@ function statusEffectHandler(item) {
 
     case BLACKHEART_BREW:
       if (blackheartBrewTracker === "DRUNK") {
-        baseDexterity--;
-        baseStrength += 2;
+        updateStats("DEXTERITY", -1);
+        updateStats("STRENGTH", 2);
         updatePlayerTrackers();
       }
       break;
 
     case POISONED:
-      baseDexterity -= 2;
-      baseStrength -= 2;
+      updateStats("DEXTERITY", -2);
+      updateStats("STRENGTH", -2);
       updatePlayerTrackers();
       //writeToLogItem() You've been poisoned!
       break;
