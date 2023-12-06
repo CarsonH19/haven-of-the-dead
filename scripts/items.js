@@ -173,7 +173,7 @@ const RING_OF_SKITTERING = {
   type: "MAGIC",
   rarity: "Common",
   effect:
-    "While attuned to this item you have a higher chance to flee successfully. The greater your dexterity, the higher the chance becomes.",
+    "While attuned to this item you have a higher chance to flee successfully.",
   function: () => {
     fleeChance += 10;
   },
@@ -360,8 +360,8 @@ const SUNSTONE = {
     "While attuned to this item undead creatures take damage at the start of battle.",
   function: () => {
     if (currentRoom.contents.monsters[0].type === "UNDEAD") {
-      currentMonsterHealth -= 10;
-      monsterHealthBar.value -= 10;
+      setTimeout(damageMonster(10), 3000);
+      writeToLogItem(LOG_ITEM, "YES", SUNSTONE);
     } else {
       return;
     }
@@ -1457,7 +1457,7 @@ const ROWDY_WISP = {
   logDetail: "WISP",
   effect:
     "When this item is used a wisp will guide you to the Laughing Coffin Tavern.",
-  status: "Guiding you to the Laughing Coffin.",
+  status: "Guiding you to the Laughing Coffin Tavern.",
   duration: null,
   function: () => {
     if (wispActive !== "ACTIVE") {

@@ -630,12 +630,14 @@ const LAUGHING_COFFIN_EVENT = {
     } else if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
       LAUGHING_COFFIN_EVENT.summary = `You pay the toll, exchanging a Laughing Coffin Coin for camaraderie and unexpected relaxation within the infamous tavern.`;
       useConsumable("Laughing Coffin Coin"); // removes coin from inventory
-      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "TWO");
-      healPlayer(calculatePlayerMaxHealth());
-      setRoomSummary();
-      setTimeout(BLACKHEART_BREW.function, 6500);
       setTimeout(newRoomAnimation, 5000);
+      setTimeout(() => {
+        healPlayer(calculatePlayerMaxHealth());
+        BLACKHEART_BREW.function();
+      }, 6500);
       setTimeout(renderRoomSummaryModal, 9000);
+      setRoomSummary();
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "TWO");
     } else {
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "THREE");
       console.log("NO COIN!");

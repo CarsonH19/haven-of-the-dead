@@ -1338,6 +1338,8 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `You are no longer poisoned.`;
       } else if (dataOne === WARDING_CANDLE) {
         newEntry.textContent = `Your warding candle protects you from nearby undead.`;
+      } else if (dataOne === SUNSTONE) {
+        newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} burns in the presence of the Sunstone.`
       }
 
       narration = newEntry.textContent;
@@ -1424,7 +1426,6 @@ function writeToLogOther(logType, narrate, dataOne) {
 // ==============================================================
 
 function writeToNarrative(narration) {
-  console.log(narration);
   let newNarration = document.createElement("li");
   newNarration.textContent = narration;
 
