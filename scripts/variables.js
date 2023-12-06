@@ -280,6 +280,8 @@ const LOG_ATTUNE = "ATTUNE";
 const LOG_CANT_ATTUNE = "CANT ATTUNE";
 const LOG_CONSUMABLE = "CONSUMABLE";
 
+const LOG_OTHER = "OTHER";
+
 // ===============================
 //       Event Trackers
 // ===============================
@@ -378,6 +380,7 @@ const closeInventoryButton = document.getElementById("closeInventoryBtn");
 let attackCounter = 0;
 
 // Wisps
+let wispActive;
 let guidingLightTracker;
 let rowdyWispTracker;
 let unholyWispTracker;

@@ -150,7 +150,7 @@ const GRAVEROBBERS_SPADE = {
   },
   unequip: () => {
     itemFindChance -= 5;
-  }
+  },
 };
 
 const CHARM_OF_HEALING = {
@@ -179,7 +179,7 @@ const RING_OF_SKITTERING = {
   },
   unequip: () => {
     fleeChance -= 10;
-  }
+  },
 };
 
 const SHADOWSTEP_BOOTS = {
@@ -306,11 +306,11 @@ const BLOODSTONE = {
         break;
 
       case 5:
-        healPlayer(10);   
+        healPlayer(10);
         break;
 
       case 6:
-        healPlayer(15);  
+        healPlayer(15);
         break;
 
       case 7:
@@ -325,7 +325,6 @@ const BLOODSTONE = {
         healPlayer(40);
         break;
     }
-
   },
 };
 
@@ -509,12 +508,12 @@ const BERSERKER_PAULDRONS = {
   rarity: "Rare",
   effect: "While attuned to this item you gain +2 Strength, but -1 Faith.",
   function: () => {
-    updateStats("STRENGTH", 2)
-    updateStats("FAITH", -1)
+    updateStats("STRENGTH", 2);
+    updateStats("FAITH", -1);
   },
   unequip: () => {
-    updateStats("STRENGTH", -2)
-    updateStats("FAITH", 1)
+    updateStats("STRENGTH", -2);
+    updateStats("FAITH", 1);
   },
 };
 
@@ -543,12 +542,12 @@ const BRACELET_OF_THE_SERPENT = {
   rarity: "Rare",
   effect: "While attuned to this item you gain +2 Dexterity, but -1 Strength.",
   function: () => {
-    updateStats("DEXTERITY", 2)
-    updateStats("STRENGTH", -1)
+    updateStats("DEXTERITY", 2);
+    updateStats("STRENGTH", -1);
   },
   unequip: () => {
-    updateStats("DEXTERITY", -2)
-    updateStats("STRENGTH", 1)
+    updateStats("DEXTERITY", -2);
+    updateStats("STRENGTH", 1);
   },
 };
 
@@ -560,11 +559,11 @@ const FANGWEAVE_ARMOR = {
   rarity: "Rare",
   effect: "While attuned to this item you gain +1 Dexterity, and +20HP.",
   function: () => {
-    updateStats("DEXTERITY", 1)
+    updateStats("DEXTERITY", 1);
     baseHealth += 20;
   },
   unequip: () => {
-    updateStats("DEXTERITY", -1)
+    updateStats("DEXTERITY", -1);
     baseHealth -= 20;
   },
 };
@@ -1406,14 +1405,15 @@ const GUIDING_LIGHT = {
   status: "Guiding you to a nearby Candlelight Shrine.",
   duration: null,
   function: () => {
-    if (FIENDSWORN.active !== null) {
+    if ((FIENDSWORN.active !== null) & (wispActive !== "ACTIVE")) {
       // writeToLog() The light refuses to guide someone sworn to evil
     } else {
       const wisp = document.querySelector(".wisp");
-      CANDLELIGHT_SHRINE.contents.events = SAFE_ROOM;
       let randomNumber = Math.round(Math.random() * 5) + 1;
       let itemDuration = roomCounter + randomNumber;
+      CANDLELIGHT_SHRINE.contents.events = SAFE_ROOM;
       GUIDING_LIGHT.duration = "Searching";
+      wispActive = "ACTIVE";
 
       let guidingLightInterval = setInterval(() => {
         if (itemDuration - roomCounter > 1) {
@@ -1430,6 +1430,7 @@ const GUIDING_LIGHT = {
           guidingLightTracker = "ARRIVE";
           wisp.classList.remove("orb");
           GUIDING_LIGHT.duration = null;
+          wispActive = null;
           clearInterval(guidingLightInterval);
         } else {
           guidingLightTracker = "GUIDING";
@@ -1459,30 +1460,38 @@ const ROWDY_WISP = {
   status: "Guiding you to the Laughing Coffin.",
   duration: null,
   function: () => {
-    const wisp = document.querySelector(".wisp");
-    LAUGHING_COFFIN_ROOM.contents.events = LAUGHING_COFFIN_EVENT;
-    let randomNumber = Math.round(Math.random() * 5) + 1;
-    let duration = roomCounter + randomNumber;
-    ROWDY_WISP.duration = "Searching";
+    if (wispActive !== "ACTIVE") {
+      const wisp = document.querySelector(".wisp");
+      let randomNumber = Math.round(Math.random() * 5) + 1;
+      let duration = roomCounter + randomNumber;
+      LAUGHING_COFFIN_ROOM.contents.events = LAUGHING_COFFIN_EVENT;
+      ROWDY_WISP.duration = "Searching";
+      wispActive = "ACTIVE";
 
-    let rowdyWispInterval = setInterval(() => {
-      ROWDY_WISP.duration = `Duration: ${duration - roomCounter} Rooms`;
-      if (roomCounter >= duration) {
-        rowdyWispTracker = "ARRIVE";
-        wisp.classList.remove("orb");
-        ROWDY_WISP.duration = null;
-        clearInterval(rowdyWispInterval);
-      } else {
-        rowdyWispTracker = "GUIDING";
-      }
-    }, 15000);
+      // Clear room if player fleed in the past
+      LAUGHING_COFFIN_ROOM.contents.monsters = [];
 
-    wisp.classList.add("orb");
+      let rowdyWispInterval = setInterval(() => {
+        ROWDY_WISP.duration = `Duration: ${duration - roomCounter} Rooms`;
+        if (roomCounter >= duration) {
+          rowdyWispTracker = "ARRIVE";
+          wisp.classList.remove("orb");
+          ROWDY_WISP.duration = null;
+          wispActive = null;
 
-    const root = document.documentElement;
-    root.style.setProperty("--orb", "#f2b268");
+          clearInterval(rowdyWispInterval);
+        } else {
+          rowdyWispTracker = "GUIDING";
+        }
+      }, 15000);
 
-    renderStatusEffects(ROWDY_WISP);
+      wisp.classList.add("orb");
+
+      const root = document.documentElement;
+      root.style.setProperty("--orb", "#f2b268");
+
+      renderStatusEffects(ROWDY_WISP);
+    }
   },
 };
 
@@ -1500,17 +1509,19 @@ const UNHOLY_WISP = {
   duration: null,
   function: () => {
     const wisp = document.querySelector(".wisp");
-    BLOOD_ALTER.contents.events = CRIMSON_COVENANT;
     let randomNumber = Math.round(Math.random() * 5) + 1;
     let wispDuration = roomCounter + randomNumber;
+    BLOOD_ALTER.contents.events = CRIMSON_COVENANT;
     UNHOLY_WISP.duration = "Searching";
+    wispActive = "ACTIVE";
 
     let unholyWispInterval = setInterval(() => {
       UNHOLY_WISP.duration = `Duration: ${wispDuration - roomCounter} Rooms`;
       if (roomCounter >= wispDuration) {
-        unholyWispTracker = "ARRIVE";
         wisp.classList.remove("orb");
         UNHOLY_WISP.duration = null;
+        unholyWispTracker = "ARRIVE";
+        wispActive = null;
         clearInterval(unholyWispInterval);
       } else {
         unholyWispTracker = "GUIDING";
@@ -1542,6 +1553,7 @@ const RESTLESS_WISP = {
     let randomNumber = Math.round(Math.random() * 5) + 1;
     let wispDuration = roomCounter + randomNumber;
     RESTLESS_WISP.duration = "Searching";
+    wispActive = "ACTIVE";
 
     // Clear room if player fleed in the past
     LOST_LEGIONS_VALE.contents.monsters = [];
@@ -1563,6 +1575,7 @@ const RESTLESS_WISP = {
         restlessWispTracker = "ARRIVE";
         wisp.classList.remove("orb");
         RESTLESS_WISP.duration = null;
+        wispActive = null;
         clearInterval(restlessWispInterval);
       } else {
         restlessWispTracker = "GUIDING";
@@ -1886,7 +1899,7 @@ function lootItems(lootGroup) {
 
     // function calculateItemFindChance() {
     //   itemFindChance = baseFaith * 2;
-    
+
     //   // ITEM: Graverobber's Spade - Increase item find chance by 5%
     //   itemFindChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
     // }
@@ -2002,8 +2015,6 @@ function renderStatusEffects(effect) {
   tooltipNoteName.style.fontWeight = "800";
 
   tooltipNoteDuration.textContent = effect.duration;
-
-  
 
   // Updates & Check Effect Duration
   let newEffectInterval = setInterval(() => {
@@ -2395,6 +2406,7 @@ inventoryModal.addEventListener("click", (event) => {
   for (let i = 0; i < buttons.length; i++) {
     let itemObject = inventoryItems.find((inv) => inv.name === buttons[i].id);
 
+    // Magic Items Logic
     if (
       magicItemsBox.contains(event.target) &&
       event.target === buttons[i] &&
@@ -2408,10 +2420,21 @@ inventoryModal.addEventListener("click", (event) => {
       attuneItem(buttons[i].id);
     }
 
+    // Consumable Items Logic
     if (consumablesBox.contains(event.target) && event.target === buttons[i]) {
-      useConsumable(buttons[i].id);
+      // Check if currently following a wisp
+      if (
+        wispDuplicateHandler(buttons[i].id) === true &&
+        wispActive === "ACTIVE"
+      ) {
+        writeToLogOther(LOG_OTHER, 'YES', "WISP");
+      } else {
+        useConsumable(buttons[i].id);
+      }
+
     }
 
+    // Attuned Items Logic
     if (buttons[i].id !== "Cursed Grimoire") {
       if (slotOne.contains(event.target) && event.target === buttons[i]) {
         removeItem(buttons[i].id);
@@ -2437,6 +2460,19 @@ inventoryModal.addEventListener("click", (event) => {
       event.target === buttons[i]
     ) {
       CURSED_GRIMOIRE.function();
+    }
+  }
+
+  function wispDuplicateHandler(itemName) {
+    if (
+      itemName === "Guiding Light" ||
+      itemName === "Rowdy Wisp" ||
+      itemName === "Restless Wisp" ||
+      itemName === "Unholy Wisp"
+    ) {
+      return true;
+    } else {
+      return false;
     }
   }
 });

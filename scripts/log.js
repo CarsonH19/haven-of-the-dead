@@ -1377,6 +1377,35 @@ function writeToLogStatusEffect(logType, narrate, dataOne, dataTwo) {
   }
 }
 
+// ==============================================================
+//                         OTHER
+// ==============================================================
+
+function writeToLogOther(logType, narrate, dataOne) {
+
+  let newEntry = document.createElement("li");
+  let narration = Math.round(Math.random() * 9);
+
+  switch (logType) {
+
+    case LOG_OTHER:
+      if (dataOne === "WISP") {
+        newEntry.textContent = `You are already following a wisp.`;
+      }
+      break;
+  }
+
+  log.insertBefore(newEntry, log.firstChild);
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+
+  if (narrate === "YES") {
+    writeToNarrative(newEntry.textContent);
+  }
+
+  checkLogSize();
+}
+
 // // ===============================
 // //          Room Events
 // // ===============================
