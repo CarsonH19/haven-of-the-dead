@@ -141,6 +141,7 @@ const FLASK_OF_LIGHT = {
 const GRAVEROBBERS_SPADE = {
   name: "Graverobber's Spade",
   description: "",
+  image: "styles/images/items/graverobbers-spade.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect: "While attuned to this item you are more likely to find items.",
@@ -184,6 +185,7 @@ const RING_OF_SKITTERING = {
 const SHADOWSTEP_BOOTS = {
   name: "Shadowstep Boots",
   description: "",
+  image: "styles/images/items/shadowstep-boots.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect: "While attuned to this item your dexterity increases by 1.",
@@ -198,6 +200,7 @@ const SHADOWSTEP_BOOTS = {
 const TITANS_FEMUR = {
   name: "Titan's Femur",
   description: "",
+  image: "styles/images/items/titan-femur.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect: "While attuned to this item your strength increases by 1.",
@@ -277,6 +280,7 @@ const MIST_VEIL_CLOAK = {
 const BLOODSTONE = {
   name: "Bloodstone",
   description: "",
+  image: "styles/images/items/bloodstone.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:
@@ -328,6 +332,7 @@ const BLOODSTONE = {
 const WRAITHBANE = {
   name: "Wraithbane",
   description: "",
+  image: "styles/images/items/wraithbane.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:
@@ -374,24 +379,26 @@ const WHISPERING_AMULET = {
     "While attuned to this item you can communicate with some undead creatures.",
   function: () => {
     // Adds Grervil's Room While Wearing
-    console.log("CALLED");
-    // catacombRooms.push(SKULL_CHAMBER);
+    catacombRooms.push(SKULL_CHAMBER);
   },
   unequip: () => {
     // Removes Grervil's Room When Unequipped
-    let indexToRemove = catacombRooms.findIndex(
-      (room) => room.roomName === "Skull-filled Chamber"
-    );
-    catacombRooms = [
-      ...catacombRooms.slice(0, indexToRemove),
-      ...catacombRooms.slice(indexToRemove + 1),
-    ];
+    if (catacombRooms.includes(SKULL_CHAMBER)) {
+      let indexToRemove = catacombRooms.findIndex(
+        (room) => room.roomName === "Skull-filled Chamber"
+      );
+      catacombRooms = [
+        ...catacombRooms.slice(0, indexToRemove),
+        ...catacombRooms.slice(indexToRemove + 1),
+      ];
+    }
   },
 };
 
 const CURSED_MIRROR = {
   name: "Cursed Mirror",
   description: "",
+  image: "styles/images/items/cursed-mirror.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:
@@ -405,6 +412,7 @@ const CURSED_MIRROR = {
 const REVENANTS_RAGE = {
   name: "Revenant's Rage",
   description: "",
+  image: "styles/images/items/revenants-rage.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:
@@ -474,6 +482,7 @@ const TOXINWEAVE_MASK = {
 const SILKSTRIDERS = {
   name: "Silkstriders",
   description: "",
+  image: "styles/images/items/silkstriders.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item you can't be webbed by spiders.",
@@ -512,6 +521,7 @@ const BERSERKER_PAULDRONS = {
 const TOME_OF_DEVOTION = {
   name: "Tome of Devotion",
   description: "",
+  image: "styles/images/items/tome-of-devotion.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item you gain +2 Faith, but -1 Dexterity.",
@@ -528,6 +538,7 @@ const TOME_OF_DEVOTION = {
 const BRACELET_OF_THE_SERPENT = {
   name: "Bracelet of the Serpent",
   description: "",
+  image: "styles/images/items/serpent-bracelet.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item you gain +2 Dexterity, but -1 Strength.",
@@ -544,6 +555,7 @@ const BRACELET_OF_THE_SERPENT = {
 const FANGWEAVE_ARMOR = {
   name: "Fangweave Armor",
   description: "",
+  image: "styles/images/items/fangweave.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item you gain +1 Dexterity, and +20HP.",
@@ -574,6 +586,7 @@ const SKELETON_KEY = {
 const SOULREAVER = {
   name: "Soulreaver",
   description: "",
+  image: "styles/images/items/soulreaver.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:
@@ -610,6 +623,7 @@ const SOULREAVER = {
 const ETHEREAL_CROWN = {
   name: "Ethereal Crown",
   description: "",
+  image: "styles/images/items/ethereal-crown.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect: "While attuned to this item evil spirits will not attack you.",
@@ -632,6 +646,7 @@ const ETHEREAL_CROWN = {
 const SOUL_JAR = {
   name: "Soul Jar",
   description: "",
+  image: "styles/images/items/souljar.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect:
@@ -655,6 +670,7 @@ const SOUL_JAR = {
 const CRIMSON_OFFERING = {
   name: "Crimson Offering",
   description: "",
+  image: "styles/images/items/crimson-offering.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect:
@@ -681,6 +697,7 @@ const DARKGUARD_TRINKET = {
 const HALLOWED_HOURGLASS = {
   name: "Hallowed Hourglass",
   description: "",
+  image: "styles/images/items/hourglass.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect:
@@ -693,6 +710,7 @@ const HALLOWED_HOURGLASS = {
 const AEGIS_OF_THE_FALLEN = {
   name: "Aegis of the Fallen",
   description: "",
+  image: "styles/images/items/aegis.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect:
@@ -709,6 +727,7 @@ const AEGIS_OF_THE_FALLEN = {
 const WAR_TORN_BANNER = {
   name: "War Torn Banner",
   description: "",
+  image: "styles/images/items/war-torn-banner.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect:
@@ -755,17 +774,20 @@ const RIBCAGE_DEFENDER = {
   },
 };
 
-const SKULLCRUSHER_HELM = {
-  name: "Skullcrusher Helm",
+const SKULLBREAKER_HELM = {
+  name: "Skullbreaker Helm",
   description: "",
+  image: "styles/images/items/skullbreaker-helm.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:
     "While attuned to this item your max health is increased by 20HP and you gain +1 Strength.",
   function: () => {
+    updateStats("STRENGTH", 1);
     baseHealth += 20;
   },
   unequip: () => {
+    updateStats("STRENGTH", -1);
     baseHealth -= 20;
   },
 };
@@ -773,6 +795,7 @@ const SKULLCRUSHER_HELM = {
 const BONECHILL_AMULET = {
   name: "Bone Chill Amulet",
   description: "",
+  image: "styles/images/items/bonechillamulet.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect:
@@ -789,6 +812,7 @@ const BONECHILL_AMULET = {
 const RATTLEBONE_WHISTLE = {
   name: "Rattlebone Whistle",
   description: "",
+  image: "styles/images/items/rattlebone-whistle.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:
@@ -816,6 +840,7 @@ const RATTLEBONE_WHISTLE = {
 const SPINE_OF_THE_NECROMANCER = {
   name: "Spine of the Necromance",
   description: "",
+  image: "styles/images/items/spine-of-the-necromancer.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect:
@@ -850,6 +875,7 @@ const SPINE_OF_THE_NECROMANCER = {
 const CURSED_GRIMOIRE = {
   name: "Cursed Grimoire",
   description: "",
+  image: "styles/images/items/cursed-grimoire.jpg",
   type: "MISC",
   rarity: "Epic",
   effect: "This item is cursed and cannot be unattuned.",
@@ -862,6 +888,7 @@ const CURSED_GRIMOIRE = {
 const CACHE_KEY = {
   name: "Ivan's Cache Key",
   description: "",
+  image: "styles/images/items/cache-key.jpg",
   soundEffect: skeletonKeyIn2,
   type: "MISC",
   rarity: "Common",
@@ -876,6 +903,7 @@ const CACHE_KEY = {
 const GRERVILS_HEAD = {
   name: "Grervil's Head",
   description: "",
+  image: "styles/images/items/grervils-skull.jpg",
   type: "MISC",
   rarity: "Common",
   effect: "Head of the talking skull, Grervil.",
@@ -1593,7 +1621,7 @@ let wispItems = [GUIDING_LIGHT, ROWDY_WISP, UNHOLY_WISP, RESTLESS_WISP];
 let bonevaultItems = [
   BONEMAIL,
   RIBCAGE_DEFENDER,
-  SKULLCRUSHER_HELM,
+  SKULLBREAKER_HELM,
   BONECHILL_AMULET,
   RATTLEBONE_WHISTLE,
   SPINE_OF_THE_NECROMANCER,

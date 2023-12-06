@@ -335,8 +335,8 @@ function potionHandler() {
 function fleeHandler() {
   let fleeAttempt = Math.round(Math.random() * 10) + baseFaith;
 
-  // ITEM: Ring of the Rodent - Increased flee chance
-  fleeAttempt += isItemAttuned(RING_OF_THE_RODENT, 0);
+  // ITEM: Ring of Skittering - Increased flee chance
+  fleeAttempt += isItemAttuned(RING_OF_SKITTERING, 0);
   // ITEM: FLickering Candle - 100% flee chance
   fleeAttempt += statusEffectHandler(FLICKERING_CANDLE);
 

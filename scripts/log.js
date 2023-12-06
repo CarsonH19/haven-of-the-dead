@@ -944,7 +944,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     case LOG_TRAP_FAIL:
       narration = Math.floor(Math.random() * 6);
       if (event === SPIKE_WALLS) {
-        if (dataOneOne === "STRENGTH") {
+        if (dataOne === "STRENGTH") {
           if (narration === 1) {
             newEntry.textContent = `Despite your best efforts, the spike walls continue to close in, and you are unable to summon the strength needed to push them back. The trap inflicts its painful toll upon you. You take ${dataTwo} damage.`;
           } else if (narration === 2) {

@@ -729,7 +729,7 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  width: 600px;
+  width: 730px;
   height: 600px;
   /* min-width: 625px; */
   /* min-height: 600px; */
@@ -823,7 +823,6 @@ progress[value]::-moz-progress-bar {
   height: 50%;
   border-top: 2px black solid;
   border-bottom: 2px black solid;
-
   z-index: 1;
 }
 
@@ -834,16 +833,17 @@ progress[value]::-moz-progress-bar {
 .magic-items {
   /* border: 1px solid red; */
   margin: 0vh 1vh 1vh 1vh;
-  height: 80%;
+  /* height: 100%; */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); 
-  gap: 10px;
+  /* gap: 0px; */
+  
 }
 
 .magic-items div {
   aspect-ratio: 1;
-  min-width: 50px;
-  min-height: 50px;
+  /* min-width: 60px;
+  min-height: 60px; */
   /* display: flex; */
   flex-direction: column-reverse;
   margin: 10px;
@@ -866,8 +866,8 @@ progress[value]::-moz-progress-bar {
 
 .consumables div {
   aspect-ratio: 1;
-  min-width: 50px;
-  min-height: 50px;
+  /* min-width: 60px;
+  min-height: 60px; */
   /* display: flex; */
   flex-direction: column-reverse;
   margin: 10px;
@@ -878,7 +878,7 @@ progress[value]::-moz-progress-bar {
 .consumables {
   /* border: 1px solid red; */
   margin: 0vh 1vh 1vh 1vh;
-  height: 80%;
+  /* height: 80%; */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); /* Set the minimum column width to 150px, but allow them to grow */
   grid-row-gap: 1vh; 

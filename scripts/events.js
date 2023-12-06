@@ -762,34 +762,45 @@ function lockedRoomHandler() {
   setTimeout(() => {
     switch (room) {
       case 0:
+        //writeToLog() room details
         break;
-  
+
       case 1:
         monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
+        //writeToLog() room details
+
         break;
-  
+
       case 2:
         monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, ARMORED_SKELETON);
+        //writeToLog() room details
+
         break;
-  
+
       case 3:
         monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
+        //writeToLog() room details
+
         break;
-  
+
       case 4:
         monsters.push(BONE_TITAN);
+        //writeToLog() room details
+
         break;
-  
+
       case 5:
         monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, BONE_TITAN);
+        //writeToLog() room details
+
         break;
     }
-  }, 1500);
 
-  items.push(MARROWSTONE_CHEESE, CRYPTBREAD, POTION, POTION);
-  getItem("BONEVAULT");
-  startBattle();
-  setRoomSummary();
+    items.push(MARROWSTONE_CHEESE, POTION);
+    getItem("BONEVAULT");
+    startBattle();
+    setRoomSummary();
+  }, 1500);
 }
 
 // ===============================

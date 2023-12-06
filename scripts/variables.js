@@ -463,6 +463,7 @@ const LEGIONS_GRACE = {
 
 const AEGIS_STATUS_EFFECT = {
   name: "Aegis of the Fallen",
+  image: "styles/images/items/aegis.jpg",
   status: `You are immune to all damage.`,
   duration: null,
   statusDuration: null,
@@ -505,6 +506,7 @@ const AEGIS_STATUS_EFFECT = {
 
 const POISONED = {
   name: "Poisoned",
+  image: "styles/images/items/poisoned.jpg",
   status: "Your Strength and Dexterity are reduced by 2.",
   duration: null,
   statusDuration: null,
@@ -558,6 +560,7 @@ const POISONED = {
 
 const HAUNTED = {
   name: "Haunted",
+  image: "styles/images/items/huanted.jpg",
   status: "Evil spirits are following you.",
   duration: null,
   statusDuration: null,
@@ -593,6 +596,7 @@ const HAUNTED = {
 
 const DISEASED = {
   name: "Diseased",
+  image: "styles/images/items/diseased.jpg",
   status: "Your max health is reduced by 25%.",
   duration: null,
   statusDuration: null,
@@ -644,6 +648,7 @@ const DISEASED = {
 
 const CURSED = {
   name: "Cursed",
+  image: "styles/images/items/cursed.jpg",
   status: "All damage taken is increased by 50%.",
   duration: null,
   statusDuration: null,
@@ -695,6 +700,7 @@ const CURSED = {
 
 const WEBBED = {
   name: "Webbed",
+  image: "styles/images/items/webbed.jpg",
   status: "You are caught in spider webbing.",
   duration: null,
   function: (webStrength) => {
@@ -743,6 +749,7 @@ const WEBBED = {
 
 const CHILLED = {
   name: "Chilled",
+  image: "styles/images/items/chilled.jpg",
   status: "You are unable to use your special ability.",
   duration: null,
   statusDuration: null,
