@@ -4,50 +4,50 @@
 
 // Common Items
 // - *Evertorch
-// - *Flask of Light
-// - Graverobber's Spade - Graverobber Earver
+// - Flask of Light
+// - *Graverobber's Spade - Graverobber Earver
 // - *Charm of Healing
 // - Shadowstep Boots
 // - *Ring of Skittering
-// - Titan's Femur
+// - *Titan's Femur
 // - Holy Relic
 // - *Ritual Blade - Crimson Covenant
 
 // Rare Items
 // - Mist Veil Cloak
-// - Bloodstone - Crimson Covenant
-// - Wraithbane
+// - *Bloodstone - Crimson Covenant
+// - *Wraithbane
 // - *Sunstone
-// - Whispering Amulet
-// - Cursed Mirror
-// - Revenant's Rage
+// - *Whispering Amulet
+// - *Cursed Mirror
+// - *Revenant's Rage
 // - Plagueward Pendant
 // - Ghostshroud Talisman
 // - Toxinweave Mask
-// - Silkstriders
+// - *Silkstriders
 // - Chillbreaker Band
 // - Berserker Pauldrons
-// - Tome of Devotion
-// - Bracelet of the Serpent
-// - Fangweave Armor
-// - Soulreaver
+// - *Tome of Devotion
+// - *Bracelet of the Serpent
+// - *Fangweave Armor
+// - *Soulreaver
 
 // Epic Items
-// - Ethereal Crown - Graverobber Earver Event Three
-// - Soul Jar
-// - Crimson Offering - Crimson Covenant
+// - *Ethereal Crown - Graverobber Earver Event Three
+// - *Soul Jar
+// - *Crimson Offering - Crimson Covenant
 // - Darkguard Trinket
-// - Hallowed Hourglass
-// - Aegis of the Fallen - Forsaken Commander
-// - War Torn Banner - Forsaken Commander
+// - *Hallowed Hourglass
+// - *Aegis of the Fallen - Forsaken Commander
+// - *War Torn Banner - Forsaken Commander
 
 // Bonevault Items
 // - Bonemail
 // - *Ribcage Defender
-// - Skull Crusher Helm
-// - Bonechill Amulet
-// - Rattlebone Whistle
-// - Spine of the Necromancer
+// - *Skull Crusher Helm
+// - *Bonechill Amulet
+// - *Rattlebone Whistle
+// - *Spine of the Necromancer
 
 // ===============================
 //          CONSUMABLES
@@ -74,9 +74,9 @@
 // *Skeleton Key
 
 // Quest Items
-// - Cursed Grimoire - Scholar Hendra
-// - Cache Key - Ivan the Scoundrel
-// - Grervil's Head - Grervil the Bodiless
+// - *Cursed Grimoire - Scholar Hendra
+// - *Cache Key - Ivan the Scoundrel
+// - *Grervil's Head - Grervil the Bodiless
 
 // Candles
 // - *Warding Candle
