@@ -632,8 +632,8 @@ const LAUGHING_COFFIN_EVENT = {
       useConsumable("Laughing Coffin Coin"); // removes coin from inventory
       setTimeout(newRoomAnimation, 5000);
       setTimeout(() => {
-        healPlayer(calculatePlayerMaxHealth());
         BLACKHEART_BREW.function();
+        healPlayer(calculatePlayerMaxHealth());
       }, 6500);
       setTimeout(renderRoomSummaryModal, 9000);
       setRoomSummary();
