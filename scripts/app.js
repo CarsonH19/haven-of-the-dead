@@ -39,7 +39,9 @@ function playerAttackHandler(smite) {
     writeToLogHero(LOG_SMITE, "YES", totalDamage);
     // Critical Hit
   } else if (criticalHit >= 20) {
-    totalDamage = Math.round(playerToMonsterDamage * calculateCritDamageModifier());
+    totalDamage = Math.round(
+      playerToMonsterDamage * calculateCritDamageModifier()
+    );
     showDamage(totalDamage, "PLAYER", "CRIT");
     soundEffectHandler(heroChecker(), "PLAYER ATTACK");
     writeToLogActions(LOG_PLAYER_CRITICAL, "YES", totalDamage);
@@ -77,7 +79,6 @@ function damageMonster(damage) {
     monsterHealthBar.value = +monsterHealthBar.value - damage;
     currentMonsterHealth -= damage;
   }
-
 }
 
 function dealMonsterDamage(damage) {
@@ -367,6 +368,8 @@ function isGameOver() {
     isItemAttuned(SOUL_JAR);
     setTimeout(() => {
       if (currentPlayerHealth <= 0) {
+        currentMusic.pause();
+        heartbeatFastLow.pause();
         renderGameOverModal();
       }
     }, 1000);
@@ -638,7 +641,6 @@ function newRoomAnimation() {
 }
 
 function damageFlashAnimation(target) {
-
   switch (target) {
     case "PLAYER":
       roomImage.classList.add("flash");
@@ -654,9 +656,8 @@ function damageFlashAnimation(target) {
     //   setTimeout(() => {
     //     monsterContainer.classList.remove("flash");
     //   }, 500);
-    //   break; 
+    //   break;
   }
-   
 }
 
 // ===============================
@@ -964,6 +965,10 @@ continueButton.addEventListener("click", () => {
 settingsButton.addEventListener("click", () => {
   // openSettingsHandler();
   settingsModal.style.display = "block";
+});
+
+restartGameBtn.addEventListener("click", () => {
+  location.reload();
 });
 
 volumeUpButton.addEventListener("click", () => adjustVolume(music, 0.05));

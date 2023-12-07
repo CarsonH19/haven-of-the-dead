@@ -72,6 +72,12 @@ const eventButtonTwo = document.getElementById("eventButtonTwo");
 
 const heroChoiceModal = document.getElementById("heroChoiceModal");
 
+// ===============================
+//        Game Over Modal
+// ===============================
+
+const restartGameBtn = document.getElementById("restartGameBtn");
+
 // =============================== 
 //           STRENGTH
 // ===============================
