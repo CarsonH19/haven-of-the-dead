@@ -877,8 +877,8 @@ const CANDLELIGHT_SHRINE = {
   roomName: "Candlelight Shrine",
   description: "A safe place.",
   summary: "",
-  backgroundImage: "styles/images/corridor-one.png",
-  music: null,
+  backgroundImage: "styles/images/backgrounds/event-rooms/candlelight-shrine.jpg",
+  music: threeThousandYearsOld,
   contents: {
     monsters: [],
     items: [],

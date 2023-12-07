@@ -122,6 +122,7 @@ const EVERTORCH = {
 const FLASK_OF_LIGHT = {
   name: "Flask of Light",
   description: "",
+  image: "styles/images/items/flask-of-light.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect:
@@ -197,10 +198,10 @@ const SHADOWSTEP_BOOTS = {
   },
 };
 
-const TITANS_FEMUR = {
-  name: "Titan's Femur",
+const BONE_BLUDGEON = {
+  name: "Bone Bludgeon",
   description: "",
-  image: "styles/images/items/titan-femur.jpg",
+  image: "styles/images/items/bone-bludgeon.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect: "While attuned to this item your strength increases by 1.",
@@ -448,6 +449,7 @@ const LAUGHING_COFFIN_COIN = {
 const PLAGUEWARD_PENDANT = {
   name: "Plagueward Pendant",
   description: "",
+  image: "styles/images/items/plagueward-pendant.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item it prevents you from being diseased.",
@@ -470,6 +472,7 @@ const GHOSTSHROUD_TALISMAN = {
 const TOXINWEAVE_MASK = {
   name: "Toxinweave Mask",
   description: "",
+  image: "styles/images/items/toxinweave-mask.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item it prevents you from being poisoned.",
@@ -493,6 +496,7 @@ const SILKSTRIDERS = {
 const CHILLBREAKER_BAND = {
   name: "Chillbreaker Band",
   description: "",
+  image: "styles/images/items/chillbreaker-band.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item it prevents you from being chilled.",
@@ -504,6 +508,7 @@ const CHILLBREAKER_BAND = {
 const BERSERKER_PAULDRONS = {
   name: "Berserker Pauldrons",
   description: "",
+  image: "styles/images/items/berserker-pauldron.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item you gain +2 Strength, but -1 Faith.",
@@ -685,6 +690,7 @@ const CRIMSON_OFFERING = {
 const DARKGUARD_TRINKET = {
   name: "Darkguard Trinket",
   description: "",
+  image: "styles/images/items/darkguard-trinket.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect: "While attuned to this item it prevents you from being cursed.",
@@ -794,7 +800,7 @@ const SKULLBREAKER_HELM = {
 const BONECHILL_AMULET = {
   name: "Bone Chill Amulet",
   description: "",
-  image: "styles/images/items/bonechillamulet.jpg",
+  image: "styles/images/items/bonechill-amulet.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect:
@@ -1029,6 +1035,7 @@ const LICHROOT = {
 const ROTBANE_FERN = {
   name: "Rotbane Fern",
   description: "",
+  image: "styles/images/items/rotbane-fern.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
   logDetail: "EAT",

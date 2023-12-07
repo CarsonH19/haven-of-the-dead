@@ -404,6 +404,7 @@ let blackheartBrewTracker;
 
 const LEGIONS_GRACE = {
   name: "Legion's Grace",
+  image: "styles/images/items/war-torn-banner.jpg",
   status: `Base Attack +${legionAttackBoost}.`,
   duration: null,
   function: () => {
