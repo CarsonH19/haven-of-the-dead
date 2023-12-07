@@ -364,12 +364,17 @@ function isGameOver() {
 
   if (currentPlayerHealth <= 0) {
     // ITEM: Soul Jar - resurrect with half HP
-    isItemAttuned(SOUL_JAR, null);
+    isItemAttuned(SOUL_JAR);
     setTimeout(() => {
       if (currentPlayerHealth <= 0) {
         alert("You died!");
+        // renderGameOverModal();
       }
     }, 1000);
+
+    function renderGameOverModal() {
+      
+    }
   }
 
   if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {

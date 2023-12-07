@@ -16,6 +16,7 @@ const GNAWER = {
   },
   function: () => {
     DISEASED.function(3);
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -36,6 +37,7 @@ const CRYPT_CRAWLER = {
   function: () => {
     WEBBED.function(4);
     soundEffectHandler(CRYPT_CRAWLER, "MONSTER ABILITY");
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -52,6 +54,7 @@ const COFFIN_SPIDER = {
   function: () => {
     WEBBED.function(5);
     soundEffectHandler(COFFIN_SPIDER, "MONSTER ABILITY");
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -69,6 +72,7 @@ const BROODMOTHER = {
   function: () => {
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
     soundEffectHandler(BROODMOTHER, "MONSTER ABILITY");
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -98,6 +102,7 @@ const SCOUNDREL = {
   function: () => {
     POISONED.function(3);
     soundEffectHandler(SCOUNDREL, "MONSTER ABILITY");
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -193,6 +198,7 @@ const BLAZING_SKELETON = {
     showDamage(15, "MONSTER");
     updatePlayerTrackers();
     soundEffectHandler(BLAZING_SKELETON, "MONSTER ABILITY");
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -209,6 +215,7 @@ const DRAUGR = {
   function: () => {
     CHILLED.function(5);
     soundEffectHandler(DRAUGR, "MONSTER ABILITY");
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -231,6 +238,7 @@ const BONE_TITAN = {
     );
 
     soundEffectHandler(BONE_TITAN, "MONSTER ABILITY");
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
     //writeToLog(); crumbles and reforms into smaller skeletons
   },
 };
@@ -248,6 +256,7 @@ const FLOOD_OF_BONES = {
   function: () => {
     //writeToLog() if critical attack, spawns 2 decrepit skeletons
     currentRoom.contents.monsters.push(DECREPIT_SKELETON);
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -287,6 +296,7 @@ const HAUNTING_SPIRIT = {
   },
   function: () => {
     HAUNTED.function();
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -301,6 +311,7 @@ const GRUDGE = {
   },
   function: () => {
     HAUNTED.function();
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -375,6 +386,7 @@ const POSSESSED_EARVER = {
   },
   function: () => {
     HAUNTED.function();
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -394,6 +406,8 @@ const IVAN_STATS = {
       // Swap the current element with the one at the preceding index
       [array[index], array[index - 1]] = [array[index - 1], array[index]];
     }
+
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 

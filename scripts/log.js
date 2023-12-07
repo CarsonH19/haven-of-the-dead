@@ -420,6 +420,7 @@ function writeToLogActions(logType, narrate, dataOne) {
 // ==============================================================
 
 function writeToLogMonster(logType, narrate, dataOne) {
+  // dataOne = damage
   let newEntry = document.createElement("li");
   let monsterName = currentRoom.contents.monsters[0].name;
   let narration = Math.round(Math.random() * 9);
@@ -446,7 +447,37 @@ function writeToLogMonster(logType, narrate, dataOne) {
     // ===============================
 
     case LOG_MONSTER_ABILITY:
-      newEntry.textContent = `The ${monsterName} deals ${dataOne} damage to you!`;
+      if (monsterName === "Gnawer") {
+        newEntry.textContent = `A vile disease afflicts you, unleashed by the plagued gnawer's bite.`;
+      } else if (
+        monsterName === 'Crypt Crawler' ||
+        monsterName === 'Coffin Spider'
+      ) {
+        newEntry.textContent = `Sticky webs constrict around you as the ${monsterName}'s web claims you, ensnaring you in its silken trap.`;
+      } else if (monsterName === 'Broodmother') {
+        newEntry.textContent = `An egg hatches from the broodmother, releasing a ravenous spawn that scuttles forth.`;
+      } else if (monsterName === 'Scoundrel') {
+        newEntry.textContent = `A searing pain courses through your veins as the poison-laced blade of the scoundrel leaves its venomous mark.`;
+      } else if (monsterName === 'Bone Titan') {
+        newEntry.textContent = `The bone titan crumbles, yielding to a heap of bones. Three decrepit skeletons emerge, rising ominously from the fractured remains.`;
+      } else if (monsterName === 'Blazing Skeleton') {
+        newEntry.textContent = `The blazing skeleton detonates, engulfing you in searing flames.`;
+      } else if (monsterName === 'Draugr') {
+        newEntry.textContent = `The draugr's icy touch envelops you in an otherworldly frost. Leaving you shivering in the wake of its dark magic.`;
+      } else if (monsterName === 'Flood of Bones') {
+        newEntry.textContent = `As the undead tide cascades, skeletal remnants reanimate in the wake of the bone-laden deluge.`;
+      } else if (monsterName === 'Baron of Bone') {
+        newEntry.textContent = ``;
+      } else if 
+      (
+        monsterName === 'Haunting Spirit' ||
+        monsterName === 'Graverobber Earver' ||
+        monsterName === 'Grudge' 
+      ) {
+        newEntry.textContent = `You are haunted by malevolent spirits, their pressence follow you and their ethereal whispers claw at your sanity.`;
+      } else if (monsterName === 'Ivan the Scoundrel') {
+        newEntry.textContent = ``;
+      }
       break;
   }
 
