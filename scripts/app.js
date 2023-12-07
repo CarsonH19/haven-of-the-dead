@@ -367,13 +367,14 @@ function isGameOver() {
     isItemAttuned(SOUL_JAR);
     setTimeout(() => {
       if (currentPlayerHealth <= 0) {
-        alert("You died!");
-        // renderGameOverModal();
+        renderGameOverModal();
       }
     }, 1000);
 
     function renderGameOverModal() {
-      
+      const gameOverModal = document.getElementById("gameOverModal");
+
+      gameOverModal.style.display = "block";
     }
   }
 

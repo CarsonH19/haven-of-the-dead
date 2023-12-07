@@ -762,7 +762,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     // ===============================
 
     case LOG_SAFE_ROOM:
-      newEntry.textContent = `${event.summary}`;
+      newEntry.textContent = `${SAFE_ROOM.description}`;
       narration = newEntry.textContent;
       break;
 
@@ -1309,7 +1309,7 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
 
     case LOG_CONSUMABLE:
       if (dataOne.logDetail === "WISP") {
-        newEntry.textContent = `As you release the ${dataOne.name}, its ethereal glow illuminates the catacomb as it beckons you to follow it.`;
+        newEntry.textContent = `As you release the ${dataOne.name}, its ethereal glow illuminates the catacomb and it beckons you to follow it.`;
       } else if (dataOne.logDetail === "CANDLE") {
         newEntry.textContent = `You ignite the ${dataOne.name}.`;
       } else if (dataOne.logDetail === "EAT") {

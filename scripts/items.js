@@ -133,7 +133,7 @@ const FLASK_OF_LIGHT = {
       currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
       currentRoom.contents.monsters[0] === GRUDGE
     ) {
-      monsterMaxHealth = monsterMaxHealth - 15;
+      monsterMaxHealth = monsterMaxHealth - 10;
       monsterAttackValue = monsterAttackValue - 2;
     }
   },
@@ -161,9 +161,9 @@ const CHARM_OF_HEALING = {
   type: "MAGIC",
   rarity: "Common",
   effect:
-    "While attuned to this item you recover 10 points of health after each room you clear.",
+    "While attuned to this item you recover 5 points of health after each room you clear.",
   function: () => {
-    healPlayer(10);
+    healPlayer(5);
   },
 };
 
@@ -749,20 +749,6 @@ const WAR_TORN_BANNER = {
 // ===============================
 //       LOCKED ROOM ITEMS
 // ===============================
-
-const BONEMAIL = {
-  name: "Bonemail",
-  description: "",
-  type: "MAGIC",
-  rarity: "Common",
-  effect: "While attuned to this item your max health is increased by 20HP.",
-  function: () => {
-    baseHealth += 20;
-  },
-  unequip: () => {
-    baseHealth -= 20;
-  },
-};
 
 const RIBCAGE_DEFENDER = {
   name: "Ribcage Defender",
@@ -1639,7 +1625,6 @@ let candleItems = [
 let wispItems = [GUIDING_LIGHT, ROWDY_WISP, UNHOLY_WISP, RESTLESS_WISP];
 
 let bonevaultItems = [
-  BONEMAIL,
   RIBCAGE_DEFENDER,
   SKULLBREAKER_HELM,
   BONECHILL_AMULET,
@@ -1651,23 +1636,17 @@ let beastCommonLoot = [RING_OF_SKITTERING, SILKSTRIDERS];
 
 let beastRareLoot = [PLAGUEWARD_PENDANT, FANGWEAVE_ARMOR];
 
-let humanoidCommonLoot = [
-  FLASK_OF_LIGHT,
-  SHADOWSTEP_BOOTS,
-  TITANS_FEMUR,
-  SILKSTRIDERS,
-];
+let humanoidCommonLoot = [FLASK_OF_LIGHT, SHADOWSTEP_BOOTS];
 
 let humanoidRareLoot = [
   SUNSTONE,
   BRACELET_OF_THE_SERPENT,
   MIST_VEIL_CLOAK,
-  PLAGUEWARD_PENDANT,
   TOME_OF_DEVOTION,
   TOXINWEAVE_MASK,
 ];
 
-let undeadCommonLoot = [EVERTORCH, HOLY_RELIC, TITANS_FEMUR, CHARM_OF_HEALING];
+let undeadCommonLoot = [EVERTORCH, HOLY_RELIC, BONE_BLUDGEON, CHARM_OF_HEALING];
 
 let undeadRareLoot = [
   GHOSTSHROUD_TALISMAN,
@@ -1687,7 +1666,7 @@ let commonItems = [
   SOOTHING_CANDLE,
   FLICKERING_CANDLE,
   SHADOWSTEP_BOOTS,
-  TITANS_FEMUR,
+  BONE_BLUDGEON,
   HOLY_RELIC,
 ];
 
@@ -1709,11 +1688,10 @@ let rareItems = [
 ];
 
 let epicItems = [
-  SOULREAVER,
   HALLOWED_HOURGLASS,
+  DARKGUARD_TRINKET,
   SOUL_JAR,
-  BLAZING_CANDLE,
-  SOULFLAME_CANDLE,
+  SOUL_JAR,
 ];
 
 let foundItem;
@@ -1891,6 +1869,7 @@ function lootItems(lootGroup) {
     let room = currentRoom.contents.items;
     let commonLoot;
     let rareLoot;
+    let epicLoot = epicItems;
     let foundItem;
     let foundConsumable;
 
@@ -1942,20 +1921,22 @@ function lootItems(lootGroup) {
     }
 
     // Loot Items
-    if (lootItemChance > 95 && rareLoot.length > 0) {
+    if (lootItemChance > 102 && epicLoot.length > 0) {
+      const epicIndex = Math.floor(Math.random() * epicLoot.length);
+      foundItem = epicLoot[epicIndex];
+      rareLoot.splice(epicIndex, 1);
+      room.push(foundItem);
+    } else if (lootItemChance > 95 && rareLoot.length > 0) {
       const rareIndex = Math.floor(Math.random() * rareLoot.length);
       foundItem = rareLoot[rareIndex];
       rareLoot.splice(rareIndex, 1);
       room.push(foundItem);
-      console.log(foundItem);
     } else if (lootItemChance > 90 && commonLoot.length > 0) {
       const commonIndex = Math.floor(Math.random() * commonLoot.length);
       foundItem = commonLoot[commonIndex];
       commonLoot.splice(commonIndex, 1);
       room.push(foundItem);
-      console.log(foundItem);
     }
-    console.log(lootConsumableChance);
 
     // Loot Consuables
     if (lootConsumableChance > 95) {
@@ -1964,14 +1945,12 @@ function lootItems(lootGroup) {
       );
       foundConsumable = rareConsumables[rareConsumablesIndex];
       room.push(foundConsumable);
-      console.log(foundConsumable);
     } else if (lootConsumableChance > 70) {
       const commonConsumablesIndex = Math.floor(
         Math.random() * commonConsumables.length
       );
       foundConsumable = commonConsumables[commonConsumablesIndex];
       room.push(foundConsumable);
-      console.log(foundConsumable);
     }
   }
 }
@@ -2434,11 +2413,10 @@ inventoryModal.addEventListener("click", (event) => {
         wispDuplicateHandler(buttons[i].id) === true &&
         wispActive === "ACTIVE"
       ) {
-        writeToLogOther(LOG_OTHER, 'YES', "WISP");
+        writeToLogOther(LOG_OTHER, "YES", "WISP");
       } else {
         useConsumable(buttons[i].id);
       }
-
     }
 
     // Attuned Items Logic

@@ -651,6 +651,11 @@ progress[value]::-moz-progress-bar {
   display: none;
 }
 
+/* Game Over Modal */
+#gameOverModal {
+  display: none;
+}
+
 /* Hero Choice Modal */
 #heroChoiceModal {
   display: none;

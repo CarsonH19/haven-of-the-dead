@@ -39,14 +39,15 @@ const SAFE_ROOM = {
   eventType: "SAFE ROOM",
   description:
     "You arrive at Candlelight Shrine, a haven untainted by darkness. Here, malevolence recoils, granting you respite. Embrace the flickering sanctuary, and let the shadows fade as you rest, shielded from the evil that prowls beyond its sacred glow.",
-  summary: `You rested at the Candlelight Shrine. The sacred flames stood sentinel, offering you solace in the heart of the catacomb.`,
+  summary: `You rest at the Candlelight Shrine. The sacred flames stand sentinel, offering you solace in the heart of the catacomb.`,
   functionOne: () => {
     setTimeout(() => {
       getItem("CANDLE");
-      healPlayer(calculatePlayerMaxHealth());
       setRoomSummary();
-      newRoomAnimation(); // creates passing of time effect
-      setTimeout(renderRoomSummaryModal, 5000);
+      writeToLogEvent(LOG_SAFE_ROOM, "YES");
+      setTimeout(newRoomAnimation, 5000);
+      setTimeout(healPlayer(calculatePlayerMaxHealth()), 6500);
+      setTimeout(renderRoomSummaryModal, 9000);
     });
   },
 };
@@ -102,7 +103,7 @@ const SWARM_OF_VERMIN = {
   name: "Swarm of Vermin",
   eventType: "TRAP",
   description:
-    "A horrifying spectacle unfolds before you, as an unending tide of rats pour into the chamber. Their frenetic scuttling and chittering echoes off the walls, drowning out all other sound. The ground seems to writhe beneath the onslaught, and the air grows thick with their foul scent.",
+    "A horrifying spectacle unfolds before you, as an unending tide of rats pour into the chamber. Their frenetic scuttling and chittering echoes off the walls, drowning out all other sound.",
   optionOne: "Strength",
   optionTwo: "Faith",
   passValue: 5,
@@ -262,7 +263,6 @@ const IVAN_THE_SCOUNDREL = {
   optionOne: "Release",
   optionTwo: "Leave",
   functionOne: () => {
-    writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
     IVAN_THE_SCOUNDREL.summary = `Amidst the severed limbs of the defeated arachnid, the scoundrel, grateful yet wary, hands over a cryptic key. "Treasures await within my hidden cache," he smirks. "Take what's yours."`;
     currentRoom.contents.items.push(CACHE_KEY);
     currentRoom.contents.monsters.push(BROODMOTHER);
@@ -276,9 +276,9 @@ const IVAN_THE_SCOUNDREL = {
 
     setRoomSummary();
     startBattle();
+    writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
-    writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
     IVAN_THE_SCOUNDREL.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
     let addRoom = roomCounter + 5;
     let ivanInterval = setInterval(() => {
@@ -295,6 +295,7 @@ const IVAN_THE_SCOUNDREL = {
     LAUGHING_COFFIN_ROOM.contents.monsters.push(IVAN_STATS);
     setRoomSummary();
     setTimeout(renderRoomSummaryModal, 5000);
+    writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
   },
 };
 
@@ -610,7 +611,7 @@ const COFFIN_SPIDER_EVENT = {
 const LAUGHING_COFFIN_EVENT = {
   name: "The Laughing Coffin",
   eventType: "MISC",
-  description: `The Laughing Coffin tavern, sanctuary for underworld denizens. Amid dim-lit haze, dubious characters eye you, inviting pay to join their revelry. The air, thick with whispered schemes, hints at the consequences of refusing. Will you pay coin or risk the ire of its wicked patrons.`,
+  description: `The Laughing Coffin tavern, sanctuary for underworld denizens. Amid dim-lit haze, dubious characters eye you. Will you pay coin or risk the ire of its wicked patrons.`,
   summary: "",
   optionOne: "Pay",
   optionTwo: "Refuse",
@@ -900,7 +901,6 @@ function renderEvent(event) {
 
       case "SAFE ROOM":
         SAFE_ROOM.functionOne();
-        writeToLogEvent(LOG_SAFE_ROOM, "YES");
         currentRoom.contents.events = null;
         break;
     }

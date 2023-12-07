@@ -560,8 +560,8 @@ function monsterAbilityHandler(monster) {
       break;
 
     case GNAWER:
-      let gnawerDiseaseChance = Math.round(Math.random() * 100);
-      if (gnawerDiseaseChance === 100) {
+      let gnawerDiseaseChance = Math.floor(Math.random() * 21);
+      if (gnawerDiseaseChance === 20) {
         console.log("Gnawer Ability Called!");
         GNAWER.function();
       }
