@@ -477,6 +477,8 @@ function writeToLogMonster(logType, narrate, dataOne) {
         newEntry.textContent = `You are haunted by malevolent spirits, their pressence follow you and their ethereal whispers claw at your sanity.`;
       } else if (monsterName === 'Ivan the Scoundrel') {
         newEntry.textContent = ``;
+      } else if (monsterName === 'Undead Legion Phalanx') {
+        newEntry.textContent = `The phalanx unleash a flurry of thrusts and slashes from their defensive positions.`;
       }
       break;
   }

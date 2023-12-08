@@ -739,9 +739,7 @@ const BATTLEFIELD = {
         LOST_LEGIONS_VALE.contents.monsters.push(UNDEAD_PHALANX);
         // writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "LEGION");
         setTimeout(() => {
-          monsterAttackValue = 4;
-          console.log('MONSTER ATTACK = 4');
-        }, 1000);
+        }, 2000);
 
     } else {
       for (let i = 0; i < 5; i++) {

@@ -193,9 +193,10 @@ const LEGIONNAIRE = {
 };
 
 const UNDEAD_PHALANX = {
-  name: "Phalanx of Undead Legionnaries",
+  name: "Undead Legion Phalanx",
+  boss: 'YES',
   type: "UNDEAD",
-  skulls: 8,
+  skulls: "Undead Legion Phalanx",
   attackCounter: 0,
   soundEffects: {
     spawn: boneCrunchCrack1,
@@ -217,12 +218,33 @@ const UNDEAD_PHALANX = {
         writeToLogHero(LOG_EVASION, "NO");
       }
 
-      soundEffectHandler(UNDEAD_PHALANX, "MONSTER ATTACK");
       damagePlayer(monsterToPlayerDamage);
-      writeToLogMonster(LOG_MONSTER_ATTACK, "NO");
+      writeToLogMonster(LOG_MONSTER_ATTACK, "NO", monsterToPlayerDamage);
     }
 
-    if (currentMonsterHealth < 80) {
+    function attackSounds() {
+      const sound = Math.floor(Math.random() * 5) + 1;
+
+      switch (sound) {
+        case 1:
+          severMetalHit2.play();
+          break;
+        case 2:
+          fleshHit5.play();
+          break;
+        case 3:
+          fleshStab3.play();
+          break;
+        case 4:
+          knifeStab.play();
+          break;
+        case 5:
+          swordImpactRock1.play();
+          break;
+      }
+    }
+
+    if (currentMonsterHealth <= 110) {
       damageMonster(currentMonsterHealth);
       for (let i = 0; i < 4; i++) {
         LOST_LEGIONS_VALE.contents.monsters.push(LEGIONNAIRE);
@@ -237,11 +259,13 @@ const UNDEAD_PHALANX = {
 
         console.log("ATTACK MADE");
         UNDEAD_PHALANX.attackCounter++;
+        attackSounds();
         phalanxAttacks();
+        updatePlayerTrackers();
       }, 500);
     }
 
-    updatePlayerTrackers();
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -309,7 +333,7 @@ const BONE_TITAN = {
 const FLOOD_OF_BONES = {
   name: "Flood of Bones",
   type: "UNDEAD",
-  skulls: 8,
+  skulls: 9,
   soundEffects: {
     spawn: boneCrunchCrack1,
     attack: fleshHit5,
@@ -505,17 +529,30 @@ function monsterSkullLevel(level) {
       monsterMaxHealth = 200;
       monsterAttackValue = 18;
       break;
+    case "Undead Legion Phalanx":
+      monsterMaxHealth = 180;
+      monsterAttackValue = 4;
+      break;
   }
 }
 
 function renderMonsterStatBlock(monster) {
   fadeInAnimation(monsterContainer);
   monsterContainer.style.display = "flex";
-  monsterNameElement.textContent = monster.name;
-  monsterSkullElement.textContent = monster.skulls;
+
+  if (monster.boss) {
+    monsterNameElement.textContent = monster.skulls;
+    monsterSkullElement.textContent = '';
+  } else {
+    monsterNameElement.textContent = monster.name;
+    monsterSkullElement.textContent = monster.skulls;  
+  }
+
   monsterSkullLevel(monster.skulls);
+
   // ITEM: Flask of Light - Weakens evil spirits.
   isItemAttuned(FLASK_OF_LIGHT, 0);
+
   setMonsterHealth(monsterMaxHealth);
 }
 
@@ -658,16 +695,16 @@ function monsterAbilityHandler(monster) {
       break;
 
     case UNDEAD_PHALANX:
-      if (currentMonsterHealth > 140) {
+      if (currentMonsterHealth > 160) {
         UNDEAD_PHALANX.function(5);
         UNDEAD_PHALANX.attackCounter = 0;
-      } else if (currentMonsterHealth > 120) {
+      } else if (currentMonsterHealth > 130) {
         UNDEAD_PHALANX.function(4);
         UNDEAD_PHALANX.attackCounter = 0;
-      } else if (currentMonsterHealth > 100) {
+      } else if (currentMonsterHealth > 110) {
         UNDEAD_PHALANX.function(3);
         UNDEAD_PHALANX.attackCounter = 0;
-      } else if (currentMonsterHealth < 80) {
+      } else if (currentMonsterHealth <= 110) {
         UNDEAD_PHALANX.function(0);
       }
       break;

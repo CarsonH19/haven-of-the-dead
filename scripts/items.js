@@ -1551,7 +1551,7 @@ const RESTLESS_WISP = {
   duration: null,
   function: () => {
     const wisp = document.querySelector(".wisp");
-    let randomNumber = Math.round(Math.random() * 5) + 1;
+    let randomNumber = Math.round(Math.random() * 0) + 1;
     let wispDuration = roomCounter + randomNumber;
     RESTLESS_WISP.duration = "Searching";
     wispActive = "ACTIVE";
