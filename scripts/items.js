@@ -2,6 +2,14 @@
 //             ITEMS
 // ===============================
 
+// IDEAS
+// Whispering Skulls use to learn tips and knowledge... must have the Whispering Amulet attuned to understand
+// 1. The Flood of Bones is extremely dangerous, but very slow. Don't make the same mistake as me and flee while you can.
+// 2. Don't trust a scoundrel or you'll end up like me.
+// 3. Do not fear those in red. 
+// 4. Beware of Coffin Spiders, they learned to lure you with riches. 
+// 5. Broodmothers must be killed quickly before their eggs hatch.
+
 // Common Items
 // - *Evertorch
 // - Flask of Light
@@ -1550,17 +1558,6 @@ const RESTLESS_WISP = {
 
     // Clear room if player fleed in the past
     LOST_LEGIONS_VALE.contents.monsters = [];
-
-    // Check if War Torn Banner is equipped
-    if (attunedItems.includes(WAR_TORN_BANNER)) {
-      for (let i = 0; i < 5; i++) {
-        LOST_LEGIONS_VALE.contents.monsters.push(LEGIONNAIRE);
-      }
-    } else {
-      for (let i = 0; i < 5; i++) {
-        LOST_LEGIONS_VALE.contents.monsters.push(SKELETAL_SOLDIER);
-      }
-    }
 
     let restlessWispInterval = setInterval(() => {
       RESTLESS_WISP.duration = `Duration: ${wispDuration - roomCounter} Rooms`;

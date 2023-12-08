@@ -239,6 +239,13 @@ const hiddenCapacity = loadAudio(
   true
 );
 
+// Candlelight Shrine Event
+const mindReading = loadAudio(
+  "audio/music/Mind Reading.mp3",
+  "mindReading",
+  true
+);
+
 // Laughing Coffin Event
 const unfinishedBusiness = loadAudio(
   "audio/music/Unfinished Business.mp3",
@@ -246,10 +253,27 @@ const unfinishedBusiness = loadAudio(
   true
 );
 
+// Lost Legion Vale Event
+const weCantStopThem = loadAudio(
+  "audio/music/We Can't Stop Them.mp3",
+  "weCantStopThem",
+  true
+);
+
 // Coffin Spider Event
 const threeThousandYearsOld = loadAudio(
   "audio/music/3000 Years Old.mp3",
   "threeThousandYearsOld",
+  true
+);
+
+// Crimson Covenant Event
+const crypta = loadAudio("audio/music/Crypta.mp3", "crypta", true);
+
+// Trap Events
+const claustrofobia = loadAudio(
+  "audio/music/Claustrofobia.mp3",
+  "claustrofobia",
   true
 );
 

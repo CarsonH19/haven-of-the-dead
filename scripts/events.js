@@ -46,7 +46,9 @@ const SAFE_ROOM = {
       setRoomSummary();
       writeToLogEvent(LOG_SAFE_ROOM, "YES");
       setTimeout(newRoomAnimation, 5000);
-      setTimeout(healPlayer(calculatePlayerMaxHealth()), 6500);
+      setTimeout(() => {
+        healPlayer(calculatePlayerMaxHealth());
+      }, 6500);
       setTimeout(renderRoomSummaryModal, 9000);
     });
   },
@@ -721,6 +723,41 @@ const CRIMSON_COVENANT = {
     setRoomSummary();
     writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
     setTimeout(renderRoomSummaryModal, 5000);
+  },
+};
+
+const BATTLEFIELD = {
+  name: "Forsaken Battlefield",
+  eventType: "MISC",
+  description: `Lost Legion Vale, a cavernous passage unveiling the remnants of a battlefield within the catacomb's depths. Countless fallen warriors lie scattered across the expanse. There will be danger ahead. Do you wish to proceed?`,
+  optionOne: "Proceed",
+  optionTwo: "Return",
+  functionOne: () => {
+    // Check if War Torn Banner is equipped
+    
+    if (attunedItems.includes(WAR_TORN_BANNER)) {
+        LOST_LEGIONS_VALE.contents.monsters.push(UNDEAD_PHALANX);
+        // writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "LEGION");
+        setTimeout(() => {
+          monsterAttackValue = 4;
+          console.log('MONSTER ATTACK = 4');
+        }, 1000);
+
+    } else {
+      for (let i = 0; i < 5; i++) {
+        LOST_LEGIONS_VALE.contents.monsters.push(SKELETAL_SOLDIER);
+
+        // writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
+      }
+    }
+
+    playMusic(weCantStopThem);
+    startBattle();
+    setRoomSummary();
+  },
+  functionTwo: () => {
+    // writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
+    setTimeout(renderRoomSummaryModal, 4000);
   },
 };
 

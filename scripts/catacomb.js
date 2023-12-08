@@ -4,37 +4,31 @@
 
 // let catacombRooms = [
 //   {
-//     roomName: "Grim Garrison",
-//     description:
-//       "Grim Garrison, shrouded in ominous quiet, harbors countless vacant coffins. The once valiant warriors who inhabited them have vanished from their resting place.",
-//     backgroundImage: "styles/images/backgrounds/event-rooms/coffin-3.jpg",
-//     music: imminentDarkness,
+//         roomName: "Clawed Caverns",
+//         description:
+//           "The Clawed Caverns echo with the sinister skittering of unseen claws. Jagged stalactites hang like fangs, ready to pierce the unwary.",
+//         backgroundImage: "styles/images/backgrounds/tier-one/clawed-cavern.jpg",
+//         music: deepTunnels,
+//         contents: {
+//           monsters: [GNAWER, GNAWER],
+//           items: [],
+//           events: null,
+//         },
+//       },
+//   {
+//     roomName: "Lost Legions Vale",
+//     description: `A desolate vale in the catacomb's heart, where the whispers of forgotten warriors echo through the cold stone. Rusted armor and tattered banners line the silent path, revealing the untold tales of legions lost to time.`,
+//     backgroundImage: "styles/images/corridor-one.png",
+//     music: droneDarkHor1,
 //     contents: {
 //       monsters: [],
 //       items: [],
-//       events: null,
+//       events: BATTLEFIELD,
 //     },
 //     function: () => {
-//       if (attunedItems.includes(WHISPERING_AMULET)) {
-//         currentRoom.contents.events = FORSAKEN_COMMANDER;
-//       } else {
-//         currentRoom.contents.monsters.push(
-//           LEGIONNAIRE,
-//           LEGIONNAIRE,
-//           FORSAKEN_COMMANDER_STATS
-//         );
-//       }
-//     },
-//   },
-//     {
-//     roomName: "TEST ROOM TWO", // !FINISHED!
-//     description: 'TEST =)',
-//     backgroundImage: 'styles/images/backgrounds/event-rooms/catacomb-entrance.jpg',
-//     music: droneDarkHor1,
-//     contents: {
-//       monsters: [BROODMOTHER],
-//       items: [],
-//       events: null,
+//       setTimeout(() => {
+//         // writeToLog(LOG_EVENT_ROOM, LOST_LEGIONS_VALE);  // NEED TO FIX!!!
+//       }, 1500);
 //     },
 //   },
 // ];
@@ -180,7 +174,7 @@ let catacombRooms = [
     music: edgeOfFear,
     contents: {
       monsters: [DECREPIT_SKELETON, SKELETAL_SOLDIER, DECREPIT_SKELETON],
-      items: [GUIDING_LIGHT],
+      items: [],
       events: null,
     },
   },
@@ -323,7 +317,7 @@ let catacombRooms = [
     description:
       "The Marrowrest Tomb exhales an eerie silence. No living soul stirs, yet the air shivers with the unseen presence of the Graverobber Earver. Unhallowed secrets lie waiting to be unearthed in this solemn sepulcher.",
     backgroundImage: "styles/images/backgrounds/tier-one/marrowrest-tomb.jpg",
-    music: imminentDarkness,
+    music: claustrofobia,
     contents: {
       monsters: [],
       items: [],
@@ -335,7 +329,7 @@ let catacombRooms = [
     description:
       "The Webspun Passage, a silken maze woven by colossal spiders. Threads glisten, hinting at unseen arachnid architects. Each step stirs a web, the air pulsating with the potential of an eight-legged guardian's descent.",
     backgroundImage: "styles/images/backgrounds/tier-one/webspun-passage.jpg",
-    music: spiderInvasion,
+    music: claustrofobia,
     contents: {
       monsters: [],
       items: [],
@@ -347,7 +341,7 @@ let catacombRooms = [
     description:
       "Within the Creeping Coffin, ancient sarcophagi loom like silent sentinels. Coffin spiders, their legs tapping a macabre rhythm, await an unsuspecting intruder. The air is heavy with the scent of ancient dread.",
     backgroundImage: "styles/images/backgrounds/event-rooms/coffin-2.jpg",
-    music: spiderInvasion,
+    music: threeThousandYearsOld,
     contents: {
       monsters: [],
       items: [],
@@ -631,7 +625,7 @@ let tierTwoRooms = [
       "The Dreadbone Chamber resonates with the echoes of skeletal hands. Bone-white appendages emerge from the darkness, reaching for the living.",
     summary: "",
     backgroundImage: "styles/images/corridor-one.png",
-    music: null,
+    music: claustrofobia,
     contents: {
       monsters: [],
       items: [],
@@ -644,7 +638,7 @@ let tierTwoRooms = [
       "The Bloodstained Bridge spans a chasm filled with bone. Crimson stains mark the way, leading to a perilous path where pendulum blades swing ominously. An unsettling quiet shrouds the impending danger.",
     summary: "",
     backgroundImage: "styles/images/corridor-one.png",
-    music: null,
+    music: claustrofobia,
     contents: {
       monsters: [],
       items: [],
@@ -657,7 +651,7 @@ let tierTwoRooms = [
       "Within the Cadaver Crypt, stone walls encase a macabre gallery of lifeless forms. The air is heavy with the scent of decay, and the distant scrape of spike walls signals impending danger to intruders.",
     summary: "",
     backgroundImage: "styles/images/corridor-one.png",
-    music: null,
+    music: claustrofobia,
     contents: {
       monsters: [],
       items: [],
@@ -721,7 +715,7 @@ let tierTwoRooms = [
       "Within the Pestilent Pit, a noxious mist clings to the walls, harboring unseen dangers. The ground trembles beneath, hinting at the lurking menace of a spike-laden pitfall, ready to ensnare the unwary explorer.",
     summary: "",
     backgroundImage: "styles/images/corridor-two.png",
-    music: null,
+    music: claustrofobia,
     contents: {
       monsters: [],
       items: [],
@@ -854,7 +848,7 @@ const CANDLELIGHT_SHRINE = {
   summary: "",
   backgroundImage:
     "styles/images/backgrounds/event-rooms/candlelight-shrine.jpg",
-  music: threeThousandYearsOld,
+  music: mindReading,
   contents: {
     monsters: [],
     items: [],
@@ -870,11 +864,11 @@ const LOST_LEGIONS_VALE = {
   roomName: "Lost Legions Vale",
   description: `A desolate vale in the catacomb's heart, where the whispers of forgotten warriors echo through the cold stone. Rusted armor and tattered banners line the silent path, revealing the untold tales of legions lost to time.`,
   backgroundImage: "styles/images/corridor-one.png",
-  music: null,
+  music: droneDarkHor1,
   contents: {
     monsters: [],
     items: [],
-    events: null,
+    events: BATTLEFIELD,
   },
   function: () => {
     setTimeout(() => {
@@ -902,7 +896,7 @@ const BLOOD_ALTER = {
     "The altar, carved from the cold, black stone native to the catacombs, stands in a chamber illuminated only by the eerie glow of blood-red torches. The walls are adorned with morbid murals, depicting the Lord of Crimson, the deity of blood and life.",
   summary: "",
   backgroundImage: "styles/images/backgrounds/event-rooms/crimson-covenant.jpg",
-  music: imminentDarkness,
+  music: crypta,
   contents: {
     monsters: [],
     items: [],
@@ -976,7 +970,7 @@ const IVANS_CACHE = {
   description:
     "Ivan's Hidden Cache, a clandestine chamber within the catacombs, echoes with whispered secrets and the scent of ill-gotten gains. Anticipation hangs thick in the air as tales of treasures untold circulate. At the heart of the room, a mysterious chest guards the spoils, tempting fate with promises of riches waiting to be unveiled.",
   backgroundImage: "",
-  music: null,
+  music: claustrofobia,
   contents: {
     monsters: [],
     items: [],
@@ -988,7 +982,7 @@ const IVAN_TRAP_ROOM_ONE = {
   roomName: "",
   description: "",
   backgroundImage: "",
-  music: null,
+  music: claustrofobia,
   contents: {
     monsters: [],
     items: [],
@@ -1000,7 +994,7 @@ const IVAN_TRAP_ROOM_TWO = {
   roomName: "",
   description: "",
   backgroundImage: "",
-  music: null,
+  music: claustrofobia,
   contents: {
     monsters: [],
     items: [],

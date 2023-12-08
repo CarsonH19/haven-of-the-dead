@@ -181,6 +181,70 @@ const ARMORED_SKELETON = {
   },
 };
 
+const LEGIONNAIRE = {
+  name: "Undead Legionnaire",
+  type: "UNDEAD",
+  skulls: 4,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: armorMetalClanksToTheGround,
+  },
+};
+
+const UNDEAD_PHALANX = {
+  name: "Phalanx of Undead Legionnaries",
+  type: "UNDEAD",
+  skulls: 8,
+  attackCounter: 0,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: armorMetalClanksToTheGround,
+  },
+  function: (attacks) => {
+    console.log("ABILITY CALLED");
+    // monsterAttackValue = 4;
+
+    //Altered Monster Attack Handler
+    function phalanxAttacks() {
+      let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
+
+      // Rogue Passive Ability Checker
+      if (heroChoice === "ROGUE" && evasionTracker >= monsterToPlayerDamage) {
+        monsterToPlayerDamage = 0;
+        // soundEffectHandler(swordSwingWhoosh, "MONSTER MISS");
+        writeToLogHero(LOG_EVASION, "NO");
+      }
+
+      soundEffectHandler(UNDEAD_PHALANX, "MONSTER ATTACK");
+      damagePlayer(monsterToPlayerDamage);
+      writeToLogMonster(LOG_MONSTER_ATTACK, "NO");
+    }
+
+    if (currentMonsterHealth < 80) {
+      damageMonster(currentMonsterHealth);
+      for (let i = 0; i < 4; i++) {
+        LOST_LEGIONS_VALE.contents.monsters.push(LEGIONNAIRE);
+      }
+      // soundEffectHandler(Break Apart Sound, "MONSTER ABILITY");
+      // writeToLogMonster(LOG_MONSTER_ABILITY, "YES", "LOSE FORMATION");
+    } else {
+      const phalanxInterval = setInterval(() => {
+        if (UNDEAD_PHALANX.attackCounter >= attacks) {
+          clearInterval(phalanxInterval);
+        }
+
+        console.log("ATTACK MADE");
+        UNDEAD_PHALANX.attackCounter++;
+        phalanxAttacks();
+      }, 500);
+    }
+
+    updatePlayerTrackers();
+  },
+};
+
 const BLAZING_SKELETON = {
   name: "Blazing Skeleton",
   type: "UNDEAD",
@@ -239,7 +303,6 @@ const BONE_TITAN = {
 
     soundEffectHandler(BONE_TITAN, "MONSTER ABILITY");
     writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
-    //writeToLog(); crumbles and reforms into smaller skeletons
   },
 };
 
@@ -361,17 +424,6 @@ const FORSAKEN_COMMANDER_STATS = {
     spawn: ghostAppearance1,
     attack: getEvilSpiritAudio(),
     death: ghostHowl,
-  },
-};
-
-const LEGIONNAIRE = {
-  name: "Undead Legionnaire",
-  type: "UNDEAD",
-  skulls: 4,
-  soundEffects: {
-    spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
-    death: armorMetalClanksToTheGround,
   },
 };
 
@@ -603,5 +655,21 @@ function monsterAbilityHandler(monster) {
       if (poisonDagger >= 9) {
         SCOUNDREL.function();
       }
+      break;
+
+    case UNDEAD_PHALANX:
+      if (currentMonsterHealth > 140) {
+        UNDEAD_PHALANX.function(5);
+        UNDEAD_PHALANX.attackCounter = 0;
+      } else if (currentMonsterHealth > 120) {
+        UNDEAD_PHALANX.function(4);
+        UNDEAD_PHALANX.attackCounter = 0;
+      } else if (currentMonsterHealth > 100) {
+        UNDEAD_PHALANX.function(3);
+        UNDEAD_PHALANX.attackCounter = 0;
+      } else if (currentMonsterHealth < 80) {
+        UNDEAD_PHALANX.function(0);
+      }
+      break;
   }
 }
