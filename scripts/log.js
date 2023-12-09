@@ -1247,11 +1247,17 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         }
       } else if (event === CRIMSON_COVENANT) {
         if (dataOne === "JOIN") {
-        newEntry.textContent = `As your blood mingles with the sacrificial stream, an otherworldly energy surges through the catacomb. The hooded figures bow in silent acknowledgment.`;
+          newEntry.textContent = `As your blood mingles with the sacrificial stream, an otherworldly energy surges through the catacomb. The hooded figures bow in silent acknowledgment.`;
         } else if (dataOne === "LOW HEALTH") {
           newEntry.textContent = `Too weak to make a sacrifice, you step away from the ritual. The hooded figures pause. The catacomb's air tightens with an unsettling stillness. The chanting falters, and the figures regard you with an ominous silence as you descend into the catacomb.`;
         }
-      } 
+      } else if (event === BATTLEFIELD) {
+        if (dataOne === "BOSS") {
+          newEntry.textContent = `Amidst the war-torn ruins, you unfurl the War Torn Banner, summoning dozens of skeletal warriors. Rising from the battlefield's remnants, they form an ominous phalanx, their instinct for war propelling them relentlessly toward you.`;
+        } else {
+          newEntry.textContent = `You enter the vale, several skeletal warriors rise from the battlefield's remnants. Their warrior instincts persisting even in death.`;
+        }
+      }
 
       narration = newEntry.textContent;
       break;
@@ -1263,6 +1269,8 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `The chamber remains tightly sealed, and its secrets a mystery.`;
       } else if (event === CRIMSON_COVENANT) {
         newEntry.textContent = `You step back from the altar, rejecting the sinister invitation. The hooded figures pause. The catacomb's air tightens with an unsettling stillness. The chanting falters, and the figures regard you with an ominous silence as you descend into the catacomb.`;
+      } else if (event === BATTLEFIELD) {
+        newEntry.textContent = `You decide not to step into the vale, and return they way you came.`;
       }
 
       narration = newEntry.textContent;

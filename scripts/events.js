@@ -732,20 +732,18 @@ const BATTLEFIELD = {
   description: `Lost Legion Vale, a cavernous passage unveiling the remnants of a battlefield within the catacomb's depths. Countless fallen warriors lie scattered across the expanse. There will be danger ahead. Do you wish to proceed?`,
   optionOne: "Proceed",
   optionTwo: "Return",
-  functionOne: () => {
-    // Check if War Torn Banner is equipped
-    
+  functionOne: () => {    
     if (attunedItems.includes(WAR_TORN_BANNER)) {
+      BATTLEFIELD.summary = "You entered Lost Legions Vale with the War Torn Banner, summoning the Undead Legion Phalanx. Defeating this powerful foe, you laid several members of the Forsken Commander's legion to rest."
         LOST_LEGIONS_VALE.contents.monsters.push(UNDEAD_PHALANX);
-        // writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "LEGION");
+        writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "BOSS");
         setTimeout(() => {
         }, 2000);
-
     } else {
-      for (let i = 0; i < 5; i++) {
+      BATTLEFIELD.summary = "You entered Lost Legions Vale and defeated a hoard of undead warriors on the battlefield.";
+      for (let i = 0; i < 7; i++) {
         LOST_LEGIONS_VALE.contents.monsters.push(SKELETAL_SOLDIER);
-
-        // writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
+        writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
       }
     }
 
@@ -754,7 +752,7 @@ const BATTLEFIELD = {
     setRoomSummary();
   },
   functionTwo: () => {
-    // writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
+    writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
     setTimeout(renderRoomSummaryModal, 4000);
   },
 };

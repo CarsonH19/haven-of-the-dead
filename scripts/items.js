@@ -1227,15 +1227,7 @@ const WHISPERING_SKULL = {
   effect: "Can be used to learn secrets of the catacomb.",
   function: () => {
     setTimeout(() => {
-      let whisper;
-      if (roomCounter >= 50) {
-        whisper = Math.floor(Math.random() * 5) + 11;
-      } else if (roomCounter >= 25) {
-        whisper = Math.floor(Math.random() * 5) + 6;
-      } else {
-        whisper = Math.floor(Math.random() * 5) + 1;
-      }
-      
+      let whisper = Math.floor(Math.random() * 10) + 1;
       writeToLogItem(LOG_ITEM, "YES", WHISPERING_SKULL, whisper);
     }, 3000);
   },
