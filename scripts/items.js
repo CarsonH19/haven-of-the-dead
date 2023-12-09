@@ -2,14 +2,6 @@
 //             ITEMS
 // ===============================
 
-// IDEAS
-// Whispering Skulls use to learn tips and knowledge... must have the Whispering Amulet attuned to understand
-// 1. The Flood of Bones is extremely dangerous, but very slow. Don't make the same mistake as me and flee while you can.
-// 2. Don't trust a scoundrel or you'll end up like me.
-// 3. Do not fear those in red. 
-// 4. Beware of Coffin Spiders, they learned to lure you with riches. 
-// 5. Broodmothers must be killed quickly before their eggs hatch.
-
 // Common Items
 // - *Evertorch
 // - Flask of Light
@@ -1224,6 +1216,31 @@ const BLACKHEART_BREW = {
   },
 };
 
+const WHISPERING_SKULL = {
+  name: "Whispering Skull",
+  description: "",
+  image: "styles/images/items/grervils-skull.jpg",
+  soundEffect: evilSpell1,
+  type: "CONSUMABLE",
+  rarity: "Common",
+  logDetail: "SPEAK",
+  effect: "Can be used to learn secrets of the catacomb.",
+  function: () => {
+    setTimeout(() => {
+      let whisper;
+      if (roomCounter >= 50) {
+        whisper = Math.floor(Math.random() * 5) + 11;
+      } else if (roomCounter >= 25) {
+        whisper = Math.floor(Math.random() * 5) + 6;
+      } else {
+        whisper = Math.floor(Math.random() * 5) + 1;
+      }
+      
+      writeToLogItem(LOG_ITEM, "YES", WHISPERING_SKULL, whisper);
+    }, 3000);
+  },
+};
+
 // ===============================
 //           CANDLES
 // ===============================
@@ -1684,12 +1701,7 @@ let rareItems = [
   BRACELET_OF_THE_SERPENT,
 ];
 
-let epicItems = [
-  HALLOWED_HOURGLASS,
-  DARKGUARD_TRINKET,
-  SOUL_JAR,
-  SOUL_JAR,
-];
+let epicItems = [HALLOWED_HOURGLASS, DARKGUARD_TRINKET, SOUL_JAR, SOUL_JAR];
 
 let foundItem;
 

@@ -574,8 +574,13 @@ const ghostBreathWithReverb = loadAudio(
   "ghostBreathWithReverb"
 );
 
-// Rooms
+// Whispering Skulls
+const evilSpell1 = loadAudio(
+  "audio/sound-effects/Evil Spell 1.mp3",
+  "evilSpell1"
+);
 
+// Room Transition
 const whooshLowAir = loadAudio(
   "audio/sound-effects/Whoosh Low Air.mp3",
   "whooshLowAir"

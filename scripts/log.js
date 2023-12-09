@@ -1320,6 +1320,8 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `You drink the ${dataOne.name}.`;
       } else if (dataOne.logDetail === "USE") {
         newEntry.textContent = `You use the ${dataOne.name}.`;
+      } else if (dataOne.logDetail === "SPEAK") {
+        newEntry.textContent = `The ${dataOne.name} speaks to you.`;
       }
       break;
 
@@ -1373,6 +1375,27 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `Your warding candle protects you from nearby undead.`;
       } else if (dataOne === SUNSTONE) {
         newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} burns in the presence of the Sunstone.`
+      } else if (dataOne === WHISPERING_SKULL) {
+        if (dataTwo === 1) {
+          newEntry.textContent = `"Broodmothers' must be slain with haste; delay breeds a swarm of her spawn. Strike swiftly, lest her hatchlings overrun you."`
+        } else if (dataTwo === 2) {
+          newEntry.textContent = `"Beware the Flood of Bones, a relentless surge that devours all. Flee from its unholy grasp or become one with the ceaseless tide, as I once did."`;
+        } else if (dataTwo === 3) {
+          newEntry.textContent = `"Scoundrels mask deceit with charm. Kindness repaid with treachery. Trust not their words, or your soul, like mine, shall bear the scars of misguided benevolence."`;
+        } else if (dataTwo === 4) {
+          newEntry.textContent = `"Amidst shadows, seek the Candlelight Shrine. Its flicker shields the virtuous from malevolence. Embrace its glow when darkness hungers for you."`;
+        } else if (dataTwo === 5) {
+          newEntry.textContent = `"Beyond sealed doors lies both riches and peril. Open them cautiously, for the vault's secrets are often guarded by the forsaken, eager to ensnare the living."`;
+        } else if (dataTwo === 6) {
+          newEntry.textContent = `"Arachnid webs ensnare the weak. Embrace strength, for it is your key to freedom in the spider's silken embrace."`;
+        } else if (dataTwo === 7) {
+          newEntry.textContent = `"Fear not the crimson robed brethren; worshipers of life's blood. Their rites grant fortitude to those who make sacrifice. Embrace the crimson, so you may endure the shadows."`;
+        } else if (dataTwo === 8) {
+          newEntry.textContent = `"Coin purchase sanctuary within the Laughing Coffin's revelry. Rogues find refuge in this underworld tavern. But beyond the welcome wanes, and wickedness emerges."`;
+        } else if (dataTwo === 9) {
+          newEntry.textContent = `"In the Vale, whispers of battles long past linger. Dare you trespass? Glory awaits, but beware, for we, the forsaken, hunger to reclaim what time has stolen."`;
+        } else if (dataTwo === 10)
+          newEntry.textContent = `"The Baron of Bone, a timeless undead sovereign, wields sinister magic, sapping strength and vitality from foes. With his skeletal visage, he commands dark arts to cripple and wither the living."`;
       }
 
       narration = newEntry.textContent;
