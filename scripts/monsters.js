@@ -7,6 +7,7 @@ const monsterSkullElement = document.getElementById("skull-level");
 
 const GNAWER = {
   name: "Gnawer",
+  image: "styles/images/monsters/gnawer.jpg",
   type: "BEAST",
   skulls: 1,
   soundEffects: {
@@ -26,6 +27,7 @@ const GNAWER = {
 
 const CRYPT_CRAWLER = {
   name: "Crypt Crawler",
+  image: "styles/images/monsters/crypt-crawler.jpg",
   type: "BEAST",
   skulls: 1,
   soundEffects: {
@@ -60,6 +62,7 @@ const COFFIN_SPIDER = {
 
 const BROODMOTHER = {
   name: "Broodmother",
+  image: "styles/images/monsters/broodmother.jpg",
   type: "BEAST",
   skulls: 6,
   soundEffects: {
@@ -91,6 +94,7 @@ function webChance(chance) {
 
 const SCOUNDREL = {
   name: "Scoundrel",
+  image: "styles/images/monsters/scoundrel.jpg",
   type: "HUMANOID",
   skulls: 2,
   soundEffects: {
@@ -150,6 +154,7 @@ const DEMON = {
 
 const DECREPIT_SKELETON = {
   name: "Decrepit Skeleton",
+  image: 'styles/images/monsters/decrepit-skeleton-one.jpg',
   type: "UNDEAD",
   skulls: 1,
   soundEffects: {
@@ -161,6 +166,7 @@ const DECREPIT_SKELETON = {
 
 const SKELETAL_SOLDIER = {
   name: "Skeletal Soldier",
+  image: "styles/images/monsters/skeletal-soldier.jpg",
   type: "UNDEAD",
   skulls: 2,
   soundEffects: {
@@ -172,6 +178,7 @@ const SKELETAL_SOLDIER = {
 
 const ARMORED_SKELETON = {
   name: "Armored Skeleton",
+  image: "styles/images/monsters/armored-skeleton.jpg",
   type: "UNDEAD",
   skulls: 3,
   soundEffects: {
@@ -194,9 +201,8 @@ const LEGIONNAIRE = {
 
 const UNDEAD_PHALANX = {
   name: "Undead Legion Phalanx",
-  boss: 'YES',
   type: "UNDEAD",
-  skulls: "Undead Legion Phalanx",
+  skulls: 9,
   attackCounter: 0,
   soundEffects: {
     spawn: boneCrunchCrack1,
@@ -204,9 +210,6 @@ const UNDEAD_PHALANX = {
     death: armorMetalClanksToTheGround,
   },
   function: (attacks) => {
-    console.log("ABILITY CALLED");
-    // monsterAttackValue = 4;
-
     //Altered Monster Attack Handler
     function phalanxAttacks() {
       let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
@@ -214,7 +217,7 @@ const UNDEAD_PHALANX = {
       // Rogue Passive Ability Checker
       if (heroChoice === "ROGUE" && evasionTracker >= monsterToPlayerDamage) {
         monsterToPlayerDamage = 0;
-        // soundEffectHandler(swordSwingWhoosh, "MONSTER MISS");
+        soundEffectHandler(swordSwingWhoosh, "MONSTER MISS");
         writeToLogHero(LOG_EVASION, "NO");
       }
 
@@ -249,8 +252,7 @@ const UNDEAD_PHALANX = {
       for (let i = 0; i < 4; i++) {
         LOST_LEGIONS_VALE.contents.monsters.push(LEGIONNAIRE);
       }
-      // soundEffectHandler(Break Apart Sound, "MONSTER ABILITY");
-      // writeToLogMonster(LOG_MONSTER_ABILITY, "YES", "LOSE FORMATION");
+      writeToLogMonster(LOG_MONSTER_ABILITY, "YES", "LOSE FORMATION");
     } else {
       const phalanxInterval = setInterval(() => {
         if (UNDEAD_PHALANX.attackCounter >= attacks) {
@@ -271,6 +273,7 @@ const UNDEAD_PHALANX = {
 
 const BLAZING_SKELETON = {
   name: "Blazing Skeleton",
+  image: "styles/images/monsters/blazing-skeleton.jpg",
   type: "UNDEAD",
   skulls: 3,
   soundEffects: {
@@ -292,6 +295,7 @@ const BLAZING_SKELETON = {
 
 const DRAUGR = {
   name: "Draugr",
+  image: "styles/images/monsters/draugr.jpg",
   type: "UNDEAD",
   skulls: 6,
   soundEffects: {
@@ -529,30 +533,34 @@ function monsterSkullLevel(level) {
       monsterMaxHealth = 200;
       monsterAttackValue = 18;
       break;
-    case "Undead Legion Phalanx":
-      monsterMaxHealth = 180;
-      monsterAttackValue = 4;
-      break;
+  }
+
+  if (currentRoom.contents.monsters[0] === UNDEAD_PHALANX) {
+    monsterMaxHealth = 180;
+    monsterAttackValue = 4;
   }
 }
 
 function renderMonsterStatBlock(monster) {
   fadeInAnimation(monsterContainer);
-  monsterContainer.style.display = "flex";
 
-  if (monster.boss) {
-    monsterNameElement.textContent = monster.skulls;
-    monsterSkullElement.textContent = '';
-  } else {
+  if (!monster.image) {
+    monsterContainer.style.display = "flex";
     monsterNameElement.textContent = monster.name;
-    monsterSkullElement.textContent = monster.skulls;  
+    monsterSkullElement.textContent = monster.skulls;
+    monsterImage.style.display = "none";
+  } else {
+    fadeInAnimation(monsterImage);
+    monsterContainer.style.display = "flex";
+    monsterNameElement.textContent = monster.name;
+    monsterSkullElement.textContent = monster.skulls;
+    monsterImage.style.display = "block";
+    monsterImage.style.backgroundImage = `url(${monster.image})`;
   }
 
   monsterSkullLevel(monster.skulls);
-
   // ITEM: Flask of Light - Weakens evil spirits.
   isItemAttuned(FLASK_OF_LIGHT, 0);
-
   setMonsterHealth(monsterMaxHealth);
 }
 

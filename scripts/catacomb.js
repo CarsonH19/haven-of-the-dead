@@ -284,7 +284,7 @@ let catacombRooms = [
     music: imminentDarkness,
     contents: {
       monsters: [SHADE],
-      items: [WHISPERING_AMULET],
+      items: [AMULET_OF_WHISPERS],
       events: null,
     },
   },
@@ -305,7 +305,7 @@ let catacombRooms = [
     description:
       "The Vermins' Vestibule teems with shadowy shapes, a breeding ground for swarms of relentless vermin. The air is thick with anticipation, as unseen forces prepare to unleash their tiny terrors upon intruders.",
     backgroundImage: "styles/images/backgrounds/tier-one/vermin-vestibule.jpg",
-    music: deepTunnels,
+    music: claustrofobia,
     contents: {
       monsters: [],
       items: [],
@@ -345,7 +345,7 @@ let catacombRooms = [
     contents: {
       monsters: [],
       items: [],
-      events: COFFIN_SPIDER_EVENT,
+      events: COFFIN_EVENT,
     },
   },
   {
@@ -357,7 +357,7 @@ let catacombRooms = [
     contents: {
       monsters: [],
       items: [],
-      events: COFFIN_SPIDER_EVENT,
+      events: COFFIN_EVENT,
     },
   },
   {
@@ -697,7 +697,7 @@ let tierTwoRooms = [
       events: null,
     },
     function: () => {
-      if (attunedItems.contains(WHISPERING_AMULET)) {
+      if (attunedItems.includes(AMULET_OF_WHISPERS)) {
         currentRoom.contents.events = FORSAKEN_COMMANDER;
       } else {
         currentRoom.contents.monsters.push(
@@ -854,6 +854,10 @@ const CANDLELIGHT_SHRINE = {
     items: [],
     events: SAFE_ROOM,
   },
+  function: () => {
+    getItem("CANDLE");
+    setRoomSummary();
+  },
 };
 
 // ===============================
@@ -863,7 +867,8 @@ const CANDLELIGHT_SHRINE = {
 const LOST_LEGIONS_VALE = {
   roomName: "Lost Legions Vale",
   description: `A desolate vale in the catacomb's heart, where the whispers of forgotten warriors echo through the cold stone. Rusted armor and tattered banners line the silent path, revealing the untold tales of legions lost to time.`,
-  backgroundImage: "styles/images/corridor-one.png",
+  backgroundImage:
+    "styles/images/backgrounds/event-rooms/lost-legions-vale.jpg",
   music: droneDarkHor1,
   contents: {
     monsters: [],
@@ -1067,7 +1072,6 @@ function checkCurrentRoom() {
   if (roomCounter === 5) {
     catacombRooms.push(BONEVAULT);
   }
-
 
   // Check if War Torn Banner is Attuned
   if (

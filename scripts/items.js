@@ -369,8 +369,8 @@ const SUNSTONE = {
   },
 };
 
-const WHISPERING_AMULET = {
-  name: "Whispering Amulet",
+const AMULET_OF_WHISPERS = {
+  name: "Amulet of Whispers",
   description: "",
   image: "styles/images/items/whispering-amulet.jpg",
   type: "MAGIC",
@@ -788,7 +788,7 @@ const BONECHILL_AMULET = {
   description: "",
   image: "styles/images/items/bonechill-amulet.jpg",
   type: "MAGIC",
-  rarity: "Common",
+  rarity: "Rare",
   effect:
     "While attuned to this item you have resistance against draugr attacks.",
   function: () => {
@@ -863,16 +863,25 @@ const SPINE_OF_THE_NECROMANCER = {
 //     function:
 //  }
 
-const CURSED_GRIMOIRE = {
-  name: "Cursed Grimoire",
+const DEMONIC_GRIMOIRE = {
+  name: "Hendra's Grimoire",
   description: "",
   image: "styles/images/items/cursed-grimoire.jpg",
-  type: "MISC",
+  type: "MAGIC",
   rarity: "Epic",
-  effect: "This item is cursed and cannot be unattuned.",
+  effect:
+    "This grimoire once belonged to Scholar Hendra. You feel a strong urge to attune to this item.",
   function: () => {
     damagePlayer(1);
-    writeToLogItem(LOG_ITEM, "YES", CURSED_GRIMOIRE);
+    DEMONIC_GRIMOIRE.name = "Demonic Grimoire";
+    DEMONIC_GRIMOIRE.effect = "This item can't be unattuned.";
+    soundEffectHandler(energyPresence4);
+    setTimeout(() => {
+      writeToLogItem(LOG_ITEM, "YES", DEMONIC_GRIMOIRE);
+    }, 3000);
+  },
+  unequip: () => {
+    // none;
   },
 };
 
@@ -1219,17 +1228,23 @@ const BLACKHEART_BREW = {
 const WHISPERING_SKULL = {
   name: "Whispering Skull",
   description: "",
-  image: "styles/images/items/grervils-skull.jpg",
+  image: "styles/images/items/whispering-skull.jpg",
   soundEffect: evilSpell1,
   type: "CONSUMABLE",
   rarity: "Common",
   logDetail: "SPEAK",
   effect: "Can be used to learn secrets of the catacomb.",
   function: () => {
-    setTimeout(() => {
-      let whisper = Math.floor(Math.random() * 10) + 1;
-      writeToLogItem(LOG_ITEM, "YES", WHISPERING_SKULL, whisper);
-    }, 3000);
+    if (attunedItems.includes(AMULET_OF_WHISPERS)) {
+      setTimeout(() => {
+        let whisper = Math.floor(Math.random() * 10) + 1;
+        writeToLogItem(LOG_ITEM, "YES", WHISPERING_SKULL, whisper);
+      }, 3000);
+    } else {
+      setTimeout(() => {
+        writeToLogItem(LOG_ITEM, "YES", WHISPERING_SKULL, "NO AMULET");
+      }, 3000);
+    }
   },
 };
 
@@ -1560,7 +1575,7 @@ const RESTLESS_WISP = {
   duration: null,
   function: () => {
     const wisp = document.querySelector(".wisp");
-    let randomNumber = Math.round(Math.random() * 0) + 1;
+    let randomNumber = Math.round(Math.random() * 5) + 1;
     let wispDuration = roomCounter + randomNumber;
     RESTLESS_WISP.duration = "Searching";
     wispActive = "ACTIVE";
@@ -1579,7 +1594,7 @@ const RESTLESS_WISP = {
       } else {
         restlessWispTracker = "GUIDING";
       }
-    }, 15000);
+    }, 5000);
 
     wisp.classList.add("orb");
 
@@ -1596,30 +1611,6 @@ const RESTLESS_WISP = {
 
 let inventoryItems = [GUIDING_LIGHT, POTION, POTION, POTION];
 
-let commonConsumables = [
-  POTION,
-  MARROWSTONE_CHEESE,
-  TOMBSTONE_TRUFFLE,
-  CRYPTBREAD,
-  BONE_MARROW_SOUP,
-  GRAVEBLOOM,
-  GHOSTLIGHT_LILY,
-  ROTBANE_FERN,
-  WITCHFIRE_ORCHID,
-  EMBERTHAW_PETAL,
-  LESSER_SOULSTONE,
-  GREATER_SOULSTONE,
-];
-
-let rareConsumables = [
-  LICHROOT,
-  GREATER_SOULSTONE,
-  GUIDING_LIGHT,
-  UNHOLY_WISP,
-  RESTLESS_WISP,
-  ROWDY_WISP,
-];
-
 let candleItems = [
   SOOTHING_CANDLE,
   FLICKERING_CANDLE,
@@ -1630,6 +1621,7 @@ let candleItems = [
 
 let wispItems = [GUIDING_LIGHT, ROWDY_WISP, UNHOLY_WISP, RESTLESS_WISP];
 
+// Bonevault Loot
 let bonevaultItems = [
   RIBCAGE_DEFENDER,
   SKULLBREAKER_HELM,
@@ -1638,6 +1630,18 @@ let bonevaultItems = [
   SPINE_OF_THE_NECROMANCER,
 ];
 
+// Coffin Event Loot
+let coffinEventItems = [
+  UNHOLY_WISP,
+  GUIDING_LIGHT,
+  ROWDY_WISP,
+  GREATER_SOULSTONE,
+  LESSER_SOULSTONE,
+  WHISPERING_SKULL,
+  RESTLESS_WISP
+];
+
+// Monster Magic Item Loot
 let beastCommonLoot = [RING_OF_SKITTERING, SILKSTRIDERS];
 
 let beastRareLoot = [PLAGUEWARD_PENDANT, FANGWEAVE_ARMOR];
@@ -1664,36 +1668,37 @@ let undeadRareLoot = [
   WRAITHBANE,
 ];
 
-let commonItems = [
-  EVERTORCH,
-  FLASK_OF_LIGHT,
-  RING_OF_SKITTERING,
-  CHARM_OF_HEALING,
-  SOOTHING_CANDLE,
-  FLICKERING_CANDLE,
-  SHADOWSTEP_BOOTS,
-  BONE_BLUDGEON,
-  HOLY_RELIC,
+// Consumables Loot
+let commonConsumables = [
+  POTION,
+  MARROWSTONE_CHEESE,
+  TOMBSTONE_TRUFFLE,
+  CRYPTBREAD,
+  BONE_MARROW_SOUP,
+  GRAVEBLOOM,
+  GHOSTLIGHT_LILY,
+  ROTBANE_FERN,
+  WITCHFIRE_ORCHID,
+  EMBERTHAW_PETAL,
+  LESSER_SOULSTONE,
+  GREATER_SOULSTONE,
 ];
 
-let rareItems = [
-  MIST_VEIL_CLOAK,
-  WRAITHBANE,
-  SUNSTONE,
-  CURSED_MIRROR,
-  REVENANTS_RAGE,
-  WARDING_CANDLE,
+let rareConsumables = [
+  LICHROOT,
+  GREATER_SOULSTONE,
   GUIDING_LIGHT,
+  UNHOLY_WISP,
+  RESTLESS_WISP,
   ROWDY_WISP,
-  LAUGHING_COFFIN_COIN,
-  TOXINWEAVE_MASK,
-  GHOSTSHROUD_TALISMAN,
-  BERSERKER_PAULDRONS,
-  TOME_OF_DEVOTION,
-  BRACELET_OF_THE_SERPENT,
 ];
 
-let epicItems = [HALLOWED_HOURGLASS, DARKGUARD_TRINKET, SOUL_JAR, SOUL_JAR];
+// Epic Loot
+let epicItems = [
+  HALLOWED_HOURGLASS,
+  SOUL_JAR,
+  DARKGUARD_TRINKET
+];
 
 let foundItem;
 
@@ -1737,7 +1742,7 @@ function removeItem(itemName) {
   // itemName must be the item's string name
   itemObject = attunedItems.find((inv) => inv.name === itemName);
 
-  if (itemObject !== "Curesed Grimoire") {
+  if (itemObject !== "Demonic Grimoire") {
     const index = attunedItems.indexOf(itemObject);
     attunedItems.splice(index, 1);
     inventoryItems.push(itemObject);
@@ -1778,42 +1783,6 @@ function removeItem(itemName) {
 
 function getItem(rarity) {
   switch (rarity) {
-    case "Epic":
-      const epicIndex = Math.round(Math.random() * epicItems.length);
-      foundItem = epicItems[epicIndex];
-      epicItems.splice(epicIndex, 1);
-      currentRoom.contents.items.push(foundItem);
-      console.log("Epic Item Found!");
-      break;
-
-    case "Rare":
-      const rareIndex = Math.round(Math.random() * rareItems.length);
-      foundItem = rareItems[rareIndex];
-      rareItems.splice(rareIndex, 1);
-      currentRoom.contents.items.push(foundItem);
-      console.log("Rare Item Found!");
-      break;
-
-    case "Common":
-      const commonIndex = Math.round(Math.random() * commonItems.length);
-      foundItem = commonItems[commonIndex];
-      commonItems.splice(commonIndex, 1);
-      currentRoom.contents.items.push(foundItem);
-      console.log("Common Item Found!");
-      break;
-
-    case "RANDOM":
-      let itemRarity = Math.round(Math.random() * 100 + baseFaith);
-
-      if (itemRarity >= 91) {
-        getItem("Epic");
-      } else if (itemRarity >= 61) {
-        getItem("Rare");
-      } else {
-        getItem("Common");
-      }
-      break;
-
     case "CONSUMABLE":
       console.log("CONSUMABLE FOUND");
       const consumableIndex = Math.round(
@@ -1824,9 +1793,10 @@ function getItem(rarity) {
       break;
 
     case "CANDLE":
-      console.log("CANDLE FOUND");
       const candleIndex = Math.round(Math.random() * candleItems.length);
       foundItem = candleItems[candleIndex];
+      console.log(candleIndex);
+      console.log(foundItem);
       currentRoom.contents.items.push(foundItem);
       break;
 
@@ -1841,6 +1811,12 @@ function getItem(rarity) {
       foundItem = bonevaultItems[bonevaultIndex];
       currentRoom.contents.items.push(foundItem);
       bonevaultItems.splice(bonevaultIndex, 1);
+      break;
+
+    case "COFFIN":
+      const coffinIndex = Math.round(Math.random() * coffinEventItems.length);
+      foundItem = coffinEventItems[coffinIndex];
+      currentRoom.contents.items.push(foundItem);
       break;
   }
 }
@@ -2061,10 +2037,13 @@ function statusEffectHandler(item) {
           let randomNumber = Math.round(Math.random() * 10);
 
           if (randomNumber >= 5) {
-            fadeOutAnimation(monsterContainer, 0000);
+            playerControlsTimeout(2500);
+            fadeOutAnimation(monsterContainer);
+            fadeOutAnimation(monsterImage);
             setTimeout(() => {
               checkForMonsters();
               monsterContainer.style.display = "none";
+              monsterImage.style.display = "none";
             }, 2000);
             writeToLogItem(LOG_ITEM, "YES", WARDING_CANDLE);
           }
@@ -2393,6 +2372,16 @@ inventoryModal.addEventListener("click", (event) => {
   for (let i = 0; i < buttons.length; i++) {
     let itemObject = inventoryItems.find((inv) => inv.name === buttons[i].id);
 
+    // Monster attack if using inventory during combat
+    if (
+      currentRoom.contents.monsters.length > 0 &&
+      event.target === buttons[i] &&
+      buttons[i].id !== "Health Potion"
+    ) {
+      monsterAttackHandler(2);
+      writeToLogOther(LOG_OTHER, "YES", "DISTRACTED");
+    }
+
     // Magic Items Logic
     if (
       magicItemsBox.contains(event.target) &&
@@ -2421,7 +2410,7 @@ inventoryModal.addEventListener("click", (event) => {
     }
 
     // Attuned Items Logic
-    if (buttons[i].id !== "Cursed Grimoire") {
+    if (buttons[i].id !== "Demonic Grimoire") {
       if (slotOne.contains(event.target) && event.target === buttons[i]) {
         removeItem(buttons[i].id);
       }
@@ -2442,10 +2431,10 @@ inventoryModal.addEventListener("click", (event) => {
         removeItem(buttons[i].id);
       }
     } else if (
-      buttons[i].id === "Cursed Grimoire" &&
+      buttons[i].id === "Demonic Grimoire" &&
       event.target === buttons[i]
     ) {
-      CURSED_GRIMOIRE.function();
+      DEMONIC_GRIMOIRE.function();
     }
   }
 

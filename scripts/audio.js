@@ -75,10 +75,18 @@ function soundEffectHandler(object, type) {
       break;
 
     case "ITEM":
+      if (object === WHISPERING_SKULL) {
+        // Reduces sound of evilSpell1 sound effect
+        volume = 0.02;
+      }
+
       sound = object.soundEffect;
       break;
 
     default:
+      if (object === energyPresence4) {
+        volume = 0.5
+      }
       sound = object;
   }
 
@@ -578,6 +586,12 @@ const ghostBreathWithReverb = loadAudio(
 const evilSpell1 = loadAudio(
   "audio/sound-effects/Evil Spell 1.mp3",
   "evilSpell1"
+);
+
+// Demonic Grimoire
+const energyPresence4 = loadAudio(
+  "audio/sound-effects/Energy Presence 4.mp3",
+  "energyPresence4"
 );
 
 // Room Transition

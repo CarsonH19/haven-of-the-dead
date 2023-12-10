@@ -1,13 +1,9 @@
-
 // // ===============================
 // //        General Variables
 // // ===============================
 
 const monsterHealthBar = document.getElementById("monster-health");
 const playerHealthBar = document.getElementById("player-health");
-
-const monsterContainer = document.getElementById("monsterContainer");
-monsterContainer.style.display = "none";
 
 const attackBtn = document.getElementById("attack-btn");
 const guardBtn = document.getElementById("guard-btn");
@@ -32,11 +28,19 @@ let criticalHit;
 // ===============================
 
 const gameWindow = document.querySelector(".game-window");
-const roomImage = document.getElementById('backgroundImage');
+const roomImage = document.getElementById("backgroundImage");
 const bottomContent = document.querySelector(".bottom-content");
 const playerContainer = document.querySelector(".player-container");
 const roomsCleared = document.getElementById("roomsCleared");
 const narrativeText = document.getElementById("narrativeText");
+
+const monsterContainer = document.getElementById("monsterContainer");
+monsterContainer.style.display = "none";
+
+const monsterImage = document.getElementById("monsterImage");
+monsterImage.style.display = "none";
+
+
 
 // ===============================
 //     Catacomb Entrance Modal
@@ -78,7 +82,7 @@ const heroChoiceModal = document.getElementById("heroChoiceModal");
 
 const restartGameBtn = document.getElementById("restartGameBtn");
 
-// =============================== 
+// ===============================
 //           STRENGTH
 // ===============================
 let baseStrength;
@@ -118,7 +122,7 @@ function calculatePlayerMaxHealth() {
 let critDamageModifier;
 
 function calculateCritDamageModifier() {
-  critDamageModifier = 1.5 + (baseStrength * 0.3);
+  critDamageModifier = 1.5 + baseStrength * 0.3;
   return critDamageModifier;
 }
 
@@ -144,14 +148,12 @@ function calculateGuardBonus() {
 }
 
 // Flee Chance // +5% per Dex
-let  fleeChance;
+let fleeChance;
 
 function calculateFleeChance() {
-  fleeChance = baseDexterity; 
+  fleeChance = baseDexterity;
   return fleeChance;
 }
-
-
 
 // ===============================
 //            FAITH
@@ -175,7 +177,6 @@ function calculateExperienceModifier() {
   return experienceModifier;
 }
 
-
 // ===============================
 //            STATS
 // ===============================
@@ -183,7 +184,6 @@ function calculateExperienceModifier() {
 let attunedItems = [];
 
 function updateStats(stat, number = 0) {
-
   switch (stat) {
     case "STRENGTH":
       baseStrength = baseStrength + number;
@@ -203,8 +203,8 @@ function updateStats(stat, number = 0) {
         baseDexterity = 0;
       }
 
-      critHitChance = calculateCritHitChance()
-      guardBonus = calculateGuardBonus()
+      critHitChance = calculateCritHitChance();
+      guardBonus = calculateGuardBonus();
       fleeChance = calculateFleeChance();
       break;
 
@@ -293,10 +293,10 @@ const LOG_OTHER = "OTHER";
 // ===============================
 //       Event Trackers
 // ===============================
- 
+
 // Legion's Grace
 let legionTracker = 0;
-let legionAttackBoost = Math.floor(legionTracker/30);
+let legionAttackBoost = Math.floor(legionTracker / 30);
 
 // Crimson Covenant
 let crimsonCovenantBoon = 0;
@@ -322,8 +322,6 @@ let evasionTracker = 2;
 
 // Priestess
 // N/A
-
-
 
 // ===============================
 //   Boons & Leveling Variables
@@ -416,13 +414,17 @@ const LEGIONS_GRACE = {
   function: () => {
     LEGIONS_GRACE.duration = `Legionnaires laid to rest: ${legionTracker}`;
 
-    setInterval(() => {
+    const legionsGraceInterval = setInterval(() => {
       LEGIONS_GRACE.duration = `${legionTracker} Legionnaires defeated`;
       LEGIONS_GRACE.status = `Base Attack increased by ${legionAttackBoost}. The more Legionnaires laid to rest, the greater the Legion's Grace becomes.`;
       if (legionTracker % 30 === 0) {
-        attackBoost = Math.floor(legionTracker/30);
+        attackBoost = Math.floor(legionTracker / 30);
         baseAttack = baseAttack + legionAttackBoost;
         updatePlayerTrackers();
+      }
+
+      if (LEGIONS_GRACE.duration === null) {
+        clearInterval(legionsGraceInterval);
       }
     }, 5000);
 
@@ -483,7 +485,7 @@ const AEGIS_STATUS_EFFECT = {
     if (AEGIS_STATUS_EFFECT.duration === null) {
       AEGIS_STATUS_EFFECT.statusDuration = actionCounter + 3;
       AEGIS_STATUS_EFFECT.duration = `Duration: ${
-      AEGIS_STATUS_EFFECT.statusDuration - actionCounter
+        AEGIS_STATUS_EFFECT.statusDuration - actionCounter
       } Actions`;
     }
 
@@ -547,7 +549,7 @@ const POISONED = {
           if (roomCounter >= POISONED.statusDuration) {
             POISONED.duration = null;
             POISONED.statusDuration = null;
-            
+
             updateStats("STRENGTH", 2);
             updateStats("DEXTERITY", 2);
             updatePlayerTrackers();
@@ -558,14 +560,12 @@ const POISONED = {
         statusEffectHandler(POISONED);
         renderStatusEffects(POISONED);
       }
-    } else {
-      if (length > POISONED.statusDuration - roomCounter) {
-        POISONED.statusDuration = roomCounter + length;
-        POISONED.duration = `Duration: ${
-          POISONED.statusDuration - roomCounter
-        } Rooms`;
-        //writeToLog() Poisoned intensifies
-      }
+    } else if (length > POISONED.statusDuration - roomCounter) {
+      POISONED.statusDuration = roomCounter + length;
+      POISONED.duration = `Duration: ${
+        POISONED.statusDuration - roomCounter
+      } Rooms`;
+      //writeToLog() Poisoned intensifies
     }
   },
 };
@@ -597,11 +597,9 @@ const HAUNTED = {
         statusEffectHandler(HAUNTED);
         renderStatusEffects(HAUNTED);
       }
-    } else {
-      if (randomNumber > HAUNTED.statusDuration) {
-        HAUNTED.statusDuration = roomCounter + randomNumber;
-        //writeToLog() Haunted again
-      }
+    } else if (randomNumber > HAUNTED.statusDuration) {
+      HAUNTED.statusDuration = roomCounter + randomNumber;
+      //writeToLog() Haunted again
     }
   },
 };
@@ -646,14 +644,12 @@ const DISEASED = {
         statusEffectHandler(DISEASED);
         renderStatusEffects(DISEASED);
       }
-    } else {
-      if (length > DISEASED.statusDuration - roomCounter) {
-        DISEASED.statusDuration = roomCounter + length;
-        DISEASED.duration = `Duration: ${
-          DISEASED.statusDuration - roomCounter
-        } Rooms`;
-        //writeToLog() Disease intensifies
-      }
+    } else if (length > DISEASED.statusDuration - roomCounter) {
+      DISEASED.statusDuration = roomCounter + length;
+      DISEASED.duration = `Duration: ${
+        DISEASED.statusDuration - roomCounter
+      } Rooms`;
+      //writeToLog() Disease intensifies
     }
   },
 };
@@ -698,14 +694,12 @@ const CURSED = {
         statusEffectHandler(CURSED);
         renderStatusEffects(CURSED);
       }
-    } else {
-      if (length > CURSED.statusDuration - roomCounter) {
-        CURSED.statusDuration = roomCounter + length;
-        CURSED.duration = `Duration: ${
-          CURSED.statusDuration - roomCounter
-        } Rooms`;
-        //writeToLog() Disease intensifies
-      }
+    } else if (length > CURSED.statusDuration - roomCounter) {
+      CURSED.statusDuration = roomCounter + length;
+      CURSED.duration = `Duration: ${
+        CURSED.statusDuration - roomCounter
+      } Rooms`;
+      //writeToLog() Disease intensifies
     }
   },
 };
@@ -733,30 +727,30 @@ const WEBBED = {
       const immune = isItemAttuned(SILKSTRIDERS, null);
 
       if (!immune) {
-      let webbedInterval = setInterval(() => {
-        let breakFreeChance = Math.round(Math.random() * webStrength);
-        breakFreeChance += baseStrength + counter;
+        let webbedInterval = setInterval(() => {
+          let breakFreeChance = Math.round(Math.random() * webStrength);
+          breakFreeChance += baseStrength + counter;
 
-        if (breakFreeChance >= webStrength) {
-          console.log("You broke free!");
-          WEBBED.duration = null;
-          counter = 0;
-          togglePlayerControls();
-          soundEffectHandler(fleshRip1);
-          //writeToLog() You break free
-          clearInterval(webbedInterval);
-        } else {
-          counter++;
-          monsterAttackHandler();
-          //writeToLog() The spider attacks you while you struggle to break free
-        }
-      }, 2000);
+          if (breakFreeChance >= webStrength) {
+            console.log("You broke free!");
+            WEBBED.duration = null;
+            counter = 0;
+            togglePlayerControls();
+            soundEffectHandler(fleshRip1);
+            //writeToLog() You break free
+            clearInterval(webbedInterval);
+          } else {
+            counter++;
+            monsterAttackHandler();
+            //writeToLog() The spider attacks you while you struggle to break free
+          }
+        }, 2000);
 
-      statusEffectHandler(WEBBED);
-      renderStatusEffects(WEBBED);
+        statusEffectHandler(WEBBED);
+        renderStatusEffects(WEBBED);
+      }
     }
-  }
-},
+  },
 };
 
 const CHILLED = {
@@ -799,14 +793,12 @@ const CHILLED = {
         statusEffectHandler(CHILLED);
         renderStatusEffects(CHILLED);
       }
-    } else {
-      if (length > CHILLED.statusDuration - roomCounter) {
-        CHILLED.statusDuration = roomCounter + length;
-        CHILLED.duration = `Duration: ${
-          CHILLED.statusDuration - roomCounter
-        } Rooms`;
-        //writeToLog() Disease intensifies
-      }
+    } else if (length > CHILLED.statusDuration - roomCounter) {
+      CHILLED.statusDuration = roomCounter + length;
+      CHILLED.duration = `Duration: ${
+        CHILLED.statusDuration - roomCounter
+      } Rooms`;
+      //writeToLog() Disease intensifies
     }
   },
 };
@@ -821,11 +813,11 @@ const FIENDSWORN = {
   active: null,
   function: () => {
     if (FIENDSWORN.active === null) {
-      FIENDSWORN.active = 'Permanent';
-        statusEffectHandler(FIENDSWORN);
-        renderStatusEffects(FIENDSWORN);
-      }
-    },
+      FIENDSWORN.active = "Permanent";
+      statusEffectHandler(FIENDSWORN);
+      renderStatusEffects(FIENDSWORN);
+    }
+  },
 };
 
 const BRANDED = {
@@ -834,10 +826,9 @@ const BRANDED = {
   active: null,
   function: () => {
     if (BRANDED.active === null) {
-      BRANDED.active = 'Permanent';
-        statusEffectHandler(BRANDED);
-        renderStatusEffects(BRANDED);
-      }
-    },
+      BRANDED.active = "Permanent";
+      statusEffectHandler(BRANDED);
+      renderStatusEffects(BRANDED);
+    }
+  },
 };
-

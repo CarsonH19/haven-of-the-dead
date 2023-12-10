@@ -79,6 +79,10 @@ function damageMonster(damage) {
     monsterHealthBar.value = +monsterHealthBar.value - damage;
     currentMonsterHealth -= damage;
   }
+
+  if (damage > 0) {
+    damageFlashAnimation("MONSTER");
+  }
 }
 
 function dealMonsterDamage(damage) {
@@ -93,9 +97,13 @@ function dealMonsterDamage(damage) {
   return damageDealt;
 }
 
-function monsterAttackHandler() {
+function monsterAttackHandler(bonus) {
   const monster = currentRoom.contents.monsters[0];
   let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
+
+  if (bonus) {
+    monsterToPlayerDamage *= bonus;
+  }
 
   // ITEM: Bonechill Amulet - reduces Draugr attacks
   monsterToPlayerDamage *= isItemAttuned(BONECHILL_AMULET, 1);
@@ -325,6 +333,7 @@ function potionHandler() {
 
   potions.textContent = ` x ${potionCounter}`;
 
+
   healPlayer(potionHealValue);
   soundEffectHandler(POTION, "ITEM");
   writeToLogActions(LOG_POTION, "YES", potionHealValue);
@@ -340,6 +349,11 @@ function fleeHandler() {
   fleeAttempt += isItemAttuned(RING_OF_SKITTERING, 0);
   // ITEM: FLickering Candle - 100% flee chance
   fleeAttempt += statusEffectHandler(FLICKERING_CANDLE);
+
+  // Flee bonus when fighting the Flood of Bones
+  if (currentRoom.contents.monsters[0].name === "Flood of Bones") {
+    fleeAttempt += 3;
+  }
 
   if (fleeAttempt >= 10) {
     writeToLogActions(LOG_FLEE, "YES", currentRoom.name);
@@ -376,7 +390,6 @@ function isGameOver() {
 
     function renderGameOverModal() {
       const gameOverModal = document.getElementById("gameOverModal");
-
       gameOverModal.style.display = "block";
     }
   }
@@ -390,10 +403,13 @@ function isGameOver() {
     soundEffectHandler(monster, "MONSTER DEATH");
 
     gainExperience(currentRoom.contents.monsters[0].skulls);
-    fadeOutAnimation(monsterContainer, 0000);
+    fadeOutAnimation(monsterContainer);
+    fadeOutAnimation(monsterImage);
+
     setTimeout(() => {
       checkForMonsters();
       monsterContainer.style.display = "none";
+      monsterImage.style.display = "none";
     }, 2000);
   }
 }
@@ -530,6 +546,7 @@ function togglePlayerControls() {
   // Checks for Chilled Condition
   if (CHILLED.duration !== null) {
     specialBtn.disabled = true;
+    fleeBtn.disabled = true;
   }
 
   if (eventModal.style.display === "block") {
@@ -650,13 +667,13 @@ function damageFlashAnimation(target) {
       }, 1000);
       break;
 
-    // case "MONSTER":
-    //   monsterContainer.classList.add("flash");
+    case "MONSTER":
+      monsterImage.classList.add("monster-flash-damage");
 
-    //   setTimeout(() => {
-    //     monsterContainer.classList.remove("flash");
-    //   }, 500);
-    //   break;
+      setTimeout(() => {
+        monsterImage.classList.remove("monster-flash-damage");
+      }, 1000);
+      break;
   }
 }
 
@@ -879,9 +896,9 @@ potionBtn.addEventListener("click", () => {
   potionHandler();
 
   if (currentRoom.contents.monsters.length > 0) {
+    specialCooldownHandler();
     playerControlsTimeout(1500);
     setTimeout(monsterAttackHandler, 1200);
-    specialCooldownHandler();
     isGameOver();
   }
 
@@ -913,7 +930,7 @@ roomSummaryButton.addEventListener("click", () => {
   // ITEM: Charm of Healing - Recover 10HP after each cleared room.
   isItemAttuned(CHARM_OF_HEALING, null);
   // ITEM: Cursed Grimoire - NPC ITEM / hurts you after each cleared room.
-  isItemAttuned(CURSED_GRIMOIRE, null);
+  isItemAttuned(DEMONIC_GRIMOIRE, null);
   // ITEM: Soothing Candle - Recover 10HP after each cleared room.
   statusEffectHandler(SOOTHING_CANDLE);
   updatePlayerTrackers();
@@ -972,4 +989,4 @@ restartGameBtn.addEventListener("click", () => {
 });
 
 volumeUpButton.addEventListener("click", () => adjustVolume(music, 0.05));
-volumeDownButton.addEventListener("click", () => adjustVolume(music, -0.05));
+volumeDownButton.addEven

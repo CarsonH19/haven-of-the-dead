@@ -42,15 +42,13 @@ const SAFE_ROOM = {
   summary: `You rest at the Candlelight Shrine. The sacred flames stand sentinel, offering you solace in the heart of the catacomb.`,
   functionOne: () => {
     setTimeout(() => {
-      getItem("CANDLE");
-      setRoomSummary();
-      writeToLogEvent(LOG_SAFE_ROOM, "YES");
       setTimeout(newRoomAnimation, 5000);
       setTimeout(() => {
         healPlayer(calculatePlayerMaxHealth());
       }, 6500);
       setTimeout(renderRoomSummaryModal, 9000);
     });
+    writeToLogEvent(LOG_SAFE_ROOM, "YES");
   },
 };
 
@@ -373,7 +371,7 @@ const SCHOLAR_HENDRA = {
     );
     (currentRoom.description =
       "After defeating the skeletal horde, you discover Hendra's lifeless form, her fingers tightly clasping a mysterious grimiore. With solemn determination, you claim the coveted relic as your own."),
-      currentRoom.contents.items.push(CURSED_GRIMOIRE);
+      currentRoom.contents.items.push(DEMONIC_GRIMOIRE);
     setRoomSummary();
     startBattle();
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
@@ -403,7 +401,7 @@ const SUMMONING_MORGRIMM = {
     // can no longer benefit from Candlelight Shrines
     FIENDSWORN_CULTIST.function();
     // Remove Cursed Grimoire
-    const index = inventoryItems.indexOf(CURSED_GRIMOIRE);
+    const index = inventoryItems.indexOf(DEMONIC_GRIMOIRE);
     inventoryItems.splice(index, 1);
     setRoomSummary();
     writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
@@ -415,7 +413,7 @@ const SUMMONING_MORGRIMM = {
     // must fight fiendsworn_cultists
     // Remove Cursed Grimoire
     BRANDED.function();
-    const index = inventoryItems.indexOf(CURSED_GRIMOIRE);
+    const index = inventoryItems.indexOf(DEMONIC_GRIMOIRE);
     inventoryItems.splice(index, 1);
     currentRoom.contents.monsters.push(
       FIENDSWORN_CULTIST,
@@ -468,7 +466,7 @@ const GRERVIL_THE_BODILESS = {
   optionOne: "Take",
   optionTwo: "Leave",
   functionOne: () => {
-    if (attunedItems.includes(WHISPERING_AMULET)) {
+    if (attunedItems.includes(AMULET_OF_WHISPERS)) {
       GRERVIL_THE_BODILESS.summary =
         "Grervil the Bodiless joins you on your journey through the catacomb, in search of his wandering body.";
 
@@ -581,8 +579,8 @@ const GRERVILS_BODY_EVENT = {
 //          Misc. Events
 // ===============================
 
-const COFFIN_SPIDER_EVENT = {
-  name: "Chest",
+const COFFIN_EVENT = {
+  name: "Coffin Raider",
   eventType: "MISC",
   description:
     "You find a large ornately decorated coffin. Something valuable may be hidden inside.  What will you do?",
@@ -591,20 +589,23 @@ const COFFIN_SPIDER_EVENT = {
   functionOne: () => {
     let randomNumber = Math.round(Math.random() * 10);
     if (randomNumber >= 7) {
-      getItem("RANDOM");
+      COFFIN_EVENT.summary = "You decided to open the coffin. Thankfully nothing dangerous was waiting inside.";
+      getItem("COFFIN");
       setRoomSummary();
       setTimeout(renderRoomSummaryModal, 5000);
       // writeToLogEvent(); Normal Coffin
     } else {
-      currentRoom.contents.monsters.push(COFFIN_SPIDER);
+      COFFIN_EVENT.summary = "You decided to open the coffin, disturbing the eternal rest of a Draugr within.";
+      currentRoom.contents.monsters.push(DRAUGR);
       monsterAttackHandler();
-      getItem("RANDOM");
+      getItem("COFFIN");
       setRoomSummary();
       startBattle();
-      // writeToLogEvent(); Coffin Spider
+      // writeToLogEvent(); DRAUGR
     }
   },
   functionTwo: () => {
+    COFFIN_EVENT.summary = "You decided to leave the coffin, and not disturb the dead within.";
     // writeToLogEvent(); Ignore
     setTimeout(renderRoomSummaryModal, 5000);
   },
@@ -732,19 +733,19 @@ const BATTLEFIELD = {
   description: `Lost Legion Vale, a cavernous passage unveiling the remnants of a battlefield within the catacomb's depths. Countless fallen warriors lie scattered across the expanse. There will be danger ahead. Do you wish to proceed?`,
   optionOne: "Proceed",
   optionTwo: "Return",
-  functionOne: () => {    
+  functionOne: () => {
     if (attunedItems.includes(WAR_TORN_BANNER)) {
-      BATTLEFIELD.summary = "You entered Lost Legions Vale with the War Torn Banner, summoning the Undead Legion Phalanx. Defeating this powerful foe, you laid several members of the Forsken Commander's legion to rest."
-        LOST_LEGIONS_VALE.contents.monsters.push(UNDEAD_PHALANX);
-        writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "BOSS");
-        setTimeout(() => {
-        }, 2000);
+      BATTLEFIELD.summary =
+        "You entered Lost Legions Vale with the War Torn Banner, summoning the Undead Legion Phalanx. Defeating this powerful foe, you laid several members of the Forsaken Commander's legion to rest.";
+      LOST_LEGIONS_VALE.contents.monsters.push(UNDEAD_PHALANX);
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "BOSS");
     } else {
-      BATTLEFIELD.summary = "You entered Lost Legions Vale and defeated a hoard of undead warriors on the battlefield.";
+      BATTLEFIELD.summary =
+        "You entered Lost Legions Vale and defeated a hoard of undead warriors on the battlefield.";
       for (let i = 0; i < 7; i++) {
         LOST_LEGIONS_VALE.contents.monsters.push(SKELETAL_SOLDIER);
-        writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
       }
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
     }
 
     playMusic(weCantStopThem);

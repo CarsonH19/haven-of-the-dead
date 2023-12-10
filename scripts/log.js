@@ -1342,7 +1342,7 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `You use a Skeleton Key to unlock the ${dataTwo}`;
       } else if (dataOne === CACHE_KEY) {
         newEntry.textContent = `You use the Cache Key to unlock Ivan's Hidden Cache.`;
-      } else if (dataOne === CURSED_GRIMOIRE) {
+      } else if (dataOne === DEMONIC_GRIMOIRE) {
         narration = Math.round(Math.random() * 9);
         if (narration === 0) {
           newEntry.textContent = `"You seek release? Foolish mortal. My curse binds your fate. Resurrect me, and only then shall freedom be yours. Resist, and suffer eternal torment."`;
@@ -1402,8 +1402,11 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
           newEntry.textContent = `"Coin purchase sanctuary within the Laughing Coffin's revelry. Rogues find refuge in this underworld tavern. But beyond the welcome wanes, and wickedness emerges."`;
         } else if (dataTwo === 9) {
           newEntry.textContent = `"In the Vale, whispers of battles long past linger. Dare you trespass? Glory awaits, but beware, for we, the forsaken, hunger to reclaim what time has stolen."`;
-        } else if (dataTwo === 10)
+        } else if (dataTwo === 10) {
           newEntry.textContent = `"The Baron of Bone, a timeless undead sovereign, wields sinister magic, sapping strength and vitality from foes. With his skeletal visage, he commands dark arts to cripple and wither the living."`;
+        } else if (dataTwo === "NO AMULET") {
+          newEntry.textContent = `Dreadful whispers resonate from the skull, yet its otherworldly language remains beyond the grasp of your understanding.`;
+        }
       }
 
       narration = newEntry.textContent;
@@ -1457,6 +1460,10 @@ function writeToLogOther(logType, narrate, dataOne) {
     case LOG_OTHER:
       if (dataOne === "WISP") {
         newEntry.textContent = `You are already following a wisp.`;
+      } else if (dataOne === "DISTRACTED") {
+        newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} takes the opportunity to attack you while you are distracted.`;
+      } else if (dataOne === "LOST FORMATION") {
+        newEntry.textContent = `The undead legionnaires are unable to keep formation and the phalanx is broken.`;
       }
       break;
   }
@@ -1493,6 +1500,10 @@ function writeToNarrative(narration) {
   let newNarration = document.createElement("li");
   newNarration.textContent = narration;
 
+  if (narrativeText.children.length >= 3) {
+    narrativeText.removeChild(narrativeText.lastElementChild);
+  }
+
   narrativeText.insertBefore(newNarration, narrativeText.firstChild);
 
   setTimeout(() => {
@@ -1521,6 +1532,8 @@ function checkLogSize() {
   if (logModalList.children.length >= 200) {
     logModalList.removeChild(logModalList.lastElementChild);
   }
+
+
 }
 
 // ==============================================================
