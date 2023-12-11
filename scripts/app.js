@@ -355,14 +355,19 @@ function fleeHandler() {
   }
 
   if (fleeAttempt >= 10) {
-    writeToLogActions(LOG_FLEE, "YES", currentRoom.name);
     setTimeout(() => {
+      fadeOutAnimation(monsterContainer);
+      fadeOutAnimation(monsterImage);
       newRoomAnimation();
       setTimeout(() => {
+        monsterContainer.style.display = "none";
+        monsterImage.style.display = "none";
         getRandomRoom(catacombRooms);
         renderCurrentRoom(currentRoom);
       }, 1500);
     }, 2000);
+
+    writeToLogActions(LOG_FLEE, "YES", currentRoom.name);
   } else {
     setTimeout(monsterAttackHandler, 1200);
     isGameOver();
@@ -696,15 +701,8 @@ function closeRoomSummaryModal() {
 }
 
 function renderRoomSummaryModal() {
-  const roomSummaryDescription = document.getElementById(
-    "roomSummaryDescription"
-  );
-  const roomSummaryMonsters = document.getElementById("roomSummaryMonsters");
-  const roomSummaryItems = document.getElementById("roomSummaryItems");
-  const roomSummaryEvents = document.getElementById("roomSummaryEvents");
-  const roomSummaryExperience = document.getElementById(
-    "roomSummaryExperience"
-  );
+  const roomSummaryInfo = document.getElementById("roomSummaryInfo");
+  // const roomSummaryInfo = document.querySelector(".room-summary-modal-content");
 
   if (
     currentRoom !== catacombEntrance &&
@@ -715,31 +713,43 @@ function renderRoomSummaryModal() {
       roomSummaryModal.style.display = "block";
       let roomInfo = roomSummaryInformation.contents;
 
+      // Main Header
+      mainHeader = document.createElement("h2");
+      mainHeader.textContent = "Room Cleared";
+      roomSummaryInfo.appendChild(mainHeader);
+
       // Description
+      descriptionSummaryContainer = document.createElement("div");
       descriptionHeader = document.createElement("h4");
       descriptionHeader.textContent = `${roomSummaryInformation.roomName}`;
-      roomSummaryDescription.appendChild(descriptionHeader);
+      descriptionSummaryContainer.appendChild(descriptionHeader);
       descriptionText = document.createElement("p");
       descriptionText.textContent = `${roomSummaryInformation.description}`;
-      roomSummaryDescription.appendChild(descriptionText);
+      descriptionSummaryContainer.appendChild(descriptionText);
+      roomSummaryInfo.appendChild(descriptionSummaryContainer);
 
       // Events
       if (roomInfo.events) {
+        eventSummaryContainer = document.createElement("div");
         eventHeader = document.createElement("h4");
         eventHeader.textContent = `${roomInfo.events.name}`;
-        roomSummaryEvents.appendChild(eventHeader);
+        eventSummaryContainer.appendChild(eventHeader);
         eventText = document.createElement("p");
         eventText.textContent = `${roomInfo.events.summary}`;
-        roomSummaryEvents.appendChild(eventText);
+        eventContainer.appendChild(eventText);
+        roomSummaryInfo.appendChild(eventSummaryContainer);
+
       }
 
       // Monsters
       if (roomInfo.monsters.length > 0) {
+        monsterSummaryContainer = document.createElement("div");
         monstersHeader = document.createElement("h4");
         monstersHeader.textContent = `Monsters Defeated`;
-        roomSummaryMonsters.appendChild(monstersHeader);
+        monsterSummaryContainer.appendChild(monstersHeader);
         monstersList = document.createElement("ul");
-        roomSummaryMonsters.appendChild(monstersList);
+        monsterSummaryContainer.appendChild(monstersList);
+        roomSummaryInfo.appendChild(monsterSummaryContainer);
 
         for (let i = 0; i < roomInfo.monsters.length; i++) {
           addMonsterToList = document.createElement("li");
@@ -748,13 +758,32 @@ function renderRoomSummaryModal() {
         }
       }
 
+      // Experience
+      if (experiencePoints > previousExperience) {
+        experienceSummaryContainer = document.createElement("div");
+        let experienceGained = experiencePoints - previousExperience;
+        experienceHeader = document.createElement("h4");
+        experienceHeader.textContent = `Experience`;
+        experienceSummaryContainer.appendChild(experienceHeader);
+        gainedExperienceText = document.createElement("p");
+        gainedExperienceText.textContent = `Gained: +${experienceGained}`;
+        experienceSummaryContainer.appendChild(gainedExperienceText);
+        experienceNeededText = document.createElement("p");
+        experienceNeededText.textContent = `To Next Level: ${
+          xpToNextLevel.textContent - experiencePoints
+        }`;
+        roomSummaryInfo.appendChild(experienceSummaryContainer);
+      }
+
       // Items
       if (roomInfo.items.length > 0) {
+        itemSummaryContainer = document.createElement("div");
         itemsHeader = document.createElement("h4");
         itemsHeader.textContent = "Items Found";
-        roomSummaryItems.appendChild(itemsHeader);
+        itemSummaryContainer.appendChild(itemsHeader);
         itemsList = document.createElement("ul");
-        roomSummaryItems.appendChild(itemsList);
+        itemSummaryContainer.appendChild(itemsList);
+        roomSummaryInfo.appendChild(itemSummaryContainer);
 
         for (let i = 0; i < roomInfo.items.length; i++) {
           addItemToList = document.createElement("li");
@@ -763,19 +792,14 @@ function renderRoomSummaryModal() {
         }
       }
 
-      // Experience
-      if (experiencePoints > previousExperience) {
-        let experienceGained = experiencePoints - previousExperience;
-        experienceHeader = document.createElement("h4");
-        experienceHeader.textContent = `Experience`;
-        roomSummaryExperience.appendChild(experienceHeader);
-        gainedExperienceText = document.createElement("p");
-        gainedExperienceText.textContent = `Gained: +${experienceGained}`;
-        roomSummaryExperience.appendChild(gainedExperienceText);
-        experienceNeededText = document.createElement("p");
-        experienceNeededText.textContent = `To Next Level: ${xpToNextLevel.textContent - experiencePoints}`;
-        roomSummaryExperience.appendChild(experienceNeededText);
-      }
+      // // Close Summary Button
+      // buttonSummaryContainer = document.createElement("div");
+      // closeSummaryButton = document.createElement("button");
+      // closeContinueButton
+      // closeSummaryButton.textContent = "Close";
+      // buttonSummaryContainer.appendChild(closeSummaryButton);
+      // roomInfo.appendChild(buttonSummaryContainer);
+
     }, 2000);
   } else {
     roomSummaryModal.style.display = "none";
@@ -796,11 +820,12 @@ function setRoomSummary() {
 }
 
 function clearRoomSummaryModal() {
-  roomSummaryDescription.textContent = "";
-  roomSummaryMonsters.textContent = "";
-  roomSummaryItems.textContent = "";
-  roomSummaryEvents.textContent = "";
-  roomSummaryExperience.textContent = "";
+  roomSummaryInfo.textContent = "";
+  // roomSummaryDescription.textContent = "";
+  // roomSummaryMonsters.textContent = "";
+  // roomSummaryItems.textContent = "";
+  // roomSummaryEvents.textContent = "";
+  // roomSummaryExperience.textContent = "";
 }
 
 // ===============================

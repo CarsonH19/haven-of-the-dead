@@ -704,7 +704,7 @@ progress[value]::-moz-progress-bar {
 .room-summary-modal-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   text-align: left;
   gap: 0px;
   background-color: var(--background);
@@ -723,18 +723,35 @@ progress[value]::-moz-progress-bar {
   padding: 20px;
 }
 
+#roomSummaryInfo {
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
 .room-summary-modal-content h2 {
   align-self: center;
   margin: 0px;
+  margin-bottom: 20px;
 }
 
 .room-summary-modal-content h4 {
   margin: 0px;
-  margin-bottom: 5px;
+  margin-top: 20px;
+  margin-bottom: 3px;
 }
 
 .room-summary-modal-content p {
   margin: 0px;
+  margin-top: 1px;
+  font-size: 1.0rem;
+}
+
+.room-summary-modal-content li {
+  margin: 0px;
+  margin-top: 1px;
   font-size: 1.0rem;
 }
 

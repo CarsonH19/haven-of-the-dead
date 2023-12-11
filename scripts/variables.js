@@ -577,7 +577,7 @@ const HAUNTED = {
   duration: null,
   statusDuration: null,
   function: () => {
-    let randomNumber = Math.round(Math.random() * 9) + 1;
+    let randomNumber = Math.round(Math.random() * 7) + 1;
     if (HAUNTED.duration === null) {
       HAUNTED.statusDuration = roomCounter + randomNumber;
       HAUNTED.duration = `Duration: ?`;

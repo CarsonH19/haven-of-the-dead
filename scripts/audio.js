@@ -263,7 +263,7 @@ const unfinishedBusiness = loadAudio(
 
 // Lost Legion Vale Event
 const weCantStopThem = loadAudio(
-  "audio/music/We Can't Stop Them.mp3",
+  "audio/music/We Can_t Stop Them.mp3",
   "weCantStopThem",
   true
 );

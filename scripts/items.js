@@ -1761,7 +1761,7 @@ function getItem(rarity) {
   switch (rarity) {
     case "CONSUMABLE":
       console.log("CONSUMABLE FOUND");
-      const consumableIndex = Math.round(
+      const consumableIndex = Math.floor(
         Math.random() * consumableItems.length
       );
       foundItem = consumableItems[consumableIndex];
@@ -1769,7 +1769,7 @@ function getItem(rarity) {
       break;
 
     case "CANDLE":
-      const candleIndex = Math.round(Math.random() * candleItems.length);
+      const candleIndex = Math.floor(Math.random() * candleItems.length);
       foundItem = candleItems[candleIndex];
       console.log(candleIndex);
       console.log(foundItem);
@@ -1777,20 +1777,20 @@ function getItem(rarity) {
       break;
 
     case "WISP":
-      const wispIndex = Math.round(Math.random() * wispItems.length);
+      const wispIndex = Math.floor(Math.random() * wispItems.length);
       foundItem = wispItems[wispIndex];
       currentRoom.contents.items.push(foundItem);
       break;
 
     case "BONEVAULT":
-      const bonevaultIndex = Math.round(Math.random() * bonevaultItems.length);
+      const bonevaultIndex = Math.floor(Math.random() * bonevaultItems.length);
       foundItem = bonevaultItems[bonevaultIndex];
       currentRoom.contents.items.push(foundItem);
       bonevaultItems.splice(bonevaultIndex, 1);
       break;
 
     case "COFFIN":
-      const coffinIndex = Math.round(Math.random() * coffinEventItems.length);
+      const coffinIndex = Math.floor(Math.random() * coffinEventItems.length);
       foundItem = coffinEventItems[coffinIndex];
       currentRoom.contents.items.push(foundItem);
       break;

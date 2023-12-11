@@ -589,13 +589,15 @@ const COFFIN_EVENT = {
   functionOne: () => {
     let randomNumber = Math.round(Math.random() * 10);
     if (randomNumber >= 7) {
-      COFFIN_EVENT.summary = "You decided to open the coffin. Thankfully nothing dangerous was waiting inside.";
+      COFFIN_EVENT.summary =
+        "You decided to open the coffin. Thankfully nothing dangerous was waiting inside.";
       getItem("COFFIN");
       setRoomSummary();
       setTimeout(renderRoomSummaryModal, 5000);
       // writeToLogEvent(); Normal Coffin
     } else {
-      COFFIN_EVENT.summary = "You decided to open the coffin, disturbing the eternal rest of a Draugr within.";
+      COFFIN_EVENT.summary =
+        "You decided to open the coffin, disturbing the eternal rest of a Draugr within.";
       currentRoom.contents.monsters.push(DRAUGR);
       monsterAttackHandler();
       getItem("COFFIN");
@@ -605,7 +607,8 @@ const COFFIN_EVENT = {
     }
   },
   functionTwo: () => {
-    COFFIN_EVENT.summary = "You decided to leave the coffin, and not disturb the dead within.";
+    COFFIN_EVENT.summary =
+      "You decided to leave the coffin, and not disturb the dead within.";
     // writeToLogEvent(); Ignore
     setTimeout(renderRoomSummaryModal, 5000);
   },
@@ -849,31 +852,31 @@ function trapEventHandler(baseStat, attribute) {
   let randomNumber = Math.round(Math.random() * 10) + baseStat;
 
   //ITEM: Evertorch - Increases success chance with traps.
-  randomNumber = randomNumber + isItemAttuned(EVERTORCH, 0);
+  randomNumber += isItemAttuned(EVERTORCH, 0);
 
   if (event.eventType === "TRAP") {
     if (randomNumber >= event.passValue) {
+      event.summary = `With ${attribute} you overcame the ${event.name} and live to continue your journey through the catacomb.`;
       writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
       if (event.functionOne) {
         event.functionOne();
       }
+    } else if (event === SPIDER_WEB) {
+      event.summary = `You alerted the Crypt Crawlers while trying to escape the silken webs.`;
+      writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
     } else {
-      if (event === SPIDER_WEB) {
-        writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
-      } else {
-        playerHealthBar.value -= event.failDamage;
-        currentPlayerHealth -= event.failDamage;
-        writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
-      }
-      if (event.functionTwo) {
-        event.functionTwo();
-      }
+      event.summary = `You failed to overcome the ${event.name} and suffered ${event.failDamage} damage for your incompitence.`;
+      playerHealthBar.value -= event.failDamage;
+      currentPlayerHealth -= event.failDamage;
+      writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
     }
-
-    updatePlayerTrackers();
+    if (event.functionTwo) {
+      event.functionTwo();
+    }
   }
 
   currentRoom.contents.events = null;
+  updatePlayerTrackers();
   fadeOutAnimation(eventModal);
   setTimeout(() => {
     eventModal.style.display = "none";
@@ -959,11 +962,11 @@ eventButtonOne.addEventListener("click", () => {
   // Traps
   if (event.eventType === "TRAP") {
     if (eventButtonOne.textContent === "Strength") {
-      trapEventHandler(baseStrength, "STRENGTH");
+      trapEventHandler(baseStrength, "Strength");
     } else if (eventButtonOne.textContent === "Dexterity") {
-      trapEventHandler(baseDexterity, "DEXTERITY");
+      trapEventHandler(baseDexterity, "Dexterity");
     } else {
-      trapEventHandler(baseFaith, "FAITH");
+      trapEventHandler(baseFaith, "Faith");
     }
   }
   // NPCs
@@ -982,11 +985,11 @@ eventButtonTwo.addEventListener("click", () => {
   // Traps
   if (event.eventType === "TRAP") {
     if (eventButtonTwo.textContent === "Strength") {
-      trapEventHandler(baseStrength, "STRENGTH");
+      trapEventHandler(baseStrength, "Strength");
     } else if (eventButtonTwo.textContent === "Dexterity") {
-      trapEventHandler(baseDexterity, "DEXTERITY");
+      trapEventHandler(baseDexterity, "Dexterity");
     } else {
-      trapEventHandler(baseFaith, "FAITH");
+      trapEventHandler(baseFaith, "Faith");
     }
   }
   // NPCs
