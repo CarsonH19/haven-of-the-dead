@@ -736,9 +736,8 @@ function renderRoomSummaryModal() {
         eventSummaryContainer.appendChild(eventHeader);
         eventText = document.createElement("p");
         eventText.textContent = `${roomInfo.events.summary}`;
-        eventContainer.appendChild(eventText);
+        eventSummaryContainer.appendChild(eventText);
         roomSummaryInfo.appendChild(eventSummaryContainer);
-
       }
 
       // Monsters
@@ -778,6 +777,7 @@ function renderRoomSummaryModal() {
       // Items
       if (roomInfo.items.length > 0) {
         itemSummaryContainer = document.createElement("div");
+        // itemSummaryContainer.classList.add("item-summary-container");
         itemsHeader = document.createElement("h4");
         itemsHeader.textContent = "Items Found";
         itemSummaryContainer.appendChild(itemsHeader);
@@ -791,16 +791,21 @@ function renderRoomSummaryModal() {
           itemsList.appendChild(addItemToList);
         }
       }
-
-      // // Close Summary Button
-      // buttonSummaryContainer = document.createElement("div");
-      // closeSummaryButton = document.createElement("button");
-      // closeContinueButton
-      // closeSummaryButton.textContent = "Close";
-      // buttonSummaryContainer.appendChild(closeSummaryButton);
-      // roomInfo.appendChild(buttonSummaryContainer);
-
     }, 2000);
+
+    document.querySelectorAll(".itemTooltip").forEach(function (element) {
+      element.addEventListener("mouseover", function () {
+        const tooltipText = this.querySelector(".tooltipText");
+        tooltipText.style.visibility = "visible";
+        tooltipText.style.opacity = "1";
+      });
+
+      element.addEventListener("mouseout", function () {
+        const tooltipText = this.querySelector(".tooltipText");
+        tooltipText.style.visibility = "hidden";
+        tooltipText.style.opacity = "0";
+      });
+    });
   } else {
     roomSummaryModal.style.display = "none";
   }
