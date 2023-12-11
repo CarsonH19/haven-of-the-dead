@@ -333,7 +333,6 @@ function potionHandler() {
 
   potions.textContent = ` x ${potionCounter}`;
 
-
   healPlayer(potionHealValue);
   soundEffectHandler(POTION, "ITEM");
   writeToLogActions(LOG_POTION, "YES", potionHealValue);
@@ -607,27 +606,29 @@ function updatePlayerTrackers() {
     heroLevel.textContent = levelCounter;
   }
 
+  const xpToNextLevel = document.getElementById("xpToNextLevel");
+
   function updateHeroExperience() {
     const currentXP = document.getElementById("currentXP");
     currentXP.textContent = experiencePoints;
-    const xpToNextLevel = document.getElementById("xpToNextLevel");
+    // const xpToNextLevel = document.getElementById("xpToNextLevel");
 
     if (levelCounter === 1) {
-      xpToNextLevel.textContent = 30;
+      xpToNextLevel.textContent = 300;
     } else if (levelCounter === 2) {
-      xpToNextLevel.textContent = 80;
+      xpToNextLevel.textContent = 800;
     } else if (levelCounter === 3) {
-      xpToNextLevel.textContent = 160;
+      xpToNextLevel.textContent = 1600;
     } else if (levelCounter === 4) {
-      xpToNextLevel.textContent = 270;
+      xpToNextLevel.textContent = 2700;
     } else if (levelCounter === 5) {
-      xpToNextLevel.textContent = 410;
+      xpToNextLevel.textContent = 4100;
     } else if (levelCounter === 6) {
-      xpToNextLevel.textContent = 580;
+      xpToNextLevel.textContent = 5800;
     } else if (levelCounter === 7) {
-      xpToNextLevel.textContent = 780;
+      xpToNextLevel.textContent = 7800;
     } else if (levelCounter === 8) {
-      xpToNextLevel.textContent = 999;
+      xpToNextLevel.textContent = 9999;
     } else {
       xpToNextLevel.textContent = `Max Level`;
     }
@@ -763,18 +764,17 @@ function renderRoomSummaryModal() {
       }
 
       // Experience
-
       if (experiencePoints > previousExperience) {
         let experienceGained = experiencePoints - previousExperience;
         experienceHeader = document.createElement("h4");
         experienceHeader.textContent = `Experience`;
         roomSummaryExperience.appendChild(experienceHeader);
         gainedExperienceText = document.createElement("p");
-        gainedExperienceText.textContent = `Experience Gained: +${experienceGained}`;
+        gainedExperienceText.textContent = `Gained: +${experienceGained}`;
         roomSummaryExperience.appendChild(gainedExperienceText);
-        totalExperienceText = document.createElement("p");
-        totalExperienceText.textContent = `Total Experience: ${experiencePoints}`;
-        roomSummaryExperience.appendChild(totalExperienceText);
+        experienceNeededText = document.createElement("p");
+        experienceNeededText.textContent = `To Next Level: ${xpToNextLevel.textContent - experiencePoints}`;
+        roomSummaryExperience.appendChild(experienceNeededText);
       }
     }, 2000);
   } else {
@@ -787,6 +787,8 @@ function renderRoomSummaryModal() {
       addItemToInventory(currentRoom.contents.items[i]);
     }
   }
+
+  updatePlayerTrackers();
 }
 
 function setRoomSummary() {
@@ -989,4 +991,4 @@ restartGameBtn.addEventListener("click", () => {
 });
 
 volumeUpButton.addEventListener("click", () => adjustVolume(music, 0.05));
-volumeDownButton.addEven
+volumeDownButton.addEven;

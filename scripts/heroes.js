@@ -114,13 +114,12 @@ function rogueShadowStrike() {
     totalDamage = playerToMonsterDamage;
     showDamage(totalDamage, "PLAYER");
     writeToLogHero(LOG_SHADOW_STRIKE, "YES", totalDamage);
-     // Attack Misses
+    // Attack Misses
   } else {
     totalDamage = 0;
     showDamage(totalDamage, "PLAYER");
     writeToLogHero(LOG_PLAYER_MISS, "NO");
   }
-
 
   damageMonster(totalDamage);
   specialCooldownHandler("RESET");
@@ -209,7 +208,6 @@ function healthLowAnimation() {
     playerHealthBar.classList.remove("health-bar-critical");
     roomImage.classList.remove("flash-low-health");
     heartbeatFastLow.pause();
-
   }
 }
 
@@ -218,6 +216,9 @@ function healthLowAnimation() {
 // ===============================
 
 function gainExperience(num) {
+  num *= 10;
+  num = Math.round((num *= calculateExperienceModifier()));
+
   // ITEM: Soulflame Candle - gain double exp.
   num = num * statusEffectHandler(SOULFLAME_CANDLE);
 
@@ -235,28 +236,28 @@ function heroChecker() {
 }
 
 function checkForLevelUp() {
-  if (experiencePoints >= 999 && levelCounter <= 8) {
+  if (experiencePoints >= 9999 && levelCounter <= 8) {
     renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 780 && levelCounter === 7) {
+  } else if (experiencePoints >= 7800 && levelCounter === 7) {
     renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 580 && levelCounter === 6) {
+  } else if (experiencePoints >= 5800 && levelCounter === 6) {
     renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 410 && levelCounter === 5) {
+  } else if (experiencePoints >= 4100 && levelCounter === 5) {
     renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 270 && levelCounter === 4) {
+  } else if (experiencePoints >= 2700 && levelCounter === 4) {
     renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 160 && levelCounter === 3) {
+  } else if (experiencePoints >= 1600 && levelCounter === 3) {
     renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 80 && levelCounter === 2) {
+  } else if (experiencePoints >= 800 && levelCounter === 2) {
     renderLevelUpModal();
     levelCounter++;
-  } else if (experiencePoints >= 30 && levelCounter === 1) {
+  } else if (experiencePoints >= 300 && levelCounter === 1) {
     renderLevelUpModal();
     levelCounter++;
   }
@@ -405,8 +406,6 @@ function endLevelUp() {
     levelUpModal.style.animation = "";
     clearLevelUpModal();
   }, 1950);
-
-
 
   updatePlayerTrackers();
 }

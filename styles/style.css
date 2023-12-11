@@ -35,6 +35,12 @@ body {
   color: var(--text);
 }
 
+li, ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
 /* 
 ==========================================
                Game Window
@@ -698,6 +704,60 @@ progress[value]::-moz-progress-bar {
 #roomSummaryModal {
   display: none;
 }
+
+.room-summary-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: left;
+  gap: 0px;
+  background-color: var(--background);
+  background-image: url(images/skull-texture.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
+  border: 3px solid #888;
+  border-radius: 10px;
+  /* width: 60%;
+  height: 56%; */
+  width: 720px;
+  height: 520px;
+  overflow: auto;
+  padding: 20px;
+}
+
+.room-summary-modal-content h2 {
+  align-self: center;
+  margin: 0px;
+}
+
+.room-summary-modal-content h4 {
+  margin: 0px;
+  margin-bottom: 5px;
+}
+
+.room-summary-modal-content p {
+  margin: 0px;
+  font-size: 1.0rem;
+}
+
+.room-summary-modal-content button {
+  /* display: flex;
+  justify-content: center;
+  align-items: flex-end; */
+  align-self: center;
+  width: 150px;
+  height: 50px;
+  margin-top: 20px;
+}
+
+.room-summary-button-container button {
+  width: 150px;
+  height: 50px;
+  margin-top: 20px;
+}
+
 
 /* Settings Modal */
 #settingsModal {

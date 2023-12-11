@@ -173,7 +173,7 @@ function calculateItemFindChance() {
 // Experience Modifier
 let experienceModifier;
 function calculateExperienceModifier() {
-  experienceModifier = baseFaith * 0.2;
+  experienceModifier = (baseFaith * 0.2) + 1;
   return experienceModifier;
 }
 
