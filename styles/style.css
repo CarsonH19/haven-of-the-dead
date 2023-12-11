@@ -187,10 +187,6 @@ li, ul {
   border-radius: 10px;
 }
 
-.middle-left div :hover {
-  box-shadow: 0px 0px 10px 5px white;
-}
-
 .middle-center {
   display: flex;
   justify-content: center;
@@ -1009,10 +1005,6 @@ progress[value]::-moz-progress-bar {
   position: relative;
   cursor: pointer;
   z-index: 1;
-}
-
-.tooltip:hover {
-  box-shadow: 0px 0px 15px 5px var(--background);
 }
 
 .tooltipText {

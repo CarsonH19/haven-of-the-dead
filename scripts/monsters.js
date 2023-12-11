@@ -190,6 +190,7 @@ const ARMORED_SKELETON = {
 
 const LEGIONNAIRE = {
   name: "Undead Legionnaire",
+  image: "styles/images/monsters/legionnaire.jpg",
   type: "UNDEAD",
   skulls: 4,
   soundEffects: {
@@ -201,6 +202,7 @@ const LEGIONNAIRE = {
 
 const UNDEAD_PHALANX = {
   name: "Undead Legion Phalanx",
+  image: "styles/images/monsters/undead-phalanx.jpg",
   type: "UNDEAD",
   skulls: 9,
   attackCounter: 0,
@@ -313,6 +315,7 @@ const DRAUGR = {
 
 const BONE_TITAN = {
   name: "Bone Titan",
+  image: "styles/images/monsters/bone-titan.jpg",
   type: "UNDEAD",
   skulls: 7,
   soundEffects: {
@@ -336,6 +339,7 @@ const BONE_TITAN = {
 
 const FLOOD_OF_BONES = {
   name: "Flood of Bones",
+  image: "styles/images/monsters/flood-of-bones.jpg",
   type: "UNDEAD",
   skulls: 9,
   soundEffects: {
@@ -367,6 +371,7 @@ const BARON_OF_BONE = {
 
 const SHADE = {
   name: "Shade",
+  image: "styles/images/monsters/shade.jpg",
   type: "UNDEAD",
   skulls: 1,
   soundEffects: {
@@ -378,6 +383,7 @@ const SHADE = {
 
 const HAUNTING_SPIRIT = {
   name: "Haunting Spirit",
+  image: "styles/images/monsters/haunting-spirit.jpg",
   type: "UNDEAD",
   skulls: 3,
   soundEffects: {
@@ -393,6 +399,7 @@ const HAUNTING_SPIRIT = {
 
 const GRUDGE = {
   name: "Grudge",
+  image: "styles/images/monsters/grudge.jpg",
   type: "UNDEAD",
   skulls: 5,
   soundEffects: {

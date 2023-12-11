@@ -1173,9 +1173,9 @@ const LESSER_SOULSTONE = {
   type: "CONSUMABLE",
   rarity: "Common",
   logDetail: "USE",
-  effect: "Can be used to gain +5 experience.",
+  effect: "Can be used to gain 50 experience.",
   function: () => {
-    gainExperience(5);
+    gainExperience(50);
   },
 };
 
@@ -1187,9 +1187,9 @@ const GREATER_SOULSTONE = {
   type: "CONSUMABLE",
   rarity: "Rare",
   logDetail: "USE",
-  effect: "Can be used to gain +20 experience.",
+  effect: "Can be used to gain 250 experience.",
   function: () => {
-    gainExperience(25);
+    gainExperience(250);
   },
 };
 
@@ -1757,30 +1757,6 @@ function removeItem(itemName) {
   renderInventory();
 }
 
-// function findItemChance() {
-//   if (currentRoom.contents.events === null) {
-//     let randomNumber = Math.round(Math.random() * 19 + baseFaith);
-
-//     // ITEM: Graverobber's Spade - Increase item find chance by 10%
-//     randomNumber += isItemAttuned(GRAVEROBBERS_SPADE, 0);
-
-//     if (randomNumber >= 10) {
-//       getItem("CONSUMABLE");
-//     }
-
-//     if (randomNumber >= 19) {
-//       let itemRarity = Math.round(Math.random() * 99 + baseFaith);
-//       if (itemRarity >= 95) {
-//         getItem("Epic");
-//       } else if (itemRarity >= 61) {
-//         getItem("Rare");
-//       } else {
-//         getItem("Common");
-//       }
-//     }
-//   }
-// }
-
 function getItem(rarity) {
   switch (rarity) {
     case "CONSUMABLE":
@@ -1856,16 +1832,8 @@ function lootItems(lootGroup) {
     let lootConsumableChance = Math.round(Math.random() * 100);
     lootConsumableChance += itemFindChance;
 
-    // // ITEM: Graverobber's Spade - Increase item find chance by 5%
-    // lootItemChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
-    // lootConsumableChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
-
-    // function calculateItemFindChance() {
-    //   itemFindChance = baseFaith * 2;
-
-    //   // ITEM: Graverobber's Spade - Increase item find chance by 5%
-    //   itemFindChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
-    // }
+    let lootSpecialChance = Math.round(Math.random() * 100);
+    lootSpecialChance += itemFindChance;
 
     switch (lootGroup) {
       case "BEAST":
@@ -1877,7 +1845,7 @@ function lootItems(lootGroup) {
         commonLoot = humanoidCommonLoot;
         rareLoot = humanoidRareLoot;
 
-        if (lootItemChance > 90) {
+        if (lootSpecialChance > 95) {
           room.push(LAUGHING_COFFIN_COIN);
         }
 
@@ -1887,7 +1855,7 @@ function lootItems(lootGroup) {
         commonLoot = undeadCommonLoot;
         rareLoot = undeadRareLoot;
 
-        if (lootItemChance > 90) {
+        if (lootSpecialChance > 95) {
           room.push(SKELETON_KEY);
         }
 
@@ -1896,6 +1864,10 @@ function lootItems(lootGroup) {
       default:
         break;
     }
+
+    console.log(`Loot Item Chance: ${lootItemChance}`);
+    console.log(`Loot Consumable Chance: ${lootConsumableChance}`);
+    console.log(`Loot Special Chance: ${lootSpecialChance}`);
 
     // Loot Items
     if (lootItemChance > 102 && epicLoot.length > 0) {
