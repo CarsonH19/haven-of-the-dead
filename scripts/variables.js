@@ -266,6 +266,7 @@ const LOG_NPC_DESCRIPTION = "NPC DESCRIPTION";
 const LOG_MISC_DESCRIPTION = "MISC DESCRIPTION";
 const LOG_SAFE_ROOM = "SAFE ROOM";
 
+const LOG_NPC_DIALOGUE = "NPC DIALOGUE";
 const LOG_NPC_OPTION_ONE = "NPC OPTION ONE";
 const LOG_NPC_OPTION_TWO = "NPC OPTION TWO";
 const LOG_MISC_OPTION_ONE = "MISC OPTION ONE";
@@ -291,7 +292,7 @@ const LOG_CONSUMABLE = "CONSUMABLE";
 const LOG_OTHER = "OTHER";
 
 // ===============================
-//       Event Trackers
+//      Event & NPC Trackers
 // ===============================
 
 // Legion's Grace
@@ -302,6 +303,10 @@ let legionAttackBoost = Math.floor(legionTracker / 30);
 let crimsonCovenantBoon = 0;
 let crimsonCovenantTracker = 0;
 // let bloodPactTracker = 0; REMOVE?!?
+
+// Ivan the Scoundrel
+let ivanTracker = 0;
+
 
 // ===============================
 //        Hero Variables
@@ -732,17 +737,16 @@ const WEBBED = {
           breakFreeChance += baseStrength + counter;
 
           if (breakFreeChance >= webStrength) {
-            console.log("You broke free!");
             WEBBED.duration = null;
             counter = 0;
             togglePlayerControls();
             soundEffectHandler(fleshRip1);
-            //writeToLog() You break free
             clearInterval(webbedInterval);
+            writeToLogMonster(LOG_MONSTER_ABILITY, "YES", "BROKE FREE");
           } else {
             counter++;
             monsterAttackHandler();
-            //writeToLog() The spider attacks you while you struggle to break free
+            writeToLogMonster(LOG_MONSTER_ABILITY, "YES", "ATTACK");
           }
         }, 2000);
 
@@ -756,7 +760,7 @@ const WEBBED = {
 const CHILLED = {
   name: "Chilled",
   image: "styles/images/items/chilled.jpg",
-  status: "You are unable to use your special ability.",
+  status: "You are unable to use your special ability or flee.",
   duration: null,
   statusDuration: null,
   function: (length) => {

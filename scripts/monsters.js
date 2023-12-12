@@ -479,22 +479,26 @@ const POSSESSED_EARVER = {
 
 const IVAN_STATS = {
   name: "Ivan the Scoundrel",
+  image: "styles/images/monsters/scoundrel.jpg",
   type: "HUMANOID",
-  skulls: 6,
+  skulls: 5,
   soundEffects: {
     spawn: swordFromSheath3,
     attack: knifeStab,
     death: fightGrunt6,
   },
+  abilityCounter: 0,
   function: () => {
-    // Ivan attacks and moves back behind another scoundrel
-    let index = myArray.indexOf(IVAN_STATS);
-    if (index > 0 && index < currentRoom.contents.monsters.length) {
-      // Swap the current element with the one at the preceding index
-      [array[index], array[index - 1]] = [array[index - 1], array[index]];
+    // Ivan attacks and moves back behind another scoundrel to treat his wounds
+    let room = currentRoom.contents.monsters; 
+    if (room.length > 0) {
+      writeToLogMonster(LOG_MONSTER_ABILITY, "YES"); // must be called before the monsters swap
+      let temp = room[0];
+      room[0] = room[1];
+      room[1] = temp;
+      currentRoom.contents.monsters = room;
+      renderMonsterStatBlock(room[0]); // Needed to load swapped monster
     }
-
-    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -706,6 +710,12 @@ function monsterAbilityHandler(monster) {
       const poisonDagger = Math.round(Math.random() * 9);
       if (poisonDagger >= 9) {
         SCOUNDREL.function();
+      }
+      break;
+
+    case IVAN_STATS:
+      if (currentMonsterHealth < 40 && IVAN_STATS.abilityCounter < 3) {
+        IVAN_STATS.function();
       }
       break;
 

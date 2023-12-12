@@ -449,36 +449,38 @@ function writeToLogMonster(logType, narrate, dataOne) {
     case LOG_MONSTER_ABILITY:
       if (monsterName === "Gnawer") {
         newEntry.textContent = `A vile disease afflicts you, unleashed by the plagued gnawer's bite.`;
-      } else if (
-        monsterName === 'Crypt Crawler' ||
-        monsterName === 'Coffin Spider'
-      ) {
-        newEntry.textContent = `Sticky webs constrict around you as the ${monsterName}'s web claims you, ensnaring you in its silken trap.`;
-      } else if (monsterName === 'Broodmother') {
-        newEntry.textContent = `An egg hatches from the broodmother, releasing a ravenous spawn that scuttles forth.`;
-      } else if (monsterName === 'Scoundrel') {
-        newEntry.textContent = `A searing pain courses through your veins as the poison-laced blade of the scoundrel leaves its venomous mark.`;
-      } else if (monsterName === 'Bone Titan') {
-        newEntry.textContent = `The bone titan crumbles, yielding to a heap of bones. Three decrepit skeletons emerge, rising ominously from the fractured remains.`;
-      } else if (monsterName === 'Blazing Skeleton') {
-        newEntry.textContent = `The blazing skeleton detonates, engulfing you in searing flames.`;
-      } else if (monsterName === 'Draugr') {
-        newEntry.textContent = `The draugr's icy touch envelops you in an otherworldly frost. Leaving you shivering in the wake of its dark magic.`;
-      } else if (monsterName === 'Flood of Bones') {
+      } else if (monsterName === "Crypt Crawler") {
+        if (dataOne === "ATTACK") {
+          newEntry.textContent = `The ${monsterName}'s attacks you, while you struggle to escape its web.`;
+        } else if (dataOne === "BROKE FREE") {
+          newEntry.textContent = `You break free from the ${monsterName}'s web.`;
+        } else {
+          newEntry.textContent = `Sticky webs constrict around you as the ${monsterName}'s web claims you, ensnaring you in its silken trap.`;
+        }
+      } else if (monsterName === "Broodmother") {
+        newEntry.textContent = `An egg hatches from the Broodmother, releasing a ravenous spawn that scuttles forth.`;
+      } else if (monsterName === "Scoundrel") {
+        newEntry.textContent = `A searing pain courses through your veins as the poison-laced blade of the Scoundrel leaves its venomous mark.`;
+      } else if (monsterName === "Bone Titan") {
+        newEntry.textContent = `The Bone Titan crumbles, yielding to a heap of bones. Three Decrepit Skeletons emerge, rising ominously from the fractured remains.`;
+      } else if (monsterName === "Blazing Skeleton") {
+        newEntry.textContent = `The Blazing Skeleton detonates, engulfing you in searing flames.`;
+      } else if (monsterName === "Draugr") {
+        newEntry.textContent = `The Draugr's icy touch envelops you in an otherworldly frost. Leaving you shivering in the wake of its dark magic.`;
+      } else if (monsterName === "Flood of Bones") {
         newEntry.textContent = `As the undead tide cascades, skeletal remnants reanimate in the wake of the bone-laden deluge.`;
-      } else if (monsterName === 'Baron of Bone') {
+      } else if (monsterName === "Baron of Bone") {
         newEntry.textContent = ``;
-      } else if 
-      (
-        monsterName === 'Haunting Spirit' ||
-        monsterName === 'Graverobber Earver' ||
-        monsterName === 'Grudge' 
+      } else if (
+        monsterName === "Haunting Spirit" ||
+        monsterName === "Graverobber Earver" ||
+        monsterName === "Grudge"
       ) {
-        newEntry.textContent = `You are haunted by malevolent spirits, their pressence follow you and their ethereal whispers claw at your sanity.`;
-      } else if (monsterName === 'Ivan the Scoundrel') {
-        newEntry.textContent = ``;
-      } else if (monsterName === 'Undead Legion Phalanx') {
+        newEntry.textContent = `You are haunted by malevolent spirits, their presence follow you and their ethereal whispers claw at your sanity.`;
+      } else if (monsterName === "Undead Legion Phalanx") {
         newEntry.textContent = `The phalanx unleash a flurry of thrusts and slashes from their defensive positions.`;
+      } else if (monsterName === 'Ivan the Scoundrel') {
+        newEntry.textContent = `Ivan stumbles back, shoving one of his henchmen towards you. With a sly grin, he swiftly consumes a potion, mending his wounds.`;
       }
       break;
   }
@@ -784,7 +786,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     case LOG_TRAP_PASS:
       narration = Math.round(Math.random() * 4);
       if (event === SPIKE_WALLS) {
-        if (dataOne === "STRENGTH") {
+        if (dataOne === "Strength") {
           if (narration === 1) {
             newEntry.textContent = `With a surge of raw power, you strain against the closing walls, muscles bulging. The spikes inch closer, but you hold them back, forcing the mechanism to yield.`;
           } else if (narration === 2) {
@@ -797,7 +799,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
             newEntry.textContent =
               "Gritting your teeth, you summon every ounce of strength within you and forcefully push the encroaching spikes back, leaving a narrow escape route in your wake.";
           }
-        } else if (dataOne === "DEXTERITY") {
+        } else if (dataOne === "Dexterity") {
           if (narration === 1) {
             newEntry.textContent = `With swift reflexes, you sidestep the encroaching spikes, narrowly avoiding their deadly embrace.`;
           } else if (narration === 2) {
@@ -811,7 +813,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === GAS_CHAMBER) {
-        if (dataOne === "STRENGTH") {
+        if (dataOne === "Strength") {
           if (narration === 1) {
             newEntry.textContent = `With a powerful surge of energy, you heave against the sealed door, breaking it open. Gas spews out, but you stand tall, unaffected by its toxic fumes.`;
           } else if (narration === 2) {
@@ -823,7 +825,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `Gritting your teeth, you unleash a torrent of strength, breaking through the sealed door. The gas billows out, but you stand resolute and untouched.`;
           }
-        } else if (dataOne === "FAITH") {
+        } else if (dataOne === "Faith") {
           if (narration === 1) {
             newEntry.textContent = `With unwavering belief, you kneel in prayer as the gas chamber fills. Miraculously, a divine light surrounds you, shielding you from harm.`;
           } else if (narration === 2) {
@@ -837,7 +839,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === SWARM_OF_VERMIN) {
-        if (dataOne === "STRENGTH") {
+        if (dataOne === "Strength") {
           if (narration === 1) {
             newEntry.textContent = `Summoning your immense strength, you roar and slam your fists into the ground, creating a shockwave that scatters the rats in all directions. You stand unharmed, triumphant amidst the chaos.`;
           } else if (narration === 2) {
@@ -849,7 +851,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `With a mighty display of strength, you create a shockwave that scatters the rats, leaving you unharmed and in control of the situation.`;
           }
-        } else if (dataOne === "FAITH") {
+        } else if (dataOne === "Faith") {
           if (narration === 1) {
             newEntry.textContent = `Calling upon your unshakeable faith, you close your eyes and speak a prayer. A radiant light emanates from you, forming a protective barrier that sends the rats fleeing in terror. You emerge unscathed, your faith unwavering.`;
           } else if (narration === 2) {
@@ -863,7 +865,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === SKELETAL_HANDS) {
-        if (dataOne === "STRENGTH") {
+        if (dataOne === "Strength") {
           if (narration === 1) {
             newEntry.textContent = `You feel the skeletal hands clawing at your ankles, but you summon a burst of strength, kicking free from their grasp. With a powerful lunge, you escape their reach unscathed.`;
           } else if (narration === 2) {
@@ -875,7 +877,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `Summoning every ounce of your formidable strength, you free yourself from the skeletal hands' grasp, leaving them empty-handed and frustrated.`;
           }
-        } else if (dataOne === "DEXTERITY") {
+        } else if (dataOne === "Dexterity") {
           if (narration === 1) {
             newEntry.textContent = `With lightning-quick reflexes, you twist and turn, slipping free from the skeletal hands' attempts to grab you. You emerge unscathed, leaving them grasping at air.`;
           } else if (narration === 2) {
@@ -889,7 +891,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === SPIKE_PITFALL) {
-        if (dataOne === "DEXTERITY") {
+        if (dataOne === "Dexterity") {
           if (narration === 1) {
             newEntry.textContent = `With a graceful leap, you clear the pitfall and land safely on the other side, narrowly avoiding the deadly spikes below.`;
           } else if (narration === 2) {
@@ -901,7 +903,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `In a display of acrobatic prowess, you effortlessly glide over the pit, leaving the lethal spikes below untouched.`;
           }
-        } else if (dataOne === "FAITH") {
+        } else if (dataOne === "Faith") {
           if (narration === 1) {
             newEntry.textContent = `With unwavering belief, you step out into the abyss, trusting in a higher power. Miraculously, solid ground meets your feet, sparing you from the spikes below.`;
           } else if (narration === 2) {
@@ -915,7 +917,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === PENDULUM_BLADES) {
-        if (dataOne === "DEXTERITY") {
+        if (dataOne === "Dexterity") {
           if (narration === 1) {
             newEntry.textContent = `With lightning-fast reflexes, you effortlessly navigate through the pendulum blades, narrowly avoiding their deadly arc.`;
           } else if (narration === 2) {
@@ -927,7 +929,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `In a display of acrobatic prowess, you deftly weave through the swinging pendulum blades, emerging unharmed on the other side.`;
           }
-        } else if (dataOne === "FAITH") {
+        } else if (dataOne === "Faith") {
           if (narration === 1) {
             newEntry.textContent = `With unwavering faith, you close your eyes and step forward, trusting in a higher power to guide you safely through the pendulum blades.`;
           } else if (narration === 2) {
@@ -941,7 +943,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === SPIDER_WEB) {
-        if (dataOne === "STRENGTH") {
+        if (dataOne === "Strength") {
           if (narration === 1) {
             newEntry.textContent = `Summoning an incredible surge of raw power, you tear through the sticky webbing with sheer brute force. The strands snap and break, setting you free.`;
           } else if (narration === 2) {
@@ -953,7 +955,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `Gritting your teeth, you summon a tremendous display of strength, tearing through the webbing like it's paper. The spider's trap is no match for your might.`;
           }
-        } else if (dataOne === "FAITH") {
+        } else if (dataOne === "Faith") {
           if (narration === 1) {
             newEntry.textContent = `With unwavering faith, you call upon divine power to guide you. A brilliant light surrounds you, dissolving the webbing and setting you free.`;
           } else if (narration === 2) {
@@ -966,7 +968,14 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
             newEntry.textContent = `With unyielding faith in your heart, you call upon higher powers. In response, a powerful force surrounds you, breaking the spider's web and setting you free.`;
           }
         }
+      } else if (event === POISON_ARROWS) {
+        if (dataOne === "Dexterity") {
+          newEntry.textContent = `Instinctively, your keen senses detect a subtle shift in the air. With a quick, agile maneuver, you sidestep the rain of arrows. Ivan's frustrated growl echoes through the shadows as approaches you. "Impressive, but it won't save you," he sneers.`;
+        } else if (dataOne === "Faith") {
+          newEntry.textContent = `With unwavering belief, you close your eyes and invoke your conviction. Miraculously, each arrow whizzes by without impacting your flesh. Ivan's furious roar reverberates through the air as your faith spares you from his devious trap.`;
+        }
       }
+
       narration = newEntry.textContent;
       break;
 
@@ -977,7 +986,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     case LOG_TRAP_FAIL:
       narration = Math.floor(Math.random() * 6);
       if (event === SPIKE_WALLS) {
-        if (dataOne === "STRENGTH") {
+        if (dataOne === "Strength") {
           if (narration === 1) {
             newEntry.textContent = `Despite your best efforts, the spike walls continue to close in, and you are unable to summon the strength needed to push them back. The trap inflicts its painful toll upon you. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
@@ -989,7 +998,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `The relentless spikes break through, leaving you with deep, painful wounds." You take ${dataTwo} damage`;
           }
-        } else if (dataOne === "DEXTERITY") {
+        } else if (dataOne === "Dexterity") {
           if (narration === 1) {
             newEntry.textContent = `Despite your agile attempts, the spikes find their mark, leaving you wounded and breathless.” You take ${dataTwo} damage.`;
           } else if (narration === 2) {
@@ -1003,7 +1012,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === SPIDER_WEB) {
-        if (dataOne === "STRENGTH") {
+        if (dataOne === "Strength") {
           if (narration === 1) {
             newEntry.textContent = `You strain against the sticky silk, managing to free yourself from the spider's web, but not without difficulty. ${dataTwo}`;
           } else if (narration === 2) {
@@ -1015,7 +1024,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `With a final surge of strength, you tear yourself free from the spider's web, but the effort takes its toll. ${dataTwo}`;
           }
-        } else if (dataOne === "FAITH") {
+        } else if (dataOne === "Faith") {
           if (narration === 1) {
             newEntry.textContent = `You call upon your faith, finding the inner strength to break free from the spider's web. However, the ordeal leaves you drained and wounded. ${dataTwo}`;
           } else if (narration === 2) {
@@ -1029,7 +1038,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === SWARM_OF_VERMIN) {
-        if (dataOne === "STRENGTH") {
+        if (dataOne === "Strength") {
           if (narration === 1) {
             newEntry.textContent = `You summon all your strength to fight off the relentless tide of rats, but they overwhelm you, leaving you battered and bitten. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
@@ -1041,7 +1050,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `Despite your best efforts, the rats swarm over you, sinking their teeth in. You take ${dataTwo} damage.`;
           }
-        } else if (dataOne === "FAITH") {
+        } else if (dataOne === "Faith") {
           if (narration === 1) {
             newEntry.textContent = `You call upon your faith for protection, but the rats manage to find their way through. They bite and scratch, causing ${dataTwo} damage.`;
           } else if (narration === 2) {
@@ -1055,7 +1064,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === SKELETAL_HANDS) {
-        if (dataOne === "STRENGTH") {
+        if (dataOne === "Strength") {
           if (narration === 1) {
             newEntry.textContent = `You summon all your strength and manage to break free from the skeletal hands' grasp, but not before they tighten their grip. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
@@ -1067,7 +1076,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `With a mighty effort, you free yourself from the skeletal hands, though not without suffering some damage. You take ${dataTwo} damage.`;
           }
-        } else if (dataOne === "DEXTERITY") {
+        } else if (dataOne === "Dexterity") {
           if (narration === 1) {
             newEntry.textContent = `You twist and contort your body with remarkable dexterity, slipping free from the skeletal hands' grasp. However, they manage to graze you. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
@@ -1081,7 +1090,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === SPIKE_PITFALL) {
-        if (dataOne === "DEXTERITY") {
+        if (dataOne === "Dexterity") {
           if (narration === 1) {
             newEntry.textContent = `You react swiftly, attempting to evade the spikes below. However, they still manage to graze you, leaving you with painful wounds. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
@@ -1093,7 +1102,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `Your agile instincts kick in, allowing you to avoid the worst of the spikes. Nonetheless, you're not entirely unscathed. You take ${dataTwo} damage.`;
           }
-        } else if (dataOne === "FAITH") {
+        } else if (dataOne === "Faith") {
           if (narration === 1) {
             newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you to safety. While you manage to avoid the worst of the spikes, some still find their mark. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
@@ -1107,7 +1116,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === PENDULUM_BLADES) {
-        if (dataOne === "DEXTERITY") {
+        if (dataOne === "Dexterity") {
           if (narration === 1) {
             newEntry.textContent = `You gracefully maneuver through the swinging blades, but one catches you off guard, leaving you with a deep gash. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
@@ -1119,7 +1128,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `You skillfully evade most of the swinging blades, but one scrapes against your side, leaving you with a painful wound. You take ${dataTwo} damage.`;
           }
-        } else if (dataOne === "FAITH") {
+        } else if (dataOne === "Faith") {
           if (narration === 1) {
             newEntry.textContent = `With unwavering faith, you trust in a higher power to guide you through the perilous blades. However, a moment of doubt leads to a glancing blow. You take ${dataTwo} damage.`;
           } else if (narration === 2) {
@@ -1133,7 +1142,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           }
         }
       } else if (event === GAS_CHAMBER) {
-        if (dataOne === "STRENGTH") {
+        if (dataOne === "Strength") {
           if (narration === 0) {
             newEntry.textContent = `You muster all your strength and push against the heavy door, but it only budges slightly. The poison smoke seeps in, making you cough and choke. You manage to escape, but you take ${dataTwo} damage.`;
           } else if (narration === 1) {
@@ -1145,7 +1154,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `You throw your weight against the door, but it holds fast. The poisonous gas envelops you, making it hard to breathe. With one last, desperate push, you break free, but you take ${dataTwo} damage.`;
           }
-        } else if (dataOne === "FAITH") {
+        } else if (dataOne === "Faith") {
           if (narration === 0) {
             newEntry.textContent = `You close your eyes, focus your faith, and pray for strength. With a surge of determination, you push against the door, but it only gives way slightly. The poison smoke makes you dizzy, and you escape, but not without taking ${dataTwo} damage.`;
           } else if (narration === 1) {
@@ -1157,6 +1166,10 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else {
             newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you. The door resists, but you feel a divine force supporting you. The noxious fumes make it hard to think, but with a final surge of faith, you break free, though not without taking ${dataTwo} damage.`;
           }
+        }
+      } else if (event === POISON_ARROWS) {
+        if (dataOne === "Dexterity" || dataOne === "Faith") {
+          newEntry.textContent = `The deadly arrows pierce your flesh, and the venom from their tips courses through your veins. Ivan's laughter echoes through the chamber as he rushes towards you to finally claim his revenge. "Toying with me was your last mistake, fool."`;
         }
       }
       narration = newEntry.textContent;
@@ -1170,6 +1183,16 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       newEntry.textContent = `${event.description}`;
       narration = newEntry.textContent;
 
+      break;
+
+    case LOG_NPC_DIALOGUE:
+      if (dataOne === "IVAN" && event === PENDULUM_BLADES) {
+        newEntry.textContent = `Ivan the Scoundrel's malevolent laughter echoes across the bridge as he steps into the dim light. "Well, well, if it isn't the betrayer. You thought you could abandon me to my fate? I prepared this special surprise just for you. Enjoy your last moments!"`;
+      } else if (dataOne === "IVAN" && event === SPIKE_PITFALL) {
+        newEntry.textContent = `The distant sound of Ivan's the Scoundrel's mocking laughter meets your ear. "Farewell, betrayer! Enjoy the abyss!"`;
+      } else if (dataOne === "IVAN" && event === GAS_CHAMBER) {
+        newEntry.textContent = `Ivan's the Scoundrel's voice taunts you from behind the sealed door, "You thought you could escape my wrath? Embrace of oblivion, betrayer. Your demise will be as silent as your treachery."`;
+      }
       break;
 
     case LOG_NPC_OPTION_ONE:
@@ -1187,7 +1210,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. They turn towards you, their hollow sockets fixed on your bold presence.`;
       } else if (event === FORSAKEN_COMMANDER) {
-          newEntry.textContent = `The spectral commander's mournful visage brightens. 'A noble soul, break their chains and usher the forsaken into the eternal rest they deserve.`;
+        newEntry.textContent = `The spectral commander's mournful visage brightens. 'A noble soul, break their chains and usher the forsaken into the eternal rest they deserve.`;
       } else if (event === GRERVIL_THE_BODILESS) {
         if (dataOne === "ONE") {
           newEntry.textContent = `Grervil's skeletal gratitude echoes as you carry the talking skull. "Thanks, seeker. Onward to reclaim my body, and the catacomb's secrets shall unfold in your favor."`;
@@ -1232,9 +1255,9 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       if (event === LAUGHING_COFFIN_EVENT) {
         if (dataOne === "ONE") {
           newEntry.textContent = `Within the Laughing Coffin, the air hums with covert whispers. Abruptly, Ivan the Scoundrel confronts you, eyes ablaze. 'Left me to die, did you?' he sneers, unsheathing his blade. Resentment drips like venom in the tainted atmosphere.`;
-        } else if (dataOne === "TWO") {
+        } else if (dataOne === "PAY") {
           newEntry.textContent = `As you enter the heart of the Laughing Coffin, the air thick with the aroma of treachery, a band of scoundrels welcomes you with sly grins. "New blood, eh?" one chuckles, raising a tankard. "Join the revelry, stranger, and drink to the shadows that bind us all."`;
-        } else if (dataOne === "THREE") {
+        } else if (dataOne === "LIAR") {
           newEntry.textContent = `The scoundrels' eyes narrow, skepticism etched across their faces. "Show it then!" demands the leader, tension thickening. Your bluff exposed, the atmosphere ignites with menace. "Seems our new friend needs a harsh lesson," sneers another, drawing a blade.`;
         }
       } else if (event === LOCKED_ROOM) {
@@ -1257,6 +1280,8 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         } else {
           newEntry.textContent = `You enter the vale, several skeletal warriors rise from the battlefield's remnants. Their warrior instincts persisting even in death.`;
         }
+      } else if (event === COFFIN_EVENT && dataOne === "DRAUGR") {
+        newEntry.textContent`As the lid creaks open, a frigid gust escapes, revealing a dormant Draugr. Awakening, its icy stare piercing you for disrupting its slumber.`;
       }
 
       narration = newEntry.textContent;
@@ -1382,10 +1407,10 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
       } else if (dataOne === WARDING_CANDLE) {
         newEntry.textContent = `Your warding candle protects you from nearby undead.`;
       } else if (dataOne === SUNSTONE) {
-        newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} burns in the presence of the Sunstone.`
+        newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} burns in the presence of the Sunstone.`;
       } else if (dataOne === WHISPERING_SKULL) {
         if (dataTwo === 1) {
-          newEntry.textContent = `"Broodmothers' must be slain with haste; delay breeds a swarm of her spawn. Strike swiftly, lest her hatchlings overrun you."`
+          newEntry.textContent = `"Broodmothers' must be slain with haste; delay breeds a swarm of her spawn. Strike swiftly, lest her hatchlings overrun you."`;
         } else if (dataTwo === 2) {
           newEntry.textContent = `"Beware the Flood of Bones, a relentless surge that devours all. Flee from its unholy grasp or become one with the ceaseless tide, as I once did."`;
         } else if (dataTwo === 3) {
@@ -1451,12 +1476,10 @@ function writeToLogStatusEffect(logType, narrate, dataOne, dataTwo) {
 // ==============================================================
 
 function writeToLogOther(logType, narrate, dataOne) {
-
   let newEntry = document.createElement("li");
   let narration = Math.round(Math.random() * 9);
 
   switch (logType) {
-
     case LOG_OTHER:
       if (dataOne === "WISP") {
         newEntry.textContent = `You are already following a wisp.`;
@@ -1532,8 +1555,6 @@ function checkLogSize() {
   if (logModalList.children.length >= 200) {
     logModalList.removeChild(logModalList.lastElementChild);
   }
-
-
 }
 
 // ==============================================================

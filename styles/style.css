@@ -524,8 +524,8 @@ progress[value]::-moz-progress-bar {
   border-radius: 10px;
   /* width: 60%;
   height: 56%; */
-  width: 860px;
-  height: 600px;
+  width: 720px;
+  height: 520px;
   overflow: auto;
   padding: 10px;
 }
@@ -849,8 +849,8 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  width: 730px;
-  height: 600px;
+  width: 720px;
+  height: 520px;
   /* min-width: 625px; */
   /* min-height: 600px; */
   /* max-width: 1160px;
@@ -930,6 +930,7 @@ progress[value]::-moz-progress-bar {
   width: 100%;
   margin: 0px;
   padding: 0px;
+  cursor: pointer;
 }
 
 .inventory-right-side {
@@ -951,24 +952,18 @@ progress[value]::-moz-progress-bar {
 }
 
 .magic-items {
-  /* border: 1px solid red; */
   margin: 0vh 1vh 1vh 1vh;
-  /* height: 100%; */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); 
-  /* gap: 0px; */
-  
 }
 
 .magic-items div {
   aspect-ratio: 1;
-  /* min-width: 60px;
-  min-height: 60px; */
-  /* display: flex; */
   flex-direction: column-reverse;
   margin: 10px;
   border: 1px solid var(--header);
   box-sizing: border-box; 
+  cursor: pointer;
 }
 
 .magic-items button {
@@ -976,7 +971,7 @@ progress[value]::-moz-progress-bar {
   width: 100%;
   margin: 0px;
   padding: 0px;
-  font-size: 0.7rem;
+  cursor: pointer;
 }
 
 .consumables-box {
@@ -986,9 +981,6 @@ progress[value]::-moz-progress-bar {
 
 .consumables div {
   aspect-ratio: 1;
-  /* min-width: 60px;
-  min-height: 60px; */
-  /* display: flex; */
   flex-direction: column-reverse;
   margin: 10px;
   border: 1px solid var(--header);
@@ -996,9 +988,7 @@ progress[value]::-moz-progress-bar {
 }
 
 .consumables {
-  /* border: 1px solid red; */
   margin: 0vh 1vh 1vh 1vh;
-  /* height: 80%; */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); /* Set the minimum column width to 150px, but allow them to grow */
   grid-row-gap: 1vh; 
@@ -1011,7 +1001,7 @@ progress[value]::-moz-progress-bar {
   width: 100%;
   margin: 0px;
   padding: 0px;
-  font-size: 0.7rem;
+  cursor: pointer;
 }
 
 .consumables-box h4 {

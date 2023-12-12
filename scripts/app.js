@@ -481,7 +481,7 @@ function renderCurrentRoom(currentRoom) {
     currentRoom.contents.monsters.length > 0 &&
     currentRoom.contents.events === null
   ) {
-    checkCurrentRoom(); // Used to add specific monsters
+    checkCurrentRoom(); // Used to add specific contents
     setTimeout(startBattle(currentRoom), 2000);
   } else {
     monsterContainer.style.display = "none";

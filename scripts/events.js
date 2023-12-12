@@ -71,7 +71,7 @@ const SPIDER_WEB = {
   name: "Spider Web",
   eventType: "TRAP",
   description:
-    "A sticky, silken labyrinth envelopes you, woven meticulously by some monstrous arachnid. The web clings to you, its threads vibrating with an eerie energy. You can feel the faint tremors of distant movements, a chilling reminder of the web's creator.",
+    "A sticky, silken web envelopes you, woven meticulously by some monstrous arachnid. The web clings to you, its threads vibrating with an eerie energy. You can feel the faint tremors of distant movements.",
   optionOne: "Strength",
   optionTwo: "Faith",
   passValue: 6,
@@ -92,11 +92,14 @@ const GAS_CHAMBER = {
   name: "Gas Chamber",
   eventType: "TRAP",
   description:
-    "The chamber's atmosphere turns ominous as a noxious, green mist begins to billow forth from unseen vents. It fills the air, suffusing the space with an acrid smell. Panic sets in as you realize you're trapped, the chamber quickly becoming a suffocating sea of emerald haze.",
+    "The chamber's atmosphere turns ominous as a noxious, green mist begins to billow forth from unseen vents. It fills the air, suffusing the space with an acrid smell. Panic sets in as you realize you're trapped.",
   optionOne: "Strength",
   optionTwo: "Faith",
   passValue: 6,
   failDamage: 25,
+  functionTwo: () => {
+    POISONED.function(5);
+  }
 };
 
 const SWARM_OF_VERMIN = {
@@ -108,13 +111,16 @@ const SWARM_OF_VERMIN = {
   optionTwo: "Faith",
   passValue: 5,
   failDamage: 20,
+  functionTwo: () => {
+    DISEASED.function(5);
+  }
 };
 
 const SKELETAL_HANDS = {
   name: "Skeletal Hands",
   eventType: "TRAP",
   description:
-    "From the depths of the catacomb floor, ghostly skeletal hands claw their way forth, bony fingers outstretched in your direction. They sway and reach, their movements eerily synchronized. The cold, clammy touch of their grasp sends shivers down your spine.",
+    "From the depths of the catacomb floor, ghostly skeletal hands claw their way forth, bony fingers outstretched in your direction. They sway and reach, for your limps. The cold, clammy touch of their grasp sends shivers down your spine.",
   optionOne: "Strength",
   optionTwo: "Dexterity",
   passValue: 6,
@@ -125,22 +131,38 @@ const SPIKE_PITFALL = {
   name: "Spike Pitfall",
   eventType: "TRAP",
   description:
-    "The ground beneath your feet gives way suddenly, leaving you in a freefall. Your heart races as you plummet into the darkness, catching glimpses of jagged spikes gleaming below. The air rushes past you, carrying the scent of damp earth and impending danger.",
+    "The ground beneath your feet gives way suddenly, leaving you in a freefall. Your heart races as you plummet into the darkness, catching glimpses of jagged spikes gleaming below. The air rushes past you.",
   optionOne: "Dexterity",
   optionTwo: "Faith",
   passValue: 6,
   failDamage: 25,
+  functionTwo: () => {
+    DISEASED.function(5);
+  }
 };
 
 const PENDULUM_BLADES = {
   name: "Pendulum Blades",
   eventType: "TRAP",
   description:
-    "A symphony of deadly precision unfolds above you, as massive blades descend from the ceiling. They swing back and forth with a rhythmic, hypnotic motion, slicing through the air like harbingers of doom. Their polished edges catch the flickering light, casting sinister gleams around the chamber.",
+    "Massive blades descend from the ceiling. They swing back and forth, slicing through the air like harbingers of doom. Their polished edges catch the flickering light, casting sinister gleams around the chamber.",
   optionOne: "Dexterity",
   optionTwo: "Faith",
   passValue: 6,
+  failDamage: 30,
+};
+
+const POISON_ARROWS = {
+  name: "Poison Arrows",
+  eventType: "TRAP",
+  description: `As you progress through the dark corridor, a subtle click triggers a deadly mechanism. Suddenly, a barrage of poison-tipped arrows begin to rain down upon you from concealed openings in the walls.`,
+  optionOne: "Dexterity",
+  optionTwo: "Faith",
+  passValue: 7,
   failDamage: 25,
+  functionTwo: () => {
+    POISONED.function(5);
+  }
 };
 
 // ===============================
@@ -280,17 +302,17 @@ const IVAN_THE_SCOUNDREL = {
   },
   functionTwo: () => {
     IVAN_THE_SCOUNDREL.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
-    let addRoom = roomCounter + 5;
-    let ivanInterval = setInterval(() => {
-      if (roomCounter > addRoom) {
+    // let addRoom = roomCounter + 5;
+    // let ivanInterval = setInterval(() => {
+      // if (roomCounter > addRoom) {
         catacombRooms.push(
           IVAN_TRAP_ROOM_ONE,
           IVAN_TRAP_ROOM_TWO,
           IVAN_TRAP_ROOM_THREE
         );
-        clearInterval(ivanInterval);
-      }
-    }, 60000);
+        // clearInterval(ivanInterval);
+      // }
+    // }, 60000);
 
     LAUGHING_COFFIN_ROOM.contents.monsters.push(IVAN_STATS);
     setRoomSummary();
@@ -336,6 +358,15 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
     monsterAttackHandler();
   },
 };
+
+function ivansRevengeTracker() {
+  ivanTracker++;
+
+  if (ivanTracker === 3) {
+    ivanTracker === "ROOM ADDED";
+    catacombRooms.push(IVANS_REVENGE);
+  }
+}
 
 //
 //
@@ -594,7 +625,7 @@ const COFFIN_EVENT = {
       getItem("COFFIN");
       setRoomSummary();
       setTimeout(renderRoomSummaryModal, 5000);
-      // writeToLogEvent(); Normal Coffin
+      
     } else {
       COFFIN_EVENT.summary =
         "You decided to open the coffin, disturbing the eternal rest of a Draugr within.";
@@ -603,13 +634,12 @@ const COFFIN_EVENT = {
       getItem("COFFIN");
       setRoomSummary();
       startBattle();
-      // writeToLogEvent(); DRAUGR
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "DRAUGR"); 
     }
   },
   functionTwo: () => {
     COFFIN_EVENT.summary =
       "You decided to leave the coffin, and not disturb the dead within.";
-    // writeToLogEvent(); Ignore
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
@@ -624,17 +654,7 @@ const LAUGHING_COFFIN_EVENT = {
   functionOne: () => {
     let patrons = LAUGHING_COFFIN_ROOM.contents.monsters;
 
-    if (
-      patrons.includes(IVAN_STATS) &&
-      inventoryItems.includes(LAUGHING_COFFIN_COIN)
-    ) {
-      LAUGHING_COFFIN_EVENT.summary = `After a fierce brawl with Ivan, the Laughing Coffin's patrons swiftly eject you for the disruption. However, in acknowledgment of your coin, they send you off with a drink, the bitter taste of conflict lingering in the air`;
-      LAUGHING_COFFIN_ROOM.contents.items.push(BLACKHEART_BREW);
-      useConsumable("Laughing Coffin Coin"); // removes coin from inventory
-      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "ONE");
-      setRoomSummary();
-      startBattle();
-    } else if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
+    if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
       LAUGHING_COFFIN_EVENT.summary = `You pay the toll, exchanging a Laughing Coffin Coin for camaraderie and unexpected relaxation within the infamous tavern.`;
       useConsumable("Laughing Coffin Coin"); // removes coin from inventory
       setTimeout(newRoomAnimation, 5000);
@@ -644,9 +664,9 @@ const LAUGHING_COFFIN_EVENT = {
       }, 6500);
       setTimeout(renderRoomSummaryModal, 9000);
       setRoomSummary();
-      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "TWO");
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "PAY");
     } else {
-      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "THREE");
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "LIAR");
       console.log("NO COIN!");
       patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
       setRoomSummary();
@@ -855,24 +875,58 @@ function trapEventHandler(baseStat, attribute) {
   randomNumber += isItemAttuned(EVERTORCH, 0);
 
   if (event.eventType === "TRAP") {
-    if (randomNumber >= event.passValue) {
-      event.summary = `With ${attribute} you overcame the ${event.name} and live to continue your journey through the catacomb.`;
-      writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
-      if (event.functionOne) {
-        event.functionOne();
-      }
-    } else if (event === SPIDER_WEB) {
-      event.summary = `You alerted the Crypt Crawlers while trying to escape the silken webs.`;
-      writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
-    } else {
-      event.summary = `You failed to overcome the ${event.name} and suffered ${event.failDamage} damage for your incompitence.`;
-      playerHealthBar.value -= event.failDamage;
-      currentPlayerHealth -= event.failDamage;
-      writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
+    switch (event) {
+      case SPIDER_WEB:
+        event.summary = `You alerted the Crypt Crawlers while trying to escape the silken webs.`;
+        writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
+        break;
+
+      case POISON_ARROWS:
+        if (randomNumber >= event.passValue) {
+
+          console.log('POISON ARROWS PASS');
+          writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
+        } else {
+          playerHealthBar.value -= event.failDamage;
+          currentPlayerHealth -= event.failDamage;
+
+          if (event.functionTwo) {
+            event.functionTwo();
+          }
+
+          console.log('POISON ARROWS FAIL');
+          writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
+        }
+
+        currentRoom.contents.monsters.push(IVAN_STATS, SCOUNDREL, SCOUNDREL);
+        startBattle();
+        setRoomSummary();
+        break;
+
+      default:
+        if (randomNumber >= event.passValue) {
+          event.summary = `With ${attribute} you overcame the ${event.name} and live to continue your journey through the catacomb.`;
+          
+          if (event.functionOne) {
+            event.functionOne();
+          }
+
+          writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
+        } else {
+          event.summary = `You failed to overcome the ${event.name} and suffered ${event.failDamage} damage for your incompitence.`;
+          playerHealthBar.value -= event.failDamage;
+          currentPlayerHealth -= event.failDamage;
+
+          if (event.functionTwo) {
+            event.functionTwo();
+          }
+
+          writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
+        }
+        break;
     }
-    if (event.functionTwo) {
-      event.functionTwo();
-    }
+    
+    setRoomSummary();
   }
 
   currentRoom.contents.events = null;
