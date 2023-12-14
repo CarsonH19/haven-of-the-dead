@@ -243,9 +243,6 @@ const UNDEAD_PHALANX = {
         case 4:
           knifeStab.play();
           break;
-        case 5:
-          swordImpactRock1.play();
-          break;
       }
     }
 
@@ -645,7 +642,7 @@ function monsterAbilityHandler(monster) {
       break;
 
     case HAUNTING_SPIRIT:
-      let spiritHauntChance = Math.round(Math.random() * 50);
+      let spiritHauntChance = Math.floor(Math.random() * 50) + 1;
       if (spiritHauntChance === 50) {
         console.log("Haunting Spirit Ability Called!");
         HAUNTING_SPIRIT.function();
@@ -653,7 +650,7 @@ function monsterAbilityHandler(monster) {
       break;
 
     case GRUDGE:
-      let grudgeHauntChance = Math.round(Math.random() * 20);
+      let grudgeHauntChance = Math.floor(Math.random() * 20) + 1;
       if (grudgeHauntChance === 20) {
         console.log("Grudge Ability Called!");
         GRUDGE.function();
@@ -661,7 +658,7 @@ function monsterAbilityHandler(monster) {
       break;
 
     case POSSESSED_EARVER:
-      let earverHauntChance = Math.round(Math.random() * 20);
+      let earverHauntChance = Math.floor(Math.random() * 20) + 1;
       if (earverHauntChance === 20) {
         console.log("Earver Ability Called!");
         POSSESSED_EARVER.function();
@@ -669,7 +666,7 @@ function monsterAbilityHandler(monster) {
       break;
 
     case GNAWER:
-      let gnawerDiseaseChance = Math.floor(Math.random() * 21);
+      let gnawerDiseaseChance = Math.floor(Math.random() * 20) + 1;
       if (gnawerDiseaseChance === 20) {
         console.log("Gnawer Ability Called!");
         GNAWER.function();
@@ -701,21 +698,21 @@ function monsterAbilityHandler(monster) {
       break;
 
     case DRAUGR:
-      const chilledChance = Math.floor(Math.random() * 21);
+      const chilledChance = Math.floor(Math.random() * 20) + 1;
       if (chilledChance >= 20) {
         DRAUGR.function();
       }
       break;
 
     case SCOUNDREL:
-      const poisonedChance = Math.floor(Math.random() * 21);
+      const poisonedChance = Math.floor(Math.random() * 20) + 1;
       if (poisonedChance >= 20) {
         SCOUNDREL.function();
       }
       break;
 
     case CULTIST:
-      const cursedChance = Math.floor(Math.random() * 21);
+      const cursedChance = Math.floor(Math.random() * 20) + 1;
       if (cursedChance >= 20) {
         SCOUNDREL.function();
       }

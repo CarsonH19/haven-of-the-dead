@@ -339,10 +339,10 @@ const swordImpactRock1 = loadAudio(
   "swordImpactRock1"
 );
 
-const swordImpactRock2 = loadAudio(
-  "audio/sound-effects/Sword Impact Rock 2.mp3",
-  "swordImpactRock2"
-);
+// const swordImpactRock2 = loadAudio(
+//   "audio/sound-effects/Sword Impact Rock 2.mp3",
+//   "swordImpactRock2"
+// );
 
 const swordDraw2 = loadAudio(
   "audio/sound-effects/Sword Draw 2.mp3",

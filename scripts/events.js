@@ -76,7 +76,6 @@ const SPIDER_WEB = {
   optionTwo: "Faith",
   passValue: 6,
   failDamage: "You've alerted nearby Crypt Crawlers!",
-  functionOne: null,
   functionTwo: () => {
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
@@ -919,11 +918,6 @@ function trapEventHandler(baseStat, attribute) {
 
   if (event.eventType === "TRAP") {
     switch (event) {
-      case SPIDER_WEB:
-        event.summary = `You alerted the Crypt Crawlers while trying to escape the silken webs.`;
-        writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
-        break;
-
       case POISON_ARROWS:
         if (randomNumber >= event.passValue) {
           writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
@@ -947,17 +941,21 @@ function trapEventHandler(baseStat, attribute) {
       default:
         if (randomNumber >= event.passValue) {
           event.summary = `With ${attribute} you overcame the ${event.name} and live to continue your journey through the catacomb.`;
+          writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
 
           if (event.functionOne) {
             event.functionOne();
           }
-
-          writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
+        } else if (event === SPIDER_WEB) {
+          event.summary = `You alerted the Crypt Crawlers while trying to escape the silken webs.`;
+          writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
+          if (event.functionTwo) {
+            event.functionTwo();
+          }
         } else {
           event.summary = `You failed to overcome the ${event.name} and suffered ${event.failDamage} damage for your incompitence.`;
           playerHealthBar.value -= event.failDamage;
           currentPlayerHealth -= event.failDamage;
-
           if (event.functionTwo) {
             event.functionTwo();
           }
