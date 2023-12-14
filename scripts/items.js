@@ -262,6 +262,7 @@ const RITUAL_BLADE = {
 const MIST_VEIL_CLOAK = {
   name: "Mist Veil Cloak",
   description: "",
+  image: "styles/images/items/mist-veil-cloak.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:
@@ -461,6 +462,7 @@ const PLAGUEWARD_PENDANT = {
 const GHOSTSHROUD_TALISMAN = {
   name: "Ghostshroud Talisman",
   description: "",
+  image: "styles/images/items/ghostshroud-talisman.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item it prevents you from being haunted.",
@@ -986,18 +988,18 @@ const TOMBSTONE_TRUFFLE = {
   },
 };
 
-const SPIDER_EGG_YOLK = {
-  name: "Spider Egg Yolk",
-  description: "",
-  type: "CONSUMABLE",
-  rarity: "Rare",
-  logDetail: "EAT",
-  effect: "Restores 10 health points when eaten.",
-  soundEffect: gulpingWater24,
-  function: () => {
-    healPlayer(10);
-  },
-};
+// const SPIDER_EGG_YOLK = {
+//   name: "Spider Egg Yolk",
+//   description: "",
+//   type: "CONSUMABLE",
+//   rarity: "Rare",
+//   logDetail: "EAT",
+//   effect: "Restores 10 health points when eaten.",
+//   soundEffect: gulpingWater24,
+//   function: () => {
+//     healPlayer(10);
+//   },
+// };
 
 // ===============================
 //        MISC CONSUMABLES
@@ -1168,7 +1170,7 @@ const GRAVEBLOOM = {
 const LESSER_SOULSTONE = {
   name: "Lesser Soulstone",
   description: "",
-  image: "styles/images/items/soulstone.jpg",
+  image: "styles/images/items/lesser-soulstone.jpg",
   soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
   rarity: "Common",
@@ -1460,7 +1462,7 @@ const GUIDING_LIGHT = {
         } else {
           guidingLightTracker = "GUIDING";
         }
-      }, 15000);
+      }, 3000);
 
       wisp.classList.add("orb");
 

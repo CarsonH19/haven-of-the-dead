@@ -620,15 +620,15 @@ progress[value]::-moz-progress-bar {
 }
 
 .siggurd-image {
-  background-image: url(images/paladin.png);
+  background-image: url(images/paladin.jpg);
 }
 
 .riven-image {
-  background-image: url(images/rogue.png);
+  background-image: url(images/rogue.jpg);
 }
 
 .liheth-image {
-  background-image: url(images/priestess.png);
+  background-image: url(images/priestess.jpg);
 }
 
 .hero-choice-buttons {

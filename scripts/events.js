@@ -99,7 +99,7 @@ const GAS_CHAMBER = {
   failDamage: 25,
   functionTwo: () => {
     POISONED.function(5);
-  }
+  },
 };
 
 const SWARM_OF_VERMIN = {
@@ -113,7 +113,7 @@ const SWARM_OF_VERMIN = {
   failDamage: 20,
   functionTwo: () => {
     DISEASED.function(5);
-  }
+  },
 };
 
 const SKELETAL_HANDS = {
@@ -138,7 +138,7 @@ const SPIKE_PITFALL = {
   failDamage: 25,
   functionTwo: () => {
     DISEASED.function(5);
-  }
+  },
 };
 
 const PENDULUM_BLADES = {
@@ -162,7 +162,7 @@ const POISON_ARROWS = {
   failDamage: 25,
   functionTwo: () => {
     POISONED.function(5);
-  }
+  },
 };
 
 // ===============================
@@ -304,14 +304,14 @@ const IVAN_THE_SCOUNDREL = {
     IVAN_THE_SCOUNDREL.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
     // let addRoom = roomCounter + 5;
     // let ivanInterval = setInterval(() => {
-      // if (roomCounter > addRoom) {
-        catacombRooms.push(
-          IVAN_TRAP_ROOM_ONE,
-          IVAN_TRAP_ROOM_TWO,
-          IVAN_TRAP_ROOM_THREE
-        );
-        // clearInterval(ivanInterval);
-      // }
+    // if (roomCounter > addRoom) {
+    catacombRooms.push(
+      IVAN_TRAP_ROOM_ONE,
+      IVAN_TRAP_ROOM_TWO,
+      IVAN_TRAP_ROOM_THREE
+    );
+    // clearInterval(ivanInterval);
+    // }
     // }, 60000);
 
     LAUGHING_COFFIN_ROOM.contents.monsters.push(IVAN_STATS);
@@ -623,23 +623,29 @@ const COFFIN_EVENT = {
       COFFIN_EVENT.summary =
         "You decided to open the coffin. Thankfully nothing dangerous was waiting inside.";
       getItem("COFFIN");
-      setRoomSummary();
+      setTimeout(soundEffectHandler(doorSecretPassage1), 1500);
       setTimeout(renderRoomSummaryModal, 5000);
-      
     } else {
       COFFIN_EVENT.summary =
         "You decided to open the coffin, disturbing the eternal rest of a Draugr within.";
       currentRoom.contents.monsters.push(DRAUGR);
-      monsterAttackHandler();
       getItem("COFFIN");
-      setRoomSummary();
       startBattle();
-      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "DRAUGR"); 
+      setTimeout(() => {
+        soundEffectHandler(doorSecretPassage1);
+        monsterAttackHandler();
+        startBattle();
+      }, 1500);
+
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "DRAUGR");
     }
+
+    setRoomSummary();
   },
   functionTwo: () => {
     COFFIN_EVENT.summary =
       "You decided to leave the coffin, and not disturb the dead within.";
+    setRoomSummary();
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
@@ -788,26 +794,27 @@ const BATTLEFIELD = {
 const LOCKED_ROOM = {
   name: "Locked Room",
   eventType: "MISC",
-  description: "You discover a locked room. Do you wish to open it?",
+  // description listed in function
   summary: "",
   optionOne: "Unlock",
   optionTwo: "Leave",
   functionOne: () => {
+    LOCKED_ROOM.description = `${currentRoom.description} Do you wish to open it?`;
     if (inventoryItems.includes(SKELETON_KEY)) {
-      LOCKED_ROOM.summary = "You used a Skeleton Key to unlock the Bonevault.";
+      LOCKED_ROOM.summary = `You used a Skeleton Key to unlock ${currentRoom.roomName}.`;
       useConsumable("Skeleton Key"); // removes item from inventory
       lockedRoomHandler();
       setRoomSummary();
       // Skeleton Key Logs Information
     } else {
-      LOCKED_ROOM.summary = "You didn't have a key to unlock the Bonevault.";
+      LOCKED_ROOM.summary = `You didn't use a Skeleton Key to unlock ${currentRoom.roomName}.`;
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
       setTimeout(renderRoomSummaryModal, 5000);
       setRoomSummary();
     }
   },
   functionTwo: () => {
-    LOCKED_ROOM.summary = "You didn't unlock the Bonevault.";
+    LOCKED_ROOM.summary = `You didn't unlock the ${currentRoom.roomName}.`;
     writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
     setTimeout(renderRoomSummaryModal, 5000);
     setRoomSummary();
@@ -817,47 +824,83 @@ const LOCKED_ROOM = {
 function lockedRoomHandler() {
   let monsters = currentRoom.contents.monsters;
   let items = currentRoom.contents.items;
-  let room = Math.round(Math.random() * 5);
 
+  if (room === "Bonevault") {
+    room = Math.round(Math.random() * 4);
+  }
   setTimeout(() => {
     switch (room) {
       case 0:
         //writeToLog() room details
+        getItem("BONEVAULT");
         break;
 
       case 1:
-        monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
+        monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, SKELETAL_SOLDIER);
+        getItem("BONEVAULT");
         //writeToLog() room details
-
         break;
 
       case 2:
-        monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, ARMORED_SKELETON);
+        monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
+        getItem("BONEVAULT");
         //writeToLog() room details
-
         break;
 
       case 3:
         monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
+        getItem("BONEVAULT");
         //writeToLog() room details
-
-        break;
-
-      case 4:
-        monsters.push(BONE_TITAN);
-        //writeToLog() room details
-
         break;
 
       case 5:
         monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, BONE_TITAN);
+        getItem("BONEVAULT");
+        //writeToLog() room details
+        break;
+
+      case "Molten Door":
+        monsters.push(
+          BLAZING_SKELETON,
+          BLAZING_SKELETON,
+          BLAZING_SKELETON,
+          BLAZING_SKELETON
+        );
+        // currentRoom.contents.items.push();
+        //writeToLog() room details
+
+        break;
+
+      case "Frozen Door":
+        monsters.push(DRAUGR, DRAUGR, DRAUGR);
+        // currentRoom.contents.items.push();
+        //writeToLog() room details
+
+        break;
+
+      case "Festering Door":
+        monsters.push(GNAWER, GNAWER, GNAWER, GNAWER, GNAWER);
+        // currentRoom.contents.items.push();
+        //writeToLog() room details
+
+        break;
+
+      case "Webbed Door":
+        monsters.push(BROODMOTHER, BROODMOTHER, BROODMOTHER);
+        // currentRoom.contents.items.push();
+        //writeToLog() room details
+
+        break;
+
+      case "Hidden Door":
+        monsters.push(SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL);
+        // currentRoom.contents.items.push();
         //writeToLog() room details
 
         break;
     }
 
-    items.push(MARROWSTONE_CHEESE, POTION);
-    getItem("BONEVAULT");
+    items.push(WHISPERING_SKULL, POTION);
     startBattle();
     setRoomSummary();
   }, 1500);
@@ -883,8 +926,6 @@ function trapEventHandler(baseStat, attribute) {
 
       case POISON_ARROWS:
         if (randomNumber >= event.passValue) {
-
-          console.log('POISON ARROWS PASS');
           writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
         } else {
           playerHealthBar.value -= event.failDamage;
@@ -894,7 +935,7 @@ function trapEventHandler(baseStat, attribute) {
             event.functionTwo();
           }
 
-          console.log('POISON ARROWS FAIL');
+          soundEffectHandler(bulletsImpactFlesh26);
           writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
         }
 
@@ -906,7 +947,7 @@ function trapEventHandler(baseStat, attribute) {
       default:
         if (randomNumber >= event.passValue) {
           event.summary = `With ${attribute} you overcame the ${event.name} and live to continue your journey through the catacomb.`;
-          
+
           if (event.functionOne) {
             event.functionOne();
           }
@@ -925,7 +966,7 @@ function trapEventHandler(baseStat, attribute) {
         }
         break;
     }
-    
+
     setRoomSummary();
   }
 

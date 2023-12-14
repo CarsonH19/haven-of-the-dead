@@ -813,6 +813,7 @@ const CHILLED = {
 
 const FIENDSWORN = {
   name: "Fiendsworn",
+  image: "styles/images/items/fiendsworn.jpg",
   status: "You have become sworn to a demonic entity.",
   active: null,
   function: () => {
@@ -826,6 +827,7 @@ const FIENDSWORN = {
 
 const BRANDED = {
   name: "Branded",
+  image: "styles/images/items/branded.jpg",
   status: "You have been branded by a demonic entity.",
   active: null,
   function: () => {

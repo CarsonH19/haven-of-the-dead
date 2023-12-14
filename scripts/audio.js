@@ -85,7 +85,7 @@ function soundEffectHandler(object, type) {
 
     default:
       if (object === energyPresence4) {
-        volume = 0.5
+        volume = 0.5;
       }
       sound = object;
   }
@@ -285,6 +285,12 @@ const claustrofobia = loadAudio(
   true
 );
 
+// Locked Door
+const doorSecretPassage1 = loadAudio(
+  "audio/sound-effects/Door Secret Passage 1.mp3",
+  "doorSecretPassage1"
+);
+
 // Misc. Ambiance
 
 const droneDungeon = loadAudio(
@@ -352,9 +358,18 @@ const magicWandCast14 = loadAudio(
 //             Miss
 // ===============================
 
+// Attack Miss (Rogue/Paladin)
 const swordSwingWhoosh = loadAudio(
   "audio/sound-effects/Sword Swing Whoosh.mp3",
   "swordSwingWhoosh"
+);
+
+// Attack Miss (Priestess)
+
+// Room Transition
+const whooshLowAir = loadAudio(
+  "audio/sound-effects/Whoosh Low Air.mp3",
+  "whooshLowAir"
 );
 
 // ===============================
@@ -386,27 +401,35 @@ const ghostlyWhoosh = loadAudio(
 //        Monster Abilities
 // ===============================
 
+// Blazing Skeleton
 const magicSpellFire1 = loadAudio(
   "audio/sound-effects/Magic Spell Fire 1.mp3",
   "magicSpellFire1"
 );
 
+// Crypt Crawler
 const spiderWebShoot7 = loadAudio(
   "audio/sound-effects/Spider Web Shoot 7.mp3",
   "spiderWebShoot7"
 );
 
+// Broodmother
 const larvaEggHatch4 = loadAudio(
   "audio/sound-effects/Larva Egg Hatch 4.mp3",
   "larvaEggHatch4"
 );
 
+// Draugr
 const iceCrackFreeze = loadAudio(
   "audio/sound-effects/Ice Crack Freeze.mp3",
   "iceCrackFreeze"
 );
 
+// ???
 const fleshRip1 = loadAudio("audio/sound-effects/Flesh Rip 1.mp3", "fleshRip1");
+
+// Ivan the Scoundrell
+const bodyShove = loadAudio("audio/sound-effects/Body Shove.mp3", "bodyShove");
 
 // ===============================
 //        Monster Spawn
@@ -504,7 +527,9 @@ const fleshStab3 = loadAudio(
   "fleshStab3"
 );
 
-// Monster Death
+// ===============================
+//         MONSTER DEATH
+// ===============================
 
 const boneBreak7 = loadAudio(
   "audio/sound-effects/Bone Break 7.mp3",
@@ -543,7 +568,10 @@ const ghostShriekWhoosh = loadAudio(
   "ghostShriekWhoosh"
 );
 
-// Items
+// ===============================
+//           ITEMS
+// ===============================
+
 const flameLicks2 = loadAudio(
   "audio/sound-effects/Flame Licks 2.mp3",
   "flameLicks2"
@@ -594,10 +622,47 @@ const energyPresence4 = loadAudio(
   "energyPresence4"
 );
 
-// Room Transition
-const whooshLowAir = loadAudio(
-  "audio/sound-effects/Whoosh Low Air.mp3",
-  "whooshLowAir"
+// ===============================
+//           EVENTS
+// ===============================
+
+// Ivan's Traps
+const humanLaugh25 = loadAudio(
+  "audio/sound-effects/Human Laugh 25.mp3",
+  "humanLaugh25"
 );
 
-// Music
+// Swarm of Vermin
+const ratsSqueak = loadAudio(
+  "audio/sound-effects/Rats Squeak.mp3",
+  "ratsSqueak"
+);
+
+// Poison Arrows
+const bulletsPassBy4 = loadAudio(
+  "audio/sound-effects/Bullets Pass By 4.mp3",
+  "bulletsPassBy4"
+);
+
+const bulletsImpactFlesh26 = loadAudio(
+  "audio/sound-effects/Bullet Impact Flesh 26.mp3",
+  "bulletsImpactFlesh26"
+);
+
+// Spike Pitfall
+const crashRockStone = loadAudio(
+  "audio/sound-effects/Crash Rock Stone.mp3",
+  "crashRockStone"
+);
+
+// Gas Chamber
+const gasLeakHose3 = loadAudio(
+  "audio/sound-effects/Gas Leak Hose 3.mp3",
+  "gasLeakHose3"
+);
+
+//Pendulum Blades
+const metalSqueak21 = loadAudio(
+  "audio/sound-effects/Metal Squeak 21.mp3",
+  "metalSqueak21"
+);

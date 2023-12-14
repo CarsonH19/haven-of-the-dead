@@ -154,7 +154,7 @@ const DEMON = {
 
 const DECREPIT_SKELETON = {
   name: "Decrepit Skeleton",
-  image: 'styles/images/monsters/decrepit-skeleton-one.jpg',
+  image: "styles/images/monsters/decrepit-skeleton-one.jpg",
   type: "UNDEAD",
   skulls: 1,
   soundEffects: {
@@ -490,7 +490,7 @@ const IVAN_STATS = {
   abilityCounter: 0,
   function: () => {
     // Ivan attacks and moves back behind another scoundrel to treat his wounds
-    let room = currentRoom.contents.monsters; 
+    let room = currentRoom.contents.monsters;
     if (room.length > 0) {
       writeToLogMonster(LOG_MONSTER_ABILITY, "YES"); // must be called before the monsters swap
       let temp = room[0];
@@ -498,6 +498,7 @@ const IVAN_STATS = {
       room[1] = temp;
       currentRoom.contents.monsters = room;
       renderMonsterStatBlock(room[0]); // Needed to load swapped monster
+      soundEffectHandler(bodyShove);
     }
   },
 };
@@ -700,15 +701,22 @@ function monsterAbilityHandler(monster) {
       break;
 
     case DRAUGR:
-      const chilledChance = Math.round(Math.random() * 9);
-      if (chilledChance >= 8) {
+      const chilledChance = Math.floor(Math.random() * 21);
+      if (chilledChance >= 20) {
         DRAUGR.function();
       }
       break;
 
     case SCOUNDREL:
-      const poisonDagger = Math.round(Math.random() * 9);
-      if (poisonDagger >= 9) {
+      const poisonedChance = Math.floor(Math.random() * 21);
+      if (poisonedChance >= 20) {
+        SCOUNDREL.function();
+      }
+      break;
+
+    case CULTIST:
+      const cursedChance = Math.floor(Math.random() * 21);
+      if (cursedChance >= 20) {
         SCOUNDREL.function();
       }
       break;

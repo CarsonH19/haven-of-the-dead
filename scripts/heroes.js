@@ -416,11 +416,11 @@ function renderHeroStatsModal() {
   const heroImage = document.querySelector(".hero-stats-img");
 
   if (hero === paladin) {
-    heroImage.style.backgroundImage = "url(styles/images/paladin.png)";
+    heroImage.style.backgroundImage = "url(styles/images/paladin.jpg)";
   } else if (hero === rogue) {
-    heroImage.style.backgroundImage = "url(styles/images/rogue.png)";
+    heroImage.style.backgroundImage = "url(styles/images/rogue.jpg)";
   } else {
-    heroImage.style.backgroundImage = "url(styles/images/priestess.png)";
+    heroImage.style.backgroundImage = "url(styles/images/priestess.jpg)";
   }
 
   // Name
