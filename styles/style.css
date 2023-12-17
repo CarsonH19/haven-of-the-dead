@@ -576,25 +576,27 @@ progress[value]::-moz-progress-bar {
   margin-top: 20px;
 }
 
+/* 
+==========================================
+          HERO CHOICE MODAL
+==========================================
+*/
+
+
 .hero-choice-modal-content {
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   text-align: left;
-  gap: 0px;
-  background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: overlay;
-  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
-  border: 3px solid #888;
+  gap: 50px;
+  margin: 0px;
   border-radius: 10px;
   /* width: 60%;
   height: 56%; */
-  width: 860px;
-  height: 600px;
+  width: 1050px;
+  height: 700px;
   overflow: auto;
-  padding: 10px;
+  padding: 20px;
 }
 
 .hero-choice-modal-content h1 {
@@ -606,10 +608,100 @@ progress[value]::-moz-progress-bar {
   justify-content: space-between;
   height: 100%;
   width: 100%;
+  gap: 40px;
   margin-bottom: 10px;
 }
 
-.siggurd-image, .riven-image, .liheth-image {
+ /* Add these styles for the hover effect */
+ .character-images .character-image {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  padding: 10px;
+}
+
+.character-images .character-image:hover {
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.7); /* Adjust the alpha value for darkness */
+  cursor: pointer;
+}
+
+.character-images .character-image .character-text {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  color: var(--text);
+  text-align: center;
+}
+
+.character-text h3 {
+  margin: 10px;
+}
+
+.character-text h4 {
+  margin: 5px;
+}
+
+
+.character-text p {
+  font-size: 0.8rem;
+  margin: 0px;
+}
+
+.character-text div p {
+  margin: 5px;
+}
+
+.character-text span {
+  font-weight: 900;
+}
+
+.character-divider {
+  height: 1px;
+  width: 80%;
+  background-color: var(--header);
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.character-text .character-abilities h4 {
+  margin: 0px;
+}
+.character-images .character-image:hover .character-text {
+  opacity: 1;
+}
+
+
+.siggurd-image {
+  width: 33%;
+  height: 100%;
+  border: solid var(--header) 2px;
+  background-repeat: no-repeat;
+  background-size: 103%; 
+  background-blend-mode: overlay;
+  background-position: center; 
+  border-radius: 10px; 
+  background-image: url(images/paladin.jpg);
+}
+
+.liheth-image {
+  width: 33%;
+  height: 100%;
+  border: solid var(--header) 2px;
+  background-repeat: no-repeat;
+  background-size: 110%; 
+  background-blend-mode: overlay;
+  background-position: center top; 
+  border-radius: 10px; 
+  background-image: url(images/priestess.jpg);
+}
+
+.riven-image {
   width: 33%;
   height: 100%;
   border: solid var(--header) 2px;
@@ -617,26 +709,16 @@ progress[value]::-moz-progress-bar {
   background-size: cover;
   background-blend-mode: overlay;
   border-radius: 10px; 
-}
-
-.siggurd-image {
-  background-image: url(images/paladin.jpg);
-}
-
-.riven-image {
   background-image: url(images/rogue.jpg);
-}
-
-.liheth-image {
-  background-image: url(images/priestess.jpg);
 }
 
 .hero-choice-buttons {
   height: 10%;
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-self: flex-end; 
+  gap: 100px;
 }
 
 .hero-choice-buttons button {
@@ -952,7 +1034,7 @@ progress[value]::-moz-progress-bar {
 }
 
 .magic-items {
-  margin: 0vh 1vh 1vh 1vh;
+  margin: 0.5vh;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); 
 }
@@ -976,7 +1058,7 @@ progress[value]::-moz-progress-bar {
 
 .consumables-box {
   text-align: left;
-  height: 47%;
+  height: 50%;
 }
 
 .consumables div {
@@ -988,12 +1070,9 @@ progress[value]::-moz-progress-bar {
 }
 
 .consumables {
-  margin: 0vh 1vh 1vh 1vh;
+  margin: 0.5vh;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); /* Set the minimum column width to 150px, but allow them to grow */
-  grid-row-gap: 1vh; 
-  grid-column-gap: 1vw;
-  
 }
 
 .consumables button {
@@ -1120,6 +1199,11 @@ progress[value]::-moz-progress-bar {
   padding: 10px;
 }
 
+.level-up-modal-content p {
+  font-size: 1.5rem;
+  margin: 10px;
+}
+
 .level-up-top {
   display: flex;
   flex-direction: column;
@@ -1171,25 +1255,27 @@ progress[value]::-moz-progress-bar {
 .attributes-container button,
 .abilities-container button {
   aspect-ratio: 1;
-  height: 100px;
-  width: 100px;
+  height: 130px;
+  width: 130px;
   font-family: monospace;
   font-size: 2rem;
-  background-color: lightgray; 
-  color: var(--background);
-
+  color: lightgray;
+  box-shadow: inset 5px 5px 40px rgba(0, 0, 0, 4.8);
+  border-radius: 100px;
 }
 
 .attributes-container button:hover,
 .abilities-container button:hover {
-  background-color: var(--background);
   color: lightgrey;
-  transition: 0.5s;
+  transition: 0.3s;
   aspect-ratio: 1;
-  height: 100px;
-  width: 100px;
   font-family: monospace;
-  font-size: 2rem;
+  font-size: 3rem;
+  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 4.8);
+  border-radius: 100px;
+  cursor: pointer;
+
+
 }
 
 /* 

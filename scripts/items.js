@@ -190,11 +190,10 @@ const SHADOWSTEP_BOOTS = {
   type: "MAGIC",
   rarity: "Common",
   effect: "While attuned to this item your dexterity increases by 1.",
-  function: () => {
-    updateStats("DEXTERITY", 1);
-  },
-  unequip: () => {
-    updateStats("DEXTERITY", -1);
+  stats: {
+    strength: 0,
+    dexterity: 1,
+    faith: 0,
   },
 };
 
@@ -205,11 +204,10 @@ const BONE_BLUDGEON = {
   type: "MAGIC",
   rarity: "Common",
   effect: "While attuned to this item your strength increases by 1.",
-  function: () => {
-    updateStats("STRENGTH", 1);
-  },
-  unequip: () => {
-    updateStats("STRENGTH", -1);
+  stats: {
+    strength: 1,
+    dexterity: 0,
+    faith: 0,
   },
 };
 
@@ -220,11 +218,10 @@ const HOLY_RELIC = {
   type: "MAGIC",
   rarity: "Common",
   effect: "While attuned to this item your faith increases by 1.",
-  function: () => {
-    updateStats("FAITH", 1);
-  },
-  unequip: () => {
-    updateStats("FAITH", -1);
+  stats: {
+    strength: 0,
+    dexterity: 0,
+    faith: 1,
   },
 };
 
@@ -235,14 +232,19 @@ const RITUAL_BLADE = {
   type: "MAGIC",
   rarity: "Common",
   effect:
-    "While attuned to this item your attack increases by 3, but your faith decreases by 1.",
+  "While attuned to this item your attacks deal additional 3 damage against beasts and humans.",
   function: () => {
-    baseAttack += 3;
-    updateStats("FAITH", -1);
+    if (
+      currentRoom.contents.monsters[0].type === "BEAST" ||
+      currentRoom.contents.monsters[0].type === "HUMANOID"
+    ) {
+      console.log(`+3 Damage!`);
+      return 3;
+    } else {
+      return 0;
+    }
   },
   unequip: () => {
-    baseAttack -= 3;
-    updateStats("FAITH", 1);
   },
 };
 
@@ -337,7 +339,7 @@ const WRAITHBANE = {
   type: "MAGIC",
   rarity: "Rare",
   effect:
-    "While attuned to this item your attacks deal additional damage against evil spirits.",
+    "While attuned to this item your attacks deal additional 3 damage against evil spirits.",
   function: () => {
     if (
       currentRoom.contents.monsters[0] === SHADE ||
@@ -507,20 +509,17 @@ const CHILLBREAKER_BAND = {
   },
 };
 
-const BERSERKER_PAULDRONS = {
-  name: "Berserker Pauldrons",
+const BERSERKER_PAULDRON = {
+  name: "Berserker Pauldron",
   description: "",
   image: "styles/images/items/berserker-pauldron.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item you gain +2 Strength, but -1 Faith.",
-  function: () => {
-    updateStats("STRENGTH", 2);
-    updateStats("FAITH", -1);
-  },
-  unequip: () => {
-    updateStats("STRENGTH", -2);
-    updateStats("FAITH", 1);
+  stats: {
+    strength: 2,
+    dexterity: 0,
+    faith: -1,
   },
 };
 
@@ -531,13 +530,10 @@ const TOME_OF_DEVOTION = {
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item you gain +2 Faith, but -1 Dexterity.",
-  function: () => {
-    updateStats("FAITH", 2);
-    updateStats("DEXTERITY", -1);
-  },
-  unequip: () => {
-    updateStats("FAITH", -2);
-    updateStats("DEXTERITY", 1);
+  stats: {
+    strength: 0,
+    dexterity: -1,
+    faith: 2,
   },
 };
 
@@ -548,13 +544,10 @@ const BRACELET_OF_THE_SERPENT = {
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item you gain +2 Dexterity, but -1 Strength.",
-  function: () => {
-    updateStats("DEXTERITY", 2);
-    updateStats("STRENGTH", -1);
-  },
-  unequip: () => {
-    updateStats("DEXTERITY", -2);
-    updateStats("STRENGTH", 1);
+  stats: {
+    strength: -1,
+    dexterity: 2,
+    faith: 0,
   },
 };
 
@@ -565,12 +558,15 @@ const FANGWEAVE_ARMOR = {
   type: "MAGIC",
   rarity: "Rare",
   effect: "While attuned to this item you gain +1 Dexterity, and +20HP.",
+  stats: {
+    strength: 0,
+    dexterity: 1,
+    faith: 0,
+  },
   function: () => {
-    updateStats("DEXTERITY", 1);
     baseHealth += 20;
   },
   unequip: () => {
-    updateStats("DEXTERITY", -1);
     baseHealth -= 20;
   },
 };
@@ -775,12 +771,15 @@ const SKULLBREAKER_HELM = {
   rarity: "Rare",
   effect:
     "While attuned to this item your max health is increased by 20HP and you gain +1 Strength.",
+  stats: {
+    strength: 1,
+    dexterity: 0,
+    faith: 0,
+  },
   function: () => {
-    updateStats("STRENGTH", 1);
     baseHealth += 20;
   },
   unequip: () => {
-    updateStats("STRENGTH", -1);
     baseHealth -= 20;
   },
 };
@@ -838,18 +837,18 @@ const SPINE_OF_THE_NECROMANCER = {
   rarity: "Epic",
   effect:
     "While attuned to this item you gain +9 Attack, but all stats are reduced by 1.",
+  stats: {
+    strength: -1,
+    dexterity: -1,
+    faith: -1,
+  },
   function: () => {
     baseAttack += 9;
-    updateStats("STRENGTH", -1);
-    updateStats("DEXTERITY", -1);
-    updateStats("FAITH", -1);
   },
   unequip: () => {
     baseAttack -= 9;
-    updateStats("STRENGTH", 1);
-    updateStats("DEXTERITY", 1);
-    updateStats("FAITH", 1);
-  },
+
+  }
 };
 
 // ===============================
@@ -881,9 +880,6 @@ const DEMONIC_GRIMOIRE = {
     setTimeout(() => {
       writeToLogItem(LOG_ITEM, "YES", DEMONIC_GRIMOIRE);
     }, 3000);
-  },
-  unequip: () => {
-    // none;
   },
 };
 
@@ -1040,7 +1036,7 @@ const ROTBANE_FERN = {
   soundEffect: chewCrackersMouth,
   function: () => {
     if (DISEASED.duration !== null) {
-      let randomNumber = Math.round(Math.random() * 9);
+      let randomNumber = Math.floor(Math.random() * 5) + 1;
 
       if (randomNumber >= 8) {
         DISEASED.duration = null;
@@ -1067,7 +1063,7 @@ const WITCHFIRE_ORCHID = {
   soundEffect: chewCrackersMouth,
   function: () => {
     if (CURSED.duration !== null) {
-      let randomNumber = Math.round(Math.random() * 9);
+      let randomNumber = Math.floor(Math.random() * 5) + 1;
 
       if (randomNumber >= 8) {
         CURSED.duration = null;
@@ -1096,7 +1092,7 @@ const EMBERTHAW_PETAL = {
   soundEffect: chewCrackersMouth,
   function: () => {
     if (CHILLED.duration !== null) {
-      let randomNumber = Math.round(Math.random() * 9);
+      let randomNumber = Math.floor(Math.random() * 5) + 1;
 
       if (randomNumber >= 8) {
         CHILLED.duration = null;
@@ -1123,7 +1119,7 @@ const GHOSTLIGHT_LILY = {
   soundEffect: chewCrackersMouth,
   function: () => {
     if (HAUNTED.duration !== null) {
-      let randomNumber = Math.round(Math.random() * 9);
+      let randomNumber = Math.floor(Math.random() * 5) + 1;
 
       if (randomNumber >= 8) {
         HAUNTED.duration = null;
@@ -1149,7 +1145,7 @@ const GRAVEBLOOM = {
   soundEffect: chewCrackersMouth,
   function: () => {
     if (POISONED.duration !== null) {
-      let randomNumber = Math.round(Math.random() * 9);
+      let randomNumber = Math.floor(Math.random() * 5) + 1;
 
       if (randomNumber >= 8) {
         POISONED.duration = null;
@@ -1175,9 +1171,9 @@ const LESSER_SOULSTONE = {
   type: "CONSUMABLE",
   rarity: "Common",
   logDetail: "USE",
-  effect: "Can be used to gain 50 experience.",
+  effect: "Can be used to gain experience points.",
   function: () => {
-    gainExperience(50);
+    gainExperience(5);
   },
 };
 
@@ -1189,9 +1185,9 @@ const GREATER_SOULSTONE = {
   type: "CONSUMABLE",
   rarity: "Rare",
   logDetail: "USE",
-  effect: "Can be used to gain 250 experience.",
+  effect: "Can be used to gain a great amount of experience points.",
   function: () => {
-    gainExperience(250);
+    gainExperience(25);
   },
 };
 
@@ -1366,12 +1362,12 @@ const BLAZING_CANDLE = {
   rarity: "Epic",
   logDetail: "CANDLE",
   effect:
-    "When this item is used all of your attacks are critical hits. After five critical hits the candle burns out.",
+    "When this item is used all attack you become critical hits. After ten critical hits the candle burns out.",
   status: "All attacks made are critical hits.",
   duration: null,
   function: () => {
-    blazingCandleTracker = 5;
-    BLAZING_CANDLE.duration = `Duration: 5 Attacks`;
+    blazingCandleTracker = 10;
+    BLAZING_CANDLE.duration = `Duration: 10 Attacks`;
     let blazingCandleInterval = setInterval(() => {
       BLAZING_CANDLE.duration = `Duration: ${blazingCandleTracker} Attacks`;
       if (blazingCandleTracker <= 0) {
@@ -1397,8 +1393,8 @@ const SOULFLAME_CANDLE = {
   status: "All experience gained is doubled.",
   duration: null,
   function: () => {
-    let itemDuration = experiencePoints + 100;
-    SOULFLAME_CANDLE.duration = "100XP";
+    let itemDuration = experiencePoints + 1000;
+    SOULFLAME_CANDLE.duration = "1000XP";
     let soulflameCandleInterval = setInterval(() => {
       SOULFLAME_CANDLE.duration = `Duration: ${
         itemDuration - experiencePoints
@@ -1634,13 +1630,11 @@ let bonevaultItems = [
 
 // Coffin Event Loot
 let coffinEventItems = [
-  UNHOLY_WISP,
-  GUIDING_LIGHT,
-  ROWDY_WISP,
   GREATER_SOULSTONE,
   LESSER_SOULSTONE,
   WHISPERING_SKULL,
-  RESTLESS_WISP
+  SKELETON_KEY,
+  POTION,
 ];
 
 // Monster Magic Item Loot
@@ -1663,8 +1657,7 @@ let undeadCommonLoot = [EVERTORCH, HOLY_RELIC, BONE_BLUDGEON, CHARM_OF_HEALING];
 let undeadRareLoot = [
   GHOSTSHROUD_TALISMAN,
   SOULREAVER,
-  BERSERKER_PAULDRONS,
-  CHILLBREAKER_BAND,
+  BERSERKER_PAULDRON,
   REVENANTS_RAGE,
   CURSED_MIRROR,
   WRAITHBANE,
@@ -1696,11 +1689,7 @@ let rareConsumables = [
 ];
 
 // Epic Loot
-let epicItems = [
-  HALLOWED_HOURGLASS,
-  SOUL_JAR,
-  DARKGUARD_TRINKET
-];
+let epicItems = [HALLOWED_HOURGLASS, SOUL_JAR, DARKGUARD_TRINKET];
 
 let foundItem;
 
@@ -1727,6 +1716,10 @@ function attuneItem(itemName) {
     inventoryItems.splice(index, 1);
     attunedItems.push(itemObject);
 
+    if (itemObject.stats) {
+      addStatChange(itemObject);
+    }
+
     if (itemObject.unequip) {
       itemObject.function();
     }
@@ -1748,11 +1741,14 @@ function removeItem(itemName) {
     const index = attunedItems.indexOf(itemObject);
     attunedItems.splice(index, 1);
     inventoryItems.push(itemObject);
-  }
 
-  if (itemObject.unequip) {
-    console.log("item function called!");
-    itemObject.unequip();
+    if (itemObject.stats) {
+      removeStatChange(itemObject);
+    }
+
+    if (itemObject.unequip) {
+      itemObject.unequip();
+    }
   }
 
   clearInventory();
@@ -1817,6 +1813,7 @@ function useConsumable(consumable) {
 
   clearInventory();
   renderInventory();
+  updatePlayerTrackers();
 }
 
 function lootItems(lootGroup) {
@@ -1828,13 +1825,13 @@ function lootItems(lootGroup) {
     let foundItem;
     let foundConsumable;
 
-    let lootItemChance = Math.round(Math.random() * 100);
+    let lootItemChance = Math.floor(Math.random() * 100) + 1;
     lootItemChance += itemFindChance;
 
-    let lootConsumableChance = Math.round(Math.random() * 100);
+    let lootConsumableChance = Math.floor(Math.random() * 100) + 1;
     lootConsumableChance += itemFindChance;
 
-    let lootSpecialChance = Math.round(Math.random() * 100);
+    let lootSpecialChance = Math.floor(Math.random() * 100) + 1;
     lootSpecialChance += itemFindChance;
 
     switch (lootGroup) {
@@ -1872,7 +1869,7 @@ function lootItems(lootGroup) {
     console.log(`Loot Special Chance: ${lootSpecialChance}`);
 
     // Loot Items
-    if (lootItemChance > 102 && epicLoot.length > 0) {
+    if (lootItemChance > 110 && epicLoot.length > 0) {
       const epicIndex = Math.floor(Math.random() * epicLoot.length);
       foundItem = epicLoot[epicIndex];
       rareLoot.splice(epicIndex, 1);
@@ -1905,6 +1902,10 @@ function lootItems(lootGroup) {
     }
   }
 }
+
+// ===============================
+//      STATUS EFFECT LOGIC
+// ===============================
 
 // List to store active effects
 const activeEffects = [];
@@ -1996,10 +1997,6 @@ function renderStatusEffects(effect) {
   });
 }
 
-// ===============================
-//      STATUS EFFECT LOGIC
-// ===============================
-
 function statusEffectHandler(item) {
   switch (item) {
     case WARDING_CANDLE:
@@ -2059,15 +2056,14 @@ function statusEffectHandler(item) {
 
     case BLACKHEART_BREW:
       if (blackheartBrewTracker === "DRUNK") {
-        updateStats("DEXTERITY", -1);
-        updateStats("STRENGTH", 2);
+        addStatChange(BLACKHEART_BREW);
         updatePlayerTrackers();
       }
       break;
 
     case POISONED:
-      updateStats("DEXTERITY", -2);
-      updateStats("STRENGTH", -2);
+      // write a function that checks stats and reduces stats by available number then restores the same amount later
+      // addStatChange(POISONED);
       updatePlayerTrackers();
       //writeToLogItem() You've been poisoned!
       break;
@@ -2336,7 +2332,6 @@ closeInventoryButton.addEventListener("click", () => {
   closeInventoryHandler();
   clearInventory();
   calculatePlayerMaxHealth();
-  checkForLevelUp();
   updatePlayerTrackers();
 });
 

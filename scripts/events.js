@@ -35,10 +35,10 @@
 // ===============================
 
 const SAFE_ROOM = {
-  name: "Safe Room",
+  name: "",
   eventType: "SAFE ROOM",
   description:
-    "You arrive at Candlelight Shrine, a haven untainted by darkness. Here, malevolence recoils, granting you respite. Embrace the flickering sanctuary, and let the shadows fade as you rest, shielded from the evil that prowls beyond its sacred glow.",
+    "You arrive at a Candlelight Shrine, a haven untainted by darkness. You embrace the flickering sanctuary, and let the shadows fade as you rest, shielded from the evil that prowls beyond its sacred glow.",
   summary: `You rest at the Candlelight Shrine. The sacred flames stand sentinel, offering you solace in the heart of the catacomb.`,
   functionOne: () => {
     setTimeout(() => {
@@ -76,12 +76,17 @@ const SPIDER_WEB = {
   optionTwo: "Faith",
   passValue: 6,
   failDamage: "You've alerted nearby Crypt Crawlers!",
+  functionOne: () => {
+    soundEffectHandler(fleshRip1);
+  },
   functionTwo: () => {
+    SPIDER_WEB.summary = `You alerted the Crypt Crawlers while trying to escape the silken webs.`;
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
+    soundEffectHandler(fleshRip1);
     setRoomSummary();
     startBattle();
   },
@@ -96,9 +101,15 @@ const GAS_CHAMBER = {
   optionTwo: "Faith",
   passValue: 6,
   failDamage: 25,
-  functionTwo: () => {
-    POISONED.function(5);
+  functionOne: () => {
+    gasLeakHose3.pause();
   },
+  functionTwo: () => {
+    gasLeakHose3.pause();
+  },
+  penalty: () => {
+    POISONED.function(5);
+  }
 };
 
 const SWARM_OF_VERMIN = {
@@ -110,7 +121,7 @@ const SWARM_OF_VERMIN = {
   optionTwo: "Faith",
   passValue: 5,
   failDamage: 20,
-  functionTwo: () => {
+  penalty: () => {
     DISEASED.function(5);
   },
 };
@@ -135,7 +146,7 @@ const SPIKE_PITFALL = {
   optionTwo: "Faith",
   passValue: 6,
   failDamage: 25,
-  functionTwo: () => {
+  penalty: () => {
     DISEASED.function(5);
   },
 };
@@ -149,19 +160,6 @@ const PENDULUM_BLADES = {
   optionTwo: "Faith",
   passValue: 6,
   failDamage: 30,
-};
-
-const POISON_ARROWS = {
-  name: "Poison Arrows",
-  eventType: "TRAP",
-  description: `As you progress through the dark corridor, a subtle click triggers a deadly mechanism. Suddenly, a barrage of poison-tipped arrows begin to rain down upon you from concealed openings in the walls.`,
-  optionOne: "Dexterity",
-  optionTwo: "Faith",
-  passValue: 7,
-  failDamage: 25,
-  functionTwo: () => {
-    POISONED.function(5);
-  },
 };
 
 // ===============================
@@ -355,6 +353,31 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
+  },
+};
+
+const IVANS_AMBUSH = {
+  name: "Ivan's Ambush",
+  eventType: "TRAP",
+  description: `As you progress through the dark corridor, a subtle click triggers a deadly mechanism. Suddenly, a barrage of poison-tipped arrows begin to rain down upon you from concealed openings in the walls.`,
+  optionOne: "Dexterity",
+  optionTwo: "Faith",
+  passValue: 7,
+  failDamage: 25,
+  functionOne: () => {
+    IVANS_AMBUSH.summary = `You avoided being struck by poison arrows after triggering a trap. Ambushed, a struggle to the death against Ivan and his scoundrels ensued. With Ivan dead, his traps will torment you no more.`;
+    currentRoom.contents.monsters.push(IVAN_STATS, SCOUNDREL, SCOUNDREL);
+    soundEffectHandler(bulletsPassBy4);
+    startBattle();
+    setRoomSummary();
+  },
+  functionTwo: () => {
+    IVANS_AMBUSH.summary = `You were struck by poison arrows after triggering a trap. Ambushed, a struggle to the death against Ivan and his scoundrels ensued. With Ivan dead, his traps will torment you no more.`;
+    POISONED.function(5);
+    soundEffectHandler(bulletsImpactFlesh26);
+    currentRoom.contents.monsters.push(IVAN_STATS, SCOUNDREL, SCOUNDREL);
+    startBattle();
+    setRoomSummary();
   },
 };
 
@@ -622,6 +645,7 @@ const COFFIN_EVENT = {
       COFFIN_EVENT.summary =
         "You decided to open the coffin. Thankfully nothing dangerous was waiting inside.";
       getItem("COFFIN");
+      getItem("WISP");
       setTimeout(soundEffectHandler(doorSecretPassage1), 1500);
       setTimeout(renderRoomSummaryModal, 5000);
     } else {
@@ -629,6 +653,7 @@ const COFFIN_EVENT = {
         "You decided to open the coffin, disturbing the eternal rest of a Draugr within.";
       currentRoom.contents.monsters.push(DRAUGR);
       getItem("COFFIN");
+      getItem("WISP");
       startBattle();
       setTimeout(() => {
         soundEffectHandler(doorSecretPassage1);
@@ -738,6 +763,7 @@ const CRIMSON_COVENANT = {
       CRIMSON_COVENANT.summary =
         "You participated in the ritual, spilling your blood alongside the other members of the Crimson Covenant.";
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "JOIN");
+      updatePlayerTrackers();
       setTimeout(renderRoomSummaryModal, 5000);
     } else {
       CRIMSON_COVENANT.summary =
@@ -792,21 +818,20 @@ const BATTLEFIELD = {
 
 const LOCKED_ROOM = {
   name: "Locked Room",
+  description: ``,
   eventType: "MISC",
   // description listed in function
-  summary: "",
   optionOne: "Unlock",
   optionTwo: "Leave",
   functionOne: () => {
-    LOCKED_ROOM.description = `${currentRoom.description} Do you wish to open it?`;
     if (inventoryItems.includes(SKELETON_KEY)) {
-      LOCKED_ROOM.summary = `You used a Skeleton Key to unlock ${currentRoom.roomName}.`;
+      LOCKED_ROOM.summary = `You used a Skeleton Key to unlock the ${currentRoom.roomName}.`;
       useConsumable("Skeleton Key"); // removes item from inventory
-      lockedRoomHandler();
+      lockedRoomHandler(currentRoom.roomName);
       setRoomSummary();
       // Skeleton Key Logs Information
     } else {
-      LOCKED_ROOM.summary = `You didn't use a Skeleton Key to unlock ${currentRoom.roomName}.`;
+      LOCKED_ROOM.summary = `You didn't use a Skeleton Key to unlock the ${currentRoom.roomName}.`;
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
       setTimeout(renderRoomSummaryModal, 5000);
       setRoomSummary();
@@ -820,13 +845,15 @@ const LOCKED_ROOM = {
   },
 };
 
-function lockedRoomHandler() {
+function lockedRoomHandler(room) {
   let monsters = currentRoom.contents.monsters;
   let items = currentRoom.contents.items;
 
   if (room === "Bonevault") {
     room = Math.round(Math.random() * 4);
+    
   }
+
   setTimeout(() => {
     switch (room) {
       case 0:
@@ -871,6 +898,7 @@ function lockedRoomHandler() {
         break;
 
       case "Frozen Door":
+        currentRoom.contents.items.push(CHILLBREAKER_BAND);
         monsters.push(DRAUGR, DRAUGR, DRAUGR);
         // currentRoom.contents.items.push();
         //writeToLog() room details
@@ -909,92 +937,65 @@ function lockedRoomHandler() {
 //          Event Logic
 // ===============================
 
-function trapEventHandler(baseStat, attribute) {
+function generalEventHandler(option, statModifier, attribute) {
   let event = currentRoom.contents.events;
-  let randomNumber = Math.round(Math.random() * 10) + baseStat;
 
-  //ITEM: Evertorch - Increases success chance with traps.
-  randomNumber += isItemAttuned(EVERTORCH, 0);
-
+  // Logic for trap events
   if (event.eventType === "TRAP") {
-    switch (event) {
-      case POISON_ARROWS:
-        if (randomNumber >= event.passValue) {
-          writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
-        } else {
-          playerHealthBar.value -= event.failDamage;
-          currentPlayerHealth -= event.failDamage;
+    let randomNumber = Math.floor(Math.random() * 10) + 1 + statModifier;
+    //ITEM: Evertorch - Increases success chance with traps.
+    randomNumber += isItemAttuned(EVERTORCH, 0);
 
-          if (event.functionTwo) {
-            event.functionTwo();
-          }
+    if (randomNumber >= event.passValue) {
+      event.summary = `With ${attribute} you overcame the ${event.name} and live to continue your journey through the catacomb.`;
+    
+      if (event.functionOne) {
+        event.functionOne();
+      }
 
-          soundEffectHandler(bulletsImpactFlesh26);
-          writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
-        }
+      writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
+    } else {
+      event.summary = `You failed to overcome the ${event.name} and suffered ${event.failDamage} damage for your incompitence.`;
+      playerHealthBar.value -= event.failDamage;
+      currentPlayerHealth -= event.failDamage;
 
-        currentRoom.contents.monsters.push(IVAN_STATS, SCOUNDREL, SCOUNDREL);
-        startBattle();
-        setRoomSummary();
-        break;
+      if (event.functionTwo) {
+        event.functionTwo();
+      }
 
-      default:
-        if (randomNumber >= event.passValue) {
-          event.summary = `With ${attribute} you overcame the ${event.name} and live to continue your journey through the catacomb.`;
-          writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
+      if (event.penalty) {
+        event.penalty();
+      }
 
-          if (event.functionOne) {
-            event.functionOne();
-          }
-        } else if (event === SPIDER_WEB) {
-          event.summary = `You alerted the Crypt Crawlers while trying to escape the silken webs.`;
-          writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
-          if (event.functionTwo) {
-            event.functionTwo();
-          }
-        } else {
-          event.summary = `You failed to overcome the ${event.name} and suffered ${event.failDamage} damage for your incompitence.`;
-          playerHealthBar.value -= event.failDamage;
-          currentPlayerHealth -= event.failDamage;
-          if (event.functionTwo) {
-            event.functionTwo();
-          }
-
-          writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
-        }
-        break;
+      writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
     }
 
     setRoomSummary();
+    setTimeout(renderRoomSummaryModal, 5000);
+  }
+
+  // Logic for non-trap events
+  if (event.eventType !== "TRAP") {
+    switch (option) {
+      case event.optionOne:
+        if (event.functionOne) {
+          event.functionOne();
+        }
+        break;
+  
+      case event.optionTwo:
+        if (event.functionTwo) {
+          event.functionTwo();
+        }
+        break;
+    }
   }
 
   currentRoom.contents.events = null;
-  updatePlayerTrackers();
-  fadeOutAnimation(eventModal);
-  setTimeout(() => {
-    eventModal.style.display = "none";
-  }, 1900);
-  setTimeout(renderRoomSummaryModal, 5000);
-}
-
-function generalEventHandler(option) {
-  let event = currentRoom.contents.events;
-
-  switch (option) {
-    case event.optionOne:
-      event.functionOne();
-      break;
-    case event.optionTwo:
-      event.functionTwo();
-      break;
-  }
-
   fadeOutAnimation(eventModal, 0000);
   setTimeout(() => {
     eventModal.style.display = "none";
   }, 1900);
-
-  currentRoom.contents.events = null;
   updatePlayerTrackers();
 }
 
@@ -1055,11 +1056,11 @@ eventButtonOne.addEventListener("click", () => {
   // Traps
   if (event.eventType === "TRAP") {
     if (eventButtonOne.textContent === "Strength") {
-      trapEventHandler(baseStrength, "Strength");
+      generalEventHandler(event.optionOne, totalStrength, "Strength");
     } else if (eventButtonOne.textContent === "Dexterity") {
-      trapEventHandler(baseDexterity, "Dexterity");
+      generalEventHandler(event.optionOne, totalDexterity, "Dexterity");
     } else {
-      trapEventHandler(baseFaith, "Faith");
+      generalEventHandler(event.optionOne, totalFaith, "Faith");
     }
   }
   // NPCs
@@ -1078,11 +1079,11 @@ eventButtonTwo.addEventListener("click", () => {
   // Traps
   if (event.eventType === "TRAP") {
     if (eventButtonTwo.textContent === "Strength") {
-      trapEventHandler(baseStrength, "Strength");
+      generalEventHandler(event.optionTwo, totalStrength, "Strength");
     } else if (eventButtonTwo.textContent === "Dexterity") {
-      trapEventHandler(baseDexterity, "Dexterity");
+      generalEventHandler(event.optionTwo, totalDexterity, "Dexterity");
     } else {
-      trapEventHandler(baseFaith, "Faith");
+      generalEventHandler(event.optionTwo, totalFaith, "Faith");
     }
   }
   // NPCs

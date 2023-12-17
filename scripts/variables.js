@@ -40,14 +40,12 @@ monsterContainer.style.display = "none";
 const monsterImage = document.getElementById("monsterImage");
 monsterImage.style.display = "none";
 
-
-
 // ===============================
 //     Catacomb Entrance Modal
 // ===============================
 
 const catacombEntranceModal = document.getElementById("catacombEntranceModal");
-const greatCatacombsBtn = document.getElementById("greatCatacombsBtn");
+const catacombEntranceBtn = document.getElementById("catacombEntranceBtn");
 
 // ===============================
 //      Room Summary Modal
@@ -85,20 +83,22 @@ const restartGameBtn = document.getElementById("restartGameBtn");
 // ===============================
 //           STRENGTH
 // ===============================
+
 let baseStrength;
+let totalStrength = baseStrength;
 
 // Max Health // +10 per Str
 let baseHealth;
 let playerMaxHealth;
 
 function calculatePlayerMaxHealth() {
-  let strengthBonusHealth = baseStrength * 10;
+  let strengthBonusHealth = totalStrength * 10;
   playerMaxHealth = baseHealth + strengthBonusHealth;
   playerMaxHealth += crimsonCovenantBoon;
 
   // Checks for Diseased Condition
   if (DISEASED.duration !== null) {
-    playerMaxHealth = playerMaxHealth * 0.75;
+    playerMaxHealth = Math.round(playerMaxHealth * 0.8);
   }
   // Prevents Healing Above Max
   if (currentPlayerHealth > playerMaxHealth) {
@@ -122,7 +122,7 @@ function calculatePlayerMaxHealth() {
 let critDamageModifier;
 
 function calculateCritDamageModifier() {
-  critDamageModifier = 1.5 + baseStrength * 0.3;
+  critDamageModifier = 1.5 + totalStrength * 0.3;
   return critDamageModifier;
 }
 
@@ -130,12 +130,13 @@ function calculateCritDamageModifier() {
 //           DEXTERITY
 // ===============================
 let baseDexterity;
+let totalDexterity = baseDexterity;
 
 // Crit Hit Chance // +5% per Dex
 let critHitChance;
 
 function calculateCritHitChance() {
-  critHitChance = baseDexterity;
+  critHitChance = totalDexterity;
   return critHitChance;
 }
 
@@ -143,7 +144,7 @@ function calculateCritHitChance() {
 let guardBonus;
 
 function calculateGuardBonus() {
-  guardBonus = baseDexterity;
+  guardBonus = totalDexterity;
   return guardBonus;
 }
 
@@ -151,7 +152,7 @@ function calculateGuardBonus() {
 let fleeChance;
 
 function calculateFleeChance() {
-  fleeChance = baseDexterity;
+  fleeChance = totalDexterity;
   return fleeChance;
 }
 
@@ -159,13 +160,14 @@ function calculateFleeChance() {
 //            FAITH
 // ===============================
 let baseFaith;
+let totalFaith = baseFaith;
 
 // Item Find Chance
 let itemFindChance;
 
 function calculateItemFindChance() {
-  itemFindChance = baseFaith * 5;
-  isItemAttuned(GRAVEROBBERS_SPADE);
+  itemFindChance = totalFaith * 5;
+  itemFindChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
 
   return itemFindChance;
 }
@@ -173,7 +175,7 @@ function calculateItemFindChance() {
 // Experience Modifier
 let experienceModifier;
 function calculateExperienceModifier() {
-  experienceModifier = (baseFaith * 0.2) + 1;
+  experienceModifier = totalFaith * 0.2 + 1;
   return experienceModifier;
 }
 
@@ -183,59 +185,63 @@ function calculateExperienceModifier() {
 
 let attunedItems = [];
 
-function updateStats(stat, number = 0) {
-  switch (stat) {
-    case "STRENGTH":
-      baseStrength = baseStrength + number;
+let statChanges = [];
 
-      if (baseStrength < 0) {
-        baseStrength = 0;
-      }
-
-      playerMaxHealth = calculatePlayerMaxHealth();
-      critDamageModifier = calculateCritDamageModifier();
-      break;
-
-    case "DEXTERITY":
-      baseDexterity = baseDexterity + number;
-
-      if (baseDexterity < 0) {
-        baseDexterity = 0;
-      }
-
-      critHitChance = calculateCritHitChance();
-      guardBonus = calculateGuardBonus();
-      fleeChance = calculateFleeChance();
-      break;
-
-    case "FAITH":
-      baseFaith = baseFaith + number;
-
-      if (baseFaith < 0) {
-        baseFaith = 0;
-      }
-
-      findItemChance = calculateItemFindChance();
-      experienceModifier = calculateExperienceModifier();
-      break;
-
-    case "ALL":
-      updateStats("STRENGTH");
-      updateStats("DEXTERITY");
-      updateStats("FAITH");
-      break;
-  }
-
-  updatePlayerTrackers();
+function addStatChange(object) {
+  statChanges.push(object);
+  updateTotalStats();
 }
 
-function applyItemStatChanges() {
-  for (let i = 0; i < attunedItems.length; i++) {
-    if (attunedItems[i].unequip) {
-      attunedItems[i].function();
-      console.log("CALLED");
+function removeStatChange(object) {
+  const index = statChanges.indexOf(object);
+  statChanges.splice(index, 1);
+  updateTotalStats();
+}
+
+function updateTotalStats() {
+  totalStrength = 0;
+  totalDexterity = 0;
+  totalFaith = 0;
+
+  for (const item of statChanges) {
+    if (item.stats) {
+      totalStrength += item.stats.strength || 0;
+      totalDexterity += item.stats.dexterity || 0;
+      totalFaith += item.stats.faith || 0;
     }
   }
+  // Strength
+  totalStrength += baseStrength;
+  if (totalStrength < 0) totalStrength = 0;
+
+  playerMaxHealth = calculatePlayerMaxHealth();
+  critDamageModifier = calculateCritDamageModifier();
+
+  // Dexterity
+  // Check for rogue passive ability
+  if (heroChoice === "ROGUE" && DARKENED_REPRISAL.active === "YES") {
+    let rougePassiveBonus = baseDexterity;
+    rougePassiveBonus *= darkenedReprisalTracker;
+    totalDexterity += rougePassiveBonus;
+    console.log(rougePassiveBonus);
+  } else {
+    totalDexterity += baseDexterity;
+  }
+
+  if (totalDexterity < 0) totalDexterity = 0;
+
+  critHitChance = calculateCritHitChance();
+  guardBonus = calculateGuardBonus();
+  fleeChance = calculateFleeChance();
+
+  //Faith
+  totalFaith += baseFaith;
+  if (totalFaith < 0) totalFaith = 0;
+
+  findItemChance = calculateItemFindChance();
+  experienceModifier = calculateExperienceModifier();
+
+  updatePlayerTrackers();
 }
 
 // ===============================
@@ -258,7 +264,6 @@ const LOG_GUARD = "GUARD";
 const LOG_GUARD_FAIL = "GUARD FAIL";
 const LOG_POTION = "POTION";
 const LOG_FLEE = "FLEE";
-const LOG_LEVEL = "LEVEL UP";
 const LOG_ROOM = "ROOM";
 
 const LOG_TRAP_DESCRIPTION = "TRAP DESCRIPTION";
@@ -274,14 +279,17 @@ const LOG_MISC_OPTION_TWO = "MISC OPTION TWO";
 const LOG_TRAP_PASS = "TRAP PASS";
 const LOG_TRAP_FAIL = "TRAP FAIL";
 
+const LOG_LEVEL = "LEVEL UP";
+const LOG_STAT_INCREASE = "STAT INCREASE";
+
 const LOG_SMITE = "SMITE";
 const LOG_SMITE_CRITICAL = "CRITICAL SMITE";
 const LOG_RADIANT_AURA = "RADIANT AURA";
 
-const LOG_SHADOW_STRIKE = "SHADOW STRIKE";
-const LOG_EVASION = "EVASION";
+const LOG_UMBRAL_ASSAULT = "UMBRAL ASSAULT";
+const LOG_DARKENED_REPRISAL = "DARKENED REPRISAL";
 
-const LOG_GREATER_PRAYER = "GREATER PRAYER";
+const LOG_CLEANSING_FLAME = "CLEANSING FLAME";
 const LOG_BURNING_DEVOTION = "BURNING RADIANCE";
 
 const LOG_ITEM = "ITEM";
@@ -302,11 +310,9 @@ let legionAttackBoost = Math.floor(legionTracker / 30);
 // Crimson Covenant
 let crimsonCovenantBoon = 0;
 let crimsonCovenantTracker = 0;
-// let bloodPactTracker = 0; REMOVE?!?
 
 // Ivan the Scoundrel
 let ivanTracker = 0;
-
 
 // ===============================
 //        Hero Variables
@@ -322,8 +328,8 @@ let holySmiteTracker = 2.0;
 let radiantAuraTracker = 5;
 
 // Rogue
-let shadowStrikeTracker = 6;
-let evasionTracker = 2;
+let umbralAssaultTracker = 3;
+let darkenedReprisalTracker = 1.5
 
 // Priestess
 // N/A
@@ -340,12 +346,16 @@ const levelUpModal = document.getElementById("levelUpModal");
 // const strengthContainer = document.getElementById("strengthContainer");
 // const strengthText = document.getElementById("strengthText");
 const strengthRank = document.getElementById("strengthRank");
+
+
 // const dexterityContainer = document.getElementById("dexterityContainer");
 // const dexterityText = document.getElementById("dexterityText");
 const dexterityRank = document.getElementById("dexterityRank");
 // const faithContainer = document.getElementById("faithContainer");
 // const faithText = document.getElementById("faithText");
 const faithRank = document.getElementById("faithRank");
+
+
 // const specialContainer = document.getElementById("specialContainer");
 const specialText = document.getElementById("specialText");
 const specialRank = document.getElementById("specialRank");
@@ -523,12 +533,20 @@ const AEGIS_STATUS_EFFECT = {
 //    Condition Status Effects
 // ===============================
 
+let tempPoisonStrength = 0;
+let tempPoisonDexterity = 0;
+
 const POISONED = {
   name: "Poisoned",
   image: "styles/images/items/poisoned.jpg",
   status: "Your Strength and Dexterity are reduced by 2.",
   duration: null,
   statusDuration: null,
+  stats: {
+    strength: -2,
+    dexterity: -2,
+    faith: 0,
+  },
   function: (length) => {
     if (POISONED.duration === null) {
       POISONED.statusDuration = roomCounter + length;
@@ -555,14 +573,15 @@ const POISONED = {
             POISONED.duration = null;
             POISONED.statusDuration = null;
 
-            updateStats("STRENGTH", 2);
-            updateStats("DEXTERITY", 2);
+            removeStatChange(POISONED);
             updatePlayerTrackers();
             clearInterval(poisonedInterval);
           }
         }, 15000);
 
-        statusEffectHandler(POISONED);
+        addStatChange(POISONED);
+        updatePlayerTrackers();
+        // statusEffectHandler(POISONED);
         renderStatusEffects(POISONED);
       }
     } else if (length > POISONED.statusDuration - roomCounter) {
@@ -612,7 +631,7 @@ const HAUNTED = {
 const DISEASED = {
   name: "Diseased",
   image: "styles/images/items/diseased.jpg",
-  status: "Your max health is reduced by 25%.",
+  status: "Your max health is reduced by 20%.",
   duration: null,
   statusDuration: null,
   function: (length) => {

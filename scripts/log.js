@@ -107,7 +107,7 @@ function writeToLogActions(logType, narrate, dataOne) {
         } else if (narration === 6) {
           narration = `Your greatsword dances through the battlefield, leaving a wake of divine devastation as it strikes true with impeccable precision.`;
         } else if (narration === 7) {
-          narration = `Your greatswor's edge becomes an extension of the heavens themselves, as it effortlessly rends through the ${monsterName}, leaving them in awe of their impending fate.`;
+          narration = `Your greatsword's edge becomes an extension of the heavens themselves, as it effortlessly rends through the ${monsterName}, leaving them in awe of their impending fate.`;
         } else if (narration === 8) {
           narration = `Your greatsword's strike transcends mortal limitations, delivering an attack of unparalleled force and leaving the ${monsterName} broken and defeated.`;
         } else if (narration === 9) {
@@ -479,7 +479,7 @@ function writeToLogMonster(logType, narrate, dataOne) {
         newEntry.textContent = `You are haunted by malevolent spirits, their presence follow you and their ethereal whispers claw at your sanity.`;
       } else if (monsterName === "Undead Legion Phalanx") {
         newEntry.textContent = `The phalanx unleash a flurry of thrusts and slashes from their defensive positions.`;
-      } else if (monsterName === 'Ivan the Scoundrel') {
+      } else if (monsterName === "Ivan the Scoundrel") {
         newEntry.textContent = `Ivan stumbles back, shoving one of his henchmen towards you. With a sly grin, he swiftly consumes a potion, mending his wounds.`;
       }
       break;
@@ -505,8 +505,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
   // dataTwo =
 
   let newEntry = document.createElement("li");
-  let monsterName = currentRoom.contents.monsters[0].name;
-  let narration = Math.round(Math.random() * 9);
+  let narration = Math.floor(Math.random() * 10) + 1;
 
   switch (logType) {
     // ===============================
@@ -582,7 +581,28 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
         }
       }
 
-      newEntry.textContent = `${narration}" Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
+      if (dataOne === "STRENGTH") {
+        newEntry.textContent = `You've chosen the Boon of Strength. Your base Strength has increased to ${baseStrength}`;
+      } else if (dataOne === "DEXTERITY") {
+        newEntry.textContent = `You've chosen the Boon of Dexterity. Your base Dexterity has increased to ${baseDexterity}`;
+      } else if (dataOne === "FAITH") {
+        newEntry.textContent = `You've chosen the Boon of Faith. Your base Faith has increased to ${baseFaith}`;
+      }
+
+      if (dataOne === "SPECIAL") {
+        if (heroChoice === "PALADIN") {
+          newEntry.textContent = `You've chosen the Holy Smite Boon. Your Holy Smite now deals ${holySmiteTracker * 100}% damage.`;
+        } else if (heroChoice === "ROGUE") {
+          newEntry.textContent = `You've chosen the Umbral Assault Boon. You now make ${umbralAssaultTracker} attacks with Umbral Assault.`;
+        } else if (heroChoice === "PRIESTESS") {
+          newEntry.textContent = `You've chosen the Cleansing Flame Boon. Your Cleansing Flame now recovers ${cleansingFlameTracker}HP.`;
+        }
+      }
+      break;
+
+    case LOG_STAT_INCREASE:
+      let hero = heroChecker();
+      newEntry.textContent = `You've reached level ${hero.level}! Your attacks deal and additional 2 damage and your base health increased by 10HP!`;
       break;
 
     // ===============================
@@ -613,7 +633,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
         narration = `"Through the strength of faith, your smite brings judgment upon the wicked."`;
       }
 
-      newEntry.textContent = `Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
+      newEntry.textContent = `Your Holy Smite deals ${dataOne} damage to the ${currentRoom.contents.monsters[0].name}!`;
       break;
 
     case LOG_SMITE_CRITICAL:
@@ -646,12 +666,12 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
         narration =
           "From the sun's heart, a torrent of flames to consume your wickedness!";
       }
-      newEntry.textContent = `${narration} Your Holy Smite deals ${dataOne} damage to the ${monsterName}!`;
+      newEntry.textContent = `Your Holy Smite deals ${dataOne} damage to the ${currentRoom.contents.monsters[0].name}!`;
       break;
 
     // Paladin Passive
     case LOG_RADIANT_AURA:
-      newEntry.textContent = `Your Radiant Aura destroys the ${monsterName}!`;
+      newEntry.textContent = `Your Radiant Aura destroys the ${currentRoom.contents.monsters[0].name}!`;
       break;
 
     // ===============================
@@ -659,7 +679,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
     // ===============================
 
     // Rogue Ability
-    case LOG_SHADOW_STRIKE:
+    case LOG_UMBRAL_ASSAULT:
       if (narration === 1) {
         narration = `“Embrace the shadows, for they shall be your silent accomplice.”`;
       } else if (narration === 2) {
@@ -682,12 +702,18 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
         narration = `“In the heart of the night, I am the unseen blade.”`;
       }
 
-      newEntry.textContent = `${narration} Your Shadow Strike deals ${dataOne} damage to the ${monsterName}!`;
+      newEntry.textContent = `You unleash an Umbral Assault on the ${currentRoom.contents.monsters[0].name}, making ${umbralAssaultTracker} against it.`;
       break;
 
     // Rogue Passive
-    case LOG_EVASION:
-      newEntry.textContent = `You evade the ${monsterName}'s attack!`;
+    case LOG_DARKENED_REPRISAL:
+      if (dataOne === "ACTIVE") {
+        newEntry.textContent = `Darkened Reprisal envelops you in an ephemeral shroud of shadows, enhancing your Dexterity.`;
+      } else if (dataOne === "DISABLE") {
+        newEntry.textContent = `The shadows surrounding you fade as Darkened Reprisal ends.`;
+      }
+
+      narration = newEntry.textContent;
       break;
 
     // ===============================
@@ -695,45 +721,45 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
     // ===============================
 
     // Priestess Ability
-    case LOG_GREATER_PRAYER:
+    case LOG_CLEANSING_FLAME:
       if (narration === 1) {
         narration =
-          "As her voice resonates, a surge of healing light envelops her.";
+          "As your voice resonates, a surge of healing fire envelops you.";
       } else if (narration === 2) {
         narration =
-          "With devout grace, the priestess channels divine energy, mending her wounds.";
+          "With devout grace, you channel divine energy, mending your wounds.";
       } else if (narration === 3) {
         narration =
-          "The air shimmers with a soothing aura, knitting flesh and spirit together.";
+          "The air shimmers with a warm aura, knitting flesh and spirit together.";
       } else if (narration === 4) {
         narration =
-          "In a sacred incantation, the priestess bestows renewed vitality upon herself.";
+          "In a sacred incantation, you bestow renewed vitality upon yourself.";
       } else if (narration === 5) {
         narration =
-          "The priestess' Greater Prayer flows like a river of life, revitalizing all in its path.";
+          "Your Cleansing Flame envelops you, revitalizing your weakened state.";
       } else if (narration === 6) {
         narration =
-          "With unwavering faith, the priestess mends the wounded, banishing pain and despair.";
+          "With unwavering faith, you mend your wounds, banishing pain and despair.";
       } else if (narration === 7) {
         narration =
-          "A gentle radiance emanates from the priestess, filling the area with healing energy.";
+          "A gentle heat emanates from your hands, filling the room with a gentle warmth.";
       } else if (narration === 8) {
         narration =
-          "As the priestess prays fervently, wounds close and strength is restored to the weary.";
+          "As you pray fervently, your wounds close and your strength is restored.";
       } else if (narration === 9) {
         narration =
-          "The echoes of the priestess' prayer reverberate, bringing solace and renewal to all.";
+          "The echoes of your prayer reverberate through the catacomb, bringing you comfort and warmth.";
       } else {
         narration =
-          "Through her sacred incantation, the priestess invokes a torrent of healing energies.";
+          "Through your sacred incantation, you invoke a torrent of Cleansing Flame.";
       }
 
-      newEntry.textContent = `${narration} Your Greater Prayer restores ${dataOne} health!`;
+      newEntry.textContent = `Your Cleansing Flame restores ${dataOne} health!`;
       break;
 
     // Priestess Passive
     case LOG_BURNING_DEVOTION:
-      newEntry.textContent = `Your Burning Devotion guides your attack. You deal ${dataOne} damage to the ${monsterName}!`;
+      newEntry.textContent = `Your Burning Devotion guides your attack. You deal ${dataOne} damage to the ${currentRoom.contents.monsters[0].name}!`;
       break;
   }
 
@@ -1144,27 +1170,27 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === GAS_CHAMBER) {
         if (dataOne === "Strength") {
           if (narration === 0) {
-            newEntry.textContent = `You muster all your strength and push against the heavy door, but it only budges slightly. The poison smoke seeps in, making you cough and choke. You manage to escape, but you take ${dataTwo} damage.`;
+            newEntry.textContent = `You muster all your strength and push against the heavy door, but it only budges slightly. The poison smoke seeps in, making you cough and choke. You manage to escape, but you take ${dataTwo} damage and are poisoned.`;
           } else if (narration === 1) {
-            newEntry.textContent = `You strain every muscle, but the door remains stubbornly shut. The toxic fumes fill the chamber, leaving you gasping for air. With one final burst of effort, you break free, but you take ${dataTwo} damage.`;
+            newEntry.textContent = `You strain every muscle, but the door remains stubbornly shut. The toxic fumes fill the chamber, leaving you gasping for air. With one final burst of effort, you break free, but you take ${dataTwo} damage and are poisoned.`;
           } else if (narration === 2) {
-            newEntry.textContent = `You put all your might into forcing the door open, but it barely moves. The poison smoke clouds your vision, causing you to stumble. You eventually break free, but you take ${dataTwo} damage.`;
+            newEntry.textContent = `You put all your might into forcing the door open, but it barely moves. The poison smoke clouds your vision, causing you to stumble. You eventually break free, but you take ${dataTwo} damage and are poisoned.`;
           } else if (narration === 3) {
-            newEntry.textContent = `With a tremendous effort, you manage to make some progress against the door. The room fills with noxious fumes, leaving you disoriented. Finally, you burst through, but you take ${dataTwo} damage.`;
+            newEntry.textContent = `With a tremendous effort, you manage to make some progress against the door. The room fills with noxious fumes, leaving you disoriented. Finally, you burst through, but you take ${dataTwo} damage and are poisoned.`;
           } else {
-            newEntry.textContent = `You throw your weight against the door, but it holds fast. The poisonous gas envelops you, making it hard to breathe. With one last, desperate push, you break free, but you take ${dataTwo} damage.`;
+            newEntry.textContent = `You throw your weight against the door, but it holds fast. The poisonous gas envelops you, making it hard to breathe. With one last, desperate push, you break free, but you take ${dataTwo} damage and are poisoned.`;
           }
         } else if (dataOne === "Faith") {
           if (narration === 0) {
-            newEntry.textContent = `You close your eyes, focus your faith, and pray for strength. With a surge of determination, you push against the door, but it only gives way slightly. The poison smoke makes you dizzy, and you escape, but not without taking ${dataTwo} damage.`;
+            newEntry.textContent = `You close your eyes, focus your faith, and pray for strength. With a surge of determination, you push against the door, but it only gives way slightly. The poison smoke makes you dizzy, and you escape, but not without taking ${dataTwo} damage and being poisoned.`;
           } else if (narration === 1) {
-            newEntry.textContent = `You channel your faith and call upon divine strength. The door resists, but you feel a glimmer of progress. The toxic fumes cloud your senses, and with a final burst of resolve, you break free, though not without taking ${dataTwo} damage.`;
+            newEntry.textContent = `You channel your faith and call upon divine strength. The door resists, but you feel a glimmer of progress. The toxic fumes cloud your senses, and with a final burst of resolve, you break free, though not without taking ${dataTwo} damage and being poisoned.`;
           } else if (narration === 2) {
-            newEntry.textContent = `You close your eyes, place your trust in your faith, and push with all your might. The door moves only slightly, but you feel a surge of divine energy. The poison smoke disorients you, but you manage to escape, albeit with ${dataTwo} damage.`;
+            newEntry.textContent = `You close your eyes, place your trust in your faith, and push with all your might. The door moves only slightly, but you feel a surge of divine energy. The poison smoke disorients you, but you manage to escape, albeit with ${dataTwo} damage and being poisoned.`;
           } else if (narration === 3) {
-            newEntry.textContent = `With unwavering faith, you summon inner strength and push against the door. It gives way just a bit, but you feel a divine presence guiding you. The room fills with poisonous fumes, leaving you struggling. Eventually, you break free, though you take ${dataTwo} damage.`;
+            newEntry.textContent = `With unwavering faith, you summon inner strength and push against the door. It gives way just a bit, but you feel a divine presence guiding you. The room fills with poisonous fumes, leaving you struggling. Eventually, you break free, though you take ${dataTwo} damage and are poisoned.`;
           } else {
-            newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you. The door resists, but you feel a divine force supporting you. The noxious fumes make it hard to think, but with a final surge of faith, you break free, though not without taking ${dataTwo} damage.`;
+            newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you. The door resists, but you feel a divine force supporting you. The noxious fumes make it hard to think, but with a final surge of faith, you break free, though not without taking ${dataTwo} damage being poisoned.`;
           }
         }
       } else if (event === POISON_ARROWS) {
@@ -1281,7 +1307,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           newEntry.textContent = `You enter the vale, several skeletal warriors rise from the battlefield's remnants. Their warrior instincts persisting even in death.`;
         }
       } else if (event === COFFIN_EVENT && dataOne === "DRAUGR") {
-        newEntry.textContent`As the lid creaks open, a frigid gust escapes, revealing a dormant Draugr. Awakening, its icy stare piercing you for disrupting its slumber.`;
+        newEntry.textContent = `As the lid creaks open, a frigid gust escapes, revealing a dormant Draugr. Awakening, its icy stare piercing you for disrupting its slumber.`;
       }
 
       narration = newEntry.textContent;

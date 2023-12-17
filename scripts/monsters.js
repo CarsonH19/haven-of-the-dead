@@ -216,13 +216,6 @@ const UNDEAD_PHALANX = {
     function phalanxAttacks() {
       let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
 
-      // Rogue Passive Ability Checker
-      if (heroChoice === "ROGUE" && evasionTracker >= monsterToPlayerDamage) {
-        monsterToPlayerDamage = 0;
-        soundEffectHandler(swordSwingWhoosh, "MONSTER MISS");
-        writeToLogHero(LOG_EVASION, "NO");
-      }
-
       damagePlayer(monsterToPlayerDamage);
       writeToLogMonster(LOG_MONSTER_ATTACK, "NO", monsterToPlayerDamage);
     }
@@ -642,16 +635,16 @@ function monsterAbilityHandler(monster) {
       break;
 
     case HAUNTING_SPIRIT:
-      let spiritHauntChance = Math.floor(Math.random() * 50) + 1;
-      if (spiritHauntChance === 50) {
+      let spiritHauntChance = Math.floor(Math.random() * 20) + 1;
+      if (spiritHauntChance === 20) {
         console.log("Haunting Spirit Ability Called!");
         HAUNTING_SPIRIT.function();
       }
       break;
 
     case GRUDGE:
-      let grudgeHauntChance = Math.floor(Math.random() * 20) + 1;
-      if (grudgeHauntChance === 20) {
+      let grudgeHauntChance = Math.floor(Math.random() * 10) + 1;
+      if (grudgeHauntChance === 10) {
         console.log("Grudge Ability Called!");
         GRUDGE.function();
       }

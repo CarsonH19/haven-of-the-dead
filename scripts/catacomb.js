@@ -114,8 +114,6 @@ let catacombRooms = [
         CRYPT_CRAWLER,
         CRYPT_CRAWLER,
         CRYPT_CRAWLER,
-        CRYPT_CRAWLER,
-        CRYPT_CRAWLER,
       ],
       items: [],
       events: null,
@@ -805,8 +803,7 @@ let tierFourRooms = [
 
 const CANDLELIGHT_SHRINE = {
   roomName: "Candlelight Shrine",
-  description: "A safe place.",
-  summary: "",
+  description: "Bathed in ethereal glow, this sanctuary emanates serenity. Carved by devoted candlelight priestesses, Candlelight Shrines shield the virtuous from malevolent forces. Soft whispers of prayers linger, intertwining with the flickering flames that dance upon ancient, sacred altars.",
   backgroundImage:
     "styles/images/backgrounds/event-rooms/candlelight-shrine.jpg",
   music: mindReading,
@@ -816,6 +813,7 @@ const CANDLELIGHT_SHRINE = {
     events: SAFE_ROOM,
   },
   function: () => {
+    CANDLELIGHT_SHRINE.contents.items = [];
     getItem("CANDLE");
     setRoomSummary();
   },
@@ -986,6 +984,7 @@ const IVAN_TRAP_ROOM_ONE = {
   function: () => {
     ivansRevengeTracker();
     setTimeout(() => {
+      metalSqueak21.loop();
       soundEffectHandler(metalSqueak21);
     }, 3000);
     setTimeout(() => {
@@ -1050,7 +1049,7 @@ const IVANS_REVENGE = {
   contents: {
     monsters: [],
     items: [LAUGHING_COFFIN_COIN, LAUGHING_COFFIN_COIN],
-    events: POISON_ARROWS,
+    events: IVANS_AMBUSH,
   },
   function: () => {
     ivansRevengeTracker();
@@ -1088,6 +1087,8 @@ function getRandomRoom(array) {
   const randomIndex = Math.floor(Math.random() * array.length);
   roomIndex = randomIndex;
   currentRoom = array[roomIndex];
+
+  return currentRoom;
 }
 
 function removeCurrentRoom() {
@@ -1163,21 +1164,21 @@ function checkCurrentRoom() {
 function checkForNewTier() {
   // Tier Two Rooms
   setTimeout(() => {
-    if (roomCounter === 25) {
+    if (roomCounter === 20) {
       catacombRooms = catacombRooms.concat(tierTwoRooms);
     }
   });
 
   // Tier Three Rooms
   setTimeout(() => {
-    if (roomCounter === 50) {
+    if (roomCounter === 45) {
       catacombRooms = catacombRooms.concat(tierThreeRooms);
     }
   });
 
   // Tier Four Rooms
   setTimeout(() => {
-    if (roomCounter === 75) {
+    if (roomCounter === 70) {
       catacombRooms = catacombRooms.concat(tierFourRooms);
     }
   });
