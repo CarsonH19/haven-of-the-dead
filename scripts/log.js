@@ -591,11 +591,23 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
 
       if (dataOne === "SPECIAL") {
         if (heroChoice === "PALADIN") {
-          newEntry.textContent = `You've chosen the Holy Smite Boon. Your Holy Smite now deals ${holySmiteTracker * 100}% damage.`;
+          if (specialAbilityBoonRank === 4) {
+            newEntry.textContent = `You've chosen Holy Smite. Your Holy Smite now always deals maximum damage.`; 
+          } else {
+            newEntry.textContent = `You've chosen Holy Smite. Your Holy Smite now deals ${holySmiteTracker * 100}% damage.`;
+          }
         } else if (heroChoice === "ROGUE") {
-          newEntry.textContent = `You've chosen the Umbral Assault Boon. You now make ${umbralAssaultTracker} attacks with Umbral Assault.`;
+          if (specialAbilityBoonRank === 4) {
+            newEntry.textContent = `You've chosen Umbral Assault. Your Umbral Assault now deals extra damage based off your Dexterity.`;
+          } else {
+            newEntry.textContent = `You've chosen Umbral Assault. You now make ${umbralAssaultTracker} attacks with Umbral Assault.`;
+          }
         } else if (heroChoice === "PRIESTESS") {
-          newEntry.textContent = `You've chosen the Cleansing Flame Boon. Your Cleansing Flame now recovers ${cleansingFlameTracker}HP.`;
+          if (specialAbilityBoonRank === 4) {
+            newEntry.textContent = `You've chosen Cleansing Flame. Your Cleansing Flame now also removes one harmful condition affecting you.`;
+          } else {
+            newEntry.textContent = `You've chosen Cleansing Flame. Your Cleansing Flame now recovers ${cleansingFlameTracker}HP.`;
+          }
         }
       }
       break;

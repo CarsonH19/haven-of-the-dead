@@ -328,7 +328,7 @@ let radiantAuraTracker = 5;
 
 // Rogue
 let umbralAssaultTracker = 2;
-let darkenedReprisalTracker = 2
+let darkenedReprisalTracker = 2;
 
 // Priestess
 // N/A
@@ -346,14 +346,12 @@ const levelUpModal = document.getElementById("levelUpModal");
 // const strengthText = document.getElementById("strengthText");
 const strengthRank = document.getElementById("strengthRank");
 
-
 // const dexterityContainer = document.getElementById("dexterityContainer");
 // const dexterityText = document.getElementById("dexterityText");
 const dexterityRank = document.getElementById("dexterityRank");
 // const faithContainer = document.getElementById("faithContainer");
 // const faithText = document.getElementById("faithText");
 const faithRank = document.getElementById("faithRank");
-
 
 // const specialContainer = document.getElementById("specialContainer");
 const specialText = document.getElementById("specialText");
@@ -568,7 +566,10 @@ const POISONED = {
             } Room`;
           }
 
-          if (roomCounter >= POISONED.statusDuration) {
+          if (
+            roomCounter >= POISONED.statusDuration ||
+            POISONED.duration === null
+          ) {
             POISONED.duration = null;
             POISONED.statusDuration = null;
 

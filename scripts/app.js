@@ -95,6 +95,11 @@ function dealMonsterDamage(damage) {
     writeToLogHero(LOG_BURNING_DEVOTION, "NO", damageDealt);
   }
 
+   //Checks for Rank 4 Holy Smite
+   if (heroChoice === "PALADIN" && specialAbilityBoonRank === 4) {
+    damageDealt = baseAttack;
+  } 
+
   return damageDealt;
 }
 
@@ -168,7 +173,7 @@ function damagePlayer(damage) {
     damageFlashAnimation("PLAYER");
   }
 
-  // Rogue Passive Ability 
+  // Rogue Passive Ability
   rogueDarkenedReprisal();
 
   showDamage(damage, "MONSTER");
@@ -428,16 +433,18 @@ heroChoiceModal.addEventListener("click", function (event) {
 
   // Function to check if the target is SIGGURD or its child
   const isSiggurdOrChild = (target) => SIGGURD.contains(target);
-  
+
   // Function to check if the target is RIVEN or its child
   const isRivenOrChild = (target) => RIVEN.contains(target);
-  
+
   // Function to check if the target is LIHETH or its child
   const isLihethOrChild = (target) => LIHETH.contains(target);
 
-  if (isSiggurdOrChild(event.target) ||
-      isRivenOrChild(event.target) ||
-      isLihethOrChild(event.target)) {
+  if (
+    isSiggurdOrChild(event.target) ||
+    isRivenOrChild(event.target) ||
+    isLihethOrChild(event.target)
+  ) {
     document.getElementById("heroChoiceModal").style.display = "none";
 
     if (isSiggurdOrChild(event.target)) {
@@ -467,7 +474,6 @@ heroChoiceModal.addEventListener("click", function (event) {
     updateTotalStats();
   }
 });
-
 
 // ===============================
 //          Game Window
@@ -915,7 +921,7 @@ specialBtn.addEventListener("click", () => {
     isGameOver();
   } else if (currentMonsterHealth > 0 && heroChoice !== "ROGUE") {
     setTimeout(monsterAttackHandler, 1200);
-  } 
+  }
 
   playerControlsTimeout(1500);
   soundEffectHandler(heroChecker(), "PLAYER ABILITY");

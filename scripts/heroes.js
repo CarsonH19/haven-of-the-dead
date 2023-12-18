@@ -96,7 +96,9 @@ function rogueUmbralAssault() {
 const DARKENED_REPRISAL = {
   name: "Darkened Reprisal",
   image: "styles/images/darkened-reprisal.jpg",
-  status: `You're Base Dexterity is increased by ${baseDexterity * darkenedReprisalTracker}.`,
+  status: `You're Base Dexterity is increased by ${
+    baseDexterity * darkenedReprisalTracker
+  }.`,
   duration: null,
   active: null,
   function: () => {
@@ -162,6 +164,21 @@ function setPriestessStats() {
 }
 
 function priestessCleansingFlame() {
+  if (specialAbilityBoonRank === 4) {
+    let conditions = [POISONED, DISEASED, CHILLED, CURSED, BURNED, HAUNTED];
+
+    let activeConditions = conditions.filter((obj) => obj.duration !== null);
+    console.log(activeConditions);
+    if (activeConditions.length > 0) {
+      let randomIndex = Math.floor(Math.random() * activeConditions.length);
+      curedCondition = activeConditions[randomIndex];
+      curedCondition.duration = null;
+      updateTotalStats();
+      console.log(curedCondition);
+      // writeToLogOther(LOG_OTHER, "YES", "CONDITION CURED", curedCondition);
+    }
+  }
+
   healPlayer(cleansingFlameTracker);
   specialCooldownHandler("RESET");
   writeToLogHero(LOG_CLEANSING_FLAME, "YES", cleansingFlameTracker);
@@ -294,8 +311,6 @@ function renderLevelUpModal() {
     levelUpHeader.textContent = "Level Up";
   }
 
-
-
   if (strengthBoonRank === 4) {
     strengthRank.textContent = "IV";
     strengthRank.disabled = true;
@@ -383,9 +398,7 @@ function levelUpHandler(boon) {
 
   if (firstLevelHandler === 0) {
     firstLevelHandler++;
-    console.log(firstLevelHandler);
   } else {
-    console.log('stats gained');
     hero.level++;
     baseAttack += 2;
     baseHealth += 10;
@@ -406,10 +419,16 @@ function levelUpHandler(boon) {
 
     switch (hero) {
       case paladin:
-        holySmiteTracker += 0.5;
+        // Rank 4 Boon Differs
+        if (specialAbilityBoonRank < 4) {
+          holySmiteTracker += 0.5;
+        }
         break;
       case rogue:
-        umbralAssaultTracker++;
+        // Rank 4 Boon Differs
+        if (specialAbilityBoonRank < 4) {
+          umbralAssaultTracker++;
+        }
         break;
       case priestess:
         cleansingFlameTracker += 10;
