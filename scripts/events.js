@@ -739,6 +739,7 @@ const CRIMSON_COVENANT = {
       CRIMSON_COVENANT.summary =
         "You partook in the ritual of the Crimson Covenant, and spilled your blood. Although weakened by the experience you feel a surge of vitality throughout your body.";
       crimsonCovenantBoon += 10;
+      crimsonCovenantTracker++;
 
       switch (crimsonCovenantTracker) {
         case 1:
@@ -831,7 +832,7 @@ const LOCKED_ROOM = {
       setRoomSummary();
       // Skeleton Key Logs Information
     } else {
-      LOCKED_ROOM.summary = `You didn't use a Skeleton Key to unlock the ${currentRoom.roomName}.`;
+      LOCKED_ROOM.summary = `You don't have a Skeleton Key to unlock the ${currentRoom.roomName}.`;
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
       setTimeout(renderRoomSummaryModal, 5000);
       setRoomSummary();

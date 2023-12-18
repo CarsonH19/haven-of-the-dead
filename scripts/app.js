@@ -26,7 +26,7 @@ function playerAttackHandler(smite) {
   criticalHit += statusEffectHandler(BLAZING_CANDLE);
 
   // Smite Critical Hit
-  if (criticalHit >= 20 && smite > 1) {
+  if (criticalHit >= 20 && smite > 1 && playerToMonsterDamage > 0) {
     totalDamage = Math.round(
       smite * (playerToMonsterDamage * calculateCritDamageModifier())
     );
@@ -40,7 +40,7 @@ function playerAttackHandler(smite) {
     soundEffectHandler(heroChecker(), "PLAYER ABILITY");
     writeToLogHero(LOG_SMITE, "YES", totalDamage);
     // Critical Hit
-  } else if (criticalHit >= 20) {
+  } else if (criticalHit >= 20 && playerToMonsterDamage > 0) {
     totalDamage = Math.round(
       playerToMonsterDamage * calculateCritDamageModifier()
     );
@@ -142,8 +142,6 @@ function dealPlayerDamage(damage) {
 }
 
 function damagePlayer(damage) {
-
-  
   if (currentPlayerHealth <= 30) {
     // ITEM - ACTIVIATE: Aegis of the Fallen - Immunity to all damage.
     isItemAttuned(AEGIS_OF_THE_FALLEN, null);
@@ -161,9 +159,9 @@ function damagePlayer(damage) {
     currentPlayerHealth -= damage;
   }
 
-  // Check for Cursed Condition
-  if (CURSED.duration !== null) {
-    damage = damage * 2;
+  // Check for Burned Condition
+  if (BURNED.duration !== null) {
+    damage = Math.round(damage * 1.25);
   }
 
   if (damage > 0) {
@@ -268,18 +266,19 @@ function specialCooldownHandler(reset) {
 // ===============================
 
 function guardHandler() {
-  let monsterToGuardDamage = dealPlayerDamage(monsterAttackValue);
-  let damageBlocked = Math.round(Math.random() * monsterToGuardDamage);
-  damageBlocked += totalDexterity * 2;
-  let damageTaken = monsterToGuardDamage - damageBlocked;
+  let damageToGuard = dealPlayerDamage(monsterAttackValue);
+  let damageBlocked = Math.round(Math.random() * damageToGuard);
+  damageBlocked += totalDexterity;
+  let damageTaken = damageToGuard - damageBlocked;
 
-  if (damageBlocked <= monsterToGuardDamage) {
+  if (damageBlocked <= damageToGuard) {
     soundEffectHandler(heroChecker(), "PLAYER GUARD");
     writeToLogActions(LOG_GUARD, "NO", damageBlocked);
   }
 
   if (damageTaken > 0) {
     damagePlayer(damageTaken);
+    monsterAbilityHandler(currentRoom.contents.monsters[0]);
     soundEffectHandler(heroChecker(), "MONSTER ATTACK");
     writeToLogMonster(LOG_MONSTER_ATTACK, "NO", damageTaken);
   } else {
@@ -288,21 +287,12 @@ function guardHandler() {
     writeToLogMonster(LOG_MONSTER_MISS, "NO");
   }
 
-  // console.log(`Damage Received: ${monsterToGuardDamage}`);
+  // console.log(`Damage Received: ${damageToGuard}`);
   // console.log(`Damage Blocked: ${damageBlocked}`);
   // console.log(`Current Player Health ${currentPlayerHealth}`);
   // console.log(`Current Player Health Bar Value ${playerHealthBar.value}`);
 
   updatePlayerTrackers();
-}
-
-function calculateMonsterDamage() {
-  let damage = dealPlayerDamage(monsterAttackValue);
-  if (totalDexterity >= damage) {
-    return 0;
-  } else {
-    return damage - totalDexterity;
-  }
 }
 
 // ===============================
@@ -570,8 +560,13 @@ function togglePlayerControls() {
 
   // Checks for Chilled Condition
   if (CHILLED.duration !== null) {
-    specialBtn.disabled = true;
+    guardBtn.disabled = true;
     fleeBtn.disabled = true;
+  }
+
+  // Checks for Cursed Condition
+  if (CURSED.duration !== null) {
+    specialBtn.disabled = true;
   }
 
   if (eventModal.style.display === "block") {
@@ -887,7 +882,7 @@ attackBtn.addEventListener("click", function () {
   } else {
     playerControlsTimeout(1500);
     setTimeout(monsterAttackHandler, 1200);
-    setTimeout(isGameOver, 1500);
+    setTimeout(isGameOver, 1300);
     updatePlayerTrackers();
   }
 });
@@ -898,8 +893,8 @@ guardBtn.addEventListener("click", () => {
 
   specialCooldownHandler();
   playerControlsTimeout(1500);
-  setTimeout(guardHandler, 1200);
-  setTimeout(isGameOver, 1500);
+  guardHandler();
+  setTimeout(isGameOver, 500);
   updatePlayerTrackers();
 });
 
@@ -918,11 +913,11 @@ specialBtn.addEventListener("click", () => {
 
   if (currentMonsterHealth <= 0) {
     isGameOver();
-  } else if (currentMonsterHealth > 0) {
-    playerControlsTimeout(1500);
+  } else if (currentMonsterHealth > 0 && heroChoice !== "ROGUE") {
     setTimeout(monsterAttackHandler, 1200);
-  }
+  } 
 
+  playerControlsTimeout(1500);
   soundEffectHandler(heroChecker(), "PLAYER ABILITY");
   updatePlayerTrackers();
   specialCooldownHandler();

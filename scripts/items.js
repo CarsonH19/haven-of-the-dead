@@ -145,12 +145,13 @@ const GRAVEROBBERS_SPADE = {
   image: "styles/images/items/graverobbers-spade.jpg",
   type: "MAGIC",
   rarity: "Common",
-  effect: "While attuned to this item you are more likely to find items.",
+  effect: "While attuned to this item you are 10% more likely to find items.",
   function: () => {
-    itemFindChance += 5;
+    updateTotalStats();
+    return 10;
   },
   unequip: () => {
-    itemFindChance -= 5;
+    updateTotalStats();
   },
 };
 
@@ -921,7 +922,7 @@ const POTION = {
   image: "styles/images/items/potion.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
-  effect: "Restores 20 health points and can be used during combat.",
+  effect: "Restores 30 health points and can be used during combat.",
   soundEffect: gulpingWater24,
   function: () => {
     potionHandler();

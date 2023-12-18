@@ -168,7 +168,6 @@ let itemFindChance;
 function calculateItemFindChance() {
   itemFindChance = totalFaith * 5;
   itemFindChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
-
   return itemFindChance;
 }
 
@@ -320,7 +319,7 @@ let ivanTracker = 0;
 
 let heroChoice;
 let baseAttack;
-let potionHealValue = 20;
+let potionHealValue = 30;
 let specialCooldownCounter = 0;
 
 // Paladin
@@ -328,8 +327,8 @@ let holySmiteTracker = 2.0;
 let radiantAuraTracker = 5;
 
 // Rogue
-let umbralAssaultTracker = 3;
-let darkenedReprisalTracker = 1.5
+let umbralAssaultTracker = 2;
+let darkenedReprisalTracker = 2
 
 // Priestess
 // N/A
@@ -678,10 +677,60 @@ const DISEASED = {
   },
 };
 
+const BURNED = {
+  name: "Burned",
+  image: "styles/images/items/burned.jpg",
+  status: "All damage you take is increased by 25%.",
+  duration: null,
+  statusDuration: null,
+  function: (length) => {
+    if (BURNED.duration === null) {
+      BURNED.statusDuration = roomCounter + length;
+      BURNED.duration = `Duration: ${
+        BURNED.statusDuration - roomCounter
+      } Rooms`;
+
+      // ITEM: Fire Trinket - Burned Immunity
+      const immune = isItemAttuned(DARKGUARD_TRINKET, null);
+
+      if (!immune) {
+        let burnedInterval = setInterval(() => {
+          if (BURNED.statusDuration - roomCounter > 1) {
+            BURNED.duration = `Duration: ${
+              BURNED.statusDuration - roomCounter
+            } Rooms`;
+          } else {
+            BURNED.duration = `Duration: ${
+              BURNED.statusDuration - roomCounter
+            } Room`;
+          }
+
+          if (roomCounter >= BURNED.statusDuration) {
+            BURNED.duration = null;
+            BURNED.statusDuration = null;
+
+            updatePlayerTrackers();
+            clearInterval(burnedInterval);
+          }
+        }, 15000);
+
+        statusEffectHandler(BURNED);
+        renderStatusEffects(BURNED);
+      }
+    } else if (length > BURNED.statusDuration - roomCounter) {
+      BURNED.statusDuration = roomCounter + length;
+      BURNED.duration = `Duration: ${
+        BURNED.statusDuration - roomCounter
+      } Rooms`;
+      //writeToLog() Disease intensifies
+    }
+  },
+};
+
 const CURSED = {
   name: "Cursed",
   image: "styles/images/items/cursed.jpg",
-  status: "All damage taken is increased by 50%.",
+  status: "You are unable to use your special ability.",
   duration: null,
   statusDuration: null,
   function: (length) => {

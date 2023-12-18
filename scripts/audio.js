@@ -311,12 +311,6 @@ const droneDarkMys24 = loadAudio(
   true
 );
 
-const droneHaunting1 = loadAudio(
-  "audio/music/Drone Haunting 1.mp3",
-  "droneHaunting1",
-  true
-);
-
 // Low Health Ambiance
 
 const heartbeatFastLow = loadAudio(

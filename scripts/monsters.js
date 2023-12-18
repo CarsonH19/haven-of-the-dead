@@ -123,6 +123,9 @@ const CULTIST = {
     attack: knifeStab,
     death: fightGrunt6,
   },
+  function: () => {
+    CURSED.function(3);
+  }
 };
 
 const FIENDSWORN_CULTIST = {
@@ -134,6 +137,9 @@ const FIENDSWORN_CULTIST = {
     attack: "",
     death: "",
   },
+  function: () => {
+    CURSED.function(5);
+  }
 };
 
 const DEMON = {

@@ -95,8 +95,8 @@ function rogueUmbralAssault() {
 
 const DARKENED_REPRISAL = {
   name: "Darkened Reprisal",
-  image: "styles/images/items/cursed.jpg",
-  status: "You're Base Dexterity is increased.",
+  image: "styles/images/darkened-reprisal.jpg",
+  status: `You're Base Dexterity is increased by ${baseDexterity * darkenedReprisalTracker}.`,
   duration: null,
   active: null,
   function: () => {
@@ -194,6 +194,8 @@ function healPlayer(healValue) {
     currentPlayerHealth = playerMaxHealth;
   }
 
+  // Checks if Darkened Reprisal should be turned off
+  rogueDarkenedReprisal();
   updatePlayerTrackers();
   healthLowAnimation();
 }
@@ -421,10 +423,10 @@ function levelUpHandler(boon) {
         radiantAuraTracker += 2;
         break;
       case rogue:
-        darkenedReprisalTracker += 0.5;
+        darkenedReprisalTracker += 1;
         break;
       case priestess:
-        burningDevotionTracker += 5;
+        burningDevotionTracker += 2;
         break;
     }
   }

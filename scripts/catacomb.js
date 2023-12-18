@@ -431,7 +431,7 @@ let tierTwoRooms = [
     description:
       "Ascending the Skeletal Spire, skeletal soldiers stand sentinel alongside decrepit skeletons. The air is imbued with the musty scent of ancient bones, and the spire whispers with the echoes of battles long forgotten.",
     summary: "",
-    backgroundImage: "styles/images/backgrounds/tier-one/skeletal-spire.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-two/skeletal-spire.jpg",
     music: null,
     contents: {
       monsters: [
@@ -478,7 +478,7 @@ let tierTwoRooms = [
     backgroundImage: "styles/images/backgrounds/tier-two/gravemist-hall.jpg",
     music: null,
     contents: {
-      monsters: [HAUNTING_SPIRIT],
+      monsters: [HAUNTING_SPIRIT, HAUNTING_SPIRIT],
       items: [],
       events: null,
     },
@@ -488,7 +488,7 @@ let tierTwoRooms = [
     description:
       "Skullshade Sanctum exudes an ominous aura. Shades, skeletal soldiers, and the clinking of bone armor create an unholy symphony. The air is thick with the whispers of the fallen, warning intruders of impending doom.",
     summary: "",
-    backgroundImage: "styles/images/backgrounds/skullshade-sanctum.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-two/skullshade-sanctum.jpg",
     music: null,
     contents: {
       monsters: [SHADE, SKELETAL_SOLDIER, SHADE, SKELETAL_SOLDIER],
@@ -503,7 +503,7 @@ let tierTwoRooms = [
     backgroundImage: "styles/images/backgrounds/tier-two/bonescar-hollow.jpg",
     music: null,
     contents: {
-      monsters: [BONE_TITAN],
+      monsters: [SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON],
       items: [],
       events: null,
     },
@@ -532,7 +532,7 @@ let tierTwoRooms = [
     backgroundImage: "styles/images/backgrounds/tier-two/desolate-crypt.jpg",
     music: null,
     contents: {
-      monsters: [GRUDGE],
+      monsters: [GRUDGE, HAUNTING_SPIRIT],
       items: [],
       events: null,
     },
@@ -541,10 +541,10 @@ let tierTwoRooms = [
     roomName: "Grim Marrow Hall",
     description:
       "Grim Marrow Hall.",
-    backgroundImage: "styles/images/backgrounds/grim-marrow-hall.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-two/grim-marrow-hall.jpg",
     music: null,
     contents: {
-      monsters: [SCOUNDREL],
+      monsters: [SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL],
       items: [],
       events: null,
     },
@@ -554,7 +554,7 @@ let tierTwoRooms = [
     description:
       "The Ghastly Gallery unveils a spectral exhibition. Ethereal shades and haunting spirits drift through the shadows. Whispers of the departed echo, while a mysterious function hints at acquiring a coveted wisp.",
     summary: "",
-    backgroundImage: "styles/images/backgrounds/ghastly-gallery.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-two/ghastly-gallery.jpg",
     music: null,
     contents: {
       monsters: [CULTIST, CULTIST, CULTIST],
@@ -593,7 +593,7 @@ let tierTwoRooms = [
     roomName: "Cadaver Crypt",
     description:
       "Within the Cadaver Crypt, stone walls encase a macabre gallery of lifeless forms. The air is heavy with the scent of decay, and the distant scrape of spike walls signals impending danger to intruders.",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/haunted-blood-cellar.jpg",
     music: claustrofobia,
     contents: {
       monsters: [],
@@ -656,7 +656,7 @@ let tierTwoRooms = [
     description:
       "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
     backgroundImage: "styles/images/backgrounds/event-rooms/bonevault.jpg",
-    music: null,
+    music: pileOfBones,
     contents: {
       monsters: [],
       items: [],
@@ -668,7 +668,7 @@ let tierTwoRooms = [
     description:
       "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
     backgroundImage: "styles/images/backgrounds/event-rooms/bonevault.jpg",
-    music: null,
+    music: pileOfBones,
     contents: {
       monsters: [],
       items: [],
@@ -687,7 +687,7 @@ let tierThreeRooms = [
     description:
       "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
     backgroundImage: "styles/images/backgrounds/event-rooms/bonevault.jpg",
-    music: null,
+    music: pileOfBones,
     contents: {
       monsters: [],
       items: [],
@@ -699,7 +699,7 @@ let tierThreeRooms = [
     description: `A locked frozen door exudes a chilling aura, icy tendrils creeping outward. Magical frost emanates, freezing the air. Delicate icicles dangle, hinting at the frigid mysteries concealed beyond.`,
     backgroundImage:
       "styles/images/backgrounds/event-rooms/frozen-locked-door.jpg",
-    music: droneDarkHor1,
+    music: pileOfBones,
     contents: {
       monsters: [],
       items: [],
@@ -711,7 +711,7 @@ let tierThreeRooms = [
     description: `A sealed door glows with red-hot intensity, its molten metal surface emanating heat. The distant crackle of flames hints at a fiery abyss beyond it.`,
     backgroundImage:
       "styles/images/backgrounds/event-rooms/red-hot-locked-door.jpg",
-    music: droneDarkHor1,
+    music: pileOfBones,
     contents: {
       monsters: [],
       items: [],
@@ -729,10 +729,10 @@ let tierFourRooms = [
     roomName: "Bastion of Bone",
     description: "A chamber with a large pile of skulls in the center.",
     summary: "",
-    backgroundImage: "styles/images/backgrounds/bastion-of-bone.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-four/bastion-of-bone.jpg",
     music: null,
     contents: {
-      monsters: [],
+      monsters: [BONE_TITAN, BONE_TITAN],
       items: [],
       events: null,
     },
@@ -741,10 +741,10 @@ let tierFourRooms = [
     roomName: "Malevolent Shrine",
     description: "A chamber with a large pile of skulls in the center.",
     summary: "",
-    backgroundImage: "styles/images/backgrounds/malevolent-shrine.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-four/malevolent-shrine.jpg",
     music: null,
     contents: {
-      monsters: [],
+      monsters: [GRUDGE, GRUDGE],
       items: [],
       events: null,
     },
@@ -753,10 +753,10 @@ let tierFourRooms = [
     roomName: "Vileblood Vestibule",
     description: "",
     summary: "",
-    backgroundImage: "styles/images/backgrounds/vileblood-vestibule.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-four/vileblood-vestibule.jpg",
     music: null,
     contents: {
-      monsters: [],
+      monsters: [GNAWER, GNAWER, GNAWER, GNAWER, GNAWER],
       items: [],
       events: null,
     },
@@ -765,10 +765,10 @@ let tierFourRooms = [
     roomName: "Forsaken Bloodhold",
     description: "",
     summary: "",
-    backgroundImage: "styles/images/backgrounds/frosaken-bloodhold.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-four/frosaken-bloodhold.jpg",
     music: null,
     contents: {
-      monsters: [],
+      monsters: [CULTIST, CULTIST, CULTIST],
       items: [],
       events: null,
     },
@@ -778,7 +778,7 @@ let tierFourRooms = [
     description:
       "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
     backgroundImage: "styles/images/backgrounds/event-rooms/bonevault.jpg",
-    music: null,
+    music: pileOfBones,
     contents: {
       monsters: [],
       items: [],
@@ -878,7 +878,7 @@ const BONEVAULT = {
   description:
     "The entrance to a Bonevault, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
   backgroundImage: "styles/images/backgrounds/event-rooms/bonevault.jpg",
-  music: droneDarkHor1,
+  music: pileOfBones,
   contents: {
     monsters: [],
     items: [],
@@ -891,7 +891,7 @@ const FROZEN_LOCKED_DOOR = {
   description: `A locked frozen door exudes a chilling aura, icy tendrils creeping outward. Magical frost emanates, freezing the air. Delicate icicles dangle, hinting at the frigid mysteries concealed beyond.`,
   backgroundImage:
     "styles/images/backgrounds/event-rooms/frozen-locked-door.jpg",
-  music: droneDarkHor1,
+  music: pileOfBones,
   contents: {
     monsters: [],
     items: [],
@@ -904,7 +904,7 @@ const RED_HOT_LOCKED_DOOR = {
   description: `A sealed door glows with red-hot intensity, its molten metal surface emanating heat. The distant crackle of flames hints at a fiery abyss beyond it.`,
   backgroundImage:
     "styles/images/backgrounds/event-rooms/red-hot-locked-door.jpg",
-  music: droneDarkHor1,
+  music: pileOfBones,
   contents: {
     monsters: [],
     items: [],
@@ -986,9 +986,9 @@ const IVAN_TRAP_ROOM_ONE = {
 };
 
 const IVAN_TRAP_ROOM_TWO = {
-  roomName: "Crumbling Path",
+  roomName: "False Path",
   description:
-    "Along the Crumbling Path, the ground trembles beneath heavy steps, hinting at the lurking spike-laden pitfall. Built by Ivan the SCoundrel to ensnare you and exact his revenge for abandoning him. ",
+    "Along the False Path, the ground trembles beneath heavy steps, hinting at the lurking spike-laden pitfall. Built by Ivan the Scoundrel to kill you and exact his revenge for abandoning him. ",
   summary: "",
   backgroundImage: "styles/images/backgrounds/event-rooms/crumbling-path.jpg",
   music: claustrofobia,
@@ -1108,6 +1108,11 @@ function checkCurrentRoom() {
   // Add Bonevault After First 5 Rooms
   if (roomCounter === 5) {
     catacombRooms.push(BONEVAULT);
+  }
+
+  // Adds new rooms during tier 3 & tier 4
+  if (catacombRooms.length < 20 && roomCounter >= 50) {
+    createNewRoom();
   }
 
   // NPCS
