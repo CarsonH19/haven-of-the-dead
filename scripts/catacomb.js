@@ -110,11 +110,7 @@ let catacombRooms = [
     backgroundImage: "styles/images/backgrounds/tier-one/the-hatchery.jpg",
     music: spiderInvasion,
     contents: {
-      monsters: [
-        CRYPT_CRAWLER,
-        CRYPT_CRAWLER,
-        CRYPT_CRAWLER,
-      ],
+      monsters: [CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER],
       items: [],
       events: null,
     },
@@ -308,9 +304,8 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Creeping Coffin",
-    description:
-      "Within the Creeping Coffin, ancient sarcophagi loom like silent sentinels. Coffin spiders, their legs tapping a macabre rhythm, await an unsuspecting intruder. The air is heavy with the scent of ancient dread.",
+    roomName: "Ornate Coffin",
+    description: '',
     backgroundImage: "styles/images/backgrounds/event-rooms/coffin-2.jpg",
     music: threeThousandYearsOld,
     contents: {
@@ -320,9 +315,8 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Ivory Crypt",
-    description:
-      "In the Ivory Crypt, delicate filigree adorns crypt walls. An ethereal silence lingers, broken only by the occasional skittering. The air is charged with the unsettling energy of the crypt's secrets.",
+    roomName: "Ivory Coffin",
+    description: '',
     backgroundImage: "styles/images/backgrounds/event-rooms/coffin-1.jpg",
     music: threeThousandYearsOld,
     contents: {
@@ -352,11 +346,11 @@ let catacombRooms = [
 
 let tierTwoRooms = [
   {
-    roomName: "Ribcage Retreat",
+    roomName: "Skull Wall Pass",
     description:
-      "Within Ribcage Retreat, the scent of ancient bones fills the chamber. Skeletal soldiers stand sentinel, their bony fingers poised on ghostly blades. An armored skeleton, a relic of forgotten battles, awaits with an eerie stillness.",
+      "Within Skull Wall Pass, the scent of ancient bones fills the chamber. Skeletal soldiers stand sentinel, their bony fingers poised on ghostly blades. An armored skeleton, a relic of forgotten battles, awaits with an eerie stillness.",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/skull-wall-pass.jpg",
     music: null,
     contents: {
       monsters: [SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON],
@@ -372,11 +366,11 @@ let tierTwoRooms = [
     description:
       "In Ghostlight Vale, spectral shades drift through a meadow of ethereal flowers. The blooms exude an otherworldly glow, casting an unsettling radiance on the lone path. The air shivers with the haunting whispers of unseen spirits.",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/ghostlight-vale.jpg",
     music: null,
     contents: {
       monsters: [SHADE],
-      items: [GHOSTLIGHT_LILY, GHOSTLIGHT_LILY, GHOSTLIGHT_LILY],
+      items: [GHOSTLIGHT_LILY, GHOSTLIGHT_LILY],
       events: null,
     },
   },
@@ -385,7 +379,7 @@ let tierTwoRooms = [
     description:
       "Within the Morbid Mausoleum, haunting spirits linger, their mournful wails echoing through the cold, still air. The oppressive weight of the mausoleum hints at the somber tales interred within.",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/morbid-mausoleum.jpg",
     music: null,
     contents: {
       monsters: [HAUNTING_SPIRIT, HAUNTING_SPIRIT],
@@ -398,7 +392,7 @@ let tierTwoRooms = [
     description:
       "The Ossuary Outpost, a desolate haven of bone and armor, resonates with the haunting clatter of skeletal soldiers. Amidst the silent echoes, armored skeletons stand guard, their sockets gleaming with an otherworldly intent.",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/ossuary-outpost.jpg",
     music: null,
     contents: {
       monsters: [SKELETAL_SOLDIER, ARMORED_SKELETON],
@@ -450,32 +444,32 @@ let tierTwoRooms = [
       events: null,
     },
   },
-  {
-    roomName: "Banshee's Boneyard",
-    description:
-      "Within Banshee's Boneyard, mournful wails intertwine with the eerie clatter of spectral bones. An evil spirit, draped in ethereal veils, await intruders with chilling whispers and ghostly apparitions.",
-    summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
-    music: null,
-    contents: {
-      monsters: [GRUDGE],
-      items: [],
-      events: null,
-    },
-  },
-  {
-    roomName: "Ghostwalk Bridge",
-    description:
-      "Ghostwalk Bridge stretches over an abyss of fog. Wisps of ethereal mist cling to skeletal structures, and haunting spirits drift silently. Crossing is a journey through whispers of the departed.",
-    summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
-    music: null,
-    contents: {
-      monsters: [HAUNTING_SPIRIT, HAUNTING_SPIRIT],
-      items: [],
-      events: null,
-    },
-  },
+  // {
+  //   roomName: "Banshee's Boneyard",
+  //   description:
+  //     "Within Banshee's Boneyard, mournful wails intertwine with the eerie clatter of spectral bones. An evil spirit, draped in ethereal veils, await intruders with chilling whispers and ghostly apparitions.",
+  //   summary: "",
+  //   backgroundImage: "",
+  //   music: null,
+  //   contents: {
+  //     monsters: [GRUDGE],
+  //     items: [],
+  //     events: null,
+  //   },
+  // },
+  // {
+  //   roomName: "Ghostwalk Bridge",
+  //   description:
+  //     "Ghostwalk Bridge stretches over an abyss of fog. Wisps of ethereal mist cling to skeletal structures, and haunting spirits drift silently. Crossing is a journey through whispers of the departed.",
+  //   summary: "",
+  //   backgroundImage: "styles/images/corridor-one.png",
+  //   music: null,
+  //   contents: {
+  //     monsters: [HAUNTING_SPIRIT, HAUNTING_SPIRIT],
+  //     items: [],
+  //     events: null,
+  //   },
+  // },
   {
     roomName: "Gravemist Hall",
     description:
@@ -506,7 +500,7 @@ let tierTwoRooms = [
     roomName: "Bonescar Hollow",
     description:
       "Bonescar Hollow, a realm of desolation, echoes with the ominous footsteps of the Bone Titan. Shadows dance on the skeletal remains, whispering tales of forgotten battles and the relentless guardian that now prowls.",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/bonescar-hollow.jpg",
     music: null,
     contents: {
       monsters: [BONE_TITAN],
@@ -518,7 +512,7 @@ let tierTwoRooms = [
     roomName: "Reaper's Charnel",
     description:
       "In the Reaper's Charnel, decrepit skeletons assemble in macabre formation. The air is tainted with the scent of ancient decay, as the skeletal sentinels stand guard, silent witnesses to the passage of time and intruders alike.",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-one/skeletal-sepulcher.jpg",
     music: null,
     contents: {
       monsters: [
@@ -535,7 +529,7 @@ let tierTwoRooms = [
     roomName: "Desolate Crypt",
     description:
       "The Desolate Crypt stands as a solemn monument to the forgotten. Within, a malevolent grudge lingers, casting a pall over the decaying memories held by the crypt's cold, stone embrace.",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/desolate-crypt.jpg",
     music: null,
     contents: {
       monsters: [GRUDGE],
@@ -546,11 +540,11 @@ let tierTwoRooms = [
   {
     roomName: "Grim Marrow Hall",
     description:
-      "Grim Marrow Hall, a haunting spectacle, echoes with the spectral moans of skeletal soldiers and haunting spirits. The decrepit skeletons, like forgotten guardians, stir as intruders disturb their eternal vigil.",
-    backgroundImage: "styles/images/corridor-one.png",
+      "Grim Marrow Hall.",
+    backgroundImage: "styles/images/backgrounds/grim-marrow-hall.jpg",
     music: null,
     contents: {
-      monsters: [SKELETAL_SOLDIER, HAUNTING_SPIRIT, DECREPIT_SKELETON],
+      monsters: [SCOUNDREL],
       items: [],
       events: null,
     },
@@ -560,10 +554,10 @@ let tierTwoRooms = [
     description:
       "The Ghastly Gallery unveils a spectral exhibition. Ethereal shades and haunting spirits drift through the shadows. Whispers of the departed echo, while a mysterious function hints at acquiring a coveted wisp.",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/ghastly-gallery.jpg",
     music: null,
     contents: {
-      monsters: [SHADE, HAUNTING_SPIRIT, SHADE],
+      monsters: [CULTIST, CULTIST, CULTIST],
       items: [],
       events: null,
       function: () => {
@@ -575,7 +569,6 @@ let tierTwoRooms = [
     roomName: "Haunted Hallow",
     description:
       "In the Haunted Hallow, haunting spirits materialize, their ghostly forms flickering in the dim light. The air is charged with otherworldly energy, as the ethereal inhabitants silently observe intruders.",
-    summary: "",
     backgroundImage: "styles/images/backgrounds/tier-two/haunted-hallow.jpg",
     music: null,
     contents: {
@@ -588,8 +581,7 @@ let tierTwoRooms = [
     roomName: "Dreadbone Chamber",
     description:
       "The Dreadbone Chamber resonates with the echoes of skeletal hands. Bone-white appendages emerge from the darkness, reaching for the living.",
-    summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/dreadbone-chamber.jpg",
     music: claustrofobia,
     contents: {
       monsters: [],
@@ -601,7 +593,6 @@ let tierTwoRooms = [
     roomName: "Cadaver Crypt",
     description:
       "Within the Cadaver Crypt, stone walls encase a macabre gallery of lifeless forms. The air is heavy with the scent of decay, and the distant scrape of spike walls signals impending danger to intruders.",
-    summary: "",
     backgroundImage: "styles/images/corridor-one.png",
     music: claustrofobia,
     contents: {
@@ -614,8 +605,7 @@ let tierTwoRooms = [
     roomName: "Haunting Bloodcellar",
     description:
       "In the Haunting Bloodcellar, ethereal spirits drift through crimson-hued mist. Haunting whispers linger, an unsettling symphony accompanying the ghostly presence. The air itself seems to mourn the forgotten souls trapped within.",
-    summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-two/haunted-blood-cellar.jpg",
     music: null,
     contents: {
       monsters: [HAUNTING_SPIRIT, HAUNTING_SPIRIT],
@@ -628,7 +618,7 @@ let tierTwoRooms = [
     description:
       "The Bone-forged Altar exudes an eerie tranquility. Skeletal remains, meticulously arranged, form a macabre mosaic.",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/tier-four/malevolent-shrine.jpg",
     music: null,
     contents: {
       monsters: [],
@@ -641,7 +631,7 @@ let tierTwoRooms = [
     description:
       "Grim Garrison, shrouded in ominous quiet, harbors countless vacant coffins. The once valiant warriors who inhabited them have vanished from their resting place.",
     summary: "",
-    backgroundImage: "styles/images/backgrounds/event-rooms/coffin-3.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-two/grim-garrison.jpg",
     music: imminentDarkness,
     contents: {
       monsters: [],
@@ -739,7 +729,7 @@ let tierFourRooms = [
     roomName: "Bastion of Bone",
     description: "A chamber with a large pile of skulls in the center.",
     summary: "",
-    backgroundImage: "styles/images/corridor-two.png",
+    backgroundImage: "styles/images/backgrounds/bastion-of-bone.jpg",
     music: null,
     contents: {
       monsters: [],
@@ -751,7 +741,7 @@ let tierFourRooms = [
     roomName: "Malevolent Shrine",
     description: "A chamber with a large pile of skulls in the center.",
     summary: "",
-    backgroundImage: "styles/images/corridor-two.png",
+    backgroundImage: "styles/images/backgrounds/malevolent-shrine.jpg",
     music: null,
     contents: {
       monsters: [],
@@ -763,7 +753,7 @@ let tierFourRooms = [
     roomName: "Vileblood Vestibule",
     description: "",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/vileblood-vestibule.jpg",
     music: null,
     contents: {
       monsters: [],
@@ -775,7 +765,7 @@ let tierFourRooms = [
     roomName: "Forsaken Bloodhold",
     description: "",
     summary: "",
-    backgroundImage: "styles/images/corridor-one.png",
+    backgroundImage: "styles/images/backgrounds/frosaken-bloodhold.jpg",
     music: null,
     contents: {
       monsters: [],
@@ -803,7 +793,8 @@ let tierFourRooms = [
 
 const CANDLELIGHT_SHRINE = {
   roomName: "Candlelight Shrine",
-  description: "Bathed in ethereal glow, this sanctuary emanates serenity. Carved by devoted candlelight priestesses, Candlelight Shrines shield the virtuous from malevolent forces. Soft whispers of prayers linger, intertwining with the flickering flames that dance upon ancient, sacred altars.",
+  description:
+    "Bathed in ethereal glow, this sanctuary emanates serenity. Carved by devoted candlelight priestesses, Candlelight Shrines shield the virtuous from malevolent forces. Soft whispers of prayers linger, intertwining with the flickering flames that dance upon ancient, sacred altars.",
   backgroundImage:
     "styles/images/backgrounds/event-rooms/candlelight-shrine.jpg",
   music: mindReading,
@@ -1054,7 +1045,7 @@ const IVANS_REVENGE = {
   function: () => {
     ivansRevengeTracker();
     setTimeout(() => {
-      soundEffectHandler(bulletsPassBy4); 
+      soundEffectHandler(bulletsPassBy4);
     }, 3000);
     setTimeout(() => {
       soundEffectHandler(humanLaugh25);
@@ -1190,14 +1181,271 @@ function checkForNewTier() {
   }
 }
 
-function addRandomRoom() {
-  //
-}
+function createNewRoom() {
+  let roomType = Math.floor(Math.random() * 6) + 1;
+  let beastType; // to decern Gnawers or Spiders
 
-// ===============================
-//    Catacomb Entrance Modal
-// ===============================
+  let newRoom = {
+    roomName: "",
+    description: "",
+    backgroundImage: "",
+    music: "",
+    contents: {
+      monsters: [],
+      items: [],
+      events: null,
+    },
+  };
 
-function closeCatacombsEntranceModal() {
-  catacombEntranceModal.style.display = "none";
+  function getRoomDetails(roomType) {
+    let roomDetails = Math.floor(Math.random() * 5) + 1;
+
+    switch (roomType) {
+      case 1:
+        // SKELETON
+        if (roomDetails === 1) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else if (roomDetails === 2) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else if (roomDetails === 3) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else if (roomDetails === 4) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        }
+        break;
+
+      case 2:
+        // GHOST
+        if (roomDetails === 1) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else if (roomDetails === 2) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else if (roomDetails === 3) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else if (roomDetails === 4) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        }
+        break;
+
+      case 3:
+        // CULTIST
+        if (roomDetails === 1) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else if (roomDetails === 2) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else if (roomDetails === 3) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else if (roomDetails === 4) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        } else {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+          newRoom.music = null;
+        }
+        break;
+
+      case 4:
+        // SCOUNDREL
+        if (roomDetails === 1) {
+          newRoom.roomName = "Rouge's Refuge";
+          newRoom.description = "";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-one/rogues-refuge.jpg";
+        } else if (roomDetails === 2) {
+          newRoom.roomName = "Forgotten Passage";
+          newRoom.description = "";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-one/forgotten-passage.jpg";
+        } else if (roomDetails === 3) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+        } else if (roomDetails === 4) {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+        } else {
+          newRoom.roomName = "";
+          newRoom.description = "";
+          newRoom.backgroundImage = "";
+        }
+
+        newRoom.music = hiddenCapacity;
+        break;
+
+      case 5:
+        // BEAST
+        if (roomDetails === 1) {
+          beastType = "GNAWER";
+          newRoom.roomName = "Gnawers' Nest";
+          newRoom.description = "In the Gnawers' Nest, the scent of fur and decay hangs heavy. A multitude of gnawers skulk, eyes gleaming in the darkness. The air resonates with the unsettling symphony of their hungry whispers.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-one/gnawers-nest.jpg";
+          newRoom.music = deepTunnels;
+        } else if (roomDetails === 2) {
+          beastType = "GNAWER";
+          newRoom.roomName = "Vile Cavern";
+          newRoom.description = "The Vile Cavern emanates an eerie green glow, casting twisted shadows. Gnawers prowl in the half-light, their hunger almost tangible in this vile expanse.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-two/vile-cavern.jpg";
+          newRoom.music = deepTunnels;
+        } else if (roomDetails === 3) {
+          beastType = "SPIDER";
+          newRoom.roomName = "The Hatchery";
+          newRoom.description = "The Hatchery pulsates with an eerie hum. Walls, lined with unhatched eggs, house a crawling horde of crypt crawlers. The air is thick with the anticipation of countless tiny legs skittering across the cold stone floor.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-one/the-hatchery.jpg";
+          newRoom.music = spiderInvasion;
+        } else if (roomDetails === 4) {
+          beastType = "SPIDER";
+          newRoom.roomName = "Broodmother's Nest";
+          newRoom.description = "The Broodmother's Nest looms with arachnid grace. A colossal web, woven with uncanny precision, cradles the monstrous broodmother. Her presence sends shivers, and the air is thick with the scent of impending danger.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-one/broodmothers-nest.jpg";
+          newRoom.music = spiderInvasion;
+        } else {
+          beastType = "SPIDER";
+          newRoom.roomName = "Cobwebbed Crypt";
+          newRoom.description = "The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-one/cobbwebbed-crypt.jpg";
+          newRoom.music = spiderInvasion;
+        }
+        break;
+
+      case 6:
+        // EVENT
+        if (roomDetails === 1) {
+          newRoom.roomName = "Webspun Passage";
+          newRoom.description = "The Webspun Passage, a silken maze woven by colossal spiders. Threads glisten, hinting at unseen arachnid architects. Each step stirs a web, the air pulsating with the potential of an eight-legged guardian's descent.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-one/webspun-passage.jpg";
+          newRoom.music = claustrofobia;
+          newRoom.contents.events = SPIDER_WEB;
+        } else if (roomDetails === 2) {
+          newRoom.roomName = "Cadaver Crypt";
+          newRoom.description = "Within the Cadaver Crypt, stone walls encase a macabre gallery of lifeless forms. The air is heavy with the scent of decay, and the distant scrape of spike walls signals impending danger to intruders.";
+          newRoom.backgroundImage = "";
+          newRoom.music = claustrofobia;
+          newRoom.contents.events = SPIKE_WALLS;
+        } else if (roomDetails === 3) {
+          newRoom.roomName = "Dreadbone Chamber";
+          newRoom.description = "Within the Cadaver Crypt, stone walls encase a macabre gallery of lifeless forms. The air is heavy with the scent of decay, and the distant scrape of spike walls signals impending danger to intruders.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-two/dreadbone-chamber.jpg";
+          newRoom.music = claustrofobia;
+          newRoom.contents.events = SKELETAL_HANDS;
+        } else if (roomDetails === 4) {
+          newRoom.roomName = "Ornate Coffin";
+          newRoom.description = "";
+          newRoom.backgroundImage = "styles/images/backgrounds/event-rooms/coffin-1.jpg";
+          newRoom.music = threeThousandYearsOld;
+          newRoom.contents.events = COFFIN_EVENT;
+        } else {
+          newRoom.roomName = "Ivory Coffin";
+          newRoom.description = "";
+          newRoom.backgroundImage = "styles/images/backgrounds/event-rooms/coffin-2.jpg";
+          newRoom.music = threeThousandYearsOld;
+          newRoom.contents.events = COFFIN_EVENT;
+        }
+
+        break;
+    }
+  }
+
+  function getRoomMonsters(roomType) {
+    let numberOfEnemies = Math.floor(Math.random() * 6);
+
+    skeletonMonsters = [
+      SKELETAL_SOLDIER,
+      SKELETAL_SOLDIER,
+      ARMORED_SKELETON,
+      ARMORED_SKELETON,
+      BONE_TITAN,
+    ];
+    let ghostMonsters = [HAUNTING_SPIRIT, HAUNTING_SPIRIT, GRUDGE];
+    let cultistMonsters = [CULTIST, FIENDSWORN_CULTIST];
+    let scoundrelMonsters = [SCOUNDREL];
+    let gnawerMonsters = [GNAWER];
+    let spiderMonsters = [CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER, BROODMOTHER];
+
+    if (roomType !== 6) {
+      let monsterType;
+      switch (roomType) {
+        case 1:
+          monsterType = skeletonMonsters;
+          break;
+
+        case 2:
+          monsterType = ghostMonsters;
+          break;
+
+        case 3:
+          monsterType = cultistMonsters;
+          break;
+
+        case 4:
+          monsterType = scoundrelMonsters;
+          break;
+
+        case 5:
+          if (beastType === "GNAWER") {
+            monsterType = gnawerMonsters;
+
+          } else if (beastType === "SPIDER") {
+            monsterType = spiderMonsters;
+
+          }
+          break;
+      }
+
+      for (let i = 0; i < numberOfEnemies; i++) {
+        let randomIndex = Math.floor(Math.random() * monsterType.length);
+        newRoom.contents.monsters.push(monsterType[randomIndex]);
+      }
+    }
+  }
+
+
+  getRoomDetails(roomType);
+  getRoomMonsters(roomType);
+  catacombRooms.push(newRoom);
 }
