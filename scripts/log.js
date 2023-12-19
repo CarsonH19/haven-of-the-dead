@@ -1470,6 +1470,8 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         } else if (dataTwo === "NO AMULET") {
           newEntry.textContent = `Dreadful whispers resonate from the skull, yet its otherworldly language remains beyond the grasp of your understanding.`;
         }
+      } else if (dataOne === GLORYFORGED_BLADE) {
+        newEntry.textContent = "The Gloryforged Blade resonates with newfound strength, forged in the crucible of your victorious battle in Fallen Warriors' Vale.";
       }
 
       narration = newEntry.textContent;
@@ -1524,7 +1526,9 @@ function writeToLogOther(logType, narrate, dataOne) {
       } else if (dataOne === "DISTRACTED") {
         newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} takes the opportunity to attack you while you are distracted.`;
       } else if (dataOne === "LOST FORMATION") {
-        newEntry.textContent = `The undead legionnaires are unable to keep formation and the phalanx is broken.`;
+        newEntry.textContent = `The Undying Warband's formation is broken.`;
+      } else if (dataOne === AEGIS_OF_THE_FALLEN) {
+        newEntry.textContent = `"You have freed my legionnaires from the Baron's undying curse. My warriors can finally find peace, and for that, I am immensely grateful. Accept this aegis; may it shield you when you need it most, as it did for me long ago."`;
       }
       break;
   }

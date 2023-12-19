@@ -116,6 +116,7 @@ const SCOUNDREL = {
 
 const CULTIST = {
   name: "Cultist",
+  image: 'styles/images/monsters/cultist.jpg',
   type: "HUMANOID",
   skulls: 3,
   soundEffects: {
@@ -130,6 +131,7 @@ const CULTIST = {
 
 const FIENDSWORN_CULTIST = {
   name: "Fiendsworn Cultist",
+  image: "styles/images/monsters/fiendsworn-cultist.jpg",
   type: "HUMANOID",
   skulls: 5,
   soundEffects: {
@@ -208,7 +210,7 @@ const LEGIONNAIRE = {
 
 const UNDYING_WARBAND = {
   name: "Undying Warband",
-  image: "styles/images/monsters/undead-warband.jpg",
+  image: "styles/images/monsters/undying-warband.jpg",
   type: "UNDEAD",
   skulls: 9,
   attackCounter: 0,
@@ -449,6 +451,7 @@ const HEADLESS_SKELETON = {
 
 const FORSAKEN_COMMANDER_STATS = {
   name: "Forsaken Commander",
+  image: 'styles/images/npcs/forasken-commander.jpg',
   type: "UNDEAD",
   skulls: 6,
   soundEffects: {
@@ -460,6 +463,7 @@ const FORSAKEN_COMMANDER_STATS = {
 
 const POSSESSED_EARVER = {
   name: "Graverobber Earver",
+  image: 'styles/images/npcs/possessed-earver.jpg',
   type: "HUMANOID",
   skulls: 4,
   soundEffects: {
@@ -475,7 +479,7 @@ const POSSESSED_EARVER = {
 
 const IVAN_STATS = {
   name: "Ivan the Scoundrel",
-  image: "styles/images/monsters/scoundrel.jpg",
+  image: "styles/images/npcs/ivan-the-scoundrel.jpg",
   type: "HUMANOID",
   skulls: 5,
   soundEffects: {

@@ -397,6 +397,9 @@ const closeInventoryButton = document.getElementById("closeInventoryBtn");
 // Soulreaver
 let attackCounter = 0;
 
+// Gloryforged Blade
+let glorforgedTracker = 0;
+
 // Wisps
 let wispActive;
 let guidingLightTracker;
@@ -676,7 +679,7 @@ const DISEASED = {
 
 const BURNED = {
   name: "Burned",
-  image: "styles/images/items/burned.jpg",
+  image: "styles/images/burned.jpg",
   status: "All damage you take is increased by 25%.",
   duration: null,
   statusDuration: null,
