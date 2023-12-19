@@ -233,7 +233,7 @@ const RITUAL_BLADE = {
   type: "MAGIC",
   rarity: "Common",
   effect:
-  "While attuned to this item your attacks deal additional 3 damage against beasts and humans.",
+    "While attuned to this item your attacks deal additional 3 damage against beasts and humans.",
   function: () => {
     if (
       currentRoom.contents.monsters[0].type === "BEAST" ||
@@ -245,8 +245,7 @@ const RITUAL_BLADE = {
       return 0;
     }
   },
-  unequip: () => {
-  },
+  unequip: () => {},
 };
 
 // ===============================
@@ -384,12 +383,26 @@ const AMULET_OF_WHISPERS = {
   function: () => {
     // Adds Grervil's Room While Wearing
     catacombRooms.push(SKULL_CHAMBER);
+
+    // Adds Grervil's Room While Wearing
+    catacombRooms.push(GRIM_GARRISON);
   },
   unequip: () => {
     // Removes Grervil's Room When Unequipped
     if (catacombRooms.includes(SKULL_CHAMBER)) {
       let indexToRemove = catacombRooms.findIndex(
         (room) => room.roomName === "Skull-filled Chamber"
+      );
+      catacombRooms = [
+        ...catacombRooms.slice(0, indexToRemove),
+        ...catacombRooms.slice(indexToRemove + 1),
+      ];
+    }
+
+    // Removes Forsaken Commander's Room When Unequipped
+    if (catacombRooms.includes(GRIM_GARRISON)) {
+      let indexToRemove = catacombRooms.findIndex(
+        (room) => room.roomName === "Grim Garrison"
       );
       catacombRooms = [
         ...catacombRooms.slice(0, indexToRemove),
@@ -734,13 +747,14 @@ const GLORYFORGED_BLADE = {
   image: "styles/images/items/gloryforged.jpg",
   type: "MAGIC",
   rarity: "Epic",
-  effect: "When attuned to this item, your attack increases with each instance of glory found in Fallen Warriors' Vale.",
+  effect:
+    "When attuned to this item, your attack increases with each instance of glory found in Fallen Warriors' Vale.",
   function: () => {
     baseAttack += glorforgedTracker;
   },
   unequip: () => {
     baseAttack -= glorforgedTracker;
-  }
+  },
 };
 
 // ===============================
@@ -846,8 +860,7 @@ const SPINE_OF_THE_NECROMANCER = {
   },
   unequip: () => {
     baseAttack -= 9;
-
-  }
+  },
 };
 
 // ===============================

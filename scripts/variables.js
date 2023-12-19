@@ -296,6 +296,10 @@ const LOG_ATTUNE = "ATTUNE";
 const LOG_CANT_ATTUNE = "CANT ATTUNE";
 const LOG_CONSUMABLE = "CONSUMABLE";
 
+const LOG_GAINED_CONDITION = "CONDITION GAINED";
+const LOG_REMOVED_CONDITION = "CONDITION REMOVED";
+
+
 const LOG_OTHER = "OTHER";
 
 // ===============================
@@ -398,7 +402,7 @@ const closeInventoryButton = document.getElementById("closeInventoryBtn");
 let attackCounter = 0;
 
 // Gloryforged Blade
-let glorforgedTracker = 0;
+let gloryforgedTracker = 0;
 
 // Wisps
 let wispActive;
@@ -555,6 +559,7 @@ const POISONED = {
 
       if (!immune) {
         let poisonedInterval = setInterval(() => {
+          console.log(poisonedInterval);
           if (POISONED.statusDuration - roomCounter > 1) {
             POISONED.duration = `Duration: ${
               POISONED.statusDuration - roomCounter
@@ -573,22 +578,23 @@ const POISONED = {
             POISONED.statusDuration = null;
 
             removeStatChange(POISONED);
-            updatePlayerTrackers();
             clearInterval(poisonedInterval);
+            updateTotalStats();
+            writeToLogStatusEffect(LOG_REMOVED_CONDITION, "YES", POISONED);
           }
         }, 3000);
 
         addStatChange(POISONED);
-        updatePlayerTrackers();
-        // statusEffectHandler(POISONED);
+        updateTotalStats();
         renderStatusEffects(POISONED);
+        writeToLogStatusEffect(LOG_GAINED_CONDITION, "YES", POISONED);
       }
     } else if (length > POISONED.statusDuration - roomCounter) {
       POISONED.statusDuration = roomCounter + length;
       POISONED.duration = `Duration: ${
         POISONED.statusDuration - roomCounter
       } Rooms`;
-      //writeToLog() Poisoned intensifies
+      writeToLogStatusEffect(LOG_GAINED_CONDITION, "YES", POISONED);
     }
   },
 };

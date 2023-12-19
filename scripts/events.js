@@ -109,7 +109,7 @@ const GAS_CHAMBER = {
   },
   penalty: () => {
     POISONED.function(5);
-  }
+  },
 };
 
 const SWARM_OF_VERMIN = {
@@ -789,11 +789,14 @@ const BATTLEFIELD = {
     BATTLEFIELD.summary =
       "You entered Fallen Warriors' Vale, tewmpting the . Defeating this powerful foe, you claimed victory, laying to eternal rest countless undead warriors.";
     FALLEN_WARRIORS_VALE.contents.monsters.push(UNDYING_WARBAND);
-    
-    if (!inventoryItems.includes(GLORYFORGED_BLADE) || !attunedItems.includes(GLORYFORGED_BLADE)) {
+
+    if (
+      !inventoryItems.includes(GLORYFORGED_BLADE) ||
+      !attunedItems.includes(GLORYFORGED_BLADE)
+    ) {
       FALLEN_WARRIORS_VALE.contents.items.push(GLORYFORGED_BLADE);
     }
-    
+
     ECHOES_OF_VICTORY.function(); // activate echoes of victory
 
     writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "BOSS");
@@ -847,7 +850,6 @@ function lockedRoomHandler(room) {
 
   if (room === "Bonevault") {
     room = Math.round(Math.random() * 4);
-    
   }
 
   setTimeout(() => {
@@ -944,7 +946,7 @@ function generalEventHandler(option, statModifier, attribute) {
 
     if (randomNumber >= event.passValue) {
       event.summary = `With ${attribute} you overcame the ${event.name} and live to continue your journey through the catacomb.`;
-    
+
       if (event.functionOne) {
         event.functionOne();
       }
@@ -952,8 +954,11 @@ function generalEventHandler(option, statModifier, attribute) {
       writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
     } else {
       event.summary = `You failed to overcome the ${event.name} and suffered ${event.failDamage} damage for your incompitence.`;
-      playerHealthBar.value -= event.failDamage;
-      currentPlayerHealth -= event.failDamage;
+
+      if (event.failDamage) {
+        playerHealthBar.value -= event.failDamage;
+        currentPlayerHealth -= event.failDamage;
+      }
 
       if (event.functionTwo) {
         event.functionTwo();
@@ -978,7 +983,7 @@ function generalEventHandler(option, statModifier, attribute) {
           event.functionOne();
         }
         break;
-  
+
       case event.optionTwo:
         if (event.functionTwo) {
           event.functionTwo();
@@ -1068,6 +1073,7 @@ eventButtonOne.addEventListener("click", () => {
     generalEventHandler(event.optionOne);
   }
   togglePlayerControls();
+  removeEventDescriptionLog();
 });
 
 eventButtonTwo.addEventListener("click", () => {
@@ -1092,4 +1098,5 @@ eventButtonTwo.addEventListener("click", () => {
   }
 
   togglePlayerControls();
+  removeEventDescriptionLog();
 });

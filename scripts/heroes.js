@@ -169,13 +169,14 @@ function priestessCleansingFlame() {
 
     let activeConditions = conditions.filter((obj) => obj.duration !== null);
     console.log(activeConditions);
+
     if (activeConditions.length > 0) {
       let randomIndex = Math.floor(Math.random() * activeConditions.length);
-      curedCondition = activeConditions[randomIndex];
+      let curedCondition = activeConditions[randomIndex];
       curedCondition.duration = null;
+      curedCondition.statusDuration = null;
       updateTotalStats();
       console.log(curedCondition);
-      // writeToLogOther(LOG_OTHER, "YES", "CONDITION CURED", curedCondition);
     }
   }
 

@@ -22,8 +22,7 @@
 
 const catacombEntrance = {
   roomName: "Catacomb Entrance",
-  backgroundImage:
-    "styles/images/backgrounds/event-rooms/catacomb-entrance.jpg",
+  backgroundImage:"styles/images/anonymous_grand_catacomb_entrance_71090877-c3af-4c56-b669-35790fad23f5.jpg",
   music: droneDarkHor1,
   contents: {
     monsters: [],
@@ -1036,29 +1035,29 @@ const GRIM_GARRISON = {
 //         Boss Rooms
 // ===============================
 
-const THRONE_OF_THE_ETERNAL = {
-  roomName: "Thrown of the Eternal",
-  description: "",
-  backgroundImage: "styles/images/backgrounds/event-rooms/eternal-throne.jpg",
-  music: imminentDarkness,
-  contents: {
-    monsters: [],
-    items: [],
-    events: BOSS_FIGHT,
-  },
-};
+// const THRONE_OF_THE_ETERNAL = {
+//   roomName: "Thrown of the Eternal",
+//   description: "",
+//   backgroundImage: "styles/images/backgrounds/event-rooms/eternal-throne.jpg",
+//   music: imminentDarkness,
+//   contents: {
+//     monsters: [],
+//     items: [],
+//     events: BOSS_FIGHT,
+//   },
+// };
 
-const BARON_OF_BONE_BOSS_ROOM = {
-  roomName: "Baron of Bone",
-  description: "",
-  backgroundImage: "styles/images/backgrounds/event-rooms/baron-of-bone.jpg",
-  music: null,
-  contents: {
-    monsters: [],
-    items: [],
-    events: BOSS_FIGHT,
-  },
-};
+// const BARON_OF_BONE_BOSS_ROOM = {
+//   roomName: "Baron of Bone",
+//   description: "",
+//   backgroundImage: "styles/images/backgrounds/event-rooms/baron-of-bone.jpg",
+//   music: null,
+//   contents: {
+//     monsters: [],
+//     items: [],
+//     events: BOSS_FIGHT,
+//   },
+// };
 
 // ===============================
 //     Catacomb Room Logic

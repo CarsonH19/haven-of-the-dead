@@ -592,9 +592,11 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
       if (dataOne === "SPECIAL") {
         if (heroChoice === "PALADIN") {
           if (specialAbilityBoonRank === 4) {
-            newEntry.textContent = `You've chosen Holy Smite. Your Holy Smite now always deals maximum damage.`; 
+            newEntry.textContent = `You've chosen Holy Smite. Your Holy Smite now always deals maximum damage.`;
           } else {
-            newEntry.textContent = `You've chosen Holy Smite. Your Holy Smite now deals ${holySmiteTracker * 100}% damage.`;
+            newEntry.textContent = `You've chosen Holy Smite. Your Holy Smite now deals ${
+              holySmiteTracker * 100
+            }% damage.`;
           }
         } else if (heroChoice === "ROGUE") {
           if (specialAbilityBoonRank === 4) {
@@ -790,6 +792,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
 //                         EVENTS
 // ==============================================================
 
+
 function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
   // dataOne =
   // dataTwo =
@@ -797,6 +800,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
   let newEntry = document.createElement("li");
   let narration = Math.round(Math.random() * 9);
   let event = currentRoom.contents.events;
+  let pauseEventDescription = null;
 
   switch (logType) {
     // ===============================
@@ -1220,7 +1224,6 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     case LOG_NPC_DESCRIPTION:
       newEntry.textContent = `${event.description}`;
       narration = newEntry.textContent;
-
       break;
 
     case LOG_NPC_DIALOGUE:
@@ -1345,7 +1348,15 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
   if (narrate) {
-    writeToNarrative(newEntry.textContent);
+    if (
+      logType === LOG_TRAP_DESCRIPTION ||
+      logType === LOG_NPC_DESCRIPTION ||
+      logType === LOG_MISC_DESCRIPTION
+    ) {
+      pauseEventDescription = "PAUSE";
+    }
+
+    writeToNarrative(newEntry.textContent, pauseEventDescription);
   }
 
   checkLogSize();
@@ -1471,7 +1482,8 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
           newEntry.textContent = `Dreadful whispers resonate from the skull, yet its otherworldly language remains beyond the grasp of your understanding.`;
         }
       } else if (dataOne === GLORYFORGED_BLADE) {
-        newEntry.textContent = "The Gloryforged Blade resonates with newfound strength, forged in the crucible of your victorious battle in Fallen Warriors' Vale.";
+        newEntry.textContent =
+          "The Gloryforged Blade resonates with newfound strength, forged in the crucible of your victorious battle in Fallen Warriors' Vale.";
       }
 
       narration = newEntry.textContent;
@@ -1494,21 +1506,29 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
 // ==============================================================
 
 function writeToLogStatusEffect(logType, narrate, dataOne, dataTwo) {
-  // dataOne =
-  // dataTwo =
+  // dataOne = Condition / Status Effect Object
 
   let newEntry = document.createElement("li");
-  let monsterName = currentRoom.contents.monsters[0].name;
-  let narration = Math.round(Math.random() * 9);
 
-  switch (
-    logType
+  switch (logType) {
+    case LOG_GAINED_CONDITION:
+      newEntry.textContent = `You've been ${dataOne.name}.`;
+      break;
 
-    // ===============================
-    //       Status Effect Logs
-    // ===============================
-  ) {
+    case LOG_REMOVED_CONDITION:
+      newEntry.textContent = `You are no longer ${dataOne.name}.`;
+      break;
   }
+
+  log.insertBefore(newEntry, log.firstChild);
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+
+  if (narrate) {
+    writeToNarrative(newEntry.textContent);
+  }
+
+  checkLogSize();
 }
 
 // ==============================================================
@@ -1517,7 +1537,6 @@ function writeToLogStatusEffect(logType, narrate, dataOne, dataTwo) {
 
 function writeToLogOther(logType, narrate, dataOne) {
   let newEntry = document.createElement("li");
-  let narration = Math.round(Math.random() * 9);
 
   switch (logType) {
     case LOG_OTHER:
@@ -1544,39 +1563,51 @@ function writeToLogOther(logType, narrate, dataOne) {
   checkLogSize();
 }
 
-// // ===============================
-// //          Room Events
-// // ===============================
-//   case LOG_ROOM:
-//     if (currentRoom === FALLEN_WARRIORS_VALE) {
-//       newEntry.textContent = `An expansive chamber unveils the remnants of a long-forgotten battle. Echoes of ancient conflict stir as skeletal warriors awaken. The air quivers with the chilling resonance of an eternal struggle, and the bones of the fallen rise once more.`;
-//     } else if (currentRoom.contents.monsters[0] === GRERVILS_BODY) {
-//       newEntry.textContent = `STOP! WAIT!`;
-//     }
-
-//   narration = newEntry.textContent;
-//   break;
-
 // ==============================================================
 //                  LOG & NARRATIVE LOGIC
 // ==============================================================
 
-function writeToNarrative(narration) {
+function writeToNarrative(narration, pauseEvent) {
   let newNarration = document.createElement("li");
   newNarration.textContent = narration;
+
+  if (pauseEvent === "PAUSE") {
+    newNarration.classList.add("event-description");
+    narrativeText.insertBefore(newNarration, narrativeText.firstChild);
+    console.log("class added");
+  } else {
+    narrativeText.insertBefore(newNarration, narrativeText.firstChild);
+
+    setTimeout(() => {
+      narrativeText.removeChild(narrativeText.lastElementChild);
+    }, 6950);
+
+    fadeOutAnimation(newNarration, 5000);
+  }
 
   if (narrativeText.children.length >= 3) {
     narrativeText.removeChild(narrativeText.lastElementChild);
   }
 
-  narrativeText.insertBefore(newNarration, narrativeText.firstChild);
-
-  setTimeout(() => {
-    narrativeText.removeChild(narrativeText.lastElementChild);
-  }, 6950);
-
-  fadeOutAnimation(newNarration, 5000);
   fadeInAnimation(newNarration);
+}
+
+function removeEventDescriptionLog() {
+  let eventDescriptions = narrativeText.querySelectorAll(
+    "li.event-description"
+  );
+
+  if (eventDescriptions.length > 0) {
+    console.log(eventDescriptions);
+
+    // Apply fade-out and remove for each element
+    eventDescriptions.forEach((element) => {
+      setTimeout(() => {
+        narrativeText.removeChild(narrativeText.lastElementChild);
+      }, 1950);
+      fadeOutAnimation(element);
+    });
+  }
 }
 
 function fadeInAnimation(element) {
