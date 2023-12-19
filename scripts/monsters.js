@@ -337,7 +337,7 @@ const BONE_TITAN = {
 
 const FLOOD_OF_BONES = {
   name: "Flood of Bones",
-  image: "styles/images/monsters/flood-of-bones.jpg",
+  // image: "styles/images/monsters/flood-of-bones.jpg",
   type: "UNDEAD",
   skulls: 9,
   soundEffects: {

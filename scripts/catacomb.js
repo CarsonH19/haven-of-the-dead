@@ -250,9 +250,9 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Rattling Hollow",
+    roomName: "Flood of Bones",
     description:
-      "Within the Rattling Hollow, bones assemble in macabre unity. An unsettling rattle permeates the air as a flood of bones, animated and vengeful, guards this chamber. Brave souls may find rare treasures amidst the bone-strewn chaos.",
+      "Bones assemble in macabre unity. An unsettling rattle permeates the air as a flood of bones, animated and vengeful, guards this chamber. Brave souls may find rare treasures amidst the bone-strewn chaos.",
     backgroundImage: "styles/images/backgrounds/tier-one/flood-of-bones.jpg",
     music: passedDanger,
     contents: {
