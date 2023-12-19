@@ -90,13 +90,19 @@ function damageMonster(damage) {
 function dealMonsterDamage(damage) {
   let damageDealt = Math.round(Math.random() * damage);
 
+  // Checks for Echoes of Victory - +25% damage
+  if (ECHOES_OF_VICTORY.duration !== null) {
+    damageDealt = Math.round(damageDealt * 1.25);
+  }
+
+  // Priestess Burning Devotion logic
   if (heroChoice === "PRIESTESS" && damageDealt < burningDevotionTracker) {
     damageDealt = burningDevotionTracker;
     writeToLogHero(LOG_BURNING_DEVOTION, "NO", damageDealt);
   }
 
-   //Checks for Rank 4 Holy Smite
-   if (heroChoice === "PALADIN" && specialAbilityBoonRank === 4) {
+  //Checks for Rank 4 Holy Smite - maximum damage
+  if (heroChoice === "PALADIN" && specialAbilityBoonRank === 4) {
     damageDealt = baseAttack;
   } 
 
@@ -1007,8 +1013,8 @@ continueButton.addEventListener("click", () => {
       renderCurrentRoom(BLOOD_ALTER);
       unholyWispTracker = null;
     } else if (restlessWispTracker === "ARRIVE") {
-      currentRoom = LOST_LEGIONS_VALE;
-      renderCurrentRoom(LOST_LEGIONS_VALE);
+      currentRoom = FALLEN_WARRIORS_VALE;
+      renderCurrentRoom(FALLEN_WARRIORS_VALE);
       restlessWispTracker = null;
     } else {
       removeCurrentRoom();

@@ -418,70 +418,69 @@ let blackheartBrewTracker;
 //                      Status Effects
 // ==============================================================
 
-const LEGIONS_GRACE = {
-  name: "Legion's Grace",
+const WAR_TORN_BANNER_STATUS = {
+  name: "War Torn Banner",
   image: "styles/images/items/war-torn-banner.jpg",
-  status: `Base Attack +${legionAttackBoost}.`,
+  status: `The undead legion will come.`,
   duration: null,
   function: () => {
-    LEGIONS_GRACE.duration = `Legionnaires laid to rest: ${legionTracker}`;
+    WAR_TORN_BANNER_STATUS.duration = `${30 - legionTracker} legionnaires remaining.`;
 
-    const legionsGraceInterval = setInterval(() => {
-      LEGIONS_GRACE.duration = `${legionTracker} Legionnaires defeated`;
-      LEGIONS_GRACE.status = `Base Attack increased by ${legionAttackBoost}. The more Legionnaires laid to rest, the greater the Legion's Grace becomes.`;
-      if (legionTracker % 30 === 0) {
-        attackBoost = Math.floor(legionTracker / 30);
-        baseAttack = baseAttack + legionAttackBoost;
-        updatePlayerTrackers();
+    const warTornBannerInterval = setInterval(() => {
+      WAR_TORN_BANNER_STATUS.duration = `${legionTracker} Legionnaires defeated`;
+
+      if (WAR_TORN_BANNER_STATUS.duration === null) {
+        clearInterval(warTornBannerInterval);
       }
+    }, 3000);
 
-      if (LEGIONS_GRACE.duration === null) {
-        clearInterval(legionsGraceInterval);
-      }
-    }, 5000);
-
-    statusEffectHandler(LEGIONS_GRACE);
-    renderStatusEffects(LEGIONS_GRACE);
+    statusEffectHandler(WAR_TORN_BANNER_STATUS);
+    renderStatusEffects(WAR_TORN_BANNER_STATUS);
   },
 };
 
-// const BLOOD_PACT = {
-//   name: "Blood Pact",
-//   status: "Your base attack is increased by 5, but your faith is reduced by 2.",
-//   duration: null,
-//   function: () => {
-//     if (BLOOD_PACT.duration === null) {
-//       let statusDuration = roomCounter + 15;
-//       BLOOD_PACT.duration = "Duration: 15 Rooms";
-//       let bloodPactInterval = setInterval(() => {
-//         if (statusDuration - roomCounter > 1) {
-//           BLOOD_PACT.duration = `Duration: ${
-//             statusDuration - roomCounter
-//           } Rooms`;
-//         } else {
-//           BLOOD_PACT.duration = `Duration: ${
-//             statusDuration - roomCounter
-//           } Room`;
-//         }
+const ECHOES_OF_VICTORY = {
+  name: "Echoes of Victory",
+  image: "styles/images/items/war-torn-banner.jpg",
+  status: `All damage dealt is increased by 25%`,
+  duration: null,
+  statusDuration: null,
+  function: () => {
+    if (ECHOES_OF_VICTORY.duration === null) {
+      ECHOES_OF_VICTORY.statusDuration = roomCounter + 9;
+      ECHOES_OF_VICTORY.duration = `Duration: ${ECHOES_OF_VICTORY.statusDuration - roomCounter} Rooms`;
 
-//         if (roomCounter >= statusDuration) {
-//           BLOOD_PACT.duration = null;
-//           baseAttack -= 5;
-//           baseFaith += 1;
+        let victoryInterval = setInterval(() => {
+          const duration = ECHOES_OF_VICTORY.statusDuration - roomCounter;
+          const roomText = duration > 1 ? 'Rooms' : 'Room';
+        
+          ECHOES_OF_VICTORY.duration = `Duration: ${duration} ${roomText}`;
+          
+          if (
+            roomCounter >= ECHOES_OF_VICTORY.statusDuration ||
+            ECHOES_OF_VICTORY.duration === null
+          ) {
+            ECHOES_OF_VICTORY.duration = null;
+            ECHOES_OF_VICTORY.statusDuration = null;
 
-//           updatePlayerTrackers();
-//           clearInterval(bloodPactInterval);
-//         }
-//       }, 15000);
+            removeStatChange(ECHOES_OF_VICTORY);
+            updatePlayerTrackers();
+            clearInterval(victoryInterval);
+          }
+        }, 15000);
 
-//       statusEffectHandler(BLOOD_PACT);
-//       renderStatusEffects(BLOOD_PACT);
-//     } else {
-//       let statusDuration = roomCounter + 15;
-//       BLOOD_PACT.duration = `Duration: ${statusDuration - roomCounter} Rooms`;
-//     }
-//   },
-// };
+        addStatChange(ECHOES_OF_VICTORY);
+        updatePlayerTrackers();
+        renderStatusEffects(ECHOES_OF_VICTORY);
+      } else if (length > ECHOES_OF_VICTORY.statusDuration - roomCounter) {
+      ECHOES_OF_VICTORY.statusDuration = roomCounter + length;
+      ECHOES_OF_VICTORY.duration = `Duration: ${
+        ECHOES_OF_VICTORY.statusDuration - roomCounter
+      } Rooms`;
+      //writeToLog() Poisoned intensifies
+    }
+  },
+};
 
 // ===============================
 //      Item Status Effects
@@ -530,9 +529,6 @@ const AEGIS_STATUS_EFFECT = {
 //    Condition Status Effects
 // ===============================
 
-let tempPoisonStrength = 0;
-let tempPoisonDexterity = 0;
-
 const POISONED = {
   name: "Poisoned",
   image: "styles/images/items/poisoned.jpg",
@@ -577,7 +573,7 @@ const POISONED = {
             updatePlayerTrackers();
             clearInterval(poisonedInterval);
           }
-        }, 15000);
+        }, 3000);
 
         addStatChange(POISONED);
         updatePlayerTrackers();
@@ -663,7 +659,7 @@ const DISEASED = {
             updatePlayerTrackers();
             clearInterval(diseasedInterval);
           }
-        }, 15000);
+        }, 3000);
 
         statusEffectHandler(DISEASED);
         renderStatusEffects(DISEASED);
@@ -713,7 +709,7 @@ const BURNED = {
             updatePlayerTrackers();
             clearInterval(burnedInterval);
           }
-        }, 15000);
+        }, 3000);
 
         statusEffectHandler(BURNED);
         renderStatusEffects(BURNED);
@@ -763,7 +759,7 @@ const CURSED = {
             updatePlayerTrackers();
             clearInterval(cursedInterval);
           }
-        }, 15000);
+        }, 3000);
 
         statusEffectHandler(CURSED);
         renderStatusEffects(CURSED);
@@ -861,7 +857,7 @@ const CHILLED = {
             updatePlayerTrackers();
             clearInterval(chilledInterval);
           }
-        }, 15000);
+        }, 3000);
 
         statusEffectHandler(CHILLED);
         renderStatusEffects(CHILLED);

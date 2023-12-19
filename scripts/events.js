@@ -785,24 +785,22 @@ const CRIMSON_COVENANT = {
 const BATTLEFIELD = {
   name: "Forsaken Battlefield",
   eventType: "MISC",
-  description: `Lost Legion Vale, a cavernous passage unveiling the remnants of a battlefield within the catacomb's depths. Countless fallen warriors lie scattered across the expanse. There will be danger ahead. Do you wish to proceed?`,
+  description: `Fallen Warriors' Vale, a cavernous passage unveiling the remnants of a battlefield within the catacomb's depths. Countless fallen warriors lie scattered across the expanse. There will be danger ahead. Do you wish to proceed?`,
   optionOne: "Proceed",
   optionTwo: "Return",
   functionOne: () => {
-    if (attunedItems.includes(WAR_TORN_BANNER)) {
-      BATTLEFIELD.summary =
-        "You entered Lost Legions Vale with the War Torn Banner, summoning the Undead Legion Phalanx. Defeating this powerful foe, you laid several members of the Forsaken Commander's legion to rest.";
-      LOST_LEGIONS_VALE.contents.monsters.push(UNDEAD_PHALANX);
-      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "BOSS");
-    } else {
-      BATTLEFIELD.summary =
-        "You entered Lost Legions Vale and defeated a hoard of undead warriors on the battlefield.";
-      for (let i = 0; i < 7; i++) {
-        LOST_LEGIONS_VALE.contents.monsters.push(SKELETAL_SOLDIER);
-      }
-      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
+    BATTLEFIELD.summary =
+      "You entered Fallen Warriors' Vale, tewmpting the . Defeating this powerful foe, you claimed victory, laying to eternal rest countless undead warriors.";
+    FALLEN_WARRIORS_VALE.contents.monsters.push(UNDYING_WARBAND);
+    
+    if (!inventoryItems.includes(GLORYFORGED_BLADE) || !attunedItems.includes(GLORYFORGED_BLADE)) {
+      FALLEN_WARRIORS_VALE.contents.items.push(GLORYFORGED_BLADE);
     }
+    
+    ECHOES_OF_VICTORY.function(); // activate echoes of victory
 
+    writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "BOSS");
+    // writeToLogEvent(LOG_MISC_OPTION_ONE, "YES"); // victory calls your name
     playMusic(weCantStopThem);
     startBattle();
     setRoomSummary();

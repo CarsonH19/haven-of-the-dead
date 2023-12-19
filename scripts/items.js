@@ -1580,7 +1580,7 @@ const RESTLESS_WISP = {
     wispActive = "ACTIVE";
 
     // Clear room if player fleed in the past
-    LOST_LEGIONS_VALE.contents.monsters = [];
+    FALLEN_WARRIORS_VALE.contents.monsters = [];
 
     let restlessWispInterval = setInterval(() => {
       RESTLESS_WISP.duration = `Duration: ${wispDuration - roomCounter} Rooms`;

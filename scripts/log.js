@@ -477,8 +477,8 @@ function writeToLogMonster(logType, narrate, dataOne) {
         monsterName === "Grudge"
       ) {
         newEntry.textContent = `You are haunted by malevolent spirits, their presence follow you and their ethereal whispers claw at your sanity.`;
-      } else if (monsterName === "Undead Legion Phalanx") {
-        newEntry.textContent = `The phalanx unleash a flurry of thrusts and slashes from their defensive positions.`;
+      } else if (monsterName === "Undying Warband") {
+        newEntry.textContent = `The warband unleash a flurry of thrusts and slashes.`;
       } else if (monsterName === "Ivan the Scoundrel") {
         newEntry.textContent = `Ivan stumbles back, shoving one of his henchmen towards you. With a sly grin, he swiftly consumes a potion, mending his wounds.`;
       }
@@ -1314,7 +1314,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         }
       } else if (event === BATTLEFIELD) {
         if (dataOne === "BOSS") {
-          newEntry.textContent = `Amidst the war-torn ruins, you unfurl the War Torn Banner, summoning dozens of skeletal warriors. Rising from the battlefield's remnants, they form an ominous phalanx, their instinct for war propelling them relentlessly toward you.`;
+          newEntry.textContent = `You enter the war-torn vale. Rising from the battlefield's remnants, the undying form an ominous warband, their instinct for war propelling them relentlessly toward you.`;
         } else {
           newEntry.textContent = `You enter the vale, several skeletal warriors rise from the battlefield's remnants. Their warrior instincts persisting even in death.`;
         }
@@ -1544,7 +1544,7 @@ function writeToLogOther(logType, narrate, dataOne) {
 // //          Room Events
 // // ===============================
 //   case LOG_ROOM:
-//     if (currentRoom === LOST_LEGIONS_VALE) {
+//     if (currentRoom === FALLEN_WARRIORS_VALE) {
 //       newEntry.textContent = `An expansive chamber unveils the remnants of a long-forgotten battle. Echoes of ancient conflict stir as skeletal warriors awaken. The air quivers with the chilling resonance of an eternal struggle, and the bones of the fallen rise once more.`;
 //     } else if (currentRoom.contents.monsters[0] === GRERVILS_BODY) {
 //       newEntry.textContent = `STOP! WAIT!`;

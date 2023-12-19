@@ -814,9 +814,9 @@ const CANDLELIGHT_SHRINE = {
 //          Misc. Rooms
 // ===============================
 
-const LOST_LEGIONS_VALE = {
-  roomName: "Lost Legions' Vale",
-  description: `A desolate vale in the catacomb's heart, where the whispers of forgotten warriors echo through the cold stone. Rusted armor and tattered banners line the silent path, revealing the untold tales of legions lost to time.`,
+const FALLEN_WARRIORS_VALE = {
+  roomName: "Fallen Warriors' Vale",
+  description: `A desolate vale in the catacomb's heart, where the whispers of forgotten warriors echo through the cold stone. Rusted armor and tattered banners line the silent battlefield, revealing the untold tales of warriors lost to time.`,
   backgroundImage:
     "styles/images/backgrounds/event-rooms/lost-legions-vale.jpg",
   music: droneDarkHor1,
@@ -827,7 +827,7 @@ const LOST_LEGIONS_VALE = {
   },
   function: () => {
     setTimeout(() => {
-      // writeToLog(LOG_EVENT_ROOM, LOST_LEGIONS_VALE);  // NEED TO FIX!!!
+      // writeToLog(LOG_EVENT_ROOM);  // NEED TO FIX!!!
     }, 1500);
   },
 };

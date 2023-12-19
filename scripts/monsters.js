@@ -206,9 +206,9 @@ const LEGIONNAIRE = {
   },
 };
 
-const UNDEAD_PHALANX = {
-  name: "Undead Legion Phalanx",
-  image: "styles/images/monsters/undead-phalanx.jpg",
+const UNDYING_WARBAND = {
+  name: "Undying Warband",
+  image: "styles/images/monsters/undead-warband.jpg",
   type: "UNDEAD",
   skulls: 9,
   attackCounter: 0,
@@ -219,7 +219,7 @@ const UNDEAD_PHALANX = {
   },
   function: (attacks) => {
     //Altered Monster Attack Handler
-    function phalanxAttacks() {
+    function warbandAttacks() {
       let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
 
       damagePlayer(monsterToPlayerDamage);
@@ -248,19 +248,19 @@ const UNDEAD_PHALANX = {
     if (currentMonsterHealth <= 110) {
       damageMonster(currentMonsterHealth);
       for (let i = 0; i < 4; i++) {
-        LOST_LEGIONS_VALE.contents.monsters.push(LEGIONNAIRE);
+        FALLEN_WARRIORS_VALE.contents.monsters.push(ARMORED_SKELETON);
       }
       writeToLogMonster(LOG_MONSTER_ABILITY, "YES", "LOSE FORMATION");
     } else {
-      const phalanxInterval = setInterval(() => {
-        if (UNDEAD_PHALANX.attackCounter >= attacks) {
-          clearInterval(phalanxInterval);
+      const warbandInterval = setInterval(() => {
+        if (UNDYING_WARBAND.attackCounter >= attacks) {
+          clearInterval(warbandInterval);
         }
 
         console.log("ATTACK MADE");
-        UNDEAD_PHALANX.attackCounter++;
+        UNDYING_WARBAND.attackCounter++;
         attackSounds();
-        phalanxAttacks();
+        warbandAttacks();
         updatePlayerTrackers();
       }, 500);
     }
@@ -543,7 +543,7 @@ function monsterSkullLevel(level) {
       break;
   }
 
-  if (currentRoom.contents.monsters[0] === UNDEAD_PHALANX) {
+  if (currentRoom.contents.monsters[0] === UNDYING_WARBAND) {
     monsterMaxHealth = 180;
     monsterAttackValue = 4;
   }
@@ -723,18 +723,18 @@ function monsterAbilityHandler(monster) {
       }
       break;
 
-    case UNDEAD_PHALANX:
+    case UNDYING_WARBAND:
       if (currentMonsterHealth > 160) {
-        UNDEAD_PHALANX.function(5);
-        UNDEAD_PHALANX.attackCounter = 0;
+        UNDYING_WARBAND.function(5);
+        UNDYING_WARBAND.attackCounter = 0;
       } else if (currentMonsterHealth > 130) {
-        UNDEAD_PHALANX.function(4);
-        UNDEAD_PHALANX.attackCounter = 0;
+        UNDYING_WARBAND.function(4);
+        UNDYING_WARBAND.attackCounter = 0;
       } else if (currentMonsterHealth > 110) {
-        UNDEAD_PHALANX.function(3);
-        UNDEAD_PHALANX.attackCounter = 0;
+        UNDYING_WARBAND.function(3);
+        UNDYING_WARBAND.attackCounter = 0;
       } else if (currentMonsterHealth <= 110) {
-        UNDEAD_PHALANX.function(0);
+        UNDYING_WARBAND.function(0);
       }
       break;
   }
