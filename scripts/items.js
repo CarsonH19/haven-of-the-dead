@@ -728,21 +728,19 @@ const AEGIS_OF_THE_FALLEN = {
   },
 };
 
-const WAR_TORN_BANNER = {
-  name: "War Torn Banner",
+const GLORYFORGED_BLADE = {
+  name: "Gloryforged Blade",
   description: "",
-  image: "styles/images/items/war-torn-banner.jpg",
+  image: "styles/images/items/gloryforged.jpg",
   type: "MAGIC",
   rarity: "Epic",
-  effect:
-    "While attuned to this item, Legion's Grace will be active. However, undead legionnaires will seek you.",
+  effect: "When attuned to this item, your attack increases with each instance of glory found in Fallen Warriors' Vale.",
   function: () => {
-    LEGIONS_GRACE.function();
-    writeToLogItem(LOG_ITEM, "YES", WAR_TORN_BANNER);
+    baseAttack += glorforgedTracker;
   },
   unequip: () => {
-    LEGIONS_GRACE.duration = null;
-  },
+    baseAttack -= glorforgedTracker;
+  }
 };
 
 // ===============================
@@ -890,7 +888,7 @@ const CACHE_KEY = {
   image: "styles/images/items/cache-key.jpg",
   soundEffect: skeletonKeyIn2,
   type: "MISC",
-  rarity: "Common",
+  rarity: "Rare",
   effect:
     "Given to you by Ivan the Scoundrel, he said it unlocks a chamber within the catacombs were his hidden cache is kept.",
   function: () => {
@@ -904,11 +902,28 @@ const GRERVILS_HEAD = {
   description: "",
   image: "styles/images/items/grervils-skull.jpg",
   type: "MISC",
-  rarity: "Common",
+  rarity: "Rare",
   effect: "Head of the talking skull, Grervil.",
   function: () => {
     // Obtained after meeting Grervil agreeing to help him find his body.
     writeToLogItem(LOG_ITEM, "YES", GRERVILS_HEAD);
+  },
+};
+
+const WAR_TORN_BANNER = {
+  name: "War Torn Banner",
+  description: "",
+  image: "styles/images/items/war-torn-banner.jpg",
+  type: "MAGIC",
+  rarity: "Rare",
+  effect:
+    "While attuned to this item, undead legionnaires will be drawn to you.",
+  function: () => {
+    WAR_TORN_BANNER_STATUS.function();
+    writeToLogItem(LOG_ITEM, "YES", WAR_TORN_BANNER);
+  },
+  unequip: () => {
+    WAR_TORN_BANNER_STATUS.duration = null;
   },
 };
 
