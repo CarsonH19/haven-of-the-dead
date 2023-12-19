@@ -104,7 +104,7 @@ function dealMonsterDamage(damage) {
   //Checks for Rank 4 Holy Smite - maximum damage
   if (heroChoice === "PALADIN" && specialAbilityBoonRank === 4) {
     damageDealt = baseAttack;
-  } 
+  }
 
   return damageDealt;
 }
@@ -725,7 +725,26 @@ const roomSummaryModal = document.getElementById("roomSummaryModal");
 const roomSummaryButton = document.getElementById("roomSummaryBtn");
 
 function closeRoomSummaryModal() {
+  let room = currentRoom.roomName;
   roomSummaryModal.style.display = "none";
+
+  // Adds Attack Power to Gloryforged Blade
+  if ((room = "Fallen Warriors' Vale")) {
+    gloryforgedTracker += 4;
+    writeToLogItem(LOG_ITEM, "YES", GLORYFORGED_BLADE);
+  }
+
+  // Checks if Forsaken Commander's Quest is Complete
+  if (legionTracker >= 30) {
+    inventoryItems.push(AEGIS_OF_THE_FALLEN);
+    if (inventoryItems.includes(WAR_TORN_BANNER)) {
+      useConsumable("War Torn Banner");
+    } else if (attunedItems.includes(WAR_TORN_BANNER)) {
+      const index = attunedItems.indexOf(WAR_TORN_BANNER);
+      inventoryItems.splice(index, 1);
+    }
+    writeToLogOther(LOG_OTHER, "YES", AEGIS_OF_THE_FALLEN);
+  }
 }
 
 function renderRoomSummaryModal() {

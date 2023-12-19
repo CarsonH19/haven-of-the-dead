@@ -454,7 +454,7 @@ const SUMMONING_MORGRIMM = {
     // can no longer benefit from Candlelight Shrines
     FIENDSWORN_CULTIST.function();
     // Remove Cursed Grimoire
-    const index = inventoryItems.indexOf(DEMONIC_GRIMOIRE);
+    const index = attunedItems.indexOf(DEMONIC_GRIMOIRE);
     inventoryItems.splice(index, 1);
     setRoomSummary();
     writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
@@ -466,7 +466,7 @@ const SUMMONING_MORGRIMM = {
     // must fight fiendsworn_cultists
     // Remove Cursed Grimoire
     BRANDED.function();
-    const index = inventoryItems.indexOf(DEMONIC_GRIMOIRE);
+    const index = attunedItems.indexOf(DEMONIC_GRIMOIRE);
     inventoryItems.splice(index, 1);
     currentRoom.contents.monsters.push(
       FIENDSWORN_CULTIST,
@@ -489,10 +489,7 @@ const FORSAKEN_COMMANDER = {
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
-    currentRoom.contents.items.push(RESTLESS_WISP);
     currentRoom.contents.items.push(WAR_TORN_BANNER);
-
-    // LEGIONS_GRACE.function(); // Applies Legion's Grace status effect
 
     setTimeout(renderRoomSummaryModal, 5000);
     setRoomSummary();
