@@ -726,19 +726,18 @@ const AEGIS_OF_THE_FALLEN = {
   },
 };
 
-const GLORYFORGED_BLADE = {
+let GLORYFORGED_BLADE = {
   name: "Gloryforged Blade",
   description: "",
   image: "styles/images/items/gloryforged.jpg",
   type: "MAGIC",
   rarity: "Epic",
-  effect:
-    "When attuned to this item, your attack increases with each instance of glory found in Fallen Warriors' Vale.",
+  effect: `When attuned to this item, your attack is increased by ${gloryforgedTracker}. This blade becomes more powerful with each instance of glory found in Fallen Warriors' Vale.`,
   function: () => {
-    baseAttack += glorforgedTracker;
+    baseAttack += gloryforgedTracker;
   },
   unequip: () => {
-    baseAttack -= glorforgedTracker;
+    baseAttack -= gloryforgedTracker;
   },
 };
 
@@ -1585,8 +1584,8 @@ const RESTLESS_WISP = {
   type: "CONSUMABLE",
   rarity: "Rare",
   logDetail: "WISP",
-  effect: "When this item is used a wisp will guide you to Lost Legions Vale.",
-  status: "Guiding you to Lost Legions Vale.",
+  effect: "When this item is used a wisp will guide you to Fallen Warriors' Vale.",
+  status: "Guiding you to Fallen Warrior's Vale.",
   duration: null,
   function: () => {
     const wisp = document.querySelector(".wisp");
@@ -1888,7 +1887,7 @@ function lootItems(lootGroup) {
     if (lootItemChance > 110 && epicLoot.length > 0) {
       const epicIndex = Math.floor(Math.random() * epicLoot.length);
       foundItem = epicLoot[epicIndex];
-      rareLoot.splice(epicIndex, 1);
+      epicLoot.splice(epicIndex, 1);
       room.push(foundItem);
     } else if (lootItemChance > 95 && rareLoot.length > 0) {
       const rareIndex = Math.floor(Math.random() * rareLoot.length);
@@ -2103,10 +2102,6 @@ function statusEffectHandler(item) {
     //   baseFaith -= 2;
     //   updatePlayerTrackers();
     //   break;
-
-    case LEGIONS_GRACE:
-      //writeToLogItem()
-      break;
 
     case CHILLED:
       //writeToLogItem() You are chilled and unable to use your special ability

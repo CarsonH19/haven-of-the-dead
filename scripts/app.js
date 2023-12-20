@@ -720,12 +720,13 @@ const roomSummaryModal = document.getElementById("roomSummaryModal");
 const roomSummaryButton = document.getElementById("roomSummaryBtn");
 
 function closeRoomSummaryModal() {
-  let room = currentRoom.roomName;
   roomSummaryModal.style.display = "none";
 
   // Adds Attack Power to Gloryforged Blade
-  if ((room = "Fallen Warriors' Vale")) {
+  if ((currentRoom.roomName === "Fallen Warriors' Vale")) {
     gloryforgedTracker += 4;
+    GLORYFORGED_BLADE.effect = `When attuned to this item, your attack is increased by ${gloryforgedTracker}. This blade becomes more powerful with each instance of glory found in Fallen Warriors' Vale.`,
+
     writeToLogItem(LOG_ITEM, "YES", GLORYFORGED_BLADE);
   }
 

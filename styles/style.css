@@ -280,6 +280,7 @@ li, ul {
   top: 50%;
   left: 50%; */
   list-style-type: none;
+  pointer-events: none;
   padding: 0;
   z-index: 99;
 }
@@ -1080,6 +1081,10 @@ progress[value]::-moz-progress-bar {
   margin: 0px;
   padding: 0px;
   cursor: pointer;
+}
+
+.consumables button:hover {
+  scale: 1.2;
 }
 
 .consumables-box h4 {

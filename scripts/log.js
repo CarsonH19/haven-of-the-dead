@@ -685,7 +685,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
 
     // Paladin Passive
     case LOG_RADIANT_AURA:
-      newEntry.textContent = `Your Radiant Aura destroys the ${currentRoom.contents.monsters[0].name}!`;
+      newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} burns in the pressence of your Radiant Aura taking ${radiantAuraTracker} damage.`;
       break;
 
     // ===============================
@@ -1234,7 +1234,9 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `Ivan's the Scoundrel's voice taunts you from behind the sealed door, "You thought you could escape my wrath? Embrace of oblivion, betrayer. Your demise will be as silent as your treachery."`;
       } else if (dataOne === GRERVILS_HEAD) {
         newEntry.textContent = `You unearthed Grervil's skeletal body. 'My form returns,' Grervil hisses. With an unsettling gratitude, he bestows a wisp before reattaching his head and wandering into the catacombs's depths.`;
-      }
+      } else if (dataOne === "IVANS CACHE AMBUSH") {
+        newEntry.textContent = `Ivan and his accomplices emerge, encircling you like prey in ambush. Peril looms in their treacherous laughter.`;
+      } 
       break;
 
     case LOG_NPC_OPTION_ONE:
@@ -1247,8 +1249,8 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `"You aid Graverobber Earver's in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their onslaught, he meets his untimely demise, leaving you to face these undead guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Released from captivity, the scoundrel breathes thanks, but a looming arachnid descends, hungry eyes fixed on its newfound prey.`;
-      } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
-        newEntry.textContent = `As the key turns, a malevolent hiss escapes as deadly poison gas clouds your senses. Weakening, you realize the scoundrel's gratitude was a ruse. Ivan and his accomplices emerge, encircling you like prey in ambush. Peril looms in their treacherous laughter."`;
+      } else if (currentRoom.name = "Ivan's Hidden Cache") {
+        newEntry.textContent = `As the key turns, a malevolent hiss escapes just before the chest explodes in an eruption of flames. Burning and disoriented you realize the scoundrel's gratitude was a ruse.`;
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. They turn towards you, their hollow sockets fixed on your bold presence.`;
       } else if (event === FORSAKEN_COMMANDER) {
@@ -1293,9 +1295,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
 
     case LOG_MISC_OPTION_ONE:
       if (event === LAUGHING_COFFIN_EVENT) {
-        if (dataOne === "ONE") {
-          newEntry.textContent = `Within the Laughing Coffin, the air hums with covert whispers. Abruptly, Ivan the Scoundrel confronts you, eyes ablaze. 'Left me to die, did you?' he sneers, unsheathing his blade. Resentment drips like venom in the tainted atmosphere.`;
-        } else if (dataOne === "PAY") {
+        if (dataOne === "PAY") {
           newEntry.textContent = `As you enter the heart of the Laughing Coffin, the air thick with the aroma of treachery, a band of scoundrels welcomes you with sly grins. "New blood, eh?" one chuckles, raising a tankard. "Join the revelry, stranger, and drink to the shadows that bind us all."`;
         } else if (dataOne === "LIAR") {
           newEntry.textContent = `The scoundrels' eyes narrow, skepticism etched across their faces. "Show it then!" demands the leader, tension thickening. Your bluff exposed, the atmosphere ignites with menace. "Seems our new friend needs a harsh lesson," sneers another, drawing a blade.`;
@@ -1311,6 +1311,8 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === CRIMSON_COVENANT) {
         if (dataOne === "JOIN") {
           newEntry.textContent = `As your blood mingles with the sacrificial stream, an otherworldly energy surges through the catacomb. The hooded figures bow in silent acknowledgment.`;
+        } else if (dataOne === "MAX HEALTH") {
+          newEntry.textContent = `Your maximum health has increased by 20HP.`;
         } else if (dataOne === "LOW HEALTH") {
           newEntry.textContent = `Too weak to make a sacrifice, you step away from the ritual. The hooded figures pause. The catacomb's air tightens with an unsettling stillness. The chanting falters, and the figures regard you with an ominous silence as you descend into the catacomb.`;
         }
@@ -1479,14 +1481,15 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
           newEntry.textContent = `Dreadful whispers resonate from the skull, yet its otherworldly language remains beyond the grasp of your understanding.`;
         }
       } else if (dataOne === GLORYFORGED_BLADE) {
-        newEntry.textContent = "The Gloryforged Blade resonates with newfound strength, forged in the crucible of your victorious battle in Fallen Warriors' Vale.";
+        newEntry.textContent =
+          "The Gloryforged Blade resonates with newfound strength, forged in the crucible of your victorious battle in Fallen Warriors' Vale.";
       } else if (dataOne === GRERVILS_HEAD) {
         if (dataTwo === "UNDERSTAND") {
           newEntry.textContent = `"The longer we stand idle seeker, the further my legs will wander."`;
         } else if (dataTwo === "WHISPERS") {
           newEntry.textContent = `Air whistles through Grervil's teeth, as if carried by an unseen wind creating an otherworldly sound. The skull is trying to speak to you, but its words are beyond your comprehension.`;
         }
-      } 
+      }
 
       narration = newEntry.textContent;
       break;

@@ -71,7 +71,7 @@ const SPIDER_WEB = {
   name: "Spider Web",
   eventType: "TRAP",
   description:
-    "A sticky, silken web envelopes you, woven meticulously by some monstrous arachnid. The web clings to you, its threads vibrating with an eerie energy. You can feel the faint tremors of distant movements.",
+    "A sticky, silken web envelopes you. The web clings to you, its threads vibrating with an eerie energy. You can feel the faint tremors of distant movements.",
   optionOne: "Strength",
   optionTwo: "Faith",
   passValue: 6,
@@ -130,7 +130,7 @@ const SKELETAL_HANDS = {
   name: "Skeletal Hands",
   eventType: "TRAP",
   description:
-    "From the depths of the catacomb floor, ghostly skeletal hands claw their way forth, bony fingers outstretched in your direction. They sway and reach, for your limps. The cold, clammy touch of their grasp sends shivers down your spine.",
+    "From the depths of the catacomb floor, ghostly skeletal hands claw their way forth, bony fingers outstretched in your direction. They sway and reach, for your limps.",
   optionOne: "Strength",
   optionTwo: "Dexterity",
   passValue: 6,
@@ -285,13 +285,13 @@ const IVAN_THE_SCOUNDREL = {
     IVAN_THE_SCOUNDREL.summary = `Amidst the severed limbs of the defeated arachnid, the scoundrel, grateful yet wary, hands over a cryptic key. "Treasures await within my hidden cache," he smirks. "Take what's yours."`;
     currentRoom.contents.items.push(CACHE_KEY);
     currentRoom.contents.monsters.push(BROODMOTHER);
-    let addRoom = roomCounter + 10;
-    let ivanInterval = setInterval(() => {
-      if (roomCounter > addRoom) {
+    // let addRoom = roomCounter + 5;
+    // let ivanInterval = setInterval(() => {
+      // if (roomCounter > addRoom) {
         catacombRooms.push(IVANS_CACHE);
-        clearInterval(ivanInterval);
-      }
-    }, 60000);
+      //   clearInterval(ivanInterval);
+      // }
+    // }, 60000);
 
     setRoomSummary();
     startBattle();
@@ -299,19 +299,18 @@ const IVAN_THE_SCOUNDREL = {
   },
   functionTwo: () => {
     IVAN_THE_SCOUNDREL.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
-    // let addRoom = roomCounter + 5;
-    // let ivanInterval = setInterval(() => {
-    // if (roomCounter > addRoom) {
+    let addRoom = roomCounter + 5;
+    let ivanInterval = setInterval(() => {
+    if (roomCounter > addRoom) {
     catacombRooms.push(
       IVAN_TRAP_ROOM_ONE,
       IVAN_TRAP_ROOM_TWO,
       IVAN_TRAP_ROOM_THREE
     );
-    // clearInterval(ivanInterval);
-    // }
-    // }, 60000);
+    clearInterval(ivanInterval);
+    }
+    }, 60000);
 
-    LAUGHING_COFFIN_ROOM.contents.monsters.push(IVAN_STATS);
     setRoomSummary();
     setTimeout(renderRoomSummaryModal, 5000);
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
@@ -321,24 +320,33 @@ const IVAN_THE_SCOUNDREL = {
 const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   name: "Ivan the Scoundrel",
   eventType: "NPC",
-  description: `Stumbling upon Ivan the Scoundrel's secret cache, a hidden bounty awaits. A glinting lock beckons. Will you wield Ivan's Cache Key to unveil the treasures within?`,
+  description: `Stumbling upon Ivan the Scoundrel's secret cache, the hidden bounty awaits. A glinting lock beckons. Will you wield Ivan's Cache Key to unveil the treasures within?`,
   optionOne: "Open",
   optionTwo: "Leave",
   functionOne: () => {
-    writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
-    IVAN_THE_SCOUNDREL_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
-    useConsumable("Ivan's Cache Key");
-    POISONED.function();
-    monsterAttackHandler();
-    currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
+    IVAN_THE_SCOUNDREL_EVENT_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels.`;
+    currentRoom.contents.monsters.push(IVAN_STATS, SCOUNDREL, SCOUNDREL);
     currentRoom.contents.items.push(
       LAUGHING_COFFIN_COIN,
-      SHADOWSTEP_BOOTS,
-      ROWDY_WISP
+      LAUGHING_COFFIN_COIN,
     );
+
     setRoomSummary();
-    startBattle();
-    monsterAttackHandler();
+    useConsumable("Ivan's Cache Key");
+    setTimeout(() => {
+      // Explosion Sound Effect
+      soundEffectHandler(magicSpellFire1);
+      damagePlayer(20);
+      BURNED.function();
+      writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
+
+      setTimeout(() => {
+        startBattle();
+        soundEffectHandler(humanLaugh25);
+        writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "IVANS CACHE AMBUSH");
+      }, 2000);
+    }, 2000);
+    
   },
   functionTwo: () => {
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
@@ -347,12 +355,11 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
     currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
     currentRoom.contents.items.push(
       LAUGHING_COFFIN_COIN,
-      SHADOWSTEP_BOOTS,
-      ROWDY_WISP
+      LAUGHING_COFFIN_COIN,
     );
     setRoomSummary();
     startBattle();
-    monsterAttackHandler();
+    writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
   },
 };
 
@@ -734,7 +741,7 @@ const CRIMSON_COVENANT = {
     if (currentPlayerHealth >= 51) {
       CRIMSON_COVENANT.summary =
         "You partook in the ritual of the Crimson Covenant, and spilled your blood. Although weakened by the experience you feel a surge of vitality throughout your body.";
-      crimsonCovenantBoon += 10;
+      crimsonCovenantBoon += 20;
       crimsonCovenantTracker++;
 
       switch (crimsonCovenantTracker) {
@@ -760,7 +767,8 @@ const CRIMSON_COVENANT = {
       CRIMSON_COVENANT.summary =
         "You participated in the ritual, spilling your blood alongside the other members of the Crimson Covenant.";
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "JOIN");
-      updatePlayerTrackers();
+      writeToLogEvent(LOG_MISC_OPTION_ONE, null, "MAX HEALTH");
+      updateTotalStats();
       setTimeout(renderRoomSummaryModal, 5000);
     } else {
       CRIMSON_COVENANT.summary =
@@ -786,11 +794,11 @@ const BATTLEFIELD = {
   optionTwo: "Return",
   functionOne: () => {
     BATTLEFIELD.summary =
-      "You entered Fallen Warriors' Vale, tewmpting the . Defeating this powerful foe, you claimed victory, laying to eternal rest countless undead warriors.";
+      "You entered Fallen Warriors' Vale, challenging the undying. Defeating them in combat, you claimed victory, laying to eternal rest countless undead warriors.";
     FALLEN_WARRIORS_VALE.contents.monsters.push(UNDYING_WARBAND);
 
     if (
-      !inventoryItems.includes(GLORYFORGED_BLADE) ||
+      !inventoryItems.includes(GLORYFORGED_BLADE) &&
       !attunedItems.includes(GLORYFORGED_BLADE)
     ) {
       FALLEN_WARRIORS_VALE.contents.items.push(GLORYFORGED_BLADE);

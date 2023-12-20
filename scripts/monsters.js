@@ -297,7 +297,7 @@ const DRAUGR = {
   name: "Draugr",
   image: "styles/images/monsters/draugr.jpg",
   type: "UNDEAD",
-  skulls: 6,
+  skulls: 5,
   soundEffects: {
     spawn: boneCrunchCrack1,
     attack: severMetalHit2,
@@ -501,6 +501,7 @@ const IVAN_STATS = {
       currentRoom.contents.monsters = room;
       renderMonsterStatBlock(room[0]); // Needed to load swapped monster
       soundEffectHandler(bodyShove);
+      soundEffectHandler(humanLaugh25);
     }
   },
 };
@@ -724,7 +725,7 @@ function monsterAbilityHandler(monster) {
       break;
 
     case IVAN_STATS:
-      if (currentMonsterHealth < 40 && IVAN_STATS.abilityCounter < 3) {
+      if (currentMonsterHealth < 40 && currentRoom.contents.monsters.length >= 2) {
         IVAN_STATS.function();
       }
       break;
