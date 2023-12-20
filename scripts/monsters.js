@@ -429,6 +429,7 @@ function getEvilSpiritAudio() {
 
 const GRERVILS_BODY = {
   name: "Grervil's Body",
+  image: "styles/images/npcs/grervils-body.jpg",
   type: "UNDEAD",
   skulls: 3,
   soundEffects: {
@@ -440,6 +441,7 @@ const GRERVILS_BODY = {
 
 const HEADLESS_SKELETON = {
   name: "Headless Skeleton",
+  image: "styles/images/npcs/grervils-body.jpg",
   type: "UNDEAD",
   skulls: 3,
   soundEffects: {
@@ -571,8 +573,8 @@ function renderMonsterStatBlock(monster) {
   }
 
   monsterSkullLevel(monster.skulls);
-  // ITEM: Flask of Light - Weakens evil spirits.
-  isItemAttuned(FLASK_OF_LIGHT, 0);
+  // ITEM: Sunstone - Weakens Evil Spirits
+  isItemAttuned(SUNSTONE, 0);
   setMonsterHealth(monsterMaxHealth);
 }
 
@@ -588,8 +590,8 @@ function startBattle() {
     updatePlayerTrackers();
     togglePlayerControls();
 
-    // ITEM: Sunstone - Damages undead creatures.
-    isItemAttuned(SUNSTONE);
+    // Checks for Paladin Passive
+    paladinRadiantAura();
     // ITEM: Rattlebone Whistle - Chance for humanoids to flee.
     isItemAttuned(RATTLEBONE_WHISTLE);
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.

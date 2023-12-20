@@ -35,13 +35,14 @@ function paladinHolySmite() {
 
 function paladinRadiantAura() {
   if (
-    currentMonsterHealth <= radiantAuraTracker &&
-    currentRoom.contents.monsters[0].type === "UNDEAD"
+    currentRoom.contents.monsters[0].type === "UNDEAD" &&
+    heroChoice === "PALADIN"
   ) {
-    writeToLogHero(LOG_RADIANT_AURA, "NO");
-
-    currentMonsterHealth = 0;
-    monsterHealthBar.value = 0;
+    setTimeout(() => {
+      damageMonster(radiantAuraTracker);
+      isGameOver();
+      writeToLogHero(LOG_RADIANT_AURA, "NO");
+    }, 1000);
   }
 }
 
@@ -135,8 +136,6 @@ function rogueDarkenedReprisal() {
 //        Hero: Priestess
 // ===============================
 
-let cleansingFlameTracker = 15;
-let burningDevotionTracker = 3;
 let priestess = {
   name: "Priestess Liheth",
   level: 1,
@@ -432,7 +431,10 @@ function levelUpHandler(boon) {
         }
         break;
       case priestess:
-        cleansingFlameTracker += 10;
+        // Rank 4 Boon Differs
+        if (specialAbilityBoonRank < 4) {
+          cleansingFlameTracker += 10;
+        }
         break;
     }
   } else if (boon === "PASSIVE") {
@@ -440,10 +442,10 @@ function levelUpHandler(boon) {
 
     switch (hero) {
       case paladin:
-        radiantAuraTracker += 2;
+        radiantAuraTracker += 5;
         break;
       case rogue:
-        darkenedReprisalTracker += 1;
+        darkenedReprisalTracker += 0.5;
         break;
       case priestess:
         burningDevotionTracker += 2;
@@ -697,3 +699,7 @@ function endLevelUp() {
 
   updateTotalStats();
 }
+
+// ===============================
+//      NPC Rendering Logic
+// ===============================

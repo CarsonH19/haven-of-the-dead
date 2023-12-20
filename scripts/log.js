@@ -792,7 +792,6 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
 //                         EVENTS
 // ==============================================================
 
-
 function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
   // dataOne =
   // dataTwo =
@@ -1233,6 +1232,8 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `The distant sound of Ivan's the Scoundrel's mocking laughter meets your ear. "Farewell, betrayer! Enjoy the abyss!"`;
       } else if (dataOne === "IVAN" && event === GAS_CHAMBER) {
         newEntry.textContent = `Ivan's the Scoundrel's voice taunts you from behind the sealed door, "You thought you could escape my wrath? Embrace of oblivion, betrayer. Your demise will be as silent as your treachery."`;
+      } else if (dataOne === GRERVILS_HEAD) {
+        newEntry.textContent = `You unearthed Grervil's skeletal body. 'My form returns,' Grervil hisses. With an unsettling gratitude, he bestows a wisp before reattaching his head and wandering into the catacombs's depths.`;
       }
       break;
 
@@ -1253,9 +1254,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === FORSAKEN_COMMANDER) {
         newEntry.textContent = `The spectral commander's mournful visage brightens. 'A noble soul, break their chains and usher the forsaken into the eternal rest they deserve.`;
       } else if (event === GRERVIL_THE_BODILESS) {
-        if (dataOne === "ONE") {
-          newEntry.textContent = `Grervil's skeletal gratitude echoes as you carry the talking skull. "Thanks, seeker. Onward to reclaim my body, and the catacomb's secrets shall unfold in your favor."`;
-        }
+        newEntry.textContent = `Grervil's gratitude echoes as you pick up the talking skull. "Thanks, seeker. Onward to reclaim my body, and the catacomb's secrets shall unfold in your favor."`;
       }
 
       narration = newEntry.textContent;
@@ -1277,7 +1276,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === FORSAKEN_COMMANDER) {
         newEntry.textContent = `The spectral commander's eyes flare with anguish. 'Your defiance condemns my legion to eternal torment. The wrath of the forsaken will fall upon you!`;
       } else if (event === GRERVIL_THE_BODILESS) {
-        newEntry.textContent = `"As you deny Grervil's plea, the disembodied skull's whispers fade into a haunting lament. Unable to move and unbound from your aid, it remains motionless upon its bone throne."`;
+        newEntry.textContent = `As you deny Grervil's plea, the disembodied skull's whispers fade into a haunting lament. Unable to move and unbound from your aid, it remains motionless upon its bone throne.`;
       }
 
       narration = newEntry.textContent;
@@ -1410,8 +1409,6 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
     case LOG_ITEM:
       if (dataOne === LAUGHING_COFFIN_COIN) {
         newEntry.textContent = `You pay a Laughing Coffin Coin and enter the tavern.`;
-      } else if (dataOne === GRERVILS_HEAD) {
-        newEntry.textContent = `You unearthed Grervil's skeletal body. 'My form returns,' Grervil hisses. With an unsettling gratitude, he bestows a wisp before vanishing into the catacombs's depths.`;
       } else if (dataOne === SKELETON_KEY) {
         newEntry.textContent = `You use a Skeleton Key to unlock the ${dataTwo}`;
       } else if (dataOne === CACHE_KEY) {
@@ -1456,7 +1453,7 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
       } else if (dataOne === WARDING_CANDLE) {
         newEntry.textContent = `Your warding candle protects you from nearby undead.`;
       } else if (dataOne === SUNSTONE) {
-        newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} burns in the presence of the Sunstone.`;
+        newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} is weakened in the presence of the Sunstone.`;
       } else if (dataOne === WHISPERING_SKULL) {
         if (dataTwo === 1) {
           newEntry.textContent = `"Broodmothers' must be slain with haste; delay breeds a swarm of her spawn. Strike swiftly, lest her hatchlings overrun you."`;
@@ -1482,9 +1479,14 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
           newEntry.textContent = `Dreadful whispers resonate from the skull, yet its otherworldly language remains beyond the grasp of your understanding.`;
         }
       } else if (dataOne === GLORYFORGED_BLADE) {
-        newEntry.textContent =
-          "The Gloryforged Blade resonates with newfound strength, forged in the crucible of your victorious battle in Fallen Warriors' Vale.";
-      }
+        newEntry.textContent = "The Gloryforged Blade resonates with newfound strength, forged in the crucible of your victorious battle in Fallen Warriors' Vale.";
+      } else if (dataOne === GRERVILS_HEAD) {
+        if (dataTwo === "UNDERSTAND") {
+          newEntry.textContent = `"The longer we stand idle seeker, the further my legs will wander."`;
+        } else if (dataTwo === "WHISPERS") {
+          newEntry.textContent = `Air whistles through Grervil's teeth, as if carried by an unseen wind creating an otherworldly sound. The skull is trying to speak to you, but its words are beyond your comprehension.`;
+        }
+      } 
 
       narration = newEntry.textContent;
       break;

@@ -4,8 +4,8 @@
 
 // Common Items
 // - *Evertorch
-// - Flask of Light
 // - *Graverobber's Spade - Graverobber Earver
+// - *Sunstone
 // - *Charm of Healing
 // - Shadowstep Boots
 // - *Ring of Skittering
@@ -17,7 +17,6 @@
 // - Mist Veil Cloak
 // - *Bloodstone - Crimson Covenant
 // - *Wraithbane
-// - *Sunstone
 // - *Whispering Amulet
 // - *Cursed Mirror
 // - *Revenant's Rage
@@ -119,10 +118,10 @@ const EVERTORCH = {
   },
 };
 
-const FLASK_OF_LIGHT = {
-  name: "Flask of Light",
+const SUNSTONE = {
+  name: "Sunstone",
   description: "",
-  image: "styles/images/items/flask-of-light.jpg",
+  image: "styles/images/items/sunstone.jpg",
   type: "MAGIC",
   rarity: "Common",
   effect:
@@ -354,24 +353,6 @@ const WRAITHBANE = {
   },
 };
 
-const SUNSTONE = {
-  name: "Sunstone",
-  description: "",
-  image: "styles/images/items/sunstone.jpg",
-  type: "MAGIC",
-  rarity: "Rare",
-  effect:
-    "While attuned to this item undead creatures take damage at the start of battle.",
-  function: () => {
-    if (currentRoom.contents.monsters[0].type === "UNDEAD") {
-      setTimeout(damageMonster(10), 3000);
-      writeToLogItem(LOG_ITEM, "YES", SUNSTONE);
-    } else {
-      return;
-    }
-  },
-};
-
 const AMULET_OF_WHISPERS = {
   name: "Amulet of Whispers",
   description: "",
@@ -381,11 +362,15 @@ const AMULET_OF_WHISPERS = {
   effect:
     "While attuned to this item you can communicate with some undead creatures.",
   function: () => {
-    // Adds Grervil's Room While Wearing
-    catacombRooms.push(SKULL_CHAMBER);
+    if (grervilTracker === null) {
+      // Adds Grervil's Room While Wearing
+      catacombRooms.push(SKULL_CHAMBER);
+    }
 
-    // Adds Grervil's Room While Wearing
-    catacombRooms.push(GRIM_GARRISON);
+    if (commanderTracker === null) {
+      // Adds Commander's Room While Wearing
+      catacombRooms.push(GRIM_GARRISON);
+    }
   },
   unequip: () => {
     // Removes Grervil's Room When Unequipped
@@ -918,8 +903,11 @@ const GRERVILS_HEAD = {
   rarity: "Rare",
   effect: "Head of the talking skull, Grervil.",
   function: () => {
-    // Obtained after meeting Grervil agreeing to help him find his body.
-    writeToLogItem(LOG_ITEM, "YES", GRERVILS_HEAD);
+    if (attunedItems.includes(AMULET_OF_WHISPERS)) {
+      writeToLogItem(LOG_ITEM, "YES", GRERVILS_HEAD, "UNDERSTAND");
+    } else {
+      writeToLogItem(LOG_ITEM, "YES", GRERVILS_HEAD, "WHISPERS");
+    }
   },
 };
 
@@ -1671,10 +1659,9 @@ let beastCommonLoot = [RING_OF_SKITTERING, SILKSTRIDERS];
 
 let beastRareLoot = [PLAGUEWARD_PENDANT, FANGWEAVE_ARMOR];
 
-let humanoidCommonLoot = [FLASK_OF_LIGHT, SHADOWSTEP_BOOTS];
+let humanoidCommonLoot = [SUNSTONE, SHADOWSTEP_BOOTS];
 
 let humanoidRareLoot = [
-  SUNSTONE,
   BRACELET_OF_THE_SERPENT,
   MIST_VEIL_CLOAK,
   TOME_OF_DEVOTION,

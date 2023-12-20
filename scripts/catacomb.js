@@ -1007,7 +1007,6 @@ const SKULL_CHAMBER = {
   roomName: "Skull-filled Chamber",
   description:
     "A chamber draped in an unsettling aura, dominated by sprawling mounds of skulls. Each skull tells a tale of doom and demise.",
-  summary: "",
   backgroundImage: "styles/images/backgrounds/event-rooms/skull-chamber.jpg",
   music: imminentDarkness,
   contents: {
@@ -1015,13 +1014,15 @@ const SKULL_CHAMBER = {
     items: [],
     events: GRERVIL_THE_BODILESS,
   },
+  function: () => {
+    grervilTracker = "STARTED";
+  }
 };
 
 const GRIM_GARRISON = {
   roomName: "Grim Garrison",
   description:
     "Grim Garrison, shrouded in ominous quiet, harbors countless vacant coffins. The once valiant warriors who inhabited them have vanished from their resting place.",
-  summary: "",
   backgroundImage: "styles/images/backgrounds/tier-two/grim-garrison.jpg",
   music: imminentDarkness,
   contents: {
@@ -1029,6 +1030,9 @@ const GRIM_GARRISON = {
     items: [],
     events: FORSAKEN_COMMANDER,
   },
+  function: () => {
+    commanderTracker = "STARTED";
+  }
 };
 
 // ===============================

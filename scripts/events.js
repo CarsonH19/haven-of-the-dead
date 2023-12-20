@@ -512,7 +512,6 @@ const GRERVIL_THE_BODILESS = {
   name: "Grervil the Bodiless",
   eventType: "NPC",
   description: `Emerging from beneath a pile of bones, the talking skull, Grervil, beckons with ghostly whispers. "Adventurer, take me with you. Help me find my wandering body, and the secrets of the catacomb shall be yours."`,
-  summary: "",
   optionOne: "Take",
   optionTwo: "Leave",
   functionOne: () => {
@@ -530,7 +529,7 @@ const GRERVIL_THE_BODILESS = {
           currentRoom.contents.items.push(SKELETON_KEY); // ADD MORE ITEMS FOR REWARD!!!
           playerControlsTimeout(7000);
           useConsumable("Grervil's Head"); // removes item from inventory
-          writeToLogItem(GRERVILS_HEAD, "YES");
+          writeToLogEvent(LOG_NPC_DIALOGUE, "YES", GRERVILS_HEAD);
 
           setTimeout(() => {
             fadeOutAnimation(monsterContainer);
@@ -558,7 +557,7 @@ const GRERVIL_THE_BODILESS = {
 
     setRoomSummary();
     setTimeout(renderRoomSummaryModal, 5000);
-    writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
+    writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
   },
 };
 

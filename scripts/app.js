@@ -3,11 +3,6 @@
 // ===============================
 
 function playerAttackHandler(smite) {
-  // Paladin Passive Ability Checker
-  if (heroChoice === "PALADIN") {
-    paladinRadiantAura();
-  }
-
   criticalHit = checkForCritcalHit();
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
   let totalDamage;
@@ -243,7 +238,7 @@ function specialCooldownHandler(reset) {
     } else if (heroChoice === "ROGUE") {
       specialCooldownCounter = 7;
     } else if (heroChoice === "PRIESTESS") {
-      specialCooldownCounter = 13;
+      specialCooldownCounter = 16;
     }
 
     // ITEM: HALLOWED HOURGLASS - Reduces Cooldown by 1

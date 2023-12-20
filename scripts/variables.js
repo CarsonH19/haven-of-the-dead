@@ -11,9 +11,9 @@ const specialBtn = document.getElementById("special-btn");
 const potionBtn = document.getElementById("potion-btn");
 const fleeBtn = document.getElementById("flee-btn");
 
-let monsterMaxHealth = 100;
+let monsterMaxHealth = null;
 let currentMonsterHealth = monsterMaxHealth;
-let monsterAttackValue = 10;
+let monsterAttackValue = null;
 
 let currentPlayerHealth = null;
 
@@ -22,6 +22,8 @@ const potions = document.getElementById("potionCount");
 potions.textContent = ` x ${potionCounter}`;
 
 let criticalHit;
+let actionCounter = 0;
+
 
 // ===============================
 //         Game Window
@@ -317,6 +319,12 @@ let crimsonCovenantTracker = 0;
 // Ivan the Scoundrel
 let ivanTracker = 0;
 
+// Grervil the Bodiless
+let grervilTracker = null;
+
+// Forsaken Commander
+let commanderTracker = null;
+
 // ===============================
 //        Hero Variables
 // ===============================
@@ -335,7 +343,8 @@ let umbralAssaultTracker = 2;
 let darkenedReprisalTracker = 2;
 
 // Priestess
-// N/A
+let cleansingFlameTracker = 10;
+let burningDevotionTracker = 3;
 
 // ===============================
 //   Boons & Leveling Variables
@@ -346,21 +355,11 @@ let previousExperience;
 let levelCounter = 1;
 
 const levelUpModal = document.getElementById("levelUpModal");
-// const strengthContainer = document.getElementById("strengthContainer");
-// const strengthText = document.getElementById("strengthText");
 const strengthRank = document.getElementById("strengthRank");
-
-// const dexterityContainer = document.getElementById("dexterityContainer");
-// const dexterityText = document.getElementById("dexterityText");
 const dexterityRank = document.getElementById("dexterityRank");
-// const faithContainer = document.getElementById("faithContainer");
-// const faithText = document.getElementById("faithText");
 const faithRank = document.getElementById("faithRank");
-
-// const specialContainer = document.getElementById("specialContainer");
 const specialText = document.getElementById("specialText");
 const specialRank = document.getElementById("specialRank");
-// const passiveContainer = document.getElementById("passiveContainer");
 const passiveText = document.getElementById("passiveText");
 const passiveRank = document.getElementById("passiveRank");
 
@@ -369,8 +368,6 @@ let dexterityBoonRank = 1;
 let faithBoonRank = 1;
 let specialAbilityBoonRank = 1;
 let passiveAbilityBoonRank = 1;
-
-let actionCounter = 0;
 
 // ===============================
 //    Hero Stats Modal Variables
