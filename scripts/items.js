@@ -2597,12 +2597,12 @@ closeTradeBtn.addEventListener("click", () => {
 });
 
 function calculateFavor(itemName, operator) {
+  let trader = "name";
   let itemValue;
   let favor;
 
   // Which Trader?
   if (currentRoom.roomName === "Hag's Hollow") {
-    console.log("HAAAAAG");
     favor = hagFavor;
   } else {
     favor = curatorFavor;
@@ -2647,9 +2647,6 @@ function calculateFavor(itemName, operator) {
       curatorFavor = favor;
     }
 
-    console.log(favor);
-    console.log(hagFavor);
-
     renderTrade();
   }
 
@@ -2672,13 +2669,14 @@ function calculateFavor(itemName, operator) {
       itemValue = 10;
     }
 
-    // Delete Item from Trader's Inventory
-    const index = traderItems.indexOf(itemObject);
-    traderItems.splice(index, 1);
     // Add Item to Player's Inventory
     if (favor >= itemValue) {
-      favor -= itemValue;
+      // Delete Item from Trader's Inventory
+      const index = traderItems.indexOf(itemObject);
+      traderItems.splice(index, 1);
 
+      favor -= itemValue;
+      console.log(favor);
       // Update global favor variable based on the current room
       if (currentRoom.roomName === "Hag's Hollow") {
         hagFavor = favor;
@@ -2689,6 +2687,7 @@ function calculateFavor(itemName, operator) {
       inventoryItems.push(itemObject);
       // writeToLogOther(LOG_OTHER, "YES", "PURCHASE");
     } else {
+      console.log('No favor');
       // writeToLogOther(LOG_OTHER, "YES", "NO FAVOR");
     }
   }
