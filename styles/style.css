@@ -285,15 +285,6 @@ li, ul {
   z-index: 99;
 }
 
-
-/* .inventory-btn {
-  justify-self: flex-end;
-}
-
-.narrative-text {
-  justify-self: center;
-} */
-
 /* 
 ==========================================
           Bottom Content
@@ -1164,11 +1155,104 @@ progress[value]::-moz-progress-bar {
   left: 250%;
 }
 
-
-
 .tooltipText li, 
 .statusTooltipText li {
   list-style: none;
+}
+
+/* 
+==========================================
+             TRADE MODAL
+==========================================
+*/
+
+/* Trade Modal */
+#tradeModal {
+  display: none;
+}
+
+.trade-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items:flex-start;
+  background-color: var(--background);
+  background-image: url(images/skull-texture.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
+  border: 3px solid #888;
+  border-radius: 10px;
+  /* width: 60%;
+  height: 56%; */
+  width: 720px;
+  height: 520px;
+  overflow: auto;
+  padding: 10px;
+}
+
+.trade-modal-top {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0, 30px, 0, 30px;
+}
+
+.trade-modal-bottom {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.trade-modal-bottom h3 {
+  text-align: center;
+}
+
+.trader-items {
+  height: 100%;
+  width: 30%;
+  border: 2px solid red;
+}
+
+.player-items {
+  height: 100%;
+  width: 70%;
+  border: 2px solid red;
+}
+
+#playerItemsBox div, 
+#traderItemsBox div {
+  aspect-ratio: 1;
+  flex-direction: column-reverse;
+  margin: 10px;
+  border: 1px solid var(--header);
+  box-sizing: border-box; 
+  padding: 0px;
+}
+
+#playerItemsBox,
+#traderItemsBox {
+  margin: 0.5vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); /* Set the minimum column width to 150px, but allow them to grow */
+}
+
+#playerItemsBox button,
+#traderItemsBox button {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+  background-size: cover;
+}
+
+#playerItemsBox button:hover,
+#traderItemsBox button:hover {
+  scale: 1.2;
 }
 
 /* 
@@ -1278,8 +1362,6 @@ progress[value]::-moz-progress-bar {
   box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 4.8);
   border-radius: 100px;
   cursor: pointer;
-
-
 }
 
 /* 

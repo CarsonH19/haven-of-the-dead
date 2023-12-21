@@ -576,6 +576,23 @@ const GRERVILS_BODY_EVENT = {
   function: () => {},
 };
 
+const HAG_TRADER = {
+  // !UNFINISHED!
+  name: "The Hag",
+  eventType: "NPC",
+  description: "Welcome, lost souls, to my hollow's embrace. Longing for my cauldron's depths, are you? Bring rare tributes, and my cauldron shall brew you something special.",
+  optionOne: "Trade",
+  optionTwo: "Decline",
+  functionOne: () => {
+    // opens modal with items
+    // trading items adds to hagFavor. This is used to buy items.
+    
+  },
+  functionTwo: () => {
+    // writeToLogEvent don’t be greedy
+  },
+};
+
 // const TRADER_BAZRIM = {
 //   // !UNFINISHED!
 //   name: "Trader Bazrim",

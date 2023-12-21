@@ -1035,6 +1035,20 @@ const GRIM_GARRISON = {
   }
 };
 
+const HAGS_HOLLOW = {
+  roomName: "Hag's Hollow",
+  description: `Hag's Hollow,  hidden deep within the catacomb's bowels, glows eerily from the bubbling cauldron within. Thick fog billows from the cauldron and hangs in the air, filling the room with a nauseating smell. The hag, with her cauldron, offers her dark expertise, welcoming those who bring rare ingredients to trade.`,
+  backgroundImage: "styles/images/backgrounds/tier-two/grim-garrison.jpg",
+  music: imminentDarkness,
+  contents: {
+    monsters: [],
+    items: [],
+    events: HAG_TRADER,
+  },
+  // function: () => {
+  // }
+};
+
 // ===============================
 //         Boss Rooms
 // ===============================

@@ -1437,7 +1437,7 @@ const GUIDING_LIGHT = {
   image: "styles/images/items/guiding-light.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
-  rarity: "Common",
+  rarity: "Rare",
   logDetail: "WISP",
   effect:
     "When this item is used a light will guide you to the nearest Candlelight Shrine.",
@@ -1584,7 +1584,8 @@ const RESTLESS_WISP = {
   type: "CONSUMABLE",
   rarity: "Rare",
   logDetail: "WISP",
-  effect: "When this item is used a wisp will guide you to Fallen Warriors' Vale.",
+  effect:
+    "When this item is used a wisp will guide you to Fallen Warriors' Vale.",
   status: "Guiding you to Fallen Warrior's Vale.",
   duration: null,
   function: () => {
@@ -1828,7 +1829,7 @@ function useConsumable(consumable) {
 
   clearInventory();
   renderInventory();
-  updatePlayerTrackers();
+  updateTotalStats();
 }
 
 function lootItems(lootGroup) {
@@ -2113,7 +2114,7 @@ function statusEffectHandler(item) {
           currentRoom.contents.monsters[0] === CULTIST ||
           currentRoom.contents.monsters[0] === FIENDSWORN_CULTIST
         ) {
-          fadeOutAnimation(monsterContainer, 0000);
+          fadeOutAnimation(monsterContainer);
           setTimeout(() => {
             checkForMonsters();
             monsterContainer.style.display = "none";
@@ -2431,3 +2432,272 @@ inventoryModal.addEventListener("click", (event) => {
     }
   }
 });
+
+hagItems = [POTION, POTION, POTION];
+curatorItems = [HOLY_RELIC];
+
+const traderItemsBox = document.getElementById("traderItemsBox");
+const playerItemsBox = document.getElementById("playerItemsBox");
+const favorTracker = document.getElementById("favorTracker");
+const traderName = document.getElementById("traderName");
+let traderItems = [];
+
+function renderTrade() {
+  let itemValue;
+
+  // Open Modal
+  tradeModal.style.display = "block";
+
+  // Which Trader?
+  if (currentRoom.roomName === "Hag's Hollow") {
+    favorTracker.textContent = hagFavor;
+    traderName.textContent = "Hag's Items";
+    traderItems = hagItems;
+    console.log(traderItems);
+  } else {
+    favorTracker.textContent = curatorFavor;
+    traderItems = curatorItems;
+    traderName.textContent = "Curator's Items";
+  }
+
+  function renderItems(container, items) {
+    const renderedItems = {};
+
+    for (let i = 0; i < items.length; i++) {
+      const itemName = items[i].name;
+
+      // Check if the item has already been rendered
+      if (renderedItems.hasOwnProperty(itemName)) {
+        // Increment the counter for this item
+        renderedItems[itemName]++;
+      } else {
+        // First time encountering this item, initialize the counter
+        renderedItems[itemName] = 1;
+
+        const itemBox = document.createElement("div");
+        itemBox.classList.add("itemTooltip");
+        const tooltipText = document.createElement("ul");
+        tooltipText.classList.add("tooltipText");
+        itemBox.appendChild(tooltipText);
+
+        const tooltipTextName = document.createElement("li");
+        const tooltipTextRarity = document.createElement("li");
+        const tooltipTextEffect = document.createElement("li");
+        const tooltipTextFavor = document.createElement("li");
+        tooltipTextName.textContent = `${items[i].name}`;
+        tooltipTextName.style.fontWeight = "800";
+        tooltipTextRarity.textContent = `${items[i].rarity}`;
+        tooltipTextEffect.textContent = `${items[i].effect}`;
+
+        if (items[i].rarity === "Epic") {
+          tooltipTextRarity.classList.add("epic-item");
+          itemValue = 50;
+        } else if (items[i].rarity === "Rare") {
+          tooltipTextRarity.classList.add("rare-item");
+          itemValue = 25;
+        } else {
+          tooltipTextRarity.classList.add("common-item");
+          itemValue = 10;
+        }
+
+        tooltipTextFavor.textContent = `Favor: ${itemValue}`;
+        tooltipTextFavor.style.fontWeight = 900;
+
+        const itemButton = document.createElement("button");
+        itemButton.setAttribute("id", itemName);
+
+        if (items[i].image) {
+          itemButton.style.backgroundImage = `url('${items[i].image}')`;
+          itemButton.style.backgroundSize = "cover";
+          itemButton.style.color = "lightgrey";
+        } else {
+          itemButton.textContent = itemName;
+        }
+
+        tooltipText.appendChild(tooltipTextName);
+        tooltipText.appendChild(tooltipTextRarity);
+        tooltipText.appendChild(tooltipTextEffect);
+        tooltipText.appendChild(tooltipTextFavor);
+        itemBox.appendChild(itemButton);
+
+        if (items === traderItems) {
+          container.appendChild(itemBox);
+        }
+
+        if (
+          items === inventoryItems &&
+          items[i].type === "CONSUMABLE" &&
+          items[i].name !== "Health Potion" &&
+          items[i].name !== "Whispering Skull"
+        ) {
+          container.appendChild(itemBox);
+        }
+      }
+    }
+
+    // Display counts for each item
+    for (const itemName in renderedItems) {
+      const itemButton = document.getElementById(itemName);
+
+      // Ensure that the itemButton is found in the document
+      if (itemButton) {
+        // Create a separate span element for the counter
+        const counterSpan = document.createElement("span");
+        counterSpan.classList.add("item-counter");
+
+        // Append counter to the item name if there's more than one instance
+        if (renderedItems[itemName] > 1) {
+          counterSpan.textContent = `x${renderedItems[itemName]}`;
+          itemButton.appendChild(counterSpan); // Append counter to the button
+        }
+      }
+    }
+  }
+
+  document.querySelectorAll(".itemTooltip").forEach(function (element) {
+    element.addEventListener("mouseover", function () {
+      const tooltipText = this.querySelector(".tooltipText");
+      tooltipText.style.visibility = "visible";
+      tooltipText.style.opacity = "1";
+    });
+
+    element.addEventListener("mouseout", function () {
+      const tooltipText = this.querySelector(".tooltipText");
+      tooltipText.style.visibility = "hidden";
+      tooltipText.style.opacity = "0";
+    });
+  });
+
+  renderItems(playerItemsBox, inventoryItems);
+  renderItems(traderItemsBox, traderItems);
+}
+
+tradeModal.addEventListener("click", (event) => {
+  const buttons = document.getElementsByTagName("button");
+
+  for (let i = 0; i < buttons.length; i++) {
+    // Trader Items Logic
+    if (traderItemsBox.contains(event.target) && event.target === buttons[i]) {
+      calculateFavor(buttons[i].id, "SUBTRACT");
+    }
+
+    // Player Items Logic
+    if (playerItemsBox.contains(event.target) && event.target === buttons[i]) {
+      calculateFavor(buttons[i].id, "ADD");
+    }
+
+    // Stop event propagation to prevent closing the modal
+    event.stopPropagation();
+  }
+});
+
+closeTradeBtn.addEventListener("click", () => {
+  tradeModal.style.display = "none";
+  clearTrade();
+});
+
+function calculateFavor(itemName, operator) {
+  let itemValue;
+  let favor;
+
+  // Which Trader?
+  if (currentRoom.roomName === "Hag's Hollow") {
+    console.log("HAAAAAG");
+    favor = hagFavor;
+  } else {
+    favor = curatorFavor;
+  }
+
+  switch (operator) {
+    case "ADD":
+      console.log("getFavor Called");
+      getFavor(itemName);
+      break;
+
+    case "SUBTRACT":
+      console.log("useFavor Called");
+      useFavor(itemName);
+      break;
+  }
+
+  // Giving an Item
+  function getFavor(itemName) {
+    let itemObject = inventoryItems.find((inv) => inv.name === itemName);
+
+    console.log(itemObject);
+
+    if (itemObject.rarity === "Epic") {
+      itemValue = 50;
+    } else if (itemObject.rarity === "Rare") {
+      itemValue = 25;
+    } else {
+      itemValue = 10;
+    }
+
+    // Delete Item from inventory
+    const index = inventoryItems.indexOf(itemObject);
+    inventoryItems.splice(index, 1);
+    // Add Item favor to total favor;
+    favor += itemValue;
+
+    // Update global favor variable based on the current room
+    if (currentRoom.roomName === "Hag's Hollow") {
+      hagFavor = favor;
+    } else {
+      curatorFavor = favor;
+    }
+
+    console.log(favor);
+    console.log(hagFavor);
+
+    renderTrade();
+  }
+
+  // Gaining an Item
+  function useFavor(itemName) {
+    let itemObject;
+
+    // Select the appropriate trader items based on the current room
+    if (currentRoom.roomName === "Hag's Hollow") {
+      itemObject = hagItems.find((inv) => inv.name === itemName);
+    } else {
+      itemObject = curatorItems.find((inv) => inv.name === itemName);
+    }
+
+    if (itemObject.rarity === "Epic") {
+      itemValue = 50;
+    } else if (itemObject.rarity === "Rare") {
+      itemValue = 25;
+    } else {
+      itemValue = 10;
+    }
+
+    // Delete Item from Trader's Inventory
+    const index = traderItems.indexOf(itemObject);
+    traderItems.splice(index, 1);
+    // Add Item to Player's Inventory
+    if (favor >= itemValue) {
+      favor -= itemValue;
+
+      // Update global favor variable based on the current room
+      if (currentRoom.roomName === "Hag's Hollow") {
+        hagFavor = favor;
+      } else {
+        curatorFavor = favor;
+      }
+
+      inventoryItems.push(itemObject);
+      // writeToLogOther(LOG_OTHER, "YES", "PURCHASE");
+    } else {
+      // writeToLogOther(LOG_OTHER, "YES", "NO FAVOR");
+    }
+  }
+
+  clearTrade();
+  renderTrade();
+}
+
+function clearTrade() {
+  playerItemsBox.textContent = "";
+  traderItemsBox.textContent = "";
+}

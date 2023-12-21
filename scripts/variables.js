@@ -70,6 +70,9 @@ const eventModal = document.getElementById("eventModal");
 const eventButtonOne = document.getElementById("eventButtonOne");
 const eventButtonTwo = document.getElementById("eventButtonTwo");
 
+const tradeModal = document.getElementById("tradeModal");
+const closeTradeBtn = document.getElementById("closeTradeBtn");
+
 // ===============================
 //        Choose Hero Modal
 // ===============================
@@ -324,6 +327,11 @@ let grervilTracker = null;
 
 // Forsaken Commander
 let commanderTracker = null;
+
+// Traders 
+let hagFavor = 0;
+let curatorFavor = 0;
+
 
 // ===============================
 //        Hero Variables
