@@ -584,6 +584,14 @@ function togglePlayerControls() {
     potionBtn.disabled = false;
   }
 
+  if (
+    currentRoom.roomName === "Hag's Hollow" ||
+    currentRoom.roomName === "Curator's Curio"
+  ) {
+    inventoryButton.disabled = false;
+    potionBtn.disabled = false;
+  }
+
   if (potionCounter <= 0) {
     potionBtn.disabled = true;
   }
@@ -723,11 +731,10 @@ function closeRoomSummaryModal() {
   roomSummaryModal.style.display = "none";
 
   // Adds Attack Power to Gloryforged Blade
-  if ((currentRoom.roomName === "Fallen Warriors' Vale")) {
+  if (currentRoom.roomName === "Fallen Warriors' Vale") {
     gloryforgedTracker += 4;
-    GLORYFORGED_BLADE.effect = `When attuned to this item, your attack is increased by ${gloryforgedTracker}. This blade becomes more powerful with each instance of glory found in Fallen Warriors' Vale.`,
-
-    writeToLogItem(LOG_ITEM, "YES", GLORYFORGED_BLADE);
+    (GLORYFORGED_BLADE.effect = `When attuned to this item, your attack is increased by ${gloryforgedTracker}. This blade becomes more powerful with each instance of glory found in Fallen Warriors' Vale.`),
+      writeToLogItem(LOG_ITEM, "YES", GLORYFORGED_BLADE);
   }
 
   // Checks if Forsaken Commander's Quest is Complete
@@ -1014,7 +1021,7 @@ continueButton.addEventListener("click", () => {
   updatePlayerTrackers();
 
   setTimeout(() => {
-    // ITEM: Wisps
+    // Wisp Logic
     if (guidingLightTracker === "ARRIVE") {
       currentRoom = CANDLELIGHT_SHRINE;
       renderCurrentRoom(CANDLELIGHT_SHRINE);
@@ -1031,6 +1038,14 @@ continueButton.addEventListener("click", () => {
       currentRoom = FALLEN_WARRIORS_VALE;
       renderCurrentRoom(FALLEN_WARRIORS_VALE);
       restlessWispTracker = null;
+    } else if (greedyWispTracker === "ARRIVE") {
+      currentRoom = CURATORS_CURIO;
+      renderCurrentRoom(CURATORS_CURIO);
+      greedyWispTracker = null;
+    } else if (wickedWispTracker === "ARRIVE") {
+      currentRoom = HAGS_HOLLOW;
+      renderCurrentRoom(HAGS_HOLLOW);
+      wickedWispTracker = null;
     } else {
       removeCurrentRoom();
       getRandomRoom(catacombRooms);

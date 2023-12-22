@@ -1236,7 +1236,103 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `You unearthed Grervil's skeletal body. 'My form returns,' Grervil hisses. With an unsettling gratitude, he bestows a wisp before reattaching his head and wandering into the catacombs's depths.`;
       } else if (dataOne === "IVANS CACHE AMBUSH") {
         newEntry.textContent = `Ivan and his accomplices emerge, encircling you like prey in ambush. Peril looms in their treacherous laughter.`;
-      } 
+      } else if (
+        currentRoom.roomName === "Hag's Hollow" &&
+        dataOne === "GET FAVOR"
+      ) {
+        let narration = Math.floor(Math.random() * 7) + 1;
+        if (narration === 1) {
+          newEntry.textContent = `"Ah, a rare gift. This will infuse my brew with shadows darker than your fears."`;
+        } else if (narration === 2) {
+          newEntry.textContent = `"A wise choice. Your offering will dance with the spirits in my cauldron."`;
+        } else if (narration === 3) {
+          newEntry.textContent = `"This ingredient? A taste of the forbidden. My cauldron hungers for such essence."`;
+        } else if (narration === 4) {
+          newEntry.textContent = `"Interesting... this will add a twist of malevolence to the concoction."`;
+        } else if (narration === 5) {
+          newEntry.textContent = `"Ah, the stench of fear clings to this. Perfect for what I have in mind."`;
+        } else if (narration === 6) {
+          newEntry.textContent = `"A rare find indeed. This will lend a touch of chaos to my elixir."`;
+        } else if (narration === 7) {
+          newEntry.textContent = `"A venomous ingredient! My cauldron shall concoct a brew that bites the soul."`;
+        }
+      } else if (
+        currentRoom.roomName === "Hag's Hollow" &&
+        dataOne === "USE FAVOR"
+      ) {
+        let narration = Math.floor(Math.random() * 8) + 1;
+        if (narration === 1) {
+          newEntry.textContent = `"Drink, brave one. Let the shadows within this brew weave their secrets through your veins."`;
+        } else if (narration === 2) {
+          newEntry.textContent = `"A sip of my creation. May it grant you strength born of the darkest abyss."`;
+        } else if (narration === 3) {
+          newEntry.textContent = `"Sip carefully, for within this brew lies the essence of ancient curses and forgotten spells."`;
+        } else if (narration === 4) {
+          newEntry.textContent = `"This potion, a blend of nightmares and moonlit whispers, is yours to command."`;
+        } else if (narration === 5) {
+          newEntry.textContent = `"Behold, a concoction brewed with the essence of the forbidden. Drink, and embrace its power."`;
+        } else if (narration === 6) {
+          newEntry.textContent = `"From my cauldron to your lips, may this elixir be a boon on your perilous journey."`;
+        } else if (narration === 7) {
+          newEntry.textContent = `"This potion, a dance of malevolence and magic. Let it guide you through the veil of the unknown."`;
+        } else if (narration === 8) {
+          newEntry.textContent = `"Savor the taste of destiny in this brew. Its secrets may be your salvation or your doom."`;
+        }
+      } else if (
+        currentRoom.roomName === "Hag's Hollow" &&
+        dataOne === "NO FAVOR"
+      ) {
+        let narration = Math.floor(Math.random() * 6) + 1;
+        if (narration === 1) {
+          newEntry.textContent = `"Ah, sweetling, the cauldron's embrace is reserved for those who prove their loyalty. Seek rare offerings to win my favor."`;
+        } else if (narration === 2) {
+          newEntry.textContent = `"My cauldron's brews are not freely given. Bring more, and you may earn a taste."`;
+        } else if (narration === 3) {
+          newEntry.textContent = `"Bold, but not bold enough. The cauldron's gifts require a deeper bond. Return with greater offerings, and we shall see."`;
+        } else if (narration === 4) {
+          newEntry.textContent = `"Impatience begets nothing. Earn my favor with more treasures, and the cauldron's mysteries may unfold for you."`;
+        } else if (narration === 5) {
+          newEntry.textContent = `"The cauldron's trust is not easily gained. Prove your dedication with richer tributes."`;
+        } else if (narration === 6) {
+          newEntry.textContent = `"The cauldron's depths remain veiled to those without sufficient favor. Return with greater offerings, and the shadows may part."`;
+        }
+      } else if (
+        currentRoom.roomName === "Curator's Curio" &&
+        dataOne === "GET FAVOR"
+      ) {
+        let narration = Math.floor(Math.random() * 6) + 1;
+        if (narration === 1) {
+        } else if (narration === 2) {
+        } else if (narration === 3) {
+        } else if (narration === 4) {
+        } else if (narration === 5) {
+        } else if (narration === 6) {
+        }
+      } else if (
+        currentRoom.roomName === "Curator's Curio" &&
+        dataOne === "USE FAVOR"
+      ) {
+        let narration = Math.floor(Math.random() * 6) + 1;
+        if (narration === 1) {
+        } else if (narration === 2) {
+        } else if (narration === 3) {
+        } else if (narration === 4) {
+        } else if (narration === 5) {
+        } else if (narration === 6) {
+        }
+      } else if (
+        currentRoom.roomName === "Curator's Curio" &&
+        dataOne === "NO FAVOR"
+      ) {
+        let narration = Math.floor(Math.random() * 6) + 1;
+        if (narration === 1) {
+        } else if (narration === 2) {
+        } else if (narration === 3) {
+        } else if (narration === 4) {
+        } else if (narration === 5) {
+        } else if (narration === 6) {
+        }
+      }
       break;
 
     case LOG_NPC_OPTION_ONE:
@@ -1249,7 +1345,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `"You aid Graverobber Earver's in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their onslaught, he meets his untimely demise, leaving you to face these undead guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Released from captivity, the scoundrel breathes thanks, but a looming arachnid descends, hungry eyes fixed on its newfound prey.`;
-      } else if (currentRoom.name = "Ivan's Hidden Cache") {
+      } else if ((currentRoom.name = "Ivan's Hidden Cache")) {
         newEntry.textContent = `As the key turns, a malevolent hiss escapes just before the chest explodes in an eruption of flames. Burning and disoriented you realize the scoundrel's gratitude was a ruse.`;
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. They turn towards you, their hollow sockets fixed on your bold presence.`;
@@ -1540,7 +1636,7 @@ function writeToLogStatusEffect(logType, narrate, dataOne, dataTwo) {
 //                         OTHER
 // ==============================================================
 
-function writeToLogOther(logType, narrate, dataOne) {
+function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
   let newEntry = document.createElement("li");
 
   switch (logType) {
@@ -1553,6 +1649,30 @@ function writeToLogOther(logType, narrate, dataOne) {
         newEntry.textContent = `The Undying Warband's formation is broken.`;
       } else if (dataOne === AEGIS_OF_THE_FALLEN) {
         newEntry.textContent = `"You have freed my legionnaires from the Baron's undying curse. My warriors can finally find peace, and for that, I am immensely grateful. Accept this aegis; may it shield you when you need it most, as it did for me long ago."`;
+      } else if (
+        currentRoom.roomName === "Hag's Hollow" &&
+        dataOne === "GET FAVOR"
+      ) {
+        newEntry.textContent = `You give the Hag a ${dataTwo.name} from your inventory and earn ${dataThree} favor.`;
+      } else if (currentRoom.roomName === "" && dataOne === "GET FAVOR") {
+        newEntry.textContent = `You give the Curator a ${dataTwo.name} from your inventory and earn ${dataThree} favor.`;
+      } else if (
+        currentRoom.roomName === "Hag's Hollow" &&
+        dataOne === "USE FAVOR"
+      ) {
+        newEntry.textContent = `You expend ${dataThree} and the Hag gives you a ${dataTwo.name}.`;
+      } else if (
+        currentRoom.roomName === "Curator's Curio" &&
+        dataOne === "GET FAVOR"
+      ) {
+        newEntry.textContent = `You give the Curator the ${dataTwo.name} from your inventory and earn ${dataThree} favor.`;
+      } else if (
+        currentRoom.roomName === "Curator's Curio" &&
+        dataOne === "USE FAVOR"
+      ) {
+        newEntry.textContent = `You expend ${dataThree} and the Curator gives you the ${dataTwo.name}.`;
+      } else if (dataOne === "NO FAVOR") {
+        newEntry.textContent = `You do not have enough favor for that item.`;
       }
       break;
   }

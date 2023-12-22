@@ -9,7 +9,7 @@
 // - *Charm of Healing
 // - Shadowstep Boots
 // - *Ring of Skittering
-// - *Titan's Femur
+// - *Bone Bludgeon
 // - Holy Relic
 // - *Ritual Blade - Crimson Covenant
 
@@ -38,7 +38,7 @@
 // - Darkguard Trinket
 // - *Hallowed Hourglass
 // - *Aegis of the Fallen - Forsaken Commander
-// - *War Torn Banner - Forsaken Commander
+// - *Gloryforged Blade
 
 // Bonevault Items
 // - Bonemail
@@ -76,6 +76,7 @@
 // - *Cursed Grimoire - Scholar Hendra
 // - *Cache Key - Ivan the Scoundrel
 // - *Grervil's Head - Grervil the Bodiless
+// - *War Torn Banner - Forsaken Commander
 
 // Candles
 // - *Warding Candle
@@ -90,6 +91,7 @@
 // - *Unholy Wisp
 // - *Restless Wisp
 // - *Wicked Wisp
+// - *Greedy Wisp
 
 // ===============================
 //        COMMON ITEMS
@@ -442,7 +444,7 @@ const LAUGHING_COFFIN_COIN = {
   type: "MISC",
   rarity: "Rare",
   effect:
-    "Taken from Ivan the Scoundrel, it may be of some value to other scoundrels.",
+    "Carried by scoundrels, this coin grants access to the infamous Laughing Coffin Tavern here in the catacomb.",
   function: () => {
     writeToLogItem(LOG_ITEM, LAUGHING_COFFIN_COIN);
   },
@@ -814,7 +816,7 @@ const RATTLEBONE_WHISTLE = {
       let randomNumber = Math.round(Math.random() * 10);
 
       if (randomNumber >= 7) {
-        fadeOutAnimation(monsterContainer, 0000);
+        fadeOutAnimation(monsterContainer);
         setTimeout(() => {
           monsterContainer.style.display = "none";
           playerControlsTimeout(2000);
@@ -936,7 +938,7 @@ const POTION = {
   description: "A small bottle of glowing red liquid.",
   image: "styles/images/items/potion.jpg",
   type: "CONSUMABLE",
-  rarity: "Common",
+  rarity: "Rare",
   effect: "Restores 30 health points and can be used during combat.",
   soundEffect: gulpingWater24,
   function: () => {
@@ -1479,7 +1481,7 @@ const GUIDING_LIGHT = {
       wisp.classList.add("orb");
 
       const root = document.documentElement;
-      root.style.setProperty("--orb", "#fff3b4");
+      root.style.setProperty("--orb", "#ffffed");
 
       renderStatusEffects(GUIDING_LIGHT);
     }
@@ -1522,7 +1524,7 @@ const ROWDY_WISP = {
         } else {
           rowdyWispTracker = "GUIDING";
         }
-      }, 15000);
+      }, 3000);
 
       wisp.classList.add("orb");
 
@@ -1565,7 +1567,7 @@ const UNHOLY_WISP = {
       } else {
         unholyWispTracker = "GUIDING";
       }
-    }, 15000);
+    }, 3000);
 
     wisp.classList.add("orb");
 
@@ -1573,6 +1575,92 @@ const UNHOLY_WISP = {
     root.style.setProperty("--orb", "#bf3637");
 
     renderStatusEffects(UNHOLY_WISP);
+  },
+};
+
+const WICKED_WISP = {
+  name: "Wicked Wisp",
+  image: "styles/images/items/wicked-wisp.jpg",
+  soundEffect: ghostBreathWithReverb,
+  type: "CONSUMABLE",
+  rarity: "Rare",
+  logDetail: "WISP",
+  effect: "When this item is used a wisp will guide you to Hag's Hollow.",
+  status: "Guiding you to Hag's Hollow.",
+  duration: null,
+  function: () => {
+    const wisp = document.querySelector(".wisp");
+    let randomNumber = Math.round(Math.random() * 5) + 1;
+    let wispDuration = roomCounter + randomNumber;
+    HAGS_HOLLOW.contents.events = HAG_TRADER;
+    WICKED_WISP.duration = "Searching";
+    wispActive = "ACTIVE";
+
+    let wickedWispInterval = setInterval(() => {
+      WICKED_WISP.duration = `Duration: ${wispDuration - roomCounter} Rooms`;
+      if (roomCounter >= wispDuration) {
+        wisp.classList.remove("orb");
+        WICKED_WISP.duration = null;
+        wickedWispTracker = "ARRIVE";
+        wispActive = null;
+        clearInterval(wickedWispInterval);
+      } else {
+        wickedWispTracker = "GUIDING";
+      }
+    }, 3000);
+
+    wisp.classList.add("orb");
+
+    const root = document.documentElement;
+    root.style.setProperty("--orb", "#824ecc");
+
+    renderStatusEffects(WICKED_WISP);
+  },
+};
+
+const GREEDY_WISP = {
+  name: "Greedy Wisp",
+  description: "",
+  image: "styles/images/items/guiding-light.jpg",
+  soundEffect: ghostBreathWithReverb,
+  type: "CONSUMABLE",
+  rarity: "Rare",
+  logDetail: "WISP",
+  effect: "When this item is used a wisp will guide you to Curator's Curio",
+  status: "Guiding you to Curator's Curio.",
+  duration: null,
+  function: () => {
+    const wisp = document.querySelector(".wisp");
+    let randomNumber = Math.round(Math.random() * 5) + 1;
+    let itemDuration = roomCounter + randomNumber;
+    CURATORS_CURIO.contents.events = CURATOR_TRADER;
+    GREEDY_WISP.duration = "Searching";
+    wispActive = "ACTIVE";
+
+    let greedyWispnterval = setInterval(() => {
+      if (itemDuration - roomCounter > 1) {
+        GREEDY_WISP.duration = `Duration: ${itemDuration - roomCounter} Rooms`;
+      } else {
+        GREEDY_WISP.duration = `Duration: ${itemDuration - roomCounter} Room`;
+      }
+
+      if (roomCounter >= itemDuration) {
+        greedyWispTracker = "ARRIVE";
+        wisp.classList.remove("orb");
+        GREEDY_WISP.duration = null;
+        wispActive = null;
+        clearInterval(greedyWispnterval);
+      } else {
+        greedyWispTracker = "GUIDING";
+      }
+    }, 3000);
+
+    wisp.classList.add("orb");
+
+    const root = document.documentElement;
+    root.style.setProperty("--orb", "#fff3b4");
+
+    renderStatusEffects(GREEDY_WISP);
   },
 };
 
@@ -1609,7 +1697,7 @@ const RESTLESS_WISP = {
       } else {
         restlessWispTracker = "GUIDING";
       }
-    }, 5000);
+    }, 3000);
 
     wisp.classList.add("orb");
 
@@ -1625,6 +1713,33 @@ const RESTLESS_WISP = {
 // ===============================
 
 let inventoryItems = [GUIDING_LIGHT, POTION, POTION, POTION];
+
+let commonCuratorArray = [
+  EVERTORCH,
+  SUNSTONE,
+  CHARM_OF_HEALING,
+  SHADOWSTEP_BOOTS,
+  BONE_BLUDGEON,
+  HOLY_RELIC,
+  RING_OF_SKITTERING,
+];
+
+let rareCuratorArray = [
+  MIST_VEIL_CLOAK,
+  CURSED_MIRROR,
+  REVENANTS_RAGE,
+  PLAGUEWARD_PENDANT,
+  GHOSTSHROUD_TALISMAN,
+  TOXINWEAVE_MASK,
+  SILKSTRIDERS,
+  CHILLBREAKER_BAND,
+  BERSERKER_PAULDRON,
+  TOME_OF_DEVOTION,
+  BRACELET_OF_THE_SERPENT,
+  FANGWEAVE_ARMOR,
+];
+
+let epicCuratorArray = [SOUL_JAR, DARKGUARD_TRINKET, HALLOWED_HOURGLASS];
 
 let candleItems = [
   SOOTHING_CANDLE,
@@ -2433,8 +2548,17 @@ inventoryModal.addEventListener("click", (event) => {
   }
 });
 
-hagItems = [POTION, POTION, POTION];
-curatorItems = [HOLY_RELIC];
+hagItems = [
+  POTION,
+  POTION,
+  POTION,
+  BONE_MARROW_SOUP,
+  BONE_MARROW_SOUP,
+  BONE_MARROW_SOUP,
+  BLACKHEART_BREW,
+  BLOODSTONE,
+];
+curatorItems = [];
 
 const traderItemsBox = document.getElementById("traderItemsBox");
 const playerItemsBox = document.getElementById("playerItemsBox");
@@ -2447,18 +2571,6 @@ function renderTrade() {
 
   // Open Modal
   tradeModal.style.display = "block";
-
-  // Which Trader?
-  if (currentRoom.roomName === "Hag's Hollow") {
-    favorTracker.textContent = hagFavor;
-    traderName.textContent = "Hag's Items";
-    traderItems = hagItems;
-    console.log(traderItems);
-  } else {
-    favorTracker.textContent = curatorFavor;
-    traderItems = curatorItems;
-    traderName.textContent = "Curator's Items";
-  }
 
   function renderItems(container, items) {
     const renderedItems = {};
@@ -2524,15 +2636,50 @@ function renderTrade() {
           container.appendChild(itemBox);
         }
 
-        if (
-          items === inventoryItems &&
-          items[i].type === "CONSUMABLE" &&
-          items[i].name !== "Health Potion" &&
-          items[i].name !== "Whispering Skull"
-        ) {
-          container.appendChild(itemBox);
+        // Which Trader?
+        if (currentRoom.roomName === "Hag's Hollow") {
+          favorTracker.textContent = hagFavor;
+          traderName.textContent = "Hag's Items";
+          traderItems = hagItems;
+
+          if (
+            items === inventoryItems &&
+            items[i].type === "CONSUMABLE" &&
+            items[i].name !== "Health Potion" &&
+            items[i].name !== "Whispering Skull"
+          ) {
+            container.appendChild(itemBox);
+          }
+
+        } else if (currentRoom.roomName === "Curator's Curio") {
+          favorTracker.textContent = curatorFavor;
+          traderItems = curatorItems;
+          traderName.textContent = "Curator's Items";
+
+          if (
+            items === inventoryItems &&
+            items[i].type === "MAGIC"
+          ) {
+            container.appendChild(itemBox);
+          }
         }
+
+        
       }
+
+      document.querySelectorAll(".itemTooltip").forEach(function (element) {
+        element.addEventListener("mouseover", function () {
+          const tooltipText = this.querySelector(".tooltipText");
+          tooltipText.style.visibility = "visible";
+          tooltipText.style.opacity = "1";
+        });
+
+        element.addEventListener("mouseout", function () {
+          const tooltipText = this.querySelector(".tooltipText");
+          tooltipText.style.visibility = "hidden";
+          tooltipText.style.opacity = "0";
+        });
+      });
     }
 
     // Display counts for each item
@@ -2553,20 +2700,6 @@ function renderTrade() {
       }
     }
   }
-
-  document.querySelectorAll(".itemTooltip").forEach(function (element) {
-    element.addEventListener("mouseover", function () {
-      const tooltipText = this.querySelector(".tooltipText");
-      tooltipText.style.visibility = "visible";
-      tooltipText.style.opacity = "1";
-    });
-
-    element.addEventListener("mouseout", function () {
-      const tooltipText = this.querySelector(".tooltipText");
-      tooltipText.style.visibility = "hidden";
-      tooltipText.style.opacity = "0";
-    });
-  });
 
   renderItems(playerItemsBox, inventoryItems);
   renderItems(traderItemsBox, traderItems);
@@ -2604,8 +2737,10 @@ function calculateFavor(itemName, operator) {
   // Which Trader?
   if (currentRoom.roomName === "Hag's Hollow") {
     favor = hagFavor;
-  } else {
+    trader = "Hag";
+  } else if (currentRoom.roomName === "Curator's Curio") {
     favor = curatorFavor;
+    trader = "Curator";
   }
 
   switch (operator) {
@@ -2623,8 +2758,6 @@ function calculateFavor(itemName, operator) {
   // Giving an Item
   function getFavor(itemName) {
     let itemObject = inventoryItems.find((inv) => inv.name === itemName);
-
-    console.log(itemObject);
 
     if (itemObject.rarity === "Epic") {
       itemValue = 50;
@@ -2648,16 +2781,16 @@ function calculateFavor(itemName, operator) {
     }
 
     renderTrade();
+    writeToLogOther(LOG_OTHER, null, "GET FAVOR", itemObject, itemValue);
+    writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "GET FAVOR");
   }
 
   // Gaining an Item
   function useFavor(itemName) {
     let itemObject;
-
-    // Select the appropriate trader items based on the current room
     if (currentRoom.roomName === "Hag's Hollow") {
       itemObject = hagItems.find((inv) => inv.name === itemName);
-    } else {
+    } else if (currentRoom.roomName === "Curator's Curio") {
       itemObject = curatorItems.find((inv) => inv.name === itemName);
     }
 
@@ -2676,19 +2809,18 @@ function calculateFavor(itemName, operator) {
       traderItems.splice(index, 1);
 
       favor -= itemValue;
-      console.log(favor);
       // Update global favor variable based on the current room
       if (currentRoom.roomName === "Hag's Hollow") {
         hagFavor = favor;
-      } else {
+      } else if (currentRoom.roomName === "Curator's Curio") {
         curatorFavor = favor;
       }
 
       inventoryItems.push(itemObject);
-      // writeToLogOther(LOG_OTHER, "YES", "PURCHASE");
+      writeToLogOther(LOG_OTHER, null, "USE FAVOR", itemObject, itemValue);
+      writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "USE FAVOR");
     } else {
-      console.log('No favor');
-      // writeToLogOther(LOG_OTHER, "YES", "NO FAVOR");
+      writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "NO FAVOR");
     }
   }
 

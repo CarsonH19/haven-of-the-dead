@@ -287,10 +287,10 @@ const IVAN_THE_SCOUNDREL = {
     currentRoom.contents.monsters.push(BROODMOTHER);
     // let addRoom = roomCounter + 5;
     // let ivanInterval = setInterval(() => {
-      // if (roomCounter > addRoom) {
-        catacombRooms.push(IVANS_CACHE);
-      //   clearInterval(ivanInterval);
-      // }
+    // if (roomCounter > addRoom) {
+    catacombRooms.push(IVANS_CACHE);
+    //   clearInterval(ivanInterval);
+    // }
     // }, 60000);
 
     setRoomSummary();
@@ -301,14 +301,14 @@ const IVAN_THE_SCOUNDREL = {
     IVAN_THE_SCOUNDREL.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
     let addRoom = roomCounter + 5;
     let ivanInterval = setInterval(() => {
-    if (roomCounter > addRoom) {
-    catacombRooms.push(
-      IVAN_TRAP_ROOM_ONE,
-      IVAN_TRAP_ROOM_TWO,
-      IVAN_TRAP_ROOM_THREE
-    );
-    clearInterval(ivanInterval);
-    }
+      if (roomCounter > addRoom) {
+        catacombRooms.push(
+          IVAN_TRAP_ROOM_ONE,
+          IVAN_TRAP_ROOM_TWO,
+          IVAN_TRAP_ROOM_THREE
+        );
+        clearInterval(ivanInterval);
+      }
     }, 60000);
 
     setRoomSummary();
@@ -326,15 +326,11 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   functionOne: () => {
     IVAN_THE_SCOUNDREL_EVENT_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels.`;
     currentRoom.contents.monsters.push(IVAN_STATS, SCOUNDREL, SCOUNDREL);
-    currentRoom.contents.items.push(
-      LAUGHING_COFFIN_COIN,
-      LAUGHING_COFFIN_COIN,
-    );
+    currentRoom.contents.items.push(LAUGHING_COFFIN_COIN, LAUGHING_COFFIN_COIN);
 
     setRoomSummary();
     useConsumable("Ivan's Cache Key");
     setTimeout(() => {
-      // Explosion Sound Effect
       soundEffectHandler(magicSpellFire1);
       damagePlayer(20);
       BURNED.function();
@@ -346,17 +342,13 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
         writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "IVANS CACHE AMBUSH");
       }, 2000);
     }, 2000);
-    
   },
   functionTwo: () => {
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
     IVAN_THE_SCOUNDREL_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
     useConsumable("Ivan's Cache Key");
     currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
-    currentRoom.contents.items.push(
-      LAUGHING_COFFIN_COIN,
-      LAUGHING_COFFIN_COIN,
-    );
+    currentRoom.contents.items.push(LAUGHING_COFFIN_COIN, LAUGHING_COFFIN_COIN);
     setRoomSummary();
     startBattle();
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
@@ -577,76 +569,44 @@ const GRERVILS_BODY_EVENT = {
 };
 
 const HAG_TRADER = {
-  // !UNFINISHED!
   name: "The Hag",
   eventType: "NPC",
-  description: "Welcome, lost souls, to my hollow's embrace. Longing for my cauldron's depths, are you? Bring rare tributes, and my cauldron shall brew you something special.",
+  description:
+    `"Welcome, lost souls, to my hollow's embrace. Longing for my cauldron's depths, are you? Bring rare tributes, and my cauldron shall brew you something special."`,
   optionOne: "Trade",
-  optionTwo: "Decline",
+  optionTwo: "Leave",
   functionOne: () => {
-    // opens modal with items
-    // trading items adds to hagFavor. This is used to buy items.
-    
+    renderTrade();
   },
   functionTwo: () => {
-    // writeToLogEvent don’t be greedy
+    endTrade();
   },
 };
 
-// const TRADER_BAZRIM = {
-//   // !UNFINISHED!
-//   name: "Trader Bazrim",
-//   eventType: "NPC",
-//   description: "",
-//   optionOne: "Accept",
-//   optionTwo: "Decline",
-//   passValue: null,
-//   failDamage: null,
-//   functionOne: () => {
-//     // opens modal with items
-//     // if trade a rare or higher item gives an item of equal value
-//   },
-//   functionTwo: () => {
-//     // writeToLogEvent don’t be greedy
-//   },
-// };
+const CURATOR_TRADER = {
+  name: "The Curator",
+  eventType: "NPC",
+  description: `"Ah, about time you stumbled in. Let's cut the formalities get to the point. What pitiful trinkets have you scrounged up, or are you here to waste my time?"`,
+  optionOne: "Trade",
+  optionTwo: "Leave",
+  functionOne: () => {
+    renderTrade();
+  },
+  functionTwo: () => {
+    endTrade();
+  },
+};
 
-// const HOZHUL = {
-//   // !UNFINISHED!
-//   name: "Hozhul, Keeper of Souls",
-//   eventType: "NPC",
-//   description: "",
-//   optionOne: "Accept",
-//   optionTwo: "Decline",
-//   passValue: null,
-//   failDamage: null,
-//   functionOne: () => {
-//     // opens modal with items
-//     // if trade a rare or higher item gives an item of equal value
-//   },
-//   functionTwo: () => {
-//     // writeToLogEvent don’t be greedy
-//   },
-// };
-
-// const CURATOR_RENVAR = {
-//   // !UNFINISHED!
-//   name: "Curator Renvar",
-//   description: "",
-//   optionOne: "Accept",
-//   optionTwo: "Decline",
-//   passValue: null,
-//   failDamage: null,
-//   functionOne: () => {
-//     // opens trade modal
-//     // give key based off item rarity
-//     // if no option call functionTwo
-//   },
-//   functionTwo: () => {
-//     // writeToLogEvent maybe next time you’ll have a taste for adventure
-//     // after room counter gains 10 re add his room to catacombRooms
-//   },
-// };
+function endTrade() {
+  currentRoom.contents.events = null;
+  fadeOutAnimation(eventModal, 0000);
+  setTimeout(() => {
+    eventModal.style.display = "none";
+  }, 1900);
+  setTimeout(() => {
+    renderRoomSummaryModal();
+  }, 5000);
+}
 
 // ===============================
 //          Misc. Events
@@ -728,23 +688,6 @@ const LAUGHING_COFFIN_EVENT = {
     setTimeout(renderRoomSummaryModal, 5000);
   },
 };
-
-// const ECHOING_CHIME = {
-//   // !UNFINISHED!
-//   name: "Echoing Chime",
-//   eventType: "MISC",
-//   description: "",
-//   optionOne: "Ring",
-//   optionTwo: "Ignore",
-//   passValue: null,
-//   failDamage: null,
-//   functionOne: () => {
-//     // filters through catacombRooms and adds additional evil spirits to rooms with undead creatures.
-//     // adds secret rooms to catacombRooms
-//     // adds ghost NPC to rooms
-//   },
-//   functionTwo: null,
-// };
 
 const CRIMSON_COVENANT = {
   name: "Crimson Covenant",
@@ -980,8 +923,7 @@ function generalEventHandler(option, statModifier, attribute) {
       event.summary = `You failed to overcome the ${event.name} and suffered ${event.failDamage} damage for your incompitence.`;
 
       if (event.failDamage) {
-        playerHealthBar.value -= event.failDamage;
-        currentPlayerHealth -= event.failDamage;
+        damagePlayer(event.failDamage);
       }
 
       if (event.functionTwo) {
@@ -1016,12 +958,15 @@ function generalEventHandler(option, statModifier, attribute) {
     }
   }
 
-  currentRoom.contents.events = null;
-  fadeOutAnimation(eventModal, 0000);
-  setTimeout(() => {
-    eventModal.style.display = "none";
-  }, 1900);
-  updatePlayerTrackers();
+  if (currentRoom.roomName !== "Hag's Hollow" && currentRoom.roomName !== "Curator's Curio") {
+    console.log("CLOSED");
+    currentRoom.contents.events = null;
+    fadeOutAnimation(eventModal);
+    setTimeout(() => {
+      eventModal.style.display = "none";
+    }, 1900);
+    updatePlayerTrackers();
+  }
 }
 
 function renderEvent(event) {

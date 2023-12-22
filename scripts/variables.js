@@ -415,6 +415,8 @@ let guidingLightTracker;
 let rowdyWispTracker;
 let unholyWispTracker;
 let restlessWispTracker;
+let greedyWispTracker;
+let wickedWispTracker;
 
 // Candles
 let wardingCandleTracker;

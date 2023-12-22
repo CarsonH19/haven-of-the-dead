@@ -762,6 +762,7 @@ progress[value]::-moz-progress-bar {
 /* Hero Choice Modal */
 #heroChoiceModal {
   display: none;
+  overflow: hidden;
 }
 
 /* Catacomb Entrance Modal */
@@ -1034,16 +1035,7 @@ progress[value]::-moz-progress-bar {
   aspect-ratio: 1;
   flex-direction: column-reverse;
   margin: 10px;
-  border: 1px solid var(--header);
   box-sizing: border-box; 
-  cursor: pointer;
-}
-
-.magic-items button {
-  height: 100%;
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
   cursor: pointer;
 }
 
@@ -1056,7 +1048,6 @@ progress[value]::-moz-progress-bar {
   aspect-ratio: 1;
   flex-direction: column-reverse;
   margin: 10px;
-  border: 1px solid var(--header);
   box-sizing: border-box; 
 }
 
@@ -1066,17 +1057,6 @@ progress[value]::-moz-progress-bar {
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); /* Set the minimum column width to 150px, but allow them to grow */
 }
 
-.consumables button {
-  height: 100%;
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
-  cursor: pointer;
-}
-
-.consumables button:hover {
-  scale: 1.2;
-}
 
 .consumables-box h4 {
   margin: 1vh 1vh 0vh 1vh;
@@ -1088,6 +1068,32 @@ progress[value]::-moz-progress-bar {
   right: 0;
   padding: 2px 5px; 
   font-size: 0.7rem;
+}
+
+
+.consumables button,
+.magic-items button {
+  aspect-ratio: 1;
+  height: 70;
+  width: 70px;
+  font-family: monospace;
+  font-size: 2rem;
+  color: lightgray;
+  box-shadow: inset 3px 3px 20px rgba(0, 0, 0, 3.8);
+  border-radius: 50px;
+}
+
+.consumables button:hover,
+.magic-items button:hover {
+  color: lightgrey;
+  transition: 0.3s;
+  aspect-ratio: 1;
+  font-family: monospace;
+  font-size: 3rem;
+  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 4.8);
+  border-radius: 50px;
+  cursor: pointer;
+  scale: 1.2;
 }
 
 .itemTooltip, 
@@ -1189,15 +1195,20 @@ progress[value]::-moz-progress-bar {
   width: 720px;
   height: 520px;
   overflow: auto;
-  padding: 10px;
+  padding: 0px;
 }
 
 .trade-modal-top {
-  height: 10%;
+  height: 15%;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0, 30px, 0, 30px;
+  padding: 10px
+}
+
+.trade-modal-top h2 {
+  margin: 0px;
+  text-align: center;
 }
 
 .trade-modal-bottom {
@@ -1214,30 +1225,61 @@ progress[value]::-moz-progress-bar {
 .trader-items {
   height: 100%;
   width: 30%;
-  border: 2px solid red;
+  /* border-right: 2px solid var(--header); */
 }
 
 .player-items {
   height: 100%;
   width: 70%;
-  border: 2px solid red;
+  margin-left: 25px;
 }
 
-#playerItemsBox div, 
-#traderItemsBox div {
+.trade-title-divider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  width: 90%;
+}
+
+#playerItemsBox div {
   aspect-ratio: 1;
   flex-direction: column-reverse;
   margin: 10px;
-  border: 1px solid var(--header);
+  /* border: 1px solid var(--header); */
   box-sizing: border-box; 
   padding: 0px;
 }
 
-#playerItemsBox,
+
+#playerItemsBox {
+  margin: 0.5vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  /* gap: 10px; */
+  /* overflow: hidden; */
+}
+
+.player-items h3,
+.trader-items h3 {
+  margin: 0px;
+}
+
 #traderItemsBox {
   margin: 0.5vh;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); /* Set the minimum column width to 150px, but allow them to grow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-right: 2px solid var(--header);
+}
+
+#playerItemsBox div,
+#traderItemsBox div {
+ height: 70px;
+ width: 70px;
 }
 
 #playerItemsBox button,
@@ -1250,8 +1292,29 @@ progress[value]::-moz-progress-bar {
   background-size: cover;
 }
 
+
+#playerItemsBox button,
+#traderItemsBox button {
+  aspect-ratio: 1;
+  height: 70;
+  width: 70px;
+  font-family: monospace;
+  font-size: 2rem;
+  color: lightgray;
+  box-shadow: inset 3px 3px 20px rgba(0, 0, 0, 3.8);
+  border-radius: 50px;
+}
+
 #playerItemsBox button:hover,
 #traderItemsBox button:hover {
+  color: lightgrey;
+  transition: 0.3s;
+  aspect-ratio: 1;
+  font-family: monospace;
+  font-size: 3rem;
+  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 4.8);
+  border-radius: 50px;
+  cursor: pointer;
   scale: 1.2;
 }
 
