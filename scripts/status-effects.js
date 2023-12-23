@@ -8,6 +8,7 @@
 
 const POISONED = {
   name: "Poisoned",
+  detail: "CONDITION",
   image: "styles/images/items/poisoned.jpg",
   status: "Your Strength and Dexterity are reduced by 2.",
   duration: null,
@@ -31,6 +32,7 @@ const POISONED = {
 
 const HAUNTED = {
   name: "Haunted",
+  detail: "CONDITION",
   image: "styles/images/items/huanted.jpg",
   status: "Evil spirits are following you.",
   duration: null,
@@ -49,6 +51,7 @@ const HAUNTED = {
 
 const DISEASED = {
   name: "Diseased",
+  detail: "CONDITION",
   image: "styles/images/items/diseased.jpg",
   status: "Your max health is reduced by 20%.",
   duration: null,
@@ -67,6 +70,7 @@ const DISEASED = {
 
 const BURNED = {
   name: "Burned",
+  detail: "CONDITION",
   image: "styles/images/burned.jpg",
   status: "All damage you take is increased by 25%.",
   duration: null,
@@ -85,6 +89,7 @@ const BURNED = {
 
 const CURSED = {
   name: "Cursed",
+  detail: "CONDITION",
   image: "styles/images/items/cursed.jpg",
   status: "You are unable to use your special ability.",
   duration: null,
@@ -103,6 +108,7 @@ const CURSED = {
 
 const WEBBED = {
   name: "Webbed",
+  detail: "CONDITION",
   image: "styles/images/items/webbed.jpg",
   status: "You are caught in spider webbing.",
   duration: null,
@@ -151,6 +157,7 @@ const WEBBED = {
 
 const CHILLED = {
   name: "Chilled",
+  detail: "CONDITION",
   image: "styles/images/items/chilled.jpg",
   status: "You are unable to use your special ability or flee.",
   duration: null,
@@ -315,7 +322,7 @@ const AEGIS_STATUS_EFFECT = {
 };
 
 // ==============================================================
-//                Status Effect Handling Logic
+//          Status Effect Handling Logic - Conditions
 // ==============================================================
 
 const startStatusEffect = (statusEffect, length) => {
@@ -332,11 +339,20 @@ const startNewStatusEffect = (statusEffect, length) => {
   const roomText = duration > 1 ? "Rooms" : "Room";
   statusEffect.duration = `Duration: ${duration} ${roomText}`;
 
-  // Checks for different Status Effects
-  if (statusEffect.stats) {
-    addStatChange(statusEffect);
-  } else {
-    updateTotalStats();
+  switch (statusEffect.detail) {
+    case "CONDITION":
+      if (statusEffect.stats) {
+        addStatChange(statusEffect);
+      } else {
+        updateTotalStats();
+      }
+      break;
+
+    case "WISP":
+      break;
+
+    case "CANDLE":
+      break;
   }
 
   setupStatusEffectInterval(statusEffect);
@@ -357,7 +373,6 @@ const setupStatusEffectInterval = (statusEffect) => {
   const intervalId = setInterval(() => {
     const duration = statusEffect.statusDuration - roomCounter;
     const roomText = duration > 1 ? "Rooms" : "Room";
-
     statusEffect.duration = `Duration: ${duration} ${roomText}`;
 
     if (
@@ -365,6 +380,8 @@ const setupStatusEffectInterval = (statusEffect) => {
       statusEffect.duration === null
     ) {
       endStatusEffectInterval(statusEffect, intervalId);
+    } else if (statusEffect.detail === "WISP") {
+      statusEffect.tracker = "GUIDING";
     }
   }, 3000);
 };
@@ -378,6 +395,12 @@ const endStatusEffectInterval = (statusEffect, intervalId) => {
     removeStatChange(statusEffect);
   } else {
     updateTotalStats();
+  }
+
+  if (statusEffect.detail === "WISP") {
+    statusEffect.tracker = "ARRIVE";
+    wisp.classList.remove("orb");
+    wispActive = null;
   }
 
   clearInterval(intervalId);

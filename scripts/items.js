@@ -88,10 +88,10 @@
 // Wisps
 // - *Guiding Light
 // - *Rowdy Wisp
-// - *Unholy Wisp
+// - *Bleeding Wisp
 // - *Restless Wisp
 // - *Wicked Wisp
-// - *CURIOUS Wisp
+// - *Curious Wisp
 
 // ===============================
 //        COMMON ITEMS
@@ -951,7 +951,7 @@ const CRYPTBREAD = {
   image: "styles/images/items/cryptbread.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
-  logDetail: "EAT",
+  detail: "EAT",
   effect: "Restores 10 health points when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -965,7 +965,7 @@ const BONE_MARROW_SOUP = {
   image: "styles/images/items/bonemarrow-soup.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
-  logDetail: "DRINK",
+  detail: "DRINK",
   effect: "Restores 15 health points when eaten.",
   soundEffect: gulpingWater24,
   function: () => {
@@ -979,7 +979,7 @@ const MARROWSTONE_CHEESE = {
   image: "styles/images/items/marrowstone-cheese.jpg",
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "EAT",
+  detail: "EAT",
   effect: "Restores 20 health points when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -993,7 +993,7 @@ const TOMBSTONE_TRUFFLE = {
   image: "styles/images/items/tombstone-truffle.jpg",
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "EAT",
+  detail: "EAT",
   effect: "Restores 10 health points when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -1006,7 +1006,7 @@ const TOMBSTONE_TRUFFLE = {
 //   description: "",
 //   type: "CONSUMABLE",
 //   rarity: "Rare",
-//   logDetail: "EAT",
+//   detail: "EAT",
 //   effect: "Restores 10 health points when eaten.",
 //   soundEffect: gulpingWater24,
 //   function: () => {
@@ -1033,7 +1033,7 @@ const LICHROOT = {
   image: "styles/images/items/lichroot.jpg",
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "EAT",
+  detail: "EAT",
   effect:
     "Can be used to permanently increase the potency of health potions by 5HP.",
   soundEffect: chewCrackersMouth,
@@ -1048,7 +1048,7 @@ const ROTBANE_FERN = {
   image: "styles/images/items/rotbane-fern.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
-  logDetail: "EAT",
+  detail: "EAT",
   effect: "Can be used for a chance to cure the diseased condition.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -1075,7 +1075,7 @@ const WITCHFIRE_ORCHID = {
   image: "styles/images/items/witchfire-orchid.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
-  logDetail: "EAT",
+  detail: "EAT",
   effect: "Can be used for a chance to cure the cursed condition.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -1104,7 +1104,7 @@ const EMBERTHAW_PETAL = {
   image: "styles/images/items/emberthaw-petal.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
-  logDetail: "EAT",
+  detail: "EAT",
   effect: "Can be used for a chance to cure the chilled condition.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -1131,7 +1131,7 @@ const GHOSTLIGHT_LILY = {
   image: "styles/images/items/ghostlight-lily.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
-  logDetail: "EAT",
+  detail: "EAT",
   effect: "Can be used for a chance to cure the haunted condition.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -1157,7 +1157,7 @@ const GRAVEBLOOM = {
   image: "styles/images/items/gravebloom.jpg",
   type: "CONSUMABLE",
   rarity: "Common",
-  logDetail: "EAT",
+  detail: "EAT",
   effect: "Can be used for a chance to cure the poisoned condition.",
   soundEffect: chewCrackersMouth,
   function: () => {
@@ -1187,7 +1187,7 @@ const LESSER_SOULSTONE = {
   soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
   rarity: "Common",
-  logDetail: "USE",
+  detail: "USE",
   effect: "Can be used to gain experience points.",
   function: () => {
     gainExperience(5);
@@ -1201,7 +1201,7 @@ const GREATER_SOULSTONE = {
   soundEffect: crystalWhoosh,
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "USE",
+  detail: "USE",
   effect: "Can be used to gain a great amount of experience points.",
   function: () => {
     gainExperience(25);
@@ -1214,7 +1214,7 @@ const BLACKHEART_BREW = {
   image: "styles/images/items/balckheart-brew.jpg",
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "DRINK",
+  detail: "DRINK",
   effect:
     "Can be used to gain increased Strength, but decreased Dexterity for a short time.",
   soundEffect: gulpingWater24,
@@ -1254,7 +1254,7 @@ const WHISPERING_SKULL = {
   soundEffect: evilSpell1,
   type: "CONSUMABLE",
   rarity: "Common",
-  logDetail: "SPEAK",
+  detail: "SPEAK",
   effect: "Can be used to learn secrets of the catacomb.",
   function: () => {
     if (attunedItems.includes(AMULET_OF_WHISPERS)) {
@@ -1280,7 +1280,7 @@ const WARDING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "CANDLE",
+  detail: "CANDLE",
   effect:
     "When this item is used there is a chance that evil spirits will flee from you. The candle burns out after clearing five rooms.",
   status: "There is a chance the undead will evade you.",
@@ -1318,7 +1318,7 @@ const SOOTHING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "Common",
-  logDetail: "CANDLE",
+  detail: "CANDLE",
   effect:
     "When this item is used you restore 10HP after clearing a room. The candle burns out after clearing five rooms.",
   status: "You regain some HP after clearing a room.",
@@ -1356,7 +1356,7 @@ const FLICKERING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "Common",
-  logDetail: "CANDLE",
+  detail: "CANDLE",
   effect:
     "When this item is used your chance to flee successfully becomes 100%. After fleeing three times the candle burns out.",
   status: "You always successfully flee.",
@@ -1383,7 +1383,7 @@ const BLAZING_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "Epic",
-  logDetail: "CANDLE",
+  detail: "CANDLE",
   effect:
     "When this item is used all attack you become critical hits. After ten critical hits the candle burns out.",
   status: "All attacks made are critical hits.",
@@ -1409,7 +1409,7 @@ const SOULFLAME_CANDLE = {
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "Epic",
-  logDetail: "CANDLE",
+  detail: "CANDLE",
   effect:
     "When this item is used all experience gained is doubled. The candle burns out after gaining 1,000XP.",
   status: "All experience gained is doubled.",
@@ -1439,278 +1439,157 @@ const SOULFLAME_CANDLE = {
 
 const GUIDING_LIGHT = {
   name: "Guiding Light",
-  description: "",
+  color: "#f5e9ae",
   image: "styles/images/items/guiding-light.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "WISP",
+  detail: "WISP",
+  tracker: null,
   effect:
     "When this item is used a light will guide you to the nearest Candlelight Shrine.",
   status: "Guiding you to a nearby Candlelight Shrine.",
   duration: null,
+  statusDuration: null,
   function: () => {
-    if ((FIENDSWORN.active !== null) & (wispActive !== "ACTIVE")) {
-      // writeToLog() The light refuses to guide someone sworn to evil
-    } else {
-      const wisp = document.querySelector(".wisp");
-      let randomNumber = Math.round(Math.random() * 5) + 1;
-      let itemDuration = roomCounter + randomNumber;
-      CANDLELIGHT_SHRINE.contents.events = SAFE_ROOM;
-      GUIDING_LIGHT.duration = "Searching";
-      wispActive = "ACTIVE";
+    CANDLELIGHT_SHRINE.contents.events = SAFE_ROOM;
 
-      let guidingLightInterval = setInterval(() => {
-        if (itemDuration - roomCounter > 1) {
-          GUIDING_LIGHT.duration = `Duration: ${
-            itemDuration - roomCounter
-          } Rooms`;
-        } else {
-          GUIDING_LIGHT.duration = `Duration: ${
-            itemDuration - roomCounter
-          } Room`;
-        }
-
-        if (roomCounter >= itemDuration) {
-          guidingLightTracker = "ARRIVE";
-          wisp.classList.remove("orb");
-          GUIDING_LIGHT.duration = null;
-          wispActive = null;
-          clearInterval(guidingLightInterval);
-        } else {
-          guidingLightTracker = "GUIDING";
-        }
-      }, 3000);
-
-      wisp.classList.add("orb");
-
-      const root = document.documentElement;
-      root.style.setProperty("--orb", "#f5e9ae");
-
-      renderStatusEffects(GUIDING_LIGHT);
-    }
+    let randomWispDuration = Math.round(Math.random() * 5) + 1;
+    wispActive = "ACTIVE";
+    renderWisp(GUIDING_LIGHT);
+    startStatusEffect(GUIDING_LIGHT, randomWispDuration);
   },
 };
 
 const ROWDY_WISP = {
   name: "Rowdy Wisp",
-  description: "",
+  color: "#f2b268",
   image: "styles/images/items/rowdy-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "WISP",
+  detail: "WISP",
+  tracker: null,
   effect:
     "When this item is used a wisp will guide you to the Laughing Coffin Tavern.",
   status: "Guiding you to the Laughing Coffin Tavern.",
   duration: null,
+  statusDuration: null,
   function: () => {
-    if (wispActive !== "ACTIVE") {
-      const wisp = document.querySelector(".wisp");
-      let randomNumber = Math.round(Math.random() * 5) + 1;
-      let duration = roomCounter + randomNumber;
-      LAUGHING_COFFIN_ROOM.contents.events = LAUGHING_COFFIN_EVENT;
-      ROWDY_WISP.duration = "Searching";
-      wispActive = "ACTIVE";
+    // Clear room if player fleed in the past
+    LAUGHING_COFFIN_ROOM.contents.monsters = [];
+    LAUGHING_COFFIN_ROOM.contents.events = LAUGHING_COFFIN_EVENT;
 
-      // Clear room if player fleed in the past
-      LAUGHING_COFFIN_ROOM.contents.monsters = [];
-
-      let rowdyWispInterval = setInterval(() => {
-        ROWDY_WISP.duration = `Duration: ${duration - roomCounter} Rooms`;
-        if (roomCounter >= duration) {
-          rowdyWispTracker = "ARRIVE";
-          wisp.classList.remove("orb");
-          ROWDY_WISP.duration = null;
-          wispActive = null;
-
-          clearInterval(rowdyWispInterval);
-        } else {
-          rowdyWispTracker = "GUIDING";
-        }
-      }, 3000);
-
-      wisp.classList.add("orb");
-
-      const root = document.documentElement;
-      root.style.setProperty("--orb", "#f2b268");
-
-      renderStatusEffects(ROWDY_WISP);
-    }
+    let randomWispDuration = Math.round(Math.random() * 5) + 1;
+    wispActive = "ACTIVE";
+    renderWisp(ROWDY_WISP);
+    startStatusEffect(ROWDY_WISP, randomWispDuration);
   },
 };
 
-const UNHOLY_WISP = {
-  name: "Unholy Wisp",
-  description: "",
+const BLEEDING_WISP = {
+  name: "Bleeding Wisp",
+  color: "#bf3637",
   image: "styles/images/items/unholy-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "WISP",
+  detail: "WISP",
+  tracker: null,
   effect:
     "When this item is used a wisp will guide you to the Crimson Covenant.",
   status: "Guiding you to the Blood Alter.",
   duration: null,
+  statusDuration: null,
   function: () => {
-    const wisp = document.querySelector(".wisp");
-    let randomNumber = Math.round(Math.random() * 5) + 1;
-    let wispDuration = roomCounter + randomNumber;
     BLOOD_ALTER.contents.events = CRIMSON_COVENANT;
-    UNHOLY_WISP.duration = "Searching";
+
+    let randomWispDuration = Math.round(Math.random() * 5) + 1;
     wispActive = "ACTIVE";
-
-    let unholyWispInterval = setInterval(() => {
-      UNHOLY_WISP.duration = `Duration: ${wispDuration - roomCounter} Rooms`;
-      if (roomCounter >= wispDuration) {
-        wisp.classList.remove("orb");
-        UNHOLY_WISP.duration = null;
-        unholyWispTracker = "ARRIVE";
-        wispActive = null;
-        clearInterval(unholyWispInterval);
-      } else {
-        unholyWispTracker = "GUIDING";
-      }
-    }, 3000);
-
-    wisp.classList.add("orb");
-
-    const root = document.documentElement;
-    root.style.setProperty("--orb", "#bf3637");
-
-    renderStatusEffects(UNHOLY_WISP);
+    renderWisp(BLEEDING_WISP);
+    startStatusEffect(BLEEDING_WISP, randomWispDuration);
   },
 };
 
 const WICKED_WISP = {
   name: "Wicked Wisp",
+  color: "#824ecc",
   image: "styles/images/items/wicked-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "WISP",
+  detail: "WISP",
+  tracker: null,
   effect: "When this item is used a wisp will guide you to Hag's Hollow.",
   status: "Guiding you to Hag's Hollow.",
   duration: null,
+  statusDuration: null,
   function: () => {
-    const wisp = document.querySelector(".wisp");
-    let randomNumber = Math.round(Math.random() * 5) + 1;
-    let wispDuration = roomCounter + randomNumber;
     HAGS_HOLLOW.contents.events = HAG_TRADER;
-    WICKED_WISP.duration = "Searching";
+
+    let randomWispDuration = Math.round(Math.random() * 5) + 1;
     wispActive = "ACTIVE";
-
-    let wickedWispInterval = setInterval(() => {
-      WICKED_WISP.duration = `Duration: ${wispDuration - roomCounter} Rooms`;
-      if (roomCounter >= wispDuration) {
-        wisp.classList.remove("orb");
-        WICKED_WISP.duration = null;
-        wickedWispTracker = "ARRIVE";
-        wispActive = null;
-        clearInterval(wickedWispInterval);
-      } else {
-        wickedWispTracker = "GUIDING";
-      }
-    }, 3000);
-
-    wisp.classList.add("orb");
-
-    const root = document.documentElement;
-    root.style.setProperty("--orb", "#824ecc");
-
-    renderStatusEffects(WICKED_WISP);
+    renderWisp(WICKED_WISP);
+    startStatusEffect(WICKED_WISP, randomWispDuration);
   },
 };
 
 const CURIOUS_WISP = {
   name: "Curious Wisp",
-  description: "",
+  color: "#8fc4d9",
   image: "styles/images/items/curious-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "WISP",
+  detail: "WISP",
+  tracker: null,
   effect: "When this item is used a wisp will guide you to Curator's Curio",
   status: "Guiding you to Curator's Curio.",
   duration: null,
+  statusDuration: null,
   function: () => {
-    const wisp = document.querySelector(".wisp");
-    let randomNumber = Math.round(Math.random() * 5) + 1;
-    let itemDuration = roomCounter + randomNumber;
     CURATORS_CURIO.contents.events = CURATOR_TRADER;
-    CURIOUS_WISP.duration = "Searching";
+
+    let randomWispDuration = Math.round(Math.random() * 5) + 1;
     wispActive = "ACTIVE";
-
-    let curiousWispnterval = setInterval(() => {
-      if (itemDuration - roomCounter > 1) {
-        CURIOUS_WISP.duration = `Duration: ${itemDuration - roomCounter} Rooms`;
-      } else {
-        CURIOUS_WISP.duration = `Duration: ${itemDuration - roomCounter} Room`;
-      }
-
-      if (roomCounter >= itemDuration) {
-        curiousWispTracker = "ARRIVE";
-        wisp.classList.remove("orb");
-        CURIOUS_WISP.duration = null;
-        wispActive = null;
-        clearInterval(curiousWispnterval);
-      } else {
-        curiousWispTracker = "GUIDING";
-      }
-    }, 3000);
-
-    wisp.classList.add("orb");
-
-    const root = document.documentElement;
-    root.style.setProperty("--orb", "#8fc4d9");
-
-    renderStatusEffects(CURIOUS_WISP);
+    renderWisp(CURIOUS_WISP);
+    startStatusEffect(CURIOUS_WISP, randomWispDuration);
   },
 };
 
 const RESTLESS_WISP = {
   name: "Restless Wisp",
-  description: "",
+  color: "#95dba8",
   image: "styles/images/items/restless-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Rare",
-  logDetail: "WISP",
+  detail: "WISP",
+  tracker: null,
   effect:
     "When this item is used a wisp will guide you to Fallen Warriors' Vale.",
   status: "Guiding you to Fallen Warrior's Vale.",
   duration: null,
+  statusDuration: null,
   function: () => {
-    const wisp = document.querySelector(".wisp");
-    let randomNumber = Math.round(Math.random() * 5) + 1;
-    let wispDuration = roomCounter + randomNumber;
-    RESTLESS_WISP.duration = "Searching";
-    wispActive = "ACTIVE";
-
     // Clear room if player fleed in the past
     FALLEN_WARRIORS_VALE.contents.monsters = [];
+    FALLEN_WARRIORS_VALE.contents.events = BATTLEFIELD;
 
-    let restlessWispInterval = setInterval(() => {
-      RESTLESS_WISP.duration = `Duration: ${wispDuration - roomCounter} Rooms`;
-      if (roomCounter >= wispDuration) {
-        restlessWispTracker = "ARRIVE";
-        wisp.classList.remove("orb");
-        RESTLESS_WISP.duration = null;
-        wispActive = null;
-        clearInterval(restlessWispInterval);
-      } else {
-        restlessWispTracker = "GUIDING";
-      }
-    }, 3000);
-
-    wisp.classList.add("orb");
-
-    const root = document.documentElement;
-    root.style.setProperty("--orb", "#95dba8");
-
-    renderStatusEffects(RESTLESS_WISP);
+    let randomWispDuration = Math.round(Math.random() * 5) + 1;
+    wispActive = "ACTIVE";
+    renderWisp(RESTLESS_WISP);
+    startStatusEffect(RESTLESS_WISP, randomWispDuration);
   },
 };
+
+function renderWisp(wispObject) {
+  const wispColor = wispObject.color;
+  const root = document.documentElement;
+
+  wisp.classList.add("orb");
+  root.style.setProperty("--orb", wispColor);
+}
 
 // ===============================
 //    Item & Inventory Arrays
@@ -1759,7 +1638,7 @@ let wispItems = [
   CURIOUS_WISP,
   WICKED_WISP,
   ROWDY_WISP,
-  UNHOLY_WISP,
+  BLEEDING_WISP,
   RESTLESS_WISP,
 ];
 
@@ -1826,7 +1705,7 @@ let rareConsumables = [
   LICHROOT,
   GREATER_SOULSTONE,
   GUIDING_LIGHT,
-  UNHOLY_WISP,
+  BLEEDING_WISP,
   RESTLESS_WISP,
   ROWDY_WISP,
   CURIOUS_WISP,
@@ -2047,7 +1926,6 @@ function lootItems(lootGroup) {
     }
   }
 }
-
 
 // ===============================
 //    Inventory Handling Logic
@@ -2334,7 +2212,7 @@ inventoryModal.addEventListener("click", (event) => {
       itemName === "Guiding Light" ||
       itemName === "Rowdy Wisp" ||
       itemName === "Restless Wisp" ||
-      itemName === "Unholy Wisp"
+      itemName === "Bleeding Wisp"
     ) {
       return true;
     } else {
@@ -2442,7 +2320,11 @@ function renderTrade() {
             items[i].type === "CONSUMABLE" &&
             items[i].name !== "Health Potion" &&
             items[i].name !== "Whispering Skull" &&
-            item[i].soundEffect !== flameLicks2
+            items[i].name !== "Warding Candle" &&
+            items[i].name !== "Soothing Candle" &&
+            items[i].name !== "Flickering Candle" &&
+            items[i].name !== "Blazing Candle" &&
+            items[i].name !== "Soulflame Candle"
           ) {
             container.appendChild(itemBox);
           }

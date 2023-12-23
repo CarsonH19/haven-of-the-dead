@@ -958,7 +958,7 @@ specialBtn.addEventListener("click", () => {
     setTimeout(monsterAttackHandler, 1200);
   }
 
-  playerControlsTimeout(1500);
+  playerControlsTimeout(2000);
   soundEffectHandler(heroChecker(), "PLAYER ABILITY");
   updatePlayerTrackers();
   specialCooldownHandler();
@@ -1029,30 +1029,30 @@ continueButton.addEventListener("click", () => {
 
   setTimeout(() => {
     // Wisp Logic
-    if (guidingLightTracker === "ARRIVE") {
+    if (GUIDING_LIGHT.tracker === "ARRIVE") {
       currentRoom = CANDLELIGHT_SHRINE;
       renderCurrentRoom(CANDLELIGHT_SHRINE);
-      guidingLightTracker = null;
-    } else if (rowdyWispTracker === "ARRIVE") {
+      GUIDING_LIGHT.tracker = null;
+    } else if (ROWDY_WISP.tracker === "ARRIVE") {
       currentRoom = LAUGHING_COFFIN_ROOM;
       renderCurrentRoom(LAUGHING_COFFIN_ROOM);
-      rowdyWispTracker = null;
-    } else if (unholyWispTracker === "ARRIVE") {
+      ROWDY_WISP.tracker = null;
+    } else if (BLEEDING_WISP.tracker === "ARRIVE") {
       currentRoom = BLOOD_ALTER;
       renderCurrentRoom(BLOOD_ALTER);
-      unholyWispTracker = null;
-    } else if (restlessWispTracker === "ARRIVE") {
+      BLEEDING_WISP.tracker = null;
+    } else if (RESTLESS_WISP.tracker === "ARRIVE") {
       currentRoom = FALLEN_WARRIORS_VALE;
       renderCurrentRoom(FALLEN_WARRIORS_VALE);
-      restlessWispTracker = null;
-    } else if (curiousWispTracker === "ARRIVE") {
+      RESTLESS_WISP.tracker = null;
+    } else if (CURIOUS_WISP.tracker === "ARRIVE") {
       currentRoom = CURATORS_CURIO;
       renderCurrentRoom(CURATORS_CURIO);
-      curiousWispTracker = null;
-    } else if (wickedWispTracker === "ARRIVE") {
+      CURIOUS_WISP.tracker = null;
+    } else if (WICKED_WISP.tracker === "ARRIVE") {
       currentRoom = HAGS_HOLLOW;
       renderCurrentRoom(HAGS_HOLLOW);
-      wickedWispTracker = null;
+      WICKED_WISP.tracker = null;
     } else {
       removeCurrentRoom();
       getRandomRoom(catacombRooms);

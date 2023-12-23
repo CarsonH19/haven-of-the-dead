@@ -413,10 +413,12 @@ let attackCounter = 0;
 let gloryforgedTracker = 0;
 
 // Wisps
+const wisp = document.querySelector(".wisp");
+
 let wispActive;
 let guidingLightTracker;
 let rowdyWispTracker;
-let unholyWispTracker;
+let bleedingWispTracker;
 let restlessWispTracker;
 let curiousWispTracker;
 let wickedWispTracker;
@@ -430,4 +432,3 @@ let soulflameCandleTracker;
 
 // Misc.
 let blackheartBrewTracker;
-

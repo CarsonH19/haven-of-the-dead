@@ -1507,17 +1507,17 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
       break;
 
     case LOG_CONSUMABLE:
-      if (dataOne.logDetail === "WISP") {
+      if (dataOne.detail === "WISP") {
         newEntry.textContent = `As you release the ${dataOne.name}, its ethereal glow illuminates the catacomb and it beckons you to follow it.`;
-      } else if (dataOne.logDetail === "CANDLE") {
+      } else if (dataOne.detail === "CANDLE") {
         newEntry.textContent = `You ignite the ${dataOne.name}.`;
-      } else if (dataOne.logDetail === "EAT") {
+      } else if (dataOne.detail === "EAT") {
         newEntry.textContent = `You eat the ${dataOne.name}.`;
-      } else if (dataOne.logDetail === "DRINK") {
+      } else if (dataOne.detail === "DRINK") {
         newEntry.textContent = `You drink the ${dataOne.name}.`;
-      } else if (dataOne.logDetail === "USE") {
+      } else if (dataOne.detail === "USE") {
         newEntry.textContent = `You use the ${dataOne.name}.`;
-      } else if (dataOne.logDetail === "SPEAK") {
+      } else if (dataOne.detail === "SPEAK") {
         newEntry.textContent = `The ${dataOne.name} speaks to you.`;
       }
       break;
