@@ -75,13 +75,11 @@ const SPIDER_WEB = {
   optionOne: "Strength",
   optionTwo: "Faith",
   passValue: 6,
-  failDamage: "You've alerted nearby Crypt Crawlers!",
   functionOne: () => {
     soundEffectHandler(fleshRip1);
   },
   functionTwo: () => {
     SPIDER_WEB.summary = `You alerted the Crypt Crawlers while trying to escape the silken webs.`;
-    currentRoom.contents.monsters.push(CRYPT_CRAWLER);
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
     currentRoom.contents.monsters.push(CRYPT_CRAWLER);
@@ -169,6 +167,7 @@ const PENDULUM_BLADES = {
 const GRAVEROBBER_EARVER = {
   name: "Graverobber Earver",
   eventType: "NPC",
+  image: "styles/images/npcs/graverobber-earver.jpg",
   description:
     "You stumble upon Graverobber Earver, a sinister figure, hell-bent on breaching an ancient tomb. He beckons you to join his sinister endeavor, promising untold treasures from the tomb.",
   summary: "",
@@ -207,6 +206,7 @@ const GRAVEROBBER_EARVER = {
 const GRAVEROBBER_EARVER_EVENT_TWO = {
   name: "Graverobber Earver",
   eventType: "NPC",
+  image: "styles/images/npcs/graverobber-earver.jpg",
   description:
     "Once more, the air grows heavy as you find Graverobber Earver, unyielding in his pursuit of forbidden riches. He implores you to lend your strength, offering a glimpse into the abyssal unknown that awaits within the looming sarcophagus, should you dare to delve into the shadows once more.",
   optionOne: "Accept",
@@ -246,6 +246,7 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
 const GRAVEROBBER_EARVER_EVENT_THREE = {
   name: "Graverobber Earver",
   eventType: "NPC",
+  image: "styles/images/npcs/graverobber-earver.jpg",
   description:
     "As fate would have it, you cross paths with Graverobber Earver yet again, his determination unshaken. This time, he stands before an ornate crypt belonging to a long dead king. With a knowing look, he extends his offer once more, tempting you with the allure of unimaginable treasures concealed within.",
   optionOne: "Accept",
@@ -276,6 +277,7 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
 const IVAN_THE_SCOUNDREL = {
   name: "Ivan the Scoundrel",
   eventType: "NPC",
+  image: "styles/images/npcs/ivan-the-scoundrel.jpg",
   description: `
   Trapped, a scoundrel ensnared in a spider's web begs, "Release me, and treasures hidden in these catacombs shall be yours." Dare you free the scoundrel, confronting the unknown horrors lurking nearby?`,
   summary: "",
@@ -333,7 +335,7 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
     setTimeout(() => {
       soundEffectHandler(magicSpellFire1);
       damagePlayer(20);
-      BURNED.function();
+      BURNED.function(3);
       writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
 
       setTimeout(() => {
@@ -389,101 +391,96 @@ function ivansRevengeTracker() {
   }
 }
 
-//
-//
+// const SCHOLAR_HENDRA = {
+//   name: "Scholar Hendra",
+//   eventType: "NPC",
+//   description:
+//     "Upon a bone-forged altar, a desperate woman struggles to shield her grimoire from encroaching skeletal horrors. Her cries for help echo through the chamber. Will you aid her in vanquishing the undead horde or ignore her cries?",
+//   optionOne: "Help",
+//   optionTwo: "Ignore",
+//   functionOne: () => {
+//     currentRoom.contents.monsters.push(
+//       DECREPIT_SKELETON,
+//       SKELETAL_SOLDIER,
+//       SKELETAL_SOLDIER,
+//       DECREPIT_SKELETON
+//     );
+//     (currentRoom.description =
+//       "After vanquishing the skeletal horde, Hendra rewards your valor with two precious health potions, then mysteriously fades into the catacombs, her grimoire clutched tightly, leaving you with a sense of foreboding."),
+//       currentRoom.contents.items.push(POTION, POTION);
+//     setRoomSummary();
+//     startBattle();
+//     monsterAttackHandler();
+//     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
+//   },
+//   functionTwo: () => {
+//     currentRoom.contents.monsters.push(
+//       DECREPIT_SKELETON,
+//       SKELETAL_SOLDIER,
+//       SKELETAL_SOLDIER,
+//       DECREPIT_SKELETON
+//     );
+//     (currentRoom.description =
+//       "After defeating the skeletal horde, you discover Hendra's lifeless form, her fingers tightly clasping a mysterious grimiore. With solemn determination, you claim the coveted relic as your own."),
+//       currentRoom.contents.items.push(DEMONIC_GRIMOIRE);
+//     setRoomSummary();
+//     startBattle();
+//     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
+//   },
+// };
 
-const SCHOLAR_HENDRA = {
-  name: "Scholar Hendra",
-  eventType: "NPC",
-  description:
-    "Upon a bone-forged altar, a desperate woman struggles to shield her grimoire from encroaching skeletal horrors. Her cries for help echo through the chamber. Will you aid her in vanquishing the undead horde or ignore her cries?",
-  optionOne: "Help",
-  optionTwo: "Ignore",
-  functionOne: () => {
-    currentRoom.contents.monsters.push(
-      DECREPIT_SKELETON,
-      SKELETAL_SOLDIER,
-      SKELETAL_SOLDIER,
-      DECREPIT_SKELETON
-    );
-    (currentRoom.description =
-      "After vanquishing the skeletal horde, Hendra rewards your valor with two precious health potions, then mysteriously fades into the catacombs, her grimoire clutched tightly, leaving you with a sense of foreboding."),
-      currentRoom.contents.items.push(POTION, POTION);
-    setRoomSummary();
-    startBattle();
-    monsterAttackHandler();
-    writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
-  },
-  functionTwo: () => {
-    currentRoom.contents.monsters.push(
-      DECREPIT_SKELETON,
-      SKELETAL_SOLDIER,
-      SKELETAL_SOLDIER,
-      DECREPIT_SKELETON
-    );
-    (currentRoom.description =
-      "After defeating the skeletal horde, you discover Hendra's lifeless form, her fingers tightly clasping a mysterious grimiore. With solemn determination, you claim the coveted relic as your own."),
-      currentRoom.contents.items.push(DEMONIC_GRIMOIRE);
-    setRoomSummary();
-    startBattle();
-    writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
-  },
-};
+// const SCHOLAR_HENDRA_EVENT_TWO = {
+//   name: "Scholar Hendra's Plan",
+//   eventType: "NPC",
+//   description: "",
+//   optionOne: "Help",
+//   optionTwo: "Ignore",
+//   functionOne: () => {},
+//   functionTwo: () => {},
+// };
 
-const SCHOLAR_HENDRA_EVENT_TWO = {
-  name: "Scholar Hendra's Plan",
-  eventType: "NPC",
-  description: "",
-  optionOne: "Help",
-  optionTwo: "Ignore",
-  functionOne: () => {},
-  functionTwo: () => {},
-};
-
-const SUMMONING_MORGRIMM = {
-  name: "Morgrimm the Malignant",
-  eventType: "MISC",
-  description:
-    "Upon entering the summoning chamber, the grimoire hovers hovers from your possesion an opens itself on a pedistal nearby.",
-  optionOne: "Read",
-  optionTwo: "Refuse",
-  functionOne: () => {
-    SUMMONING_MORGRIMM.description =
-      "You summon Morgrimm and become Fiendsworn.";
-    // can no longer benefit from Candlelight Shrines
-    FIENDSWORN_CULTIST.function();
-    // Remove Cursed Grimoire
-    const index = attunedItems.indexOf(DEMONIC_GRIMOIRE);
-    inventoryItems.splice(index, 1);
-    setRoomSummary();
-    writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
-  },
-  functionTwo: () => {
-    SUMMONING_MORGRIMM.description =
-      "You refuse to summon Morgrimm and become Branded.";
-    // become branded and demons begin to follow you
-    // must fight fiendsworn_cultists
-    // Remove Cursed Grimoire
-    BRANDED.function();
-    const index = attunedItems.indexOf(DEMONIC_GRIMOIRE);
-    inventoryItems.splice(index, 1);
-    currentRoom.contents.monsters.push(
-      FIENDSWORN_CULTIST,
-      FIENDSWORN_CULTIST,
-      FIENDSWORN_CULTIST
-    );
-    setRoomSummary();
-    startBattle();
-    writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
-  },
-};
-
-//
-//
+// const SUMMONING_MORGRIMM = {
+//   name: "Morgrimm the Malignant",
+//   eventType: "MISC",
+//   description:
+//     "Upon entering the summoning chamber, the grimoire hovers hovers from your possesion an opens itself on a pedistal nearby.",
+//   optionOne: "Read",
+//   optionTwo: "Refuse",
+//   functionOne: () => {
+//     SUMMONING_MORGRIMM.description =
+//       "You summon Morgrimm and become Fiendsworn.";
+//     // can no longer benefit from Candlelight Shrines
+//     FIENDSWORN_CULTIST.function();
+//     // Remove Cursed Grimoire
+//     const index = attunedItems.indexOf(DEMONIC_GRIMOIRE);
+//     inventoryItems.splice(index, 1);
+//     setRoomSummary();
+//     writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
+//   },
+//   functionTwo: () => {
+//     SUMMONING_MORGRIMM.description =
+//       "You refuse to summon Morgrimm and become Branded.";
+//     // become branded and demons begin to follow you
+//     // must fight fiendsworn_cultists
+//     // Remove Cursed Grimoire
+//     BRANDED.function();
+//     const index = attunedItems.indexOf(DEMONIC_GRIMOIRE);
+//     inventoryItems.splice(index, 1);
+//     currentRoom.contents.monsters.push(
+//       FIENDSWORN_CULTIST,
+//       FIENDSWORN_CULTIST,
+//       FIENDSWORN_CULTIST
+//     );
+//     setRoomSummary();
+//     startBattle();
+//     writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
+//   },
+// };
 
 const FORSAKEN_COMMANDER = {
   name: "Forsaken Commander",
   eventType: "NPC",
+  image: "styles/images/npcs/forasken-commander.jpg",
   description: `A spectral commander, draped in ethereal sorrow, materializes before you. "Valiant adventurer, my legion walk these depths, bound by an unholy curse. Will you them from the chains of undeath?"`,
   optionOne: "Accept",
   optionTwo: "Refuse",
@@ -570,9 +567,9 @@ const GRERVILS_BODY_EVENT = {
 
 const HAG_TRADER = {
   name: "The Hag",
-  eventType: "NPC",
-  description:
-    `"Welcome, lost souls, to my hollow's embrace. Longing for my cauldron's depths, are you? Bring rare tributes, and my cauldron shall brew you something special."`,
+  eventType: "MISC",
+  description: `"Welcome, lost souls, to my hollow's embrace. Longing for my cauldron's depths, are you? Bring rare tributes, and my cauldron shall brew you something special."`,
+  summary: `The hag seeks rare ingredients to brew elixirs, entwining dark magic and forbidden lore. Her cauldron's simmering concoctions grant her power, prolonging her twisted existence, and unleashing curses upon those who dare to cross her malevolent path.`,
   optionOne: "Trade",
   optionTwo: "Leave",
   functionOne: () => {
@@ -585,8 +582,9 @@ const HAG_TRADER = {
 
 const CURATOR_TRADER = {
   name: "The Curator",
-  eventType: "NPC",
+  eventType: "MISC",
   description: `"Ah, about time you stumbled in. Let's cut the formalities get to the point. What pitiful trinkets have you scrounged up, or are you here to waste my time?"`,
+  summary: `The Curator, a shrewd and condescending guardian of the catacombs, seeks to amass a collection of potent magical items. Intrigued by the esoteric and enchanted, he's open to trades but demands only the most exceptional artifacts for his coveted assortment.`,
   optionOne: "Trade",
   optionTwo: "Leave",
   functionOne: () => {
@@ -634,9 +632,9 @@ const COFFIN_EVENT = {
       currentRoom.contents.monsters.push(DRAUGR);
       getItem("COFFIN");
       getItem("WISP");
-      startBattle();
+      soundEffectHandler(doorSecretPassage1);
       setTimeout(() => {
-        soundEffectHandler(doorSecretPassage1);
+        playMusic(edgeOfFear);
         monsterAttackHandler();
         startBattle();
       }, 1500);
@@ -693,7 +691,7 @@ const CRIMSON_COVENANT = {
   name: "Crimson Covenant",
   eventType: "MISC",
   description:
-    "Before you sits a lady in white, encircled by hooded figures in blood-stained robes. With chilling devotion, they cut their wrists, offering crimson tributes to her. Echoing chants fill the catacomb—a haunting invitation. Will you join their ritual at the blood altar?",
+    "Before you stands a figure in blood-stained robes, encircled by other members of a ritual. With chilling devotion, they cut their wrists, offering crimson tributes. Echoing chants fill the catacomb, a haunting invitation. Will you join their ritual?",
   summary: "",
   optionOne: "Join",
   optionTwo: "Refuse",
@@ -817,6 +815,7 @@ function lockedRoomHandler(room) {
 
   if (room === "Bonevault") {
     room = Math.round(Math.random() * 4);
+    console.log(`Bonevault Room: ${room}`);
   }
 
   setTimeout(() => {
@@ -859,7 +858,6 @@ function lockedRoomHandler(room) {
         );
         // currentRoom.contents.items.push();
         //writeToLog() room details
-
         break;
 
       case "Frozen Door":
@@ -867,33 +865,33 @@ function lockedRoomHandler(room) {
         monsters.push(DRAUGR, DRAUGR, DRAUGR);
         // currentRoom.contents.items.push();
         //writeToLog() room details
-
         break;
 
-      case "Festering Door":
-        monsters.push(GNAWER, GNAWER, GNAWER, GNAWER, GNAWER);
-        // currentRoom.contents.items.push();
-        //writeToLog() room details
+      // case "Festering Door":
+      //   monsters.push(GNAWER, GNAWER, GNAWER, GNAWER, GNAWER);
+      //   // currentRoom.contents.items.push();
+      //   //writeToLog() room details
+      //   break;
 
-        break;
+      // case "Webbed Door":
+      //   monsters.push(BROODMOTHER, BROODMOTHER, BROODMOTHER);
+      //   // currentRoom.contents.items.push();
+      //   //writeToLog() room details
+      //   break;
 
-      case "Webbed Door":
-        monsters.push(BROODMOTHER, BROODMOTHER, BROODMOTHER);
-        // currentRoom.contents.items.push();
-        //writeToLog() room details
-
-        break;
-
-      case "Hidden Door":
-        monsters.push(SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL);
-        // currentRoom.contents.items.push();
-        //writeToLog() room details
-
-        break;
+      // case "Hidden Door":
+      //   monsters.push(SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL);
+      //   // currentRoom.contents.items.push();
+      //   //writeToLog() room details
+      //   break;
     }
 
     items.push(WHISPERING_SKULL, POTION);
-    startBattle();
+
+    if (monsters.length > 0) {
+      startBattle();
+    }
+
     setRoomSummary();
   }, 1500);
 }
@@ -958,14 +956,24 @@ function generalEventHandler(option, statModifier, attribute) {
     }
   }
 
-  if (currentRoom.roomName !== "Hag's Hollow" && currentRoom.roomName !== "Curator's Curio") {
-    console.log("CLOSED");
+  if (
+    currentRoom.roomName !== "Hag's Hollow" &&
+    currentRoom.roomName !== "Curator's Curio"
+  ) {
     currentRoom.contents.events = null;
     fadeOutAnimation(eventModal);
     setTimeout(() => {
       eventModal.style.display = "none";
     }, 1900);
-    updatePlayerTrackers();
+
+    if (npcImageCard.style.display === "block") {
+      console.log("BLOCK");
+      fadeOutAnimation(npcImageCard);
+      setTimeout(() => {
+        npcImageCard.style.display = "none";
+      }, 1900);
+    }
+    updateTotalStats();
   }
 }
 
@@ -991,6 +999,14 @@ function renderEvent(event) {
         break;
 
       case "NPC":
+        // Render NPC Image Card
+        if (event.image) {
+          npcImageCard.style.backgroundImage = `url(${event.image})`;
+          npcImageCard.style.backgroundSize = "cover";
+          fadeInAnimation(npcImageCard);
+          npcImageCard.style.display = "block";
+        }
+
         eventButtonOne.textContent = event.optionOne;
         eventButtonTwo.textContent = event.optionTwo;
         break;
@@ -1036,6 +1052,7 @@ eventButtonOne.addEventListener("click", () => {
   // NPCs
   if (event.eventType === "NPC") {
     generalEventHandler(event.optionOne);
+
   }
   // Miscellaneous
   if (event.eventType === "MISC") {
@@ -1060,6 +1077,7 @@ eventButtonTwo.addEventListener("click", () => {
   // NPCs
   if (event.eventType === "NPC") {
     generalEventHandler(event.optionTwo);
+
   }
   // Miscellaneous
   if (event.eventType === "MISC") {

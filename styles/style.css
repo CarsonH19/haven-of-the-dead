@@ -86,6 +86,20 @@ li, ul {
   margin: 0px;
 }
 
+/* NPC IMAGE CARD */
+
+#npcImageCard {
+  display: none;
+  position: absolute;
+  left: 50%; /* Center horizontally */
+  top: 25%; /* Center vertically */
+  transform: translate(-50%, -50%); /* Adjust for element's size */
+  width: 200px;
+  height: 200px;
+  border: 2px solid var(--header);
+  border-radius: 5px;
+}
+
 .top-right {
   display: flex;
   width: 60%;

@@ -739,12 +739,14 @@ function closeRoomSummaryModal() {
 
   // Checks if Forsaken Commander's Quest is Complete
   if (legionTracker >= 30) {
+    WAR_TORN_BANNER_STATUS.duration = null;
     inventoryItems.push(AEGIS_OF_THE_FALLEN);
+
     if (inventoryItems.includes(WAR_TORN_BANNER)) {
       useConsumable("War Torn Banner");
     } else if (attunedItems.includes(WAR_TORN_BANNER)) {
       const index = attunedItems.indexOf(WAR_TORN_BANNER);
-      inventoryItems.splice(index, 1);
+      attunedItems.splice(index, 1);
     }
     writeToLogOther(LOG_OTHER, "YES", AEGIS_OF_THE_FALLEN);
   }
@@ -756,7 +758,8 @@ function renderRoomSummaryModal() {
 
   if (
     currentRoom !== catacombEntrance &&
-    currentRoom.contents.monsters.length === 0
+    currentRoom.contents.monsters.length === 0 &&
+    roomSummaryModal.style.display === "none"
   ) {
     // Builds summary modal with currentRoom's contents.
     setTimeout(function () {
@@ -914,7 +917,7 @@ attackBtn.addEventListener("click", function () {
   if (currentMonsterHealth <= 0) {
     isGameOver();
   } else {
-    playerControlsTimeout(1500);
+    playerControlsTimeout(2000);
     setTimeout(monsterAttackHandler, 1200);
     setTimeout(isGameOver, 1300);
     updatePlayerTrackers();
@@ -926,7 +929,7 @@ guardBtn.addEventListener("click", () => {
   attackCounter = 0; // Item: Soulreaver
 
   specialCooldownHandler();
-  playerControlsTimeout(1500);
+  playerControlsTimeout(2000);
   guardHandler();
   setTimeout(isGameOver, 500);
   updatePlayerTrackers();
@@ -965,7 +968,7 @@ potionBtn.addEventListener("click", () => {
 
   if (currentRoom.contents.monsters.length > 0) {
     specialCooldownHandler();
-    playerControlsTimeout(1500);
+    playerControlsTimeout(2000);
     setTimeout(monsterAttackHandler, 1200);
     isGameOver();
   }
@@ -979,7 +982,7 @@ fleeBtn.addEventListener("click", () => {
 
   fleeHandler();
   specialCooldownHandler();
-  playerControlsTimeout(1500);
+  playerControlsTimeout(2000);
   updatePlayerTrackers();
 });
 
@@ -1038,10 +1041,10 @@ continueButton.addEventListener("click", () => {
       currentRoom = FALLEN_WARRIORS_VALE;
       renderCurrentRoom(FALLEN_WARRIORS_VALE);
       restlessWispTracker = null;
-    } else if (greedyWispTracker === "ARRIVE") {
+    } else if (curiousWispTracker === "ARRIVE") {
       currentRoom = CURATORS_CURIO;
       renderCurrentRoom(CURATORS_CURIO);
-      greedyWispTracker = null;
+      curiousWispTracker = null;
     } else if (wickedWispTracker === "ARRIVE") {
       currentRoom = HAGS_HOLLOW;
       renderCurrentRoom(HAGS_HOLLOW);

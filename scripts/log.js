@@ -616,7 +616,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
 
     case LOG_STAT_INCREASE:
       let hero = heroChecker();
-      newEntry.textContent = `You've reached level ${hero.level}! Your attacks deal and additional 2 damage and your base health increased by 10HP!`;
+      newEntry.textContent = `You've reached level ${hero.level}! Your attacks deal and additional 2 damage and your base health increased by 10HP.`;
       break;
 
     // ===============================
@@ -1302,11 +1302,17 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       ) {
         let narration = Math.floor(Math.random() * 6) + 1;
         if (narration === 1) {
+          newEntry.textContent = `"Well, I suppose you're not entirely useless. This might fetch a decent price. "`;
         } else if (narration === 2) {
+          newEntry.textContent = `"Hmm, not bad. I've seen worse. Congratulations, you've managed to pique my interest."`;
         } else if (narration === 3) {
+          newEntry.textContent = `"Finally, something worth my time. You might have a modicum of taste. "`;
         } else if (narration === 4) {
+          newEntry.textContent = `"I'll admit, this piece has a certain charm. You might have stumbled upon something worthwhile."`;
         } else if (narration === 5) {
+          newEntry.textContent = `"Huh, I was starting to think you were only capable of picking up garbage."`;
         } else if (narration === 6) {
+          newEntry.textContent = `"I've seen more impressive offerings, but this has a glimmer of potential."`;
         }
       } else if (
         currentRoom.roomName === "Curator's Curio" &&
@@ -1314,11 +1320,17 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       ) {
         let narration = Math.floor(Math.random() * 6) + 1;
         if (narration === 1) {
+          newEntry.textContent = `"You think you've earned the right to one of my treasures, eh? Fine, pick something, but don't expect me to be charitable."`;
         } else if (narration === 2) {
+          newEntry.textContent = `"Well, aren't you persistent? Fine, take your pick, but don't linger."`;
         } else if (narration === 3) {
+          newEntry.textContent = `"So, you want to spend your favor, do you? Don't get too comfortable with the idea. "`;
         } else if (narration === 4) {
+          newEntry.textContent = `"I suppose you've earned the privilege to snag something from my collection."`;
         } else if (narration === 5) {
+          newEntry.textContent = `"You've got some nerve cashing in that favor. Make it snappy; I've got deadlines. And don't think this makes us friends. It's just business."`;
         } else if (narration === 6) {
+          newEntry.textContent = `"You've scraped together enough goodwill for a trade. Make it quick."`;
         }
       } else if (
         currentRoom.roomName === "Curator's Curio" &&
@@ -1326,11 +1338,17 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       ) {
         let narration = Math.floor(Math.random() * 6) + 1;
         if (narration === 1) {
+          newEntry.textContent = `"Look at you, thinking you can just stroll in here and take your pick. You haven't earned that privilege. "`;
         } else if (narration === 2) {
+          newEntry.textContent = `"You're seriously attempting to haggle with me? Save your breath."`;
         } else if (narration === 3) {
+          newEntry.textContent = `"Do you honestly believe you're entitled to that? You haven't earned the right to trade."`;
         } else if (narration === 4) {
+          newEntry.textContent = `"You must be delusional if you think you can walk away with that treasure."`;
         } else if (narration === 5) {
+          newEntry.textContent = `"You think I'd trade my prized possessions for the likes of you?"`;
         } else if (narration === 6) {
+          newEntry.textContent = `"Nice try, but you haven't earned the right to touch that just yet."`;
         }
       }
       break;
@@ -1345,7 +1363,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `"You aid Graverobber Earver's in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their onslaught, he meets his untimely demise, leaving you to face these undead guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Released from captivity, the scoundrel breathes thanks, but a looming arachnid descends, hungry eyes fixed on its newfound prey.`;
-      } else if ((currentRoom.name = "Ivan's Hidden Cache")) {
+      } else if ((currentRoom.roomName = "Ivan's Hidden Cache")) {
         newEntry.textContent = `As the key turns, a malevolent hiss escapes just before the chest explodes in an eruption of flames. Burning and disoriented you realize the scoundrel's gratitude was a ruse.`;
       } else if (event === SCHOLAR_HENDRA) {
         newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. They turn towards you, their hollow sockets fixed on your bold presence.`;
@@ -1544,8 +1562,6 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `You make an offering you the Crimson Covenant.`;
       } else if (dataOne === RATTLEBONE_WHISTLE) {
         newEntry.textContent = `The Rattlebone Charm induces fear in your attacker, causing them to flee in terror.`;
-      } else if (dataOne === GRERVILS_HEAD) {
-        newEntry.textContent = `"Keep searching! My body must be around here somewhere!"`;
       } else if (dataOne === GRAVEBLOOM) {
         newEntry.textContent = `You are no longer poisoned.`;
       } else if (dataOne === WARDING_CANDLE) {

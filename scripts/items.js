@@ -91,7 +91,7 @@
 // - *Unholy Wisp
 // - *Restless Wisp
 // - *Wicked Wisp
-// - *Greedy Wisp
+// - *CURIOUS Wisp
 
 // ===============================
 //        COMMON ITEMS
@@ -246,7 +246,6 @@ const RITUAL_BLADE = {
       return 0;
     }
   },
-  unequip: () => {},
 };
 
 // ===============================
@@ -1221,22 +1220,29 @@ const BLACKHEART_BREW = {
   soundEffect: gulpingWater24,
   status: "You are drunk. Strength increased by 2 & Dexterity decreased by 1.",
   duration: null,
+  statusDuration: null,
+  stats: {
+    strength: 2,
+    dexterity: -1,
+    faith: 0,
+  },
   function: () => {
-    let duration = roomCounter + 5;
-    blackheartBrewTracker = "DRUNK";
+    let statusDuration = roomCounter + 5;
     BLACKHEART_BREW.duration = "5 Rooms";
     let blackheartBrewInterval = setInterval(() => {
-      BLACKHEART_BREW.duration = `Duration: ${duration - roomCounter} Rooms`;
+      const duration = BLACKHEART_BREW.statusDuration - roomCounter;
+      const roomText = duration > 1 ? "Rooms" : "Room";
+
+      BLACKHEART_BREW.duration = `Duration: ${duration} ${roomText}`;
+
       if (roomCounter >= duration) {
-        blackheartBrewTracker = "SOBER";
         BLACKHEART_BREW.duration = null;
-        baseDexterity++;
-        baseStrength -= 2;
+        removeStatChange(POISONED);
         clearInterval(blackheartBrewInterval);
       }
     }, 15000);
 
-    statusEffectHandler(BLACKHEART_BREW);
+    addStatChange(BLACKHEART_BREW);
     renderStatusEffects(BLACKHEART_BREW);
   },
 };
@@ -1270,7 +1276,6 @@ const WHISPERING_SKULL = {
 
 const WARDING_CANDLE = {
   name: "Warding Candle",
-  description: "",
   image: "styles/images/items/warding-candle.jpg",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
@@ -1400,19 +1405,18 @@ const BLAZING_CANDLE = {
 
 const SOULFLAME_CANDLE = {
   name: "Soulflame Candle",
-  description: "",
   image: "styles/images/items/soulflame-candle.jpg",
   soundEffect: flameLicks2,
   type: "CONSUMABLE",
   rarity: "Epic",
   logDetail: "CANDLE",
   effect:
-    "When this item is used the experience you gain is doubled. The candle burns out after gaining 100XP.",
+    "When this item is used all experience gained is doubled. The candle burns out after gaining 1,000XP.",
   status: "All experience gained is doubled.",
   duration: null,
   function: () => {
     let itemDuration = experiencePoints + 1000;
-    SOULFLAME_CANDLE.duration = "1000XP";
+    SOULFLAME_CANDLE.duration = "Duration: 1,000XP";
     let soulflameCandleInterval = setInterval(() => {
       SOULFLAME_CANDLE.duration = `Duration: ${
         itemDuration - experiencePoints
@@ -1481,7 +1485,7 @@ const GUIDING_LIGHT = {
       wisp.classList.add("orb");
 
       const root = document.documentElement;
-      root.style.setProperty("--orb", "#ffffed");
+      root.style.setProperty("--orb", "#f5e9ae");
 
       renderStatusEffects(GUIDING_LIGHT);
     }
@@ -1545,7 +1549,7 @@ const UNHOLY_WISP = {
   rarity: "Rare",
   logDetail: "WISP",
   effect:
-    "When this item is used a wisp will guide you to the nearest Blood Alter.",
+    "When this item is used a wisp will guide you to the Crimson Covenant.",
   status: "Guiding you to the Blood Alter.",
   duration: null,
   function: () => {
@@ -1618,10 +1622,10 @@ const WICKED_WISP = {
   },
 };
 
-const GREEDY_WISP = {
-  name: "Greedy Wisp",
+const CURIOUS_WISP = {
+  name: "Curious Wisp",
   description: "",
-  image: "styles/images/items/guiding-light.jpg",
+  image: "styles/images/items/curious-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Rare",
@@ -1634,33 +1638,33 @@ const GREEDY_WISP = {
     let randomNumber = Math.round(Math.random() * 5) + 1;
     let itemDuration = roomCounter + randomNumber;
     CURATORS_CURIO.contents.events = CURATOR_TRADER;
-    GREEDY_WISP.duration = "Searching";
+    CURIOUS_WISP.duration = "Searching";
     wispActive = "ACTIVE";
 
-    let greedyWispnterval = setInterval(() => {
+    let curiousWispnterval = setInterval(() => {
       if (itemDuration - roomCounter > 1) {
-        GREEDY_WISP.duration = `Duration: ${itemDuration - roomCounter} Rooms`;
+        CURIOUS_WISP.duration = `Duration: ${itemDuration - roomCounter} Rooms`;
       } else {
-        GREEDY_WISP.duration = `Duration: ${itemDuration - roomCounter} Room`;
+        CURIOUS_WISP.duration = `Duration: ${itemDuration - roomCounter} Room`;
       }
 
       if (roomCounter >= itemDuration) {
-        greedyWispTracker = "ARRIVE";
+        curiousWispTracker = "ARRIVE";
         wisp.classList.remove("orb");
-        GREEDY_WISP.duration = null;
+        CURIOUS_WISP.duration = null;
         wispActive = null;
-        clearInterval(greedyWispnterval);
+        clearInterval(curiousWispnterval);
       } else {
-        greedyWispTracker = "GUIDING";
+        curiousWispTracker = "GUIDING";
       }
     }, 3000);
 
     wisp.classList.add("orb");
 
     const root = document.documentElement;
-    root.style.setProperty("--orb", "#fff3b4");
+    root.style.setProperty("--orb", "#8fc4d9");
 
-    renderStatusEffects(GREEDY_WISP);
+    renderStatusEffects(CURIOUS_WISP);
   },
 };
 
@@ -1749,7 +1753,15 @@ let candleItems = [
   SOULFLAME_CANDLE,
 ];
 
-let wispItems = [GUIDING_LIGHT, ROWDY_WISP, UNHOLY_WISP, RESTLESS_WISP];
+let wispItems = [
+  GUIDING_LIGHT,
+  GUIDING_LIGHT,
+  CURIOUS_WISP,
+  WICKED_WISP,
+  ROWDY_WISP,
+  UNHOLY_WISP,
+  RESTLESS_WISP,
+];
 
 // Bonevault Loot
 let bonevaultItems = [
@@ -1817,6 +1829,8 @@ let rareConsumables = [
   UNHOLY_WISP,
   RESTLESS_WISP,
   ROWDY_WISP,
+  CURIOUS_WISP,
+  WICKED_WISP,
 ];
 
 // Epic Loot
@@ -2088,9 +2102,11 @@ function renderStatusEffects(effect) {
   // Updates & Check Effect Duration
   let newEffectInterval = setInterval(() => {
     tooltipNoteDuration.textContent = effect.duration;
+    console.log(effect.duration);
     if (effect.duration === null) {
       // Removes Element when duration ends
       middleLeft.removeChild(newEffect);
+      console.log(`Status Effect removed!`);
       clearInterval(newEffectInterval);
 
       // Remove the effect from the activeEffects list
@@ -2167,7 +2183,6 @@ function statusEffectHandler(item) {
       } else {
         return 0;
       }
-      break;
 
     case BLAZING_CANDLE:
       if (blazingCandleTracker > 0) {
@@ -2186,41 +2201,21 @@ function statusEffectHandler(item) {
       }
 
     case BLACKHEART_BREW:
-      if (blackheartBrewTracker === "DRUNK") {
-        addStatChange(BLACKHEART_BREW);
-        updatePlayerTrackers();
-      }
       break;
 
     case POISONED:
-      // write a function that checks stats and reduces stats by available number then restores the same amount later
-      // addStatChange(POISONED);
-      updatePlayerTrackers();
-      //writeToLogItem() You've been poisoned!
       break;
 
     case HAUNTED:
-      //writeToLogItem() You've been haunted!
       break;
 
     case DISEASED:
-      updatePlayerTrackers();
-      //writeToLogItem() You've been diseased!
       break;
 
     case WEBBED:
-      //writeToLogItem() You are caught in the spiders web
       break;
 
-    // case BLOOD_PACT:
-    //   //writeToLogItem()
-    //   baseAttack += 5;
-    //   baseFaith -= 2;
-    //   updatePlayerTrackers();
-    //   break;
-
     case CHILLED:
-      //writeToLogItem() You are chilled and unable to use your special ability
       break;
 
     case FIENDSWORN:
@@ -2646,25 +2641,20 @@ function renderTrade() {
             items === inventoryItems &&
             items[i].type === "CONSUMABLE" &&
             items[i].name !== "Health Potion" &&
-            items[i].name !== "Whispering Skull"
+            items[i].name !== "Whispering Skull" &&
+            item[i].soundEffect !== flameLicks2
           ) {
             container.appendChild(itemBox);
           }
-
         } else if (currentRoom.roomName === "Curator's Curio") {
           favorTracker.textContent = curatorFavor;
           traderItems = curatorItems;
           traderName.textContent = "Curator's Items";
 
-          if (
-            items === inventoryItems &&
-            items[i].type === "MAGIC"
-          ) {
+          if (items === inventoryItems && items[i].type === "MAGIC") {
             container.appendChild(itemBox);
           }
         }
-
-        
       }
 
       document.querySelectorAll(".itemTooltip").forEach(function (element) {

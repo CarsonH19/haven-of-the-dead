@@ -97,9 +97,7 @@ function rogueUmbralAssault() {
 const DARKENED_REPRISAL = {
   name: "Darkened Reprisal",
   image: "styles/images/darkened-reprisal.jpg",
-  status: `You're Base Dexterity is increased by ${
-    baseDexterity * darkenedReprisalTracker
-  }.`,
+  status: `You're Dexterity is increased.`,
   duration: null,
   active: null,
   function: () => {
@@ -107,13 +105,14 @@ const DARKENED_REPRISAL = {
     let reprisalInterval = setInterval(() => {
       if (DARKENED_REPRISAL.active === "NO") {
         DARKENED_REPRISAL.duration = null;
-        updateTotalStats();
         writeToLogHero(LOG_DARKENED_REPRISAL, "YES", "DISABLE");
         clearInterval(reprisalInterval);
+        updateTotalStats();
       }
     }, 3000);
 
     renderStatusEffects(DARKENED_REPRISAL);
+    updateTotalStats();
   },
 };
 
@@ -303,7 +302,11 @@ function renderLevelUpModal() {
   faithRank.style.backgroundSize = "cover";
 
   let hero = heroChecker();
-  levelUpModal.style.display = "block";
+
+  fadeInAnimation(levelUpModal);
+  setTimeout(() => {
+    levelUpModal.style.display = "block";
+  }, 1900);
 
   if (firstLevelHandler === 0) {
     levelUpHeader.textContent = "";
@@ -402,6 +405,7 @@ function levelUpHandler(boon) {
     hero.level++;
     baseAttack += 2;
     baseHealth += 10;
+    inventoryItems.push(GUIDING_LIGHT);
     writeToLogHero(LOG_STAT_INCREASE, "NO");
   }
 

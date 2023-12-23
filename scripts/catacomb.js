@@ -11,7 +11,7 @@
 //     contents: {
 //       monsters: [],
 //       items: [],
-//       events: IVAN_THE_SCOUNDREL,
+//       events: GRAVEROBBER_EARVER,
 //     },
 //   },
 // ];
@@ -23,7 +23,7 @@
 const catacombEntrance = {
   roomName: "Catacomb Entrance",
   backgroundImage:
-    "styles/images/anonymous_grand_catacomb_entrance_71090877-c3af-4c56-b669-35790fad23f5.jpg",
+    "styles/images/backgrounds/catacomb-entrance-2.jpg",
   music: droneDarkHor1,
   contents: {
     monsters: [],
@@ -601,20 +601,20 @@ let tierTwoRooms = [
       events: null,
     },
   },
-  {
-    roomName: "Bone-forged Altar",
-    description:
-      "The Bone-forged Altar exudes an eerie tranquility. Skeletal remains, meticulously arranged, form a macabre mosaic.",
-    summary: "",
-    backgroundImage:
-      "styles/images/backgrounds/tier-four/malevolent-shrine.jpg",
-    music: imminentDarkness,
-    contents: {
-      monsters: [],
-      items: [],
-      events: SCHOLAR_HENDRA,
-    },
-  },
+  // {
+  //   roomName: "Bone-forged Altar",
+  //   description:
+  //     "The Bone-forged Altar exudes an eerie tranquility. Skeletal remains, meticulously arranged, form a macabre mosaic.",
+  //   summary: "",
+  //   backgroundImage:
+  //     "styles/images/backgrounds/tier-four/malevolent-shrine.jpg",
+  //   music: imminentDarkness,
+  //   contents: {
+  //     monsters: [],
+  //     items: [],
+  //     events: SCHOLAR_HENDRA,
+  //   },
+  // },
   {
     roomName: "Bonevault",
     description:
@@ -1039,7 +1039,7 @@ const GRIM_GARRISON = {
 const HAGS_HOLLOW = {
   roomName: "Hag's Hollow",
   description: `Hag's Hollow,  hidden deep within the catacomb's bowels, glows eerily from the bubbling cauldron within. Thick fog billows from the cauldron and hangs in the air, filling the room with a nauseating smell. The hag, with her cauldron, offers her dark expertise, welcoming those who bring rare ingredients to trade.`,
-  backgroundImage: "styles/images/backgrounds/tier-two/grim-garrison.jpg",
+  backgroundImage: "styles/images/backgrounds/event-rooms/hags-hollow.jpg",
   music: imminentDarkness,
   contents: {
     monsters: [],
@@ -1052,8 +1052,8 @@ const HAGS_HOLLOW = {
 
 const CURATORS_CURIO = {
   roomName: "Curator's Curio",
-  description: ``,
-  backgroundImage: "styles/images/backgrounds/tier-two/grim-garrison.jpg",
+  description: `The Curator's Curio, a clandestine collection of catacomb relics and arcane artifacts. In the dim-lit reliquary, items of forgotten power gather, chosen by the curator, who is willing to make a deal for anything that catches his eye.`,
+  backgroundImage: "styles/images/backgrounds/event-rooms/curators-curio.jpg",
   music: imminentDarkness,
   contents: {
     monsters: [],

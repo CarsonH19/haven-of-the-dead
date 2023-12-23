@@ -391,7 +391,6 @@ const HAUNTING_SPIRIT = {
   },
   function: () => {
     HAUNTED.function();
-    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -407,7 +406,6 @@ const GRUDGE = {
   },
   function: () => {
     HAUNTED.function();
-    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -475,7 +473,6 @@ const POSSESSED_EARVER = {
   },
   function: () => {
     HAUNTED.function();
-    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 

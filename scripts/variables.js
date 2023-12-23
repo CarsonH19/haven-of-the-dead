@@ -24,7 +24,6 @@ potions.textContent = ` x ${potionCounter}`;
 let criticalHit;
 let actionCounter = 0;
 
-
 // ===============================
 //         Game Window
 // ===============================
@@ -36,6 +35,7 @@ const playerContainer = document.querySelector(".player-container");
 const roomsCleared = document.getElementById("roomsCleared");
 const narrativeText = document.getElementById("narrativeText");
 
+const npcImageCard = document.getElementById("npcImageCard");
 const monsterContainer = document.getElementById("monsterContainer");
 monsterContainer.style.display = "none";
 
@@ -224,10 +224,12 @@ function updateTotalStats() {
   // Dexterity
   // Check for rogue passive ability
   if (heroChoice === "ROGUE" && DARKENED_REPRISAL.active === "YES") {
-    let rougePassiveBonus = baseDexterity;
-    rougePassiveBonus *= darkenedReprisalTracker;
-    totalDexterity += rougePassiveBonus;
-    console.log(rougePassiveBonus);
+    let roguePassiveBonus = baseDexterity;
+    roguePassiveBonus = Math.floor(
+      (roguePassiveBonus *= darkenedReprisalTracker)
+    );
+    totalDexterity += roguePassiveBonus;
+    console.log(roguePassiveBonus);
   } else {
     totalDexterity += baseDexterity;
   }
@@ -304,7 +306,6 @@ const LOG_CONSUMABLE = "CONSUMABLE";
 const LOG_GAINED_CONDITION = "CONDITION GAINED";
 const LOG_REMOVED_CONDITION = "CONDITION REMOVED";
 
-
 const LOG_OTHER = "OTHER";
 
 // ===============================
@@ -328,10 +329,9 @@ let grervilTracker = null;
 // Forsaken Commander
 let commanderTracker = null;
 
-// Traders 
+// Traders
 let hagFavor = 0;
 let curatorFavor = 0;
-
 
 // ===============================
 //        Hero Variables
@@ -415,7 +415,7 @@ let guidingLightTracker;
 let rowdyWispTracker;
 let unholyWispTracker;
 let restlessWispTracker;
-let greedyWispTracker;
+let curiousWispTracker;
 let wickedWispTracker;
 
 // Candles
@@ -438,7 +438,9 @@ const WAR_TORN_BANNER_STATUS = {
   status: `The undead legion will come.`,
   duration: null,
   function: () => {
-    WAR_TORN_BANNER_STATUS.duration = `${30 - legionTracker} legionnaires remaining.`;
+    WAR_TORN_BANNER_STATUS.duration = `${
+      30 - legionTracker
+    } legionnaires remaining.`;
 
     const warTornBannerInterval = setInterval(() => {
       WAR_TORN_BANNER_STATUS.duration = `${legionTracker} Legionnaires defeated`;
@@ -462,31 +464,33 @@ const ECHOES_OF_VICTORY = {
   function: () => {
     if (ECHOES_OF_VICTORY.duration === null) {
       ECHOES_OF_VICTORY.statusDuration = roomCounter + 9;
-      ECHOES_OF_VICTORY.duration = `Duration: ${ECHOES_OF_VICTORY.statusDuration - roomCounter} Rooms`;
+      ECHOES_OF_VICTORY.duration = `Duration: ${
+        ECHOES_OF_VICTORY.statusDuration - roomCounter
+      } Rooms`;
 
-        let victoryInterval = setInterval(() => {
-          const duration = ECHOES_OF_VICTORY.statusDuration - roomCounter;
-          const roomText = duration > 1 ? 'Rooms' : 'Room';
-        
-          ECHOES_OF_VICTORY.duration = `Duration: ${duration} ${roomText}`;
-          
-          if (
-            roomCounter >= ECHOES_OF_VICTORY.statusDuration ||
-            ECHOES_OF_VICTORY.duration === null
-          ) {
-            ECHOES_OF_VICTORY.duration = null;
-            ECHOES_OF_VICTORY.statusDuration = null;
+      let victoryInterval = setInterval(() => {
+        const duration = ECHOES_OF_VICTORY.statusDuration - roomCounter;
+        const roomText = duration > 1 ? "Rooms" : "Room";
 
-            removeStatChange(ECHOES_OF_VICTORY);
-            updatePlayerTrackers();
-            clearInterval(victoryInterval);
-          }
-        }, 15000);
+        ECHOES_OF_VICTORY.duration = `Duration: ${duration} ${roomText}`;
 
-        addStatChange(ECHOES_OF_VICTORY);
-        updatePlayerTrackers();
-        renderStatusEffects(ECHOES_OF_VICTORY);
-      } else if (length > ECHOES_OF_VICTORY.statusDuration - roomCounter) {
+        if (
+          roomCounter >= ECHOES_OF_VICTORY.statusDuration ||
+          ECHOES_OF_VICTORY.duration === null
+        ) {
+          ECHOES_OF_VICTORY.duration = null;
+          ECHOES_OF_VICTORY.statusDuration = null;
+
+          removeStatChange(ECHOES_OF_VICTORY);
+          updatePlayerTrackers();
+          clearInterval(victoryInterval);
+        }
+      }, 15000);
+
+      addStatChange(ECHOES_OF_VICTORY);
+      updatePlayerTrackers();
+      renderStatusEffects(ECHOES_OF_VICTORY);
+    } else if (length > ECHOES_OF_VICTORY.statusDuration - roomCounter) {
       ECHOES_OF_VICTORY.statusDuration = roomCounter + length;
       ECHOES_OF_VICTORY.duration = `Duration: ${
         ECHOES_OF_VICTORY.statusDuration - roomCounter
@@ -555,53 +559,13 @@ const POISONED = {
     faith: 0,
   },
   function: (length) => {
-    if (POISONED.duration === null) {
-      POISONED.statusDuration = roomCounter + length;
-      POISONED.duration = `Duration: ${
-        POISONED.statusDuration - roomCounter
-      } Rooms`;
+    // ITEM: Toxinweave Mask - Poison Immunity
+    const immune = isItemAttuned(TOXINWEAVE_MASK, null);
 
-      // ITEM: Toxinweave Mask - Poison Immunity
-      const immune = isItemAttuned(TOXINWEAVE_MASK, null);
-
-      if (!immune) {
-        let poisonedInterval = setInterval(() => {
-          console.log(poisonedInterval);
-          if (POISONED.statusDuration - roomCounter > 1) {
-            POISONED.duration = `Duration: ${
-              POISONED.statusDuration - roomCounter
-            } Rooms`;
-          } else {
-            POISONED.duration = `Duration: ${
-              POISONED.statusDuration - roomCounter
-            } Room`;
-          }
-
-          if (
-            roomCounter >= POISONED.statusDuration ||
-            POISONED.duration === null
-          ) {
-            POISONED.duration = null;
-            POISONED.statusDuration = null;
-
-            removeStatChange(POISONED);
-            clearInterval(poisonedInterval);
-            updateTotalStats();
-            writeToLogStatusEffect(LOG_REMOVED_CONDITION, "YES", POISONED);
-          }
-        }, 3000);
-
-        addStatChange(POISONED);
-        updateTotalStats();
-        renderStatusEffects(POISONED);
-        writeToLogStatusEffect(LOG_GAINED_CONDITION, "YES", POISONED);
-      }
-    } else if (length > POISONED.statusDuration - roomCounter) {
-      POISONED.statusDuration = roomCounter + length;
-      POISONED.duration = `Duration: ${
-        POISONED.statusDuration - roomCounter
-      } Rooms`;
-      writeToLogStatusEffect(LOG_GAINED_CONDITION, "YES", POISONED);
+    if (!immune) {
+      startStatusEffect(POISONED, length);
+    } else {
+      writeToLogItem(LOG_ITEM, null, TOXINWEAVE_MASK);
     }
   },
 };
@@ -613,8 +577,8 @@ const HAUNTED = {
   duration: null,
   statusDuration: null,
   function: () => {
-    let randomNumber = Math.round(Math.random() * 7) + 1;
     if (HAUNTED.duration === null) {
+      let randomNumber = Math.round(Math.random() * 7) + 1;
       HAUNTED.statusDuration = roomCounter + randomNumber;
       HAUNTED.duration = `Duration: ?`;
 
@@ -630,12 +594,10 @@ const HAUNTED = {
           }
         }, 15000);
 
+        writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         statusEffectHandler(HAUNTED);
         renderStatusEffects(HAUNTED);
       }
-    } else if (randomNumber > HAUNTED.statusDuration) {
-      HAUNTED.statusDuration = roomCounter + randomNumber;
-      //writeToLog() Haunted again
     }
   },
 };
@@ -647,45 +609,13 @@ const DISEASED = {
   duration: null,
   statusDuration: null,
   function: (length) => {
-    if (DISEASED.duration === null) {
-      DISEASED.statusDuration = roomCounter + length;
-      DISEASED.duration = `Duration: ${
-        DISEASED.statusDuration - roomCounter
-      } Rooms`;
+    // ITEM: Plagueward Pendant - Disease Immunity
+    const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
 
-      // ITEM: Plagueward Pendant - Disease Immunity
-      const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
-
-      if (!immune) {
-        let diseasedInterval = setInterval(() => {
-          if (DISEASED.statusDuration - roomCounter > 1) {
-            DISEASED.duration = `Duration: ${
-              DISEASED.statusDuration - roomCounter
-            } Rooms`;
-          } else {
-            DISEASED.duration = `Duration: ${
-              DISEASED.statusDuration - roomCounter
-            } Room`;
-          }
-
-          if (roomCounter >= DISEASED.statusDuration) {
-            DISEASED.duration = null;
-            DISEASED.statusDuration = null;
-
-            updatePlayerTrackers();
-            clearInterval(diseasedInterval);
-          }
-        }, 3000);
-
-        statusEffectHandler(DISEASED);
-        renderStatusEffects(DISEASED);
-      }
-    } else if (length > DISEASED.statusDuration - roomCounter) {
-      DISEASED.statusDuration = roomCounter + length;
-      DISEASED.duration = `Duration: ${
-        DISEASED.statusDuration - roomCounter
-      } Rooms`;
-      //writeToLog() Disease intensifies
+    if (!immune) {
+      startStatusEffect(DISEASED, length);
+    } else {
+      writeToLogItem(LOG_ITEM, null, PLAGUEWARD_PENDANT);
     }
   },
 };
@@ -697,45 +627,13 @@ const BURNED = {
   duration: null,
   statusDuration: null,
   function: (length) => {
-    if (BURNED.duration === null) {
-      BURNED.statusDuration = roomCounter + length;
-      BURNED.duration = `Duration: ${
-        BURNED.statusDuration - roomCounter
-      } Rooms`;
+    // ITEM: Fire Trinket - Burned Immunity
+    const immune = isItemAttuned(DARKGUARD_TRINKET, null);
 
-      // ITEM: Fire Trinket - Burned Immunity
-      const immune = isItemAttuned(DARKGUARD_TRINKET, null);
-
-      if (!immune) {
-        let burnedInterval = setInterval(() => {
-          if (BURNED.statusDuration - roomCounter > 1) {
-            BURNED.duration = `Duration: ${
-              BURNED.statusDuration - roomCounter
-            } Rooms`;
-          } else {
-            BURNED.duration = `Duration: ${
-              BURNED.statusDuration - roomCounter
-            } Room`;
-          }
-
-          if (roomCounter >= BURNED.statusDuration) {
-            BURNED.duration = null;
-            BURNED.statusDuration = null;
-
-            updatePlayerTrackers();
-            clearInterval(burnedInterval);
-          }
-        }, 3000);
-
-        statusEffectHandler(BURNED);
-        renderStatusEffects(BURNED);
-      }
-    } else if (length > BURNED.statusDuration - roomCounter) {
-      BURNED.statusDuration = roomCounter + length;
-      BURNED.duration = `Duration: ${
-        BURNED.statusDuration - roomCounter
-      } Rooms`;
-      //writeToLog() Disease intensifies
+    if (!immune) {
+      startStatusEffect(BURNED, length);
+    } else {
+      writeToLogItem(LOG_ITEM, null, PLAGUEWARD_PENDANT);
     }
   },
 };
@@ -747,45 +645,13 @@ const CURSED = {
   duration: null,
   statusDuration: null,
   function: (length) => {
-    if (CURSED.duration === null) {
-      CURSED.statusDuration = roomCounter + length;
-      CURSED.duration = `Duration: ${
-        CURSED.statusDuration - roomCounter
-      } Rooms`;
+    // ITEM: Darkguard Trinket - Cursed Immunity
+    const immune = isItemAttuned(DARKGUARD_TRINKET, null);
 
-      // ITEM: Darkguard Trinket - Cursed Immunity
-      const immune = isItemAttuned(DARKGUARD_TRINKET, null);
-
-      if (!immune) {
-        let cursedInterval = setInterval(() => {
-          if (CURSED.statusDuration - roomCounter > 1) {
-            CURSED.duration = `Duration: ${
-              CURSED.statusDuration - roomCounter
-            } Rooms`;
-          } else {
-            CURSED.duration = `Duration: ${
-              CURSED.statusDuration - roomCounter
-            } Room`;
-          }
-
-          if (roomCounter >= CURSED.statusDuration) {
-            CURSED.duration = null;
-            CURSED.statusDuration = null;
-
-            updatePlayerTrackers();
-            clearInterval(cursedInterval);
-          }
-        }, 3000);
-
-        statusEffectHandler(CURSED);
-        renderStatusEffects(CURSED);
-      }
-    } else if (length > CURSED.statusDuration - roomCounter) {
-      CURSED.statusDuration = roomCounter + length;
-      CURSED.duration = `Duration: ${
-        CURSED.statusDuration - roomCounter
-      } Rooms`;
-      //writeToLog() Disease intensifies
+    if (!immune) {
+      startStatusEffect(CURSED, length);
+    } else {
+      writeToLogItem(LOG_ITEM, null, DARKGUARD_TRINKET);
     }
   },
 };
@@ -845,45 +711,13 @@ const CHILLED = {
   duration: null,
   statusDuration: null,
   function: (length) => {
-    if (CHILLED.duration === null) {
-      CHILLED.statusDuration = roomCounter + length;
-      CHILLED.duration = `Duration: ${
-        CHILLED.statusDuration - roomCounter
-      } Rooms`;
+    // ITEM: Chillbreaker Band - Chilled Immunity
+    const immune = isItemAttuned(CHILLBREAKER_BAND, null);
 
-      // ITEM: Chillbreaker Band - Chilled Immunity
-      const immune = isItemAttuned(CHILLBREAKER_BAND, null);
-
-      if (!immune) {
-        let chilledInterval = setInterval(() => {
-          if (CHILLED.statusDuration - roomCounter > 1) {
-            CHILLED.duration = `Duration: ${
-              CHILLED.statusDuration - roomCounter
-            } Rooms`;
-          } else {
-            CHILLED.duration = `Duration: ${
-              CHILLED.statusDuration - roomCounter
-            } Room`;
-          }
-
-          if (roomCounter >= CHILLED.statusDuration) {
-            CHILLED.duration = null;
-            CHILLED.statusDuration = null;
-
-            updatePlayerTrackers();
-            clearInterval(chilledInterval);
-          }
-        }, 3000);
-
-        statusEffectHandler(CHILLED);
-        renderStatusEffects(CHILLED);
-      }
-    } else if (length > CHILLED.statusDuration - roomCounter) {
-      CHILLED.statusDuration = roomCounter + length;
-      CHILLED.duration = `Duration: ${
-        CHILLED.statusDuration - roomCounter
-      } Rooms`;
-      //writeToLog() Disease intensifies
+    if (!immune) {
+      startStatusEffect(CHILLED, length);
+    } else {
+      writeToLogItem(LOG_ITEM, null, CHILLBREAKER_BAND);
     }
   },
 };
@@ -918,4 +752,77 @@ const BRANDED = {
       renderStatusEffects(BRANDED);
     }
   },
+};
+
+//
+//
+//
+//
+//
+//
+//
+
+const startStatusEffect = (statusEffect, length) => {
+  if (statusEffect.duration === null && statusEffect.statusDuration === null) {
+    startNewStatusEffect(statusEffect, length);
+  } else if (isDurationExtended(statusEffect, length)) {
+    extendStatusEffectDuration(statusEffect, length);
+  }
+};
+
+const startNewStatusEffect = (statusEffect, length) => {
+  statusEffect.statusDuration = roomCounter + length;
+  const duration = statusEffect.statusDuration - roomCounter;
+  const roomText = duration > 1 ? "Rooms" : "Room";
+  statusEffect.duration = `Duration: ${duration} ${roomText}`;
+
+  // Checks for different Status Effects
+  if (statusEffect.stats) {
+    addStatChange(statusEffect);
+  } else {
+    updateTotalStats();
+  }
+
+  setupStatusEffectInterval(statusEffect);
+  renderStatusEffects(statusEffect);
+};
+
+const isDurationExtended = (statusEffect, length) =>
+  length > statusEffect.statusDuration - roomCounter;
+
+const extendStatusEffectDuration = (statusEffect, length) => {
+  statusEffect.statusDuration = roomCounter + length;
+  statusEffect.duration = `Duration: ${
+    statusEffect.statusDuration - roomCounter
+  } Rooms`;
+};
+
+const setupStatusEffectInterval = (statusEffect) => {
+  const intervalId = setInterval(() => {
+    const duration = statusEffect.statusDuration - roomCounter;
+    const roomText = duration > 1 ? "Rooms" : "Room";
+
+    statusEffect.duration = `Duration: ${duration} ${roomText}`;
+
+    if (
+      roomCounter >= statusEffect.statusDuration ||
+      statusEffect.duration === null
+    ) {
+      endStatusEffectInterval(statusEffect, intervalId);
+    }
+  }, 3000);
+};
+
+const endStatusEffectInterval = (statusEffect, intervalId) => {
+  statusEffect.duration = null;
+  statusEffect.statusDuration = null;
+
+  // Checks for different Status Effects
+  if (statusEffect.stats) {
+    removeStatChange(statusEffect);
+  } else {
+    updateTotalStats();
+  }
+
+  clearInterval(intervalId);
 };
