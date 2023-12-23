@@ -116,7 +116,7 @@ const SCOUNDREL = {
 
 const CULTIST = {
   name: "Cultist",
-  image: 'styles/images/monsters/cultist.jpg',
+  image: "styles/images/monsters/cultist.jpg",
   type: "HUMANOID",
   skulls: 3,
   soundEffects: {
@@ -126,7 +126,7 @@ const CULTIST = {
   },
   function: () => {
     CURSED.function(3);
-  }
+  },
 };
 
 const FIENDSWORN_CULTIST = {
@@ -141,7 +141,7 @@ const FIENDSWORN_CULTIST = {
   },
   function: () => {
     CURSED.function(5);
-  }
+  },
 };
 
 const DEMON = {
@@ -353,16 +353,6 @@ const FLOOD_OF_BONES = {
   },
 };
 
-const BARON_OF_BONE = {
-  name: "Baron of Bone",
-  type: "UNDEAD",
-  skulls: 9,
-  spawn: boneCrunchCrack1,
-  attack: fleshHit5,
-  death: boneBreak8,
-  ability: boneBreak7,
-};
-
 // ===============================
 //          Evil Spirits
 // ===============================
@@ -451,7 +441,7 @@ const HEADLESS_SKELETON = {
 
 const FORSAKEN_COMMANDER_STATS = {
   name: "Forsaken Commander",
-  image: 'styles/images/npcs/forasken-commander.jpg',
+  image: "styles/images/npcs/forasken-commander.jpg",
   type: "UNDEAD",
   skulls: 6,
   soundEffects: {
@@ -463,7 +453,7 @@ const FORSAKEN_COMMANDER_STATS = {
 
 const POSSESSED_EARVER = {
   name: "Graverobber Earver",
-  image: 'styles/images/npcs/possessed-earver.jpg',
+  image: "styles/images/npcs/possessed-earver.jpg",
   type: "HUMANOID",
   skulls: 4,
   soundEffects: {
@@ -556,19 +546,15 @@ function monsterSkullLevel(level) {
 function renderMonsterStatBlock(monster) {
   fadeInAnimation(monsterContainer);
 
-  if (!monster.image) {
-    monsterContainer.style.display = "flex";
-    monsterNameElement.textContent = monster.name;
-    monsterSkullElement.textContent = monster.skulls;
-    monsterImage.style.display = "none";
-  } else {
+  if (monster.image) {
     fadeInAnimation(monsterImage);
-    monsterContainer.style.display = "flex";
-    monsterNameElement.textContent = monster.name;
-    monsterSkullElement.textContent = monster.skulls;
     monsterImage.style.display = "block";
     monsterImage.style.backgroundImage = `url(${monster.image})`;
   }
+
+  monsterContainer.style.display = "flex";
+  monsterNameElement.textContent = monster.name;
+  monsterSkullElement.textContent = monster.skulls;
 
   monsterSkullLevel(monster.skulls);
   // ITEM: Sunstone - Weakens Evil Spirits
@@ -722,7 +708,10 @@ function monsterAbilityHandler(monster) {
       break;
 
     case IVAN_STATS:
-      if (currentMonsterHealth < 40 && currentRoom.contents.monsters.length >= 2) {
+      if (
+        currentMonsterHealth < 40 &&
+        currentRoom.contents.monsters.length >= 2
+      ) {
         IVAN_STATS.function();
       }
       break;
@@ -741,5 +730,120 @@ function monsterAbilityHandler(monster) {
         UNDYING_WARBAND.function(0);
       }
       break;
+
+    case UNDEAD_RIVEN:
+      if (actionCounter % 5 === 0) {
+        UNDEAD_RIVEN.attackCounter = 3;
+        UNDEAD_RIVEN.function();
+      }
+      break;
+
+    case UNDEAD_LIHETH:
+      if (actionCounter % 5 === 0) {
+        UNDEAD_LIHETH.function();
+      }
+      break;
+
+    case UNDEAD_SIGGURD:
+      if (actionCounter % 5 === 0) {
+        UNDEAD_SIGGURD.function();
+      }
+      break;
+
+    case BARON_OF_BONE:
+      BARON_OF_BONE.function();
   }
 }
+
+const UNDEAD_SIGGURD = {
+  name: "Siggurd, Knight of the Dead",
+  image: "styles/images/paladin.jpg",
+  type: "UNDEAD",
+  skulls: 7,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: armorMetalClanksToTheGround,
+  },
+  function: () => {
+    undeadSiggurdSmite = "ACTIVE";
+    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES"); // blade glows with green energy
+  },
+};
+
+const UNDEAD_LIHETH = {
+  name: "Liheth, Priestess of the Dead",
+  image: "styles/images/priestess.jpg",
+  type: "UNDEAD",
+  skulls: 7,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: armorMetalClanksToTheGround,
+  },
+  function: () => {
+    monsterHealthBar.value = +monsterHealthBar.value + 30;
+    currentMonsterHealth += 30;
+
+    if (currentMonsterHealth > monsterMaxHealth) {
+      monsterHealthBar.value = monsterMaxHealth;
+      currentMonsterHealth = monsterMaxHealth;
+    }
+
+    updatePlayerTrackers();
+    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+  },
+};
+
+const UNDEAD_RIVEN = {
+  name: "Riven, Shadow of the Dead",
+  image: "styles/images/rogue.jpg",
+  type: "UNDEAD",
+  skulls: 7,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: armorMetalClanksToTheGround,
+  },
+  attackCounter: 0,
+  function: () => {
+    function undeadRivenAttacks() {
+      let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
+
+      damagePlayer(monsterToPlayerDamage);
+      writeToLogMonster(LOG_MONSTER_ATTACK, "NO", monsterToPlayerDamage);
+    }
+
+    let undeadRivenInterval = setInterval(() => {
+      if (UNDEAD_RIVEN.attackCounter > 0) {
+        UNDEAD_RIVEN.attackCounter--;
+
+        undeadRivenAttacks();
+        isGameOver();
+      } else {
+        clearInterval(undeadRivenInterval);
+      }
+    }, 500);
+
+    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+  },
+};
+
+const BARON_OF_BONE = {
+  name: "Baron of Bone",
+  type: "UNDEAD",
+  skulls: 9,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: armorMetalClanksToTheGround,
+  },
+  function: () => {
+    const conditionsArray = [POISONED, DISEASED, CHILLED, BURNED, CURSED];
+    let index = Math.floor(Math.random() * conditionsArray.length);
+
+    let condition = conditionsArray[index];
+    condition.function(9);
+    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+  },
+};

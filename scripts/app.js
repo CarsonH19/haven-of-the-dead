@@ -110,6 +110,8 @@ function monsterAttackHandler(bonus) {
 
   if (bonus) {
     monsterToPlayerDamage *= bonus;
+  } else if (undeadSiggurdSmite === "ACTIVE") {
+    monsterToPlayerDamage = 24;
   }
 
   // ITEM: Bonechill Amulet - reduces Draugr attacks
@@ -1027,38 +1029,43 @@ continueButton.addEventListener("click", () => {
   closeContinueButton();
   updatePlayerTrackers();
 
-  setTimeout(() => {
-    // Wisp Logic
-    if (GUIDING_LIGHT.tracker === "ARRIVE") {
-      currentRoom = CANDLELIGHT_SHRINE;
-      renderCurrentRoom(CANDLELIGHT_SHRINE);
-      GUIDING_LIGHT.tracker = null;
-    } else if (ROWDY_WISP.tracker === "ARRIVE") {
-      currentRoom = LAUGHING_COFFIN_ROOM;
-      renderCurrentRoom(LAUGHING_COFFIN_ROOM);
-      ROWDY_WISP.tracker = null;
-    } else if (BLEEDING_WISP.tracker === "ARRIVE") {
-      currentRoom = BLOOD_ALTER;
-      renderCurrentRoom(BLOOD_ALTER);
-      BLEEDING_WISP.tracker = null;
-    } else if (RESTLESS_WISP.tracker === "ARRIVE") {
-      currentRoom = FALLEN_WARRIORS_VALE;
-      renderCurrentRoom(FALLEN_WARRIORS_VALE);
-      RESTLESS_WISP.tracker = null;
-    } else if (CURIOUS_WISP.tracker === "ARRIVE") {
-      currentRoom = CURATORS_CURIO;
-      renderCurrentRoom(CURATORS_CURIO);
-      CURIOUS_WISP.tracker = null;
-    } else if (WICKED_WISP.tracker === "ARRIVE") {
-      currentRoom = HAGS_HOLLOW;
-      renderCurrentRoom(HAGS_HOLLOW);
-      WICKED_WISP.tracker = null;
-    } else {
-      removeCurrentRoom();
-      getRandomRoom(catacombRooms);
-      renderCurrentRoom(currentRoom);
-    }
-  }, 1500);
+  if (currentRoom.roomName === "Throne of the Eternal") {
+    currentRoom = BARON_OF_BONE_BOSS_ROOM;
+    renderCurrentRoom(BARON_OF_BONE_BOSS_ROOM);
+  } else {
+    setTimeout(() => {
+      // Wisp Logic
+      if (GUIDING_LIGHT.tracker === "ARRIVE") {
+        currentRoom = CANDLELIGHT_SHRINE;
+        renderCurrentRoom(CANDLELIGHT_SHRINE);
+        GUIDING_LIGHT.tracker = null;
+      } else if (ROWDY_WISP.tracker === "ARRIVE") {
+        currentRoom = LAUGHING_COFFIN_ROOM;
+        renderCurrentRoom(LAUGHING_COFFIN_ROOM);
+        ROWDY_WISP.tracker = null;
+      } else if (BLEEDING_WISP.tracker === "ARRIVE") {
+        currentRoom = BLOOD_ALTER;
+        renderCurrentRoom(BLOOD_ALTER);
+        BLEEDING_WISP.tracker = null;
+      } else if (RESTLESS_WISP.tracker === "ARRIVE") {
+        currentRoom = FALLEN_WARRIORS_VALE;
+        renderCurrentRoom(FALLEN_WARRIORS_VALE);
+        RESTLESS_WISP.tracker = null;
+      } else if (CURIOUS_WISP.tracker === "ARRIVE") {
+        currentRoom = CURATORS_CURIO;
+        renderCurrentRoom(CURATORS_CURIO);
+        CURIOUS_WISP.tracker = null;
+      } else if (WICKED_WISP.tracker === "ARRIVE") {
+        currentRoom = HAGS_HOLLOW;
+        renderCurrentRoom(HAGS_HOLLOW);
+        WICKED_WISP.tracker = null;
+      } else {
+        removeCurrentRoom();
+        getRandomRoom(catacombRooms);
+        renderCurrentRoom(currentRoom);
+      }
+    }, 1500);
+  }
 
   soundEffectHandler(whooshLowAir);
 });

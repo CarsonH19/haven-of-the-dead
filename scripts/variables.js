@@ -1,8 +1,7 @@
 // // ===============================
-// //        General Variables
+// //        Player Variables
 // // ===============================
 
-const monsterHealthBar = document.getElementById("monster-health");
 const playerHealthBar = document.getElementById("player-health");
 
 const attackBtn = document.getElementById("attack-btn");
@@ -10,10 +9,6 @@ const guardBtn = document.getElementById("guard-btn");
 const specialBtn = document.getElementById("special-btn");
 const potionBtn = document.getElementById("potion-btn");
 const fleeBtn = document.getElementById("flee-btn");
-
-let monsterMaxHealth = null;
-let currentMonsterHealth = monsterMaxHealth;
-let monsterAttackValue = null;
 
 let currentPlayerHealth = null;
 
@@ -23,6 +18,18 @@ potions.textContent = ` x ${potionCounter}`;
 
 let criticalHit;
 let actionCounter = 0;
+
+// ===============================
+//         Monster Variables
+// ===============================
+const monsterHealthBar = document.getElementById("monster-health");
+
+let monsterMaxHealth = null;
+let currentMonsterHealth = monsterMaxHealth;
+let monsterAttackValue = null;
+
+// Used for Undead Siggurd Monster Ability
+let undeadSiggurdSmite;
 
 // ===============================
 //         Game Window
