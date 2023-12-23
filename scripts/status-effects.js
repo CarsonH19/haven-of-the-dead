@@ -2,117 +2,6 @@
 //                      Status Effects
 // ==============================================================
 
-const WAR_TORN_BANNER_STATUS = {
-  name: "War Torn Banner",
-  image: "styles/images/items/war-torn-banner.jpg",
-  status: `The undead legion will come.`,
-  duration: null,
-  function: () => {
-    WAR_TORN_BANNER_STATUS.duration = `${
-      30 - legionTracker
-    } legionnaires remaining.`;
-
-    const warTornBannerInterval = setInterval(() => {
-      WAR_TORN_BANNER_STATUS.duration = `${legionTracker} Legionnaires defeated`;
-
-      if (WAR_TORN_BANNER_STATUS.duration === null) {
-        clearInterval(warTornBannerInterval);
-      }
-    }, 3000);
-
-    statusEffectHandler(WAR_TORN_BANNER_STATUS);
-    renderStatusEffects(WAR_TORN_BANNER_STATUS);
-  },
-};
-
-const ECHOES_OF_VICTORY = {
-  name: "Echoes of Victory",
-  image: "styles/images/items/war-torn-banner.jpg",
-  status: `All damage dealt is increased by 25%`,
-  duration: null,
-  statusDuration: null,
-  function: () => {
-    if (ECHOES_OF_VICTORY.duration === null) {
-      ECHOES_OF_VICTORY.statusDuration = roomCounter + 9;
-      ECHOES_OF_VICTORY.duration = `Duration: ${
-        ECHOES_OF_VICTORY.statusDuration - roomCounter
-      } Rooms`;
-
-      let victoryInterval = setInterval(() => {
-        const duration = ECHOES_OF_VICTORY.statusDuration - roomCounter;
-        const roomText = duration > 1 ? "Rooms" : "Room";
-
-        ECHOES_OF_VICTORY.duration = `Duration: ${duration} ${roomText}`;
-
-        if (
-          roomCounter >= ECHOES_OF_VICTORY.statusDuration ||
-          ECHOES_OF_VICTORY.duration === null
-        ) {
-          ECHOES_OF_VICTORY.duration = null;
-          ECHOES_OF_VICTORY.statusDuration = null;
-
-          removeStatChange(ECHOES_OF_VICTORY);
-          updatePlayerTrackers();
-          clearInterval(victoryInterval);
-        }
-      }, 15000);
-
-      addStatChange(ECHOES_OF_VICTORY);
-      updatePlayerTrackers();
-      renderStatusEffects(ECHOES_OF_VICTORY);
-    } else if (length > ECHOES_OF_VICTORY.statusDuration - roomCounter) {
-      ECHOES_OF_VICTORY.statusDuration = roomCounter + length;
-      ECHOES_OF_VICTORY.duration = `Duration: ${
-        ECHOES_OF_VICTORY.statusDuration - roomCounter
-      } Rooms`;
-      //writeToLog() Poisoned intensifies
-    }
-  },
-};
-
-// ===============================
-//      Item Status Effects
-// ===============================
-
-const AEGIS_STATUS_EFFECT = {
-  name: "Aegis of the Fallen",
-  image: "styles/images/items/aegis.jpg",
-  status: `You are immune to all damage.`,
-  duration: null,
-  statusDuration: null,
-  function: () => {
-    if (AEGIS_STATUS_EFFECT.duration === null) {
-      AEGIS_STATUS_EFFECT.statusDuration = actionCounter + 3;
-      AEGIS_STATUS_EFFECT.duration = `Duration: ${
-        AEGIS_STATUS_EFFECT.statusDuration - actionCounter
-      } Actions`;
-    }
-
-    let aegisInterval = setInterval(() => {
-      if (AEGIS_STATUS_EFFECT.statusDuration - actionCounter > 1) {
-        AEGIS_STATUS_EFFECT.duration = `Duration: ${
-          AEGIS_STATUS_EFFECT.statusDuration - actionCounter
-        } Actions`;
-      } else {
-        AEGIS_STATUS_EFFECT.duration = `Duration: ${
-          AEGIS_STATUS_EFFECT.statusDuration - actionCounter
-        } Action`;
-      }
-
-      if (actionCounter >= AEGIS_STATUS_EFFECT.statusDuration) {
-        AEGIS_STATUS_EFFECT.duration = null;
-        AEGIS_STATUS_EFFECT.statusDuration = null;
-
-        updatePlayerTrackers();
-        clearInterval(aegisInterval);
-      }
-    }, 3000);
-
-    statusEffectHandler(AEGIS_STATUS_EFFECT);
-    renderStatusEffects(AEGIS_STATUS_EFFECT);
-  },
-};
-
 // ===============================
 //    Condition Status Effects
 // ===============================
@@ -146,28 +35,14 @@ const HAUNTED = {
   status: "Evil spirits are following you.",
   duration: null,
   statusDuration: null,
-  function: () => {
-    if (HAUNTED.duration === null) {
-      let randomNumber = Math.round(Math.random() * 7) + 1;
-      HAUNTED.statusDuration = roomCounter + randomNumber;
-      HAUNTED.duration = `Duration: ?`;
+  function: (length) => {
+    // ITEM: Ghostshroud Talisman - Haunted Immunity
+    const immune = isItemAttuned(GHOSTSHROUD_TALISMAN, null);
 
-      // ITEM: Ghostshroud Talisman - Haunted Immunity
-      const immune = isItemAttuned(GHOSTSHROUD_TALISMAN, null);
-
-      if (!immune) {
-        let hauntedInterval = setInterval(() => {
-          if (roomCounter >= HAUNTED.statusDuration) {
-            HAUNTED.duration = null;
-            HAUNTED.statusDuration = null;
-            clearInterval(hauntedInterval);
-          }
-        }, 15000);
-
-        writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
-        statusEffectHandler(HAUNTED);
-        renderStatusEffects(HAUNTED);
-      }
+    if (!immune) {
+      startStatusEffect(HAUNTED, length);
+    } else {
+      writeToLogItem(LOG_ITEM, null, GHOSTSHROUD_TALISMAN);
     }
   },
 };
@@ -203,7 +78,7 @@ const BURNED = {
     if (!immune) {
       startStatusEffect(BURNED, length);
     } else {
-      writeToLogItem(LOG_ITEM, null, PLAGUEWARD_PENDANT);
+      writeToLogItem(LOG_ITEM, null, DARKGUARD_TRINKET);
     }
   },
 };
@@ -296,41 +171,152 @@ const CHILLED = {
 //    Permanent Status Effects
 // ===============================
 
-const FIENDSWORN = {
-  name: "Fiendsworn",
-  image: "styles/images/items/fiendsworn.jpg",
-  status: "You have become sworn to a demonic entity.",
-  active: null,
+// const FIENDSWORN = {
+//   name: "Fiendsworn",
+//   image: "styles/images/items/fiendsworn.jpg",
+//   status: "You have become sworn to a demonic entity.",
+//   active: null,
+//   function: () => {
+//     if (FIENDSWORN.active === null) {
+//       FIENDSWORN.active = "Permanent";
+//       statusEffectHandler(FIENDSWORN);
+//       renderStatusEffects(FIENDSWORN);
+//     }
+//   },
+// };
+
+// const BRANDED = {
+//   name: "Branded",
+//   image: "styles/images/items/branded.jpg",
+//   status: "You have been branded by a demonic entity.",
+//   active: null,
+//   function: () => {
+//     if (BRANDED.active === null) {
+//       BRANDED.active = "Permanent";
+//       statusEffectHandler(BRANDED);
+//       renderStatusEffects(BRANDED);
+//     }
+//   },
+// };
+
+// ===============================
+//     Misc. Status Effects
+// ===============================
+
+const ECHOES_OF_VICTORY = {
+  name: "Echoes of Victory",
+  image: "styles/images/items/war-torn-banner.jpg",
+  status: `All damage dealt is increased by 25%`,
+  duration: null,
+  statusDuration: null,
   function: () => {
-    if (FIENDSWORN.active === null) {
-      FIENDSWORN.active = "Permanent";
-      statusEffectHandler(FIENDSWORN);
-      renderStatusEffects(FIENDSWORN);
+    if (ECHOES_OF_VICTORY.duration === null) {
+      ECHOES_OF_VICTORY.statusDuration = roomCounter + 9;
+      ECHOES_OF_VICTORY.duration = `Duration: ${
+        ECHOES_OF_VICTORY.statusDuration - roomCounter
+      } Rooms`;
+
+      let victoryInterval = setInterval(() => {
+        const duration = ECHOES_OF_VICTORY.statusDuration - roomCounter;
+        const roomText = duration > 1 ? "Rooms" : "Room";
+
+        ECHOES_OF_VICTORY.duration = `Duration: ${duration} ${roomText}`;
+
+        if (
+          roomCounter >= ECHOES_OF_VICTORY.statusDuration ||
+          ECHOES_OF_VICTORY.duration === null
+        ) {
+          ECHOES_OF_VICTORY.duration = null;
+          ECHOES_OF_VICTORY.statusDuration = null;
+
+          removeStatChange(ECHOES_OF_VICTORY);
+          updatePlayerTrackers();
+          clearInterval(victoryInterval);
+        }
+      }, 15000);
+
+      addStatChange(ECHOES_OF_VICTORY);
+      updatePlayerTrackers();
+      renderStatusEffects(ECHOES_OF_VICTORY);
+    } else if (length > ECHOES_OF_VICTORY.statusDuration - roomCounter) {
+      ECHOES_OF_VICTORY.statusDuration = roomCounter + length;
+      ECHOES_OF_VICTORY.duration = `Duration: ${
+        ECHOES_OF_VICTORY.statusDuration - roomCounter
+      } Rooms`;
+      //writeToLog() Poisoned intensifies
     }
   },
 };
 
-const BRANDED = {
-  name: "Branded",
-  image: "styles/images/items/branded.jpg",
-  status: "You have been branded by a demonic entity.",
-  active: null,
+// ===============================
+//      Item Status Effects
+// ===============================
+
+const WAR_TORN_BANNER_STATUS = {
+  name: "War Torn Banner",
+  image: "styles/images/items/war-torn-banner.jpg",
+  status: `The undead legion will come.`,
+  duration: null,
   function: () => {
-    if (BRANDED.active === null) {
-      BRANDED.active = "Permanent";
-      statusEffectHandler(BRANDED);
-      renderStatusEffects(BRANDED);
-    }
+    WAR_TORN_BANNER_STATUS.duration = `${
+      30 - legionTracker
+    } legionnaires remaining.`;
+
+    const warTornBannerInterval = setInterval(() => {
+      WAR_TORN_BANNER_STATUS.duration = `${legionTracker} Legionnaires defeated`;
+
+      if (WAR_TORN_BANNER_STATUS.duration === null) {
+        clearInterval(warTornBannerInterval);
+      }
+    }, 3000);
+
+    statusEffectHandler(WAR_TORN_BANNER_STATUS);
+    renderStatusEffects(WAR_TORN_BANNER_STATUS);
   },
 };
 
-//
-//
-//
-//
-//
-//
-//
+const AEGIS_STATUS_EFFECT = {
+  name: "Aegis of the Fallen",
+  image: "styles/images/items/aegis.jpg",
+  status: `You are immune to all damage.`,
+  duration: null,
+  statusDuration: null,
+  function: () => {
+    if (AEGIS_STATUS_EFFECT.duration === null) {
+      AEGIS_STATUS_EFFECT.statusDuration = actionCounter + 3;
+      AEGIS_STATUS_EFFECT.duration = `Duration: ${
+        AEGIS_STATUS_EFFECT.statusDuration - actionCounter
+      } Actions`;
+    }
+
+    let aegisInterval = setInterval(() => {
+      if (AEGIS_STATUS_EFFECT.statusDuration - actionCounter > 1) {
+        AEGIS_STATUS_EFFECT.duration = `Duration: ${
+          AEGIS_STATUS_EFFECT.statusDuration - actionCounter
+        } Actions`;
+      } else {
+        AEGIS_STATUS_EFFECT.duration = `Duration: ${
+          AEGIS_STATUS_EFFECT.statusDuration - actionCounter
+        } Action`;
+      }
+
+      if (actionCounter >= AEGIS_STATUS_EFFECT.statusDuration) {
+        AEGIS_STATUS_EFFECT.duration = null;
+        AEGIS_STATUS_EFFECT.statusDuration = null;
+
+        updatePlayerTrackers();
+        clearInterval(aegisInterval);
+      }
+    }, 3000);
+
+    statusEffectHandler(AEGIS_STATUS_EFFECT);
+    renderStatusEffects(AEGIS_STATUS_EFFECT);
+  },
+};
+
+// ==============================================================
+//                Status Effect Handling Logic
+// ==============================================================
 
 const startStatusEffect = (statusEffect, length) => {
   if (statusEffect.duration === null && statusEffect.statusDuration === null) {
@@ -397,102 +383,6 @@ const endStatusEffectInterval = (statusEffect, intervalId) => {
   clearInterval(intervalId);
 };
 
-// ===============================
-//      STATUS EFFECT LOGIC
-// ===============================
-
-// List to store active effects
-const activeEffects = [];
-
-function renderStatusEffects(effect) {
-  const middleLeft = document.querySelector(".middle-left");
-
-  // Check if the effect is already active
-  const existingEffectIndex = activeEffects.findIndex(
-    (activeEffect) => activeEffect.name === effect.name
-  );
-
-  if (existingEffectIndex !== -1) {
-    // Update the existing effect
-    const existingEffect = activeEffects[existingEffectIndex];
-    existingEffect.duration = effect.duration;
-    // You can update other properties as needed
-
-    return; // Exit the function since the effect is already active
-  }
-
-  // New Status Effect
-  const newEffect = document.createElement("div");
-
-  // Render Image
-  if (effect.image) {
-    newEffect.style.backgroundImage = `url('${effect.image}')`;
-    newEffect.style.backgroundSize = "cover";
-  } else {
-    newEffect.textContent = effect.name;
-  }
-
-  middleLeft.appendChild(newEffect);
-
-  // Status Effect Tooltip
-  newEffect.classList.add("statusTooltip");
-  const tooltipText = document.createElement("ul");
-  tooltipText.classList.add("statusTooltipText");
-  newEffect.appendChild(tooltipText);
-
-  const tooltipNoteName = document.createElement("li");
-  const tooltipNoteDuration = document.createElement("li");
-  const tooltipNoteStatus = document.createElement("li");
-  tooltipNoteName.textContent = effect.name;
-  tooltipNoteName.style.fontWeight = "800";
-
-  tooltipNoteDuration.textContent = effect.duration;
-
-  // Updates & Check Effect Duration
-  let newEffectInterval = setInterval(() => {
-    tooltipNoteDuration.textContent = effect.duration;
-    console.log(effect.duration);
-    if (effect.duration === null) {
-      // Removes Element when duration ends
-      middleLeft.removeChild(newEffect);
-      console.log(`Status Effect removed!`);
-      clearInterval(newEffectInterval);
-
-      // Remove the effect from the activeEffects list
-      activeEffects.splice(existingEffectIndex, 1);
-    }
-  }, 3000);
-
-  tooltipNoteStatus.textContent = effect.status;
-
-  tooltipText.appendChild(tooltipNoteName);
-  tooltipText.appendChild(tooltipNoteDuration);
-  tooltipText.appendChild(tooltipNoteStatus);
-
-  // Add the effect to the list of active effects
-  activeEffects.push({
-    element: newEffect,
-    name: effect.name,
-    duration: effect.duration,
-    // Add other properties as needed
-  });
-
-  document.querySelectorAll(".statusTooltip").forEach(function (element) {
-    element.addEventListener("mouseover", function () {
-      const tooltipText = this.querySelector(".statusTooltipText");
-
-      tooltipText.style.visibility = "visible";
-      tooltipText.style.opacity = "1";
-    });
-
-    element.addEventListener("mouseout", function () {
-      const tooltipText = this.querySelector(".statusTooltipText");
-      tooltipText.style.visibility = "hidden";
-      tooltipText.style.opacity = "0";
-    });
-  });
-}
-
 function statusEffectHandler(item) {
   switch (item) {
     case WARDING_CANDLE:
@@ -549,23 +439,23 @@ function statusEffectHandler(item) {
         return 1;
       }
 
-    case BLACKHEART_BREW:
-      break;
+    // case BLACKHEART_BREW:
+    //   break;
 
-    case POISONED:
-      break;
+    // case POISONED:
+    //   break;
 
-    case HAUNTED:
-      break;
+    // case HAUNTED:
+    //   break;
 
-    case DISEASED:
-      break;
+    // case DISEASED:
+    //   break;
 
-    case WEBBED:
-      break;
+    // case WEBBED:
+    //   break;
 
-    case CHILLED:
-      break;
+    // case CHILLED:
+    //   break;
 
     case FIENDSWORN:
       if (FIENDSWORN.active !== null) {
@@ -586,8 +476,6 @@ function statusEffectHandler(item) {
     case BRANDED:
       if (roomMonsters[0].length > 0 && BRANDED.active !== null) {
         let randomDemon = Math.round(Math.random() * 6);
-        console.log("DEMON");
-        console.log(randomDemon);
 
         if (randomDemon >= 6) {
           roomMonsters.unshift(DEMON);
@@ -595,5 +483,102 @@ function statusEffectHandler(item) {
         }
       }
       break;
+
+    default:
+      break;
   }
+}
+
+// ===============================
+//  STATUS EFFECT RENDERING LOGIC
+// ===============================
+
+// List to store active effects
+const activeEffects = [];
+
+function renderStatusEffects(effect) {
+  const middleLeft = document.querySelector(".middle-left");
+
+  // Check if the effect is already active
+  const existingEffectIndex = activeEffects.findIndex(
+    (activeEffect) => activeEffect.name === effect.name
+  );
+
+  if (existingEffectIndex !== -1) {
+    // Update the existing effect
+    const existingEffect = activeEffects[existingEffectIndex];
+    existingEffect.duration = effect.duration;
+    // You can update other properties as needed
+
+    return; // Exit the function since the effect is already active
+  }
+
+  // New Status Effect
+  const newEffect = document.createElement("div");
+
+  // Render Image
+  if (effect.image) {
+    newEffect.style.backgroundImage = `url('${effect.image}')`;
+    newEffect.style.backgroundSize = "cover";
+  } else {
+    newEffect.textContent = effect.name;
+  }
+
+  middleLeft.appendChild(newEffect);
+
+  // Status Effect Tooltip
+  newEffect.classList.add("statusTooltip");
+  const tooltipText = document.createElement("ul");
+  tooltipText.classList.add("statusTooltipText");
+  newEffect.appendChild(tooltipText);
+
+  const tooltipNoteName = document.createElement("li");
+  const tooltipNoteDuration = document.createElement("li");
+  const tooltipNoteStatus = document.createElement("li");
+  tooltipNoteName.textContent = effect.name;
+  tooltipNoteName.style.fontWeight = "800";
+
+  tooltipNoteDuration.textContent = effect.duration;
+
+  // Updates & Check Effect Duration
+  let newEffectInterval = setInterval(() => {
+    tooltipNoteDuration.textContent = effect.duration;
+    if (effect.duration === null) {
+      // Removes Element when duration ends
+      middleLeft.removeChild(newEffect);
+      clearInterval(newEffectInterval);
+
+      // Remove the effect from the activeEffects list
+      activeEffects.splice(existingEffectIndex, 1);
+    }
+  }, 3000);
+
+  tooltipNoteStatus.textContent = effect.status;
+
+  tooltipText.appendChild(tooltipNoteName);
+  tooltipText.appendChild(tooltipNoteDuration);
+  tooltipText.appendChild(tooltipNoteStatus);
+
+  // Add the effect to the list of active effects
+  activeEffects.push({
+    element: newEffect,
+    name: effect.name,
+    duration: effect.duration,
+    // Add other properties as needed
+  });
+
+  document.querySelectorAll(".statusTooltip").forEach(function (element) {
+    element.addEventListener("mouseover", function () {
+      const tooltipText = this.querySelector(".statusTooltipText");
+
+      tooltipText.style.visibility = "visible";
+      tooltipText.style.opacity = "1";
+    });
+
+    element.addEventListener("mouseout", function () {
+      const tooltipText = this.querySelector(".statusTooltipText");
+      tooltipText.style.visibility = "hidden";
+      tooltipText.style.opacity = "0";
+    });
+  });
 }

@@ -728,6 +728,7 @@ const roomSummaryModal = document.getElementById("roomSummaryModal");
 const roomSummaryButton = document.getElementById("roomSummaryBtn");
 
 function closeRoomSummaryModal() {
+  roomSummaryModalTracker = null;
   roomSummaryModal.style.display = "none";
 
   // Adds Attack Power to Gloryforged Blade
@@ -755,12 +756,15 @@ function closeRoomSummaryModal() {
 function renderRoomSummaryModal() {
   const roomSummaryInfo = document.getElementById("roomSummaryInfo");
   // const roomSummaryInfo = document.querySelector(".room-summary-modal-content");
+  console.log("renderRoomSummaryModal Called");
 
   if (
     currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
-    roomSummaryModal.style.display === "none"
+    roomSummaryModalTracker !== "ACTIVE"
+    // roomSummaryModal.style.display === "none"
   ) {
+    roomSummaryModalTracker = "ACTIVE";
     // Builds summary modal with currentRoom's contents.
     setTimeout(function () {
       roomSummaryModal.style.display = "block";

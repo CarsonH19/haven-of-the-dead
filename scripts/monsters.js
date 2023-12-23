@@ -614,7 +614,7 @@ function checkForMonsters() {
   if (currentRoom.contents.monsters.length > 0) {
     startBattle();
   } else {
-    console.log("RENDER SUMMARY CALLED!");
+    console.log("All monsters defeated");
     attackCounter = 0; // Item: Soulreaver
     setTimeout(renderRoomSummaryModal, 5000);
     togglePlayerControls();

@@ -55,6 +55,9 @@ const catacombEntranceBtn = document.getElementById("catacombEntranceBtn");
 
 let roomSummaryInformation;
 
+// Used to prevent duplicate renders
+let roomSummaryModalTracker;
+
 // ===============================
 //      Continue Button Modal
 // ===============================
