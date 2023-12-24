@@ -1171,7 +1171,6 @@ const GRAVEBLOOM = {
 
         updatePlayerTrackers();
         clearInterval(poisonedInterval);
-        writeToLogItem(LOG_ITEM, "YES", GRAVEBLOOM);
       }
     }
 
@@ -1276,7 +1275,7 @@ const TROLLBLOOD_TONIC = {
   status:
     "Strength and Dexterity increased by 1, and you regain 20HP after after each room cleared.",
   duration: null,
-  statDuration: null,
+  statusDuration: null,
   stats: {
     strength: 1,
     dexterity: 1,
@@ -1299,7 +1298,7 @@ const NECROTIC_NECTAR = {
     "Using this item recovers all missing HP. However, your Strength and Dexterity are reduced to 0. These effects persist for 5 rooms.",
   status: "Strength and Dexterity reduced to 0.",
   duration: null,
-  statDuration: 5,
+  statusDuration: null,
   stats: {
     strength: -99,
     dexterity: -99,
@@ -1311,22 +1310,21 @@ const NECROTIC_NECTAR = {
   },
 };
 
-const HEXFIRE_BREW = {
-  name: "Hexfire Brew",
+const HEXBANE_BREW = {
+  name: "Hexbane Brew",
   image: "styles/images/items/hexfire-brew.jpg",
   soundEffect: gulpingWater24,
   type: "CONSUMABLE",
   rarity: "Epic",
   detail: "DRINK",
   effect:
-    "Using this item cures and grants immunity to the Poisoned, Diseased, Chilled, and Cursed conditions. Additionally, your Attack damage increases by 5. These effects persist for 10 rooms.",
+    "Using this item cures and grants immunity to the Poisoned, Diseased, Chilled, and Cursed conditions. These effects persist for 10 rooms.",
   status:
-    "You have immunity to being Poisned, Diseased, Chilled, and Cursed. Attack damage +5.",
+    "You have immunity to being Poisoned, Diseased, Chilled, and Cursed.",
   duration: null,
-  statDuration: 10,
+  statusDuration: null,
   function: () => {
     startStatusEffect(HEXFIRE_BREW, 10);
-    // Attack +5 added to playerAttackHandler
   },
 };
 
@@ -1346,8 +1344,10 @@ const WARDING_CANDLE = {
     "While this candle is lit undead creaturs may flee from you. The candle burns out after clearing 5 rooms.",
   status: "There is a chance undead enemies will flee from you.",
   duration: null,
+  statusDuration: null,
   function: () => {
     WARDING_CANDLE.tracker = "LIT";
+    console.log("FUNCTION");
     startStatusEffect(WARDING_CANDLE, 5);
   },
 };
@@ -1365,6 +1365,7 @@ const SOOTHING_CANDLE = {
     "While this candle is lit you restore 10HP after clearing a room. The candle burns out after clearing 5 rooms.",
   status: "You regain 10HP after clearing a room.",
   duration: null,
+  statusDuration: null,
   function: () => {
     SOOTHING_CANDLE.tracker = "LIT";
     startStatusEffect(SOOTHING_CANDLE, 5);
@@ -1384,6 +1385,7 @@ const FLICKERING_CANDLE = {
     "While this candle is lit your chance to flee successfully becomes 100%. After fleeing 3 times the candle burns out.",
   status: "You always successfully flee.",
   duration: null,
+  statusDuration: null,
   function: () => {
     FLICKERING_CANDLE.tracker = "LIT";
     startStatusEffect(FLICKERING_CANDLE, 5);
@@ -1403,6 +1405,7 @@ const BLAZING_CANDLE = {
     "While this candle is lit all attack you make become critical hits. The candle burns out after clearing a room.",
   status: "All attacks made are critical hits.",
   duration: null,
+  statusDuration: null,
   function: () => {
     BLAZING_CANDLE.tracker = "LIT";
     startStatusEffect(BLAZING_CANDLE, 1);
@@ -1421,6 +1424,7 @@ const SOULFLAME_CANDLE = {
     "While this candle is lit all experience gained is doubled. The candle burns out after 10 rooms.",
   status: "All experience gained is doubled.",
   duration: null,
+  statusDuration: null,
   function: () => {
     SOULFLAME_CANDLE.tracker = "LIT";
     startStatusEffect(SOULFLAME_CANDLE, 10);

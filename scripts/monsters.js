@@ -17,7 +17,6 @@ const GNAWER = {
   },
   function: () => {
     DISEASED.function(3);
-    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -106,7 +105,6 @@ const SCOUNDREL = {
   function: () => {
     POISONED.function(3);
     soundEffectHandler(SCOUNDREL, "MONSTER ABILITY");
-    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -352,6 +350,102 @@ const FLOOD_OF_BONES = {
     writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
+
+
+const UNDEAD_SIGGURD = {
+  name: "Siggurd, Knight of the Dead",
+  image: "styles/images/monsters/undead-siggurd.jpg",
+  type: "UNDEAD",
+  skulls: 7,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: armorMetalClanksToTheGround,
+  },
+  function: () => {
+    undeadSiggurdSmite = "ACTIVE";
+    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES"); // blade glows with green energy
+  },
+};
+
+const UNDEAD_LIHETH = {
+  name: "Liheth, Priestess of the Dead",
+  image: "styles/images/monsters/undead-liheth.jpg",
+  type: "UNDEAD",
+  skulls: 7,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: armorMetalClanksToTheGround,
+  },
+  function: () => {
+    monsterHealthBar.value = +monsterHealthBar.value + 30;
+    currentMonsterHealth += 30;
+
+    if (currentMonsterHealth > monsterMaxHealth) {
+      monsterHealthBar.value = monsterMaxHealth;
+      currentMonsterHealth = monsterMaxHealth;
+    }
+
+    updatePlayerTrackers();
+    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+  },
+};
+
+const UNDEAD_RIVEN = {
+  name: "Riven, Shadow of the Dead",
+  image: "styles/images/monsters/undead-riven.jpg",
+  type: "UNDEAD",
+  skulls: 7,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: armorMetalClanksToTheGround,
+  },
+  attackCounter: 0,
+  function: () => {
+    function undeadRivenAttacks() {
+      let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
+
+      damagePlayer(monsterToPlayerDamage);
+      writeToLogMonster(LOG_MONSTER_ATTACK, "NO", monsterToPlayerDamage);
+    }
+
+    let undeadRivenInterval = setInterval(() => {
+      if (UNDEAD_RIVEN.attackCounter > 0) {
+        UNDEAD_RIVEN.attackCounter--;
+
+        undeadRivenAttacks();
+        isGameOver();
+      } else {
+        clearInterval(undeadRivenInterval);
+      }
+    }, 500);
+
+    playerControlsTimeout(1500);
+    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+  },
+};
+
+const BARON_OF_BONE = {
+  name: "Baron of Bone",
+  type: "UNDEAD",
+  skulls: 9,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: severMetalHit2,
+    death: armorMetalClanksToTheGround,
+  },
+  function: () => {
+    const conditionsArray = [POISONED, DISEASED, CHILLED, BURNED, CURSED];
+    let index = Math.floor(Math.random() * conditionsArray.length);
+
+    let condition = conditionsArray[index];
+    condition.function(9);
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+  },
+};
+
 
 // ===============================
 //          Evil Spirits
@@ -689,6 +783,7 @@ function monsterAbilityHandler(monster) {
     case DRAUGR:
       const chilledChance = Math.floor(Math.random() * 20) + 1;
       if (chilledChance >= 20) {
+        console.log("Draugr Ability Called!");
         DRAUGR.function();
       }
       break;
@@ -696,6 +791,7 @@ function monsterAbilityHandler(monster) {
     case SCOUNDREL:
       const poisonedChance = Math.floor(Math.random() * 20) + 1;
       if (poisonedChance >= 20) {
+        console.log("Scoundrel Ability Called!");
         SCOUNDREL.function();
       }
       break;
@@ -703,7 +799,8 @@ function monsterAbilityHandler(monster) {
     case CULTIST:
       const cursedChance = Math.floor(Math.random() * 20) + 1;
       if (cursedChance >= 20) {
-        SCOUNDREL.function();
+        console.log("Cultist Ability Called!");
+        CULTIST.function();
       }
       break;
 
@@ -712,6 +809,7 @@ function monsterAbilityHandler(monster) {
         currentMonsterHealth < 40 &&
         currentRoom.contents.monsters.length >= 2
       ) {
+        console.log("Ivan Ability Called!");
         IVAN_STATS.function();
       }
       break;
@@ -726,13 +824,12 @@ function monsterAbilityHandler(monster) {
       } else if (currentMonsterHealth > 110) {
         UNDYING_WARBAND.function(3);
         UNDYING_WARBAND.attackCounter = 0;
-      } else if (currentMonsterHealth <= 110) {
-        UNDYING_WARBAND.function(0);
-      }
+      } 
       break;
 
     case UNDEAD_RIVEN:
       if (actionCounter % 5 === 0) {
+        console.log("Undead Riven Ability Called!");
         UNDEAD_RIVEN.attackCounter = 3;
         UNDEAD_RIVEN.function();
       }
@@ -740,111 +837,20 @@ function monsterAbilityHandler(monster) {
 
     case UNDEAD_LIHETH:
       if (actionCounter % 5 === 0) {
+        console.log("Undead Liheth Ability Called!");
         UNDEAD_LIHETH.function();
       }
       break;
 
     case UNDEAD_SIGGURD:
       if (actionCounter % 5 === 0) {
+        console.log("Undead Siggurd Ability Called!");
         UNDEAD_SIGGURD.function();
       }
       break;
 
     case BARON_OF_BONE:
+      console.log("Baron of Bone Ability Called!");
       BARON_OF_BONE.function();
   }
 }
-
-const UNDEAD_SIGGURD = {
-  name: "Siggurd, Knight of the Dead",
-  image: "styles/images/monsters/undead-siggurd.jpg",
-  type: "UNDEAD",
-  skulls: 7,
-  soundEffects: {
-    spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
-    death: armorMetalClanksToTheGround,
-  },
-  function: () => {
-    undeadSiggurdSmite = "ACTIVE";
-    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES"); // blade glows with green energy
-  },
-};
-
-const UNDEAD_LIHETH = {
-  name: "Liheth, Priestess of the Dead",
-  image: "styles/images/monsters/undead-liheth.jpg",
-  type: "UNDEAD",
-  skulls: 7,
-  soundEffects: {
-    spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
-    death: armorMetalClanksToTheGround,
-  },
-  function: () => {
-    monsterHealthBar.value = +monsterHealthBar.value + 30;
-    currentMonsterHealth += 30;
-
-    if (currentMonsterHealth > monsterMaxHealth) {
-      monsterHealthBar.value = monsterMaxHealth;
-      currentMonsterHealth = monsterMaxHealth;
-    }
-
-    updatePlayerTrackers();
-    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
-  },
-};
-
-const UNDEAD_RIVEN = {
-  name: "Riven, Shadow of the Dead",
-  image: "styles/images/monsters/undead-riven.jpg",
-  type: "UNDEAD",
-  skulls: 7,
-  soundEffects: {
-    spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
-    death: armorMetalClanksToTheGround,
-  },
-  attackCounter: 0,
-  function: () => {
-    function undeadRivenAttacks() {
-      let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
-
-      damagePlayer(monsterToPlayerDamage);
-      writeToLogMonster(LOG_MONSTER_ATTACK, "NO", monsterToPlayerDamage);
-    }
-
-    let undeadRivenInterval = setInterval(() => {
-      if (UNDEAD_RIVEN.attackCounter > 0) {
-        UNDEAD_RIVEN.attackCounter--;
-
-        undeadRivenAttacks();
-        isGameOver();
-      } else {
-        clearInterval(undeadRivenInterval);
-      }
-    }, 500);
-
-    playerControlsTimeout(1500);
-    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
-  },
-};
-
-const BARON_OF_BONE = {
-  name: "Baron of Bone",
-  type: "UNDEAD",
-  skulls: 9,
-  soundEffects: {
-    spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
-    death: armorMetalClanksToTheGround,
-  },
-  function: () => {
-    const conditionsArray = [POISONED, DISEASED, CHILLED, BURNED, CURSED];
-    let index = Math.floor(Math.random() * conditionsArray.length);
-
-    let condition = conditionsArray[index];
-    condition.function(9);
-    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
-  },
-};

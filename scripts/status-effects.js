@@ -297,15 +297,9 @@ const AEGIS_STATUS_EFFECT = {
     }
 
     let aegisInterval = setInterval(() => {
-      if (AEGIS_STATUS_EFFECT.statusDuration - actionCounter > 1) {
-        AEGIS_STATUS_EFFECT.duration = `Duration: ${
-          AEGIS_STATUS_EFFECT.statusDuration - actionCounter
-        } Actions`;
-      } else {
-        AEGIS_STATUS_EFFECT.duration = `Duration: ${
-          AEGIS_STATUS_EFFECT.statusDuration - actionCounter
-        } Action`;
-      }
+      const duration = statusEffect.statusDuration - actionCounter;
+      const actionText = duration > 1 ? "Actions" : "Action";
+      AEGIS_STATUS_EFFECT.duration = `Duration: ${duration} ${actionText}`;
 
       if (actionCounter >= AEGIS_STATUS_EFFECT.statusDuration) {
         AEGIS_STATUS_EFFECT.duration = null;
@@ -327,6 +321,7 @@ const AEGIS_STATUS_EFFECT = {
 
 const startStatusEffect = (statusEffect, length) => {
   if (statusEffect.duration === null && statusEffect.statusDuration === null) {
+    console.log("CANDLE");
     startNewStatusEffect(statusEffect, length);
   } else if (isDurationExtended(statusEffect, length)) {
     extendStatusEffectDuration(statusEffect, length);
@@ -343,6 +338,10 @@ const startNewStatusEffect = (statusEffect, length) => {
     addStatChange(statusEffect);
   } else {
     updateTotalStats();
+  }
+
+  if (statusEffect.detail === "CONDITION") {
+    writeToLogStatusEffect(LOG_GAINED_CONDITION, "YES", statusEffect);
   }
 
   setupStatusEffectInterval(statusEffect);
@@ -372,6 +371,8 @@ const setupStatusEffectInterval = (statusEffect) => {
       endStatusEffectInterval(statusEffect, intervalId);
     } else if (statusEffect.detail === "WISP") {
       statusEffect.tracker = "GUIDING";
+    } else if (statusEffect.detail === "CANDLE") {
+      statusEffect.tracker = "LIT";
     }
   }, 3000);
 };
@@ -393,6 +394,8 @@ const endStatusEffectInterval = (statusEffect, intervalId) => {
     wispActive = null;
   } else if (statusEffect.detail === "CANDLE") {
     statusEffect.tracker = null;
+  } else if (statusEffect.detail === "CONDITION") {
+    writeToLogStatusEffect(LOG_REMOVED_CONDITION, "YES", statusEffect);
   }
 
   clearInterval(intervalId);
@@ -401,7 +404,7 @@ const endStatusEffectInterval = (statusEffect, intervalId) => {
 function statusEffectHandler(item) {
   switch (item) {
     case WARDING_CANDLE:
-      if (wardingCandleTracker === "LIT") {
+      if (WARDING_CANDLE.tracker === "LIT") {
         if (
           currentRoom.contents.monsters[0].type === "UNDEAD" &&
           currentRoom.contents.monsters[0].skulls <= 6
@@ -417,6 +420,7 @@ function statusEffectHandler(item) {
               monsterContainer.style.display = "none";
               monsterImage.style.display = "none";
             }, 2000);
+
             writeToLogItem(LOG_ITEM, "YES", WARDING_CANDLE);
           }
         }
@@ -424,31 +428,31 @@ function statusEffectHandler(item) {
       break;
 
     case SOOTHING_CANDLE:
-      if (soothingCandleTracker === "LIT") {
+      if (SOOTHING_CANDLE.tracker === "LIT") {
         healPlayer(10);
         writeToLogItem(LOG_ITEM, "YES", SOOTHING_CANDLE);
       }
       break;
 
     case FLICKERING_CANDLE:
-      if (flickeringCandleTracker > 0) {
-        flickeringCandleTracker--;
+      if (FLICKERING_CANDLE.tracker === 0) {
+        writeToLogItem(LOG_ITEM, "YES", FLICKERING_CANDLE);
         return 99;
       } else {
         return 0;
       }
 
     case BLAZING_CANDLE:
-      if (blazingCandleTracker > 0) {
-        blazingCandleTracker--;
-        writeToLogItem(LOG_ITEM, "YES", BLAZING_CANDLE);
+      if (BLAZING_CANDLE.tracker === "LIT") {
+        writeToLogItem(LOG_ITEM, "YES", FLICKERING_CANDLE);
         return 20;
       } else {
         return 0;
       }
 
     case SOULFLAME_CANDLE:
-      if (soulflameCandleTracker === "LIT") {
+      if (SOULFLAME_CANDLE.tracker === "LIT") {
+        writeToLogItem(LOG_ITEM, "YES", FLICKERING_CANDLE);
         return 2;
       } else {
         return 1;
@@ -472,32 +476,32 @@ function statusEffectHandler(item) {
     // case CHILLED:
     //   break;
 
-    case FIENDSWORN:
-      if (FIENDSWORN.active !== null) {
-        if (
-          currentRoom.contents.monsters[0] === CULTIST ||
-          currentRoom.contents.monsters[0] === FIENDSWORN_CULTIST
-        ) {
-          fadeOutAnimation(monsterContainer);
-          setTimeout(() => {
-            checkForMonsters();
-            monsterContainer.style.display = "none";
-          }, 2000);
-          writeToLogItem(LOG_STATUS, "YES", FIENDSWORN);
-        }
-      }
-      break;
+    // case FIENDSWORN:
+    //   if (FIENDSWORN.active !== null) {
+    //     if (
+    //       currentRoom.contents.monsters[0] === CULTIST ||
+    //       currentRoom.contents.monsters[0] === FIENDSWORN_CULTIST
+    //     ) {
+    //       fadeOutAnimation(monsterContainer);
+    //       setTimeout(() => {
+    //         checkForMonsters();
+    //         monsterContainer.style.display = "none";
+    //       }, 2000);
+    //       writeToLogItem(LOG_STATUS, "YES", FIENDSWORN);
+    //     }
+    //   }
+    //   break;
 
-    case BRANDED:
-      if (roomMonsters[0].length > 0 && BRANDED.active !== null) {
-        let randomDemon = Math.round(Math.random() * 6);
+    // case BRANDED:
+    //   if (roomMonsters[0].length > 0 && BRANDED.active !== null) {
+    //     let randomDemon = Math.round(Math.random() * 6);
 
-        if (randomDemon >= 6) {
-          roomMonsters.unshift(DEMON);
-          writeToLogItem(LOG_STATUS, "YES", BRANDED);
-        }
-      }
-      break;
+    //     if (randomDemon >= 6) {
+    //       roomMonsters.unshift(DEMON);
+    //       writeToLogItem(LOG_STATUS, "YES", BRANDED);
+    //     }
+    //   }
+    //   break;
 
     default:
       break;

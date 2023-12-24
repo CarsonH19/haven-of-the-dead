@@ -447,9 +447,7 @@ function writeToLogMonster(logType, narrate, dataOne) {
     // ===============================
 
     case LOG_MONSTER_ABILITY:
-      if (monsterName === "Gnawer") {
-        newEntry.textContent = `A vile disease afflicts you, unleashed by the plagued gnawer's bite.`;
-      } else if (monsterName === "Crypt Crawler") {
+      if (monsterName === "Crypt Crawler") {
         if (dataOne === "ATTACK") {
           newEntry.textContent = `The ${monsterName}'s attacks you, while you struggle to escape its web.`;
         } else if (dataOne === "BROKE FREE") {
@@ -459,8 +457,6 @@ function writeToLogMonster(logType, narrate, dataOne) {
         }
       } else if (monsterName === "Broodmother") {
         newEntry.textContent = `An egg hatches from the Broodmother, releasing a ravenous spawn that scuttles forth.`;
-      } else if (monsterName === "Scoundrel") {
-        newEntry.textContent = `A searing pain courses through your veins as the poison-laced blade of the Scoundrel leaves its venomous mark.`;
       } else if (monsterName === "Bone Titan") {
         newEntry.textContent = `The Bone Titan crumbles, yielding to a heap of bones. Three Decrepit Skeletons emerge, rising ominously from the fractured remains.`;
       } else if (monsterName === "Blazing Skeleton") {
@@ -470,13 +466,7 @@ function writeToLogMonster(logType, narrate, dataOne) {
       } else if (monsterName === "Flood of Bones") {
         newEntry.textContent = `As the undead tide cascades, skeletal remnants reanimate in the wake of the bone-laden deluge.`;
       } else if (monsterName === "Baron of Bone") {
-        newEntry.textContent = ``;
-      } else if (
-        monsterName === "Haunting Spirit" ||
-        monsterName === "Graverobber Earver" ||
-        monsterName === "Grudge"
-      ) {
-        newEntry.textContent = `You are haunted by malevolent spirits, their presence follow you and their ethereal whispers claw at your sanity.`;
+        newEntry.textContent = `The Baron of Bone's dark magic withers your body and soul.`;
       } else if (monsterName === "Undying Warband") {
         newEntry.textContent = `The warband unleash a flurry of thrusts and slashes.`;
       } else if (monsterName === "Ivan the Scoundrel") {
@@ -1562,10 +1552,16 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `You make an offering you the Crimson Covenant.`;
       } else if (dataOne === RATTLEBONE_WHISTLE) {
         newEntry.textContent = `The Rattlebone Charm induces fear in your attacker, causing them to flee in terror.`;
-      } else if (dataOne === GRAVEBLOOM) {
-        newEntry.textContent = `You are no longer poisoned.`;
       } else if (dataOne === WARDING_CANDLE) {
-        newEntry.textContent = `Your warding candle protects you from nearby undead.`;
+        newEntry.textContent = `Your warding candle causes the undead creature to flee.`;
+      } else if (dataOne === BLAZING_CANDLE) {
+        newEntry.textContent = `Your blazing candle flares violently.`;
+      } else if (dataOne === SOULFLAME_CANDLE) {
+        newEntry.textContent = `Your soulflame candle glows an eerie green.`;
+      } else if (dataOne === FLICKERING_CANDLE) {
+        newEntry.textContent = `Your flickering candle distracts nearby enemies, allowing you to escape.`;
+      } else if (dataOne === SOOTHING_CANDLE) {
+        newEntry.textContent = `Your soothing candle emits a gentle, comforting warmth.`;
       } else if (dataOne === SUNSTONE) {
         newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} is weakened in the presence of the Sunstone.`;
       } else if (dataOne === WHISPERING_SKULL) {

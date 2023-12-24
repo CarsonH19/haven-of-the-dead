@@ -7,11 +7,6 @@ function playerAttackHandler(smite) {
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
   let totalDamage;
 
-  // ITEM: Hexfire Brew - Attack +5
-  if (HEXFIRE_BREW.duration !== null) {
-    playerToMonsterDamage += 5;
-  }
-
   // ITEM: Revenant's Rage - Increases attack when low health
   playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
   // ITEM: +3 attack against evil spirits.
