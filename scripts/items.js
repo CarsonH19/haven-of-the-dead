@@ -7,10 +7,11 @@
 // - *Graverobber's Spade - Graverobber Earver
 // - *Sunstone
 // - *Charm of Healing
-// - Shadowstep Boots
+// - *Shadowstep Boots
 // - *Ring of Skittering
 // - *Bone Bludgeon
-// - Holy Relic
+// - *Holy Relic
+// - *Silkstriders
 // - *Ritual Blade - Crimson Covenant
 
 // Rare Items
@@ -23,7 +24,6 @@
 // - Plagueward Pendant
 // - Ghostshroud Talisman
 // - Toxinweave Mask
-// - *Silkstriders
 // - Chillbreaker Band
 // - Berserker Pauldrons
 // - *Tome of Devotion
@@ -489,7 +489,7 @@ const SILKSTRIDERS = {
   description: "",
   image: "styles/images/items/silkstriders.jpg",
   type: "MAGIC",
-  rarity: "Rare",
+  rarity: "Common",
   effect: "While attuned to this item you can't be webbed by spiders.",
   function: () => {
     return "IMMUNE";
@@ -902,11 +902,6 @@ const GRERVILS_HEAD = {
   rarity: "Rare",
   effect: "Head of the talking skull, Grervil.",
   function: () => {
-    if (attunedItems.includes(AMULET_OF_WHISPERS)) {
-      writeToLogItem(LOG_ITEM, "YES", GRERVILS_HEAD, "UNDERSTAND");
-    } else {
-      writeToLogItem(LOG_ITEM, "YES", GRERVILS_HEAD, "WHISPERS");
-    }
   },
 };
 
@@ -1602,6 +1597,7 @@ let commonCuratorArray = [
   SHADOWSTEP_BOOTS,
   BONE_BLUDGEON,
   HOLY_RELIC,
+  SILKSTRIDERS,
   RING_OF_SKITTERING,
 ];
 
@@ -1612,7 +1608,6 @@ let rareCuratorArray = [
   PLAGUEWARD_PENDANT,
   GHOSTSHROUD_TALISMAN,
   TOXINWEAVE_MASK,
-  SILKSTRIDERS,
   CHILLBREAKER_BAND,
   BERSERKER_PAULDRON,
   TOME_OF_DEVOTION,
@@ -1685,7 +1680,6 @@ let undeadRareLoot = [
 
 // Consumables Loot
 let commonConsumables = [
-  POTION,
   MARROWSTONE_CHEESE,
   TOMBSTONE_TRUFFLE,
   CRYPTBREAD,
@@ -1696,7 +1690,6 @@ let commonConsumables = [
   WITCHFIRE_ORCHID,
   EMBERTHAW_PETAL,
   LESSER_SOULSTONE,
-  GREATER_SOULSTONE,
 ];
 
 let rareConsumables = [
@@ -1708,6 +1701,7 @@ let rareConsumables = [
   ROWDY_WISP,
   CURIOUS_WISP,
   WICKED_WISP,
+  POTION,
 ];
 
 // Epic Loot
@@ -2202,6 +2196,15 @@ inventoryModal.addEventListener("click", (event) => {
       event.target === buttons[i]
     ) {
       DEMONIC_GRIMOIRE.function();
+    }
+
+    // Misc Other Item Logic
+    if (buttons[i].id === "Grervil's Head") {
+      if (attunedItems.includes(AMULET_OF_WHISPERS)) {
+        writeToLogItem(LOG_ITEM, "YES", GRERVILS_HEAD, "UNDERSTAND");
+      } else {
+        writeToLogItem(LOG_ITEM, "YES", GRERVILS_HEAD, "WHISPERS");
+      }
     }
   }
 

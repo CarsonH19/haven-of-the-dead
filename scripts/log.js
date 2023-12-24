@@ -998,9 +998,9 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           } else if (narration === 2) {
             newEntry.textContent = `In the face of danger, you close your eyes and trust in your faith. Suddenly, a divine force surrounds you, shattering the spider's web and releasing you unharmed.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You reach deep within your faith, feeling the presence of a higher power. With a heartfelt prayer, the webbing dissolves, leaving you unscathed.`;
+            newEntry.textContent = `You reach deep within your faith, feeling the presence of a higher power. With a heartfelt prayer, the webbing dissolves, setting you free.`;
           } else if (narration === 4) {
-            newEntry.textContent = `With a surge of faith, you call upon the divine to protect you. A warm light envelops you, and the spider's web crumbles, leaving you untouched.`;
+            newEntry.textContent = `With a surge of faith, you call upon the divine to protect you. A warm light envelops you, and the spider's web crumbles, setting you free.`;
           } else {
             newEntry.textContent = `With unyielding faith in your heart, you call upon higher powers. In response, a powerful force surrounds you, breaking the spider's web and setting you free.`;
           }
@@ -1051,27 +1051,27 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === SPIDER_WEB) {
         if (dataOne === "Strength") {
           if (narration === 1) {
-            newEntry.textContent = `You strain against the sticky silk, managing to free yourself from the spider's web, but not without difficulty. ${dataTwo}`;
+            newEntry.textContent = `You strain against the sticky silk, managing to free yourself from the web, but not without alerting its creators..`;
           } else if (narration === 2) {
-            newEntry.textContent = `With a mighty effort, you tear yourself free from the spider's web, but not before it has inflicted painful abrasions. ${dataTwo}`;
+            newEntry.textContent = `With a mighty effort, you tear yourself free from the web, but not without alerting its creators.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You summon your strength, breaking free from the spider's web, but not without consequence. The struggle leaves you with painful welts. ${dataTwo}`;
+            newEntry.textContent = `You summon your strength, breaking free from the web, but not without alerting its creators.`;
           } else if (narration === 4) {
-            newEntry.textContent = `After a fierce struggle, you manage to break free from the spider's web, but not without paying a price. ${dataTwo}`;
+            newEntry.textContent = `After a fierce struggle, you manage to break free from the web, but not without alerting its creators.`;
           } else {
-            newEntry.textContent = `With a final surge of strength, you tear yourself free from the spider's web, but the effort takes its toll. ${dataTwo}`;
+            newEntry.textContent = `With a final surge of strength, you tear yourself free from the web, but not without alerting its creators.`;
           }
         } else if (dataOne === "Faith") {
           if (narration === 1) {
-            newEntry.textContent = `You call upon your faith, finding the inner strength to break free from the spider's web. However, the ordeal leaves you drained and wounded. ${dataTwo}`;
+            newEntry.textContent = `You call upon your faith, finding the inner strength to break free from the web, but not without alerting its creators.`;
           } else if (narration === 2) {
-            newEntry.textContent = `With a prayer on your lips, you manage to tear yourself free from the spider's web, but not without suffering. ${dataTwo}`;
+            newEntry.textContent = `With a prayer on your lips, you manage to tear yourself free from the web, but not without alerting its creators.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You draw upon your faith, summoning the resolve to break free from the spider's web. The effort leaves you with painful welts. ${dataTwo}`;
+            newEntry.textContent = `You draw upon your faith, summoning the resolve to break free from the web, but not without alerting its creators.`;
           } else if (narration === 4) {
-            newEntry.textContent = `Guided by your faith, you break free from the spider's web, but not without paying a price. ${dataTwo}`;
+            newEntry.textContent = `Guided by your faith, you break free from the web, but not without alerting its creators.`;
           } else {
-            newEntry.textContent = `In your moment of need, your faith empowers you to tear yourself free from the spider's web. The effort, however, takes its toll. ${dataTwo}`;
+            newEntry.textContent = `In your moment of need, your faith empowers you to tear yourself free from the web, but not without alerting its creators.`;
           }
         }
       } else if (event === SWARM_OF_VERMIN) {
