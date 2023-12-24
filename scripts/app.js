@@ -7,6 +7,11 @@ function playerAttackHandler(smite) {
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
   let totalDamage;
 
+  // ITEM: Hexfire Brew - Attack +5
+  if (HEXFIRE_BREW.duration !== null) {
+    playerToMonsterDamage += 5;
+  }
+
   // ITEM: Revenant's Rage - Increases attack when low health
   playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
   // ITEM: +3 attack against evil spirits.
@@ -355,6 +360,16 @@ function fleeHandler() {
   if (fleeAttempt >= 10) {
     let roomToFlee = currentRoom;
     let newRoom = getRandomRoom(catacombRooms);
+
+    // Is Flickering Candle Active?\
+    if ((FLICKERING_CANDLE.tracker = "LIT")) {
+      FLICKERING_CANDLE.fleeNumber--;
+
+      if (FLICKERING_CANDLE.fleeNumber <= 0) {
+        FLICKERING_CANDLE.duration = null;
+        FLICKERING_CANDLE.statusDuration = null;
+      }
+    }
 
     if (roomToFlee !== newRoom) {
       setTimeout(() => {
@@ -1005,6 +1020,11 @@ roomSummaryButton.addEventListener("click", () => {
   clearRoomSummaryModal();
   togglePlayerControls();
   updateRoomsCleared();
+
+  // ITEM: Trollblood Tonic - 20HP after each cleared room.
+  if (TROLLBLOOD_TONIC.duration !== null) {
+    healPlayer(20);
+  }
   // ITEM: Charm of Healing - Recover 10HP after each cleared room.
   isItemAttuned(CHARM_OF_HEALING, null);
   // ITEM: Cursed Grimoire - NPC ITEM / hurts you after each cleared room.

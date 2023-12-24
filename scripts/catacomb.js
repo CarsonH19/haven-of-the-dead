@@ -1070,8 +1070,17 @@ const HAGS_HOLLOW = {
     items: [],
     events: HAG_TRADER,
   },
-  // function: () => {
-  // }
+  function: () => {
+    hagItems = [];
+    hagItems = [
+      SOULSHROUD_STEW,
+      SOULSHROUD_STEW,
+      SOULSHROUD_STEW,
+      TROLLBLOOD_TONIC,
+      NECROTIC_NECTAR,
+      HEXFIRE_BREW,
+    ];
+  },
 };
 
 const CURATORS_CURIO = {

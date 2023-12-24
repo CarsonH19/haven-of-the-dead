@@ -162,8 +162,7 @@ const CHARM_OF_HEALING = {
   image: "styles/images/items/charm-of-healing.jpg",
   type: "MAGIC",
   rarity: "Common",
-  effect:
-    "While attuned to this item you recover 5 points of health after each room you clear.",
+  effect: "While attuned to this item you recover 5HP after each room cleared.",
   function: () => {
     healPlayer(5);
   },
@@ -1210,14 +1209,12 @@ const GREATER_SOULSTONE = {
 
 const BLACKHEART_BREW = {
   name: "Blackheart Brew",
-  description: "A favored drink of the scoundrels at the Laughing Coffin.",
   image: "styles/images/items/balckheart-brew.jpg",
+  soundEffect: gulpingWater24,
   type: "CONSUMABLE",
   rarity: "Rare",
   detail: "DRINK",
-  effect:
-    "Can be used to gain increased Strength, but decreased Dexterity for a short time.",
-  soundEffect: gulpingWater24,
+  effect: null,
   status: "You are drunk. Strength increased by 2 & Dexterity decreased by 1.",
   duration: null,
   statusDuration: null,
@@ -1227,29 +1224,12 @@ const BLACKHEART_BREW = {
     faith: 0,
   },
   function: () => {
-    let statusDuration = roomCounter + 5;
-    BLACKHEART_BREW.duration = "5 Rooms";
-    let blackheartBrewInterval = setInterval(() => {
-      const duration = BLACKHEART_BREW.statusDuration - roomCounter;
-      const roomText = duration > 1 ? "Rooms" : "Room";
-
-      BLACKHEART_BREW.duration = `Duration: ${duration} ${roomText}`;
-
-      if (roomCounter >= duration) {
-        BLACKHEART_BREW.duration = null;
-        removeStatChange(POISONED);
-        clearInterval(blackheartBrewInterval);
-      }
-    }, 15000);
-
-    addStatChange(BLACKHEART_BREW);
-    renderStatusEffects(BLACKHEART_BREW);
+    startStatusEffect(BLACKHEART_BREW, 5);
   },
 };
 
 const WHISPERING_SKULL = {
   name: "Whispering Skull",
-  description: "",
   image: "styles/images/items/whispering-skull.jpg",
   soundEffect: evilSpell1,
   type: "CONSUMABLE",
@@ -1270,6 +1250,86 @@ const WHISPERING_SKULL = {
   },
 };
 
+const SOULSHROUD_STEW = {
+  name: "Soulshroud Stew",
+  image: "styles/images/items/soulshroud-stew.jpg",
+  soundEffect: gulpingWater24,
+  type: "CONSUMABLE",
+  rarity: "Common",
+  detail: "DRINK",
+  effect: "Using this item recovers 15HP.  Additionally, you gain 30XP.",
+  function: () => {
+    healPlayer(15);
+    gainExperience(3);
+  },
+};
+
+const TROLLBLOOD_TONIC = {
+  name: "Trollblood Tonic",
+  image: "styles/images/items/trollblood-tonic.jpg",
+  soundEffect: gulpingWater24,
+  type: "CONSUMABLE",
+  rarity: "Rare",
+  detail: "DRINK",
+  effect:
+    "Using this item increases your Strength and Dexterity by 1. Additionally, you recover 20HP after each room cleared. These effects persist for 10 rooms.",
+  status:
+    "Strength and Dexterity increased by 1, and you regain 20HP after after each room cleared.",
+  duration: null,
+  statDuration: null,
+  stats: {
+    strength: 1,
+    dexterity: 1,
+    faith: 0,
+  },
+  function: () => {
+    startStatusEffect(TROLLBLOOD_TONIC, 10);
+    // healPlayer(20) added to playerAttackHandler
+  },
+};
+
+const NECROTIC_NECTAR = {
+  name: "Necrotic Nectar",
+  image: "styles/images/items/necrotic-nectar.jpg",
+  soundEffect: gulpingWater24,
+  type: "CONSUMABLE",
+  rarity: "Rare",
+  detail: "DRINK",
+  effect:
+    "Using this item recovers all missing HP. However, your Strength and Dexterity are reduced to 0. These effects persist for 5 rooms.",
+  status: "Strength and Dexterity reduced to 0.",
+  duration: null,
+  statDuration: 5,
+  stats: {
+    strength: -99,
+    dexterity: -99,
+    faith: 0,
+  },
+  function: () => {
+    healPlayer(playerMaxHealth);
+    startStatusEffect(NECROTIC_NECTAR, 10);
+  },
+};
+
+const HEXFIRE_BREW = {
+  name: "Hexfire Brew",
+  image: "styles/images/items/hexfire-brew.jpg",
+  soundEffect: gulpingWater24,
+  type: "CONSUMABLE",
+  rarity: "Epic",
+  detail: "DRINK",
+  effect:
+    "Using this item cures and grants immunity to the Poisoned, Diseased, Chilled, and Cursed conditions. Additionally, your Attack damage increases by 5. These effects persist for 10 rooms.",
+  status:
+    "You have immunity to being Poisned, Diseased, Chilled, and Cursed. Attack damage +5.",
+  duration: null,
+  statDuration: 10,
+  function: () => {
+    startStatusEffect(HEXFIRE_BREW, 10);
+    // Attack +5 added to playerAttackHandler
+  },
+};
+
 // ===============================
 //           CANDLES
 // ===============================
@@ -1281,33 +1341,14 @@ const WARDING_CANDLE = {
   type: "CONSUMABLE",
   rarity: "Rare",
   detail: "CANDLE",
+  tracker: null,
   effect:
-    "When this item is used there is a chance that evil spirits will flee from you. The candle burns out after clearing five rooms.",
-  status: "There is a chance the undead will evade you.",
+    "While this candle is lit undead creaturs may flee from you. The candle burns out after clearing 5 rooms.",
+  status: "There is a chance undead enemies will flee from you.",
   duration: null,
   function: () => {
-    let itemDuration = roomCounter + 5;
-    WARDING_CANDLE.duration = "Duration: 5 Rooms";
-    let wardingCandleInterval = setInterval(() => {
-      if (itemDuration - roomCounter > 1) {
-        WARDING_CANDLE.duration = `Duration: ${
-          itemDuration - roomCounter
-        } Rooms`;
-      } else {
-        WARDING_CANDLE.duration = `Duration: ${
-          itemDuration - roomCounter
-        } Room`;
-      }
-
-      if (roomCounter >= itemDuration) {
-        wardingCandleTracker = "BURNED OUT";
-        WARDING_CANDLE.duration = null;
-        clearInterval(wardingCandleInterval);
-      } else {
-        wardingCandleTracker = "LIT";
-      }
-    }, 15000);
-    renderStatusEffects(WARDING_CANDLE);
+    WARDING_CANDLE.tracker = "LIT";
+    startStatusEffect(WARDING_CANDLE, 5);
   },
 };
 
@@ -1319,33 +1360,14 @@ const SOOTHING_CANDLE = {
   type: "CONSUMABLE",
   rarity: "Common",
   detail: "CANDLE",
+  tracker: null,
   effect:
-    "When this item is used you restore 10HP after clearing a room. The candle burns out after clearing five rooms.",
-  status: "You regain some HP after clearing a room.",
+    "While this candle is lit you restore 10HP after clearing a room. The candle burns out after clearing 5 rooms.",
+  status: "You regain 10HP after clearing a room.",
   duration: null,
   function: () => {
-    let itemDuration = roomCounter + 5;
-    SOOTHING_CANDLE.duration = "Duration: 5 Rooms";
-    let soothingCandleInterval = setInterval(() => {
-      if (itemDuration - roomCounter > 1) {
-        SOOTHING_CANDLE.duration = `Duration: ${
-          itemDuration - roomCounter
-        } Rooms`;
-      } else {
-        SOOTHING_CANDLE.duration = `Duration: ${
-          itemDuration - roomCounter
-        } Room`;
-      }
-
-      if (roomCounter >= itemDuration) {
-        soothingCandleTracker = "BURNED OUT";
-        SOOTHING_CANDLE.duration = null;
-        clearInterval(soothingCandleInterval);
-      } else {
-        soothingCandleTracker = "LIT";
-      }
-    }, 15000);
-    renderStatusEffects(SOOTHING_CANDLE);
+    SOOTHING_CANDLE.tracker = "LIT";
+    startStatusEffect(SOOTHING_CANDLE, 5);
   },
 };
 
@@ -1357,22 +1379,14 @@ const FLICKERING_CANDLE = {
   type: "CONSUMABLE",
   rarity: "Common",
   detail: "CANDLE",
+  tracker: null,
   effect:
-    "When this item is used your chance to flee successfully becomes 100%. After fleeing three times the candle burns out.",
+    "While this candle is lit your chance to flee successfully becomes 100%. After fleeing 3 times the candle burns out.",
   status: "You always successfully flee.",
   duration: null,
   function: () => {
-    flickeringCandleTracker = 3;
-    FLICKERING_CANDLE.duration = `Duration: 3`;
-    let flickeringCandleInterval = setInterval(() => {
-      FLICKERING_CANDLE.duration = `Duration: ${flickeringCandleTracker}`;
-      if (flickeringCandleTracker <= 0) {
-        flickeringCandleTracker = "BURNED OUT";
-        FLICKERING_CANDLE.duration = null;
-        clearInterval(flickeringCandleInterval);
-      }
-    }, 3000);
-    renderStatusEffects(FLICKERING_CANDLE);
+    FLICKERING_CANDLE.tracker = "LIT";
+    startStatusEffect(FLICKERING_CANDLE, 5);
   },
 };
 
@@ -1384,22 +1398,14 @@ const BLAZING_CANDLE = {
   type: "CONSUMABLE",
   rarity: "Epic",
   detail: "CANDLE",
+  tracker: null,
   effect:
-    "When this item is used all attack you become critical hits. After ten critical hits the candle burns out.",
+    "While this candle is lit all attack you make become critical hits. The candle burns out after clearing a room.",
   status: "All attacks made are critical hits.",
   duration: null,
   function: () => {
-    blazingCandleTracker = 10;
-    BLAZING_CANDLE.duration = `Duration: 10 Attacks`;
-    let blazingCandleInterval = setInterval(() => {
-      BLAZING_CANDLE.duration = `Duration: ${blazingCandleTracker} Attacks`;
-      if (blazingCandleTracker <= 0) {
-        blazingCandleTracker = "BURNED OUT";
-        BLAZING_CANDLE.duration = null;
-        clearInterval(blazingCandleInterval);
-      }
-    }, 3000);
-    renderStatusEffects(BLAZING_CANDLE);
+    BLAZING_CANDLE.tracker = "LIT";
+    startStatusEffect(BLAZING_CANDLE, 1);
   },
 };
 
@@ -1410,26 +1416,14 @@ const SOULFLAME_CANDLE = {
   type: "CONSUMABLE",
   rarity: "Epic",
   detail: "CANDLE",
+  tracker: null,
   effect:
-    "When this item is used all experience gained is doubled. The candle burns out after gaining 1,000XP.",
+    "While this candle is lit all experience gained is doubled. The candle burns out after 10 rooms.",
   status: "All experience gained is doubled.",
   duration: null,
   function: () => {
-    let itemDuration = experiencePoints + 1000;
-    SOULFLAME_CANDLE.duration = "Duration: 1,000XP";
-    let soulflameCandleInterval = setInterval(() => {
-      SOULFLAME_CANDLE.duration = `Duration: ${
-        itemDuration - experiencePoints
-      }XP`;
-      if (experiencePoints >= itemDuration) {
-        soulflameCandleTracker = "BURNED OUT";
-        SOULFLAME_CANDLE.duration = null;
-        clearInterval(soulflameCandleInterval);
-      } else {
-        soulflameCandleTracker = "LIT";
-      }
-    }, 3000);
-    renderStatusEffects(SOULFLAME_CANDLE);
+    SOULFLAME_CANDLE.tracker = "LIT";
+    startStatusEffect(SOULFLAME_CANDLE, 10);
   },
 };
 
@@ -2221,16 +2215,7 @@ inventoryModal.addEventListener("click", (event) => {
   }
 });
 
-hagItems = [
-  POTION,
-  POTION,
-  POTION,
-  BONE_MARROW_SOUP,
-  BONE_MARROW_SOUP,
-  BONE_MARROW_SOUP,
-  BLACKHEART_BREW,
-  BLOODSTONE,
-];
+hagItems = [];
 curatorItems = [];
 
 const traderItemsBox = document.getElementById("traderItemsBox");

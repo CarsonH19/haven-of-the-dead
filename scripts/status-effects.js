@@ -339,20 +339,10 @@ const startNewStatusEffect = (statusEffect, length) => {
   const roomText = duration > 1 ? "Rooms" : "Room";
   statusEffect.duration = `Duration: ${duration} ${roomText}`;
 
-  switch (statusEffect.detail) {
-    case "CONDITION":
-      if (statusEffect.stats) {
-        addStatChange(statusEffect);
-      } else {
-        updateTotalStats();
-      }
-      break;
-
-    case "WISP":
-      break;
-
-    case "CANDLE":
-      break;
+  if (statusEffect.stats) {
+    addStatChange(statusEffect);
+  } else {
+    updateTotalStats();
   }
 
   setupStatusEffectInterval(statusEffect);
@@ -401,6 +391,8 @@ const endStatusEffectInterval = (statusEffect, intervalId) => {
     statusEffect.tracker = "ARRIVE";
     wisp.classList.remove("orb");
     wispActive = null;
+  } else if (statusEffect.detail === "CANDLE") {
+    statusEffect.tracker = null;
   }
 
   clearInterval(intervalId);

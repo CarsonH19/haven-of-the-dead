@@ -757,7 +757,7 @@ function monsterAbilityHandler(monster) {
 
 const UNDEAD_SIGGURD = {
   name: "Siggurd, Knight of the Dead",
-  image: "styles/images/paladin.jpg",
+  image: "styles/images/monsters/undead-siggurd.jpg",
   type: "UNDEAD",
   skulls: 7,
   soundEffects: {
@@ -773,7 +773,7 @@ const UNDEAD_SIGGURD = {
 
 const UNDEAD_LIHETH = {
   name: "Liheth, Priestess of the Dead",
-  image: "styles/images/priestess.jpg",
+  image: "styles/images/monsters/undead-liheth.jpg",
   type: "UNDEAD",
   skulls: 7,
   soundEffects: {
@@ -797,7 +797,7 @@ const UNDEAD_LIHETH = {
 
 const UNDEAD_RIVEN = {
   name: "Riven, Shadow of the Dead",
-  image: "styles/images/rogue.jpg",
+  image: "styles/images/monsters/undead-riven.jpg",
   type: "UNDEAD",
   skulls: 7,
   soundEffects: {
@@ -825,6 +825,7 @@ const UNDEAD_RIVEN = {
       }
     }, 500);
 
+    playerControlsTimeout(1500);
     // writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
