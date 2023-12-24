@@ -353,7 +353,7 @@ const FLOOD_OF_BONES = {
 
 
 const UNDEAD_SIGGURD = {
-  name: "Siggurd, Knight of the Dead",
+  name: "Death Knight Siggurd",
   image: "styles/images/monsters/undead-siggurd.jpg",
   type: "UNDEAD",
   skulls: 7,
@@ -369,7 +369,7 @@ const UNDEAD_SIGGURD = {
 };
 
 const UNDEAD_LIHETH = {
-  name: "Liheth, Priestess of the Dead",
+  name: "The Unholy Flame, Liheth",
   image: "styles/images/monsters/undead-liheth.jpg",
   type: "UNDEAD",
   skulls: 7,
@@ -393,7 +393,7 @@ const UNDEAD_LIHETH = {
 };
 
 const UNDEAD_RIVEN = {
-  name: "Riven, Shadow of the Dead",
+  name: "Riven, Shadow of the Baron",
   image: "styles/images/monsters/undead-riven.jpg",
   type: "UNDEAD",
   skulls: 7,
@@ -423,7 +423,7 @@ const UNDEAD_RIVEN = {
     }, 500);
 
     playerControlsTimeout(1500);
-    // writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 

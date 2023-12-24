@@ -471,6 +471,12 @@ function writeToLogMonster(logType, narrate, dataOne) {
         newEntry.textContent = `The warband unleash a flurry of thrusts and slashes.`;
       } else if (monsterName === "Ivan the Scoundrel") {
         newEntry.textContent = `Ivan stumbles back, shoving one of his henchmen towards you. With a sly grin, he swiftly consumes a potion, mending his wounds.`;
+      } else if (monsterName === "Riven, Shadow of the Baron") {
+        newEntry.textContent = `Riven unleashes a violent flurry of shadow and steel, striking with otherworldly precision.`;
+      } else if (monsterName === "The Unholy Flame, Liheth") {
+        newEntry.textContent = `Liheth's chants resonate through the throne room and a surge of unholy fire envelops her, mending her wounds.";`;
+      } else if (monsterName === "Death Knight Siggurd") {
+        newEntry.textContent = `Siggurd's greatsword bursts into emerald flames, ablaze with malicious ferocity.`;
       }
       break;
   }
