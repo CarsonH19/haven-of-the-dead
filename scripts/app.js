@@ -7,6 +7,11 @@ function playerAttackHandler(smite) {
   let playerToMonsterDamage = dealMonsterDamage(baseAttack);
   let totalDamage;
 
+  //Checks for Rank 4 Holy Smite - maximum damage
+  if (heroChoice === "PALADIN" && specialAbilityBoonRank === 4 && smite > 1) {
+    playerToMonsterDamage = baseAttack;
+  }
+
   // ITEM: Revenant's Rage - Increases attack when low health
   playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
   // ITEM: +3 attack against evil spirits.
@@ -94,11 +99,6 @@ function dealMonsterDamage(damage) {
   if (heroChoice === "PRIESTESS" && damageDealt < burningDevotionTracker) {
     damageDealt = burningDevotionTracker;
     writeToLogHero(LOG_BURNING_DEVOTION, "NO", damageDealt);
-  }
-
-  //Checks for Rank 4 Holy Smite - maximum damage
-  if (heroChoice === "PALADIN" && specialAbilityBoonRank === 4) {
-    damageDealt = baseAttack;
   }
 
   return damageDealt;
@@ -236,11 +236,11 @@ function specialCooldownHandler(reset) {
 
   if (reset) {
     if (heroChoice === "PALADIN") {
-      specialCooldownCounter = 7;
-    } else if (heroChoice === "ROGUE") {
-      specialCooldownCounter = 7;
-    } else if (heroChoice === "PRIESTESS") {
       specialCooldownCounter = 16;
+    } else if (heroChoice === "ROGUE") {
+      specialCooldownCounter = 8;
+    } else if (heroChoice === "PRIESTESS") {
+      specialCooldownCounter = 21;
     }
 
     // ITEM: HALLOWED HOURGLASS - Reduces Cooldown by 1
@@ -281,18 +281,17 @@ function guardHandler() {
 
   if (damageBlocked <= damageToGuard) {
     soundEffectHandler(heroChecker(), "PLAYER GUARD");
-    writeToLogActions(LOG_GUARD, "NO", damageBlocked);
   }
 
   if (damageTaken > 0) {
     damagePlayer(damageTaken);
     monsterAbilityHandler(currentRoom.contents.monsters[0]);
     soundEffectHandler(heroChecker(), "MONSTER ATTACK");
-    writeToLogMonster(LOG_MONSTER_ATTACK, "NO", damageTaken);
+    writeToLogMonster(LOG_MONSTER_ATTACK, null, damageTaken);
   } else {
     damagePlayer(0);
     soundEffectHandler(swordSwingWhoosh, "MONSTER MISS");
-    writeToLogMonster(LOG_MONSTER_MISS, "NO");
+    writeToLogMonster(LOG_MONSTER_MISS, null);
   }
 
   // console.log(`Damage Received: ${damageToGuard}`);
@@ -300,6 +299,7 @@ function guardHandler() {
   // console.log(`Current Player Health ${currentPlayerHealth}`);
   // console.log(`Current Player Health Bar Value ${playerHealthBar.value}`);
 
+  writeToLogActions(LOG_GUARD, "NO", damageBlocked);
   updatePlayerTrackers();
 }
 
@@ -353,6 +353,9 @@ function fleeHandler() {
   }
 
   if (fleeAttempt >= 10) {
+    // Log must be placed before currentRoom change
+    writeToLogActions(LOG_FLEE, "YES");
+
     let roomToFlee = currentRoom;
     let newRoom = getRandomRoom(catacombRooms);
 
@@ -378,8 +381,6 @@ function fleeHandler() {
           renderCurrentRoom(currentRoom);
         }, 1500);
       }, 2000);
-
-      writeToLogActions(LOG_FLEE, "YES", currentRoom.name);
     } else {
       fleeHandler();
     }
@@ -414,13 +415,11 @@ function isGameOver() {
   }
 
   if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {
-    playerControlsTimeout(3000);
+    playerControlsTimeout(4000);
 
     // ITEM: Bloodstone - Recovers health when monster dies
     isItemAttuned(BLOODSTONE, null);
-
     soundEffectHandler(monster, "MONSTER DEATH");
-
     gainExperience(currentRoom.contents.monsters[0].skulls);
     fadeOutAnimation(monsterContainer);
     fadeOutAnimation(monsterImage);
@@ -531,17 +530,6 @@ function renderCurrentRoom(currentRoom) {
 
     setTimeout(() => {
       renderEvent(currentRoom.contents.events);
-      switch (currentRoom.contents.events.eventType) {
-        case "TRAP":
-          writeToLogEvent(LOG_TRAP_DESCRIPTION, "YES");
-          break;
-        case "NPC":
-          writeToLogEvent(LOG_NPC_DESCRIPTION, "YES");
-          break;
-        case "MISC":
-          writeToLogEvent(LOG_MISC_DESCRIPTION, "YES");
-          break;
-      }
     }, 3000);
   }
 
@@ -596,6 +584,16 @@ function togglePlayerControls() {
     potionBtn.disabled = false;
   }
 
+  if (WEBBED.duration !== null) {
+    attackBtn.disabled = true;
+    guardBtn.disabled = true;
+    specialBtn.disabled = true;
+    fleeBtn.disabled = true;
+    inventoryButton.disabled = true;
+    potionBtn.disabled = true;
+  }
+
+  // Gives access to inventory while trading
   if (
     currentRoom.roomName === "Hag's Hollow" ||
     currentRoom.roomName === "Curator's Curio"
@@ -768,7 +766,6 @@ function closeRoomSummaryModal() {
 function renderRoomSummaryModal() {
   const roomSummaryInfo = document.getElementById("roomSummaryInfo");
   // const roomSummaryInfo = document.querySelector(".room-summary-modal-content");
-  console.log("renderRoomSummaryModal Called");
 
   if (
     currentRoom !== catacombEntrance &&
@@ -776,6 +773,7 @@ function renderRoomSummaryModal() {
     roomSummaryModalTracker !== "ACTIVE"
     // roomSummaryModal.style.display === "none"
   ) {
+    console.log("renderRoomSummaryModal Called");
     roomSummaryModalTracker = "ACTIVE";
     // Builds summary modal with currentRoom's contents.
     setTimeout(function () {
@@ -1085,14 +1083,15 @@ continueButton.addEventListener("click", () => {
   soundEffectHandler(whooshLowAir);
 });
 
-settingsButton.addEventListener("click", () => {
-  // openSettingsHandler();
-  settingsModal.style.display = "block";
-});
 
 restartGameBtn.addEventListener("click", () => {
   location.reload();
 });
 
-volumeUpButton.addEventListener("click", () => adjustVolume(music, 0.05));
-volumeDownButton.addEven;
+// volumeUpButton.addEventListener("click", () => adjustVolume(music, 0.05));
+// volumeDownButton.addEven;
+
+// settingsButton.addEventListener("click", () => {
+//   // openSettingsHandler();
+//   settingsModal.style.display = "block";
+// });

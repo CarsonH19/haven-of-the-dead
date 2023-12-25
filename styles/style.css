@@ -47,7 +47,6 @@ li, ul {
 ==========================================
 */
 
-
 .game-window {
   aspect-ratio: 16 / 9;
   width: auto;
@@ -207,14 +206,19 @@ li, ul {
   width: 90%;
   /* height: 100%; */
   padding: 20px 40px 20px 40px;
+  margin-bottom: 100px;
   font-size: 1.5rem;
   overflow: hidden;
+}
+
+.middle-center ul {
+  
 }
 
 .damage-dealt-box {
   width: 20%;
   min-width: 200px;
-  height: 5vh;
+  height: 7vh;
   align-self: flex-end;
   display: flex;
   justify-content: flex-start;
@@ -223,7 +227,7 @@ li, ul {
 .damage-received-box {
   width: 33%;
   min-width: 300px;
-  height: 10vh;
+  height: 2vh;
   align-self: flex-start;
   display: flex;
   flex-direction:column;
@@ -257,15 +261,34 @@ li, ul {
 }
 
 .damage-shake {
-  animation: damage-shake 0.5s;
+  animation: damage-shake 1.0s;
 }
-
+/* BOUNCE
 @keyframes damage-shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px) rotate(0.2deg); }
-  50% { transform: translateX(5px) rotate(-0.2deg); }
-  75% { transform: translateX(-5px) rotate(0.2deg); }
-  100% { transform: translateX(0); }
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+} */
+
+/* SHAKE */
+@keyframes damage-shake {
+  0% { transform: translateY(0) rotate(0.2deg); }
+  10% { transform: translateY(-5px) rotate(0.1deg); }
+  20% { transform: translateY(5px) rotate(-0.1deg); }
+  30% { transform: translateY(-5px) rotate(0.1deg); }
+  40% { transform: translateY(5px) rotate(-0.1deg); }
+  50% { transform: translateY(-5px) rotate(0.1deg); }
+  60% { transform: translateY(5px) rotate(-0.1deg); }
+  70% { transform: translateY(-2px) rotate(0.1deg); }
+  80% { transform: translateY(2px) rotate(-0.1deg); }
+  90% { transform: translateY(-1px) rotate(0.1deg); }
+  100% { transform: translateY(0) rotate(0.2deg); }
 }
 
 .middle-center li {
@@ -298,6 +321,7 @@ li, ul {
   pointer-events: none;
   padding: 0;
   z-index: 99;
+  transition: transform 0.3s ease-in-out;
 }
 
 /* 
@@ -389,6 +413,7 @@ li, ul {
 }
 
 .controls-container {
+  transition: 0.3s;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -396,9 +421,49 @@ li, ul {
   background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-blend-mode: overlay;  padding: 6px;
-  
+  background-blend-mode: overlay;  
+  padding: 0px;
+  cursor: pointer;
 }
+
+/* #continueButton {
+  font-size: 0.8rem;
+  transition: 0.3s;
+  cursor: pointer;
+  color: var(--text);
+  box-shadow: inset 3px 3px 20px rgba(0, 0, 0, 3.8);
+  background-color: var(--background);
+  background-image: url(images/skull-texture.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  border: 1px solid var(--text);
+}  */
+
+/* #continueButton:hover {
+  transition: 0.3s;
+  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 4.8);
+  cursor: pointer;
+  color: var(--text);
+  scale: 1.2;
+  border: 1px solid var(--text);
+  background-color: var(--background);
+  background-image: url(images/skull-texture.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+}  */
+
+
+/* .controls-container button:hover{
+  transition: 0.3s;
+  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 4.8);
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text);
+  border: 2px solid var(--text);
+  background-color: transparent;
+}  */
 
 .attack {
   display: flex;
@@ -437,7 +502,12 @@ li, ul {
   margin-top: 0px;
 }
 
-/* Log */
+/* 
+==========================================
+             Log Window
+==========================================
+*/
+
 .log-container {
   overflow: auto;
   cursor: pointer;
@@ -457,7 +527,7 @@ li, ul {
 .log-container ul li {
   padding: 0px;
   margin: 0px;
-  border-bottom: 1px dashed black;
+  border-bottom: 1px dashed var(--header);
   padding-top: 6px;
   padding-bottom: 6px;
 }
@@ -759,9 +829,15 @@ progress[value]::-moz-progress-bar {
   padding: 0px 0px 5px 0px;
 }
 
+.log-container-modal {
+  padding: 5px;
+}
+
 .log-modal-list li {
-  border-bottom: 1px dashed black;
-  padding: 5px 0px 5px 0px
+  border-bottom: 1px dashed var(--header);
+  padding: 10px 0px 10px 0px;
+  font-size: 1.0rem;
+
 }
 
 /* Start Game Modal */
@@ -909,16 +985,21 @@ progress[value]::-moz-progress-bar {
   position: fixed;
   z-index: 1;
   left: 50%;
-  top: 65%;
+  top: 60%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0,0,0,0.4);
 }
 
 .event-content button {
+  transition: 0.3s;
   width: 150px;
   height: 50px; 
-  /* opacity: 1;
-  transition: 2s; */
+  cursor: pointer;
+  margin: 20px;
+}
+
+.event-content button:hover {
+  transition: 0.3s;
+  scale: 1.2;
 }
 
 /* Inventory Modal */
@@ -1561,7 +1642,7 @@ progress[value]::-moz-progress-bar {
 /* Damage Flash */
 .flash {
   box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); 
-  animation: flashAnimation 1.0s forwards; 
+  animation: flashAnimation 0.8s forwards; 
 }
 
 .monster-damage-flash {
@@ -1571,35 +1652,17 @@ progress[value]::-moz-progress-bar {
 
 .flash-low-health {
   box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); 
-  animation: flashAnimation 1.0s infinite; 
+  animation: flashAnimation 0.8s infinite; 
 }
 
 @keyframes flashAnimation {
   0% {
-    box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); 
+    box-shadow: inset 0 0 60px 20px rgba(188, 13, 13, 0.5); 
   }
   100% {
     box-shadow: none; 
   }
 }
-
-/* Health Bar Pulse */
-/* #player-health {
-  animation: pulse 1s infinite alternate;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.03);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
- */
 
  /* Health Bar Shake */
  @keyframes shake {

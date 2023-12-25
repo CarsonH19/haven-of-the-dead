@@ -327,6 +327,7 @@ const BONE_TITAN = {
 
 const FLOOD_OF_BONES = {
   name: "Flood of Bones",
+  boss: "Flood of Bones",
   // image: "styles/images/monsters/flood-of-bones.jpg",
   type: "UNDEAD",
   skulls: 9,
@@ -361,7 +362,7 @@ const UNDEAD_LIHETH = {
   name: "The Unholy Flame, Liheth",
   image: "styles/images/monsters/undead-liheth.jpg",
   type: "UNDEAD",
-  skulls: 7,
+  skulls: 9,
   soundEffects: {
     spawn: boneCrunchCrack1,
     attack: severMetalHit2,
@@ -384,7 +385,7 @@ const UNDEAD_RIVEN = {
   name: "Riven, Shadow of the Baron",
   image: "styles/images/monsters/undead-riven.jpg",
   type: "UNDEAD",
-  skulls: 7,
+  skulls: 9,
   soundEffects: {
     spawn: boneCrunchCrack1,
     attack: severMetalHit2,
@@ -416,6 +417,7 @@ const UNDEAD_RIVEN = {
 
 const BARON_OF_BONE = {
   name: "Baron of Bone",
+  boss: "Baron of Bone",
   type: "UNDEAD",
   skulls: 9,
   soundEffects: {
@@ -577,6 +579,7 @@ const IVAN_STATS = {
 // ===============================
 
 function monsterSkullLevel(level) {
+  let monster = currentRoom.contents.monsters[0];
   switch (level) {
     case 1:
       monsterMaxHealth = 20;
@@ -616,17 +619,28 @@ function monsterSkullLevel(level) {
       break;
   }
 
-  if (currentRoom.contents.monsters[0] === UNDYING_WARBAND) {
-    monsterMaxHealth = 180;
-    monsterAttackValue = 4;
+  // Logic for bosses & specific case monsters
+  switch (monster) {
+    case UNDYING_WARBAND:
+      monsterMaxHealth = 180;
+      monsterAttackValue = 4;
+      break;
+
+    case BARON_OF_BONE:
+      monsterMaxHealth = 400;
+      monsterAttackValue = 18;
+      break;
   }
 }
 
 function renderMonsterStatBlock(monster) {
   fadeInAnimation(monsterContainer);
 
-  if (monster.image) {
+  if (monster.boss) {
+    monsterContainer.style.maxWidth = "500px";
+  } else {
     fadeInAnimation(monsterImage);
+    monsterContainer.style.maxWidth = "350px";
     monsterImage.style.display = "block";
     monsterImage.style.backgroundImage = `url(${monster.image})`;
   }
@@ -650,17 +664,17 @@ function setMonsterHealth(maxLife) {
 function startBattle() {
   setTimeout(() => {
     renderMonsterStatBlock(currentRoom.contents.monsters[0]);
-    updatePlayerTrackers();
     togglePlayerControls();
 
     // Checks for Paladin Passive
-    paladinRadiantAura();
+    setTimeout(paladinRadiantAura, 500);
     // ITEM: Rattlebone Whistle - Chance for humanoids to flee.
     isItemAttuned(RATTLEBONE_WHISTLE);
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
     isItemAttuned(ETHEREAL_CROWN);
     // ITEM: Warding Candle - Chance for evil spirits to flee.
     statusEffectHandler(WARDING_CANDLE);
+    updatePlayerTrackers();
   }, 1000);
 
   soundEffectHandler(currentRoom.contents.monsters[0], "SPAWN");

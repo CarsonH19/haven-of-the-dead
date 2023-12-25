@@ -110,17 +110,10 @@ const WEBBED = {
   name: "Webbed",
   detail: "CONDITION",
   image: "styles/images/items/webbed.jpg",
-  status: "You are caught in spider webbing.",
+  status: "You are caught in spider webbing. All attacks make ",
   duration: null,
   function: (webStrength) => {
     if (WEBBED.duration === null) {
-      attackBtn.disabled = true;
-      guardBtn.disabled = true;
-      specialBtn.disabled = true;
-      fleeBtn.disabled = true;
-      inventoryButton.disabled = true;
-      potionBtn.disabled = true;
-
       WEBBED.duration = `Struggling to break free...`;
       let counter = 0;
 
@@ -148,7 +141,7 @@ const WEBBED = {
           }
         }, 2000);
 
-        statusEffectHandler(WEBBED);
+        togglePlayerControls();
         renderStatusEffects(WEBBED);
       }
     }

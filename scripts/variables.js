@@ -341,6 +341,8 @@ let commanderTracker = null;
 
 // Traders
 let hagFavor = 0;
+let previousHagFavor;
+
 let curatorFavor = 0;
 
 // ===============================
@@ -353,7 +355,7 @@ let potionHealValue = 30;
 let specialCooldownCounter = 0;
 
 // Paladin
-let holySmiteTracker = 2.0;
+let holySmiteTracker = 1.5;
 let radiantAuraTracker = 5;
 
 // Rogue

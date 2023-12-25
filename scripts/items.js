@@ -148,11 +148,7 @@ const GRAVEROBBERS_SPADE = {
   rarity: "Common",
   effect: "While attuned to this item you are 10% more likely to find items.",
   function: () => {
-    updateTotalStats();
     return 10;
-  },
-  unequip: () => {
-    updateTotalStats();
   },
 };
 
@@ -418,16 +414,10 @@ const REVENANTS_RAGE = {
   type: "MAGIC",
   rarity: "Rare",
   effect:
-    "While attuned to this item you deal more damage when your health reaches critical levels.",
+    "While attuned to this item your Attack increases by 5 when below 30HP.",
   function: () => {
-    if (currentPlayerHealth <= 10) {
-      return 4;
-    } else if (currentPlayerHealth <= 20) {
-      return 3;
-    } else if (currentPlayerHealth <= 30) {
-      return 2;
-    } else if (currentPlayerHealth <= 40) {
-      return 1;
+    if (currentPlayerHealth <= 30) {
+      return 5;
     } else {
       return 0;
     }
@@ -572,7 +562,6 @@ const FANGWEAVE_ARMOR = {
 
 const SKELETON_KEY = {
   name: "Skeleton Key",
-  description: "",
   image: "styles/images/items/skeleton-key.jpg",
   soundEffect: skeletonKeyIn2,
   type: "MISC",
@@ -586,7 +575,6 @@ const SKELETON_KEY = {
 
 const SOULREAVER = {
   name: "Soulreaver",
-  description: "",
   image: "styles/images/items/soulreaver.jpg",
   type: "MAGIC",
   rarity: "Rare",
@@ -611,7 +599,7 @@ const SOULREAVER = {
       return 4;
     } else if (attackCounter >= 5) {
       attackCounter++;
-      writeToLogItem(LOG_ITEM, "NO", SOULREAVER);
+      writeToLogItem(LOG_ITEM, null, SOULREAVER);
       return 5;
     }
   },
@@ -703,9 +691,9 @@ const HALLOWED_HOURGLASS = {
   type: "MAGIC",
   rarity: "Epic",
   effect:
-    "While attuned to this item your special ability cooldown is reduced.",
+    "While attuned to this item your special ability cooldown is reduced by 2 actions.",
   function: () => {
-    specialCooldownCounter--;
+    specialCooldownCounter -= 2;
   },
 };
 
@@ -901,8 +889,7 @@ const GRERVILS_HEAD = {
   type: "MISC",
   rarity: "Rare",
   effect: "Head of the talking skull, Grervil.",
-  function: () => {
-  },
+  function: () => {},
 };
 
 const WAR_TORN_BANNER = {
@@ -1307,19 +1294,18 @@ const NECROTIC_NECTAR = {
 
 const HEXBANE_BREW = {
   name: "Hexbane Brew",
-  image: "styles/images/items/hexfire-brew.jpg",
+  image: "styles/images/items/hexbane-brew.jpg",
   soundEffect: gulpingWater24,
   type: "CONSUMABLE",
   rarity: "Epic",
   detail: "DRINK",
   effect:
     "Using this item cures and grants immunity to the Poisoned, Diseased, Chilled, and Cursed conditions. These effects persist for 10 rooms.",
-  status:
-    "You have immunity to being Poisoned, Diseased, Chilled, and Cursed.",
+  status: "You have immunity to being Poisoned, Diseased, Chilled, and Cursed.",
   duration: null,
   statusDuration: null,
   function: () => {
-    startStatusEffect(HEXFIRE_BREW, 10);
+    startStatusEffect(HEXBANE_BREW, 10);
   },
 };
 
@@ -1815,9 +1801,12 @@ function useConsumable(consumable) {
   // must use item's string name
   let itemObject = inventoryItems.find((inv) => inv.name === consumable);
 
-  if (consumable !== "Health Potion") {
+  if (itemObject !== POTION) {
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
+  }
+
+  if (itemObject.type === "CONSUMABLE") {
     writeToLogItem(LOG_CONSUMABLE, "YES", itemObject);
   }
 
@@ -2199,7 +2188,7 @@ inventoryModal.addEventListener("click", (event) => {
     }
 
     // Misc Other Item Logic
-    if (buttons[i].id === "Grervil's Head") {
+    if (event.target === buttons[i] && buttons[i].id === "Grervil's Head") {
       if (attunedItems.includes(AMULET_OF_WHISPERS)) {
         writeToLogItem(LOG_ITEM, "YES", GRERVILS_HEAD, "UNDERSTAND");
       } else {

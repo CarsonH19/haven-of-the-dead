@@ -114,7 +114,7 @@ const SWARM_OF_VERMIN = {
   name: "Swarm of Vermin",
   eventType: "TRAP",
   description:
-    "A horrifying spectacle unfolds before you, as an unending tide of rats pour into the chamber. Their frenetic scuttling and chittering echoes off the walls, drowning out all other sound.",
+    "An unending tide of rats pour into the chamber. Their frenetic scuttling and chittering echoes off the walls, drowning out all other sound.",
   optionOne: "Strength",
   optionTwo: "Faith",
   passValue: 5,
@@ -178,10 +178,10 @@ const GRAVEROBBER_EARVER = {
       "After helping Graverobber Earver open the tomb, he was possessed by an evil spirit and attacked you. Forced to defend yourself, you struck down the grave robber.";
     currentRoom.contents.monsters.push(POSSESSED_EARVER);
     currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
+
     setRoomSummary();
     startBattle();
     monsterAttackHandler();
-    setRoomSummary();
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
@@ -191,7 +191,6 @@ const GRAVEROBBER_EARVER = {
 
     let earverInterval = setInterval(() => {
       if (roomCounter > currentRoomCounter) {
-        console.log("Room Added");
         catacombRooms.push(GRAVEROBBER_EARVER_ROOM_TWO);
         clearInterval(earverInterval);
       }
@@ -481,7 +480,7 @@ const FORSAKEN_COMMANDER = {
   name: "Forsaken Commander",
   eventType: "NPC",
   image: "styles/images/npcs/forasken-commander.jpg",
-  description: `A spectral commander, draped in ethereal sorrow, materializes before you. "Valiant adventurer, my legion walk these depths, bound by an unholy curse. Will you them from the chains of undeath?"`,
+  description: `A spectral commander materializes before you. "Valiant adventurer, my legion walk these depths, bound by the Baron's unholy curse. Please, free them from the chains of undeath."`,
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
@@ -507,7 +506,8 @@ const FORSAKEN_COMMANDER = {
 const GRERVIL_THE_BODILESS = {
   name: "Grervil the Bodiless",
   eventType: "NPC",
-  description: `Emerging from beneath a pile of bones, the talking skull, Grervil, beckons with ghostly whispers. "Adventurer, take me with you. Help me find my wandering body, and the secrets of the catacomb shall be yours."`,
+  image: "styles/images/npcs/forasken-commander.jpg",
+  description: `Emerging from beneath a pile of bones, the talking skull, Grervil, beckons with ghostly whispers. "Adventurer, I am but a voice trapped in this hollowed cranium. My body wanders, lost in the depths of the catacomb. Take me with you, and aid me in finding my lost body."`,
   optionOne: "Take",
   optionTwo: "Leave",
   functionOne: () => {
@@ -522,20 +522,24 @@ const GRERVIL_THE_BODILESS = {
       grervilsQuestInterval = setInterval(() => {
         if (currentRoom.contents.monsters[0] === GRERVILS_BODY) {
           currentRoom.contents.events = GRERVILS_BODY_EVENT;
-          currentRoom.contents.items.push(SKELETON_KEY); // ADD MORE ITEMS FOR REWARD!!!
-          playerControlsTimeout(7000);
-          useConsumable("Grervil's Head"); // removes item from inventory
-          writeToLogEvent(LOG_NPC_DIALOGUE, "YES", GRERVILS_HEAD);
 
           setTimeout(() => {
             fadeOutAnimation(monsterContainer);
+            fadeOutAnimation(monsterImage);
+
             setTimeout(() => {
               checkForMonsters();
               monsterContainer.style.display = "none";
+              monsterImage.style.display = "none";
             }, 2000);
-          }, 5000);
+          }, 4000);
 
-          setTimeout(setRoomSummary, 7500);
+          useConsumable("Grervil's Head"); // removes item from inventory
+          playerControlsTimeout(5000);
+          writeToLogEvent(LOG_NPC_DIALOGUE, "YES", GRERVILS_HEAD);
+          setTimeout(() => {
+            renderEvent(GRERVILS_BODY_EVENT);
+          }, 7500);
           clearInterval(grervilsQuestInterval);
         }
       }, 3000);
@@ -559,10 +563,20 @@ const GRERVIL_THE_BODILESS = {
 
 const GRERVILS_BODY_EVENT = {
   name: "Grervil's Body Found",
+  image: "styles/images/npcs/forasken-commander.jpg",
   eventType: "NPC",
-  description: null,
+  description: `I don't have much to aid you, but take what you need most, brave soul. A key to unlock secrets or an ethereal wisp to guide you through the shadows.`,
   summary: `While exploring the catacomb, you unearthed Grervil's skeletal body. The skeleton gave you a wisp before departing into the catacombs's depths.`,
-  function: () => {},
+  optionOne: "Skeleton Key",
+  optionTwo: "Wisp",
+  functionOne: () => {
+    currentRoom.contents.items.push(SKELETON_KEY);
+    setRoomSummary();
+  },
+  functionTwo: () => {
+    getItem("WISP");
+    setRoomSummary();
+  },
 };
 
 const HAG_TRADER = {
@@ -665,14 +679,13 @@ const LAUGHING_COFFIN_EVENT = {
     if (inventoryItems.includes(LAUGHING_COFFIN_COIN)) {
       LAUGHING_COFFIN_EVENT.summary = `You pay the toll, exchanging a Laughing Coffin Coin for camaraderie and unexpected relaxation within the infamous tavern.`;
       useConsumable("Laughing Coffin Coin"); // removes coin from inventory
-      setTimeout(newRoomAnimation, 5000);
+      setTimeout(newRoomAnimation, 7000);
       setTimeout(() => {
         BLACKHEART_BREW.function();
         healPlayer(calculatePlayerMaxHealth());
-      }, 6500);
-      setTimeout(renderRoomSummaryModal, 9000);
+      }, 8500);
+      setTimeout(renderRoomSummaryModal, 11000);
       setRoomSummary();
-      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "PAY");
     } else {
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "LIAR");
       console.log("NO COIN!");
@@ -682,8 +695,11 @@ const LAUGHING_COFFIN_EVENT = {
     }
   },
   functionTwo: () => {
-    writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
-    setTimeout(renderRoomSummaryModal, 5000);
+    setTimeout(() => {
+      writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
+    }, 2000);
+
+    setTimeout(renderRoomSummaryModal, 7000);
   },
 };
 
@@ -813,31 +829,31 @@ function lockedRoomHandler(room) {
   let monsters = currentRoom.contents.monsters;
   let items = currentRoom.contents.items;
 
-  if (room === "Bonevault") {
-    room = Math.round(Math.random() * 4);
+  if (currentRoom.roomName === "Bonevault") {
+    let room = Math.floor(Math.random() * 5) + 1;
     console.log(`Bonevault Room: ${room}`);
   }
 
   setTimeout(() => {
     switch (room) {
-      case 0:
+      case 1:
         //writeToLog() room details
         getItem("BONEVAULT");
         break;
 
-      case 1:
+      case 2:
         monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, SKELETAL_SOLDIER);
         getItem("BONEVAULT");
         //writeToLog() room details
         break;
 
-      case 2:
+      case 3:
         monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
         getItem("BONEVAULT");
         //writeToLog() room details
         break;
 
-      case 3:
+      case 4:
         monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
         getItem("BONEVAULT");
         //writeToLog() room details
@@ -888,9 +904,13 @@ function lockedRoomHandler(room) {
 
     items.push(WHISPERING_SKULL, POTION);
 
-    if (monsters.length > 0) {
-      startBattle();
-    }
+    setTimeout(() => {
+      if (monsters.length > 0) {
+        startBattle();
+      } else {
+        renderRoomSummaryModal();
+      }
+    }, 2000);
 
     setRoomSummary();
   }, 1500);
@@ -975,6 +995,16 @@ function generalEventHandler(option, statModifier, attribute) {
     }
     updateTotalStats();
   }
+
+  // Logic for Hag Curse after not trading
+  if (
+    currentRoom.roomName === "Hag's Hollow" &&
+    previousHagFavor === hagFavor
+  ) {
+    CURSED.function(7);
+    // ADD SOUND EFFECT !FIX!
+    writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "CURSE");
+  }
 }
 
 function renderEvent(event) {
@@ -1031,6 +1061,19 @@ function renderEvent(event) {
       eventModal.style.display = "block";
     }
   }, 2000);
+
+  // Display Event Description as Narrative
+  switch (event.eventType) {
+    case "TRAP":
+      writeToLogEvent(LOG_TRAP_DESCRIPTION, "YES");
+      break;
+    case "NPC":
+      writeToLogEvent(LOG_NPC_DESCRIPTION, "YES");
+      break;
+    case "MISC":
+      writeToLogEvent(LOG_MISC_DESCRIPTION, "YES");
+      break;
+  }
 }
 
 // ===============================
@@ -1052,7 +1095,6 @@ eventButtonOne.addEventListener("click", () => {
   // NPCs
   if (event.eventType === "NPC") {
     generalEventHandler(event.optionOne);
-
   }
   // Miscellaneous
   if (event.eventType === "MISC") {
@@ -1077,7 +1119,6 @@ eventButtonTwo.addEventListener("click", () => {
   // NPCs
   if (event.eventType === "NPC") {
     generalEventHandler(event.optionTwo);
-
   }
   // Miscellaneous
   if (event.eventType === "MISC") {

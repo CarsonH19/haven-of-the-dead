@@ -4,7 +4,7 @@
 
 function writeToLogActions(logType, narrate, dataOne) {
   let newEntry = document.createElement("li");
-  let narration = Math.round(Math.random() * 9);
+  let narration = Math.floor(Math.random() * 10) + 1;
   let monsterName;
 
   if (currentRoom.contents.monsters.length > 0) {
@@ -85,7 +85,7 @@ function writeToLogActions(logType, narrate, dataOne) {
         }
       }
 
-      newEntry.textContent = `You deal ${dataOne} damage to the ${monsterName}!`;
+      newEntry.textContent = `ATTACK: You deal ${dataOne} damage to the ${monsterName}!`;
       break;
 
     // ===============================
@@ -161,7 +161,7 @@ function writeToLogActions(logType, narrate, dataOne) {
         }
       }
 
-      newEntry.textContent = `${narration} You deal ${dataOne} damage to the ${monsterName}!`;
+      newEntry.textContent = `ATTACK: You deal ${dataOne} damage to the ${monsterName}!`;
       break;
 
     // ===============================
@@ -169,7 +169,7 @@ function writeToLogActions(logType, narrate, dataOne) {
     // ===============================
 
     case LOG_PLAYER_MISS:
-      newEntry.textContent = `You fail to attack the ${monsterName}!`;
+      newEntry.textContent = `ATTACK: You fail to attack the ${monsterName}!`;
       break;
 
     // ===============================
@@ -244,11 +244,11 @@ function writeToLogActions(logType, narrate, dataOne) {
           narration = `As the ${monsterName}'s strike approaches, you raise your hand, creating a barrier of light that absorbs the blow with a gentle but resolute force.`;
         }
       }
-      newEntry.textContent = `${narration} You guard ${dataOne} damage from the ${monsterName}!`;
+      newEntry.textContent = `GUARD: You guard ${dataOne} damage from the ${monsterName}!`;
       break;
 
     case LOG_GUARD_FAIL:
-      newEntry.textContent = `You fail to guard the ${monsterName}'s attack!`;
+      newEntry.textContent = `GUARD: You fail to guard the ${monsterName}'s attack!`;
       break;
 
     // ===============================
@@ -324,7 +324,7 @@ function writeToLogActions(logType, narrate, dataOne) {
         }
       }
 
-      newEntry.textContent = `${narration} You drink a potion and restore ${dataOne} health!`;
+      newEntry.textContent = `POTION: You drink a potion and restore ${dataOne} health!`;
       break;
 
     // ===============================
@@ -400,7 +400,7 @@ function writeToLogActions(logType, narrate, dataOne) {
         }
       }
 
-      newEntry.textContent = `You flee from the ${currentRoom.roomName}!`;
+      newEntry.textContent = `FLEE: You flee from the ${currentRoom.roomName}!`;
       break;
   }
 
@@ -421,6 +421,7 @@ function writeToLogActions(logType, narrate, dataOne) {
 
 function writeToLogMonster(logType, narrate, dataOne) {
   // dataOne = damage
+  let logText;
   let newEntry = document.createElement("li");
   let monsterName = currentRoom.contents.monsters[0].name;
   let narration = Math.round(Math.random() * 9);
@@ -481,13 +482,15 @@ function writeToLogMonster(logType, narrate, dataOne) {
       break;
   }
 
-  log.insertBefore(newEntry, log.firstChild);
-  const newEntryClone = newEntry.cloneNode(true);
-  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
-
   if (narrate === "YES") {
     writeToNarrative(newEntry.textContent);
   }
+
+  logText = newEntry.textContent;
+  newEntry.textContent = `ENEMY: ${logText}`;
+  log.insertBefore(newEntry, log.firstChild);
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
   checkLogSize();
 }
@@ -578,33 +581,33 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
       }
 
       if (dataOne === "STRENGTH") {
-        newEntry.textContent = `You've chosen the Boon of Strength. Your base Strength has increased to ${baseStrength}`;
+        newEntry.textContent = `BOON: You've chosen the Boon of Strength. Your base Strength has increased to ${baseStrength}`;
       } else if (dataOne === "DEXTERITY") {
-        newEntry.textContent = `You've chosen the Boon of Dexterity. Your base Dexterity has increased to ${baseDexterity}`;
+        newEntry.textContent = `BOON: You've chosen the Boon of Dexterity. Your base Dexterity has increased to ${baseDexterity}`;
       } else if (dataOne === "FAITH") {
-        newEntry.textContent = `You've chosen the Boon of Faith. Your base Faith has increased to ${baseFaith}`;
+        newEntry.textContent = `BOON: You've chosen the Boon of Faith. Your base Faith has increased to ${baseFaith}`;
       }
 
       if (dataOne === "SPECIAL") {
         if (heroChoice === "PALADIN") {
           if (specialAbilityBoonRank === 4) {
-            newEntry.textContent = `You've chosen Holy Smite. Your Holy Smite now always deals maximum damage.`;
+            newEntry.textContent = `BOON: You've chosen Holy Smite. Your Holy Smite now always deals maximum damage.`;
           } else {
-            newEntry.textContent = `You've chosen Holy Smite. Your Holy Smite now deals ${
+            newEntry.textContent = `BOON: You've chosen Holy Smite. Your Holy Smite now deals ${
               holySmiteTracker * 100
             }% damage.`;
           }
         } else if (heroChoice === "ROGUE") {
           if (specialAbilityBoonRank === 4) {
-            newEntry.textContent = `You've chosen Umbral Assault. Your Umbral Assault now deals extra damage based off your Dexterity.`;
+            newEntry.textContent = `BOON: You've chosen Umbral Assault. Your Umbral Assault now deals extra damage based off your Dexterity.`;
           } else {
-            newEntry.textContent = `You've chosen Umbral Assault. You now make ${umbralAssaultTracker} attacks with Umbral Assault.`;
+            newEntry.textContent = `BOON: You've chosen Umbral Assault. You now make ${umbralAssaultTracker} attacks with Umbral Assault.`;
           }
         } else if (heroChoice === "PRIESTESS") {
           if (specialAbilityBoonRank === 4) {
-            newEntry.textContent = `You've chosen Cleansing Flame. Your Cleansing Flame now also removes one harmful condition affecting you.`;
+            newEntry.textContent = `BOON: You've chosen Cleansing Flame. Your Cleansing Flame now also removes one harmful condition affecting you.`;
           } else {
-            newEntry.textContent = `You've chosen Cleansing Flame. Your Cleansing Flame now recovers ${cleansingFlameTracker}HP.`;
+            newEntry.textContent = `BOON: You've chosen Cleansing Flame. Your Cleansing Flame now recovers ${cleansingFlameTracker}HP.`;
           }
         }
       }
@@ -612,7 +615,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
 
     case LOG_STAT_INCREASE:
       let hero = heroChecker();
-      newEntry.textContent = `You've reached level ${hero.level}! Your attacks deal and additional 2 damage and your base health increased by 10HP.`;
+      newEntry.textContent = `LEVEL UP: You've reached level ${hero.level}! Your attacks deal and additional 2 damage and your base health increased by 10HP.`;
       break;
 
     // ===============================
@@ -643,7 +646,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
         narration = `"Through the strength of faith, your smite brings judgment upon the wicked."`;
       }
 
-      newEntry.textContent = `Your Holy Smite deals ${dataOne} damage to the ${currentRoom.contents.monsters[0].name}!`;
+      newEntry.textContent = `SPECIAL: Your Holy Smite deals ${dataOne} damage to the ${currentRoom.contents.monsters[0].name}!`;
       break;
 
     case LOG_SMITE_CRITICAL:
@@ -676,12 +679,12 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
         narration =
           "From the sun's heart, a torrent of flames to consume your wickedness!";
       }
-      newEntry.textContent = `Your Holy Smite deals ${dataOne} damage to the ${currentRoom.contents.monsters[0].name}!`;
+      newEntry.textContent = `SPECIAL: Your Holy Smite deals ${dataOne} damage to the ${currentRoom.contents.monsters[0].name}!`;
       break;
 
     // Paladin Passive
     case LOG_RADIANT_AURA:
-      newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} burns in the pressence of your Radiant Aura taking ${radiantAuraTracker} damage.`;
+      newEntry.textContent = `PASSIVE: The ${currentRoom.contents.monsters[0].name} burns in the pressence of your Radiant Aura taking ${radiantAuraTracker} damage.`;
       break;
 
     // ===============================
@@ -712,7 +715,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
         narration = `“In the heart of the night, I am the unseen blade.”`;
       }
 
-      newEntry.textContent = `You unleash an Umbral Assault on the ${currentRoom.contents.monsters[0].name}, making ${umbralAssaultTracker} against it.`;
+      newEntry.textContent = `SPECIAL: You unleash an Umbral Assault on the ${currentRoom.contents.monsters[0].name}, making ${umbralAssaultTracker} against it.`;
       break;
 
     // Rogue Passive
@@ -723,7 +726,6 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `The shadows surrounding you fade as Darkened Reprisal ends.`;
       }
 
-      narration = newEntry.textContent;
       break;
 
     // ===============================
@@ -764,22 +766,27 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
           "Through your sacred incantation, you invoke a torrent of Cleansing Flame.";
       }
 
-      newEntry.textContent = `Your Cleansing Flame restores ${dataOne} health!`;
+      newEntry.textContent = `SPECIAL: Your Cleansing Flame restores ${dataOne} health!`;
       break;
 
     // Priestess Passive
     case LOG_BURNING_DEVOTION:
-      newEntry.textContent = `Your Burning Devotion guides your attack. You deal ${dataOne} damage to the ${currentRoom.contents.monsters[0].name}!`;
+      newEntry.textContent = `PASSIVE: Your Burning Devotion guides your attack. You deal ${dataOne} damage to the ${currentRoom.contents.monsters[0].name}!`;
       break;
+  }
+
+  if (narrate === "YES") {
+    writeToNarrative(narration);
+  }
+
+  if (logType === LOG_DARKENED_REPRISAL) {
+    logText = newEntry.textContent;
+    newEntry.textContent = `PASSIVE: ${logText}`;
   }
 
   log.insertBefore(newEntry, log.firstChild);
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
-
-  if (narrate === "YES") {
-    writeToNarrative(narration);
-  }
 
   checkLogSize();
 }
@@ -1229,7 +1236,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (dataOne === "IVAN" && event === GAS_CHAMBER) {
         newEntry.textContent = `Ivan's the Scoundrel's voice taunts you from behind the sealed door, "You thought you could escape my wrath? Embrace of oblivion, betrayer. Your demise will be as silent as your treachery."`;
       } else if (dataOne === GRERVILS_HEAD) {
-        newEntry.textContent = `You unearthed Grervil's skeletal body. 'My form returns,' Grervil hisses. With an unsettling gratitude, he bestows a wisp before reattaching his head and wandering into the catacombs's depths.`;
+        newEntry.textContent = `Ah, at last, you've stumbled upon my long-lost bones! I am whole once more, and in your debt.`;
       } else if (dataOne === "IVANS CACHE AMBUSH") {
         newEntry.textContent = `Ivan and his accomplices emerge, encircling you like prey in ambush. Peril looms in their treacherous laughter.`;
       } else if (
@@ -1292,6 +1299,11 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         } else if (narration === 6) {
           newEntry.textContent = `"The cauldron's depths remain veiled to those without sufficient favor. Return with greater offerings, and the shadows may part."`;
         }
+      } else if (
+        currentRoom.roomName === "Hag's Hollow" &&
+        dataOne === "CURSE"
+      ) {
+        newEntry.textContent = `"The cauldron hungers, yet you withhold its bounty. For your insolence, a curse woven in shadows shall now cling to your every step, a reminder of the debt you owe."`;
       } else if (
         currentRoom.roomName === "Curator's Curio" &&
         dataOne === "GET FAVOR"
@@ -1359,15 +1371,16 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `"You aid Graverobber Earver's in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their onslaught, he meets his untimely demise, leaving you to face these undead guardians."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Released from captivity, the scoundrel breathes thanks, but a looming arachnid descends, hungry eyes fixed on its newfound prey.`;
-      } else if ((currentRoom.roomName = "Ivan's Hidden Cache")) {
+      } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
         newEntry.textContent = `As the key turns, a malevolent hiss escapes just before the chest explodes in an eruption of flames. Burning and disoriented you realize the scoundrel's gratitude was a ruse.`;
-      } else if (event === SCHOLAR_HENDRA) {
-        newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. They turn towards you, their hollow sockets fixed on your bold presence.`;
       } else if (event === FORSAKEN_COMMANDER) {
         newEntry.textContent = `The spectral commander's mournful visage brightens. 'A noble soul, break their chains and usher the forsaken into the eternal rest they deserve.`;
       } else if (event === GRERVIL_THE_BODILESS) {
         newEntry.textContent = `Grervil's gratitude echoes as you pick up the talking skull. "Thanks, seeker. Onward to reclaim my body, and the catacomb's secrets shall unfold in your favor."`;
       }
+
+      // } else if (event === SCHOLAR_HENDRA) {
+      //   newEntry.textContent = `You unleash a powerful shout that pierces the air, grabbing the attention of the menacing horde. They turn towards you, their hollow sockets fixed on your bold presence.`;
 
       narration = newEntry.textContent;
       break;
@@ -1383,13 +1396,15 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `Refusing the scoundrel's plea, he hisses, "You'll rue this day. My revenge will echo through these cursed catacombs." The shadows deepen, foretelling the ominous path ahead.`;
       } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
         newEntry.textContent = `Discovering the concealed cache, caution grips you as Ivan's offer of kindness grows suspicious. Suddenly, shadows and an ambush unfolds. With weapons unsheathed, Ivan and his cohorts emerge, revealing your instincts not to trust him were right all along.`;
-      } else if (event === SCHOLAR_HENDRA) {
-        newEntry.textContent = `After the skeletons mercilessly strike down Hendra, their hollow gaze fixate on you.`;
       } else if (event === FORSAKEN_COMMANDER) {
         newEntry.textContent = `The spectral commander's eyes flare with anguish. 'Your defiance condemns my legion to eternal torment. The wrath of the forsaken will fall upon you!`;
       } else if (event === GRERVIL_THE_BODILESS) {
         newEntry.textContent = `As you deny Grervil's plea, the disembodied skull's whispers fade into a haunting lament. Unable to move and unbound from your aid, it remains motionless upon its bone throne.`;
       }
+
+      // } else if (event === SCHOLAR_HENDRA) {
+      //   newEntry.textContent = `After the skeletons mercilessly strike down Hendra, their hollow gaze fixate on you.`;
+      // }
 
       narration = newEntry.textContent;
       break;
@@ -1454,10 +1469,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       break;
   }
 
-  log.insertBefore(newEntry, log.firstChild);
-  const newEntryClone = newEntry.cloneNode(true);
-  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
-
+  // Pauses narrations for event descriptions
   if (narrate) {
     if (
       logType === LOG_TRAP_DESCRIPTION ||
@@ -1469,6 +1481,12 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
 
     writeToNarrative(newEntry.textContent, pauseEventDescription);
   }
+
+  logText = newEntry.textContent;
+  newEntry.textContent = `EVENT: ${logText}`;
+  log.insertBefore(newEntry, log.firstChild);
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
   checkLogSize();
 }
@@ -1482,7 +1500,6 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
   // dataTwo =
 
   let newEntry = document.createElement("li");
-  let narration = Math.round(Math.random() * 9);
 
   switch (logType) {
     // ===============================
@@ -1522,7 +1539,7 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
       if (dataOne === LAUGHING_COFFIN_COIN) {
         newEntry.textContent = `You pay a Laughing Coffin Coin and enter the tavern.`;
       } else if (dataOne === SKELETON_KEY) {
-        newEntry.textContent = `You use a Skeleton Key to unlock the ${dataTwo}`;
+        newEntry.textContent = `You use a Skeleton Key to unlock the ${dataTwo}.`;
       } else if (dataOne === CACHE_KEY) {
         newEntry.textContent = `You use the Cache Key to unlock Ivan's Hidden Cache.`;
       } else if (dataOne === DEMONIC_GRIMOIRE) {
@@ -1603,19 +1620,22 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         } else if (dataTwo === "WHISPERS") {
           newEntry.textContent = `Air whistles through Grervil's teeth, as if carried by an unseen wind creating an otherworldly sound. The skull is trying to speak to you, but its words are beyond your comprehension.`;
         }
+      } else if (dataOne === CHARM_OF_HEALING) {
+        newEntry.textContent = `The Charm of Healing shimmers with arcane energy and you recover 5HP.`;
       }
 
-      narration = newEntry.textContent;
       break;
   }
-
-  log.insertBefore(newEntry, log.firstChild);
-  const newEntryClone = newEntry.cloneNode(true);
-  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
   if (narrate) {
     writeToNarrative(newEntry.textContent);
   }
+
+  logText = newEntry.textContent;
+  newEntry.textContent = `ITEM: ${logText}`;
+  log.insertBefore(newEntry, log.firstChild);
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
   checkLogSize();
 }
@@ -1639,13 +1659,15 @@ function writeToLogStatusEffect(logType, narrate, dataOne, dataTwo) {
       break;
   }
 
-  log.insertBefore(newEntry, log.firstChild);
-  const newEntryClone = newEntry.cloneNode(true);
-  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
-
   if (narrate) {
     writeToNarrative(newEntry.textContent);
   }
+
+  logText = newEntry.textContent;
+  newEntry.textContent = `CONDITION: ${logText}`;
+  log.insertBefore(newEntry, log.firstChild);
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
   checkLogSize();
 }
@@ -1656,52 +1678,58 @@ function writeToLogStatusEffect(logType, narrate, dataOne, dataTwo) {
 
 function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
   let newEntry = document.createElement("li");
+  let = narration;
 
   switch (logType) {
     case LOG_OTHER:
       if (dataOne === "WISP") {
         newEntry.textContent = `You are already following a wisp.`;
       } else if (dataOne === "DISTRACTED") {
-        newEntry.textContent = `The ${currentRoom.contents.monsters[0].name} takes the opportunity to attack you while you are distracted.`;
+        narration = `The ${currentRoom.contents.monsters[0].name} takes the opportunity to attack you while you are distracted.`;
       } else if (dataOne === "LOST FORMATION") {
-        newEntry.textContent = `The Undying Warband's formation is broken.`;
+        narration = `The Undying Warband's formation is broken.`;
       } else if (dataOne === AEGIS_OF_THE_FALLEN) {
-        newEntry.textContent = `"You have freed my legionnaires from the Baron's undying curse. My warriors can finally find peace, and for that, I am immensely grateful. Accept this aegis; may it shield you when you need it most, as it did for me long ago."`;
+        narration = `"You have freed my legionnaires from the Baron's undying curse. My warriors can finally find peace, and for that, I am immensely grateful. Accept this aegis; may it shield you when you need it most, as it did for me long ago."`;
       } else if (
         currentRoom.roomName === "Hag's Hollow" &&
         dataOne === "GET FAVOR"
       ) {
-        newEntry.textContent = `You give the Hag a ${dataTwo.name} from your inventory and earn ${dataThree} favor.`;
-      } else if (currentRoom.roomName === "" && dataOne === "GET FAVOR") {
-        newEntry.textContent = `You give the Curator a ${dataTwo.name} from your inventory and earn ${dataThree} favor.`;
-      } else if (
-        currentRoom.roomName === "Hag's Hollow" &&
-        dataOne === "USE FAVOR"
-      ) {
-        newEntry.textContent = `You expend ${dataThree} and the Hag gives you a ${dataTwo.name}.`;
+        newEntry.textContent = `TRADE: You give the Hag a ${dataTwo.name} from your inventory and earn ${dataThree} favor.`;
       } else if (
         currentRoom.roomName === "Curator's Curio" &&
         dataOne === "GET FAVOR"
       ) {
-        newEntry.textContent = `You give the Curator the ${dataTwo.name} from your inventory and earn ${dataThree} favor.`;
+        newEntry.textContent = `TRADE: You give the Curator a ${dataTwo.name} from your inventory and earn ${dataThree} favor.`;
+      } else if (
+        currentRoom.roomName === "Hag's Hollow" &&
+        dataOne === "USE FAVOR"
+      ) {
+        newEntry.textContent = `TRADE: You expend ${dataThree} and the Hag gives you a ${dataTwo.name}.`;
+      } else if (
+        currentRoom.roomName === "Curator's Curio" &&
+        dataOne === "GET FAVOR"
+      ) {
+        newEntry.textContent = `TRADE: You give the Curator the ${dataTwo.name} from your inventory and earn ${dataThree} favor.`;
       } else if (
         currentRoom.roomName === "Curator's Curio" &&
         dataOne === "USE FAVOR"
       ) {
-        newEntry.textContent = `You expend ${dataThree} and the Curator gives you the ${dataTwo.name}.`;
+        newEntry.textContent = `TRADE: You expend ${dataThree} and the Curator gives you the ${dataTwo.name}.`;
       } else if (dataOne === "NO FAVOR") {
-        newEntry.textContent = `You do not have enough favor for that item.`;
+        newEntry.textContent = `TRADE: You do not have enough favor for that item.`;
       }
       break;
+  }
+
+  narration = newEntry.textContent;
+
+  if (narrate === "YES") {
+    writeToNarrative(narration);
   }
 
   log.insertBefore(newEntry, log.firstChild);
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
-
-  if (narrate === "YES") {
-    writeToNarrative(newEntry.textContent);
-  }
 
   checkLogSize();
 }
@@ -1717,10 +1745,8 @@ function writeToNarrative(narration, pauseEvent) {
   if (pauseEvent === "PAUSE") {
     newNarration.classList.add("event-description");
     narrativeText.insertBefore(newNarration, narrativeText.firstChild);
-    console.log("class added");
   } else {
     narrativeText.insertBefore(newNarration, narrativeText.firstChild);
-
     setTimeout(() => {
       narrativeText.removeChild(narrativeText.lastElementChild);
     }, 6950);

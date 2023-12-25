@@ -190,9 +190,8 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Skeletonarium",
-    description:
-      "The Skeletonarium echoes with the metallic clank of skeletal soldiers. Armor-clad and relentless, they guard this chamber of bones. A skeleton key glimmers amid the remains.",
+    roomName: "Skull-cluttered Path",
+    description: "",
     backgroundImage: "styles/images/backgrounds/tier-one/skeletonarium.jpg",
     music: edgeOfFear,
     contents: {
@@ -393,7 +392,7 @@ let tierTwoRooms = [
     backgroundImage: "styles/images/backgrounds/tier-two/ghostlight-vale.jpg",
     music: hauntedOutpost,
     contents: {
-      monsters: [SHADE, SHADE, SHADE],
+      monsters: [SHADE, SHADE, SHADE, GRUDGE],
       items: [GHOSTLIGHT_LILY, GHOSTLIGHT_LILY],
       events: null,
     },
@@ -496,7 +495,7 @@ let tierTwoRooms = [
   {
     roomName: "Skullshade Sanctum",
     description:
-      "Skullshade Sanctum exudes an ominous aura. Shades, skeletal soldiers, and the clinking of bone armor create an unholy symphony. The air is thick with the whispers of the fallen, warning intruders of impending doom.",
+      "Skullshade Sanctum exudes an ominous aura. The clinking of bone armor create an unholy symphony. The air is thick with the whispers of the fallen, warning intruders of impending doom.",
     summary: "",
     backgroundImage:
       "styles/images/backgrounds/tier-two/skullshade-sanctum.jpg",
@@ -562,8 +561,7 @@ let tierTwoRooms = [
   },
   {
     roomName: "Ghastly Gallery",
-    description:
-      "The Ghastly Gallery unveils a spectral exhibition. Ethereal shades and haunting spirits drift through the shadows. Whispers of the departed echo, while a mysterious function hints at acquiring a coveted wisp.",
+    description: '',
     summary: "",
     backgroundImage: "styles/images/backgrounds/tier-two/ghastly-gallery.jpg",
     music: fightThrough,
@@ -583,7 +581,7 @@ let tierTwoRooms = [
     backgroundImage: "styles/images/backgrounds/tier-two/haunted-hallow.jpg",
     music: hauntedOutpost,
     contents: {
-      monsters: [HAUNTING_SPIRIT, HAUNTING_SPIRIT],
+      monsters: [HAUNTING_SPIRIT, HAUNTING_SPIRIT, HAUNTING_SPIRIT, HAUNTING_SPIRIT],
       items: [],
       events: null,
     },
@@ -613,9 +611,9 @@ let tierTwoRooms = [
     },
   },
   {
-    roomName: "Haunting Bloodcellar",
+    roomName: "Haunted Bloodcellar",
     description:
-      "In the Haunting Bloodcellar, ethereal spirits drift through crimson-hued mist. Haunting whispers linger, an unsettling symphony accompanying the ghostly presence. The air itself seems to mourn the forgotten souls trapped within.",
+      "In the Haunted Bloodcellar, ethereal spirits drift through crimson-hued mist. Haunting whispers linger, an unsettling symphony accompanying the ghostly presence. The air itself seems to mourn the forgotten souls trapped within.",
     backgroundImage:
       "styles/images/backgrounds/tier-two/haunted-blood-cellar.jpg",
     music: hauntedOutpost,
@@ -1071,6 +1069,7 @@ const HAGS_HOLLOW = {
     events: HAG_TRADER,
   },
   function: () => {
+    previousHagFavor = hagFavor;
     hagItems = [];
     hagItems = [
       SOULSHROUD_STEW,
@@ -1080,6 +1079,8 @@ const HAGS_HOLLOW = {
       NECROTIC_NECTAR,
       HEXBANE_BREW,
     ];
+
+
   },
 };
 
@@ -1291,15 +1292,14 @@ function checkCurrentRoom() {
 
     switch (randomSpirits) {
       case 0:
-        roomMonsters.unshift(SHADE);
         break;
 
       case 1:
-        roomMonsters.unshift(SHADE, SHADE);
+        roomMonsters.unshift(HAUNTING_SPIRIT);
         break;
 
       case 2:
-        roomMonsters.unshift(HAUNTING_SPIRIT);
+        roomMonsters.unshift(HAUNTING_SPIRIT, HAUNTING_SPIRIT);
         break;
     }
   }
@@ -1367,17 +1367,17 @@ function createNewRoom() {
           newRoom.description = "Within the Skeletal Sepulcher, shadows dance on crumbling bone. Skeletons stir, guarding their final resting place. A chill pervades as skeletal soldiers stand sentinel.";
           newRoom.backgroundImage = "styles/images/backgrounds/tier-one/skeletal-sepulcher.jpg";
         } else if (roomDetails === 3) {
-          newRoom.roomName = "";
-          newRoom.description = "";
-          newRoom.backgroundImage = "";
+          newRoom.roomName = "Skullshade Sanctum";
+          newRoom.description = "Skullshade Sanctum exudes an ominous aura. The clinking of bone armor create an unholy symphony. The air is thick with the whispers of the fallen, warning intruders of impending doom.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-two/skullshade-sanctum.jpg";
         } else if (roomDetails === 4) {
-          newRoom.roomName = "";
-          newRoom.description = "";
-          newRoom.backgroundImage = "";
+          newRoom.roomName = "Ossuary Outpost";
+          newRoom.description = "Ossuary Outpost, a desolate haven of bone and armor, resonates with the haunting clatter of skeletal soldiers. Amidst the silent echoes, armored skeletons stand guard, their sockets gleaming with an otherworldly intent.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-two/ossuary-outpost.jpg";
         } else {
-          newRoom.roomName = "";
-          newRoom.description = "";
-          newRoom.backgroundImage = "";
+          newRoom.roomName = "Gravemist Hall";
+          newRoom.description = "Gravemist Hall, veiled in a perpetual fog, echoes with the melancholic echoes of the deceased. Shadows dance among gravestones as skeletal figures guard the way, their eyes gleaming with spectral vigilance.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-two/gravemist-hall.jpg";
         }
 
         newRoom.music = edgeOfFear;
@@ -1392,21 +1392,21 @@ function createNewRoom() {
           newRoom.backgroundImage =
             "styles/images/backgrounds/tier-one/haunted-hall.jpg";
         } else if (roomDetails === 2) {
-          newRoom.roomName = "";
-          newRoom.description = "";
-          newRoom.backgroundImage = "";
+          newRoom.roomName = "Echoing Vestibule";
+          newRoom.description = "Within the Echoing Vestibule, shadows seem to converse in ghostly murmurs. A lone haunting spirit glides through the mist, leaving echoes of melancholy. The air is heavy with the presence of lingering sorrow.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-one/echoing-vestibule.jpg";
         } else if (roomDetails === 3) {
-          newRoom.roomName = "";
-          newRoom.description = "";
-          newRoom.backgroundImage = "";
+          newRoom.roomName = "Huanted Bloodcellar";
+          newRoom.description = "In the Haunted Bloodcellar, ethereal spirits drift through crimson-hued mist. Haunting whispers linger, an unsettling symphony accompanying the ghostly presence. The air itself seems to mourn the forgotten souls trapped within.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-two/haunted-bloodcellar.jpg";
         } else if (roomDetails === 4) {
-          newRoom.roomName = "";
-          newRoom.description = "";
-          newRoom.backgroundImage = "";
+          newRoom.roomName = "Haunted Hallow";
+          newRoom.description = "In the Haunted Hallow, haunting spirits materialize, their ghostly forms flickering in the dim light. The air is charged with otherworldly energy, as the ethereal inhabitants silently observe intruders.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-two/haunted-hallow.jpg";
         } else {
-          newRoom.roomName = "";
-          newRoom.description = "";
-          newRoom.backgroundImage = "";
+          newRoom.roomName = "Morbid Mausoleum";
+          newRoom.description = "Within the Morbid Mausoleum, haunting spirits linger, their mournful wails echoing through the cold, still air. The oppressive weight of the mausoleum hints at the somber tales interred within.";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-two/morbid-mausoleum.jpg";
         }
 
         newRoom.music = hauntedOutpost;
@@ -1416,9 +1416,9 @@ function createNewRoom() {
       case 3:
         // CULTIST
         if (roomDetails === 1) {
-          newRoom.roomName = "";
+          newRoom.roomName = "Ghastly Gallery";
           newRoom.description = "";
-          newRoom.backgroundImage = "";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-two/ghastly-gallery.jpg";
           newRoom.music = null;
         } else if (roomDetails === 2) {
           newRoom.roomName = "";
@@ -1456,9 +1456,10 @@ function createNewRoom() {
           newRoom.backgroundImage =
             "styles/images/backgrounds/tier-one/forgotten-passage.jpg";
         } else if (roomDetails === 3) {
-          newRoom.roomName = "";
+          newRoom.roomName = "Grim Marrow Hall";
           newRoom.description = "";
-          newRoom.backgroundImage = "";
+          newRoom.backgroundImage = "styles/images/backgrounds/tier-two/grim-marrow-hall.jpg";
+          ;
         } else if (roomDetails === 4) {
           newRoom.roomName = "";
           newRoom.description = "";
