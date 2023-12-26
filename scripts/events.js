@@ -787,15 +787,13 @@ const BATTLEFIELD = {
   description: `Fallen Warriors' Vale, a cavernous passage unveiling the remnants of a battlefield within the catacomb's depths. Countless fallen warriors lie scattered across the expanse. There will be danger ahead. Do you wish to proceed?`,
   optionOne: "Proceed",
   optionTwo: "Return",
+  blade: null,
   functionOne: () => {
     BATTLEFIELD.summary =
       "You entered Fallen Warriors' Vale, challenging the fallen warriors. Defeating them in combat, you claimed victory, laying to eternal rest countless undead.";
     FALLEN_WARRIORS_VALE.contents.monsters.push(UNDYING_WARBAND);
 
-    if (
-      !inventoryItems.includes(GLORYFORGED_BLADE) &&
-      !attunedItems.includes(GLORYFORGED_BLADE)
-    ) {
+    if (BATTLEFIELD.blade === null) {
       console.log("BLADE ADDED");
       FALLEN_WARRIORS_VALE.contents.items.push(GLORYFORGED_BLADE);
     }
@@ -824,6 +822,7 @@ function endBattlefieldEvent() {
     currentRoom.roomName === "Fallen Warriors' Vale" &&
     currentRoom.contents.monsters.length <= 0
   ) {
+
     setTimeout(newRoomAnimation, 1000);
     setTimeout(() => {
       playMusic(currentRoom.music);
@@ -836,6 +835,7 @@ function endBattlefieldEvent() {
 function gloryforgedBladeCheck() {
   // Checks for Undying Warband / Adds Attack to Gloryforged Blade & Starts Echoes of Victory
   if (currentRoom.roomName === "Fallen Warriors' Vale") {
+    BATTLEFIELD.blade = "LOOTED";
     gloryforgedTracker += 3;
     GLORYFORGED_BLADE.effect = `When attuned to this item, your Attack is increased by ${gloryforgedTracker}. This blade becomes more powerful with each victory in Fallen Warriors' Vale.`;
     ECHOES_OF_VICTORY.function(); // activate echoes of victory
