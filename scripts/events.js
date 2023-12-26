@@ -484,8 +484,8 @@ const FORSAKEN_COMMANDER = {
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
+    commanderTracker === "ACTIVE";
     currentRoom.contents.items.push(WAR_TORN_BANNER);
-
     setTimeout(renderRoomSummaryModal, 5000);
     setRoomSummary();
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
@@ -503,15 +503,33 @@ const FORSAKEN_COMMANDER = {
   },
 };
 
+function forsakenCommanderCheck() {
+  // Checks if Forsaken Commander's Quest is Complete
+  if (legionTracker >= 30 && commanderTracker === "ACTIVE") {
+    commanderTracker === "FINSIHED";
+    WAR_TORN_BANNER_STATUS.duration = null;
+    inventoryItems.push(AEGIS_OF_THE_FALLEN);
+
+    if (inventoryItems.includes(WAR_TORN_BANNER)) {
+      useConsumable("War Torn Banner");
+    } else if (attunedItems.includes(WAR_TORN_BANNER)) {
+      const index = attunedItems.indexOf(WAR_TORN_BANNER);
+      attunedItems.splice(index, 1);
+    }
+    writeToLogOther(LOG_OTHER, "YES", AEGIS_OF_THE_FALLEN);
+  }
+}
+
 const GRERVIL_THE_BODILESS = {
   name: "Grervil the Bodiless",
   eventType: "NPC",
-  image: "styles/images/npcs/forasken-commander.jpg",
+  image: "styles/images/npcs/grervil.jpg",
   description: `Emerging from beneath a pile of bones, the talking skull, Grervil, beckons with ghostly whispers. "Adventurer, I am but a voice trapped in this hollowed cranium. My body wanders, lost in the depths of the catacomb. Take me with you, and aid me in finding my lost body."`,
   optionOne: "Take",
   optionTwo: "Leave",
   functionOne: () => {
     if (attunedItems.includes(AMULET_OF_WHISPERS)) {
+      grervilTracker === "ACTIVE";
       GRERVIL_THE_BODILESS.summary =
         "Grervil the Bodiless joins you on your journey through the catacomb, in search of his wandering body.";
 
@@ -550,6 +568,7 @@ const GRERVIL_THE_BODILESS = {
     }
   },
   functionTwo: () => {
+    grervilTracker === "ACTIVE";
     GRERVIL_THE_BODILESS.summary = `You refused to aid Grervil find his wandering body, abandoning the talking skull where he was found.`;
 
     const randomUndeadRoom = findRandomUndeadRoom();
@@ -563,7 +582,7 @@ const GRERVIL_THE_BODILESS = {
 
 const GRERVILS_BODY_EVENT = {
   name: "Grervil's Body Found",
-  image: "styles/images/npcs/forasken-commander.jpg",
+  image: "styles/images/npcs/grervil.jpg",
   eventType: "NPC",
   description: `I don't have much to aid you, but take what you need most, brave soul. A key to unlock secrets or an ethereal wisp to guide you through the shadows.`,
   summary: `While exploring the catacomb, you unearthed Grervil's skeletal body. The skeleton gave you a wisp before departing into the catacombs's depths.`,
@@ -571,10 +590,12 @@ const GRERVILS_BODY_EVENT = {
   optionTwo: "Wisp",
   functionOne: () => {
     currentRoom.contents.items.push(SKELETON_KEY);
+    grervilTracker === "FINISHED";
     setRoomSummary();
   },
   functionTwo: () => {
     getItem("WISP");
+    grervilTracker === "FINISHED";
     setRoomSummary();
   },
 };
@@ -768,29 +789,66 @@ const BATTLEFIELD = {
   optionTwo: "Return",
   functionOne: () => {
     BATTLEFIELD.summary =
-      "You entered Fallen Warriors' Vale, challenging the undying. Defeating them in combat, you claimed victory, laying to eternal rest countless undead warriors.";
+      "You entered Fallen Warriors' Vale, challenging the fallen warriors. Defeating them in combat, you claimed victory, laying to eternal rest countless undead.";
     FALLEN_WARRIORS_VALE.contents.monsters.push(UNDYING_WARBAND);
 
     if (
       !inventoryItems.includes(GLORYFORGED_BLADE) &&
       !attunedItems.includes(GLORYFORGED_BLADE)
     ) {
+      console.log("BLADE ADDED");
       FALLEN_WARRIORS_VALE.contents.items.push(GLORYFORGED_BLADE);
     }
 
-    ECHOES_OF_VICTORY.function(); // activate echoes of victory
-
     writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "BOSS");
-    // writeToLogEvent(LOG_MISC_OPTION_ONE, "YES"); // victory calls your name
     playMusic(weCantStopThem);
-    startBattle();
+    setTimeout(newRoomAnimation, 3000);
+    setTimeout(() => {
+      let undyingWarbandImage = "styles/images/monsters/undying-warband.jpg";
+      renderBackground(undyingWarbandImage);
+      startBattle();
+    }, 4500);
     setRoomSummary();
   },
   functionTwo: () => {
+    BATTLEFIELD.summary = `You chose not to step onto the battlefield.`;
     writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
+    setRoomSummary();
     setTimeout(renderRoomSummaryModal, 4000);
   },
 };
+
+function endBattlefieldEvent() {
+  // Checks for end of battle at Fallen Warriors' Vale
+  if (
+    currentRoom.roomName === "Fallen Warriors' Vale" &&
+    currentRoom.contents.monsters.length <= 0
+  ) {
+    setTimeout(newRoomAnimation, 1000);
+    setTimeout(() => {
+      playMusic(currentRoom.music);
+      renderBackground(currentRoom.backgroundImage);
+    }, 2000);
+    togglePlayerControls();
+  }
+}
+
+function gloryforgedBladeCheck() {
+  // Checks for Undying Warband / Adds Attack to Gloryforged Blade & Starts Echoes of Victory
+  if (currentRoom.roomName === "Fallen Warriors' Vale") {
+    gloryforgedTracker += 3;
+    GLORYFORGED_BLADE.effect = `When attuned to this item, your Attack is increased by ${gloryforgedTracker}. This blade becomes more powerful with each victory in Fallen Warriors' Vale.`;
+    ECHOES_OF_VICTORY.function(); // activate echoes of victory
+
+    // Checks if item has been obtained before narration is called
+    if (
+      inventoryItems.includes(GLORYFORGED_BLADE) ||
+      attunedItems.includes(GLORYFORGED_BLADE)
+    ) {
+      writeToLogItem(LOG_ITEM, "YES", GLORYFORGED_BLADE);
+    }
+  }
+}
 
 // ===============================
 //          Locked Rooms
@@ -834,86 +892,94 @@ function lockedRoomHandler(room) {
     console.log(`Bonevault Room: ${room}`);
   }
 
-  setTimeout(() => {
-    switch (room) {
-      case 1:
-        //writeToLog() room details
-        getItem("BONEVAULT");
-        break;
+  items.push(WHISPERING_SKULL, LESSER_SOULSTONE);
 
-      case 2:
-        monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, SKELETAL_SOLDIER);
-        getItem("BONEVAULT");
-        //writeToLog() room details
-        break;
+  switch (room) {
+    case 1:
+      //writeToLog() room details
+      getItem("BONEVAULT");
+      setTimeout(renderRoomSummaryModal, 3000);
+      break;
 
-      case 3:
-        monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
-        getItem("BONEVAULT");
-        //writeToLog() room details
-        break;
-
-      case 4:
-        monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
-        getItem("BONEVAULT");
-        //writeToLog() room details
-        break;
-
-      case 5:
-        monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, BONE_TITAN);
-        getItem("BONEVAULT");
-        //writeToLog() room details
-        break;
-
-      case "Molten Door":
-        monsters.push(
-          BLAZING_SKELETON,
-          BLAZING_SKELETON,
-          BLAZING_SKELETON,
-          BLAZING_SKELETON
-        );
-        // currentRoom.contents.items.push();
-        //writeToLog() room details
-        break;
-
-      case "Frozen Door":
-        currentRoom.contents.items.push(CHILLBREAKER_BAND);
-        monsters.push(DRAUGR, DRAUGR, DRAUGR);
-        // currentRoom.contents.items.push();
-        //writeToLog() room details
-        break;
-
-      // case "Festering Door":
-      //   monsters.push(GNAWER, GNAWER, GNAWER, GNAWER, GNAWER);
-      //   // currentRoom.contents.items.push();
-      //   //writeToLog() room details
-      //   break;
-
-      // case "Webbed Door":
-      //   monsters.push(BROODMOTHER, BROODMOTHER, BROODMOTHER);
-      //   // currentRoom.contents.items.push();
-      //   //writeToLog() room details
-      //   break;
-
-      // case "Hidden Door":
-      //   monsters.push(SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL);
-      //   // currentRoom.contents.items.push();
-      //   //writeToLog() room details
-      //   break;
-    }
-
-    items.push(WHISPERING_SKULL, POTION);
-
-    setTimeout(() => {
-      if (monsters.length > 0) {
+    case 2:
+      monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, SKELETAL_SOLDIER);
+      getItem("BONEVAULT");
+      setTimeout(() => {
+        setRoomSummary();
         startBattle();
-      } else {
-        renderRoomSummaryModal();
-      }
-    }, 2000);
+      }, 3000);
+      //writeToLog() room details
+      break;
 
-    setRoomSummary();
-  }, 1500);
+    case 3:
+      monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
+      getItem("BONEVAULT");
+      setTimeout(() => {
+        setRoomSummary();
+        startBattle();
+      }, 3000); //writeToLog() room details
+      break;
+
+    case 4:
+      monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
+      getItem("BONEVAULT");
+      setTimeout(() => {
+        setRoomSummary();
+        startBattle();
+      }, 3000); //writeToLog() room details
+      break;
+
+    case 5:
+      monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, BONE_TITAN);
+      getItem("BONEVAULT");
+      setTimeout(() => {
+        setRoomSummary();
+        startBattle();
+      }, 3000); //writeToLog() room details
+      break;
+
+    case "Molten Door":
+      monsters.push(
+        BLAZING_SKELETON,
+        BLAZING_SKELETON,
+        BLAZING_SKELETON,
+        BLAZING_SKELETON
+      );
+      setTimeout(() => {
+        setRoomSummary();
+        startBattle();
+      }, 3000); // currentRoom.contents.items.push();
+      //writeToLog() room details
+      break;
+
+    case "Frozen Door":
+      items.push(CHILLBREAKER_BAND);
+      monsters.push(DRAUGR, DRAUGR, DRAUGR);
+      setTimeout(() => {
+        setRoomSummary();
+        startBattle();
+      }, 3000); // currentRoom.contents.items.push();
+      //writeToLog() room details
+      break;
+
+    // case "Festering Door":
+    //   monsters.push(GNAWER, GNAWER, GNAWER, GNAWER, GNAWER);
+    //   // currentRoom.contents.items.push();
+    //   //writeToLog() room details
+    //   break;
+
+    // case "Webbed Door":
+    //   monsters.push(BROODMOTHER, BROODMOTHER, BROODMOTHER);
+    //   // currentRoom.contents.items.push();
+    //   //writeToLog() room details
+    //   break;
+
+    // case "Hidden Door":
+    //   monsters.push(SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL);
+    //   // currentRoom.contents.items.push();
+    //   //writeToLog() room details
+    //   break;
+  }
 }
 
 // ===============================

@@ -148,6 +148,7 @@ const GRAVEROBBERS_SPADE = {
   rarity: "Common",
   effect: "While attuned to this item you are 10% more likely to find items.",
   function: () => {
+    setTimeout(updateTotalStats, 1000);
     return 10;
   },
 };
@@ -229,7 +230,7 @@ const RITUAL_BLADE = {
   type: "MAGIC",
   rarity: "Common",
   effect:
-    "While attuned to this item your attacks deal additional 3 damage against beasts and humans.",
+    "While attuned to this item your Attack increases by 3 when fighting beasts and humans.",
   function: () => {
     if (
       currentRoom.contents.monsters[0].type === "BEAST" ||
@@ -334,7 +335,7 @@ const WRAITHBANE = {
   type: "MAGIC",
   rarity: "Rare",
   effect:
-    "While attuned to this item your attacks deal additional 3 damage against evil spirits.",
+    "While attuned to this item your Attack increases by 3 when fighting evil spirits.",
   function: () => {
     if (
       currentRoom.contents.monsters[0] === SHADE ||
@@ -1368,6 +1369,7 @@ const FLICKERING_CANDLE = {
   duration: null,
   statusDuration: null,
   function: () => {
+    console.log("CALLED?!?!?")
     FLICKERING_CANDLE.tracker = "LIT";
     startStatusEffect(FLICKERING_CANDLE, 5);
   },
@@ -1804,9 +1806,6 @@ function useConsumable(consumable) {
   if (itemObject !== POTION) {
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
-  }
-
-  if (itemObject.type === "CONSUMABLE") {
     writeToLogItem(LOG_CONSUMABLE, "YES", itemObject);
   }
 
@@ -2036,7 +2035,7 @@ function renderInventory() {
     const itemButton = document.createElement("button");
     itemButton.setAttribute("id", attunedItems[i].name);
 
-    if (inventoryItems[i].image) {
+    if (attunedItems[i].image) {
       itemButton.style.backgroundImage = `url('${attunedItems[i].image}')`;
       itemButton.style.backgroundSize = "cover";
       itemButton.style.color = "lightgrey";

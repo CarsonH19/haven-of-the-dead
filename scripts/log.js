@@ -17,73 +17,73 @@ function writeToLogActions(logType, narrate, dataOne) {
     // ===============================
 
     case LOG_PLAYER_ATTACK:
-      if (heroChoice === "PALADIN") {
-        if (narration === 1) {
-          narration = `You swing your greatsword in a wide arc, the blade gleaming with radiant energy as it cleaves through the ${monsterName}'s defenses.`;
-        } else if (narration === 2) {
-          narration = `With a powerful thrust, your greatsword pierces through the ${monsterName}'s armor, leaving a trail of holy light in its wake.`;
-        } else if (narration === 3) {
-          narration = `You channel your righteous fury, delivering a punishing overhead strike that sends shockwaves of holy energy rippling through the air.`;
-        } else if (narration === 4) {
-          narration = `With a swift and precise motion, you sweep your greatsword in a graceful arc, leaving a trail of radiant energy that burns the ${monsterName}.`;
-        } else if (narration === 5) {
-          narration = `You lunge forward, your greatsword leading the way like a beacon of purity, piercing through the ${monsterName}.`;
-        } else if (narration === 6) {
-          narration = `You whirl your greatsword in a frenzied dance of light and steel, striking the ${monsterName} with a fervent determination.`;
-        } else if (narration === 7) {
-          narration = `You charge forward, greatsword held high, delivering a relentless assault that leaves no room for the ${monsterName} to counter.`;
-        } else if (narration === 8) {
-          narration = `Your greatsword pulses with intense light as you unleash a flurry of strikes, each blow carrying the weight of divine justice.`;
-        } else if (narration === 9) {
-          narration = `Your blade glows with an ethereal light, and as it strikes, imparting a profound sense of justice upon the ${monsterName}.`;
-        } else {
-          narration = `Your strike is infused with the power of the heavens, rending through the ${monsterName}'s defenses with celestial force.`;
-        }
-      } else if (heroChoice === "ROGUE") {
-        if (narration === 1) {
-          narration = `Your dagger seems to meld with the darkness, striking the ${monsterName} with a stealthy grace that belies its deadly intent.`;
-        } else if (narration === 2) {
-          narration = `Your dagger moves like a phantom through the shadows, leaving behind a trail of obsidian-hued energy.`;
-        } else if (narration === 3) {
-          narration = `Your daggers move in perfect harmony, their edges infused with the essence of shadows, creating a stealthy and deadly pincer movement.`;
-        } else if (narration === 4) {
-          narration = `You disappear into the shadows, only to reemerge in a sudden, unexpected strike, catching the ${monsterName} off guard.`;
-        } else if (narration === 5) {
-          narration = `Your dagger’s blade seems to whisper through the air, striking the ${monsterName} with uncanny precision as if guided by the shadows themselves.`;
-        } else if (narration === 6) {
-          narration = `Your movements are a graceful dance of shadow and steel, leaving behind a sense of foreboding darkness in their wake.`;
-        } else if (narration === 7) {
-          narration = `With the speed of nightfall, you dart in to deliver a swift, calculated strike before melting back into the shadows.`;
-        } else if (narration === 8) {
-          narration = `Your dagger becomes a conduit for the encroaching twilight, striking with a shadowy force that seems to wrap around the ${monsterName}.`;
-        } else if (narration === 9) {
-          narration = `Your dagger appears from the shadows, striking before the ${monsterName} even registers their presence.`;
-        } else {
-          narration = `You shroud the ${monsterName} in a veil of shadow, making them believe they've dodged the strike, only to realize too late that they were deceived.`;
-        }
-      } else if (heroChoice === "PRIESTESS") {
-        if (narration === 1) {
-          narration = `You conjure a beam of pure light, directing it towards the ${monsterName} with unwavering faith.`;
-        } else if (narration === 2) {
-          narration = `A radiant halo manifests around you, expanding outward to strike the ${monsterName} with a burst of celestial energy.`;
-        } else if (narration === 3) {
-          narration = `You call upon the power of the heavens to unleash a radiant explosion, engulfing the ${monsterName} in brilliant light.`;
-        } else if (narration === 4) {
-          narration = `A spear of golden light materializes in your hand, hurtling towards the ${monsterName} with divine precision.`;
-        } else if (narration === 5) {
-          narration = `You release a burst of concentrated light energy, illuminating the area as it engulfs the ${monsterName}.`;
-        } else if (narration === 6) {
-          narration = `A swirling orb of ethereal light forms, pulsating with power before launching towards the ${monsterName} in a blinding flash.`;
-        } else if (narration === 7) {
-          narration = `You weave a tapestry of light, shaping it into a focused beam that pierces through the ${monsterName}'s defenses.`;
-        } else if (narration === 8) {
-          narration = `You summon a protective shield of radiant energy, using it to bash into the ${monsterName} with a forceful strike.`;
-        } else if (narration === 9) {
-          narration = `Beams of light rain down upon the ${monsterName}, creating a cascade of radiant energy that engulfs them in brilliance.`;
-        } else {
-          narration = `You channel the essence of a guiding beacon, directing its luminous energy towards the ${monsterName} in a searing strike`;
-        }
-      }
+      // if (heroChoice === "PALADIN") {
+      //   if (narration === 1) {
+      //     narration = `You swing your greatsword in a wide arc, the blade gleaming with radiant energy as it cleaves through the ${monsterName}'s defenses.`;
+      //   } else if (narration === 2) {
+      //     narration = `With a powerful thrust, your greatsword pierces through the ${monsterName}'s armor, leaving a trail of holy light in its wake.`;
+      //   } else if (narration === 3) {
+      //     narration = `You channel your righteous fury, delivering a punishing overhead strike that sends shockwaves of holy energy rippling through the air.`;
+      //   } else if (narration === 4) {
+      //     narration = `With a swift and precise motion, you sweep your greatsword in a graceful arc, leaving a trail of radiant energy that burns the ${monsterName}.`;
+      //   } else if (narration === 5) {
+      //     narration = `You lunge forward, your greatsword leading the way like a beacon of purity, piercing through the ${monsterName}.`;
+      //   } else if (narration === 6) {
+      //     narration = `You whirl your greatsword in a frenzied dance of light and steel, striking the ${monsterName} with a fervent determination.`;
+      //   } else if (narration === 7) {
+      //     narration = `You charge forward, greatsword held high, delivering a relentless assault that leaves no room for the ${monsterName} to counter.`;
+      //   } else if (narration === 8) {
+      //     narration = `Your greatsword pulses with intense light as you unleash a flurry of strikes, each blow carrying the weight of divine justice.`;
+      //   } else if (narration === 9) {
+      //     narration = `Your blade glows with an ethereal light, and as it strikes, imparting a profound sense of justice upon the ${monsterName}.`;
+      //   } else {
+      //     narration = `Your strike is infused with the power of the heavens, rending through the ${monsterName}'s defenses with celestial force.`;
+      //   }
+      // } else if (heroChoice === "ROGUE") {
+      //   if (narration === 1) {
+      //     narration = `Your dagger seems to meld with the darkness, striking the ${monsterName} with a stealthy grace that belies its deadly intent.`;
+      //   } else if (narration === 2) {
+      //     narration = `Your dagger moves like a phantom through the shadows, leaving behind a trail of obsidian-hued energy.`;
+      //   } else if (narration === 3) {
+      //     narration = `Your daggers move in perfect harmony, their edges infused with the essence of shadows, creating a stealthy and deadly pincer movement.`;
+      //   } else if (narration === 4) {
+      //     narration = `You disappear into the shadows, only to reemerge in a sudden, unexpected strike, catching the ${monsterName} off guard.`;
+      //   } else if (narration === 5) {
+      //     narration = `Your dagger’s blade seems to whisper through the air, striking the ${monsterName} with uncanny precision as if guided by the shadows themselves.`;
+      //   } else if (narration === 6) {
+      //     narration = `Your movements are a graceful dance of shadow and steel, leaving behind a sense of foreboding darkness in their wake.`;
+      //   } else if (narration === 7) {
+      //     narration = `With the speed of nightfall, you dart in to deliver a swift, calculated strike before melting back into the shadows.`;
+      //   } else if (narration === 8) {
+      //     narration = `Your dagger becomes a conduit for the encroaching twilight, striking with a shadowy force that seems to wrap around the ${monsterName}.`;
+      //   } else if (narration === 9) {
+      //     narration = `Your dagger appears from the shadows, striking before the ${monsterName} even registers their presence.`;
+      //   } else {
+      //     narration = `You shroud the ${monsterName} in a veil of shadow, making them believe they've dodged the strike, only to realize too late that they were deceived.`;
+      //   }
+      // } else if (heroChoice === "PRIESTESS") {
+      //   if (narration === 1) {
+      //     narration = `You conjure a beam of pure light, directing it towards the ${monsterName} with unwavering faith.`;
+      //   } else if (narration === 2) {
+      //     narration = `A radiant halo manifests around you, expanding outward to strike the ${monsterName} with a burst of celestial energy.`;
+      //   } else if (narration === 3) {
+      //     narration = `You call upon the power of the heavens to unleash a radiant explosion, engulfing the ${monsterName} in brilliant light.`;
+      //   } else if (narration === 4) {
+      //     narration = `A spear of golden light materializes in your hand, hurtling towards the ${monsterName} with divine precision.`;
+      //   } else if (narration === 5) {
+      //     narration = `You release a burst of concentrated light energy, illuminating the area as it engulfs the ${monsterName}.`;
+      //   } else if (narration === 6) {
+      //     narration = `A swirling orb of ethereal light forms, pulsating with power before launching towards the ${monsterName} in a blinding flash.`;
+      //   } else if (narration === 7) {
+      //     narration = `You weave a tapestry of light, shaping it into a focused beam that pierces through the ${monsterName}'s defenses.`;
+      //   } else if (narration === 8) {
+      //     narration = `You summon a protective shield of radiant energy, using it to bash into the ${monsterName} with a forceful strike.`;
+      //   } else if (narration === 9) {
+      //     narration = `Beams of light rain down upon the ${monsterName}, creating a cascade of radiant energy that engulfs them in brilliance.`;
+      //   } else {
+      //     narration = `You channel the essence of a guiding beacon, directing its luminous energy towards the ${monsterName} in a searing strike`;
+      //   }
+      // }
 
       newEntry.textContent = `ATTACK: You deal ${dataOne} damage to the ${monsterName}!`;
       break;
@@ -404,13 +404,18 @@ function writeToLogActions(logType, narrate, dataOne) {
       break;
   }
 
-  log.insertBefore(newEntry, log.firstChild);
-  const newEntryClone = newEntry.cloneNode(true);
-  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
-
   if (narrate === "YES") {
     writeToNarrative(narration);
   }
+
+  // if (logType === LOG_GUARD) {
+  //   logText = newEntry.textContent;
+  //   newEntry.textContent = `PASSIVE: ${logText}`;
+  // }
+
+  log.insertBefore(newEntry, log.firstChild);
+  const newEntryClone = newEntry.cloneNode(true);
+  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
   checkLogSize();
 }
@@ -468,6 +473,8 @@ function writeToLogMonster(logType, narrate, dataOne) {
         newEntry.textContent = `As the undead tide cascades, skeletal remnants reanimate in the wake of the bone-laden deluge.`;
       } else if (monsterName === "Baron of Bone") {
         newEntry.textContent = `The Baron of Bone's dark magic withers your body and soul.`;
+      } else if (dataOne === "WARBAND BROKEN") {
+        newEntry.textContent = `The Undying Warband's formation is broken.`;
       } else if (monsterName === "Undying Warband") {
         newEntry.textContent = `The warband unleash a flurry of thrusts and slashes.`;
       } else if (monsterName === "Ivan the Scoundrel") {
@@ -721,9 +728,9 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
     // Rogue Passive
     case LOG_DARKENED_REPRISAL:
       if (dataOne === "ACTIVE") {
-        newEntry.textContent = `Darkened Reprisal envelops you in an ephemeral shroud of shadows, enhancing your Dexterity.`;
+        narration = `Darkened Reprisal envelops you in an ephemeral shroud of shadows, enhancing your Dexterity.`;
       } else if (dataOne === "DISABLE") {
-        newEntry.textContent = `The shadows surrounding you fade as Darkened Reprisal ends.`;
+        narration = `The shadows surrounding you fade as Darkened Reprisal ends.`;
       }
 
       break;
@@ -1543,7 +1550,7 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
       } else if (dataOne === CACHE_KEY) {
         newEntry.textContent = `You use the Cache Key to unlock Ivan's Hidden Cache.`;
       } else if (dataOne === DEMONIC_GRIMOIRE) {
-        narration = Math.round(Math.random() * 9);
+        let narration = Math.round(Math.random() * 9);
         if (narration === 0) {
           newEntry.textContent = `"You seek release? Foolish mortal. My curse binds your fate. Resurrect me, and only then shall freedom be yours. Resist, and suffer eternal torment."`;
         } else if (narration === 1) {
@@ -1678,7 +1685,7 @@ function writeToLogStatusEffect(logType, narrate, dataOne, dataTwo) {
 
 function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
   let newEntry = document.createElement("li");
-  let = narration;
+  let narration = null;
 
   switch (logType) {
     case LOG_OTHER:
@@ -1686,8 +1693,6 @@ function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
         newEntry.textContent = `You are already following a wisp.`;
       } else if (dataOne === "DISTRACTED") {
         narration = `The ${currentRoom.contents.monsters[0].name} takes the opportunity to attack you while you are distracted.`;
-      } else if (dataOne === "LOST FORMATION") {
-        narration = `The Undying Warband's formation is broken.`;
       } else if (dataOne === AEGIS_OF_THE_FALLEN) {
         narration = `"You have freed my legionnaires from the Baron's undying curse. My warriors can finally find peace, and for that, I am immensely grateful. Accept this aegis; may it shield you when you need it most, as it did for me long ago."`;
       } else if (
@@ -1721,9 +1726,7 @@ function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
       break;
   }
 
-  narration = newEntry.textContent;
-
-  if (narrate === "YES") {
+  if (narrate === "YES" && narration !== null) {
     writeToNarrative(narration);
   }
 
@@ -1740,22 +1743,46 @@ function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
 
 function writeToNarrative(narration, pauseEvent) {
   let newNarration = document.createElement("li");
+  let code = codeGenerator();
+
   newNarration.textContent = narration;
 
   if (pauseEvent === "PAUSE") {
-    newNarration.classList.add("event-description");
-    narrativeText.insertBefore(newNarration, narrativeText.firstChild);
+    let pausedNarration;
+    pausedNarration = newNarration;
+    pausedNarration.classList.add("event-description");
+    narrativeText.insertBefore(pausedNarration, narrativeText.firstChild);
   } else {
+    newNarration.classList.add(`narration${code}`);
+
     narrativeText.insertBefore(newNarration, narrativeText.firstChild);
     setTimeout(() => {
-      narrativeText.removeChild(narrativeText.lastElementChild);
+      let notPaused = narrativeText.querySelector(`.narration${code}`);
+
+      if (notPaused) {
+        notPaused.remove();
+      }
     }, 6950);
 
     fadeOutAnimation(newNarration, 5000);
   }
 
-  if (narrativeText.children.length >= 3) {
-    narrativeText.removeChild(narrativeText.lastElementChild);
+  if (narrativeText.children.length >= 4) {
+    if (
+      !narrativeText.lastElementChild.classList.contains("event-description")
+    ) {
+      narrativeText.removeChild(narrativeText.lastElementChild);
+    } else {
+      let children = narrativeText.children;
+      let secondToLastChild = children[children.length - 2];
+      narrativeText.removeChild(secondToLastChild);
+    }
+  }
+
+  function codeGenerator() {
+    const randomCode = Math.round(Math.random() * 9999);
+    console.log(randomCode);
+    return randomCode;
   }
 
   fadeInAnimation(newNarration);

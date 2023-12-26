@@ -135,6 +135,9 @@ function monsterAttackHandler(bonus) {
     soundEffectHandler(monster, "MONSTER ATTACK");
     monsterAbilityHandler(currentRoom.contents.monsters[0]);
     writeToLogMonster(LOG_MONSTER_ATTACK, "NO", monsterToPlayerDamage);
+  } else if (currentRoom.contents.monsters[0] === UNDYING_WARBAND) {
+    // Calls Undying Warband Ability even on miss
+    monsterAbilityHandler(UNDYING_WARBAND);
   } else if (monsterToPlayerDamage <= 0) {
     soundEffectHandler(swordSwingWhoosh, "MONSTER MISS");
     writeToLogMonster(LOG_MONSTER_MISS, "NO");
@@ -299,7 +302,7 @@ function guardHandler() {
   // console.log(`Current Player Health ${currentPlayerHealth}`);
   // console.log(`Current Player Health Bar Value ${playerHealthBar.value}`);
 
-  writeToLogActions(LOG_GUARD, "NO", damageBlocked);
+  writeToLogActions(LOG_GUARD, "YES", damageBlocked);
   updatePlayerTrackers();
 }
 
@@ -340,7 +343,7 @@ function potionHandler() {
 //             Flee
 // ===============================
 function fleeHandler() {
-  let fleeAttempt = Math.round(Math.random() * 10) + totalFaith;
+  let fleeAttempt = Math.round(Math.random() * 10) + totalDexterity;
 
   // ITEM: Ring of Skittering - Increased flee chance
   fleeAttempt += isItemAttuned(RING_OF_SKITTERING, 0);
@@ -543,7 +546,10 @@ function renderCurrentRoom(currentRoom) {
 }
 
 function togglePlayerControls() {
-  if (currentRoom.contents.monsters.length > 0) {
+  if (
+    currentRoom.contents.monsters.length > 0 &&
+    monsterContainer.style.display === "flex"
+  ) {
     attackBtn.disabled = false;
     guardBtn.disabled = false;
     specialBtn.disabled = false;
@@ -556,9 +562,11 @@ function togglePlayerControls() {
     fleeBtn.disabled = true;
   }
 
+  // Checks for Special Ability Cooldown
   if (
     currentRoom.contents.monsters.length > 0 &&
-    specialCooldownCounter === 0
+    specialCooldownCounter === 0 &&
+    monsterContainer.style.display === "flex"
   ) {
     specialBtn.disabled = false;
   } else {
@@ -576,6 +584,7 @@ function togglePlayerControls() {
     specialBtn.disabled = true;
   }
 
+  // Checks for Event Modal
   if (eventModal.style.display === "block") {
     inventoryButton.disabled = true;
     potionBtn.disabled = true;
@@ -584,6 +593,7 @@ function togglePlayerControls() {
     potionBtn.disabled = false;
   }
 
+  // Checks for Webbed Condition
   if (WEBBED.duration !== null) {
     attackBtn.disabled = true;
     guardBtn.disabled = true;
@@ -741,26 +751,8 @@ function closeRoomSummaryModal() {
   roomSummaryModalTracker = null;
   roomSummaryModal.style.display = "none";
 
-  // Adds Attack Power to Gloryforged Blade
-  if (currentRoom.roomName === "Fallen Warriors' Vale") {
-    gloryforgedTracker += 4;
-    (GLORYFORGED_BLADE.effect = `When attuned to this item, your attack is increased by ${gloryforgedTracker}. This blade becomes more powerful with each instance of glory found in Fallen Warriors' Vale.`),
-      writeToLogItem(LOG_ITEM, "YES", GLORYFORGED_BLADE);
-  }
-
-  // Checks if Forsaken Commander's Quest is Complete
-  if (legionTracker >= 30) {
-    WAR_TORN_BANNER_STATUS.duration = null;
-    inventoryItems.push(AEGIS_OF_THE_FALLEN);
-
-    if (inventoryItems.includes(WAR_TORN_BANNER)) {
-      useConsumable("War Torn Banner");
-    } else if (attunedItems.includes(WAR_TORN_BANNER)) {
-      const index = attunedItems.indexOf(WAR_TORN_BANNER);
-      attunedItems.splice(index, 1);
-    }
-    writeToLogOther(LOG_OTHER, "YES", AEGIS_OF_THE_FALLEN);
-  }
+  gloryforgedBladeCheck();
+  forsakenCommanderCheck();
 }
 
 function renderRoomSummaryModal() {
@@ -1080,9 +1072,9 @@ continueButton.addEventListener("click", () => {
     }, 1500);
   }
 
+  playerControlsTimeout(2500);
   soundEffectHandler(whooshLowAir);
 });
-
 
 restartGameBtn.addEventListener("click", () => {
   location.reload();

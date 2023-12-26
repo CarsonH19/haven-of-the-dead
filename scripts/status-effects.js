@@ -71,7 +71,7 @@ const DISEASED = {
 const BURNED = {
   name: "Burned",
   detail: "CONDITION",
-  image: "styles/images/burned.jpg",
+  image: "styles/images/items/burned.jpg",
   status: "All damage you take is increased by 25%.",
   duration: null,
   statusDuration: null,
@@ -264,7 +264,6 @@ const WAR_TORN_BANNER_STATUS = {
 
     const warTornBannerInterval = setInterval(() => {
       WAR_TORN_BANNER_STATUS.duration = `${legionTracker} Legionnaires defeated`;
-
       if (WAR_TORN_BANNER_STATUS.duration === null) {
         clearInterval(warTornBannerInterval);
       }
@@ -428,7 +427,8 @@ function statusEffectHandler(item) {
       break;
 
     case FLICKERING_CANDLE:
-      if (FLICKERING_CANDLE.tracker === 0) {
+      if (FLICKERING_CANDLE.tracker === "LIT") {
+        console.log("CANDLE!?!?!");
         writeToLogItem(LOG_ITEM, "YES", FLICKERING_CANDLE);
         return 99;
       } else {
@@ -437,7 +437,7 @@ function statusEffectHandler(item) {
 
     case BLAZING_CANDLE:
       if (BLAZING_CANDLE.tracker === "LIT") {
-        writeToLogItem(LOG_ITEM, "YES", FLICKERING_CANDLE);
+        writeToLogItem(LOG_ITEM, "YES", BLAZING_CANDLE);
         return 20;
       } else {
         return 0;
@@ -445,7 +445,7 @@ function statusEffectHandler(item) {
 
     case SOULFLAME_CANDLE:
       if (SOULFLAME_CANDLE.tracker === "LIT") {
-        writeToLogItem(LOG_ITEM, "YES", FLICKERING_CANDLE);
+        writeToLogItem(LOG_ITEM, "YES", SOULFLAME_CANDLE);
         return 2;
       } else {
         return 1;

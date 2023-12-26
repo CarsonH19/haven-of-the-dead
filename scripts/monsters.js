@@ -205,7 +205,7 @@ const LEGIONNAIRE = {
 
 const UNDYING_WARBAND = {
   name: "Undying Warband",
-  image: "styles/images/monsters/undying-warband.jpg",
+  boss: "Undying Warband",
   type: "UNDEAD",
   skulls: 9,
   attackCounter: 0,
@@ -247,7 +247,6 @@ const UNDYING_WARBAND = {
       for (let i = 0; i < 4; i++) {
         FALLEN_WARRIORS_VALE.contents.monsters.push(ARMORED_SKELETON);
       }
-      writeToLogMonster(LOG_MONSTER_ABILITY, "YES", "LOSE FORMATION");
     } else {
       const warbandInterval = setInterval(() => {
         if (UNDYING_WARBAND.attackCounter >= attacks) {
@@ -622,7 +621,7 @@ function monsterSkullLevel(level) {
   // Logic for bosses & specific case monsters
   switch (monster) {
     case UNDYING_WARBAND:
-      monsterMaxHealth = 180;
+      monsterMaxHealth = 260;
       monsterAttackValue = 4;
       break;
 
@@ -664,8 +663,6 @@ function setMonsterHealth(maxLife) {
 function startBattle() {
   setTimeout(() => {
     renderMonsterStatBlock(currentRoom.contents.monsters[0]);
-    togglePlayerControls();
-
     // Checks for Paladin Passive
     setTimeout(paladinRadiantAura, 500);
     // ITEM: Rattlebone Whistle - Chance for humanoids to flee.
@@ -677,17 +674,21 @@ function startBattle() {
     updatePlayerTrackers();
   }, 1000);
 
+  playerControlsTimeout(1500);
   soundEffectHandler(currentRoom.contents.monsters[0], "SPAWN");
 }
 
 function checkForMonsters() {
-  // If Legionnaire Killed Adds to Legion Tracker
+  // Checks for Legionnaire / Adds to Legion Tracker
   if (currentRoom.contents.monsters[0] === LEGIONNAIRE) {
     legionTracker++;
   }
 
   // Removes Monster From Rooms Monsters Arry
   currentRoom.contents.monsters.shift();
+
+  // Used to end Fallen Warriors' Vale battle
+  endBattlefieldEvent();
 
   // Checks for more monsters
   if (currentRoom.contents.monsters.length > 0) {
@@ -814,11 +815,11 @@ function monsterAbilityHandler(monster) {
         break;
 
       case UNDYING_WARBAND:
-        if (currentMonsterHealth > 160) {
+        if (currentMonsterHealth > 230) {
           UNDYING_WARBAND.function(5);
           UNDYING_WARBAND.attackCounter = 0;
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
-        } else if (currentMonsterHealth > 130) {
+        } else if (currentMonsterHealth > 180) {
           UNDYING_WARBAND.function(4);
           UNDYING_WARBAND.attackCounter = 0;
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
@@ -826,6 +827,9 @@ function monsterAbilityHandler(monster) {
           UNDYING_WARBAND.function(3);
           UNDYING_WARBAND.attackCounter = 0;
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+        } else if (currentMonsterHealth <= 110) {
+          UNDYING_WARBAND.function(0);
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES", "WARBAND BROKEN");
         }
         break;
 
