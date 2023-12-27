@@ -418,6 +418,19 @@ function levelUpHandler(boon) {
   } else if (boon === "FAITH") {
     baseFaith++;
     faithBoonRank++;
+
+    if (faithBoonRank === 4) {
+      SOULFLAME_CANDLE.effect =
+        "While this candle is lit all experience gained is doubled. The candle burns out after 20 rooms.";
+      BLAZING_CANDLE.effect =
+        "While this candle is lit all attack you make become critical hits. The candle burns out after clearing two rooms.";
+      FLICKERING_CANDLE.effect =
+        "While this candle is lit your chance to flee successfully becomes 100%. The candle burns out after fleeing 6 times.";
+      SOOTHING_CANDLE.effect =
+        "While this candle is lit you restore 10HP after clearing a room. The candle burns out after clearing 10 rooms.";
+      WARDING_CANDLE.effect =
+        "While this candle is lit undead creatures may flee from you. The candle burns out after clearing 10 rooms.";
+    }
   } else if (boon === "SPECIAL") {
     specialAbilityBoonRank++;
 

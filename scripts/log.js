@@ -587,11 +587,23 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
       }
 
       if (dataOne === "STRENGTH") {
-        newEntry.textContent = `BOON: You've chosen the Boon of Strength. Your base Strength has increased to ${baseStrength}`;
+        if (strengthBoonRank === 4) {
+          newEntry.textContent = `BOON: You've chosen the Boon of Strength. Your base Strength has increased to ${baseStrength}. Additionally, your Attack is increased by an amount equal to your Strength.`;
+        } else {
+          newEntry.textContent = `BOON: You've chosen the Boon of Strength. Your base Strength has increased to ${baseStrength}.`;
+        }
       } else if (dataOne === "DEXTERITY") {
-        newEntry.textContent = `BOON: You've chosen the Boon of Dexterity. Your base Dexterity has increased to ${baseDexterity}`;
+        if (dexterityBoonRank === 4) {
+          newEntry.textContent = `BOON: You've chosen the Boon of Dexterity. Your base Dexterity has increased to ${baseDexterity}. Additionally, damage received from enemies is reduced by an amount equal to your Dexterity.`;
+        } else {
+          newEntry.textContent = `BOON: You've chosen the Boon of Dexterity. Your base Dexterity has increased to ${baseDexterity}.`;
+        }
       } else if (dataOne === "FAITH") {
-        newEntry.textContent = `BOON: You've chosen the Boon of Faith. Your base Faith has increased to ${baseFaith}`;
+        if (faithBoonRank === 4) {
+          newEntry.textContent = `BOON: You've chosen the Boon of Faith. Your base Faith has increased to ${baseFaith}. Additionally, the duration of candles is doubled and it takes less time for wisps to guide you.`;
+        } else {
+          newEntry.textContent = `BOON: You've chosen the Boon of Faith. Your base Faith has increased to ${baseFaith}.`;
+        }
       }
 
       if (dataOne === "SPECIAL") {

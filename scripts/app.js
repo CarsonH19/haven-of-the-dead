@@ -4,14 +4,15 @@
 
 function playerAttackHandler(smite) {
   criticalHit = checkForCritcalHit();
-  let playerToMonsterDamage = dealMonsterDamage(baseAttack);
+  let playerToMonsterDamage = dealMonsterDamage(totalAttack);
   let totalDamage;
 
   //Checks for Rank 4 Holy Smite - maximum damage
   if (heroChoice === "PALADIN" && specialAbilityBoonRank === 4 && smite > 1) {
-    playerToMonsterDamage = baseAttack;
+    playerToMonsterDamage = totalAttack;
   }
 
+  // ATTACK MODIFIERS
   // ITEM: Revenant's Rage - Increases attack when low health
   playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
   // ITEM: +3 attack against evil spirits.
@@ -22,6 +23,12 @@ function playerAttackHandler(smite) {
   playerToMonsterDamage += isItemAttuned(CRIMSON_OFFERING, 0);
   // ITEM: Soulreaver - damage++ for each consecutive attack
   playerToMonsterDamage += isItemAttuned(SOULREAVER, 0);
+
+  if (strengthBoonRank === 4) {
+    playerToMonsterDamage += totalStrength;
+  }
+
+  // CRITICAL HIT MODIFIERS
   // ITEM: Blazing Candle - all attacks are critical hits
   criticalHit += statusEffectHandler(BLAZING_CANDLE);
 
@@ -70,7 +77,7 @@ function checkForCritcalHit() {
 }
 
 function calculateTotalCritDamage() {
-  return Math.round(baseAttack * calculateCritDamageModifier());
+  return Math.round(totalAttack * calculateCritDamageModifier());
 }
 
 function damageMonster(damage) {
@@ -149,6 +156,15 @@ function monsterAttackHandler(bonus) {
 
 function dealPlayerDamage(damage) {
   const dealtDamage = Math.round(Math.random() * damage);
+
+  if (dexterityBoonRank === 4) {
+    playerToMonsterDamage += totalDexterity;
+  }
+
+  if (damageDealt <= 0) {
+    damageDealt = 0;
+  }
+
   return dealtDamage;
 }
 
@@ -364,7 +380,7 @@ function fleeHandler() {
     let newRoom = getRandomRoom(catacombRooms);
 
     // Is Flickering Candle Active?\
-    if ((FLICKERING_CANDLE.tracker === "LIT")) {
+    if (FLICKERING_CANDLE.tracker === "LIT") {
       FLICKERING_CANDLE.fleeNumber--;
 
       if (FLICKERING_CANDLE.fleeNumber <= 0) {
@@ -558,7 +574,6 @@ function renderCurrentRoom(currentRoom) {
 let controlInterval;
 
 function setControlsInterval(command, pauseTime) {
-
   switch (command) {
     case "START":
       // console.log("setControlsInterval Started!");

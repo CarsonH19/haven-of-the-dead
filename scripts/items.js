@@ -192,6 +192,7 @@ const SHADOWSTEP_BOOTS = {
     strength: 0,
     dexterity: 1,
     faith: 0,
+    attack: 0,
   },
 };
 
@@ -206,6 +207,7 @@ const BONE_BLUDGEON = {
     strength: 1,
     dexterity: 0,
     faith: 0,
+    attack: 0,
   },
 };
 
@@ -220,6 +222,7 @@ const HOLY_RELIC = {
     strength: 0,
     dexterity: 0,
     faith: 1,
+    attack: 0,
   },
 };
 
@@ -236,7 +239,6 @@ const RITUAL_BLADE = {
       currentRoom.contents.monsters[0].type === "BEAST" ||
       currentRoom.contents.monsters[0].type === "HUMANOID"
     ) {
-      console.log(`+3 Damage!`);
       return 3;
     } else {
       return 0;
@@ -510,6 +512,7 @@ const BERSERKER_PAULDRON = {
     strength: 2,
     dexterity: 0,
     faith: -1,
+    attack: 0,
   },
 };
 
@@ -524,6 +527,7 @@ const TOME_OF_DEVOTION = {
     strength: 0,
     dexterity: -1,
     faith: 2,
+    attack: 0,
   },
 };
 
@@ -538,6 +542,7 @@ const BRACELET_OF_THE_SERPENT = {
     strength: -1,
     dexterity: 2,
     faith: 0,
+    attack: 0,
   },
 };
 
@@ -552,6 +557,7 @@ const FANGWEAVE_ARMOR = {
     strength: 0,
     dexterity: 1,
     faith: 0,
+    attack: 0,
   },
   function: () => {
     baseHealth += 20;
@@ -722,11 +728,11 @@ let GLORYFORGED_BLADE = {
   type: "MAGIC",
   rarity: "Epic",
   effect: `When attuned to this item, your attack is increased by ${gloryforgedTracker}. This blade becomes more powerful with each instance of glory found in Fallen Warriors' Vale.`,
-  function: () => {
-    baseAttack += gloryforgedTracker;
-  },
-  unequip: () => {
-    baseAttack -= gloryforgedTracker;
+  stats: {
+    strength: 0,
+    dexterity: 0,
+    faith: 0,
+    attack: gloryforgedTracker,
   },
 };
 
@@ -761,6 +767,7 @@ const SKULLBREAKER_HELM = {
     strength: 1,
     dexterity: 0,
     faith: 0,
+    attack: 0,
   },
   function: () => {
     baseHealth += 20;
@@ -827,12 +834,7 @@ const SPINE_OF_THE_NECROMANCER = {
     strength: -1,
     dexterity: -1,
     faith: -1,
-  },
-  function: () => {
-    baseAttack += 9;
-  },
-  unequip: () => {
-    baseAttack -= 9;
+    attack: 9,
   },
 };
 
@@ -1204,6 +1206,7 @@ const BLACKHEART_BREW = {
     strength: 2,
     dexterity: -1,
     faith: 0,
+    attack: 0,
   },
   function: () => {
     startStatusEffect(BLACKHEART_BREW, 5);
@@ -1263,6 +1266,7 @@ const TROLLBLOOD_TONIC = {
     strength: 1,
     dexterity: 1,
     faith: 0,
+    attack: 0,
   },
   function: () => {
     startStatusEffect(TROLLBLOOD_TONIC, 10);
@@ -1278,7 +1282,7 @@ const NECROTIC_NECTAR = {
   rarity: "Rare",
   detail: "DRINK",
   effect:
-    "Using this item recovers all missing HP. However, your Strength and Dexterity are reduced to 0. These effects persist for 5 rooms.",
+    "Using this item recovers all missing HP. However, your Strength and Dexterity are reduced to 0, and your Attack is reduced by 3. These effects persist for 5 rooms.",
   status: "Strength and Dexterity reduced to 0.",
   duration: null,
   statusDuration: null,
@@ -1286,6 +1290,7 @@ const NECROTIC_NECTAR = {
     strength: -99,
     dexterity: -99,
     faith: 0,
+    attack: -3,
   },
   function: () => {
     healPlayer(playerMaxHealth);
@@ -1323,7 +1328,7 @@ const WARDING_CANDLE = {
   detail: "CANDLE",
   tracker: null,
   effect:
-    "While this candle is lit undead creaturs may flee from you. The candle burns out after clearing 5 rooms.",
+    "While this candle is lit undead creatures may flee from you. The candle burns out after clearing 5 rooms.",
   status: "There is a chance undead enemies will flee from you.",
   duration: null,
   statusDuration: null,
@@ -1369,7 +1374,7 @@ const FLICKERING_CANDLE = {
   duration: null,
   statusDuration: null,
   function: () => {
-    console.log("CALLED?!?!?")
+    console.log("CALLED?!?!?");
     FLICKERING_CANDLE.tracker = "LIT";
     startStatusEffect(FLICKERING_CANDLE, 5);
   },

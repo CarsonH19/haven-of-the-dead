@@ -96,6 +96,49 @@ const heroChoiceModal = document.getElementById("heroChoiceModal");
 const restartGameBtn = document.getElementById("restartGameBtn");
 
 // ===============================
+//        Hero Variables
+// ===============================
+
+let heroChoice;
+let potionHealValue = 30;
+let specialCooldownCounter = 0;
+
+// Paladin
+let holySmiteTracker = 1.5;
+let radiantAuraTracker = 5;
+
+// Rogue
+let umbralAssaultTracker = 2;
+let darkenedReprisalTracker = 2;
+
+// Priestess
+let cleansingFlameTracker = 10;
+let burningDevotionTracker = 3;
+
+// ===============================
+//   Boons & Leveling Variables
+// ===============================
+
+let experiencePoints = 0;
+let previousExperience;
+let levelCounter = 1;
+
+const levelUpModal = document.getElementById("levelUpModal");
+const strengthRank = document.getElementById("strengthRank");
+const dexterityRank = document.getElementById("dexterityRank");
+const faithRank = document.getElementById("faithRank");
+const specialText = document.getElementById("specialText");
+const specialRank = document.getElementById("specialRank");
+const passiveText = document.getElementById("passiveText");
+const passiveRank = document.getElementById("passiveRank");
+
+let strengthBoonRank = 1;
+let dexterityBoonRank = 1;
+let faithBoonRank = 1;
+let specialAbilityBoonRank = 1;
+let passiveAbilityBoonRank = 1;
+
+// ===============================
 //           STRENGTH
 // ===============================
 
@@ -194,6 +237,13 @@ function calculateExperienceModifier() {
 }
 
 // ===============================
+//            ATTACK
+// ===============================
+
+let baseAttack;
+let totalAttack;
+
+// ===============================
 //            STATS
 // ===============================
 
@@ -216,12 +266,14 @@ function updateTotalStats() {
   totalStrength = 0;
   totalDexterity = 0;
   totalFaith = 0;
+  totalAttack = 0;
 
   for (const item of statChanges) {
     if (item.stats) {
       totalStrength += item.stats.strength || 0;
       totalDexterity += item.stats.dexterity || 0;
       totalFaith += item.stats.faith || 0;
+      totalAttack += item.stats.attack || 0;
     }
   }
   // Strength
@@ -256,6 +308,13 @@ function updateTotalStats() {
 
   findItemChance = calculateItemFindChance();
   experienceModifier = calculateExperienceModifier();
+
+  // Attack 
+  totalAttack += baseAttack;
+
+  if (strengthBoonRank === 4) {
+    totalAttack += totalStrength;
+  }
 
   updatePlayerTrackers();
 }
@@ -344,50 +403,6 @@ let hagFavor = 0;
 let previousHagFavor;
 
 let curatorFavor = 0;
-
-// ===============================
-//        Hero Variables
-// ===============================
-
-let heroChoice;
-let baseAttack;
-let potionHealValue = 30;
-let specialCooldownCounter = 0;
-
-// Paladin
-let holySmiteTracker = 1.5;
-let radiantAuraTracker = 5;
-
-// Rogue
-let umbralAssaultTracker = 2;
-let darkenedReprisalTracker = 2;
-
-// Priestess
-let cleansingFlameTracker = 10;
-let burningDevotionTracker = 3;
-
-// ===============================
-//   Boons & Leveling Variables
-// ===============================
-
-let experiencePoints = 0;
-let previousExperience;
-let levelCounter = 1;
-
-const levelUpModal = document.getElementById("levelUpModal");
-const strengthRank = document.getElementById("strengthRank");
-const dexterityRank = document.getElementById("dexterityRank");
-const faithRank = document.getElementById("faithRank");
-const specialText = document.getElementById("specialText");
-const specialRank = document.getElementById("specialRank");
-const passiveText = document.getElementById("passiveText");
-const passiveRank = document.getElementById("passiveRank");
-
-let strengthBoonRank = 1;
-let dexterityBoonRank = 1;
-let faithBoonRank = 1;
-let specialAbilityBoonRank = 1;
-let passiveAbilityBoonRank = 1;
 
 // ===============================
 //    Hero Stats Modal Variables
