@@ -479,12 +479,13 @@ function ivansRevengeTracker() {
 const FORSAKEN_COMMANDER = {
   name: "Forsaken Commander",
   eventType: "NPC",
-  image: "styles/images/npcs/forasken-commander.jpg",
+  image: "styles/images/npcs/commander.jpg",
   description: `A spectral commander materializes before you. "Valiant adventurer, my legion walk these depths, bound by the Baron's unholy curse. Please, free them from the chains of undeath."`,
   optionOne: "Accept",
   optionTwo: "Refuse",
+  tracker: null,
   functionOne: () => {
-    commanderTracker === "ACTIVE";
+    FORSAKEN_COMMANDER.tracker = "ACTIVE";
     currentRoom.contents.items.push(WAR_TORN_BANNER);
     setTimeout(renderRoomSummaryModal, 5000);
     setRoomSummary();
@@ -505,8 +506,8 @@ const FORSAKEN_COMMANDER = {
 
 function forsakenCommanderCheck() {
   // Checks if Forsaken Commander's Quest is Complete
-  if (legionTracker >= 30 && commanderTracker === "ACTIVE") {
-    commanderTracker === "FINSIHED";
+  if (legionTracker >= 30 && FORSAKEN_COMMANDER.tracker === "ACTIVE") {
+    FORSAKEN_COMMANDER.tracker = "FINSIHED";
     WAR_TORN_BANNER_STATUS.duration = null;
     inventoryItems.push(AEGIS_OF_THE_FALLEN);
 
@@ -632,7 +633,7 @@ const CURATOR_TRADER = {
 
 function endTrade() {
   currentRoom.contents.events = null;
-  fadeOutAnimation(eventModal, 0000);
+  fadeOutAnimation(eventModal);
   setTimeout(() => {
     eventModal.style.display = "none";
   }, 1900);
@@ -1071,6 +1072,8 @@ function generalEventHandler(option, statModifier, attribute) {
     // ADD SOUND EFFECT !FIX!
     writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "CURSE");
   }
+
+  // setTimeout(togglePlayerControls, 2000);
 }
 
 function renderEvent(event) {
@@ -1166,7 +1169,6 @@ eventButtonOne.addEventListener("click", () => {
   if (event.eventType === "MISC") {
     generalEventHandler(event.optionOne);
   }
-  togglePlayerControls();
   removeEventDescriptionLog();
 });
 
@@ -1191,6 +1193,5 @@ eventButtonTwo.addEventListener("click", () => {
     generalEventHandler(event.optionTwo);
   }
 
-  togglePlayerControls();
   removeEventDescriptionLog();
 });

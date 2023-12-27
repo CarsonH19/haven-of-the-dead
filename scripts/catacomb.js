@@ -947,7 +947,6 @@ const IVAN_TRAP_ROOM_ONE = {
   function: () => {
     ivansRevengeTracker();
     setTimeout(() => {
-      metalSqueak21.loop();
       soundEffectHandler(metalSqueak21);
     }, 3000);
     setTimeout(() => {

@@ -252,12 +252,13 @@ function specialCooldownHandler(reset) {
 
   if (specialCooldownCounter > 0 && !reset) {
     specialCooldownCounter--;
-    specialBtn.disabled = true;
+    // togglePlayerControls();
     special.textContent = `Cooldown: ${specialCooldownCounter}`;
   }
 
   if (specialCooldownCounter === 0) {
-    specialBtn.disabled = false;
+    // togglePlayerControls();
+
     if (heroChoice === "PALADIN") {
       special.textContent = `Holy Smite`;
     } else if (heroChoice === "ROGUE") {
@@ -355,15 +356,15 @@ function fleeHandler() {
     fleeAttempt += 3;
   }
 
+  console.log(fleeAttempt);
+
   if (fleeAttempt >= 10) {
     // Log must be placed before currentRoom change
-    writeToLogActions(LOG_FLEE, "YES");
-
     let roomToFlee = currentRoom;
     let newRoom = getRandomRoom(catacombRooms);
 
     // Is Flickering Candle Active?\
-    if ((FLICKERING_CANDLE.tracker = "LIT")) {
+    if ((FLICKERING_CANDLE.tracker === "LIT")) {
       FLICKERING_CANDLE.fleeNumber--;
 
       if (FLICKERING_CANDLE.fleeNumber <= 0) {
@@ -380,16 +381,20 @@ function fleeHandler() {
         setTimeout(() => {
           monsterContainer.style.display = "none";
           monsterImage.style.display = "none";
-          // getRandomRoom(catacombRooms);
           renderCurrentRoom(currentRoom);
         }, 1500);
       }, 2000);
+
+      turnOffControls();
+      writeToLogActions(LOG_FLEE, "YES", "SUCCESS");
     } else {
       fleeHandler();
     }
   } else {
+    //  playercontrolsTimeout(200);
     setTimeout(monsterAttackHandler, 1200);
-    isGameOver();
+    setTimeout(isGameOver, 1500);
+    writeToLogActions(LOG_FLEE, "YES", "FAILURE");
   }
 }
 
@@ -417,8 +422,12 @@ function isGameOver() {
     }
   }
 
-  if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {
-    playerControlsTimeout(4000);
+  if (
+    currentRoom.contents.monsters.length > 0 &&
+    currentMonsterHealth <= 0 &&
+    monsterContainer.style.display === "flex"
+  ) {
+    togglePlayerControls();
 
     // ITEM: Bloodstone - Recovers health when monster dies
     isItemAttuned(BLOODSTONE, null);
@@ -487,6 +496,7 @@ heroChoiceModal.addEventListener("click", function (event) {
     }, 3000);
 
     updateTotalStats();
+    setControlsInterval("START");
   }
 });
 
@@ -536,13 +546,48 @@ function renderCurrentRoom(currentRoom) {
     }, 3000);
   }
 
+  turnOffControls();
   specialCooldownHandler();
-  togglePlayerControls();
   setRoomSummary();
   renderBackground(currentRoom.backgroundImage);
   playMusic(currentRoom.music);
   updatePlayerTrackers();
   checkForNewTier();
+}
+
+let controlInterval;
+
+function setControlsInterval(command, pauseTime) {
+
+  switch (command) {
+    case "START":
+      // console.log("setControlsInterval Started!");
+
+      controlInterval = setInterval(() => {
+        // console.log("Control Interval Called");
+        togglePlayerControls();
+      }, 500);
+      break;
+
+    case "PAUSE":
+      // console.log("setControlsInterval Paused!");
+      clearInterval(controlInterval);
+      turnOffControls();
+      setTimeout(() => {
+        controlInterval = setInterval(() => {
+          // console.log("Control Interval Called");
+          togglePlayerControls();
+        }, 500);
+      }, pauseTime);
+      break;
+
+    case "STOP":
+      // console.log("setControlsInterval Stopped!");
+
+      clearInterval(controlInterval);
+      turnOffControls();
+      break;
+  }
 }
 
 function togglePlayerControls() {
@@ -552,13 +597,11 @@ function togglePlayerControls() {
   ) {
     attackBtn.disabled = false;
     guardBtn.disabled = false;
-    specialBtn.disabled = false;
     fleeBtn.disabled = false;
     potionBtn.disabled = false;
   } else {
     attackBtn.disabled = true;
     guardBtn.disabled = true;
-    specialBtn.disabled = true;
     fleeBtn.disabled = true;
   }
 
@@ -573,6 +616,15 @@ function togglePlayerControls() {
     specialBtn.disabled = true;
   }
 
+  // Checks for Event Modal
+  if (eventModal.style.display === "block") {
+    inventoryButton.disabled = true;
+    potionBtn.disabled = true;
+  } else {
+    inventoryButton.disabled = false;
+    potionBtn.disabled = false;
+  }
+
   // Checks for Chilled Condition
   if (CHILLED.duration !== null) {
     guardBtn.disabled = true;
@@ -582,15 +634,6 @@ function togglePlayerControls() {
   // Checks for Cursed Condition
   if (CURSED.duration !== null) {
     specialBtn.disabled = true;
-  }
-
-  // Checks for Event Modal
-  if (eventModal.style.display === "block") {
-    inventoryButton.disabled = true;
-    potionBtn.disabled = true;
-  } else {
-    inventoryButton.disabled = false;
-    potionBtn.disabled = false;
   }
 
   // Checks for Webbed Condition
@@ -617,18 +660,33 @@ function togglePlayerControls() {
   }
 }
 
-function playerControlsTimeout(timeout) {
-  attackBtn.disabled = true;
-  guardBtn.disabled = true;
-  specialBtn.disabled = true;
-  fleeBtn.disabled = true;
-  inventoryButton.disabled = true;
-  potionBtn.disabled = true;
-
-  setTimeout(() => {
-    togglePlayerControls();
-  }, timeout);
+function turnOffControls() {
+  if (currentRoom.roomName === "Candlelight Shrine") {
+    inventoryButton.disabled = false;
+    potionBtn.disabled = false;
+  } else {
+    attackBtn.disabled = true;
+    guardBtn.disabled = true;
+    specialBtn.disabled = true;
+    fleeBtn.disabled = true;
+    inventoryButton.disabled = true;
+    potionBtn.disabled = true;
+  }
 }
+
+// function playerControlsTimeout(timeout) {
+//   attackBtn.disabled = true;
+//   guardBtn.disabled = true;
+//   specialBtn.disabled = true;
+//   fleeBtn.disabled = true;
+//   inventoryButton.disabled = true;
+//   potionBtn.disabled = true;
+
+//   console.log(`Player Controls Timeout: ${timeout}`);
+//   setTimeout(() => {
+//     togglePlayerControls();
+//   }, timeout);
+// }
 
 function updateRoomsCleared() {
   roomCounter++;
@@ -914,7 +972,7 @@ function renderContinueButton() {
 //       Event Listeners
 // ===============================
 
-attackBtn.addEventListener("click", function () {
+attackBtn.addEventListener("click", () => {
   actionCounter++;
 
   playerAttackHandler();
@@ -923,11 +981,12 @@ attackBtn.addEventListener("click", function () {
   if (currentMonsterHealth <= 0) {
     isGameOver();
   } else {
-    playerControlsTimeout(2000);
     setTimeout(monsterAttackHandler, 1200);
     setTimeout(isGameOver, 1300);
     updatePlayerTrackers();
   }
+
+  setControlsInterval("PAUSE", 1800);
 });
 
 guardBtn.addEventListener("click", () => {
@@ -935,7 +994,7 @@ guardBtn.addEventListener("click", () => {
   attackCounter = 0; // Item: Soulreaver
 
   specialCooldownHandler();
-  playerControlsTimeout(2000);
+  setControlsInterval("PAUSE", 1800);
   guardHandler();
   setTimeout(isGameOver, 500);
   updatePlayerTrackers();
@@ -958,9 +1017,9 @@ specialBtn.addEventListener("click", () => {
     isGameOver();
   } else if (currentMonsterHealth > 0 && heroChoice !== "ROGUE") {
     setTimeout(monsterAttackHandler, 1200);
+    setControlsInterval("PAUSE", 1800);
   }
 
-  playerControlsTimeout(2000);
   soundEffectHandler(heroChecker(), "PLAYER ABILITY");
   updatePlayerTrackers();
   specialCooldownHandler();
@@ -974,7 +1033,7 @@ potionBtn.addEventListener("click", () => {
 
   if (currentRoom.contents.monsters.length > 0) {
     specialCooldownHandler();
-    playerControlsTimeout(2000);
+    setControlsInterval("PAUSE", 1800);
     setTimeout(monsterAttackHandler, 1200);
     isGameOver();
   }
@@ -988,7 +1047,6 @@ fleeBtn.addEventListener("click", () => {
 
   fleeHandler();
   specialCooldownHandler();
-  playerControlsTimeout(2000);
   updatePlayerTrackers();
 });
 
@@ -1003,7 +1061,7 @@ roomSummaryButton.addEventListener("click", () => {
   closeRoomSummaryModal();
   renderContinueButton();
   clearRoomSummaryModal();
-  togglePlayerControls();
+  // togglePlayerControls();
   updateRoomsCleared();
 
   // ITEM: Trollblood Tonic - 20HP after each cleared room.
@@ -1072,7 +1130,8 @@ continueButton.addEventListener("click", () => {
     }, 1500);
   }
 
-  playerControlsTimeout(2500);
+  // playerControlsTimeout(3000);
+  setControlsInterval("PAUSE", 3000);
   soundEffectHandler(whooshLowAir);
 });
 

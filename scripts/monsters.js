@@ -652,6 +652,7 @@ function renderMonsterStatBlock(monster) {
   // ITEM: Sunstone - Weakens Evil Spirits
   isItemAttuned(SUNSTONE, 0);
   setMonsterHealth(monsterMaxHealth);
+  togglePlayerControls();
 }
 
 function setMonsterHealth(maxLife) {
@@ -674,7 +675,6 @@ function startBattle() {
     updatePlayerTrackers();
   }, 1000);
 
-  playerControlsTimeout(1500);
   soundEffectHandler(currentRoom.contents.monsters[0], "SPAWN");
 }
 
@@ -693,6 +693,7 @@ function checkForMonsters() {
   // Checks for more monsters
   if (currentRoom.contents.monsters.length > 0) {
     startBattle();
+    // playerControlsTimeout(2000);
   } else {
     console.log("All monsters defeated");
     attackCounter = 0; // Item: Soulreaver
@@ -764,6 +765,7 @@ function monsterAbilityHandler(monster) {
         if (webChance(4)) {
           console.log("Crypt Crawler Ability Called!");
           setTimeout(CRYPT_CRAWLER.function, 300);
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         }
         break;
 

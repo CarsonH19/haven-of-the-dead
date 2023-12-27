@@ -263,9 +263,10 @@ const WAR_TORN_BANNER_STATUS = {
     } legionnaires remaining.`;
 
     const warTornBannerInterval = setInterval(() => {
-      WAR_TORN_BANNER_STATUS.duration = `${legionTracker} Legionnaires defeated`;
       if (WAR_TORN_BANNER_STATUS.duration === null) {
         clearInterval(warTornBannerInterval);
+      } else {
+        WAR_TORN_BANNER_STATUS.duration = `${30 - legionTracker} legionnaires remaining.`;
       }
     }, 3000);
 
@@ -289,7 +290,7 @@ const AEGIS_STATUS_EFFECT = {
     }
 
     let aegisInterval = setInterval(() => {
-      const duration = statusEffect.statusDuration - actionCounter;
+      const duration = AEGIS_STATUS_EFFECT.statusDuration - actionCounter;
       const actionText = duration > 1 ? "Actions" : "Action";
       AEGIS_STATUS_EFFECT.duration = `Duration: ${duration} ${actionText}`;
 

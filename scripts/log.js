@@ -332,7 +332,7 @@ function writeToLogActions(logType, narrate, dataOne) {
     // ===============================
 
     case LOG_FLEE:
-      if (heroChoice === "PALADIN") {
+      if (heroChoice === "PALADIN" && dataOne === "SUCCESS") {
         if (narration === 1) {
           narration = `"Retreat is a tactical decision, not a sign of weakness. We shall regroup and return with renewed resolve."`;
         } else if (narration === 2) {
@@ -354,7 +354,7 @@ function writeToLogActions(logType, narrate, dataOne) {
         } else {
           narration = `"A tactical retreat is the mark of a wise leader. We shall live to fight for the light another day."`;
         }
-      } else if (heroChoice === "ROGUE") {
+      } else if (heroChoice === "ROGUE" && dataOne === "SUCCESS") {
         if (narration === 1) {
           narration = `"In shadows, we find refuge. Retreat now, strike later."`;
         } else if (narration === 2) {
@@ -376,7 +376,7 @@ function writeToLogActions(logType, narrate, dataOne) {
         } else {
           narration = `"Wisdom lies in knowing when to slip away. We shall return, shadows wrapped in deadlier resolve."`;
         }
-      } else if (heroChoice === "PRIESTESS") {
+      } else if (heroChoice === "PRIESTESS" && dataOne === "SUCCESS") {
         if (narration === 1) {
           narration = `"In retreat, we seek to heal and regroup. The light will guide us back to victory."`;
         } else if (narration === 2) {
@@ -400,18 +400,17 @@ function writeToLogActions(logType, narrate, dataOne) {
         }
       }
 
-      newEntry.textContent = `FLEE: You flee from the ${currentRoom.roomName}!`;
+      if (dataOne === "FAILURE") {
+        newEntry.textContent = `FLEE: You fail to flee from the ${currentRoom.contents.monsters[0].name}.`;
+      } else if (dataOne === "SUCCESS") {
+        newEntry.textContent = `FLEE: You flee from the ${currentRoom.roomName}!`;
+      }
       break;
   }
 
-  if (narrate === "YES") {
+  if (narrate === "YES" && dataOne === "SUCCESS") {
     writeToNarrative(narration);
   }
-
-  // if (logType === LOG_GUARD) {
-  //   logText = newEntry.textContent;
-  //   newEntry.textContent = `PASSIVE: ${logText}`;
-  // }
 
   log.insertBefore(newEntry, log.firstChild);
   const newEntryClone = newEntry.cloneNode(true);
@@ -1794,14 +1793,12 @@ function removeEventDescriptionLog() {
   );
 
   if (eventDescriptions.length > 0) {
-    console.log(eventDescriptions);
-
     // Apply fade-out and remove for each element
     eventDescriptions.forEach((element) => {
-      setTimeout(() => {
-        narrativeText.removeChild(narrativeText.lastElementChild);
-      }, 1950);
-      fadeOutAnimation(element);
+      // setTimeout(() => {
+      narrativeText.removeChild(narrativeText.lastElementChild);
+      // }, 1950);
+      // fadeOutAnimation(element);
     });
   }
 }

@@ -259,16 +259,16 @@ const RITUAL_BLADE = {
 
 const MIST_VEIL_CLOAK = {
   name: "Mist Veil Cloak",
-  description: "",
   image: "styles/images/items/mist-veil-cloak.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:
-    "While attuned to this item you have a slight chance of completely evading enemy attacks.",
+    "While attuned to this item you have a 10% chance of completely evading enemy attacks.",
   function: () => {
-    let randomNumber = Math.round(Math.random() * 20);
-    if (randomNumber >= 19) {
+    let randomNumber = Math.floor(Math.random() * 10) + 1;
+    if (randomNumber === 10) {
       console.log(`Attack evaded with Mist Veil Cloak!`);
+      // writeToLogItem(LOG_ITEM, "YES", MIST_VEIL_CLOAK) !FIX! player dodged attack
       return 0;
     } else {
       console.log(`Attack NOT evaded...`);
@@ -364,7 +364,7 @@ const AMULET_OF_WHISPERS = {
       catacombRooms.push(SKULL_CHAMBER);
     }
 
-    if (commanderTracker === null) {
+    if (FORSAKEN_COMMANDER.tracker === null) {
       // Adds Commander's Room While Wearing
       catacombRooms.push(GRIM_GARRISON);
     }
@@ -903,7 +903,7 @@ const WAR_TORN_BANNER = {
     "While attuned to this item, undead legionnaires will be drawn to you.",
   function: () => {
     WAR_TORN_BANNER_STATUS.function();
-    writeToLogItem(LOG_ITEM, "YES", WAR_TORN_BANNER);
+    // writeToLogItem(LOG_ITEM, "YES", WAR_TORN_BANNER); !FIX! // with the banner raised behind you the legion will come
   },
   unequip: () => {
     WAR_TORN_BANNER_STATUS.duration = null;
