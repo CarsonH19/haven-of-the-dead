@@ -206,7 +206,7 @@ const CHILLED = {
 const ECHOES_OF_VICTORY = {
   name: "Echoes of Victory",
   image: "styles/images/items/war-torn-banner.jpg",
-  status: `All damage dealt is increased by 25%`,
+  status: `All damage dealt is increased by 20%`,
   duration: null,
   statusDuration: null,
   function: () => {
@@ -272,6 +272,26 @@ const WAR_TORN_BANNER_STATUS = {
 
     statusEffectHandler(WAR_TORN_BANNER_STATUS);
     renderStatusEffects(WAR_TORN_BANNER_STATUS);
+  },
+};
+
+const BONE_AMALGAM_STATUS_EFFECT = {
+  name: "Bone Amalgam",
+  image: "styles/images/items/bone-amalgam.jpg",
+  status: `Defeat enemies to accumulate bones and gain temporary hit points.`,
+  duration: null,
+  function: () => {
+    BONE_AMALGAM_STATUS_EFFECT.duration = `Temporary HP: ${BONE_AMALGAM.tracker}/30`;
+
+    const amalgamInterval = setInterval(() => {
+      if (BONE_AMALGAM_STATUS_EFFECT.duration === null) {
+        clearInterval(amalgamInterval);
+      } else {
+        BONE_AMALGAM_STATUS_EFFECT.duration = `Temporary HP: ${BONE_AMALGAM.tracker}/30`;
+      }
+    }, 3000);
+
+    renderStatusEffects(BONE_AMALGAM_STATUS_EFFECT);
   },
 };
 

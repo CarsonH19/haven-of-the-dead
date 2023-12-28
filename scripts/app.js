@@ -99,9 +99,9 @@ function damageMonster(damage) {
 function dealMonsterDamage(damage) {
   let damageDealt = Math.round(Math.random() * damage);
 
-  // Checks for Echoes of Victory - +25% damage
+  // Checks for Echoes of Victory - +20% damage
   if (ECHOES_OF_VICTORY.duration !== null) {
-    damageDealt = Math.round(damageDealt * 1.25);
+    damageDealt = Math.round(damageDealt * 1.20);
   }
 
   // Priestess Burning Devotion logic
@@ -119,8 +119,12 @@ function monsterAttackHandler(bonus) {
 
   if (bonus) {
     monsterToPlayerDamage *= bonus;
-  } else if (undeadSiggurdSmite === "ACTIVE") {
-    monsterToPlayerDamage = 24;
+  } else if (UNDEAD_SIGGURD.tracker === 7) {
+    UNDEAD_SIGGURD.tracker = 0;
+    monsterToPlayerDamage = 36;
+  } else if (BONEVAULT_DEMON.tracker === 3) {
+    BONEVAULT_DEMON.tracker = 0;
+    monsterToPlayerDamage = 18;
   }
 
   // ITEM: Hellfire Charm - Erupts dealing 15 damage
@@ -309,10 +313,25 @@ function specialCooldownHandler(reset) {
 //            Guard
 // ===============================
 
-function guardHandler() {
+function guardHandler(bonus) {
   let damageToGuard = dealPlayerDamage(monsterAttackValue);
+
+  if (bonus) {
+    damageToGuard *= bonus;
+  } else if (UNDEAD_SIGGURD.tracker === 7) {
+    UNDEAD_SIGGURD.tracker = 0;
+    damageToGuard = 36;
+  } else if (BONEVAULT_DEMON.tracker === 3) {
+    BONEVAULT_DEMON.tracker = 0;
+    damageToGuard = 18;
+  }
+
   let damageBlocked = Math.round(Math.random() * damageToGuard);
   damageBlocked += totalDexterity;
+
+  // ITEM - Tomb Guardian: +3 Guard Bonus
+  damageBlocked += isItemAttuned(TOMB_GUARDIAN, 0);
+
   let damageTaken = damageToGuard - damageBlocked;
 
   if (damageBlocked <= damageToGuard) {

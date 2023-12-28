@@ -823,7 +823,6 @@ function endBattlefieldEvent() {
     currentRoom.roomName === "Fallen Warriors' Vale" &&
     currentRoom.contents.monsters.length <= 0
   ) {
-
     setTimeout(newRoomAnimation, 1000);
     setTimeout(() => {
       playMusic(currentRoom.music);
@@ -887,15 +886,19 @@ const LOCKED_ROOM = {
 function lockedRoomHandler(room) {
   let monsters = currentRoom.contents.monsters;
   let items = currentRoom.contents.items;
+  let lockedDoor;
 
   if (currentRoom.roomName === "Bonevault") {
-    let room = Math.floor(Math.random() * 5) + 1;
+    lockedDoor = Math.floor(Math.random() * 5) + 1;
+    lockedDoor = 5; // TESTING
     console.log(`Bonevault Room: ${room}`);
+  } else {
+    lockedDoor = room;
   }
 
   items.push(WHISPERING_SKULL, LESSER_SOULSTONE);
 
-  switch (room) {
+  switch (lockedDoor) {
     case 1:
       //writeToLog() room details
       getItem("BONEVAULT");
@@ -903,16 +906,6 @@ function lockedRoomHandler(room) {
       break;
 
     case 2:
-      monsters.push(SKELETAL_SOLDIER, ARMORED_SKELETON, SKELETAL_SOLDIER);
-      getItem("BONEVAULT");
-      setTimeout(() => {
-        setRoomSummary();
-        startBattle();
-      }, 3000);
-      //writeToLog() room details
-      break;
-
-    case 3:
       monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
       getItem("BONEVAULT");
       setTimeout(() => {
@@ -921,7 +914,7 @@ function lockedRoomHandler(room) {
       }, 3000); //writeToLog() room details
       break;
 
-    case 4:
+    case 3:
       monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
       getItem("BONEVAULT");
       setTimeout(() => {
@@ -930,13 +923,35 @@ function lockedRoomHandler(room) {
       }, 3000); //writeToLog() room details
       break;
 
-    case 5:
+    case 4:
       monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, BONE_TITAN);
       getItem("BONEVAULT");
       setTimeout(() => {
         setRoomSummary();
         startBattle();
       }, 3000); //writeToLog() room details
+      break;
+
+    case 5:
+      if (BONEVAULT_DEMON.boss !== "DEFEATED") {
+        BONEVAULT_DEMON.boss = "FIGHTING";
+        monsters.push(BONEVAULT_DEMON);
+        items.push(TOMB_GUARDIAN);
+        playMusic(passedDanger);
+        setTimeout(newRoomAnimation, 3000);
+        setTimeout(() => {
+          let bonevaultDemonImage =
+            "styles/images/backgrounds/event-rooms/bonevault-demon.jpg";
+          renderBackground(bonevaultDemonImage);
+          startBattle();
+        }, 4500);
+        setRoomSummary();
+        //writeToLog() room details
+      } else {
+        //writeToLog() room details
+        getItem("BONEVAULT");
+        setTimeout(renderRoomSummaryModal, 3000);
+      }
       break;
 
     case "Molten Door":
@@ -946,10 +961,11 @@ function lockedRoomHandler(room) {
         BLAZING_SKELETON,
         BLAZING_SKELETON
       );
+      // styles/images/backgrounds/event-rooms/molten-door-room.jpg !FIX! add room
       setTimeout(() => {
         setRoomSummary();
         startBattle();
-      }, 3000); 
+      }, 3000);
       //writeToLog() room details
       break;
 
@@ -959,7 +975,7 @@ function lockedRoomHandler(room) {
       setTimeout(() => {
         setRoomSummary();
         startBattle();
-      }, 3000); 
+      }, 3000);
       //writeToLog() room details
       break;
 

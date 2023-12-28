@@ -735,17 +735,16 @@ const GLORYFORGED_BLADE = {
 
 const BONE_AMALGAM = {
   name: "Bone Amalgam",
-  // image: "styles/images/items/gloryforged.jpg",
+  image: "styles/images/items/bone-amalgam.jpg",
   type: "MAGIC",
   rarity: "Epic",
-  effect: `When attuned to this item, you gain temporary HP after defeating a creature with bones.`,
+  effect: `When attuned to this item, you gain temporary HP after defeating a creature with bones. You can accumulate up to 30 temporary HP.`,
   tracker: 0,
   function: () => {
-    // BONE_AMALGAM_STATUS_EFFECT.function();
+    BONE_AMALGAM_STATUS_EFFECT.function();
   },
   unequip: () => {
-    // BONE_AMALGAM_STATUS_EFFECT.duration = null;
-    // BONE_AMALGAM_STATUS_EFFECT.statusDuration = null;
+    BONE_AMALGAM_STATUS_EFFECT.duration = null;
   },
 };
 
@@ -757,19 +756,20 @@ function boneAmalgamAddHitPoints() {
       monster !== SHADE || 
       monster !== CRYPT_CRAWLER ||
       monster !== BROODMOTHER) &&
-      BONE_AMALGAM.tracker <= 50
+      BONE_AMALGAM.tracker <= 30
       ) {
-        let tempHitPoints = monster.skulls * 5;
+        let tempHitPoints = monster.skulls * 3;
         BONE_AMALGAM.tracker += tempHitPoints;
         console.log(`Temp Hit Points added ${tempHitPoints}`);
-        if (BONE_AMALGAM.tracker > 50) {
-          BONE_AMALGAM.tracker = 50;
+        if (BONE_AMALGAM.tracker > 30) {
+          BONE_AMALGAM.tracker = 30;
         }
       }
   }
  }
 
  function boneAmalgamUseHitPoints(damage) {
+  const randomBoneBreak = Math.round(Math.random() * 1);
   let remainingDamage;
 
   if (
@@ -778,17 +778,23 @@ function boneAmalgamAddHitPoints() {
   ) {
     if (BONE_AMALGAM.tracker >= damage) {
       BONE_AMALGAM.tracker -= damage;
-      console.log(`Temp Hit Points used! ${damage}`);
-      console.log(`Tracker ${BONE_AMALGAM.tracker}`);
+      // console.log(`Temp Hit Points used! ${damage}`);
+      // console.log(`Tracker ${BONE_AMALGAM.tracker}`);
       remainingDamage = 0;
     } else {
       remainingDamage = damage - BONE_AMALGAM.tracker;
       BONE_AMALGAM.tracker = 0; // Set temporaryHitPoints to 0, as they are all used up
-      console.log(`Temp Hit Points used! ${temporaryHitPoints}`);
-      console.log(`Remaining Damage after using Temp Hit Points: ${remainingDamage}`);
-      console.log(`Tracker ${BONE_AMALGAM.tracker}`);
+      // console.log(`Temp Hit Points used! ${temporaryHitPoints}`);
+      // console.log(`Remaining Damage after using Temp Hit Points: ${remainingDamage}`);
+      // console.log(`Tracker ${BONE_AMALGAM.tracker}`);
     }
-    // writeToLogItem(LOG_ITEM, "YES", BONE_AMALGAM);
+
+    if (randomBoneBreak === 1) {
+      soundEffectHandler(boneBreak7);
+    } else {
+      soundEffectHandler(boneBreak8);
+    }
+    writeToLogItem(LOG_ITEM, "YES", BONE_AMALGAM);
   } else {
     remainingDamage = damage;
   }
@@ -891,10 +897,30 @@ const SPINE_OF_THE_NECROMANCER = {
   },
 };
 
+// Bonevault Demon
+
+const TOMB_GUARDIAN = {
+  name: "Tomb Guardian",
+  image: "styles/images/items/tomb-guardian.jpg",
+  type: "MAGIC",
+  rarity: "Epic",
+  effect:
+  "While attuned to this item your Guard Bonus is increased by 3.",
+  tracker: 0,
+  function: () => {
+    // add shield soundEffect? hero.soundEffects.guard = sound;
+    // writeToLogItem(LOG_ITEM, null, TOMB_GUARDIAN);
+    return 3; 
+  },
+  unequip: () => {
+    // removed shield soundEffect? hero.soundEffects.guard = old sound;
+  },
+};
+
 // Frozen Door
 
 const BONECHILL_AMULET = {
-  name: "Bone Chill Amulet",
+  name: "Bonechill Amulet",
   image: "styles/images/items/bonechill-amulet.jpg",
   type: "MAGIC",
   rarity: "Rare",
@@ -917,7 +943,7 @@ const BONECHILL_AMULET = {
 
 const HELLFIRE_CHARM = {
   name: "Hellfire Charm",
-  // image: "styles/images/items/bonechill-amulet.jpg",
+  image: "styles/images/items/hellfire-charm.jpg",
   type: "MAGIC",
   rarity: "Rare",
   effect:

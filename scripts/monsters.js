@@ -298,10 +298,44 @@ const BONE_TITAN = {
   },
 };
 
+let BONEVAULT_DEMON = {
+  name: "Bonevault Demon",
+  boss: "Bonevault Demon",
+  type: "UNDEAD",
+  skulls: 7,
+  soundEffects: { // !FIX! Add sound effects 
+    spawn: boneCrunchCrack1,
+    attack: fleshHit5,
+    death: boneBreak8,
+    ability: boneBreak7,
+  },
+  tracker: 0,
+  function: () => {
+    if (BONEVAULT_DEMON.tracker === 3) {
+      writeToLogMonster(LOG_MONSTER_ABILITY, "YES", BONEVAULT_DEMON);
+    }
+  }
+};
+
+function endBonevaultDemonBoss() {
+  if (
+    currentRoom.roomName === "Bonevault" &&
+    BONEVAULT_DEMON.boss === "FIGHTING" &&
+    currentRoom.contents.monsters.length <= 0
+  ) {
+    BONEVAULT_DEMON.boss = "DEFEATED";
+    setTimeout(newRoomAnimation, 1000);
+    setTimeout(() => {
+      playMusic(currentRoom.music);
+      renderBackground(currentRoom.backgroundImage);
+    }, 2500);
+    togglePlayerControls();
+  }
+}
+
 const FLOOD_OF_BONES = {
   name: "Flood of Bones",
   boss: "Flood of Bones",
-  // image: "styles/images/monsters/flood-of-bones.jpg",
   type: "UNDEAD",
   skulls: 9,
   soundEffects: {
@@ -316,6 +350,22 @@ const FLOOD_OF_BONES = {
   },
 };
 
+function endFloodOfBonesBoss() {
+  if (
+    currentRoom.roomName === "Flood of Bones" &&
+    currentRoom.contents.monsters.length <= 0
+  ) {
+    setTimeout(newRoomAnimation, 1000);
+    setTimeout(() => {
+      let defeatedFloodImage =
+            "styles/images/backgrounds/tier-one/flood-of-bones-defeated.jpg";
+      playMusic(threeThousandYearsOld);
+      renderBackground(defeatedFloodImage);
+    }, 2500);
+    togglePlayerControls();
+  }
+}
+
 const UNDEAD_SIGGURD = {
   name: "Death Knight Siggurd",
   image: "styles/images/monsters/undead-siggurd.jpg",
@@ -326,8 +376,9 @@ const UNDEAD_SIGGURD = {
     attack: severMetalHit2,
     death: armorMetalClanksToTheGround,
   },
+  tracker: 0,
   function: () => {
-    undeadSiggurdSmite = "ACTIVE";
+    //
   },
 };
 
@@ -341,7 +392,10 @@ const UNDEAD_LIHETH = {
     attack: severMetalHit2,
     death: armorMetalClanksToTheGround,
   },
+  tracker: 0,
   function: () => {
+    UNDEAD_LIHETH.tracker = 0;
+
     monsterHealthBar.value = +monsterHealthBar.value + 30;
     currentMonsterHealth += 30;
 
@@ -365,6 +419,7 @@ const UNDEAD_RIVEN = {
     death: armorMetalClanksToTheGround,
   },
   attackCounter: 0,
+  tracker: 0,
   function: () => {
     function undeadRivenAttacks() {
       let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
@@ -669,8 +724,11 @@ function checkForMonsters() {
   // Removes Monster From Rooms Monsters Arry
   monster.shift();
 
-  // Used to end Fallen Warriors' Vale battle
+  // Used to change the room after defeating a boss
   endBattlefieldEvent();
+  endBonevaultDemonBoss();
+  endFloodOfBonesBoss();
+
 
   // Checks for more monsters
   if (monster.length > 0) {
@@ -817,28 +875,43 @@ function monsterAbilityHandler(monster) {
         }
         break;
 
+      case BONEVAULT_DEMON:
+        if (BONEVAULT_DEMON.tracker === 3) {
+          console.log("Bonevault Demon Ability Called!");
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+        } else {
+          BONEVAULT_DEMON.tracker++;
+          BONEVAULT_DEMON.function();
+        }
+        break;
+
       case UNDEAD_RIVEN:
-        if (actionCounter % 5 === 0) {
+        if (UNDEAD_RIVEN.tracker === 7) {
           console.log("Undead Riven Ability Called!");
           UNDEAD_RIVEN.attackCounter = 3;
           UNDEAD_RIVEN.function();
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+        } else {
+          UNDEAD_RIVEN.tracker++;
         }
-        writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         break;
 
       case UNDEAD_LIHETH:
-        if (actionCounter % 7 === 0) {
+        if (UNDEAD_LIHETH.tracker === 10) {
           console.log("Undead Liheth Ability Called!");
           UNDEAD_LIHETH.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+        } else {
+          UNDEAD_LIHETH.tracker++;
         }
         break;
 
       case UNDEAD_SIGGURD:
-        if (actionCounter % 5 === 0) {
+        if (UNDEAD_SIGGURD.tracker === 7) {
           console.log("Undead Siggurd Ability Called!");
-          UNDEAD_SIGGURD.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+        } else {
+          UNDEAD_SIGGURD.tracker++;
         }
         break;
 
