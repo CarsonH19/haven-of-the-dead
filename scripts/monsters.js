@@ -248,10 +248,9 @@ const BLAZING_SKELETON = {
     ability: magicSpellFire1,
   },
   function: () => {
-    //writeToLog() erupts in flames on death
+    //writeToLog() erupts in flames on death !FIX!
     damagePlayer(15);
     damageMonster(currentMonsterHealth);
-    showDamage(15, "MONSTER");
     BURNED.function(3);
     updatePlayerTrackers();
     soundEffectHandler(BLAZING_SKELETON, "MONSTER ABILITY");
@@ -359,7 +358,7 @@ function endFloodOfBonesBoss() {
     setTimeout(() => {
       let defeatedFloodImage =
             "styles/images/backgrounds/tier-one/flood-of-bones-defeated.jpg";
-      playMusic(threeThousandYearsOld);
+      playMusic(pileOfBones);
       renderBackground(defeatedFloodImage);
     }, 2500);
     togglePlayerControls();

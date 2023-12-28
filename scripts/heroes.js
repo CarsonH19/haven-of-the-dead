@@ -36,7 +36,8 @@ function paladinHolySmite() {
 function paladinRadiantAura() {
   if (
     currentRoom.contents.monsters[0].type === "UNDEAD" &&
-    heroChoice === "PALADIN"
+    heroChoice === "PALADIN" &&
+    currentMonsterHealth > 0
   ) {
     setTimeout(() => {
       damageMonster(radiantAuraTracker);

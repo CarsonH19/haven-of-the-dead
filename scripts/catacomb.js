@@ -4,10 +4,10 @@
 
 let catacombRooms = [
   {
-    roomName: "Bonevault",
-    description:
-      "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
-    backgroundImage: "styles/images/backgrounds/event-rooms/bonevault.jpg",
+    roomName: "Frozen Door",
+    description: `A locked frozen door exudes a chilling aura, icy tendrils creeping outward. Magical frost emanates, freezing the air. Delicate icicles dangle, hinting at the frigid mysteries concealed beyond.`,
+    backgroundImage:
+      "styles/images/backgrounds/event-rooms/frozen-locked-door.jpg",
     music: pileOfBones,
     contents: {
       monsters: [],
@@ -16,10 +16,10 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Bonevault",
-    description:
-      "Bonevaults stand as silent repositories of forgotten horrors. Their entrance, locked and foreboding, guards secrets untold. Within, an unsettling stillness hints at the ominous events awaiting those who dare to unlock the mysteries concealed within.",
-    backgroundImage: "styles/images/backgrounds/event-rooms/bonevault.jpg",
+    roomName: "Molten Door",
+    description: `A sealed door glows with red-hot intensity, its molten metal surface emanating heat. The distant crackle of flames hints at a fiery abyss beyond it.`,
+    backgroundImage:
+      "styles/images/backgrounds/event-rooms/red-hot-locked-door.jpg",
     music: pileOfBones,
     contents: {
       monsters: [],

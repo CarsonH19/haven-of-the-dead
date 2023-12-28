@@ -864,6 +864,7 @@ const LOCKED_ROOM = {
   functionOne: () => {
     if (inventoryItems.includes(SKELETON_KEY)) {
       LOCKED_ROOM.summary = `You used a Skeleton Key to unlock the ${currentRoom.roomName}.`;
+      setTimeout(soundEffectHandler(doorSecretPassage1), 1500);
       useConsumable("Skeleton Key"); // removes item from inventory
       lockedRoomHandler(currentRoom.roomName);
       setRoomSummary();
@@ -890,46 +891,72 @@ function lockedRoomHandler(room) {
 
   if (currentRoom.roomName === "Bonevault") {
     lockedDoor = Math.floor(Math.random() * 5) + 1;
-    lockedDoor = 5; // TESTING
-    console.log(`Bonevault Room: ${room}`);
+    console.log(`Bonevault Room: ${lockedDoor}`);
   } else {
     lockedDoor = room;
   }
 
+  // Items you get in every room
   items.push(WHISPERING_SKULL, LESSER_SOULSTONE);
 
   switch (lockedDoor) {
     case 1:
       //writeToLog() room details
       getItem("BONEVAULT");
-      setTimeout(renderRoomSummaryModal, 3000);
+      playMusic(edgeOfFear);
+      setTimeout(newRoomAnimation, 3000);
+      setTimeout(() => {
+        let bonevaultRoom =
+          "styles/images/backgrounds/event-rooms/bonevault-room-1.jpg";
+        renderBackground(bonevaultRoom);
+      }, 4500);
+      setTimeout(renderRoomSummaryModal, 5000);
+      setRoomSummary();
       break;
 
     case 2:
       monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON);
       getItem("BONEVAULT");
+      playMusic(edgeOfFear);
+      setTimeout(newRoomAnimation, 3000);
       setTimeout(() => {
-        setRoomSummary();
+        let bonevaultRoom =
+          "styles/images/backgrounds/event-rooms/bonevault-room-2.jpg";
+        renderBackground(bonevaultRoom);
         startBattle();
-      }, 3000); //writeToLog() room details
+      }, 4500);
+      setRoomSummary();
+      //writeToLog() room details
       break;
 
     case 3:
       monsters.push(ARMORED_SKELETON, ARMORED_SKELETON, ARMORED_SKELETON);
       getItem("BONEVAULT");
+      playMusic(edgeOfFear);
+      setTimeout(newRoomAnimation, 3000);
       setTimeout(() => {
-        setRoomSummary();
+        let bonevaultRoom =
+          "styles/images/backgrounds/event-rooms/bonevault-room-3.jpg";
+        renderBackground(bonevaultRoom);
         startBattle();
-      }, 3000); //writeToLog() room details
+      }, 4500);
+      setRoomSummary();
+      //writeToLog() room details
       break;
 
     case 4:
       monsters.push(SKELETAL_SOLDIER, SKELETAL_SOLDIER, BONE_TITAN);
       getItem("BONEVAULT");
+      playMusic(edgeOfFear);
+      setTimeout(newRoomAnimation, 3000);
       setTimeout(() => {
-        setRoomSummary();
+        let bonevaultDemonImage =
+          "styles/images/backgrounds/event-rooms/bonevault-room-3.jpg";
+        renderBackground(bonevaultDemonImage);
         startBattle();
-      }, 3000); //writeToLog() room details
+      }, 4500);
+      setRoomSummary();
+      //writeToLog() room details
       break;
 
     case 5:
@@ -940,6 +967,7 @@ function lockedRoomHandler(room) {
         playMusic(passedDanger);
         setTimeout(newRoomAnimation, 3000);
         setTimeout(() => {
+          roomNameElement.textContent = `Tomb of the Demon`;
           let bonevaultDemonImage =
             "styles/images/backgrounds/event-rooms/bonevault-demon.jpg";
           renderBackground(bonevaultDemonImage);
@@ -948,9 +976,17 @@ function lockedRoomHandler(room) {
         setRoomSummary();
         //writeToLog() room details
       } else {
-        //writeToLog() room details
         getItem("BONEVAULT");
-        setTimeout(renderRoomSummaryModal, 3000);
+        playMusic(edgeOfFear);
+        setTimeout(newRoomAnimation, 3000);
+        setTimeout(() => {
+          let bonevaultRoom =
+            "styles/images/backgrounds/event-rooms/bonevault-room-1.jpg";
+          renderBackground(bonevaultRoom);
+        }, 4500);
+        setTimeout(renderRoomSummaryModal, 5000);
+        setRoomSummary();
+        //writeToLog() room details
       }
       break;
 
@@ -959,23 +995,36 @@ function lockedRoomHandler(room) {
         BLAZING_SKELETON,
         BLAZING_SKELETON,
         BLAZING_SKELETON,
+        BLAZING_SKELETON,
         BLAZING_SKELETON
       );
-      // styles/images/backgrounds/event-rooms/molten-door-room.jpg !FIX! add room
+      items.push(HELLFIRE_CHARM);
+      playMusic(edgeOfFear);
+      setTimeout(newRoomAnimation, 3000);
       setTimeout(() => {
-        setRoomSummary();
+        roomNameElement.textContent = `The Crematorium`;
+        let moltenDoorImage =
+          "styles/images/backgrounds/event-rooms/molten-door-room.jpg";
+        renderBackground(moltenDoorImage);
         startBattle();
-      }, 3000);
+      }, 4500);
+      setRoomSummary();
       //writeToLog() room details
       break;
 
     case "Frozen Door":
       items.push(BONECHILL_AMULET);
-      monsters.push(DRAUGR, DRAUGR, DRAUGR);
+      monsters.push(DRAUGR, DRAUGR, DRAUGR, DRAUGR);
+      playMusic(edgeOfFear);
+      setTimeout(newRoomAnimation, 3000);
       setTimeout(() => {
-        setRoomSummary();
+        roomNameElement.textContent = `The Frigid Tomb`;
+        let frozenDoorImage =
+          "styles/images/backgrounds/event-rooms/frozen-door-room.jpg";
+        renderBackground(frozenDoorImage);
         startBattle();
-      }, 3000);
+      }, 4500);
+      setRoomSummary()
       //writeToLog() room details
       break;
 

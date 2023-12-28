@@ -589,7 +589,7 @@ function renderCurrentRoom(currentRoom) {
   // Renders Event Modal
   if (currentRoom.contents.events) {
     if (currentRoom.contents.events === LOCKED_ROOM) {
-      LOCKED_ROOM.description = `${currentRoom.description} Do you wish to unlock it?`;
+      LOCKED_ROOM.description = `${currentRoom.description}`; // !FIX! doesn't need to be here
     }
 
     setTimeout(() => {

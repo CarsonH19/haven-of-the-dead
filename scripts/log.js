@@ -484,8 +484,8 @@ function writeToLogMonster(logType, narrate, dataOne) {
         newEntry.textContent = `Liheth's chants resonate through the throne room and a surge of unholy fire envelops her, mending her wounds.";`;
       } else if (monsterName === "Death Knight Siggurd") {
         newEntry.textContent = `Siggurd's greatsword bursts into emerald flames, ablaze with malicious ferocity.`;
-      } else if (monsterName = `Bonevault Demon`) {
-        newEntry.textContent = `The Bonevault Demon, a nightmarish behemoth, rises menacingly. Sinewy muscles coil, and its massive claws gleam ominously as it prepares to unleash a devastating swipe.`
+      } else if ((monsterName = `Bonevault Demon`)) {
+        newEntry.textContent = `The Bonevault Demon, a nightmarish behemoth, rises menacingly. Sinewy muscles coil, and its massive claws gleam ominously as it prepares to unleash a devastating swipe.`;
       }
       break;
   }
@@ -1436,6 +1436,13 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     case LOG_MISC_DESCRIPTION:
       newEntry.textContent = `${event.description}`;
       narration = newEntry.textContent;
+
+      if (event === LOCKED_ROOM) {
+        // setTimeout(() => {
+          const lockedDoor = `Do you wish to unlock it?`;
+          writeToNarrative(lockedDoor, "PAUSE");
+        // }, 1000);
+      }
       break;
 
     case LOG_MISC_OPTION_ONE:
@@ -1645,7 +1652,7 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
       } else if (dataOne === BONECHILL_AMULET) {
         newEntry.textContent = `The Bonechil Amulet glows with an icy aura, a freezing chill permeates the air, sapping the strength of the ${currentRoom.contents.monsters[0].name}, leaving them weakened.`;
       } else if (dataOne === HELLFIRE_CHARM) {
-        newEntry.textContent = `The Hellfire Charm ignites, flames burst forth with infernal fury, consuming the ${currentRoom.contents.monsters[0].name} in searing torment.`
+        newEntry.textContent = `The Hellfire Charm ignites, flames burst forth with infernal fury, consuming the ${currentRoom.contents.monsters[0].name} in searing torment.`;
       } else if (dataOne === BONE_AMALGAM) {
         newEntry.textContent = `The Bone Amalgam forms a barrier of bone around you, blocking the ${currentRoom.contents.monsters[0].name}'s attack.`;
       }
