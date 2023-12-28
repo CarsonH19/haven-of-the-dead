@@ -69,7 +69,6 @@ function playerAttackHandler(smite) {
   }
 
   damageMonster(totalDamage);
-  updatePlayerTrackers();
 }
 
 function checkForCritcalHit() {
@@ -92,6 +91,9 @@ function damageMonster(damage) {
   if (damage > 0) {
     damageFlashAnimation("MONSTER");
   }
+
+  showDamage(damage, "PLAYER");
+  updatePlayerTrackers();
 }
 
 function dealMonsterDamage(damage) {
@@ -121,8 +123,8 @@ function monsterAttackHandler(bonus) {
     monsterToPlayerDamage = 24;
   }
 
-  // ITEM: Bonechill Amulet - reduces Draugr attacks
-  monsterToPlayerDamage *= isItemAttuned(BONECHILL_AMULET, 1);
+  // ITEM: Hellfire Charm - Erupts dealing 15 damage
+  isItemAttuned(HELLFIRE_CHARM, null);
 
   // ITEM: Mist Veil Cloak - Chance to evade attacks.
   monsterToPlayerDamage *= isItemAttuned(MIST_VEIL_CLOAK, 1);
@@ -155,14 +157,21 @@ function monsterAttackHandler(bonus) {
 }
 
 function dealPlayerDamage(damage) {
-  const dealtDamage = Math.round(Math.random() * damage);
+  let dealtDamage = Math.round(Math.random() * damage);
 
   if (dexterityBoonRank === 4) {
     playerToMonsterDamage += totalDexterity;
   }
 
-  if (damageDealt <= 0) {
-    damageDealt = 0;
+  if (dealtDamage <= 0) {
+    dealtDamage = 0;
+  }
+
+  // ITEM - Hellfire Charm - Accumulates damage received
+  if (attunedItems.includes(HELLFIRE_CHARM)) {
+    HELLFIRE_CHARM.tracker += dealtDamage;
+    console.log(dealtDamage);
+    console.log(HELLFIRE_CHARM.tracker);
   }
 
   return dealtDamage;
@@ -177,6 +186,13 @@ function damagePlayer(damage) {
   if (AEGIS_STATUS_EFFECT.duration !== null) {
     damage = 0;
   }
+
+  // Bone Amalgam Use Temp HP
+  if (attunedItems.includes(BONE_AMALGAM)) {
+    damage = boneAmalgamUseHitPoints(damage);
+    console.log(`Returned Damage ${damage}`)
+  }
+  
 
   if (currentPlayerHealth - damage <= 0) {
     playerHealthBar.value = 0;
@@ -262,8 +278,8 @@ function specialCooldownHandler(reset) {
       specialCooldownCounter = 21;
     }
 
-    // ITEM: HALLOWED HOURGLASS - Reduces Cooldown by 1
-    isItemAttuned(HALLOWED_HOURGLASS, null);
+    // ITEM: HALLOWED HOURGLASS - Reduces Cooldown by 2
+    specialCooldownCounter -= isItemAttuned(HALLOWED_HOURGLASS, 0);
   }
 
   if (specialCooldownCounter > 0 && !reset) {

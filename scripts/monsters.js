@@ -41,22 +41,6 @@ const CRYPT_CRAWLER = {
   },
 };
 
-const COFFIN_SPIDER = {
-  name: "Coffin Spider",
-  type: "BEAST",
-  skulls: 3,
-  soundEffects: {
-    spawn: spiderDaddyLong2,
-    attack: spiderBiteFang3,
-    death: alienSpiderWeb3,
-    ability: spiderWebShoot7,
-  },
-  function: () => {
-    WEBBED.function(5);
-    soundEffectHandler(COFFIN_SPIDER, "MONSTER ABILITY");
-  },
-};
-
 const BROODMOTHER = {
   name: "Broodmother",
   image: "styles/images/monsters/broodmother.jpg",
@@ -139,17 +123,6 @@ const FIENDSWORN_CULTIST = {
   },
 };
 
-const DEMON = {
-  name: "Demon",
-  type: "DEMON",
-  skulls: 7,
-  soundEffects: {
-    spawn: "",
-    attack: "",
-    death: "",
-  },
-  function: () => {},
-};
 
 // ===============================
 //           Skeletons
@@ -279,6 +252,7 @@ const BLAZING_SKELETON = {
     damagePlayer(15);
     damageMonster(currentMonsterHealth);
     showDamage(15, "MONSTER");
+    BURNED.function(3);
     updatePlayerTrackers();
     soundEffectHandler(BLAZING_SKELETON, "MONSTER ABILITY");
   },
@@ -649,8 +623,12 @@ function renderMonsterStatBlock(monster) {
   monsterSkullElement.textContent = monster.skulls;
 
   monsterSkullLevel(monster.skulls);
-  // ITEM: Sunstone - Weakens Evil Spirits
-  isItemAttuned(SUNSTONE, 0);
+
+  // ITEM: Sunstone - Reduces the Attack & Max HP of Evil Spirits
+  isItemAttuned(SUNSTONE, null);
+  // ITEM: Bonechill Amulet - Reduces the Attack & Max HP of Humans & Beasts
+  isItemAttuned(BONECHILL_AMULET, null);
+
   setMonsterHealth(monsterMaxHealth);
   togglePlayerControls();
 }
@@ -679,19 +657,23 @@ function startBattle() {
 }
 
 function checkForMonsters() {
+  const monster = currentRoom.contents.monsters;
   // Checks for Legionnaire / Adds to Legion Tracker
-  if (currentRoom.contents.monsters[0] === LEGIONNAIRE) {
+  if (monster[0] === LEGIONNAIRE) {
     legionTracker++;
   }
 
+  // ITEM - Bone Amalgum: Adds temporary HP
+  boneAmalgamAddHitPoints();
+
   // Removes Monster From Rooms Monsters Arry
-  currentRoom.contents.monsters.shift();
+  monster.shift();
 
   // Used to end Fallen Warriors' Vale battle
   endBattlefieldEvent();
 
   // Checks for more monsters
-  if (currentRoom.contents.monsters.length > 0) {
+  if (monster.length > 0) {
     startBattle();
     // playerControlsTimeout(2000);
   } else {
@@ -714,7 +696,7 @@ function monsterAbilityHandler(monster) {
         break;
 
       case BLAZING_SKELETON:
-        if (currentMonsterHealth <= 5) {
+        if (currentMonsterHealth <= 7) {
           console.log("Blazing Skeleton Ability Called!");
           BLAZING_SKELETON.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");

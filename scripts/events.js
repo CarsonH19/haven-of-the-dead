@@ -949,17 +949,17 @@ function lockedRoomHandler(room) {
       setTimeout(() => {
         setRoomSummary();
         startBattle();
-      }, 3000); // currentRoom.contents.items.push();
+      }, 3000); 
       //writeToLog() room details
       break;
 
     case "Frozen Door":
-      items.push(CHILLBREAKER_BAND);
+      items.push(BONECHILL_AMULET);
       monsters.push(DRAUGR, DRAUGR, DRAUGR);
       setTimeout(() => {
         setRoomSummary();
         startBattle();
-      }, 3000); // currentRoom.contents.items.push();
+      }, 3000); 
       //writeToLog() room details
       break;
 

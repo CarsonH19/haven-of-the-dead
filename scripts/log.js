@@ -1640,6 +1640,10 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         }
       } else if (dataOne === CHARM_OF_HEALING) {
         newEntry.textContent = `The Charm of Healing shimmers with arcane energy and you recover 5HP.`;
+      } else if (dataOne === BONECHILL_AMULET) {
+        newEntry.textContent = `The Bonechil Amulet glows with an icy aura, a freezing chill permeates the air, sapping the strength of the ${currentRoom.contents.monsters[0].name}, leaving them weakened.`;
+      } else if (dataOne === HELLFIRE_CHARM) {
+        newEntry.textContent = `The Hellfire Charm ignites, flames burst forth with infernal fury, consuming the ${currentRoom.contents.monsters[0].name} in searing torment.`
       }
 
       break;

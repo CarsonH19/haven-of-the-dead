@@ -233,7 +233,7 @@ const RITUAL_BLADE = {
   type: "MAGIC",
   rarity: "Common",
   effect:
-    "While attuned to this item your Attack increases by 3 when fighting beasts and humans.",
+    "While attuned to this item your Attack increases by 3 when fighting human and beast type enemies.",
   function: () => {
     if (
       currentRoom.contents.monsters[0].type === "BEAST" ||
@@ -618,7 +618,6 @@ const SOULREAVER = {
 
 const ETHEREAL_CROWN = {
   name: "Ethereal Crown",
-  description: "",
   image: "styles/images/items/ethereal-crown.jpg",
   type: "MAGIC",
   rarity: "Epic",
@@ -641,7 +640,6 @@ const ETHEREAL_CROWN = {
 
 const SOUL_JAR = {
   name: "Soul Jar",
-  description: "",
   image: "styles/images/items/souljar.jpg",
   type: "MAGIC",
   rarity: "Epic",
@@ -665,7 +663,6 @@ const SOUL_JAR = {
 
 const CRIMSON_OFFERING = {
   name: "Crimson Offering",
-  description: "",
   image: "styles/images/items/crimson-offering.jpg",
   type: "MAGIC",
   rarity: "Epic",
@@ -681,7 +678,6 @@ const CRIMSON_OFFERING = {
 
 const DARKGUARD_TRINKET = {
   name: "Darkguard Trinket",
-  description: "",
   image: "styles/images/items/darkguard-trinket.jpg",
   type: "MAGIC",
   rarity: "Epic",
@@ -693,20 +689,18 @@ const DARKGUARD_TRINKET = {
 
 const HALLOWED_HOURGLASS = {
   name: "Hallowed Hourglass",
-  description: "",
   image: "styles/images/items/hourglass.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect:
     "While attuned to this item your special ability cooldown is reduced by 2 actions.",
   function: () => {
-    specialCooldownCounter -= 2;
+    return 2;
   },
 };
 
 const AEGIS_OF_THE_FALLEN = {
   name: "Aegis of the Fallen",
-  description: "",
   image: "styles/images/items/aegis.jpg",
   type: "MAGIC",
   rarity: "Epic",
@@ -719,11 +713,14 @@ const AEGIS_OF_THE_FALLEN = {
       AEGIS_OF_THE_FALLEN.cooldown = 15;
     }
   },
+  unequip: () => {
+    AEGIS_STATUS_EFFECT.duration = null;
+    AEGIS_STATUS_EFFECT.statusDuration = null;
+  }
 };
 
-let GLORYFORGED_BLADE = {
+const GLORYFORGED_BLADE = {
   name: "Gloryforged Blade",
-  description: "",
   image: "styles/images/items/gloryforged.jpg",
   type: "MAGIC",
   rarity: "Epic",
@@ -736,9 +733,74 @@ let GLORYFORGED_BLADE = {
   },
 };
 
+const BONE_AMALGAM = {
+  name: "Bone Amalgam",
+  // image: "styles/images/items/gloryforged.jpg",
+  type: "MAGIC",
+  rarity: "Epic",
+  effect: `When attuned to this item, you gain temporary HP after defeating a creature with bones.`,
+  tracker: 0,
+  function: () => {
+    // BONE_AMALGAM_STATUS_EFFECT.function();
+  },
+  unequip: () => {
+    // BONE_AMALGAM_STATUS_EFFECT.duration = null;
+    // BONE_AMALGAM_STATUS_EFFECT.statusDuration = null;
+  },
+};
+
+function boneAmalgamAddHitPoints() {
+  let monster = currentRoom.contents.monsters[0];
+  if (attunedItems.includes(BONE_AMALGAM)) {
+    if ((monster !== GRUDGE ||
+      monster !== HAUNTING_SPIRIT ||
+      monster !== SHADE || 
+      monster !== CRYPT_CRAWLER ||
+      monster !== BROODMOTHER) &&
+      BONE_AMALGAM.tracker <= 50
+      ) {
+        let tempHitPoints = monster.skulls * 5;
+        BONE_AMALGAM.tracker += tempHitPoints;
+        console.log(`Temp Hit Points added ${tempHitPoints}`);
+        if (BONE_AMALGAM.tracker > 50) {
+          BONE_AMALGAM.tracker = 50;
+        }
+      }
+  }
+ }
+
+ function boneAmalgamUseHitPoints(damage) {
+  let remainingDamage;
+
+  if (
+    attunedItems.includes(BONE_AMALGAM) &&
+    BONE_AMALGAM.tracker > 0
+  ) {
+    if (BONE_AMALGAM.tracker >= damage) {
+      BONE_AMALGAM.tracker -= damage;
+      console.log(`Temp Hit Points used! ${damage}`);
+      console.log(`Tracker ${BONE_AMALGAM.tracker}`);
+      remainingDamage = 0;
+    } else {
+      remainingDamage = damage - BONE_AMALGAM.tracker;
+      BONE_AMALGAM.tracker = 0; // Set temporaryHitPoints to 0, as they are all used up
+      console.log(`Temp Hit Points used! ${temporaryHitPoints}`);
+      console.log(`Remaining Damage after using Temp Hit Points: ${remainingDamage}`);
+      console.log(`Tracker ${BONE_AMALGAM.tracker}`);
+    }
+    // writeToLogItem(LOG_ITEM, "YES", BONE_AMALGAM);
+  } else {
+    remainingDamage = damage;
+  }
+
+  return remainingDamage;
+}
+
 // ===============================
 //       LOCKED ROOM ITEMS
 // ===============================
+
+// Bonevault 
 
 const RIBCAGE_DEFENDER = {
   name: "Ribcage Defender",
@@ -762,35 +824,26 @@ const SKULLBREAKER_HELM = {
   type: "MAGIC",
   rarity: "Rare",
   effect:
-    "While attuned to this item your max health is increased by 20HP and you gain +1 Strength.",
+    "While attuned to this item your Attack increases by 5 when your enemy is below 30% their max HP.",
   stats: {
-    strength: 1,
+    strength: 0,
     dexterity: 0,
     faith: 0,
     attack: 0,
   },
+  tracker: null,
   function: () => {
-    baseHealth += 20;
+    let thirtyPercent = Math.round(monsterMaxHealth * 0.3);
+    if (thirtyPercent > currentMonsterHealth && SKULLBREAKER_HELM.tracker === null) {
+      SKULLBREAKER_HELM.stats.attack = 5;
+      updateTotalStats();
+    } else {
+      SKULLBREAKER_HELM.tracker = null;
+      SKULLBREAKER_HELM.stats.attack = 0;
+    }
   },
   unequip: () => {
-    baseHealth -= 20;
-  },
-};
 
-const BONECHILL_AMULET = {
-  name: "Bone Chill Amulet",
-  description: "",
-  image: "styles/images/items/bonechill-amulet.jpg",
-  type: "MAGIC",
-  rarity: "Rare",
-  effect:
-    "While attuned to this item you have resistance against draugr attacks.",
-  function: () => {
-    if (currentRoom.contents.monsters[0] === DRAUGR) {
-      return 0.5;
-    } else {
-      return 1;
-    }
   },
 };
 
@@ -835,6 +888,48 @@ const SPINE_OF_THE_NECROMANCER = {
     dexterity: -1,
     faith: -1,
     attack: 9,
+  },
+};
+
+// Frozen Door
+
+const BONECHILL_AMULET = {
+  name: "Bone Chill Amulet",
+  image: "styles/images/items/bonechill-amulet.jpg",
+  type: "MAGIC",
+  rarity: "Rare",
+  effect:
+  "While attuned to this item the max HP and Attack of human and beast type enemies are reduced.",
+  function: () => {
+    if (
+      currentRoom.contents.monsters[0].type === "HUMANOID" ||
+      currentRoom.contents.monsters[0].type === "BEAST" 
+    ) {
+      monsterMaxHealth = monsterMaxHealth - 15;
+      monsterAttackValue = monsterAttackValue - 3;
+      soundEffectHandler(iceCrackFreeze);
+      writeToLogItem(LOG_ITEM, "YES", BONECHILL_AMULET);
+    }
+  },
+};
+
+// Molten Door
+
+const HELLFIRE_CHARM = {
+  name: "Hellfire Charm",
+  // image: "styles/images/items/bonechill-amulet.jpg",
+  type: "MAGIC",
+  rarity: "Rare",
+  effect:
+  "While attuned to this item it will burst into flames dealing 15 damage to your enemies after you take an accumulative 30 damage.",
+  tracker: 0,
+  function: () => {
+    if (HELLFIRE_CHARM.tracker >= 30) {
+      HELLFIRE_CHARM.tracker = 0;
+      damageMonster(15);
+      soundEffectHandler(magicSpellFire1);
+      writeToLogItem(LOG_ITEM, "YES", HELLFIRE_CHARM);
+    } 
   },
 };
 
@@ -1632,7 +1727,6 @@ let wispItems = [
 let bonevaultItems = [
   RIBCAGE_DEFENDER,
   SKULLBREAKER_HELM,
-  BONECHILL_AMULET,
   RATTLEBONE_WHISTLE,
   SPINE_OF_THE_NECROMANCER,
 ];
