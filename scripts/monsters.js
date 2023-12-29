@@ -249,11 +249,10 @@ const BLAZING_SKELETON = {
   },
   function: () => {
     //writeToLog() erupts in flames on death !FIX!
-    damagePlayer(15);
     damageMonster(currentMonsterHealth);
     BURNED.function(3);
-    updatePlayerTrackers();
     soundEffectHandler(BLAZING_SKELETON, "MONSTER ABILITY");
+    writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
   },
 };
 
@@ -297,7 +296,7 @@ const BONE_TITAN = {
   },
 };
 
-let BONEVAULT_DEMON = {
+const BONEVAULT_DEMON = {
   name: "Bonevault Demon",
   boss: "Bonevault Demon",
   type: "UNDEAD",
@@ -697,7 +696,7 @@ function startBattle() {
   setTimeout(() => {
     renderMonsterStatBlock(currentRoom.contents.monsters[0]);
     // Checks for Paladin Passive
-    setTimeout(paladinRadiantAura, 500);
+    setTimeout(paladinRadiantAura, 1500);
     // ITEM: Rattlebone Whistle - Chance for humanoids to flee.
     isItemAttuned(RATTLEBONE_WHISTLE);
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
@@ -748,14 +747,6 @@ function monsterAbilityHandler(monster) {
         if (currentMonsterHealth <= 15) {
           console.log("Bone Titan Ability Called!");
           BONE_TITAN.function();
-          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
-        }
-        break;
-
-      case BLAZING_SKELETON:
-        if (currentMonsterHealth <= 7) {
-          console.log("Blazing Skeleton Ability Called!");
-          BLAZING_SKELETON.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         }
         break;

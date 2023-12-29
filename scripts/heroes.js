@@ -43,7 +43,7 @@ function paladinRadiantAura() {
       damageMonster(radiantAuraTracker);
       isGameOver();
       writeToLogHero(LOG_RADIANT_AURA, "NO");
-    }, 1000);
+    }, 500);
   }
 }
 

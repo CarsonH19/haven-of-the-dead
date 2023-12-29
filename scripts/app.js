@@ -101,7 +101,7 @@ function dealMonsterDamage(damage) {
 
   // Checks for Echoes of Victory - +20% damage
   if (ECHOES_OF_VICTORY.duration !== null) {
-    damageDealt = Math.round(damageDealt * 1.20);
+    damageDealt = Math.round(damageDealt * 1.2);
   }
 
   // Priestess Burning Devotion logic
@@ -117,6 +117,7 @@ function monsterAttackHandler(bonus) {
   const monster = currentRoom.contents.monsters[0];
   let monsterToPlayerDamage = dealPlayerDamage(monsterAttackValue);
 
+  // Monster Ability Logic
   if (bonus) {
     monsterToPlayerDamage *= bonus;
   } else if (UNDEAD_SIGGURD.tracker === 7) {
@@ -125,6 +126,12 @@ function monsterAttackHandler(bonus) {
   } else if (BONEVAULT_DEMON.tracker === 3) {
     BONEVAULT_DEMON.tracker = 0;
     monsterToPlayerDamage = 18;
+  } else if (
+    currentRoom.contents.monsters[0] === BLAZING_SKELETON &&
+    currentMonsterHealth <= 7
+  ) {
+    monsterToPlayerDamage = 15;
+    BLAZING_SKELETON.function();
   }
 
   // ITEM: Hellfire Charm - Erupts dealing 15 damage
@@ -194,9 +201,8 @@ function damagePlayer(damage) {
   // Bone Amalgam Use Temp HP
   if (attunedItems.includes(BONE_AMALGAM)) {
     damage = boneAmalgamUseHitPoints(damage);
-    console.log(`Returned Damage ${damage}`)
+    console.log(`Returned Damage ${damage}`);
   }
-  
 
   if (currentPlayerHealth - damage <= 0) {
     playerHealthBar.value = 0;

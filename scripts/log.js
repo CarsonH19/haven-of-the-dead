@@ -841,6 +841,12 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     case LOG_TRAP_DESCRIPTION:
       newEntry.textContent = `${event.description} How will overcome this danger?`;
       narration = newEntry.textContent;
+
+      // Question Logic
+      if (event.eventType === "TRAP") {
+        const question = `How will you overcome this danger?`;
+        writeToNarrative(question, "PAUSE");
+      } 
       break;
 
     // ===============================
@@ -1246,6 +1252,22 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     case LOG_NPC_DESCRIPTION:
       newEntry.textContent = `${event.description}`;
       narration = newEntry.textContent;
+
+      // Question Logic
+      if (event === IVAN_THE_SCOUNDREL) {
+        const question = `Will you release him, facing the lurking horrors that await?`;
+        writeToNarrative(question, "PAUSE");
+      } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
+        const question = `Will you wield Ivan's Cache Key to unveil the treasures within?`;
+        writeToNarrative(question, "PAUSE");
+      } else if (
+        event === GRAVEROBBER_EARVER ||
+        event === GRAVEROBBER_EARVER_EVENT_TWO ||
+        event === GRAVEROBBER_EARVER_EVENT_THREE
+      ) {
+        const question = `Will you join Graverobber Earver and desecrate the grave?`;
+        writeToNarrative(question, "PAUSE");
+      }
       break;
 
     case LOG_NPC_DIALOGUE:
@@ -1437,11 +1459,22 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       newEntry.textContent = `${event.description}`;
       narration = newEntry.textContent;
 
+      // Question Logic
       if (event === LOCKED_ROOM) {
-        // setTimeout(() => {
-          const lockedDoor = `Do you wish to unlock it?`;
-          writeToNarrative(lockedDoor, "PAUSE");
-        // }, 1000);
+        const question = `Do you wish to unlock it?`;
+        writeToNarrative(question, "PAUSE");
+      } else if (event === COFFIN_EVENT) {
+        const question = `Do you wish to open it?`;
+        writeToNarrative(question, "PAUSE");
+      } else if (event === LAUGHING_COFFIN_EVENT) {
+        const question = `Will you pay coin to enter or risk the ire of its patrons.`;
+        writeToNarrative(question, "PAUSE");
+      } else if (event === CRIMSON_COVENANT) {
+        const question = `Will you join their ritual and offer your blood?`;
+        writeToNarrative(question, "PAUSE");
+      } else if (event === BATTLEFIELD) {
+        const question = `Do you wish to enter the battlefield?`;
+        writeToNarrative(question, "PAUSE");
       }
       break;
 

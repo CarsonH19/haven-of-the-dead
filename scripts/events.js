@@ -278,7 +278,7 @@ const IVAN_THE_SCOUNDREL = {
   eventType: "NPC",
   image: "styles/images/npcs/ivan-the-scoundrel.jpg",
   description: `
-  Trapped, a scoundrel ensnared in a spider's web begs, "Release me, and treasures hidden in these catacombs shall be yours." Dare you free the scoundrel, confronting the unknown horrors lurking nearby?`,
+  Trapped, a scoundrel ensnared in a spider's web begs, You there! Release me, and my hidden treasure shall be yours. You have my word, just get me out of this web before it returns!"`,
   summary: "",
   optionOne: "Release",
   optionTwo: "Leave",
@@ -321,7 +321,7 @@ const IVAN_THE_SCOUNDREL = {
 const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   name: "Ivan the Scoundrel",
   eventType: "NPC",
-  description: `Stumbling upon Ivan the Scoundrel's secret cache, the hidden bounty awaits. A glinting lock beckons. Will you wield Ivan's Cache Key to unveil the treasures within?`,
+  description: `Stumbling upon Ivan the Scoundrel's secret cache, the hidden bounty awaits. A glinting lock beckons.`,
   optionOne: "Open",
   optionTwo: "Leave",
   functionOne: () => {
@@ -480,7 +480,7 @@ const FORSAKEN_COMMANDER = {
   name: "Forsaken Commander",
   eventType: "NPC",
   image: "styles/images/npcs/commander.jpg",
-  description: `A spectral commander materializes before you. "Valiant adventurer, my legion walk these depths, bound by the Baron's unholy curse. Please, free them from the chains of undeath."`,
+  description: `A spectral commander materializes before you. "Valiant adventurer, my legion walk these depths, bound by an unholy curse to fight for the Baron. Please, will you help me free them from the chains of undeath."`,
   optionOne: "Accept",
   optionTwo: "Refuse",
   tracker: null,
@@ -650,7 +650,7 @@ const COFFIN_EVENT = {
   name: "Coffin Raider",
   eventType: "MISC",
   description:
-    "You find a large ornately decorated coffin. Something valuable may be hidden inside.  What will you do?",
+    "You find a large ornately decorated coffin. Something valuable may be hidden inside.",
   optionOne: "Open",
   optionTwo: "Ignore",
   functionOne: () => {
@@ -691,7 +691,7 @@ const COFFIN_EVENT = {
 const LAUGHING_COFFIN_EVENT = {
   name: "The Laughing Coffin",
   eventType: "MISC",
-  description: `The Laughing Coffin tavern, sanctuary for underworld denizens. Amid dim-lit haze, dubious characters eye you. Will you pay coin or risk the ire of its wicked patrons.`,
+  description: `The Laughing Coffin tavern, sanctuary for underworld denizens. Amid dim-lit haze, dubious characters eye you.`,
   summary: "",
   optionOne: "Pay",
   optionTwo: "Refuse",
@@ -729,7 +729,7 @@ const CRIMSON_COVENANT = {
   name: "Crimson Covenant",
   eventType: "MISC",
   description:
-    "Before you stands a figure in blood-stained robes, encircled by other members of a ritual. With chilling devotion, they cut their wrists, offering crimson tributes. Echoing chants fill the catacomb, a haunting invitation. Will you join their ritual?",
+    "Before you stands a figure in blood-stained robes, encircled by other members of a ritual. With chilling devotion, they cut their wrists, offering crimson tributes. Echoing chants fill the catacomb, a haunting invitation.",
   summary: "",
   optionOne: "Join",
   optionTwo: "Refuse",
@@ -785,8 +785,8 @@ const CRIMSON_COVENANT = {
 const BATTLEFIELD = {
   name: "Forsaken Battlefield",
   eventType: "MISC",
-  description: `Fallen Warriors' Vale, a cavernous passage unveiling the remnants of a battlefield within the catacomb's depths. Countless fallen warriors lie scattered across the expanse. There will be danger ahead. Do you wish to proceed?`,
-  optionOne: "Proceed",
+  description: `Fallen Warriors' Vale, a cavernous passage unveiling the remnants of a battlefield within the catacomb's depths. Countless fallen warriors lie scattered across the expanse.`,
+  optionOne: "Enter",
   optionTwo: "Return",
   blade: null,
   functionOne: () => {
