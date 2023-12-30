@@ -548,7 +548,7 @@ const HEADLESS_SKELETON = {
 
 const FORSAKEN_COMMANDER_STATS = {
   name: "Forsaken Commander",
-  image: "styles/images/npcs/forasken-commander.jpg",
+  image: "styles/images/npcs/commander.jpg",
   type: "UNDEAD",
   skulls: 6,
   soundEffects: {

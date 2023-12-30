@@ -995,6 +995,7 @@ function renderRoomSummaryModal() {
 }
 
 function setRoomSummary() {
+  roomSummaryInformation = null;
   roomSummaryInformation = JSON.parse(JSON.stringify(currentRoom));
 }
 

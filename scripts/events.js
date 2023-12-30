@@ -486,21 +486,27 @@ const FORSAKEN_COMMANDER = {
   tracker: null,
   functionOne: () => {
     FORSAKEN_COMMANDER.tracker = "ACTIVE";
+    FORSAKEN_COMMANDER.summary = `You agree to aid the Forsaken Commander, promising to defeat his cursed legion and give them the eternal rest they deserve.`;
     currentRoom.contents.items.push(WAR_TORN_BANNER);
     setTimeout(renderRoomSummaryModal, 5000);
     setRoomSummary();
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
+    FORSAKEN_COMMANDER.summary = `You refused to aid the Forsaken Commander, in a rage the commander and several of his legionnaires attacked you.`;
     currentRoom.contents.monsters.push(
+      LEGIONNAIRE,
       LEGIONNAIRE,
       LEGIONNAIRE,
       FORSAKEN_COMMANDER_STATS
     );
     currentRoom.contents.items.push(AEGIS_OF_THE_FALLEN);
-    setRoomSummary();
-    startBattle();
+    playMusic(passedDanger);
+    setTimeout(() => {
+      startBattle();
+    }, 2000);
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
+    setRoomSummary();
   },
 };
 
@@ -528,9 +534,10 @@ const GRERVIL_THE_BODILESS = {
   description: `Emerging from beneath a pile of bones, the talking skull, Grervil, beckons with ghostly whispers. "Adventurer, I am but a voice trapped in this hollowed cranium. My body wanders, lost in the depths of the catacomb. Take me with you, and aid me in finding my lost body."`,
   optionOne: "Take",
   optionTwo: "Leave",
+  tracker: null,
   functionOne: () => {
     if (attunedItems.includes(AMULET_OF_WHISPERS)) {
-      grervilTracker === "ACTIVE";
+      GRERVIL_THE_BODILESS.tracker = "ACTIVE";
       GRERVIL_THE_BODILESS.summary =
         "Grervil the Bodiless joins you on your journey through the catacomb, in search of his wandering body.";
 
@@ -547,14 +554,13 @@ const GRERVIL_THE_BODILESS = {
             fadeOutAnimation(monsterImage);
 
             setTimeout(() => {
-              checkForMonsters();
               monsterContainer.style.display = "none";
               monsterImage.style.display = "none";
             }, 2000);
-          }, 4000);
+          }, 5000);
 
           useConsumable("Grervil's Head"); // removes item from inventory
-          setControlsInterval("PAUSE", 5000);
+          setControlsInterval("PAUSE", 9000);
           writeToLogEvent(LOG_NPC_DIALOGUE, "YES", GRERVILS_HEAD);
           setTimeout(() => {
             renderEvent(GRERVILS_BODY_EVENT);
@@ -569,7 +575,7 @@ const GRERVIL_THE_BODILESS = {
     }
   },
   functionTwo: () => {
-    grervilTracker === "ACTIVE";
+    GRERVIL_THE_BODILESS.tracker = "ACTIVE";
     GRERVIL_THE_BODILESS.summary = `You refused to aid Grervil find his wandering body, abandoning the talking skull where he was found.`;
 
     const randomUndeadRoom = findRandomUndeadRoom();
@@ -590,14 +596,18 @@ const GRERVILS_BODY_EVENT = {
   optionOne: "Skeleton Key",
   optionTwo: "Wisp",
   functionOne: () => {
+    GRERVILS_BODY_EVENT.summary = `At last, you reunited Grervil with his skeletal body. As a gesture of gratitude, he bestowed a Skeleton Key on to you before departing.`;
+    GRERVIL_THE_BODILESS.tracker = "FINISHED";
     currentRoom.contents.items.push(SKELETON_KEY);
-    grervilTracker === "FINISHED";
     setRoomSummary();
+    checkForMonsters();
   },
   functionTwo: () => {
+    GRERVILS_BODY_EVENT.summary = `At last, you reunited Grervil with his skeletal body. As a gesture of gratitude, he bestowed a Wisp on to you before departing.`;
+    GRERVIL_THE_BODILESS.tracker = "FINISHED";
     getItem("WISP");
-    grervilTracker === "FINISHED";
     setRoomSummary();
+    checkForMonsters();
   },
 };
 

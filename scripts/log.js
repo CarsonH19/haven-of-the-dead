@@ -1418,7 +1418,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === FORSAKEN_COMMANDER) {
         newEntry.textContent = `The spectral commander's mournful visage brightens. 'A noble soul, break their chains and usher the forsaken into the eternal rest they deserve.`;
       } else if (event === GRERVIL_THE_BODILESS) {
-        newEntry.textContent = `Grervil's gratitude echoes as you pick up the talking skull. "Thanks, seeker. Onward to reclaim my body, and the catacomb's secrets shall unfold in your favor."`;
+        newEntry.textContent = `Grervil's gratitude echoes as you pick up the talking skull. "Thank you, seeker. Onward to reclaim my body."`;
       }
 
       // } else if (event === SCHOLAR_HENDRA) {

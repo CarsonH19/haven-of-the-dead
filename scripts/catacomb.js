@@ -9,9 +9,9 @@ let catacombRooms = [
     backgroundImage: "styles/images/backgrounds/tier-one/sneakshade-sanctum.jpg",
     music: unfinishedBusiness,
     contents: {
-      monsters: [],
+      monsters: [DECREPIT_SKELETON],
       items: [],
-      events: ITEM_ROBBERY,
+      events: null,
     },
   },
 ];
