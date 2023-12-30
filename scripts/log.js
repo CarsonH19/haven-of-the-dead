@@ -1276,7 +1276,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (dataOne === "IVAN" && event === SPIKE_PITFALL) {
         newEntry.textContent = `The distant sound of Ivan's the Scoundrel's mocking laughter meets your ear. "Farewell, betrayer! Enjoy the abyss!"`;
       } else if (dataOne === "IVAN" && event === GAS_CHAMBER) {
-        newEntry.textContent = `Ivan's the Scoundrel's voice taunts you from behind the sealed door, "You thought you could escape my wrath? Embrace of oblivion, betrayer. Your demise will be as silent as your treachery."`;
+        newEntry.textContent = `Ivan's the Scoundrel's voice taunts you from behind the sealed door, "You thought you could escape my wrath? Your demise will be as silent as your treachery."`;
       } else if (dataOne === GRERVILS_HEAD) {
         newEntry.textContent = `Ah, at last, you've stumbled upon my long-lost bones! I am whole once more, and in your debt.`;
       } else if (dataOne === "IVANS CACHE AMBUSH") {

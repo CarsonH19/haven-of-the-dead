@@ -104,7 +104,6 @@ function dealMonsterDamage(damage) {
   damageDealt *= isItemAttuned(RELIC_OF_RETRIBUTION, 1);
   console.log(damageDealt);
 
-
   // Checks for Echoes of Victory - +20% damage
   if (ECHOES_OF_VICTORY.duration !== null) {
     damageDealt = Math.round(damageDealt * 1.2);
@@ -314,15 +313,12 @@ function specialCooldownHandler(reset) {
     specialCooldownCounter -= isItemAttuned(HALLOWED_HOURGLASS, 0);
   }
 
-
-
   if (specialCooldownCounter > 0 && !reset) {
     specialCooldownCounter--;
     special.textContent = `Cooldown: ${specialCooldownCounter}`;
   }
 
   if (specialCooldownCounter === 0) {
-
     if (heroChoice === "PALADIN") {
       special.textContent = `Holy Smite`;
     } else if (heroChoice === "ROGUE") {
@@ -979,17 +975,17 @@ function renderRoomSummaryModal() {
   }
 
   // Adds items in current room to inventory
-  console.log("ADDING ITEMS?")
+  console.log("ADDING ITEMS?");
   if (currentRoom.contents.items.length > 0) {
     for (let i = 0; i < currentRoom.contents.items.length; i++) {
-        let currentItem = currentRoom.contents.items[i];
-        addItemToInventory(currentItem);
-        console.log(`${currentItem} added to inventory`);
+      let currentItem = currentRoom.contents.items[i];
+      addItemToInventory(currentItem);
+      console.log(`${currentItem} added to inventory`);
     }
 
     // Clear the items array in the current room
     currentRoom.contents.items = [];
-}
+  }
 
   updatePlayerTrackers();
 }
@@ -1031,17 +1027,19 @@ function renderContinueButton() {
 // ===============================
 
 attackBtn.addEventListener("click", () => {
-  actionCounter++;
+  if (monsterContainer.style.display === "flex") {
+    actionCounter++;
 
-  playerAttackHandler();
-  specialCooldownHandler();
+    playerAttackHandler();
+    specialCooldownHandler();
 
-  if (currentMonsterHealth <= 0) {
-    isGameOver();
-  } else {
-    setTimeout(monsterAttackHandler, 1200);
-    setTimeout(isGameOver, 1300);
-    updatePlayerTrackers();
+    if (currentMonsterHealth <= 0) {
+      isGameOver();
+    } else {
+      setTimeout(monsterAttackHandler, 1200);
+      setTimeout(isGameOver, 1300);
+      updatePlayerTrackers();
+    }
   }
 
   setControlsInterval("PAUSE", 1800);

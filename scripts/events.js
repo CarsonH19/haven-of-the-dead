@@ -278,7 +278,7 @@ const IVAN_THE_SCOUNDREL = {
   eventType: "NPC",
   image: "styles/images/npcs/ivan-the-scoundrel.jpg",
   description: `
-  Trapped, a scoundrel ensnared in a spider's web begs, You there! Release me, and my hidden treasure shall be yours. You have my word, just get me out of this web before it returns!"`,
+  Trapped, a scoundrel ensnared in a spider's web begs, You there! Release me, and my hidden treasure shall be yours. You have my word, just get me out of this web!"`,
   summary: "",
   optionOne: "Release",
   optionTwo: "Leave",
@@ -803,7 +803,7 @@ const CRIMSON_COVENANT = {
   name: "Crimson Covenant",
   eventType: "MISC",
   description:
-    "Before you stands a figure in blood-stained robes, encircled by other members of a ritual. With chilling devotion, they cut their wrists, offering crimson tributes. Echoing chants fill the catacomb, a haunting invitation.",
+    "Before you stands a figure in blood-stained robes, encircled by other members of a ritual. With chilling devotion, they cut their wrists, offering crimson tributes. Echoing chants fill the catacomb, a haunting invitation to join.",
   summary: "",
   optionOne: "Join",
   optionTwo: "Refuse",
@@ -832,7 +832,6 @@ const CRIMSON_COVENANT = {
       }
 
       damagePlayer(50);
-      damageFlashAnimation();
       setRoomSummary();
       CRIMSON_COVENANT.summary =
         "You participated in the ritual, spilling your blood alongside the other members of the Crimson Covenant.";

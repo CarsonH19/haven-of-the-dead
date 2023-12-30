@@ -347,7 +347,7 @@ let tierTwoRooms = [
     },
   },
   {
-    roomName: "Skullcarver's Passage",
+    roomName: "Titan's Tunnel",
     description:
       "Skullcarver's Passage winds through the heart of bone. A colossal bone titan looms, its presence carving fear into the marrow of adventurers.",
     backgroundImage: "styles/images/backgrounds/tier-one/skullcarvers-pass.jpg",
@@ -359,7 +359,7 @@ let tierTwoRooms = [
     },
   },
   {
-    roomName: "Skull Wall Pass",
+    roomName: "Skull-wall Pass",
     description:
       "Within Skull Wall Pass, the scent of ancient bones fills the chamber. Skeletal soldiers stand sentinel, their bony fingers poised on ghostly blades. An armored skeleton, a relic of forgotten battles, awaits with an eerie stillness.",
     summary: "",
@@ -419,7 +419,7 @@ let tierTwoRooms = [
     music: deepTunnels,
     contents: {
       monsters: [GNAWER, GNAWER, GNAWER, GNAWER],
-      items: [],
+      items: [WICKED_WISP],
       events: null,
     },
   },
@@ -499,7 +499,7 @@ let tierTwoRooms = [
     music: hauntedOutpost,
     contents: {
       monsters: [GRUDGE, HAUNTING_SPIRIT],
-      items: [],
+      items: [CURIOUS_WISP],
       events: null,
     },
   },
@@ -1559,7 +1559,16 @@ function createNewRoom() {
   }
 
   function getRoomMonsters(roomType) {
-    let numberOfEnemies = Math.floor(Math.random() * 6);
+    let numberOfEnemies;
+
+    // Get Threat Level
+    if (roomCounter >= 90) {
+      numberOfEnemies = 6;
+    } else if (roomCounter >= 70) {
+      numberOfEnemies = 5;
+    } else if (roomCounter >= 50) {
+      numberOfEnemies = 4;
+    } 
 
     skeletonMonsters = [
       SKELETAL_SOLDIER,
@@ -1569,11 +1578,10 @@ function createNewRoom() {
       BONE_TITAN,
     ];
     let ghostMonsters = [HAUNTING_SPIRIT, HAUNTING_SPIRIT, GRUDGE];
-    let cultistMonsters = [CULTIST, FIENDSWORN_CULTIST];
+    let cultistMonsters = [CULTIST, CULTIST, FIENDSWORN_CULTIST];
     let scoundrelMonsters = [SCOUNDREL];
     let gnawerMonsters = [GNAWER];
     let spiderMonsters = [
-      CRYPT_CRAWLER,
       CRYPT_CRAWLER,
       CRYPT_CRAWLER,
       BROODMOTHER,

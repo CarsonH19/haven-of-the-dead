@@ -92,7 +92,7 @@ function rogueUmbralAssault() {
   }, 500);
 
   specialCooldownHandler("RESET");
-  setControlsInterval("PAUSE", 1800);
+  setControlsInterval("PAUSE", 2200);
   setTimeout(updatePlayerTrackers, 1450);
 }
 
