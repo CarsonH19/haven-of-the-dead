@@ -28,6 +28,11 @@ function playerAttackHandler(smite) {
   // ITEM: Blazing Candle - all attacks are critical hits
   criticalHit += statusEffectHandler(BLAZING_CANDLE);
 
+  //ITEM: Unholy Effigy - Reduces cooldown on Crit
+  isItemAttuned(UNHOLY_EFFIGY);
+
+  console.log(`Critical Hit Chance: ${criticalHit}`);
+
   // Smite Critical Hit
   if (criticalHit >= 20 && smite > 1 && playerToMonsterDamage > 0) {
     totalDamage = Math.round(
@@ -68,7 +73,7 @@ function playerAttackHandler(smite) {
 }
 
 function checkForCritcalHit() {
-  return Math.floor(Math.random() * 20) + calculateCritHitChance() + 1;
+  return Math.floor(Math.random() * 20) + calculateCritHitChance();
 }
 
 function calculateTotalCritDamage() {
@@ -88,15 +93,17 @@ function damageMonster(damage) {
     damageFlashAnimation("MONSTER");
   }
 
-  showDamage(damage, "PLAYER");
   updatePlayerTrackers();
 }
 
 function dealMonsterDamage(damage) {
   let damageDealt = Math.round(Math.random() * damage);
 
+  console.log(damageDealt);
   // ITEM: Relic of Retribution - +25% damage against undead
   damageDealt *= isItemAttuned(RELIC_OF_RETRIBUTION, 1);
+  console.log(damageDealt);
+
 
   // Checks for Echoes of Victory - +20% damage
   if (ECHOES_OF_VICTORY.duration !== null) {
@@ -243,6 +250,7 @@ function damagePlayer(damage) {
 }
 
 function showDamage(damage, source, critical) {
+  console.log(`showDamage Called`);
   const damageDealtElement = document.getElementById("damageDealt");
   const damageReceivedElement = document.getElementById("damageReceived");
   const numbers = document.createElement("li");
@@ -306,14 +314,14 @@ function specialCooldownHandler(reset) {
     specialCooldownCounter -= isItemAttuned(HALLOWED_HOURGLASS, 0);
   }
 
+
+
   if (specialCooldownCounter > 0 && !reset) {
     specialCooldownCounter--;
-    // togglePlayerControls();
     special.textContent = `Cooldown: ${specialCooldownCounter}`;
   }
 
   if (specialCooldownCounter === 0) {
-    // togglePlayerControls();
 
     if (heroChoice === "PALADIN") {
       special.textContent = `Holy Smite`;
@@ -412,7 +420,7 @@ function potionHandler() {
 //             Flee
 // ===============================
 function fleeHandler() {
-  let fleeAttempt = Math.round(Math.random() * 10) + totalDexterity;
+  let fleeAttempt = Math.floor(Math.random() * 10) + totalDexterity;
 
   // ITEM: Ring of Skittering - Increased flee chance
   fleeAttempt += isItemAttuned(RING_OF_SKITTERING, 0);

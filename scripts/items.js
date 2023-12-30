@@ -802,7 +802,7 @@ function boneAmalgamUseHitPoints(damage) {
 
 const GEM_OF_ANGUISH = {
   name: "Gem of Anguish",
-  // image: "styles/images/items/bone-amalgam.jpg",
+  image: "styles/images/items/gem-of-anguish.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect: `While attuned to this item, you gain 1XP for each point of damage you receive.`,
@@ -813,7 +813,7 @@ const GEM_OF_ANGUISH = {
 
 const RELIC_OF_RETRIBUTION = {
   name: "Relic of Retribution",
-  // image: "styles/images/items/bone-amalgam.jpg",
+  image: "styles/images/items/relic-of-retribution.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect: `While attuned to this item, your Attack damage is increased by 25% against undead enemies.`,
@@ -822,23 +822,22 @@ const RELIC_OF_RETRIBUTION = {
     if (currentRoom.contents.monsters[0].type === "UNDEAD") {
       return 1.25;
     } else {
-      return 0;
+      return 1;
     }
   },
 };
 
 const UNHOLY_EFFIGY = {
   name: "Unholy Effigy",
-  // image: "styles/images/items/bone-amalgam.jpg",
+  image: "styles/images/items/unholy-effigy.jpg",
   type: "MAGIC",
   rarity: "Epic",
   effect: `While attuned to this item, each time you land a critical hit your special ability cooldown is reduced.`,
   tracker: 0,
   function: () => {
-    if (criticalHit === 20) {
-      return -1;
-    } else {
-      return 0;
+    if (criticalHit >= 20) {
+      specialCooldownCounter--;
+      specialCooldownHandler();
     }
   },
 };
@@ -2637,6 +2636,26 @@ function calculateFavor(itemName, operator) {
         hagFavor = favor;
       } else if (currentRoom.roomName === "Curator's Curio") {
         curatorFavor = favor;
+
+        // Remove Item From Loot Tables
+        if (beastCommonLoot.includes(itemObject)) {
+          removeItemFromLootTable(beastCommonLoot, itemObject);
+        } else if (beastRareLoot.includes(itemObject)) {
+          removeItemFromLootTable(beastRareLoot, itemObject);
+        } else if (humanoidCommonLoot.includes(itemObject)) {
+          removeItemFromLootTable(humanoidCommonLoot, itemObject);
+        } else if (humanoidRareLoot.includes(itemObject)) {
+          removeItemFromLootTable(humanoidRareLoot, itemObject);
+        } else if (undeadCommonLoot.includes(itemObject)) {
+          removeItemFromLootTable(undeadCommonLoot, itemObject);
+        } else if (undeadRareLoot.includes(itemObject)) {
+          removeItemFromLootTable(undeadRareLoot, itemObject);
+        }
+
+        function removeItemFromLootTable(lootTable, itemObject) {
+          const index = lootTable.indexOf(itemObject);
+          lootTable.splice(index, 1);
+        }
       }
 
       inventoryItems.push(itemObject);

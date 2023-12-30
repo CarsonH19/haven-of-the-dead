@@ -194,7 +194,8 @@ let totalDexterity = baseDexterity;
 let critHitChance;
 
 function calculateCritHitChance() {
-  critHitChance = totalDexterity;
+  // 5% Base Chance
+  critHitChance = totalDexterity + 1;
   return critHitChance;
 }
 
@@ -214,7 +215,8 @@ function calculateGuardBonus() {
 let fleeChance;
 
 function calculateFleeChance() {
-  fleeChance = totalDexterity;
+  // 10% Base Chance
+  fleeChance = totalDexterity + 1;
   return fleeChance;
 }
 
