@@ -724,7 +724,7 @@ const GLORYFORGED_BLADE = {
   image: "styles/images/items/gloryforged.jpg",
   type: "MAGIC",
   rarity: "Epic",
-  effect: `When attuned to this item, your attack is increased by ${gloryforgedTracker}. This blade becomes more powerful with each instance of glory found in Fallen Warriors' Vale.`,
+  effect: `While attuned to this item, your attack is increased by ${gloryforgedTracker}. This blade becomes more powerful with each instance of glory found in Fallen Warriors' Vale.`,
   stats: {
     strength: 0,
     dexterity: 0,
@@ -738,7 +738,7 @@ const BONE_AMALGAM = {
   image: "styles/images/items/bone-amalgam.jpg",
   type: "MAGIC",
   rarity: "Epic",
-  effect: `When attuned to this item, you gain temporary HP after defeating a creature with bones. You can accumulate up to 30 temporary HP.`,
+  effect: `While attuned to this item, you gain temporary HP after defeating a creature with bones. You can accumulate up to 30 temporary HP.`,
   tracker: 0,
   function: () => {
     BONE_AMALGAM_STATUS_EFFECT.function();
@@ -799,6 +799,49 @@ function boneAmalgamUseHitPoints(damage) {
 
   return remainingDamage;
 }
+
+const GEM_OF_ANGUISH = {
+  name: "Gem of Anguish",
+  // image: "styles/images/items/bone-amalgam.jpg",
+  type: "MAGIC",
+  rarity: "Epic",
+  effect: `While attuned to this item, you gain 1XP for each point of damage you receive.`,
+  function: () => {
+    // see damagePlayer() for item logic
+  },
+};
+
+const RELIC_OF_RETRIBUTION = {
+  name: "Relic of Retribution",
+  // image: "styles/images/items/bone-amalgam.jpg",
+  type: "MAGIC",
+  rarity: "Epic",
+  effect: `While attuned to this item, your Attack damage is increased by 25% against undead enemies.`,
+  tracker: 0,
+  function: () => {
+    if (currentRoom.contents.monsters[0].type === "UNDEAD") {
+      return 1.25;
+    } else {
+      return 0;
+    }
+  },
+};
+
+const UNHOLY_EFFIGY = {
+  name: "Unholy Effigy",
+  // image: "styles/images/items/bone-amalgam.jpg",
+  type: "MAGIC",
+  rarity: "Epic",
+  effect: `While attuned to this item, each time you land a critical hit your special ability cooldown is reduced.`,
+  tracker: 0,
+  function: () => {
+    if (criticalHit === 20) {
+      return -1;
+    } else {
+      return 0;
+    }
+  },
+};
 
 // ===============================
 //       LOCKED ROOM ITEMS
@@ -907,7 +950,7 @@ const TOMB_GUARDIAN = {
   tracker: 0,
   function: () => {
     // add shield soundEffect? hero.soundEffects.guard = sound;
-    // writeToLogItem(LOG_ITEM, null, TOMB_GUARDIAN);
+    // writeToLogItem(LOG_ITEM, null, TOMB_GUARDIAN); !FIX!
     return 3;
   },
   unequip: () => {
@@ -1354,19 +1397,19 @@ const WHISPERING_SKULL = {
   },
 };
 
-const SOULSHROUD_STEW = {
-  name: "Soulshroud Stew",
-  image: "styles/images/items/soulshroud-stew.jpg",
-  soundEffect: gulpingWater24,
-  type: "CONSUMABLE",
-  rarity: "Common",
-  detail: "DRINK",
-  effect: "Using this item recovers 15HP.  Additionally, you gain 30XP.",
-  function: () => {
-    healPlayer(15);
-    gainExperience(3);
-  },
-};
+// const SOULSHROUD_STEW = {
+//   name: "Soulshroud Stew",
+//   image: "styles/images/items/soulshroud-stew.jpg",
+//   soundEffect: gulpingWater24,
+//   type: "CONSUMABLE",
+//   rarity: "Common",
+//   detail: "DRINK",
+//   effect: "Using this item recovers 15HP.  Additionally, you gain 30XP.",
+//   function: () => {
+//     healPlayer(15);
+//     gainExperience(3);
+//   },
+// };
 
 const TROLLBLOOD_TONIC = {
   name: "Trollblood Tonic",
@@ -1727,7 +1770,7 @@ let rareCuratorArray = [
   FANGWEAVE_ARMOR,
 ];
 
-let epicCuratorArray = [SOUL_JAR, DARKGUARD_TRINKET, HALLOWED_HOURGLASS];
+let epicCuratorArray = [RELIC_OF_RETRIBUTION, GEM_OF_ANGUISH, UNHOLY_EFFIGY];
 
 let candleItems = [
   SOOTHING_CANDLE,
@@ -1834,29 +1877,33 @@ function isItemAttuned(item, defaultValue) {
 }
 
 function attuneItem(itemName) {
-  // itemName must be the item's string name
-  const itemObject = inventoryItems.find((inv) => inv.name === itemName);
+  if (attunedItems.length < 5) {
+    // itemName must be the item's string name
+    const itemObject = inventoryItems.find((inv) => inv.name === itemName);
 
-  // Check if the item is not already attuned
-  if (itemObject && !attunedItems.includes(itemObject)) {
-    const index = inventoryItems.indexOf(itemObject);
-    inventoryItems.splice(index, 1);
-    attunedItems.push(itemObject);
+    // Check if the item is not already attuned
+    if (itemObject && !attunedItems.includes(itemObject)) {
+      const index = inventoryItems.indexOf(itemObject);
+      inventoryItems.splice(index, 1);
+      attunedItems.push(itemObject);
 
-    if (itemObject.stats) {
-      addStatChange(itemObject);
+      if (itemObject.stats) {
+        addStatChange(itemObject);
+      }
+
+      if (itemObject.unequip) {
+        itemObject.function();
+      }
+
+      clearInventory();
+      renderInventory();
+      writeToLogItem(LOG_ATTUNE, "YES", itemName);
+    } else {
+      // Handle case where the item is already attuned
+      writeToLogItem(LOG_CANT_ATTUNE, "YES", itemName, "DUPLICATE");
     }
-
-    if (itemObject.unequip) {
-      itemObject.function();
-    }
-
-    clearInventory();
-    renderInventory();
-    writeToLogItem(LOG_ATTUNE, "YES", itemName);
   } else {
-    // Handle case where the item is already attuned
-    writeToLogItem(LOG_CANT_ATTUNE, "YES", itemName, "DUPLICATE");
+    writeToLogItem(LOG_CANT_ATTUNE, "YES", "ONLY FIVE");
   }
 }
 
@@ -2285,28 +2332,24 @@ inventoryModal.addEventListener("click", (event) => {
     }
 
     // Attuned Items Logic
-    if (event.target === buttons[i] && attunedItems.length < 5) {
-      if (slotOne.contains(event.target) && event.target === buttons[i]) {
-        removeItem(buttons[i].id);
-      }
+    if (slotOne.contains(event.target) && event.target === buttons[i]) {
+      removeItem(buttons[i].id);
+    }
 
-      if (slotTwo.contains(event.target) && event.target === buttons[i]) {
-        removeItem(buttons[i].id);
-      }
+    if (slotTwo.contains(event.target) && event.target === buttons[i]) {
+      removeItem(buttons[i].id);
+    }
 
-      if (slotThree.contains(event.target) && event.target === buttons[i]) {
-        removeItem(buttons[i].id);
-      }
+    if (slotThree.contains(event.target) && event.target === buttons[i]) {
+      removeItem(buttons[i].id);
+    }
 
-      if (slotFour.contains(event.target) && event.target === buttons[i]) {
-        removeItem(buttons[i].id);
-      }
+    if (slotFour.contains(event.target) && event.target === buttons[i]) {
+      removeItem(buttons[i].id);
+    }
 
-      if (slotFive.contains(event.target) && event.target === buttons[i]) {
-        removeItem(buttons[i].id);
-      }
-    } else {
-      writeToLogItem(LOG_CANT_ATTUNE, "YES", "ONLY FIVE");
+    if (slotFive.contains(event.target) && event.target === buttons[i]) {
+      removeItem(buttons[i].id);
     }
 
     // Misc Other Item Logic

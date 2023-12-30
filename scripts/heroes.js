@@ -92,7 +92,7 @@ function rogueUmbralAssault() {
   }, 500);
 
   specialCooldownHandler("RESET");
-  playerControlsTimeout(1500);
+  setControlsInterval("PAUSE", 1800);
   setTimeout(updatePlayerTrackers, 1450);
 }
 
@@ -244,6 +244,8 @@ function gainExperience(num) {
 
   experiencePoints += num;
 
+  console.log(`Experience Gained: ${num}`);
+  updatePlayerTrackers();
   checkForLevelUp();
 }
 

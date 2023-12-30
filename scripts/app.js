@@ -95,6 +95,9 @@ function damageMonster(damage) {
 function dealMonsterDamage(damage) {
   let damageDealt = Math.round(Math.random() * damage);
 
+  // ITEM: Relic of Retribution - +25% damage against undead
+  damageDealt *= isItemAttuned(RELIC_OF_RETRIBUTION, 1);
+
   // Checks for Echoes of Victory - +20% damage
   if (ECHOES_OF_VICTORY.duration !== null) {
     damageDealt = Math.round(damageDealt * 1.2);
@@ -200,6 +203,12 @@ function damagePlayer(damage) {
     console.log(`Returned Damage ${damage}`);
   }
 
+  // Check for Burned Condition
+  if (BURNED.duration !== null) {
+    damage = Math.round(damage * 1.25);
+  }
+
+  // Subtract from Health
   if (currentPlayerHealth - damage <= 0) {
     playerHealthBar.value = 0;
     currentPlayerHealth = 0;
@@ -208,15 +217,13 @@ function damagePlayer(damage) {
     currentPlayerHealth -= damage;
   }
 
-  // Check for Burned Condition
-  if (BURNED.duration !== null) {
-    damage = Math.round(damage * 1.25);
+  // ITEM: Gem of Anguish - Gain XP for each point of damage
+  if (isItemAttuned(GEM_OF_ANGUISH, null) !== null) {
+    let xp = damage * 0.1;
+    gainExperience(xp);
   }
 
-  if (damage > 0) {
-    damageFlashAnimation("PLAYER");
-  }
-
+  // Boss Critical Hit
   if (
     currentRoom.contents.monsters[0] === BONEVAULT_DEMON &&
     BONEVAULT_DEMON.tracker === 3
@@ -224,6 +231,10 @@ function damagePlayer(damage) {
     showDamage(damage, "MONSTER", "CRIT");
   } else {
     showDamage(damage, "MONSTER");
+  }
+
+  if (damage > 0) {
+    damageFlashAnimation("PLAYER");
   }
 
   // Rogue Passive Ability
@@ -720,20 +731,6 @@ function turnOffControls() {
   }
 }
 
-// function playerControlsTimeout(timeout) {
-//   attackBtn.disabled = true;
-//   guardBtn.disabled = true;
-//   specialBtn.disabled = true;
-//   fleeBtn.disabled = true;
-//   inventoryButton.disabled = true;
-//   potionBtn.disabled = true;
-
-//   console.log(`Player Controls Timeout: ${timeout}`);
-//   setTimeout(() => {
-//     togglePlayerControls();
-//   }, timeout);
-// }
-
 function updateRoomsCleared() {
   roomCounter++;
   roomsCleared.textContent = `Rooms Cleared: ${roomCounter}`;
@@ -869,7 +866,7 @@ function renderRoomSummaryModal() {
     roomSummaryModalTracker !== "ACTIVE"
     // roomSummaryModal.style.display === "none"
   ) {
-    console.log("renderRoomSummaryModal Called");
+    console.log("Rendering Room Summary");
     roomSummaryModalTracker = "ACTIVE";
     // Builds summary modal with currentRoom's contents.
     setTimeout(function () {
@@ -878,18 +875,18 @@ function renderRoomSummaryModal() {
 
       // Main Header
       mainHeader = document.createElement("h2");
-      mainHeader.textContent = "Room Cleared";
+      mainHeader.textContent = `${roomSummaryInformation.roomName} Cleared`;
       roomSummaryInfo.appendChild(mainHeader);
 
       // Description
-      descriptionSummaryContainer = document.createElement("div");
-      descriptionHeader = document.createElement("h4");
-      descriptionHeader.textContent = `${roomSummaryInformation.roomName}`;
-      descriptionSummaryContainer.appendChild(descriptionHeader);
-      descriptionText = document.createElement("p");
-      descriptionText.textContent = `${roomSummaryInformation.description}`;
-      descriptionSummaryContainer.appendChild(descriptionText);
-      roomSummaryInfo.appendChild(descriptionSummaryContainer);
+      // descriptionSummaryContainer = document.createElement("div");
+      // descriptionHeader = document.createElement("h4");
+      // descriptionHeader.textContent = `${roomSummaryInformation.roomName}`;
+      // descriptionSummaryContainer.appendChild(descriptionHeader);
+      // descriptionText = document.createElement("p");
+      // descriptionText.textContent = `${roomSummaryInformation.description}`;
+      // descriptionSummaryContainer.appendChild(descriptionText);
+      // roomSummaryInfo.appendChild(descriptionSummaryContainer);
 
       // Events
       if (roomInfo.events) {

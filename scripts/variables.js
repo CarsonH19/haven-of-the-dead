@@ -205,7 +205,7 @@ function calculateGuardBonus() {
   guardBonus = totalDexterity;
 
   // ITEM - Tomb Guardian: +3 Guard Bonus
-  damageBlocked += isItemAttuned(TOMB_GUARDIAN, 0);
+  guardBonus += isItemAttuned(TOMB_GUARDIAN, 0);
 
   return guardBonus;
 }
