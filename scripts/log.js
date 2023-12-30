@@ -846,7 +846,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       if (event.eventType === "TRAP") {
         const question = `How will you overcome this danger?`;
         writeToNarrative(question, "PAUSE");
-      } 
+      }
       break;
 
     // ===============================
@@ -1475,6 +1475,9 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === BATTLEFIELD) {
         const question = `Do you wish to enter the battlefield?`;
         writeToNarrative(question, "PAUSE");
+      } else if (event === ITEM_ROBBERY) {
+        const question = `Do you agree to surrender your items to the scoundrels?`;
+        writeToNarrative(question, "PAUSE");
       }
       break;
 
@@ -1509,6 +1512,10 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         }
       } else if (event === COFFIN_EVENT && dataOne === "DRAUGR") {
         newEntry.textContent = `As the lid creaks open, a frigid gust escapes, revealing a dormant Draugr. Awakening, its icy stare piercing you for disrupting its slumber.`;
+      } else if (event === ITEM_ROBBERY && dataOne === "SURRENDER") {
+        newEntry.textContent = `As you reluctantly yield, laughter echoes among the scoundrels. Mocking grins adorn their faces as they strip you of possessions. A bitter surrender, the price paid in both treasure and pride.`;
+      } else if (event === ITEM_ROBBERY && dataOne === "NOTHING") {
+        newEntry.textContent = `As you offer an empty pouch, the scoundrels, enraged, scorn your deception. Their frustration erupts into a sudden assault, blades flashing in fury.`;
       }
 
       narration = newEntry.textContent;
@@ -1523,6 +1530,8 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `You step back from the altar, rejecting the sinister invitation. The hooded figures pause. The catacomb's air tightens with an unsettling stillness. The chanting falters, and the figures regard you with an ominous silence as you descend into the catacomb.`;
       } else if (event === BATTLEFIELD) {
         newEntry.textContent = `You decide not to step into the vale, and return they way you came.`;
+      } else if (event === ITEM_ROBBERY && dataOne === "REFUSE") {
+        newEntry.textContent = `Defiance burns in your eyes as you reject their demands. The air thickens with tension, blades poised. The scoundrels grin, relishing the impending clash between audacity and avarice.`
       }
 
       narration = newEntry.textContent;
@@ -1748,6 +1757,10 @@ function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
   let newEntry = document.createElement("li");
   let narration = null;
 
+  console.log(dataOne);
+
+  console.log(dataTwo);
+
   switch (logType) {
     case LOG_OTHER:
       if (dataOne === "WISP") {
@@ -1783,6 +1796,8 @@ function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
         newEntry.textContent = `TRADE: You expend ${dataThree} and the Curator gives you the ${dataTwo.name}.`;
       } else if (dataOne === "NO FAVOR") {
         newEntry.textContent = `TRADE: You do not have enough favor for that item.`;
+      } else if (dataTwo === "ITEMS STOLEN") {
+        newEntry.textContent = `The scoundrels stole your ${dataOne}.`;
       }
       break;
   }

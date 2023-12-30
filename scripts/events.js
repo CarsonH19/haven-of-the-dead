@@ -646,6 +646,70 @@ function endTrade() {
 //          Misc. Events
 // ===============================
 
+const ITEM_ROBBERY = {
+  name: "Item Thieves",
+  image: "styles/images/monsters/scoundrel.jpg",
+  eventType: "MISC",
+  description: `Scoundrels suddenly emerge from hiding and quickly surround you, their eyes gleaming with greed. "Surrender your items, and you won't join the dead just yet." they demand, blades unsheathed.`,
+  optionOne: "Surrender",
+  optionTwo: "Refuse",
+  functionOne: () => {
+    if (inventoryItems.length > 3) {
+      ITEM_ROBBERY.summary =
+        "You surrendered to the scoundrels took what they wanted from your inventory, but left you unharmed.";
+      itemRobberyRemoval();
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "SURRENDER");
+      setTimeout(renderRoomSummaryModal, 1000);
+    } else {
+      ITEM_ROBBERY.summary =
+        "You surrendered to the soundrels, but had nothing of interest, so they attacked you anyways.";
+      currentRoom.contents.items.push(LAUGHING_COFFIN_COIN);
+      currentRoom.contents.monsters.push(
+        SCOUNDREL,
+        SCOUNDREL,
+        SCOUNDREL,
+        SCOUNDREL
+      );
+      playMusic(hiddenCapacity);
+      setTimeout(() => {
+        monsterAttackHandler();
+        POISONED.function(3);
+        startBattle();
+      }, 3000);
+      writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "NOTHING");
+    }
+    setRoomSummary();
+  },
+  functionTwo: () => {
+    ITEM_ROBBERY.summary =
+      "You refused to surrender your items to the scoundrels and a battle ensued.";
+    currentRoom.contents.items.push(LAUGHING_COFFIN_COIN);
+    currentRoom.contents.monsters.push(
+      SCOUNDREL,
+      SCOUNDREL,
+      SCOUNDREL,
+      SCOUNDREL
+    );
+    playMusic(hiddenCapacity);
+    setTimeout(() => {
+      monsterAttackHandler();
+      POISONED.function(3);
+      startBattle();
+    }, 3000);
+    setRoomSummary();
+    writeToLogEvent(LOG_MISC_OPTION_TWO, "YES", "REFUSE");
+  },
+};
+
+function itemRobberyRemoval() {
+  for (let i = 0; i < 3; i++) {
+    const randomItemIndex = Math.floor(Math.random() * inventoryItems.length);
+    const stolenItem = inventoryItems.splice(randomItemIndex, 1)[0];
+    writeToLogOther(LOG_OTHER, null, stolenItem.name, "ITEMS STOLEN");
+    console.log(stolenItem.name);
+  }
+}
+
 const COFFIN_EVENT = {
   name: "Coffin Raider",
   eventType: "MISC",
@@ -1024,7 +1088,7 @@ function lockedRoomHandler(room) {
         renderBackground(frozenDoorImage);
         startBattle();
       }, 4500);
-      setRoomSummary()
+      setRoomSummary();
       //writeToLog() room details
       break;
 
@@ -1163,14 +1227,6 @@ function renderEvent(event) {
         break;
 
       case "NPC":
-        // Render NPC Image Card
-        if (event.image) {
-          npcImageCard.style.backgroundImage = `url(${event.image})`;
-          npcImageCard.style.backgroundSize = "cover";
-          fadeInAnimation(npcImageCard);
-          npcImageCard.style.display = "block";
-        }
-
         eventButtonOne.textContent = event.optionOne;
         eventButtonTwo.textContent = event.optionTwo;
         break;
@@ -1186,6 +1242,14 @@ function renderEvent(event) {
         break;
     }
 
+    // Render Image Card
+    if (event.image) {
+      npcImageCard.style.backgroundImage = `url(${event.image})`;
+      npcImageCard.style.backgroundSize = "cover";
+      fadeInAnimation(npcImageCard);
+      npcImageCard.style.display = "block";
+    }
+
     if (
       event.eventType === "TRAP" ||
       event.eventType === "NPC" ||
@@ -1197,17 +1261,19 @@ function renderEvent(event) {
   }, 2000);
 
   // Display Event Description as Narrative
-  switch (event.eventType) {
-    case "TRAP":
-      writeToLogEvent(LOG_TRAP_DESCRIPTION, "YES");
-      break;
-    case "NPC":
-      writeToLogEvent(LOG_NPC_DESCRIPTION, "YES");
-      break;
-    case "MISC":
-      writeToLogEvent(LOG_MISC_DESCRIPTION, "YES");
-      break;
-  }
+  setTimeout(() => {
+    switch (event.eventType) {
+      case "TRAP":
+        writeToLogEvent(LOG_TRAP_DESCRIPTION, "YES");
+        break;
+      case "NPC":
+        writeToLogEvent(LOG_NPC_DESCRIPTION, "YES");
+        break;
+      case "MISC":
+        writeToLogEvent(LOG_MISC_DESCRIPTION, "YES");
+        break;
+    }
+  }, 1000);
 }
 
 // ===============================
