@@ -435,7 +435,7 @@ const LAUGHING_COFFIN_COIN = {
   type: "MISC",
   rarity: "Rare",
   effect:
-    "Carried by scoundrels, this coin grants access to the infamous Laughing Coffin Tavern here in the catacomb.",
+    "Carried by scoundrels, this coin grants access to the infamous Laughing Coffin Tavern.",
   function: () => {
     writeToLogItem(LOG_ITEM, LAUGHING_COFFIN_COIN);
   },
@@ -716,7 +716,7 @@ const AEGIS_OF_THE_FALLEN = {
   unequip: () => {
     AEGIS_STATUS_EFFECT.duration = null;
     AEGIS_STATUS_EFFECT.statusDuration = null;
-  }
+  },
 };
 
 const GLORYFORGED_BLADE = {
@@ -751,31 +751,29 @@ const BONE_AMALGAM = {
 function boneAmalgamAddHitPoints() {
   let monster = currentRoom.contents.monsters[0];
   if (attunedItems.includes(BONE_AMALGAM)) {
-    if ((monster !== GRUDGE ||
-      monster !== HAUNTING_SPIRIT ||
-      monster !== SHADE || 
-      monster !== CRYPT_CRAWLER ||
-      monster !== BROODMOTHER) &&
+    if (
+      (monster !== GRUDGE ||
+        monster !== HAUNTING_SPIRIT ||
+        monster !== SHADE ||
+        monster !== CRYPT_CRAWLER ||
+        monster !== BROODMOTHER) &&
       BONE_AMALGAM.tracker <= 30
-      ) {
-        let tempHitPoints = monster.skulls * 3;
-        BONE_AMALGAM.tracker += tempHitPoints;
-        console.log(`Temp Hit Points added ${tempHitPoints}`);
-        if (BONE_AMALGAM.tracker > 30) {
-          BONE_AMALGAM.tracker = 30;
-        }
+    ) {
+      let tempHitPoints = monster.skulls * 3;
+      BONE_AMALGAM.tracker += tempHitPoints;
+      console.log(`Temp Hit Points added ${tempHitPoints}`);
+      if (BONE_AMALGAM.tracker > 30) {
+        BONE_AMALGAM.tracker = 30;
       }
+    }
   }
- }
+}
 
- function boneAmalgamUseHitPoints(damage) {
+function boneAmalgamUseHitPoints(damage) {
   const randomBoneBreak = Math.round(Math.random() * 1);
   let remainingDamage;
 
-  if (
-    attunedItems.includes(BONE_AMALGAM) &&
-    BONE_AMALGAM.tracker > 0
-  ) {
+  if (attunedItems.includes(BONE_AMALGAM) && BONE_AMALGAM.tracker > 0) {
     if (BONE_AMALGAM.tracker >= damage) {
       BONE_AMALGAM.tracker -= damage;
       // console.log(`Temp Hit Points used! ${damage}`);
@@ -806,7 +804,7 @@ function boneAmalgamAddHitPoints() {
 //       LOCKED ROOM ITEMS
 // ===============================
 
-// Bonevault 
+// Bonevault
 
 const RIBCAGE_DEFENDER = {
   name: "Ribcage Defender",
@@ -840,7 +838,10 @@ const SKULLBREAKER_HELM = {
   tracker: null,
   function: () => {
     let thirtyPercent = Math.round(monsterMaxHealth * 0.3);
-    if (thirtyPercent > currentMonsterHealth && SKULLBREAKER_HELM.tracker === null) {
+    if (
+      thirtyPercent > currentMonsterHealth &&
+      SKULLBREAKER_HELM.tracker === null
+    ) {
       SKULLBREAKER_HELM.stats.attack = 5;
       updateTotalStats();
     } else {
@@ -848,9 +849,7 @@ const SKULLBREAKER_HELM = {
       SKULLBREAKER_HELM.stats.attack = 0;
     }
   },
-  unequip: () => {
-
-  },
+  unequip: () => {},
 };
 
 const RATTLEBONE_WHISTLE = {
@@ -904,13 +903,12 @@ const TOMB_GUARDIAN = {
   image: "styles/images/items/tomb-guardian.jpg",
   type: "MAGIC",
   rarity: "Epic",
-  effect:
-  "While attuned to this item your Guard Bonus is increased by 3.",
+  effect: "While attuned to this item your Guard Bonus is increased by 3.",
   tracker: 0,
   function: () => {
     // add shield soundEffect? hero.soundEffects.guard = sound;
     // writeToLogItem(LOG_ITEM, null, TOMB_GUARDIAN);
-    return 3; 
+    return 3;
   },
   unequip: () => {
     // removed shield soundEffect? hero.soundEffects.guard = old sound;
@@ -925,11 +923,11 @@ const BONECHILL_AMULET = {
   type: "MAGIC",
   rarity: "Rare",
   effect:
-  "While attuned to this item the max HP and Attack of human and beast type enemies are reduced.",
+    "While attuned to this item the max HP and Attack of human and beast type enemies are reduced.",
   function: () => {
     if (
       currentRoom.contents.monsters[0].type === "HUMANOID" ||
-      currentRoom.contents.monsters[0].type === "BEAST" 
+      currentRoom.contents.monsters[0].type === "BEAST"
     ) {
       monsterMaxHealth = monsterMaxHealth - 15;
       monsterAttackValue = monsterAttackValue - 3;
@@ -947,7 +945,7 @@ const HELLFIRE_CHARM = {
   type: "MAGIC",
   rarity: "Rare",
   effect:
-  "While attuned to this item it will burst into flames dealing 15 damage to your enemies after you take an accumulative 30 damage.",
+    "While attuned to this item it will burst into flames dealing 15 damage to your enemies after you take an accumulative 30 damage.",
   tracker: 0,
   function: () => {
     if (HELLFIRE_CHARM.tracker >= 30) {
@@ -955,7 +953,7 @@ const HELLFIRE_CHARM = {
       damageMonster(15);
       soundEffectHandler(magicSpellFire1);
       writeToLogItem(LOG_ITEM, "YES", HELLFIRE_CHARM);
-    } 
+    }
   },
 };
 
@@ -1009,7 +1007,7 @@ const CACHE_KEY = {
 const GRERVILS_HEAD = {
   name: "Grervil's Head",
   description: "",
-  image: "styles/images/items/grervils-skull.jpg",
+  image: "styles/images/npcs/grervil.jpg",
   type: "MISC",
   rarity: "Rare",
   effect: "Head of the talking skull, Grervil.",
@@ -1158,9 +1156,9 @@ const ROTBANE_FERN = {
   soundEffect: chewCrackersMouth,
   function: () => {
     if (DISEASED.duration !== null) {
-      let randomNumber = Math.floor(Math.random() * 5) + 1;
+      let randomNumber = Math.floor(Math.random() * 3) + 1;
 
-      if (randomNumber >= 8) {
+      if (randomNumber >= 3) {
         DISEASED.duration = null;
         DISEASED.statusDuration = null;
 
@@ -1185,9 +1183,9 @@ const WITCHFIRE_ORCHID = {
   soundEffect: chewCrackersMouth,
   function: () => {
     if (CURSED.duration !== null) {
-      let randomNumber = Math.floor(Math.random() * 5) + 1;
+      let cureChance = Math.floor(Math.random() * 3) + 1;
 
-      if (randomNumber >= 8) {
+      if (cureChance >= 3) {
         CURSED.duration = null;
         CURSED.statusDuration = null;
         // baseDexterity += 2;
@@ -1214,9 +1212,9 @@ const EMBERTHAW_PETAL = {
   soundEffect: chewCrackersMouth,
   function: () => {
     if (CHILLED.duration !== null) {
-      let randomNumber = Math.floor(Math.random() * 5) + 1;
+      let cureChance = Math.floor(Math.random() * 3) + 1;
 
-      if (randomNumber >= 8) {
+      if (cureChance >= 3) {
         CHILLED.duration = null;
         CHILLED.statusDuration = null;
 
@@ -1241,9 +1239,9 @@ const GHOSTLIGHT_LILY = {
   soundEffect: chewCrackersMouth,
   function: () => {
     if (HAUNTED.duration !== null) {
-      let randomNumber = Math.floor(Math.random() * 5) + 1;
+      let cureChance = Math.floor(Math.random() * 3) + 1;
 
-      if (randomNumber >= 8) {
+      if (cureChance >= 3) {
         HAUNTED.duration = null;
         HAUNTED.statusDuration = null;
 
@@ -1267,9 +1265,9 @@ const GRAVEBLOOM = {
   soundEffect: chewCrackersMouth,
   function: () => {
     if (POISONED.duration !== null) {
-      let randomNumber = Math.floor(Math.random() * 5) + 1;
+      let cureChance = Math.floor(Math.random() * 3) + 1;
 
-      if (randomNumber >= 8) {
+      if (cureChance >= 3) {
         POISONED.duration = null;
         POISONED.statusDuration = null;
         baseDexterity += 2;
@@ -1497,7 +1495,7 @@ const FLICKERING_CANDLE = {
   function: () => {
     console.log("CALLED?!?!?");
     FLICKERING_CANDLE.tracker = "LIT";
-    startStatusEffect(FLICKERING_CANDLE, 5);
+    startStatusEffect(FLICKERING_CANDLE, 3);
   },
 };
 
@@ -1931,7 +1929,10 @@ function useConsumable(consumable) {
   if (itemObject !== POTION) {
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
-    writeToLogItem(LOG_CONSUMABLE, "YES", itemObject);
+
+    if (itemObject.type === "CONSUMABLE") {
+      writeToLogItem(LOG_CONSUMABLE, "YES", itemObject);
+    }
   }
 
   itemObject.function();
@@ -2284,7 +2285,7 @@ inventoryModal.addEventListener("click", (event) => {
     }
 
     // Attuned Items Logic
-    if (buttons[i].id !== "Demonic Grimoire") {
+    if (event.target === buttons[i] && attunedItems.length < 5) {
       if (slotOne.contains(event.target) && event.target === buttons[i]) {
         removeItem(buttons[i].id);
       }
@@ -2304,11 +2305,8 @@ inventoryModal.addEventListener("click", (event) => {
       if (slotFive.contains(event.target) && event.target === buttons[i]) {
         removeItem(buttons[i].id);
       }
-    } else if (
-      buttons[i].id === "Demonic Grimoire" &&
-      event.target === buttons[i]
-    ) {
-      DEMONIC_GRIMOIRE.function();
+    } else {
+      writeToLogItem(LOG_CANT_ATTUNE, "YES", "ONLY FIVE");
     }
 
     // Misc Other Item Logic
@@ -2438,7 +2436,12 @@ function renderTrade() {
           traderItems = curatorItems;
           traderName.textContent = "Curator's Items";
 
-          if (items === inventoryItems && items[i].type === "MAGIC") {
+          if (
+            items === inventoryItems &&
+            items[i].type === "MAGIC" &&
+            items[i].name !== "War Torn Banner" &&
+            items[i].name !== "Grervil's Head"
+          ) {
             container.appendChild(itemBox);
           }
         }

@@ -24,10 +24,6 @@ function playerAttackHandler(smite) {
   // ITEM: Soulreaver - damage++ for each consecutive attack
   playerToMonsterDamage += isItemAttuned(SOULREAVER, 0);
 
-  if (strengthBoonRank === 4) {
-    playerToMonsterDamage += totalStrength;
-  }
-
   // CRITICAL HIT MODIFIERS
   // ITEM: Blazing Candle - all attacks are critical hits
   criticalHit += statusEffectHandler(BLAZING_CANDLE);
@@ -72,7 +68,7 @@ function playerAttackHandler(smite) {
 }
 
 function checkForCritcalHit() {
-  return Math.round(Math.random() * 20) + calculateCritHitChance();
+  return Math.floor(Math.random() * 20) + calculateCritHitChance() + 1;
 }
 
 function calculateTotalCritDamage() {
@@ -221,10 +217,17 @@ function damagePlayer(damage) {
     damageFlashAnimation("PLAYER");
   }
 
+  if (
+    currentRoom.contents.monsters[0] === BONEVAULT_DEMON &&
+    BONEVAULT_DEMON.tracker === 3
+  ) {
+    showDamage(damage, "MONSTER", "CRIT");
+  } else {
+    showDamage(damage, "MONSTER");
+  }
+
   // Rogue Passive Ability
   rogueDarkenedReprisal();
-
-  showDamage(damage, "MONSTER");
   healthLowAnimation();
 }
 
@@ -335,9 +338,6 @@ function guardHandler(bonus) {
   let damageBlocked = Math.round(Math.random() * damageToGuard);
   damageBlocked += totalDexterity;
 
-  // ITEM - Tomb Guardian: +3 Guard Bonus
-  damageBlocked += isItemAttuned(TOMB_GUARDIAN, 0);
-
   let damageTaken = damageToGuard - damageBlocked;
 
   if (damageBlocked <= damageToGuard) {
@@ -409,7 +409,7 @@ function fleeHandler() {
   fleeAttempt += statusEffectHandler(FLICKERING_CANDLE);
 
   // Flee bonus when fighting the Flood of Bones
-  if (currentRoom.contents.monsters[0].name === "Flood of Bones") {
+  if (currentRoom.contents.monsters[0] === FLOOD_OF_BONES) {
     fleeAttempt += 3;
   }
 
@@ -419,16 +419,6 @@ function fleeHandler() {
     // Log must be placed before currentRoom change
     let roomToFlee = currentRoom;
     let newRoom = getRandomRoom(catacombRooms);
-
-    // Is Flickering Candle Active?\
-    if (FLICKERING_CANDLE.tracker === "LIT") {
-      FLICKERING_CANDLE.fleeNumber--;
-
-      if (FLICKERING_CANDLE.fleeNumber <= 0) {
-        FLICKERING_CANDLE.duration = null;
-        FLICKERING_CANDLE.statusDuration = null;
-      }
-    }
 
     if (roomToFlee !== newRoom) {
       setTimeout(() => {
@@ -448,7 +438,7 @@ function fleeHandler() {
       fleeHandler();
     }
   } else {
-    //  playercontrolsTimeout(200);
+    setControlsInterval("PAUSE", 1800);
     setTimeout(monsterAttackHandler, 1200);
     setTimeout(isGameOver, 1500);
     writeToLogActions(LOG_FLEE, "YES", "FAILURE");
@@ -984,11 +974,17 @@ function renderRoomSummaryModal() {
   }
 
   // Adds items in current room to inventory
+  console.log("ADDING ITEMS?")
   if (currentRoom.contents.items.length > 0) {
     for (let i = 0; i < currentRoom.contents.items.length; i++) {
-      addItemToInventory(currentRoom.contents.items[i]);
+        let currentItem = currentRoom.contents.items[i];
+        addItemToInventory(currentItem);
+        console.log(`${currentItem} added to inventory`);
     }
-  }
+
+    // Clear the items array in the current room
+    currentRoom.contents.items = [];
+}
 
   updatePlayerTrackers();
 }
@@ -1186,7 +1182,6 @@ continueButton.addEventListener("click", () => {
     }, 1500);
   }
 
-  // playerControlsTimeout(3000);
   setControlsInterval("PAUSE", 3000);
   soundEffectHandler(whooshLowAir);
 });

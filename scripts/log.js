@@ -839,7 +839,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     // ===============================
 
     case LOG_TRAP_DESCRIPTION:
-      newEntry.textContent = `${event.description} How will overcome this danger?`;
+      newEntry.textContent = `${event.description}`;
       narration = newEntry.textContent;
 
       // Question Logic
@@ -1575,6 +1575,8 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `${dataOne} cannot be attuned to.`;
       } else if (dataTwo === "DUPLICATE") {
         newEntry.textContent = `You can only attune to a single ${dataOne} at a time.`;
+      } else if (dataOne === "ONLY FIVE") {
+        newEntry.textContent = `You must unattune an item before attuning to another.`;
       }
 
       break;

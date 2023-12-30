@@ -454,9 +454,8 @@ let tierTwoRooms = [
     },
   },
   {
-    roomName: "Bonescar Hollow",
-    description:
-      "Bonescar Hollow, a realm of desolation, echoes with the ominous footsteps of the Bone Titan. Shadows dance on the skeletal remains, whispering tales of forgotten battles and the relentless guardian that now prowls.",
+    roomName: "Bonescar Pass",
+    description: '',
     backgroundImage: "styles/images/backgrounds/tier-two/bonescar-hollow.jpg",
     music: edgeOfFear,
     contents: {

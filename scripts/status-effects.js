@@ -266,7 +266,9 @@ const WAR_TORN_BANNER_STATUS = {
       if (WAR_TORN_BANNER_STATUS.duration === null) {
         clearInterval(warTornBannerInterval);
       } else {
-        WAR_TORN_BANNER_STATUS.duration = `${30 - legionTracker} legionnaires remaining.`;
+        WAR_TORN_BANNER_STATUS.duration = `${
+          30 - legionTracker
+        } legionnaires remaining.`;
       }
     }, 3000);
 
@@ -348,7 +350,6 @@ const startStatusEffect = (statusEffect, length) => {
     console.log(`New Length: ${length}`);
   }
 
-
   if (statusEffect.duration === null && statusEffect.statusDuration === null) {
     console.log("CANDLE");
     startNewStatusEffect(statusEffect, length);
@@ -358,10 +359,16 @@ const startStatusEffect = (statusEffect, length) => {
 };
 
 const startNewStatusEffect = (statusEffect, length) => {
-  statusEffect.statusDuration = roomCounter + length;
-  const duration = statusEffect.statusDuration - roomCounter;
-  const roomText = duration > 1 ? "Rooms" : "Room";
-  statusEffect.duration = `Duration: ${duration} ${roomText}`;
+  if (statusEffect === FLICKERING_CANDLE) {
+    statusEffect.statusDuration = 3;
+    const duration = statusEffect.statusDuration;
+    statusEffect.duration = `Duration: ${duration}/3`;
+  } else {
+    statusEffect.statusDuration = roomCounter + length;
+    const duration = statusEffect.statusDuration - roomCounter;
+    const roomText = duration > 1 ? "Rooms" : "Room";
+    statusEffect.duration = `Duration: ${duration} ${roomText}`;
+  }
 
   if (statusEffect.stats) {
     addStatChange(statusEffect);
@@ -389,9 +396,14 @@ const extendStatusEffectDuration = (statusEffect, length) => {
 
 const setupStatusEffectInterval = (statusEffect) => {
   const intervalId = setInterval(() => {
-    const duration = statusEffect.statusDuration - roomCounter;
-    const roomText = duration > 1 ? "Rooms" : "Room";
-    statusEffect.duration = `Duration: ${duration} ${roomText}`;
+    if (statusEffect === FLICKERING_CANDLE) {
+      const duration = statusEffect.statusDuration;
+      statusEffect.duration = `Remaining: ${duration}/3`;
+    } else {
+      const duration = statusEffect.statusDuration - roomCounter;
+      const roomText = duration > 1 ? "Rooms" : "Room";
+      statusEffect.duration = `Duration: ${duration} ${roomText}`;
+    }
 
     if (
       roomCounter >= statusEffect.statusDuration ||
@@ -403,7 +415,7 @@ const setupStatusEffectInterval = (statusEffect) => {
     } else if (statusEffect.detail === "CANDLE") {
       statusEffect.tracker = "LIT";
     }
-  }, 3000);
+  }, 2000);
 };
 
 const endStatusEffectInterval = (statusEffect, intervalId) => {
@@ -441,7 +453,7 @@ function statusEffectHandler(item) {
           let randomNumber = Math.round(Math.random() * 10);
 
           if (randomNumber >= 5) {
-            playerControlsTimeout(2500);
+            setControlsInterval("PAUSE", 3000);
             fadeOutAnimation(monsterContainer);
             fadeOutAnimation(monsterImage);
             setTimeout(() => {
@@ -464,11 +476,16 @@ function statusEffectHandler(item) {
       break;
 
     case FLICKERING_CANDLE:
-      if (FLICKERING_CANDLE.tracker === "LIT") {
-        console.log("CANDLE!?!?!");
+      if (
+        FLICKERING_CANDLE.tracker === "LIT" &&
+        FLICKERING_CANDLE.statusDuration > 0
+      ) {
+        FLICKERING_CANDLE.statusDuration--;
         writeToLogItem(LOG_ITEM, "YES", FLICKERING_CANDLE);
         return 99;
       } else {
+        FLICKERING_CANDLE.duration = null;
+        FLICKERING_CANDLE.statusDuration = null;
         return 0;
       }
 

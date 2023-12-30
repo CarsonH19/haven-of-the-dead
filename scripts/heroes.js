@@ -36,6 +36,7 @@ function paladinHolySmite() {
 function paladinRadiantAura() {
   if (
     currentRoom.contents.monsters[0].type === "UNDEAD" &&
+    monsterContainer.style.display === "FLEX" &&
     heroChoice === "PALADIN" &&
     currentMonsterHealth > 0
   ) {

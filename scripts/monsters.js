@@ -123,7 +123,6 @@ const FIENDSWORN_CULTIST = {
   },
 };
 
-
 // ===============================
 //           Skeletons
 // ===============================
@@ -301,7 +300,8 @@ const BONEVAULT_DEMON = {
   boss: "Bonevault Demon",
   type: "UNDEAD",
   skulls: 7,
-  soundEffects: { // !FIX! Add sound effects 
+  soundEffects: {
+    // !FIX! Add sound effects
     spawn: boneCrunchCrack1,
     attack: fleshHit5,
     death: boneBreak8,
@@ -312,7 +312,7 @@ const BONEVAULT_DEMON = {
     if (BONEVAULT_DEMON.tracker === 3) {
       writeToLogMonster(LOG_MONSTER_ABILITY, "YES", BONEVAULT_DEMON);
     }
-  }
+  },
 };
 
 function endBonevaultDemonBoss() {
@@ -356,7 +356,7 @@ function endFloodOfBonesBoss() {
     setTimeout(newRoomAnimation, 1000);
     setTimeout(() => {
       let defeatedFloodImage =
-            "styles/images/backgrounds/tier-one/flood-of-bones-defeated.jpg";
+        "styles/images/backgrounds/tier-one/flood-of-bones-defeated.jpg";
       playMusic(pileOfBones);
       renderBackground(defeatedFloodImage);
     }, 2500);
@@ -647,6 +647,16 @@ function monsterSkullLevel(level) {
 
   // Logic for bosses & specific case monsters
   switch (monster) {
+    case FLOOD_OF_BONES:
+      monsterMaxHealth = 300;
+      monsterAttackValue = 10;
+      break;
+
+    case BONEVAULT_DEMON:
+      monsterMaxHealth = 180;
+      monsterAttackValue = 12;
+      break;
+
     case UNDYING_WARBAND:
       monsterMaxHealth = 260;
       monsterAttackValue = 4;
@@ -726,7 +736,6 @@ function checkForMonsters() {
   endBattlefieldEvent();
   endBonevaultDemonBoss();
   endFloodOfBonesBoss();
-
 
   // Checks for more monsters
   if (monster.length > 0) {

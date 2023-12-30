@@ -97,7 +97,7 @@ const GAS_CHAMBER = {
     "The chamber's atmosphere turns ominous as a noxious, green mist begins to billow forth from unseen vents. It fills the air, suffusing the space with an acrid smell. Panic sets in as you realize you're trapped.",
   optionOne: "Strength",
   optionTwo: "Faith",
-  passValue: 6,
+  passValue: 7,
   failDamage: 25,
   functionOne: () => {
     gasLeakHose3.pause();
@@ -117,7 +117,7 @@ const SWARM_OF_VERMIN = {
     "An unending tide of rats pour into the chamber. Their frenetic scuttling and chittering echoes off the walls, drowning out all other sound.",
   optionOne: "Strength",
   optionTwo: "Faith",
-  passValue: 5,
+  passValue: 6,
   failDamage: 20,
   penalty: () => {
     DISEASED.function(5);
@@ -131,7 +131,7 @@ const SKELETAL_HANDS = {
     "From the depths of the catacomb floor, ghostly skeletal hands claw their way forth, bony fingers outstretched in your direction. They sway and reach, for your limps.",
   optionOne: "Strength",
   optionTwo: "Dexterity",
-  passValue: 6,
+  passValue: 7,
   failDamage: 25,
 };
 
@@ -480,7 +480,7 @@ const FORSAKEN_COMMANDER = {
   name: "Forsaken Commander",
   eventType: "NPC",
   image: "styles/images/npcs/commander.jpg",
-  description: `A spectral commander materializes before you. "Valiant adventurer, my legion walk these depths, bound by an unholy curse to fight for the Baron. Please, will you help me free them from the chains of undeath."`,
+  description: `A spectral commander materializes before you. "Valiant adventurer, my legion walk these depths, bound by an unholy curse to fight for the Baron. Please, will you help me free them from the chains of undeath?"`,
   optionOne: "Accept",
   optionTwo: "Refuse",
   tracker: null,
@@ -554,7 +554,7 @@ const GRERVIL_THE_BODILESS = {
           }, 4000);
 
           useConsumable("Grervil's Head"); // removes item from inventory
-          playerControlsTimeout(5000);
+          setControlsInterval("PAUSE", 5000);
           writeToLogEvent(LOG_NPC_DIALOGUE, "YES", GRERVILS_HEAD);
           setTimeout(() => {
             renderEvent(GRERVILS_BODY_EVENT);

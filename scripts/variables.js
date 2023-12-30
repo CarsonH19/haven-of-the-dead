@@ -203,6 +203,10 @@ let guardBonus;
 
 function calculateGuardBonus() {
   guardBonus = totalDexterity;
+
+  // ITEM - Tomb Guardian: +3 Guard Bonus
+  damageBlocked += isItemAttuned(TOMB_GUARDIAN, 0);
+
   return guardBonus;
 }
 
@@ -309,7 +313,7 @@ function updateTotalStats() {
   findItemChance = calculateItemFindChance();
   experienceModifier = calculateExperienceModifier();
 
-  // Attack 
+  // Attack
   totalAttack += baseAttack;
 
   if (strengthBoonRank === 4) {
