@@ -1410,11 +1410,11 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === GRAVEROBBER_EARVER_EVENT_TWO) {
         newEntry.textContent = `You assist Graverobber Earver in his quest to open the sarcophagus. The lid creaks open, but as the contents are revealed, a deafening roar echoes through the catacomb. A monstrous abomination, awakens in a fury of flailing bones, and mercilessly strikes down Graverobber Earver before turning its baleful gaze upon you.`;
       } else if (event === GRAVEROBBER_EARVER_EVENT_THREE) {
-        newEntry.textContent = `"You aid Graverobber Earver's in unsealing the ancient crypt, a chilling gust rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth undead warriors. Trapped in their onslaught, he meets his untimely demise, leaving you to face these undead guardians."`;
+        newEntry.textContent = `"You aid Graverobber Earver's in unsealing the ancient crypt, a wave of heat rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth flaming skeletons. Trapped in their blaze, Graverobber Earver meets his demise, leaving you to face these vengeful undead."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Released from captivity, the scoundrel breathes thanks, but a looming arachnid descends, hungry eyes fixed on its newfound prey.`;
       } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
-        newEntry.textContent = `As the key turns, a malevolent hiss escapes just before the chest explodes in an eruption of flames. Burning and disoriented you realize the scoundrel's gratitude was a ruse.`;
+        newEntry.textContent = `As the key turns, a malevolent hiss escapes just before the chest explodes in an eruption of flames. Burned and disoriented you realize the scoundrel's gratitude was a ruse.`;
       } else if (event === FORSAKEN_COMMANDER) {
         newEntry.textContent = `The spectral commander's mournful visage brightens. 'A noble soul, break their chains and usher the forsaken into the eternal rest they deserve.`;
       } else if (event === GRERVIL_THE_BODILESS) {

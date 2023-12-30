@@ -207,12 +207,12 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
   eventType: "NPC",
   image: "styles/images/npcs/graverobber-earver.jpg",
   description:
-    "Once more, the air grows heavy as you find Graverobber Earver, unyielding in his pursuit of forbidden riches. He implores you to lend your strength, offering a glimpse into the abyssal unknown that awaits within the looming sarcophagus, should you dare to delve into the shadows once more.",
+    "Once more, the air grows heavy as you find Graverobber Earver, unyielding in his pursuit of forbidden riches. He implores you to lend your strength, offering to share the riches within, should you dare to assist him.",
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
     GRAVEROBBER_EARVER.summary =
-      "You agreed to help Graverobber Earver open the sarcophagus, awakening a large undead creature which struck Earver down and nearly you as well.";
+      "You agreed to help Graverobber Earver open the sarcophagus, awakening a Bone Titan which struck Earver down and nearly you as well.";
 
     currentRoom.contents.monsters.push(BONE_TITAN);
     currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
@@ -247,14 +247,14 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
   eventType: "NPC",
   image: "styles/images/npcs/graverobber-earver.jpg",
   description:
-    "As fate would have it, you cross paths with Graverobber Earver yet again, his determination unshaken. This time, he stands before an ornate crypt belonging to a long dead king. With a knowing look, he extends his offer once more, tempting you with the allure of unimaginable treasures concealed within.",
+    "As fate would have it, you cross paths with Graverobber Earver yet again, his determination unshaken. This time, he stands before an ornate crypt belonging to a long dead king. With a knowing look, he extends his offer once more, tempting you with the allure of treasures concealed within.",
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
     GRAVEROBBER_EARVER.summary =
-      "You agreed to help Graverobber Earver open the tomb, unleashing powerful undead warriors which struck Earver down and nearly you as well.";
+      "You agreed to help Graverobber Earver open the tomb, unleashing fiery skeletal undead which consumed Earver in flames and nearly you as well.";
 
-    currentRoom.contents.monsters.push(DRAUGR, DRAUGR, DRAUGR);
+    currentRoom.contents.monsters.push(BLAZING_SKELETON, BLAZING_SKELETON, BLAZING_SKELETON, BLAZING_SKELETON);
     currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
     setRoomSummary();
     startBattle();
