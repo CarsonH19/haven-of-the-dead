@@ -39,6 +39,7 @@ const gameWindow = document.querySelector(".game-window");
 const roomImage = document.getElementById("backgroundImage");
 const bottomContent = document.querySelector(".bottom-content");
 const playerContainer = document.querySelector(".player-container");
+const controlsContainer = document.querySelector(".controls-container");
 const roomsCleared = document.getElementById("roomsCleared");
 const narrativeText = document.getElementById("narrativeText");
 

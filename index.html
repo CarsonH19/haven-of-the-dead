@@ -334,10 +334,10 @@
               <div id="monsterContainer" class="monster-container">
                 <div class="monster-display">
                   <h3 id="monster-name">Monster</h3>
-                  <h3 id="skull-level"></h3>
+                  <!-- <h2 id="skull-level"></h2> -->
                 </div>
                 <div class="monster-health-bar">
-                  <p><span><span id="monsterCurrentHP">0</span> / <span
+                  <p>HP: <span><span id="monsterCurrentHP">0</span> / <span
                     id="monsterMaxHP">0</span></p>
                   <progress id="monster-health" max="100" value="100">100%</progress>
                 </div>
@@ -362,42 +362,48 @@
           <div class="damage-received-box">
             <ul id="damageReceived" class="damage"></ul>
           </div>
-        </div>
-        <div class="bottom-content">
-          <div id="playerContainer" class="player-container">
-            <h3 id="playerName"></h3>
-            <div class="health-bar">
-              <div class="health-level-experience">
-                <p>HP: <span id="currentHP">0</span> / <span id="maxHP">0</span></p>
-                <p>Exp: <span id="currentXP">0</span> / <span id="xpToNextLevel">0</span></p>
-                <p>Lvl: <span id="heroLevel">0</span></p>
-              </div>  
-              <progress id="player-health" max="100" value="100">100%</progress>
+          <div class="bottom-content">
+            <div id="playerContainer" class="player-container">
+              <div>
+                <h3 id="playerName"></h3>
+                <div class="divider"></div>
+              </div>
+              <div class="health-bar">
+                <div class="health-level-experience">
+                  <p>HP: <span id="currentHP">0</span> / <span id="maxHP">0</span></p>
+                  <p>Exp: <span id="currentXP">0</span> / <span id="xpToNextLevel">0</span></p>
+                  <p>Lvl: <span id="heroLevel">0</span></p>
+                </div>  
+                <progress id="player-health" max="100" value="100">100%</progress>
+              </div>
+              <div class="player-stats">
+                <p>Strength: <span id="heroStrength">0</span></p>
+                <p>Dexterity: <span id="heroDexterity">0</span></p>
+                <p>Faith: <span id="heroFaith">0</span></p>
+              </div>
             </div>
-            <div class="player-stats">
-              <p>Strength: <span id="heroStrength">0</span></p>
-              <p>Dexterity: <span id="heroDexterity">0</span></p>
-              <p>Faith: <span id="heroFaith">0</span></p>
+            <div id="playerControls" class="controls-container">
+              <div class="attack">
+                <button id="attack-btn" class="toggle-btn">Attack</button>
+              </div>
+              <div class="other-buttons">
+                <button id="guard-btn" class="toggle-btn">Guard</button>
+                <button id="special-btn" class="toggle-btn">
+                  <span id="specialCount">Special</span>
+                </button>
+                <button id="potion-btn" class="toggle-btn">
+                  Potion<span id="potionCount"></span>
+                </button>
+                <button id="flee-btn" class="toggle-btn">Flee</button>
+              </div>
             </div>
-          </div>
-          <div class="controls-container">
-            <div class="attack">
-              <button id="attack-btn" class="toggle-btn">Attack</button>
+            <div id="logContainer" class="log-container">
+              <div>
+                <h3>Log</h3>
+                <div class="divider"></div>
+              </div>
+              <ul id="log"></ul>
             </div>
-            <div class="other-buttons">
-              <button id="guard-btn" class="toggle-btn">Guard</button>
-              <button id="special-btn" class="toggle-btn">
-                <span id="specialCount">Special</span>
-              </button>
-              <button id="potion-btn" class="toggle-btn">
-                Potion<span id="potionCount"></span>
-              </button>
-              <button id="flee-btn" class="toggle-btn">Flee</button>
-            </div>
-          </div>
-          <div id="logContainer" class="log-container">
-            <h3>Log</h3>
-            <ul id="log"></ul>
           </div>
         </div>
       </div>

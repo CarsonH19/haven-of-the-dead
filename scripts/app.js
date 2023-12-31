@@ -731,6 +731,21 @@ function togglePlayerControls() {
     potionBtn.disabled = true;
   }
 
+  // Close Action Buttons
+  if (
+    monsterContainer.style.display === "none" &&
+    currentRoom.contents.monsters.length <= 0
+  ) {
+    fadeOutAnimation(controlsContainer);
+    setTimeout(() => {
+      controlsContainer.style.display = "none";
+    }, 2000)  } else {
+    fadeInAnimation(controlsContainer);
+    setTimeout(() => {
+      controlsContainer.style.display = "flex";
+    }, 2000);
+  }
+
   // Gives access to inventory while trading
   if (
     currentRoom.roomName === "Hag's Hollow" ||
@@ -747,6 +762,22 @@ function togglePlayerControls() {
   // Baron of Bone Room
   if (currentRoom.roomName === "Presence of the Eternal") {
     fleeBtn.disabled = true;
+  }
+
+  addStrikeThrough(attackBtn);
+  addStrikeThrough(guardBtn);
+  if (specialCooldownCounter === 0) {
+    addStrikeThrough(specialBtn);
+  }
+  addStrikeThrough(potionBtn);
+  addStrikeThrough(fleeBtn);
+
+  function addStrikeThrough(button) {
+    if (button.disabled === true) {
+      button.classList.add("strikethrough-text");
+    } else {
+      button.classList.remove("strikethrough-text");
+    }
   }
 }
 
@@ -1141,7 +1172,7 @@ catacombEntranceBtn.addEventListener("click", () => {
   catacombEntranceModal.style.display = "none";
   renderLevelUpModal();
   continueButtonModal.style.display = "block";
-  continueButton.textContent = "Enter the Catacombs";
+  continueButton.textContent = "Enter";
 });
 
 roomSummaryButton.addEventListener("click", () => {
@@ -1223,10 +1254,10 @@ continueButton.addEventListener("click", () => {
   soundEffectHandler(whooshLowAir);
 });
 
-startBtn.addEventListener('click', (() => {
+startBtn.addEventListener("click", () => {
   startGameModal.style.display = "none";
-  heroChoiceModal.style.display = 'block';
-}));
+  heroChoiceModal.style.display = "block";
+});
 
 restartGameBtn.addEventListener("click", () => {
   location.reload();

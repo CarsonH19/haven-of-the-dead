@@ -23,23 +23,21 @@
   src: url('fonts/vecna/VecnaBold-4YY4.ttf') format('truetype');
 }
 
-h1, h2 {
+h1, h2, h3 {
   color: var(--header);
   font-family: 'Ringbearer', sans-serif;
   font-weight: 500;
+  letter-spacing: 2px;
 }
-
-h3, h4 {
+  
+  h4 {
   color: var(--header);
-
 }
 
 
 * {
   box-sizing: border-box;
 }
-
-
 
 body {
   margin: 0px;
@@ -57,6 +55,33 @@ body {
   color: var(--text);
 }
 
+p {
+  font-family: 'garamond';
+}
+
+button {
+  /* font-family: 'Ringbearer'; */
+  font-size: 1.2rem;
+  border-radius: 8px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+button:hover {
+  transition: 0.3s;
+  scale: 1.1;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  /* background-color: var(--background); */
+  /* color: var(--text); */
+  box-shadow: 2px px 8px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
+}
+
+.strikethrough-text {
+  text-decoration: line-through;
+}
+
+
 li, ul {
   list-style: none;
   padding: 0px;
@@ -72,8 +97,8 @@ li, ul {
 .game-window {
   aspect-ratio: 16 / 9;
   width: auto;
-  min-width: 1160px;
-  max-width: 60vw;
+  /* min-width: 1160px;
+  max-width: 60vw; */
   height: 100vh; 
   min-height: 847px; 
   display: none;
@@ -82,7 +107,7 @@ li, ul {
   border: 5px solid var(--accent);
   background-image: url();
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 }
 
 #backgroundImage {
@@ -114,9 +139,9 @@ li, ul {
   position: absolute;
   left: 50%; /* Center horizontally */
   top: 25%; /* Center vertically */
-  transform: translate(-50%, -50%); /* Adjust for element's size */
-  width: 200px;
-  height: 200px;
+  transform: translate(-50%, -70%); 
+  width: 250px;
+  height: 250px;
   border: 2px solid var(--header);
   border-radius: 5px;
 }
@@ -168,9 +193,15 @@ li, ul {
   height: 30%;
 }
 
-.monster-display h3 {
+.monster-display h3,
+.monster-display h2 {
   margin: 0px;
   padding: 0px;
+  font-size: 1.2rem;
+}
+
+.monster-display h2 {
+  font-size: 2.0rem;
 }
 
 .monster-container progress {
@@ -179,6 +210,8 @@ li, ul {
 
 .monster-health-bar p {
   margin: 0px;
+  font-weight: 900;
+  font-size: 1.1rem;
 }
 
 
@@ -213,11 +246,15 @@ li, ul {
 }
 
 .middle-left div {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border: 2px solid #252b3b;
   border-radius: 10px;
   z-index: 1;
+}
+
+.middle-left div:hover {
+  border: 1px solid var(--header);
 }
 
 .middle-center {
@@ -243,6 +280,10 @@ li, ul {
   justify-content: flex-start;
 }
 
+.damage-dealt-box .damage {
+  margin-top: 7vh;
+}
+
 .damage-received-box {
   width: 33%;
   min-width: 300px;
@@ -255,7 +296,8 @@ li, ul {
 }
 
 .damage-received-box .damage {
-  margin-bottom: 15vh;
+  margin-bottom: 18vh;
+  margin-right: 40px;
 }
 
 .damage {
@@ -334,6 +376,7 @@ li, ul {
 
 .narrative-text {
   list-style-type: none;
+  font-size: 1.4rem;
   pointer-events: none;
   padding: 0;
   z-index: 99;
@@ -344,6 +387,8 @@ li, ul {
 
 .narrative-text li {
   transition: transform 0.5s ease-in-out;
+  font-size: 1.5rem;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
 }
 
 /* 
@@ -357,43 +402,51 @@ li, ul {
   min-width: 1000px;
   height: 23%;
   min-height: 180px;
-  border-top: 4px solid var(--accent);
+  /* border-top: 4px solid var(--accent); */
   left: 0;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
+  /* background-image: url(images/skull-texture.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay; */
+  background-color: 
+  transparent;
 }
 
 .controls-container,
 .log-container {
-  flex: 1;
+  /* flex: 1; */
   width: 33%;
-  background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: overlay;
   padding: 10px;
-
 }
 
 .player-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 33%;
-  background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: overlay;
+  height: 100%;
   cursor: pointer;
   padding: 10px;
+  gap: 15px;
+}
+
+.player-container:hover {
+  transition: 0.3s;
+  margin-top: -3vh;
+}
+
+.log-container:hover {
+  transition: 0.3s;
+  margin-top: -15vh;
 }
 
 .player-container h3 {
   margin: 0px;
-  height: 10%;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
+  font-size: 1.2rem;
 }
 
 .player-container h4 {
@@ -414,39 +467,37 @@ li, ul {
   justify-content: space-between;
 }
 
-.health-bar p {
+.health-bar p,
+.player-stats p {
   margin: 0px;
   padding: 0px;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
 }
-
 
 
 .player-stats {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  width: 90%;
-  height: 40%;
+  width: 100%;
+  height: auto;
 }
 
 .player-stats p {
+  text-align: center;
   margin: 0px;
-  width: 100%;
 }
 
 .controls-container {
   transition: 0.3s;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
-  background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: overlay;  
-  padding: 0px;
+  padding: 10px;
   cursor: pointer;
 }
+
 
 .attack {
   display: flex;
@@ -456,8 +507,8 @@ li, ul {
 }
 
 .attack button {
-  width: 100%;
-  height: 100%;
+  width: 94%;
+  height: 90%;
 }
 
 
@@ -471,18 +522,14 @@ li, ul {
 .other-buttons {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   width: 100%;
   height: 66%;
 }
 
 .other-buttons button {
-  width: 50%;
-  height: 50%;
-}
-
-
-.log-container h3 {
-  margin-top: 0px;
+  width: 45%;
+  height: 45%;
 }
 
 /* 
@@ -497,12 +544,14 @@ li, ul {
 }
 
 .log-container h3 {
+  margin-top: 0px;
   margin-bottom: 2px;
-  font-size: 1.0rem;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
 }
 
 .log-container ul {
-  font-size: 0.8rem;
+  font-size: 1.0rem;
   padding: 0px;
   margin: 0px;
   list-style-type: none;
@@ -543,13 +592,13 @@ progress[value] {
 
 progress[value]::-webkit-progress-value {
   background-color: #ad0505;
-  transition: all 0.2s ease-out;
+  transition: all 0.1s ease-out;
 
 }
 
 progress[value]::-moz-progress-bar {
   background-color: #ad0505;
-  transition: all 0.2s ease-out;
+  transition: all 0.1s ease-out;
 }
 
 /* 
@@ -818,7 +867,13 @@ progress[value]::-moz-progress-bar {
   border-bottom: 1px dashed var(--header);
   padding: 10px 0px 10px 0px;
   font-size: 1.0rem;
+}
 
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: var(--header);
+  border-radius: 10px;
 }
 
 /* 
@@ -849,7 +904,8 @@ progress[value]::-moz-progress-bar {
 }
 
 .start-modal-content h1 {
-  font-size: 5rem;
+  font-size: 5.5rem;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
   margin-top: -10vh;
   margin-bottom: 10vh;
 }
@@ -857,8 +913,23 @@ progress[value]::-moz-progress-bar {
 .start-modal-content button {
   width: 150px;
   height: 50px;
+  background-color: var(--text);
+  color: var(--accent);
+  font-weight: 500;
 }
 
+.start-modal-content button:hover {
+  transition: 0.3s;
+  scale: 1.2;
+  /* background-color: var(--accent);
+  color: var(--header);
+  border: 1px solid var(--header); */
+}
+
+/* .start-modal-content button:hover {
+  transition: 0.1s;
+  font-weight: 600;
+} */
 /* 
 ==========================================
           GAME OVER MODAL
@@ -941,6 +1012,7 @@ progress[value]::-moz-progress-bar {
   margin: 0px;
   margin-top: 20px;
   margin-bottom: 3px;
+  font-size: 1.2rem;
 }
 
 .room-summary-modal-content .itemTooltip {
@@ -960,13 +1032,13 @@ progress[value]::-moz-progress-bar {
 .room-summary-modal-content p {
   margin: 0px;
   margin-top: 1px;
-  font-size: 1.0rem;
+  font-size: 1.2rem;
 }
 
 .room-summary-modal-content li {
   margin: 0px;
   margin-top: 1px;
-  font-size: 1.0rem;
+  font-size: 1.2rem;
 }
 
 .room-summary-modal-content button {
@@ -1072,7 +1144,7 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto;
   border: 3px solid #888;
   border-radius: 10px;
-  width: 720px;
+  width: 850px;
   height: 520px;
 }
 
@@ -1090,6 +1162,14 @@ progress[value]::-moz-progress-bar {
   height: 100%;
   background-color: rgba(0,0,0,0.4);
 }
+
+#inventoryBtn {
+  width: 80%;
+  height: 12%;
+  font-size: 1.1rem;
+
+}
+
 
 .inventory-container {
   height: 100%;
@@ -1296,6 +1376,7 @@ progress[value]::-moz-progress-bar {
   gap: 5px;
   visibility: hidden;
   min-width: 120px; /* Set a minimum width */
+  height: auto;
   width: auto; /* Allow the width to adjust based on content */
   min-height: 80px; /* Set a minimum height */
   background-color: var(--accent);

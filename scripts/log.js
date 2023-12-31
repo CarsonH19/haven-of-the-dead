@@ -408,7 +408,10 @@ function writeToLogActions(logType, narrate, dataOne) {
       break;
   }
 
-  if (narrate === "YES" && dataOne === "SUCCESS") {
+  if (
+    (narrate === "YES" && dataOne === "SUCCESS") ||
+    (narrate === "YES" && logType === LOG_POTION)
+  ) {
     writeToNarrative(narration);
   }
 
@@ -1531,7 +1534,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === BATTLEFIELD) {
         newEntry.textContent = `You decide not to step into the vale, and return they way you came.`;
       } else if (event === ITEM_ROBBERY && dataOne === "REFUSE") {
-        newEntry.textContent = `Defiance burns in your eyes as you reject their demands. The air thickens with tension, blades poised. The scoundrels grin, relishing the impending clash between audacity and avarice.`
+        newEntry.textContent = `Defiance burns in your eyes as you reject their demands. The air thickens with tension, blades poised. The scoundrels grin, relishing the impending clash between audacity and avarice.`;
       }
 
       narration = newEntry.textContent;
