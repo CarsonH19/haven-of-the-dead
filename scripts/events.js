@@ -187,7 +187,7 @@ const GRAVEROBBER_EARVER = {
   functionTwo: () => {
     GRAVEROBBER_EARVER.summary =
       "You refused to help Graverobber Earver open the sealed tomb.";
-    let currentRoomCounter = roomCounter + 10;
+    let currentRoomCounter = roomCounter + 5;
 
     let earverInterval = setInterval(() => {
       if (roomCounter > currentRoomCounter) {
@@ -226,7 +226,7 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
     GRAVEROBBER_EARVER_EVENT_TWO.summary =
       "Again, you refused to help Graverobber Earver desecrate a burial.";
 
-    let currentRoomCounter = roomCounter + 10;
+    let currentRoomCounter = roomCounter + 5;
     let earverInterval = setInterval(() => {
       console.log(`currentRoomCounter: ${currentRoomCounter}`);
       if (roomCounter > currentRoomCounter) {

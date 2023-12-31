@@ -49,6 +49,9 @@ monsterContainer.style.display = "none";
 const monsterImage = document.getElementById("monsterImage");
 monsterImage.style.display = "none";
 
+// Used to control which controls are enabled
+let controlInterval;
+
 // ===============================
 //     Catacomb Entrance Modal
 // ===============================
@@ -201,7 +204,7 @@ function calculateCritHitChance() {
 
 // Guard Bonus // +1 Damage Avoided Per Dex
 let guardBonus;
-let guardCooldown = 0;
+let guardReady = "YES";
 
 function calculateGuardBonus() {
   guardBonus = totalDexterity;
@@ -218,7 +221,7 @@ let fleeChance;
 function calculateFleeChance() {
   // 10% Base Chance
   fleeChance = totalDexterity + 1;
-  return fleeChance;
+  return Math.round(fleeChance);
 }
 
 // ===============================
@@ -233,13 +236,13 @@ let itemFindChance;
 function calculateItemFindChance() {
   itemFindChance = totalFaith * 5;
   itemFindChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
-  return itemFindChance;
+  return Math.round(itemFindChance);
 }
 
 // Experience Modifier
 let experienceModifier;
 function calculateExperienceModifier() {
-  experienceModifier = totalFaith * 0.2 + 1;
+  experienceModifier = (totalFaith * 0.2) + 1;
   return experienceModifier;
 }
 

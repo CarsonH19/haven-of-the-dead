@@ -492,75 +492,118 @@ function renderHeroStatsModal() {
     heroImage.style.backgroundImage = "url(styles/images/priestess.jpg)";
   }
 
-  // Name
+  // HERO NAME
   const heroName = document.getElementById("heroName");
   heroName.textContent = hero.name;
-  // Health
+  // HEALTH ------------------------------------------------------
   let heroHealthCurrent = document.getElementById("heroHealthCurrent");
   let heroHealthMax = document.getElementById("heroHealthMax");
   heroHealthCurrent.textContent = currentPlayerHealth;
   heroHealthMax.textContent = playerMaxHealth;
-  // Strength
+  //ATTACK ------------------------------------------------------
+  let heroCurrentAttack = document.getElementById("heroCurrentAttack");
+  heroCurrentAttack.textContent = totalAttack;
+  // STRENGTH ------------------------------------------------------
   let heroStatsStrength = document.getElementById("heroStatsStrength");
-  heroStatsStrength.textContent = baseStrength;
+  heroStatsStrength.textContent = totalStrength;
+  // Bonus Health
   const heroBonusHealth = document.getElementById("heroBonusHealth");
-  heroBonusHealth.textContent = `+${baseStrength * 10}`;
+  heroBonusHealth.textContent = `+${totalStrength * 10}`;
+  // Critical Hit Damage
   const heroCritHitDamage = document.getElementById("heroCritHitDamage");
   let heroCritDamageMod = calculateCritDamageModifier() * 100;
   heroCritHitDamage.textContent = `${heroCritDamageMod}%`;
-  // Dexterity
+  // DEXTERITY ------------------------------------------------------
   let heroStatsDexterity = document.getElementById("heroStatsDexterity");
-  heroStatsDexterity.textContent = baseDexterity;
+  heroStatsDexterity.textContent = totalDexterity;
+  // Critical Hit Chance
   const heroCritHitChance = document.getElementById("heroCritHitChance");
-  critHitPercentage = ((1 + baseDexterity) / 20) * 100;
+  let critHitPercentage = ((1 + totalDexterity) / 20) * 100;
   heroCritHitChance.textContent = `${critHitPercentage}%`;
+  // Guard Bonus
   const heroGuardBonus = document.getElementById("heroGuardBonus");
-  heroGuardBonus.textContent = `+${baseDexterity}`;
-  // Faith
-  let heroStatsFaith = document.getElementById("heroStatsFaith");
-  heroStatsFaith.textContent = baseFaith;
+  heroGuardBonus.textContent = `-${totalDexterity} Additional Damage`;
+  // Flee Chance
   const heroFleeChance = document.getElementById("heroFleeChance");
-  fleeChancePercentage = ((1 + baseFaith) / 10) * 100;
-  heroFleeChance.textContent = `${fleeChancePercentage}%`;
+  let fleeChancePercentage = (totalFaith / 10) * 100;
+  heroFleeChance.textContent = `+${fleeChancePercentage}%`;
+  // FAITH ------------------------------------------------------
+  let heroStatsFaith = document.getElementById("heroStatsFaith");
+  heroStatsFaith.textContent = totalFaith;
+  // Hero Experience Modifier
+  const heroExperienceModifier = document.getElementById(
+    "heroExperienceModifier"
+  );
+  heroExperienceModifier.textContent = `${experienceModifier * 100}%`;
+  // Item Find Chance
   const heroFindItemChance = document.getElementById("heroFindItemChance");
-  findItemPercentage = ((1 + baseFaith) / 20) * 100;
-  heroFindItemChance.textContent = `${findItemPercentage}%`;
-  // Special
-  const heroSpecial = document.getElementById("heroSpecial");
-  let heroSpecialStat = document.createElement(`span`);
+  heroFindItemChance.textContent = `+${itemFindChance}%`;
+  // SPECIAL ----------------------------------------------------
+  const heroSpecial = document.getElementById("heroSpecialName");
+  const heroSpecialDetails = document.getElementById("heroSpecialDetails");
 
   if (hero === paladin) {
-    heroSpecial.textContent = "Holy Smite:";
+    heroSpecial.textContent = `Holy Smite (Rank ${specialAbilityBoonRank})`;
     let smitePercentage = holySmiteTracker * 100;
-    heroSpecialStat.textContent = ` ${smitePercentage}%`;
-    heroSpecial.appendChild(heroSpecialStat);
+    heroSpecialDetails.textContent = `${smitePercentage}% Damage`;
   } else if (hero === rogue) {
-    heroSpecial.textContent = "Umbral Strike:";
-    heroSpecialStat.textContent = ` ${umbralAssaultTracker} Attacks`;
-    heroSpecial.appendChild(heroSpecialStat);
+    heroSpecial.textContent = `Umbral Strike (Rank ${specialAbilityBoonRank})`;
+    heroSpecialDetails.textContent = `${umbralAssaultTracker} Attacks`;
   } else {
-    heroSpecial.textContent = `Cleansing Flame:`;
-    heroSpecialStat.textContent = ` +${cleansingFlameTracker}`;
-    heroSpecial.appendChild(heroSpecialStat);
+    heroSpecial.textContent = `Cleansing Flame (Rank ${specialAbilityBoonRank})`;
+    heroSpecialDetails.textContent = `Restores ${cleansingFlameTracker}HP`;
   }
 
-  // Passive
-  const heroPassive = document.getElementById("heroPassive");
-  const heroPassiveStat = document.createElement("span");
+  // PASSIVE ----------------------------------------------------
+  const heroPassive = document.getElementById("heroPassiveName");
+  const heroPassiveDetails = document.getElementById("heroPassiveDetails");
 
   if (hero === paladin) {
-    heroPassive.textContent = "Radiant Aura:";
-    heroPassiveStat.textContent = ` +${radiantAuraTracker}`;
-    heroPassive.appendChild(heroPassiveStat);
+    heroPassive.textContent = `Radiant Aura (Rank ${passiveAbilityBoonRank})`;
+    heroPassiveDetails.textContent = `Damage to Undead Enemies: ${radiantAuraTracker}`;
   } else if (hero === rogue) {
-    heroPassive.textContent = "Darkened Reprisal:";
-    heroPassiveStat.textContent = ` +${darkenedReprisalTracker}`;
-    heroPassive.appendChild(heroPassiveStat);
+    heroPassive.textContent = `Darkened Reprisal (Rank ${passiveAbilityBoonRank})`;
+    heroPassiveDetails.textContent = `Dexterity Increase Below 30HP: ${
+      darkenedReprisalTracker * 100
+    }%`;
   } else {
-    heroPassive.textContent = "Burning Devotion:";
-    heroPassiveStat.textContent = ` +${burningDevotionTracker}`;
-    heroPassive.appendChild(heroPassiveStat);
+    heroPassive.textContent = `Burning Devotion (Rank ${passiveAbilityBoonRank})`;
+    heroPassiveDetails.textContent = `Minimum Attack Damage ${burningDevotionTracker}`;
   }
+
+  // Check for Rank 4 Boons
+  const rankFourStrengthBoon = document.getElementById("rankFourStrength");
+  const rankFourDexterityBoon = document.getElementById("rankFourDexterity");
+  const rankFourFaithBoon = document.getElementById("rankFourFaith");
+  const rankFourSpecialBoon = document.getElementById("rankFourSpecial");
+  // const rankFourPassiveBoon = document.getElementById("rankFourPassive");
+
+  if (strengthBoonRank === 4) {
+    rankFourStrengthBoon.textContent = `+${totalStrength} Attack Damage`;
+  } else if (dexterityBoonRank === 4) {
+    rankFourDexterityBoon.textContent = `Reduce Damage Taken by ${totalDexterity}`;
+  } else if (faithBoonRank === 4) {
+    rankFourFaithBoon.textContent = `Candles Burn Longer / Wisps Guide Faster.`;
+  } else if (specialAbilityBoonRank === 4) {
+    if (heroChoice === "PALADIN") {
+      rankFourSpecialBoon.textContent = `Deals ${totalAttack * 2.5} Damage`;
+    } else if (heroChoice === "ROGUE") {
+      rankFourSpecialBoon.textContent = `Attacks Deal +${totalDexterity} Damage`;
+    } else if (heroChoice === "PRIESTESS") {
+      console.log("CALLED");
+      rankFourSpecialBoon.textContent = `Removes 1 Condition`;
+    }
+  } 
+  
+  // if (passiveAbilityBoonRank === 4) {
+  //   if (heroChoice === "PALADIN") {
+  //     rankFourPassiveBoon.textContent = ``;
+  //   } else if (heroChoice === "ROGUE") {
+  //     rankFourPassiveBoon.textContent = ``;
+  //   } else if (heroChoice === "PRIESTESS") {
+  //     rankFourPassiveBoon.textContent = ``;
+  //   }
+  // }
 }
 
 // ===============================

@@ -648,7 +648,7 @@ function monsterSkullLevel(level) {
   // Logic for bosses & specific case monsters
   switch (monster) {
     case FLOOD_OF_BONES:
-      monsterMaxHealth = 300;
+      monsterMaxHealth = 400;
       monsterAttackValue = 10;
       break;
 
@@ -659,12 +659,12 @@ function monsterSkullLevel(level) {
 
     case UNDYING_WARBAND:
       monsterMaxHealth = 260;
-      monsterAttackValue = 4;
+      monsterAttackValue = 5;
       break;
 
     case BARON_OF_BONE:
-      monsterMaxHealth = 400;
-      monsterAttackValue = 18;
+      monsterMaxHealth = 800;
+      monsterAttackValue = 25;
       break;
   }
 }
@@ -885,7 +885,7 @@ function monsterAbilityHandler(monster) {
         break;
 
       case UNDEAD_RIVEN:
-        if (UNDEAD_RIVEN.tracker === 7) {
+        if (UNDEAD_RIVEN.tracker === 5) {
           console.log("Undead Riven Ability Called!");
           UNDEAD_RIVEN.attackCounter = 3;
           UNDEAD_RIVEN.function();
@@ -896,7 +896,7 @@ function monsterAbilityHandler(monster) {
         break;
 
       case UNDEAD_LIHETH:
-        if (UNDEAD_LIHETH.tracker === 10) {
+        if (UNDEAD_LIHETH.tracker === 5) {
           console.log("Undead Liheth Ability Called!");
           UNDEAD_LIHETH.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
@@ -906,7 +906,7 @@ function monsterAbilityHandler(monster) {
         break;
 
       case UNDEAD_SIGGURD:
-        if (UNDEAD_SIGGURD.tracker === 7) {
+        if (UNDEAD_SIGGURD.tracker === 5) {
           console.log("Undead Siggurd Ability Called!");
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         } else {

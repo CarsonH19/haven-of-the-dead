@@ -106,7 +106,9 @@ function dealMonsterDamage(damage) {
 
   console.log(damageDealt);
   // ITEM: Relic of Retribution - +25% damage against undead
-  damageDealt = Math.round(damageDealt *= isItemAttuned(RELIC_OF_RETRIBUTION, 1));
+  damageDealt = Math.round(
+    (damageDealt *= isItemAttuned(RELIC_OF_RETRIBUTION, 1))
+  );
 
   // Checks for Echoes of Victory - +20% damage
   if (ECHOES_OF_VICTORY.duration !== null) {
@@ -179,8 +181,9 @@ function monsterAttackHandler(bonus) {
 function dealPlayerDamage(damage) {
   let dealtDamage = Math.round(Math.random() * damage);
 
+  // Rank 4 Dexterity damage reduction
   if (dexterityBoonRank === 4) {
-    playerToMonsterDamage += totalDexterity;
+    dealtDamage -= totalDexterity;
   }
 
   if (dealtDamage <= 0) {
@@ -384,10 +387,7 @@ function guardHandler(bonus) {
     damageBlocked = damageToGuard;
   }
 
-  if (guardCooldown > 0) {
-    guardCooldown--;
-    guard.textContent = `Cooldown: ${guardCooldown}`;
-  }
+  guardReady = "NO";
 
   writeToLogActions(LOG_GUARD, "YES", damageBlocked);
   updatePlayerTrackers();
@@ -631,8 +631,6 @@ function renderCurrentRoom(currentRoom) {
   checkForNewTier();
 }
 
-let controlInterval;
-
 function setControlsInterval(command, pauseTime) {
   switch (command) {
     case "START":
@@ -683,7 +681,7 @@ function togglePlayerControls() {
   // Checks for Guard Cooldown
   if (
     currentRoom.contents.monsters.length > 0 &&
-    guardCooldown === 0 &&
+    guardReady === "YES" &&
     monsterContainer.style.display === "flex"
   ) {
     guardBtn.disabled = false;
@@ -1053,7 +1051,7 @@ function renderContinueButton() {
 
 attackBtn.addEventListener("click", () => {
   if (monsterContainer.style.display === "flex") {
-    guardCooldown--;
+    guardReady = "YES";
     actionCounter++;
 
     playerAttackHandler();
@@ -1083,7 +1081,7 @@ guardBtn.addEventListener("click", () => {
 });
 
 specialBtn.addEventListener("click", () => {
-  guardCooldown--;
+  guardReady = "YES";
   actionCounter++;
 
   if (heroChoice === "PALADIN") {
@@ -1109,7 +1107,7 @@ specialBtn.addEventListener("click", () => {
 });
 
 potionBtn.addEventListener("click", () => {
-  guardCooldown--;
+  guardReady = "YES";
   actionCounter++;
   attackCounter = 0; // Item: Soulreaver
 
@@ -1126,7 +1124,7 @@ potionBtn.addEventListener("click", () => {
 });
 
 fleeBtn.addEventListener("click", () => {
-  guardCooldown--;
+  guardReady = "YES";
   actionCounter++;
   attackCounter = 0; // Item: Soulreaver
 
@@ -1164,6 +1162,7 @@ roomSummaryButton.addEventListener("click", () => {
 });
 
 continueButton.addEventListener("click", () => {
+  guardReady = "YES";
   attackCounter = 0; // Item: Soulreaver
 
   // ITEM: Aegis of the Fallen - Reset if still active

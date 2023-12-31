@@ -1560,8 +1560,8 @@ progress[value]::-moz-progress-bar {
   border-radius: 10px;
   /* width: 46%;
   height: 56%; */
-  width: 600px;
-  height: 480px;
+  width: 720px;
+  height: 520px;
   overflow: auto;
 }
 
@@ -1577,12 +1577,12 @@ progress[value]::-moz-progress-bar {
 .hero-stats-modal-content {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; 
+  justify-content: space-between; 
   align-items:flex-start;
-  gap: 15px;
+  /* gap: 15px; */
   width: 50%;
   height: 100%;
-  padding: 0px 10px 0px 25px;
+  padding: 10px;
 }
 
 .hero-stats-modal-content {
@@ -1590,16 +1590,16 @@ progress[value]::-moz-progress-bar {
 }
 
 .hero-stats-modal-content h3 {
-  margin-top: 20px;
-  font-size: 1.2rem;
+  margin: 0px;
+  /* font-size: 1.2rem; */
 }
 
-.hero-stats-modal-content .stats-health-points {
+/* .hero-stats-modal-content .stats-health-points {
   margin-top: -28px;
-}
+} */
 
 .hero-stats-modal-content div h4 {
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
   margin: 0px;
 }
 

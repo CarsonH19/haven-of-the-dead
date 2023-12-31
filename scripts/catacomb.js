@@ -1231,15 +1231,14 @@ const THRONE_OF_THE_ETERNAL = {
       startBattle();
       setRoomSummary();
     }, 4000);
-    // writeToLogOther(LOG_OTHER, "YES"); // Others have come before you...
+    // writeToLogOther(LOG_OTHER, "YES"); // Others have come before you... !FIX!
   },
 };
 
 const BARON_OF_BONE_BOSS_ROOM = {
   roomName: "Baron of Bone",
-  description: "",
   backgroundImage: "styles/images/backgrounds/event-rooms/baron-of-bone.jpg",
-  music: null,
+  music: passedDanger,
   contents: {
     monsters: [BARON_OF_BONE],
     items: [],
@@ -1357,7 +1356,7 @@ function checkForNewTier() {
 
   // Boss Room
   setTimeout(() => {});
-  if (roomCounter === 100) {
+  if (roomCounter === 90) {
     catacombRooms.push(THRONE_OF_THE_ETERNAL);
   }
 }

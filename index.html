@@ -271,29 +271,36 @@
           <h3 id="heroName"></h3>
           <div>
             <p class="stats-health-points">Health Points: <span id="heroHealthCurrent">0</span>/<span id="heroHealthMax">0</span></p>
+            <p class="stats-attack">Attack Damage: <span id="heroCurrentAttack">0</span></p>
           </div>
-          <div>
+          <div id="strengthStats">
             <h4>Strength: <span id="heroStatsStrength">0</span></h4>
             <p>Bonus Health: <span id="heroBonusHealth">0</span></p>
             <p>Critical Hit Damage: <span id="heroCritHitDamage">0</span></p>
+            <p id="rankFourStrength"></p>
           </div>
-          <div>
+          <div id="dexterityStats">
             <h4>Dexterity: <span id="heroStatsDexterity">0</span></h4>
             <p>Critical Hit Chance: <span id="heroCritHitChance">0</span></p>
             <p>Guard Bonus: <span id="heroGuardBonus">0</span></p>
-          </div>
-          <div>
-            <h4>Faith: <span id="heroStatsFaith">0</span></h4>
             <p>Flee Chance: <span id="heroFleeChance">0</span></p>
+            <p id="rankFourDexterity"></p>
+          </div>
+          <div id="faithStats">
+            <h4>Faith: <span id="heroStatsFaith">0</span></h4>
+            <p>Experience Modifier: <span id="heroExperienceModifier">0</span></p>
             <p>Find Item Chance: <span id="heroFindItemChance">0</span></p>
+            <p id="rankFourFaith"></p>
           </div>
-          <div>
-            <h4>Special Ability</h4>
-            <p id="heroSpecial">Special Name:</p>
+          <div id="specialStats">
+            <h4 id="heroSpecialName">Special Ability</h4>
+            <p id="heroSpecialDetails">Special Name:</p>
+            <p id="rankFourSpecial"></p>
           </div>
-          <div>
-            <h4>Passive Ability</h4>
-            <p id="heroPassive">Passive Name:</p>
+          <div id="passiveStats">
+            <h4 id="heroPassiveName">Passive Ability</h4>
+            <p id="heroPassiveDetails">Passive Name:</p>
+            <p id="rankFourPassive"></p>
           </div>
         </div>
       </div>
@@ -377,9 +384,7 @@
               <button id="attack-btn" class="toggle-btn">Attack</button>
             </div>
             <div class="other-buttons">
-              <button id="guard-btn" class="toggle-btn">
-                <span id="guardCount">Guard</span>
-              </button>
+              <button id="guard-btn" class="toggle-btn">Guard</button>
               <button id="special-btn" class="toggle-btn">
                 <span id="specialCount">Special</span>
               </button>
