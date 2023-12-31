@@ -8,16 +8,38 @@
   --orb: #fff3b4;
 }
 
+@font-face {
+  font-family: 'Ringbearer';
+  src: url('fonts/ringbearer/RINGM___.TTF') format('truetype');
+}
+
+@font-face {
+  font-family: 'Vecna';
+  src: url('fonts/vecna/Vecna-oppx.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Vecna Bold';
+  src: url('fonts/vecna/VecnaBold-4YY4.ttf') format('truetype');
+}
+
+h1, h2 {
+  color: var(--header);
+  font-family: 'Ringbearer', sans-serif;
+  font-weight: 500;
+}
+
+h3, h4 {
+  color: var(--header);
+
+}
+
+
 * {
   box-sizing: border-box;
 }
 
-h1,
-h2,
-h3,
-h4 {
-  color: var(--header);
-}
+
 
 body {
   margin: 0px;
