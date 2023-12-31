@@ -54,7 +54,7 @@ li, ul {
   max-width: 60vw;
   height: 100vh; 
   min-height: 847px; 
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   border: 5px solid var(--accent);
@@ -426,45 +426,6 @@ li, ul {
   cursor: pointer;
 }
 
-/* #continueButton {
-  font-size: 0.8rem;
-  transition: 0.3s;
-  cursor: pointer;
-  color: var(--text);
-  box-shadow: inset 3px 3px 20px rgba(0, 0, 0, 3.8);
-  background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: overlay;
-  border: 1px solid var(--text);
-}  */
-
-/* #continueButton:hover {
-  transition: 0.3s;
-  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 4.8);
-  cursor: pointer;
-  color: var(--text);
-  scale: 1.2;
-  border: 1px solid var(--text);
-  background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: overlay;
-}  */
-
-
-/* .controls-container button:hover{
-  transition: 0.3s;
-  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 4.8);
-  cursor: pointer;
-  font-size: 1rem;
-  color: var(--text);
-  border: 2px solid var(--text);
-  background-color: transparent;
-}  */
-
 .attack {
   display: flex;
   justify-content: center;
@@ -598,8 +559,6 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  /* width: 60%;
-  height: 56%; */
   width: 720px;
   height: 520px;
   overflow: auto;
@@ -840,28 +799,82 @@ progress[value]::-moz-progress-bar {
 
 }
 
-/* Start Game Modal */
+/* 
+==========================================
+          START GAME MODAL
+==========================================
+*/
+
 #startGameModal {
-  display: none;
+  display: block;
+  transition: 0.5s;
+  z-index: 99;
 }
 
-/* Game Over Modal */
+.start-modal-content {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  flex-direction: column;
+  text-align: left;
+  background-image: url(images/backgrounds/event-rooms/skeletal-hands.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-position-y: 30%;
+}
+
+.start-modal-content h1 {
+  font-size: 5rem;
+  margin-top: -10vh;
+  margin-bottom: 10vh;
+}
+
+.start-modal-content button {
+  width: 150px;
+  height: 50px;
+}
+
+/* 
+==========================================
+          GAME OVER MODAL
+==========================================
+*/
+
+
 #gameOverModal {
   display: none;
 }
 
-/* Hero Choice Modal */
+
+/* 
+==========================================
+          HERO CHOICE MODAL
+==========================================
+*/
 #heroChoiceModal {
   display: none;
   overflow: hidden;
 }
 
-/* Catacomb Entrance Modal */
+/* 
+==========================================
+        CATACOMB ENTRANCE MODAL
+==========================================
+*/
+
 #catacombEntranceModal {
   display: none;
 }
 
-/* Room Summary Modal */
+/* 
+==========================================
+          ROOM SUMMARY MODAL
+==========================================
+*/
+
 #roomSummaryModal {
   display: none;
 }
@@ -935,9 +948,6 @@ progress[value]::-moz-progress-bar {
 }
 
 .room-summary-modal-content button {
-  /* display: flex;
-  justify-content: center;
-  align-items: flex-end; */
   align-self: center;
   width: 150px;
   height: 50px;
@@ -951,12 +961,23 @@ progress[value]::-moz-progress-bar {
 }
 
 
-/* Settings Modal */
+/* 
+==========================================
+              SETTINGS MODAL
+==========================================
+*/
+
 #settingsModal {
   display: none;
 }
 
-/* Continue Button Modal */
+
+/* 
+==========================================
+        CONTINUE BUTTON MODAL
+==========================================
+*/
+
 #continueButtonModal {
   display: none;
 }
@@ -976,7 +997,12 @@ progress[value]::-moz-progress-bar {
   height: 50px;
 }
 
-/* Event Modal */
+/* 
+==========================================
+          EVENT MODAL
+==========================================
+*/
+
 #eventModal {
   display: none;
 }
@@ -1002,7 +1028,12 @@ progress[value]::-moz-progress-bar {
   scale: 1.2;
 }
 
-/* Inventory Modal */
+/* 
+==========================================
+          INVENTORY MODAL
+==========================================
+*/
+
 #inventoryModal {
   display: none;
 }
@@ -1016,15 +1047,11 @@ progress[value]::-moz-progress-bar {
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;  
-  margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
+  margin: 12vh auto;
   border: 3px solid #888;
   border-radius: 10px;
   width: 720px;
   height: 520px;
-  /* min-width: 625px; */
-  /* min-height: 600px; */
-  /* max-width: 1160px;
-  max-height: 847px; */
 }
 
 .inventory-modal-content h2 {
@@ -1050,17 +1077,17 @@ progress[value]::-moz-progress-bar {
 
 .inventory-header {
   display: grid;
-  grid-template-columns: 1fr auto; /* One column takes up remaining space, and the other is auto (width of its content) */
+  grid-template-columns: 1fr auto; 
   align-items: center;
 }
 
 .inventory-header h2 {
-  text-align: center; /* Center the text */
+  text-align: center; 
   grid-column: 1;
 }
 
 .inventory-header button {
-  justify-self: end; /* Align the button to the end (right) */
+  justify-self: end; 
   grid-column: 2;
 }
 
@@ -1191,6 +1218,12 @@ progress[value]::-moz-progress-bar {
   cursor: pointer;
   scale: 1.2;
 }
+
+/* 
+==========================================
+          TOOLTIP STYLING
+==========================================
+*/
 
 .itemTooltip, 
 .statusTooltip {
@@ -1543,6 +1576,7 @@ progress[value]::-moz-progress-bar {
 
 #heroStatsModal {
   display: none;
+  transition: 0.5s;
 }
 
 .stats-card {
@@ -1591,15 +1625,9 @@ progress[value]::-moz-progress-bar {
 
 .hero-stats-modal-content h3 {
   margin: 0px;
-  /* font-size: 1.2rem; */
 }
 
-/* .hero-stats-modal-content .stats-health-points {
-  margin-top: -28px;
-} */
-
 .hero-stats-modal-content div h4 {
-  /* font-size: 1.2rem; */
   margin: 0px;
 }
 

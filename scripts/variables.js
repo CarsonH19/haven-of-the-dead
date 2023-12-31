@@ -60,6 +60,13 @@ const catacombEntranceModal = document.getElementById("catacombEntranceModal");
 const catacombEntranceBtn = document.getElementById("catacombEntranceBtn");
 
 // ===============================
+//      Start Game Modal
+// ===============================
+
+const startGameModal = document.getElementById("startGameModal");
+const startBtn = document.getElementById("startBtn");
+
+// ===============================
 //      Room Summary Modal
 // ===============================
 
@@ -242,7 +249,7 @@ function calculateItemFindChance() {
 // Experience Modifier
 let experienceModifier;
 function calculateExperienceModifier() {
-  experienceModifier = (totalFaith * 0.2) + 1;
+  experienceModifier = totalFaith * 0.2 + 1;
   return experienceModifier;
 }
 

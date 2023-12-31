@@ -524,7 +524,7 @@ function isGameOver() {
 //       Choose Hero Modal
 // ===============================
 
-heroChoiceModal.style.display = "block";
+// heroChoiceModal.style.display = "block";
 heroChoiceModal.addEventListener("click", function (event) {
   const SIGGURD = document.getElementById("siggurd");
   const RIVEN = document.getElementById("riven");
@@ -545,6 +545,7 @@ heroChoiceModal.addEventListener("click", function (event) {
     isRivenOrChild(event.target) ||
     isLihethOrChild(event.target)
   ) {
+    gameWindow.style.display = "flex";
     document.getElementById("heroChoiceModal").style.display = "none";
 
     if (isSiggurdOrChild(event.target)) {
@@ -870,8 +871,6 @@ function damageFlashAnimation(target) {
 // ===============================
 //        Start Game Modal
 // ===============================
-
-document.getElementById("startGameModal").style.display = "none";
 
 // ===============================
 //      Room Summary Modal
@@ -1223,6 +1222,11 @@ continueButton.addEventListener("click", () => {
   setControlsInterval("PAUSE", 3000);
   soundEffectHandler(whooshLowAir);
 });
+
+startBtn.addEventListener('click', (() => {
+  startGameModal.style.display = "none";
+  heroChoiceModal.style.display = 'block';
+}));
 
 restartGameBtn.addEventListener("click", () => {
   location.reload();
