@@ -742,6 +742,11 @@ function togglePlayerControls() {
   if (potionCounter <= 0) {
     potionBtn.disabled = true;
   }
+
+  // Baron of Bone Room
+  if (currentRoom.roomName === "Presence of the Eternal") {
+    fleeBtn.disabled = true;
+  }
 }
 
 function turnOffControls() {
@@ -1172,13 +1177,10 @@ continueButton.addEventListener("click", () => {
     clearInterval(aegisInterval);
   }
 
-  newRoomAnimation();
-  closeContinueButton();
-  updatePlayerTrackers();
-
   if (currentRoom.roomName === "Throne of the Eternal") {
-    currentRoom = BARON_OF_BONE_BOSS_ROOM;
-    renderCurrentRoom(BARON_OF_BONE_BOSS_ROOM);
+    currentRoom.contents.events = THE_FINAL_BATTLE;
+    renderEvent(THE_FINAL_BATTLE);
+    closeContinueButton();
   } else {
     setTimeout(() => {
       // Wisp Logic
@@ -1212,6 +1214,10 @@ continueButton.addEventListener("click", () => {
         renderCurrentRoom(currentRoom);
       }
     }, 1500);
+
+    newRoomAnimation();
+    closeContinueButton();
+    updatePlayerTrackers();
   }
 
   setControlsInterval("PAUSE", 3000);

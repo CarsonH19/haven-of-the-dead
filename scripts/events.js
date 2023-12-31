@@ -254,7 +254,12 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
     GRAVEROBBER_EARVER_EVENT_THREE.summary =
       "You agreed to help Graverobber Earver open the tomb, unleashing fiery skeletal undead which consumed Earver in flames and nearly you as well.";
 
-    currentRoom.contents.monsters.push(BLAZING_SKELETON, BLAZING_SKELETON, BLAZING_SKELETON, BLAZING_SKELETON);
+    currentRoom.contents.monsters.push(
+      BLAZING_SKELETON,
+      BLAZING_SKELETON,
+      BLAZING_SKELETON,
+      BLAZING_SKELETON
+    );
     currentRoom.contents.items.push(GRAVEROBBERS_SPADE);
     setRoomSummary();
     startBattle();
@@ -923,6 +928,51 @@ function gloryforgedBladeCheck() {
   }
 }
 
+const JOIN_THE_BARON = {
+  name: "The Baron's Offer",
+  eventType: "MISC",
+  description:
+    "The Baron of Bone offers you eternal salvation if you join him.",
+  optionOne: "Join",
+  optionTwo: "Refuse",
+  functionOne: () => {
+    JOIN_THE_BARON.summary = `You chose to join the Baron of Bone.`;
+    setTimeout(() => {
+      // playMusic(); Add final boss theme !FIX!
+      startBattle();
+    }, 2000);
+    // Render Ending !FIX! write a function to render an ending screen
+    //writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
+  },
+  functionTwo: () => {
+    JOIN_THE_BARON.summary = `You chose not to join the Baron of Bone.`;
+    currentRoom.contents.monsters.push(BARON_OF_BONE);
+    setTimeout(() => {
+      // playMusic(); Add final boss theme !FIX!
+      startBattle();
+    }, 2000);
+    //writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
+  },
+};
+
+const THE_FINAL_BATTLE = {
+  name: "The Final Battle",
+  eventType: "MISC",
+  description:
+    "The final battle is just ahead. Are you sure you're ready to continue?",
+  optionOne: "Yes",
+  optionTwo: "No",
+  functionOne: () => {
+    currentRoom = BARON_OF_BONE_BOSS_ROOM;
+    renderCurrentRoom(BARON_OF_BONE_BOSS_ROOM);
+  },
+  functionTwo: () => {
+    setTimeout(() => {
+      renderContinueButton();
+    }, 2000);
+  },
+};
+
 // ===============================
 //          Locked Rooms
 // ===============================
@@ -931,7 +981,6 @@ const LOCKED_ROOM = {
   name: "Locked Room",
   description: ``,
   eventType: "MISC",
-  // description listed in function
   optionOne: "Unlock",
   optionTwo: "Leave",
   functionOne: () => {

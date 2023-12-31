@@ -368,7 +368,7 @@ const UNDEAD_SIGGURD = {
   name: "Death Knight Siggurd",
   image: "styles/images/monsters/undead-siggurd.jpg",
   type: "UNDEAD",
-  skulls: 7,
+  skulls: 9,
   soundEffects: {
     spawn: boneCrunchCrack1,
     attack: severMetalHit2,
@@ -437,7 +437,7 @@ const UNDEAD_RIVEN = {
       }
     }, 500);
 
-    playerControlsTimeout(1500);
+    // playerControlsTimeout(1500);
   },
 };
 
@@ -762,6 +762,7 @@ function monsterAbilityHandler(monster) {
 
       case FLOOD_OF_BONES:
         if (criticalHit >= 20) {
+          // !FIX! add healing and change log to collecting bones and restoring health
           console.log("Flood of Bones Ability Called!");
           FLOOD_OF_BONES.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
