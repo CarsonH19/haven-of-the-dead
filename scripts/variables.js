@@ -201,6 +201,7 @@ function calculateCritHitChance() {
 
 // Guard Bonus // +1 Damage Avoided Per Dex
 let guardBonus;
+let guardCooldown = 0;
 
 function calculateGuardBonus() {
   guardBonus = totalDexterity;

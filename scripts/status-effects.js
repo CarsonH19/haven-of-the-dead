@@ -407,13 +407,18 @@ const setupStatusEffectInterval = (statusEffect) => {
 
     if (
       roomCounter >= statusEffect.statusDuration ||
-      statusEffect.duration === null
+      statusEffect.duration === null &&
+      statusEffect !== FLICKERING_CANDLE
     ) {
       endStatusEffectInterval(statusEffect, intervalId);
     } else if (statusEffect.detail === "WISP") {
       statusEffect.tracker = "GUIDING";
     } else if (statusEffect.detail === "CANDLE") {
       statusEffect.tracker = "LIT";
+    }
+
+    if (statusEffect === FLICKERING_CANDLE && statusDuration <= 0) {
+      endStatusEffectInterval(statusEffect, intervalId);
     }
   }, 2000);
 };

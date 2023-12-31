@@ -174,10 +174,7 @@ const RING_OF_SKITTERING = {
   effect:
     "While attuned to this item you have a higher chance to flee successfully.",
   function: () => {
-    fleeChance += 10;
-  },
-  unequip: () => {
-    fleeChance -= 10;
+    return 2;
   },
 };
 
@@ -418,12 +415,20 @@ const REVENANTS_RAGE = {
   rarity: "Rare",
   effect:
     "While attuned to this item your Attack increases by 5 when below 30HP.",
+  stats: {
+    strength: 0,
+    dexterity: 0,
+    faith: 0,
+    attack: 0,
+  },
   function: () => {
     if (currentPlayerHealth <= 30) {
-      return 5;
+      REVENANTS_RAGE.stats.attack = 5;
     } else {
-      return 0;
+      REVENANTS_RAGE.stats.attack = 0;
     }
+    
+    updateTotalStats();
   },
 };
 
@@ -1205,12 +1210,9 @@ const ROTBANE_FERN = {
         DISEASED.statusDuration = null;
 
         updatePlayerTrackers();
-        clearInterval(diseasedInterval);
         writeToLogItem(LOG_ITEM, "YES", ROTBANE_FERN);
       }
     }
-
-    healPlayer(1);
   },
 };
 
@@ -1230,16 +1232,10 @@ const WITCHFIRE_ORCHID = {
       if (cureChance >= 3) {
         CURSED.duration = null;
         CURSED.statusDuration = null;
-        // baseDexterity += 2;
-        // baseStrength += 2;
 
-        updatePlayerTrackers();
-        clearInterval(cursedInterval);
         writeToLogItem(LOG_ITEM, "YES", WITCHFIRE_ORCHID);
       }
     }
-
-    healPlayer(1);
   },
 };
 
@@ -1260,13 +1256,9 @@ const EMBERTHAW_PETAL = {
         CHILLED.duration = null;
         CHILLED.statusDuration = null;
 
-        updatePlayerTrackers();
-        clearInterval(chilledInterval);
         writeToLogItem(LOG_ITEM, "YES", EMBERTHAW_PETAL);
       }
     }
-
-    healPlayer(1);
   },
 };
 
@@ -1287,12 +1279,9 @@ const GHOSTLIGHT_LILY = {
         HAUNTED.duration = null;
         HAUNTED.statusDuration = null;
 
-        clearInterval(hauntedInterval);
         writeToLogItem(LOG_ITEM, "YES", GHOSTLIGHT_LILY);
       }
     }
-
-    healPlayer(1);
   },
 };
 
@@ -1312,15 +1301,10 @@ const GRAVEBLOOM = {
       if (cureChance >= 3) {
         POISONED.duration = null;
         POISONED.statusDuration = null;
-        baseDexterity += 2;
-        baseStrength += 2;
 
         updatePlayerTrackers();
-        clearInterval(poisonedInterval);
       }
     }
-
-    healPlayer(1);
   },
 };
 
@@ -1780,7 +1764,6 @@ let candleItems = [
 ];
 
 let wispItems = [
-  GUIDING_LIGHT,
   GUIDING_LIGHT,
   CURIOUS_WISP,
   WICKED_WISP,

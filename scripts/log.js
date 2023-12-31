@@ -800,7 +800,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
   }
 
   if (logType === LOG_DARKENED_REPRISAL) {
-    logText = newEntry.textContent;
+    logText = narration;
     newEntry.textContent = `PASSIVE: ${logText}`;
   }
 
@@ -1272,7 +1272,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
 
     case LOG_NPC_DIALOGUE:
       if (dataOne === "IVAN" && event === PENDULUM_BLADES) {
-        newEntry.textContent = `Ivan the Scoundrel's malevolent laughter echoes across the bridge as he steps into the dim light. "Well, well, if it isn't the betrayer. You thought you could abandon me to my fate? I prepared this special surprise just for you. Enjoy your last moments!"`;
+        newEntry.textContent = `Ivan the Scoundrel's malevolent laughter echoes across the bridge. "You thought you could abandon me to my fate? Enjoy your last moments!"`;
       } else if (dataOne === "IVAN" && event === SPIKE_PITFALL) {
         newEntry.textContent = `The distant sound of Ivan's the Scoundrel's mocking laughter meets your ear. "Farewell, betrayer! Enjoy the abyss!"`;
       } else if (dataOne === "IVAN" && event === GAS_CHAMBER) {

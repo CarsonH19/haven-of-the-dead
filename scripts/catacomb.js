@@ -246,7 +246,7 @@ let catacombRooms = [
     music: passedDanger,
     contents: {
       monsters: [FLOOD_OF_BONES],
-      items: [],
+      items: [BONE_AMALGAM],
       events: null,
     },
   },
@@ -269,7 +269,8 @@ let catacombRooms = [
   },
   {
     roomName: "Sealed Tomb",
-    backgroundImage: "styles/images/backgrounds/event-rooms/earver-event-one.jpg",
+    backgroundImage:
+      "styles/images/backgrounds/event-rooms/earver-event-one.jpg",
     music: claustrofobia,
     contents: {
       monsters: [],
@@ -934,7 +935,8 @@ const GRAVEROBBER_EARVER_ROOM_TWO = {
 
 const GRAVEROBBER_EARVER_ROOM_THREE = {
   roomName: "Crypt of the Lost King",
-  backgroundImage: "styles/images/backgrounds/event-rooms/earver-event-three.jpg",
+  backgroundImage:
+    "styles/images/backgrounds/event-rooms/earver-event-three.jpg",
   music: imminentDarkness,
   contents: {
     monsters: [],
@@ -1130,7 +1132,8 @@ const CURATORS_CURIO = {
       for (let i = 0; i < commonCuratorArray.length; i++) {
         if (
           !attunedItems.includes(commonCuratorArray[i]) &&
-          !inventoryItems.includes(commonCuratorArray[i])
+          !inventoryItems.includes(commonCuratorArray[i]) &&
+          !curatorItems.includes(commonCuratorArray[i])
         ) {
           commonArray.push(commonCuratorArray[i]);
         }
@@ -1149,7 +1152,8 @@ const CURATORS_CURIO = {
       for (let i = 0; i < rareCuratorArray.length; i++) {
         if (
           !attunedItems.includes(rareCuratorArray[i]) &&
-          !inventoryItems.includes(rareCuratorArray[i])
+          !inventoryItems.includes(rareCuratorArray[i]) &&
+          !curatorItems.includes(rareCuratorArray[i])
         ) {
           rareArray.push(rareCuratorArray[i]);
         }
@@ -1169,7 +1173,8 @@ const CURATORS_CURIO = {
       for (let i = 0; i < epicCuratorArray.length; i++) {
         if (
           !attunedItems.includes(epicCuratorArray[i]) &&
-          !inventoryItems.includes(epicCuratorArray[i])
+          !inventoryItems.includes(epicCuratorArray[i]) &&
+          !curatorItems.includes(rareCuratorArray[i])
         ) {
           epicArray.push(epicCuratorArray[i]);
         }
@@ -1476,10 +1481,12 @@ function createNewRoom() {
             "styles/images/backgrounds/tier-two/grim-marrow-hall.jpg";
         } else if (roomDetails === 4) {
           newRoom.roomName = "SneakShade Sanctum";
-          newRoom.backgroundImage = "styles/images/backgrounds/tier-one/sneakshade-sanctum.jpg";
+          newRoom.backgroundImage =
+            "styles/images/backgrounds/tier-one/sneakshade-sanctum.jpg";
         } else {
           newRoom.roomName = "Raided Tomb";
-          newRoom.backgroundImage = "styles/images/backgrounds/tier-one/marrowrest-tomb.jpg";
+          newRoom.backgroundImage =
+            "styles/images/backgrounds/tier-one/marrowrest-tomb.jpg";
         }
 
         newRoom.music = hiddenCapacity;
@@ -1543,7 +1550,7 @@ function createNewRoom() {
         } else if (roomDetails === 4) {
           newRoom.roomName = "Dreadbone Chamber";
           newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-two/dreadbone-chamber.jpg";
+            "styles/images/backgrounds/event-rooms/skeletal-hands.jpg";
           newRoom.music = claustrofobia;
           newRoom.contents.events = SKELETAL_HANDS;
         } else {
@@ -1568,7 +1575,7 @@ function createNewRoom() {
       numberOfEnemies = 5;
     } else if (roomCounter >= 50) {
       numberOfEnemies = 4;
-    } 
+    }
 
     skeletonMonsters = [
       SKELETAL_SOLDIER,
@@ -1581,11 +1588,7 @@ function createNewRoom() {
     let cultistMonsters = [CULTIST, CULTIST, FIENDSWORN_CULTIST];
     let scoundrelMonsters = [SCOUNDREL];
     let gnawerMonsters = [GNAWER];
-    let spiderMonsters = [
-      CRYPT_CRAWLER,
-      CRYPT_CRAWLER,
-      BROODMOTHER,
-    ];
+    let spiderMonsters = [CRYPT_CRAWLER, CRYPT_CRAWLER, BROODMOTHER];
 
     if (roomType !== 6) {
       let monsterType;

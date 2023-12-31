@@ -729,7 +729,7 @@ function checkForMonsters() {
   // ITEM - Bone Amalgum: Adds temporary HP
   boneAmalgamAddHitPoints();
 
-  // Removes Monster From Rooms Monsters Arry
+  // Removes Monster From Rooms Monsters Array
   monster.shift();
 
   // Used to change the room after defeating a boss
@@ -739,8 +739,8 @@ function checkForMonsters() {
 
   // Checks for more monsters
   if (monster.length > 0) {
+    // setControlsInterval("PAUSE", 1100);
     startBattle();
-    // playerControlsTimeout(2000);
   } else {
     console.log("All monsters defeated");
     attackCounter = 0; // Item: Soulreaver

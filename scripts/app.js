@@ -7,9 +7,14 @@ function playerAttackHandler(smite) {
   let playerToMonsterDamage = dealMonsterDamage(totalAttack);
   let totalDamage;
 
-  //Checks for Rank 4 Holy Smite - maximum damage
+  // Checks for Rank 4 Holy Smite - maximum damage
   if (heroChoice === "PALADIN" && specialAbilityBoonRank === 4 && smite > 1) {
     playerToMonsterDamage = totalAttack;
+  }
+
+  // Checks for Rank 4 Umbral Assault - additional damage !FIX! Balance?!
+  if (heroChoice === "ROGUE" && specialAbilityBoonRank === 4) {
+    playerToMonsterDamage += totalDexterity;
   }
 
   // ATTACK MODIFIERS
@@ -101,8 +106,7 @@ function dealMonsterDamage(damage) {
 
   console.log(damageDealt);
   // ITEM: Relic of Retribution - +25% damage against undead
-  damageDealt *= isItemAttuned(RELIC_OF_RETRIBUTION, 1);
-  console.log(damageDealt);
+  damageDealt = Math.round(damageDealt *= isItemAttuned(RELIC_OF_RETRIBUTION, 1));
 
   // Checks for Echoes of Victory - +20% damage
   if (ECHOES_OF_VICTORY.duration !== null) {
@@ -304,7 +308,7 @@ function specialCooldownHandler(reset) {
     if (heroChoice === "PALADIN") {
       specialCooldownCounter = 16;
     } else if (heroChoice === "ROGUE") {
-      specialCooldownCounter = 8;
+      specialCooldownCounter = 11;
     } else if (heroChoice === "PRIESTESS") {
       specialCooldownCounter = 21;
     }
@@ -338,6 +342,7 @@ function specialCooldownHandler(reset) {
 // ===============================
 
 function guardHandler(bonus) {
+  const guard = document.getElementById("guardCount");
   let damageToGuard = dealPlayerDamage(monsterAttackValue);
 
   if (bonus) {
@@ -374,6 +379,15 @@ function guardHandler(bonus) {
   // console.log(`Damage Blocked: ${damageBlocked}`);
   // console.log(`Current Player Health ${currentPlayerHealth}`);
   // console.log(`Current Player Health Bar Value ${playerHealthBar.value}`);
+
+  if (damageBlocked > damageToGuard) {
+    damageBlocked = damageToGuard;
+  }
+
+  if (guardCooldown > 0) {
+    guardCooldown--;
+    guard.textContent = `Cooldown: ${guardCooldown}`;
+  }
 
   writeToLogActions(LOG_GUARD, "YES", damageBlocked);
   updatePlayerTrackers();
@@ -666,6 +680,17 @@ function togglePlayerControls() {
     fleeBtn.disabled = true;
   }
 
+  // Checks for Guard Cooldown
+  if (
+    currentRoom.contents.monsters.length > 0 &&
+    guardCooldown === 0 &&
+    monsterContainer.style.display === "flex"
+  ) {
+    guardBtn.disabled = false;
+  } else {
+    guardBtn.disabled = true;
+  }
+
   // Checks for Special Ability Cooldown
   if (
     currentRoom.contents.monsters.length > 0 &&
@@ -904,11 +929,11 @@ function renderRoomSummaryModal() {
         roomSummaryInfo.appendChild(eventSummaryContainer);
       }
 
-      // Monsters
+      // Enemies
       if (roomInfo.monsters.length > 0) {
         monsterSummaryContainer = document.createElement("div");
         monstersHeader = document.createElement("h4");
-        monstersHeader.textContent = `Monsters Defeated`;
+        monstersHeader.textContent = `Enemies Defeated`;
         monsterSummaryContainer.appendChild(monstersHeader);
         monstersList = document.createElement("ul");
         monsterSummaryContainer.appendChild(monstersList);
@@ -1028,6 +1053,7 @@ function renderContinueButton() {
 
 attackBtn.addEventListener("click", () => {
   if (monsterContainer.style.display === "flex") {
+    guardCooldown--;
     actionCounter++;
 
     playerAttackHandler();
@@ -1057,6 +1083,7 @@ guardBtn.addEventListener("click", () => {
 });
 
 specialBtn.addEventListener("click", () => {
+  guardCooldown--;
   actionCounter++;
 
   if (heroChoice === "PALADIN") {
@@ -1082,6 +1109,7 @@ specialBtn.addEventListener("click", () => {
 });
 
 potionBtn.addEventListener("click", () => {
+  guardCooldown--;
   actionCounter++;
   attackCounter = 0; // Item: Soulreaver
 
@@ -1098,6 +1126,7 @@ potionBtn.addEventListener("click", () => {
 });
 
 fleeBtn.addEventListener("click", () => {
+  guardCooldown--;
   actionCounter++;
   attackCounter = 0; // Item: Soulreaver
 

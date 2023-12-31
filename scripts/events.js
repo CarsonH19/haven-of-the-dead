@@ -169,7 +169,7 @@ const GRAVEROBBER_EARVER = {
   eventType: "NPC",
   image: "styles/images/npcs/graverobber-earver.jpg",
   description:
-    "You stumble upon Graverobber Earver, a sinister figure, hell-bent on breaching an ancient tomb. He beckons you to join his sinister endeavor, promising untold treasures from the tomb.",
+    "You stumble upon Graverobber Earver, hell-bent on breaching a sealed tomb. He beckons you to join his sinister endeavor, promising to share the treasure within.",
   summary: "",
   optionOne: "Accept",
   optionTwo: "Refuse",
@@ -211,7 +211,7 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
-    GRAVEROBBER_EARVER.summary =
+    GRAVEROBBER_EARVER_EVENT_TWO.summary =
       "You agreed to help Graverobber Earver open the sarcophagus, awakening a Bone Titan which struck Earver down and nearly you as well.";
 
     currentRoom.contents.monsters.push(BONE_TITAN);
@@ -223,7 +223,7 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
-    GRAVEROBBER_EARVER.summary =
+    GRAVEROBBER_EARVER_EVENT_TWO.summary =
       "Again, you refused to help Graverobber Earver desecrate a burial.";
 
     let currentRoomCounter = roomCounter + 10;
@@ -251,7 +251,7 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
   optionOne: "Accept",
   optionTwo: "Refuse",
   functionOne: () => {
-    GRAVEROBBER_EARVER.summary =
+    GRAVEROBBER_EARVER_EVENT_THREE.summary =
       "You agreed to help Graverobber Earver open the tomb, unleashing fiery skeletal undead which consumed Earver in flames and nearly you as well.";
 
     currentRoom.contents.monsters.push(BLAZING_SKELETON, BLAZING_SKELETON, BLAZING_SKELETON, BLAZING_SKELETON);
@@ -263,7 +263,7 @@ const GRAVEROBBER_EARVER_EVENT_THREE = {
     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
-    GRAVEROBBER_EARVER.summary =
+    GRAVEROBBER_EARVER_EVENT_THREE.summary =
       "Yet again, you refused to help Graverobber Earver. In recognition of your virtue, the spirit of a long dead king gifted his Ethereal Crown to you.";
 
     currentRoom.contents.items.push(ETHEREAL_CROWN);
@@ -943,14 +943,14 @@ const LOCKED_ROOM = {
       setRoomSummary();
       // Skeleton Key Logs Information
     } else {
-      LOCKED_ROOM.summary = `You don't have a Skeleton Key to unlock the ${currentRoom.roomName}.`;
+      LOCKED_ROOM.summary = `You didn't have a Skeleton Key to unlock the ${currentRoom.roomName}.`;
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
       setTimeout(renderRoomSummaryModal, 5000);
       setRoomSummary();
     }
   },
   functionTwo: () => {
-    LOCKED_ROOM.summary = `You didn't unlock the ${currentRoom.roomName}.`;
+    LOCKED_ROOM.summary = `You chose not to unlock the ${currentRoom.roomName}.`;
     writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
     setTimeout(renderRoomSummaryModal, 5000);
     setRoomSummary();
