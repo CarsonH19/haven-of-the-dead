@@ -19,11 +19,18 @@
     <title>Haven of the Dead</title>
   </head>
   <body>
+
+    <!----------------- FADE MODAL ------------------->
+
+    <div id="fadeModal" class="modal">
+      <div id="fade"></div>
+    </div>
+
     <!----------------- START GAME MODAL ------------------->
 
     <div id="startGameModal" class="modal">
       <div class="start-modal-content">
-        <h1>Haven of the Dead</h1>
+        <h1>Haven of <br> the Dead</h1>
         <button id="startBtn">Start</button>
       </div>
     </div>
@@ -230,6 +237,7 @@
       <div class="modal-content">
         <div class="log-container-modal">
           <h3>Log</h3>
+          <div class="divider"></div>
           <ul id="logModalList" class="log-modal-list"></ul>
         </div>
       </div>
@@ -310,8 +318,9 @@
     <!-----------------  GAME OVER MODAL  ------------------->
 
     <div id="gameOverModal" class="modal">
-      <div class="modal-content">
+      <div class="game-over-modal-content">
         <h1>You Died</h1>
+        <p>The endless undead hoard continue to poor from the catacomb and spread like a disease through the land. The world entered a dark age, as the undead traveled across the kingdom increasing there numbers until no one remained</p>
         <button id="restartGameBtn">Restart</button>
       </div>
     </div>
@@ -320,7 +329,7 @@
 
     <div id="gameWindow" class="screen">
       <audio id="myAudio" src=""></audio>
-      <div id="fade"></div>
+      <!-- <div id="fade"></div> -->
       <div class="game-window">
         <div id="backgroundImage">
           <div class="top-content">

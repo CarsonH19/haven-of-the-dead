@@ -533,10 +533,8 @@ heroChoiceModal.addEventListener("click", function (event) {
 
   // Function to check if the target is SIGGURD or its child
   const isSiggurdOrChild = (target) => SIGGURD.contains(target);
-
   // Function to check if the target is RIVEN or its child
   const isRivenOrChild = (target) => RIVEN.contains(target);
-
   // Function to check if the target is LIHETH or its child
   const isLihethOrChild = (target) => LIHETH.contains(target);
 
@@ -545,9 +543,6 @@ heroChoiceModal.addEventListener("click", function (event) {
     isRivenOrChild(event.target) ||
     isLihethOrChild(event.target)
   ) {
-    gameWindow.style.display = "flex";
-    document.getElementById("heroChoiceModal").style.display = "none";
-
     if (isSiggurdOrChild(event.target)) {
       heroChoice = "PALADIN";
       playerName.textContent = paladin.name;
@@ -566,8 +561,15 @@ heroChoiceModal.addEventListener("click", function (event) {
     totalDexterity = baseDexterity;
     totalFaith = baseFaith;
 
-    document.getElementById("gameWindow").style.display = "flex";
-    renderCurrentRoom(catacombEntrance);
+    setTimeout(() => {
+      gameWindow.style.display = "flex";
+      document.getElementById("heroChoiceModal").style.display = "none";
+      document.getElementById("gameWindow").style.display = "flex";
+      renderCurrentRoom(catacombEntrance);
+    }, 1500);
+    newRoomAnimation();
+    soundEffectHandler(whooshLowAir);
+
     setTimeout(function () {
       catacombEntranceModal.style.display = "block";
     }, 3000);
@@ -739,7 +741,8 @@ function togglePlayerControls() {
     fadeOutAnimation(controlsContainer);
     setTimeout(() => {
       controlsContainer.style.display = "none";
-    }, 2000)  } else {
+    }, 2000);
+  } else {
     fadeInAnimation(controlsContainer);
     setTimeout(() => {
       controlsContainer.style.display = "flex";
@@ -1255,8 +1258,12 @@ continueButton.addEventListener("click", () => {
 });
 
 startBtn.addEventListener("click", () => {
-  startGameModal.style.display = "none";
-  heroChoiceModal.style.display = "block";
+  setTimeout(() => {
+    startGameModal.style.display = "none";
+    heroChoiceModal.style.display = "block";
+  }, 1500);
+  newRoomAnimation();
+  soundEffectHandler(whooshLowAir);
 });
 
 restartGameBtn.addEventListener("click", () => {

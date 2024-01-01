@@ -12,10 +12,10 @@ let paladin = {
   faith: 1,
   special: paladinHolySmite,
   soundEffects: {
-    attack: swordImpactRock1,
-    miss: swordSwingWhoosh,
-    ability: magicSpellWhoosh14,
-    guard: swordHit4,
+    attack: heavyAttackSounds,
+    miss: guardSounds,
+    ability: magicAttackSounds,
+    guard: guardSounds,
   },
 };
 
@@ -62,10 +62,10 @@ let rogue = {
   faith: 0,
   special: rogueUmbralAssault,
   soundEffects: {
-    attack: swordDraw2,
-    miss: swordSwingWhoosh,
+    attack: lightAttackSounds,
+    miss: guardSounds,
     ability: ghostlyWhoosh,
-    guard: swordHit4,
+    guard: guardSounds,
   },
 };
 
@@ -147,10 +147,10 @@ let priestess = {
   faith: 2,
   special: priestessCleansingFlame,
   soundEffects: {
-    attack: magicWandCast14,
-    miss: swordSwingWhoosh,
-    ability: magicalSpell,
-    guard: swordSwingWhoosh,
+    attack: magicAttackSounds,
+    miss: magicGuardSounds,
+    ability: magicGuardSounds,
+    guard: magicGuardSounds,
   },
 };
 
@@ -593,8 +593,8 @@ function renderHeroStatsModal() {
       console.log("CALLED");
       rankFourSpecialBoon.textContent = `Removes 1 Condition`;
     }
-  } 
-  
+  }
+
   // if (passiveAbilityBoonRank === 4) {
   //   if (heroChoice === "PALADIN") {
   //     rankFourPassiveBoon.textContent = ``;

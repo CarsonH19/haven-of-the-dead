@@ -410,7 +410,7 @@ function writeToLogActions(logType, narrate, dataOne) {
 
   if (
     (narrate === "YES" && dataOne === "SUCCESS") ||
-    (narrate === "YES" && logType === LOG_POTION)
+    (typeof narration !== 'number')
   ) {
     writeToNarrative(narration);
   }
@@ -638,7 +638,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
 
     case LOG_STAT_INCREASE:
       let hero = heroChecker();
-      newEntry.textContent = `LEVEL UP: You've reached level ${hero.level}! Your attacks deal and additional 2 damage and your base health increased by 10HP.`;
+      newEntry.textContent = `LEVEL UP: You've reached level ${hero.level}! Your attacks deal and additional 2 damage and your base health increased by 10HP. Additionally, a Guiding Light has come to aid you on your journey.`;
       break;
 
     // ===============================

@@ -1554,7 +1554,7 @@ const SOULFLAME_CANDLE = {
   detail: "CANDLE",
   tracker: null,
   effect:
-    "While this candle is lit all experience gained is doubled. The candle burns out after 10 rooms.",
+    "While this candle is lit all experience gained is doubled. The candle burns out after clearing 10 rooms.",
   status: "All experience gained is doubled.",
   duration: null,
   statusDuration: null,

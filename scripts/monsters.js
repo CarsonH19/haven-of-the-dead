@@ -79,9 +79,9 @@ const SCOUNDREL = {
   skulls: 2,
   soundEffects: {
     spawn: swordFromSheath3,
-    attack: knifeStab,
+    attack: lightAttackSounds,
     death: fightGrunt6,
-    ability: fleshStab3,
+    ability: lightAttackSounds,
   },
   function: () => {
     POISONED.function(3);
@@ -100,8 +100,9 @@ const CULTIST = {
   skulls: 3,
   soundEffects: {
     spawn: swordFromSheath3,
-    attack: knifeStab,
+    attack: lightAttackSounds,
     death: fightGrunt6,
+    ability: evilSpell1,
   },
   function: () => {
     CURSED.function(5);
@@ -115,8 +116,9 @@ const FIENDSWORN_CULTIST = {
   skulls: 5,
   soundEffects: {
     spawn: swordFromSheath3,
-    attack: knifeStab,
+    attack: lightAttackSounds,
     death: fightGrunt6,
+    ability: evilSpell1,
   },
   function: () => {
     CURSED.function(7);
@@ -146,7 +148,7 @@ const SKELETAL_SOLDIER = {
   skulls: 2,
   soundEffects: {
     spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
+    attack: heavyAttackSounds,
     death: boneBreak8,
   },
 };
@@ -158,7 +160,7 @@ const ARMORED_SKELETON = {
   skulls: 3,
   soundEffects: {
     spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
+    attack: heavyAttackSounds,
     death: armorMetalClanksToTheGround,
   },
 };
@@ -170,7 +172,7 @@ const LEGIONNAIRE = {
   skulls: 4,
   soundEffects: {
     spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
+    attack: heavyAttackSounds,
     death: armorMetalClanksToTheGround,
   },
 };
@@ -183,7 +185,7 @@ const UNDYING_WARBAND = {
   attackCounter: 0,
   soundEffects: {
     spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
+    attack: lightAttackSounds,
     death: armorMetalClanksToTheGround,
   },
   function: (attacks) => {
@@ -193,25 +195,6 @@ const UNDYING_WARBAND = {
 
       damagePlayer(monsterToPlayerDamage);
       writeToLogMonster(LOG_MONSTER_ATTACK, "NO", monsterToPlayerDamage);
-    }
-
-    function attackSounds() {
-      const sound = Math.floor(Math.random() * 5) + 1;
-
-      switch (sound) {
-        case 1:
-          severMetalHit2.play();
-          break;
-        case 2:
-          fleshHit5.play();
-          break;
-        case 3:
-          fleshStab3.play();
-          break;
-        case 4:
-          knifeStab.play();
-          break;
-      }
     }
 
     if (currentMonsterHealth <= 110) {
@@ -227,7 +210,7 @@ const UNDYING_WARBAND = {
 
         console.log("ATTACK MADE");
         UNDYING_WARBAND.attackCounter++;
-        attackSounds();
+        soundEffectHandler(heavyAttackSounds());
         warbandAttacks();
         updatePlayerTrackers();
       }, 500);
@@ -242,9 +225,9 @@ const BLAZING_SKELETON = {
   skulls: 3,
   soundEffects: {
     spawn: boneCrunchCrack1,
-    attack: torchPassBy1,
+    attack: magicAttackSounds,
     death: boneBreak8,
-    ability: magicSpellFire1,
+    ability: magicAttackSounds,
   },
   function: () => {
     //writeToLog() erupts in flames on death !FIX!
@@ -262,7 +245,7 @@ const DRAUGR = {
   skulls: 5,
   soundEffects: {
     spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
+    attack: heavyAttackSounds,
     death: boneBreak8,
     ability: iceCrackFreeze,
   },
@@ -279,7 +262,7 @@ const BONE_TITAN = {
   skulls: 7,
   soundEffects: {
     spawn: boneCrunchCrack1,
-    attack: fleshHit5,
+    attack: heavyAttackSounds,
     death: boneBreak8,
     ability: boneBreak7,
   },
@@ -303,7 +286,7 @@ const BONEVAULT_DEMON = {
   soundEffects: {
     // !FIX! Add sound effects
     spawn: boneCrunchCrack1,
-    attack: fleshHit5,
+    attack: heavyAttackSounds,
     death: boneBreak8,
     ability: boneBreak7,
   },
@@ -371,8 +354,9 @@ const UNDEAD_SIGGURD = {
   skulls: 9,
   soundEffects: {
     spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
+    attack: heavyAttackSounds,
     death: armorMetalClanksToTheGround,
+    ability: magicAttackSounds,
   },
   tracker: 0,
   function: () => {
@@ -386,9 +370,10 @@ const UNDEAD_LIHETH = {
   type: "UNDEAD",
   skulls: 9,
   soundEffects: {
-    spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
+    spawn: magicGuardSounds,
+    attack: magicAttackSounds,
     death: armorMetalClanksToTheGround,
+    ability: magicAttackSounds,
   },
   tracker: 0,
   function: () => {
@@ -412,9 +397,10 @@ const UNDEAD_RIVEN = {
   type: "UNDEAD",
   skulls: 9,
   soundEffects: {
-    spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
-    death: armorMetalClanksToTheGround,
+    spawn: ghostAppearance1,
+    attack: lightAttackSounds,
+    death: ghostShriekWhoosh,
+    ability: lightAttackSounds,
   },
   attackCounter: 0,
   tracker: 0,
@@ -447,8 +433,8 @@ const BARON_OF_BONE = {
   type: "UNDEAD",
   skulls: 9,
   soundEffects: {
-    spawn: boneCrunchCrack1,
-    attack: severMetalHit2,
+    spawn: evilSpell1,
+    attack: magicAttackSounds,
     death: armorMetalClanksToTheGround,
   },
   function: () => {
@@ -471,7 +457,7 @@ const SHADE = {
   skulls: 1,
   soundEffects: {
     spawn: ghostAppearance1,
-    attack: getEvilSpiritAudio(),
+    attack: getEvilSpiritAudio,
     death: ghostHowl,
   },
 };
@@ -483,7 +469,7 @@ const HAUNTING_SPIRIT = {
   skulls: 3,
   soundEffects: {
     spawn: ghostAppearance1,
-    attack: getEvilSpiritAudio(),
+    attack: getEvilSpiritAudio,
     death: ghostHowl,
   },
   function: () => {
@@ -498,7 +484,7 @@ const GRUDGE = {
   skulls: 5,
   soundEffects: {
     spawn: ghostAppearance1,
-    attack: getEvilSpiritAudio(),
+    attack: getEvilSpiritAudio,
     death: ghostShriekWhoosh,
   },
   function: () => {
@@ -580,7 +566,7 @@ const IVAN_STATS = {
   skulls: 5,
   soundEffects: {
     spawn: swordFromSheath3,
-    attack: knifeStab,
+    attack: lightAttackSounds,
     death: fightGrunt6,
   },
   abilityCounter: 0,
@@ -673,10 +659,9 @@ function renderMonsterStatBlock(monster) {
   fadeInAnimation(monsterContainer);
 
   if (monster.boss) {
-    monsterContainer.style.maxWidth = "500px";
+    //
   } else {
     fadeInAnimation(monsterImage);
-    monsterContainer.style.maxWidth = "350px";
     monsterImage.style.display = "block";
     monsterImage.style.backgroundImage = `url(${monster.image})`;
   }
@@ -693,6 +678,9 @@ function renderMonsterStatBlock(monster) {
   isItemAttuned(BONECHILL_AMULET, null);
 
   setMonsterHealth(monsterMaxHealth);
+
+  monsterContainer.style.maxWidth = `${monsterMaxHealth + 350}px`;
+
   togglePlayerControls();
 }
 

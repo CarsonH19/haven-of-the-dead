@@ -32,26 +32,43 @@ function updateVolumeDisplay(volume) {
 }
 
 function soundEffectHandler(object, type) {
+  let hero = heroChecker();
   let sound;
   let volume = 0.1;
 
   switch (type) {
     case "SPAWN":
-      sound = object.soundEffects.spawn;
+      if (typeof object.soundEffects.spawn === "function") {
+        sound = object.soundEffects.spawn();
+      } else {
+        sound = object.soundEffects.spawn;
+      }
       break;
 
     case "MONSTER ATTACK":
-      sound = object.soundEffects.attack;
+      if (typeof object.soundEffects.attack === "function") {
+        sound = object.soundEffects.attack();
+      } else {
+        sound = object.soundEffects.attack;
+      }
       volume = 0.05;
       break;
 
     case "MONSTER ABILITY":
-      sound = object.soundEffects.ability;
+      if (typeof object.soundEffects.ability === "function") {
+        sound = object.soundEffects.ability();
+      } else {
+        sound = object.soundEffects.ability;
+      }
       volume = 0.05;
       break;
 
     case "MONSTER DEATH":
-      sound = object.soundEffects.death;
+      if (typeof object.soundEffects.death === "function") {
+        sound = object.soundEffects.death();
+      } else {
+        sound = object.soundEffects.death;
+      }
       break;
 
     case "MONSTER MISS":
@@ -59,19 +76,23 @@ function soundEffectHandler(object, type) {
       break;
 
     case "PLAYER ATTACK":
-      sound = object.soundEffects.attack;
+      sound = hero.soundEffects.attack();
       break;
 
     case "PLAYER ABILITY":
-      sound = object.soundEffects.ability;
+      if (typeof object.soundEffects.ability === "function") {
+        sound = object.soundEffects.ability();
+      } else {
+        sound = object.soundEffects.ability;
+      }
       break;
 
     case "PLAYER GUARD":
-      sound = object.soundEffects.guard;
+      sound = hero.soundEffects.guard();
       break;
 
     case "PLAYER MISS":
-      sound = object.soundEffects.miss;
+      sound = hero.soundEffects.miss();
       break;
 
     case "ITEM":
@@ -89,6 +110,8 @@ function soundEffectHandler(object, type) {
       }
       sound = object;
   }
+
+  console.log(`SOUND: ${sound}`);
 
   // Check if the AudioContext and GainNode are already created
   if (!object.audioContext) {
@@ -268,7 +291,7 @@ const weCantStopThem = loadAudio(
   true
 );
 
-// Coffin Spider Event
+// Coffin Event
 const threeThousandYearsOld = loadAudio(
   "audio/music/3000 Years Old.mp3",
   "threeThousandYearsOld",
@@ -320,71 +343,266 @@ const heartbeatFastLow = loadAudio(
 );
 
 // ===============================
-//        Player Attacks
+//      Player Sound Effects
+// ===============================
+
+// ===============================
+//         Guard Weapon
 // ===============================
 
 const severMetalHit2 = loadAudio(
-  "audio/sound-effects/Sever Metal Hit 2.mp3",
+  "audio/sound-effects/guard/Sever Metal Hit 2.mp3",
   "severMetalHit2"
 );
 
 const swordImpactRock1 = loadAudio(
-  "audio/sound-effects/Sword Impact Rock 1.mp3",
+  "audio/sound-effects/guard/Sword Impact Rock 1.mp3",
   "swordImpactRock1"
 );
 
-// const swordImpactRock2 = loadAudio(
-//   "audio/sound-effects/Sword Impact Rock 2.mp3",
-//   "swordImpactRock2"
-// );
-
-const swordDraw2 = loadAudio(
-  "audio/sound-effects/Sword Draw 2.mp3",
-  "swordDraw2"
+const swordHit4 = loadAudio(
+  "audio/sound-effects/guard/Sword Hit 4.mp3",
+  "swordHit4"
 );
 
-const magicWandCast14 = loadAudio(
-  "audio/sound-effects/Magic Wand Cast 14.mp3",
-  "magicWandCast14"
-);
-
-// ===============================
-//             Miss
-// ===============================
-
-// Attack Miss (Rogue/Paladin)
 const swordSwingWhoosh = loadAudio(
-  "audio/sound-effects/Sword Swing Whoosh.mp3",
+  "audio/sound-effects/light/Sword Swing Whoosh.mp3",
   "swordSwingWhoosh"
 );
 
-// Attack Miss (Priestess)
+function guardSounds() {
+  let sounds = [severMetalHit2, swordImpactRock1, swordHit4, swordSwingWhoosh];
+  let index = Math.floor(Math.random() * sounds.length);
+  console.log(sounds[index]);
+  return sounds[index];
+}
 
-// Room Transition
-const whooshLowAir = loadAudio(
-  "audio/sound-effects/Whoosh Low Air.mp3",
-  "whooshLowAir"
+// ===============================
+//         Heavy Weapon
+// ===============================
+// Paladin / Undead
+
+const axeChopFlesh1 = loadAudio(
+  "audio/sound-effects/heavy/Axe Chop Flesh 1.mp3",
+  "axeChopFlesh1"
 );
 
-// ===============================
-//            Guard
-// ===============================
+const axeChopFlesh2 = loadAudio(
+  "audio/sound-effects/heavy/Axe Chop Flesh 2.mp3",
+  "axeChopFlesh2"
+);
 
-const swordHit4 = loadAudio("audio/sound-effects/Sword Hit 4.mp3", "swordHit4");
+const axeChopFlesh8 = loadAudio(
+  "audio/sound-effects/heavy/Axe Chop Flesh 8.mp3",
+  "axeChopFlesh8"
+);
+
+const axeChopFlesh10 = loadAudio(
+  "audio/sound-effects/heavy/Axe Chop Flesh 10.mp3",
+  "axeChopFlesh10"
+);
+
+const battleAxeStrike2 = loadAudio(
+  "audio/sound-effects/heavy/Battle Axe Strike 2.mp3",
+  "battleAxeStrike2"
+);
+
+const battleAxeStrike3 = loadAudio(
+  "audio/sound-effects/heavy/Battle Axe Strike 3.mp3",
+  "battleAxeStrike3"
+);
+
+const battleAxeThrow = loadAudio(
+  "audio/sound-effects/heavy/Battle Axe Throw.mp3",
+  "battleAxeThrow"
+);
+
+const impactFleshChop = loadAudio(
+  "audio/sound-effects/heavy/Impact Flesh Chop.mp3",
+  "impactFleshChop"
+);
+
+function heavyAttackSounds() {
+  let sounds = [
+    axeChopFlesh1,
+    axeChopFlesh10,
+    axeChopFlesh2,
+    axeChopFlesh8,
+    battleAxeStrike2,
+    battleAxeStrike3,
+    battleAxeThrow,
+    impactFleshChop,
+  ];
+  let index = Math.floor(Math.random() * sounds.length);
+  console.log(sounds[index]);
+  return sounds[index];
+}
+
+// ===============================
+//         Light Weapon
+// ===============================
+// Rogue / Scoundrel / Cultists
+
+const knifeSliceFace = loadAudio(
+  "audio/sound-effects/light/Knife Slice Face.mp3",
+  "knifeSliceFace"
+);
+const knifeStab1 = loadAudio(
+  "audio/sound-effects/light/Knife Stab 1.mp3",
+  "knifeStab1"
+);
+const knifeStab = loadAudio(
+  "audio/sound-effects/light/Knife Stab.mp3",
+  "knifeStab"
+);
+const knifeStabFleshWet = loadAudio(
+  "audio/sound-effects/light/Knife Stab Flesh Wet.mp3",
+  "knifeStabFleshWet"
+);
+const knifeThrowFlesh = loadAudio(
+  "audio/sound-effects/light/Knife Throw Flesh.mp3",
+  "knifeThrowFlesh"
+);
+const swordSlice = loadAudio(
+  "audio/sound-effects/light/Sword Slice.mp3",
+  "swordSlice"
+);
+const swordDraw2 = loadAudio(
+  "audio/sound-effects/light/Sword Draw 2.mp3",
+  "swordDraw2"
+);
+const swordThrow = loadAudio(
+  "audio/sound-effects/light/Sword Throw.mp3",
+  "swordThrow"
+);
+
+function lightAttackSounds() {
+  let sounds = [
+    knifeSliceFace,
+    knifeStab1,
+    knifeStab,
+    knifeStabFleshWet,
+    knifeThrowFlesh,
+    swordSlice,
+    swordDraw2,
+    swordThrow,
+  ];
+  let index = Math.floor(Math.random() * sounds.length);
+  console.log(sounds[index]);
+  return sounds[index];
+}
+
+// ===============================
+//            Magic
+// ===============================
+// Priestess / Blazing Skeleton / Baron
+
+// Attack & Ability
+
+const magicSpellBuild14 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Build 14.mp3",
+  "magicSpellBuild14"
+);
+const magicSpellBurst = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Burst.mp3",
+  "magicSpellBurst"
+);
+const magicSpellFire1 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Fire 1.mp3",
+  "magicSpellFire1"
+);
+const magicSpellFire2 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Fire 2.mp3",
+  "magicSpellFire2"
+);
+const magicSpellHit2 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Hit 2.mp3",
+  "magicSpellHit2"
+);
+const magicSpellHit4 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Hit 4.mp3",
+  "magicSpellHit4"
+);
+const magicSpellImpact = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Impact.mp3",
+  "magicSpellImpact"
+);
+const magicWandCast8 = loadAudio(
+  "audio/sound-effects/magic/Magic Wand Cast 8.mp3",
+  "magicWandCast8"
+);
+const magicWandCast14 = loadAudio(
+  "audio/sound-effects/magic/Magic Wand Cast 14.mp3",
+  "magicWandCast14"
+);
+const magicalSpell = loadAudio(
+  "audio/sound-effects/magic/Magical Spell.mp3",
+  "magicalSpell"
+);
+
+function magicAttackSounds() {
+  let sounds = [
+    magicSpellBuild14,
+    magicSpellBurst,
+    magicSpellFire1,
+    magicSpellFire2,
+    magicSpellHit2,
+    magicSpellHit4,
+    magicSpellImpact,
+  ];
+  let index = Math.floor(Math.random() * sounds.length);
+  console.log(sounds[index]);
+  return sounds[index];
+}
+
+// Guard & Miss
+const magicSpellPassBy28 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Pass By 28.mp3",
+  "magicSpellPassBy28"
+);
+const magicSpellWhoosh2 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Whoosh 2.mp3",
+  "magicSpellWhoosh2"
+);
+const magicSpellWhoosh4 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Whoosh 4.mp3",
+  "magicSpellWhoosh4"
+);
+const magicSpellWhoosh9 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Whoosh 9.mp3",
+  "magicSpellWhoosh9"
+);
+const magicSpellWhoosh14 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Whoosh 14.mp3",
+  "magicSpellWhoosh14"
+);
+const magicSpellWhoosh20 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Whoosh 20.mp3",
+  "magicSpellWhoosh20"
+);
+const magicSpellWhoosh22 = loadAudio(
+  "audio/sound-effects/magic/Magic Spell Whoosh 22.mp3",
+  "magicSpellWhoosh22"
+);
+
+function magicGuardSounds() {
+  let sounds = [
+    magicSpellPassBy28,
+    magicSpellWhoosh14,
+    magicSpellWhoosh2,
+    magicSpellWhoosh20,
+    magicSpellWhoosh22,
+    magicSpellWhoosh4,
+    magicSpellWhoosh9,
+  ];
+  let index = Math.floor(Math.random() * sounds.length);
+  console.log(sounds[index]);
+  return sounds[index];
+}
 
 // ===============================
 //       Player Abilities
 // ===============================
-
-const magicSpellWhoosh14 = loadAudio(
-  "audio/sound-effects/Magic Spell Whoosh 14.mp3",
-  "magicSpellWhoosh14"
-);
-
-const magicalSpell = loadAudio(
-  "audio/sound-effects/Magical Spell.mp3",
-  "magicalSpell"
-);
 
 const ghostlyWhoosh = loadAudio(
   "audio/sound-effects/Ghostly Whoosh.mp3",
@@ -394,12 +612,6 @@ const ghostlyWhoosh = loadAudio(
 // ===============================
 //        Monster Abilities
 // ===============================
-
-// Blazing Skeleton
-const magicSpellFire1 = loadAudio(
-  "audio/sound-effects/Magic Spell Fire 1.mp3",
-  "magicSpellFire1"
-);
 
 // Crypt Crawler
 const spiderWebShoot7 = loadAudio(
@@ -467,11 +679,6 @@ const ghostAppearance1 = loadAudio(
 //        Monster Attacks
 // ===============================
 
-const impactFleshChop = loadAudio(
-  "audio/sound-effects/Impact Flesh Chop.mp3",
-  "impactFleshChop"
-);
-
 const fleshHit5 = loadAudio("audio/sound-effects/Flesh Hit 5.mp3", "fleshHit5");
 
 const impactPunchBody2 = loadAudio(
@@ -488,8 +695,6 @@ const spiderBiteFang4 = loadAudio(
   "audio/sound-effects/Spider Bite Fang 4.mp3",
   "spiderBiteFang4"
 );
-
-const knifeStab = loadAudio("audio/sound-effects/Knife Stab.mp3", "knifeStab");
 
 const skullHitShovel = loadAudio(
   "audio/sound-effects/Skull Hit Shovel.mp3",
@@ -659,4 +864,14 @@ const gasLeakHose3 = loadAudio(
 const metalSqueak21 = loadAudio(
   "audio/sound-effects/Metal Squeak 21.mp3",
   "metalSqueak21"
+);
+
+// ===============================
+//           MIC
+// ===============================
+
+// Room Transition
+const whooshLowAir = loadAudio(
+  "audio/sound-effects/Whoosh Low Air.mp3",
+  "whooshLowAir"
 );
