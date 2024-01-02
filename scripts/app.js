@@ -36,8 +36,6 @@ function playerAttackHandler(smite) {
   //ITEM: Unholy Effigy - Reduces cooldown on Crit
   isItemAttuned(UNHOLY_EFFIGY);
 
-  console.log(`Critical Hit Chance: ${criticalHit}`);
-
   // Smite Critical Hit
   if (criticalHit >= 20 && smite > 1 && playerToMonsterDamage > 0) {
     totalDamage = Math.round(
@@ -104,7 +102,6 @@ function damageMonster(damage) {
 function dealMonsterDamage(damage) {
   let damageDealt = Math.round(Math.random() * damage);
 
-  console.log(damageDealt);
   // ITEM: Relic of Retribution - +25% damage against undead
   damageDealt = Math.round(
     (damageDealt *= isItemAttuned(RELIC_OF_RETRIBUTION, 1))
@@ -193,8 +190,6 @@ function dealPlayerDamage(damage) {
   // ITEM - Hellfire Charm - Accumulates damage received
   if (attunedItems.includes(HELLFIRE_CHARM)) {
     HELLFIRE_CHARM.tracker += dealtDamage;
-    console.log(dealtDamage);
-    console.log(HELLFIRE_CHARM.tracker);
   }
 
   return dealtDamage;
@@ -213,7 +208,6 @@ function damagePlayer(damage) {
   // Bone Amalgam Use Temp HP
   if (attunedItems.includes(BONE_AMALGAM)) {
     damage = boneAmalgamUseHitPoints(damage);
-    console.log(`Returned Damage ${damage}`);
   }
 
   // Check for Burned Condition
@@ -256,7 +250,6 @@ function damagePlayer(damage) {
 }
 
 function showDamage(damage, source, critical) {
-  console.log(`showDamage Called`);
   const damageDealtElement = document.getElementById("damageDealt");
   const damageReceivedElement = document.getElementById("damageReceived");
   const numbers = document.createElement("li");
@@ -442,10 +435,9 @@ function fleeHandler() {
     fleeAttempt += 3;
   }
 
-  console.log(fleeAttempt);
-
   if (fleeAttempt >= 10) {
     // Log must be placed before currentRoom change
+    writeToLogActions(LOG_FLEE, "YES", "SUCCESS");
     let roomToFlee = currentRoom;
     let newRoom = getRandomRoom(catacombRooms);
 
@@ -458,11 +450,10 @@ function fleeHandler() {
           monsterContainer.style.display = "none";
           monsterImage.style.display = "none";
           renderCurrentRoom(currentRoom);
-        }, 1500);
+        }, 2000);
       }, 2000);
 
-      turnOffControls();
-      writeToLogActions(LOG_FLEE, "YES", "SUCCESS");
+      setControlsInterval("PAUSE", 4000);
     } else {
       fleeHandler();
     }
@@ -493,8 +484,13 @@ function isGameOver() {
     }, 1000);
 
     function renderGameOverModal() {
-      const gameOverModal = document.getElementById("gameOverModal");
-      gameOverModal.style.display = "block";
+      setTimeout(() => {
+        const gameOverModal = document.getElementById("gameOverModal");
+        gameOverModal.style.display = "block";
+      }, 2000);
+
+      newRoomAnimation();
+      playMusic(theEndOfTheWorld);
     }
   }
 
@@ -566,7 +562,7 @@ heroChoiceModal.addEventListener("click", function (event) {
       document.getElementById("heroChoiceModal").style.display = "none";
       document.getElementById("gameWindow").style.display = "flex";
       renderCurrentRoom(catacombEntrance);
-    }, 1500);
+    }, 2000);
     newRoomAnimation();
     soundEffectHandler(whooshLowAir);
 
@@ -634,39 +630,49 @@ function renderCurrentRoom(currentRoom) {
   checkForNewTier();
 }
 
+const CONTROL_INTERVAL_DURATION = 500;
+let controlInterval = null;
+
 function setControlsInterval(command, pauseTime) {
+  // Clear existing interval if it exists
+  clearInterval(controlInterval);
+
   switch (command) {
     case "START":
-      // console.log("setControlsInterval Started!");
-
-      controlInterval = setInterval(() => {
-        // console.log("Control Interval Called");
-        togglePlayerControls();
-      }, 500);
+      if (controlInterval === null) {
+        console.log("setControlsInterval Started!");
+        controlInterval = setInterval(() => {
+          togglePlayerControls();
+        }, CONTROL_INTERVAL_DURATION);
+      }
       break;
 
     case "PAUSE":
-      // console.log("setControlsInterval Paused!");
-      clearInterval(controlInterval);
+      console.log("setControlsInterval Paused!");
       turnOffControls();
       setTimeout(() => {
         controlInterval = setInterval(() => {
-          // console.log("Control Interval Called");
           togglePlayerControls();
-        }, 500);
+        }, CONTROL_INTERVAL_DURATION);
       }, pauseTime);
+      // console.log(`paused for: ${pauseTime}`);
       break;
 
     case "STOP":
-      // console.log("setControlsInterval Stopped!");
-
-      clearInterval(controlInterval);
+      console.log("setControlsInterval Stopped!");
+      controlInterval = null;
       turnOffControls();
+      break;
+
+    default:
+      console.error("Invalid command:", command);
       break;
   }
 }
 
 function togglePlayerControls() {
+  // console.log(`Controls Toggled`);
+
   if (
     currentRoom.contents.monsters.length > 0 &&
     monsterContainer.style.display === "flex"
@@ -741,12 +747,12 @@ function togglePlayerControls() {
     fadeOutAnimation(controlsContainer);
     setTimeout(() => {
       controlsContainer.style.display = "none";
-    }, 2000);
+    }, 1500);
   } else {
     fadeInAnimation(controlsContainer);
     setTimeout(() => {
       controlsContainer.style.display = "flex";
-    }, 2000);
+    }, 1500);
   }
 
   // Gives access to inventory while trading
@@ -874,13 +880,32 @@ function updatePlayerTrackers() {
   renderHeroStats();
 }
 
+// function newRoomAnimation() {
+//   const fade = document.getElementById("fade");
+//   fade.style.animation = "fade-in 2s";
+//   setTimeout(() => {
+//     fade.style.animation = "fade-out 2s";
+    
+//     clearNarrative();
+//   }, 2000);
+// }
+
 function newRoomAnimation() {
   const fade = document.getElementById("fade");
-  fade.style.animation = "fade-in 2s";
-  setTimeout(() => {
-    fade.style.animation = "fade-out 2s";
-  }, 2000);
+
+  // Remove the animation to reset it
+  fade.style.animation = "none";
+
+  // Trigger reflow to apply the reset
+  void fade.offsetWidth;
+
+  // Add the animation back
+  fade.style.animation = "room-transition 4s";
+
+  // Additional logic, if needed
+  clearNarrative();
 }
+
 
 function damageFlashAnimation(target) {
   switch (target) {
@@ -905,6 +930,10 @@ function damageFlashAnimation(target) {
 // ===============================
 //        Start Game Modal
 // ===============================
+
+document.addEventListener("DOMContentLoaded", () => {
+  playMusic(mazeHeist);
+});
 
 // ===============================
 //      Room Summary Modal
@@ -1036,12 +1065,10 @@ function renderRoomSummaryModal() {
   }
 
   // Adds items in current room to inventory
-  console.log("ADDING ITEMS?");
   if (currentRoom.contents.items.length > 0) {
     for (let i = 0; i < currentRoom.contents.items.length; i++) {
       let currentItem = currentRoom.contents.items[i];
       addItemToInventory(currentItem);
-      console.log(`${currentItem} added to inventory`);
     }
 
     // Clear the items array in the current room
@@ -1182,8 +1209,8 @@ roomSummaryButton.addEventListener("click", () => {
   closeRoomSummaryModal();
   renderContinueButton();
   clearRoomSummaryModal();
-  // togglePlayerControls();
   updateRoomsCleared();
+  setControlsInterval("START");
 
   // ITEM: Trollblood Tonic - 20HP after each cleared room.
   if (TROLLBLOOD_TONIC.duration !== null) {
@@ -1195,6 +1222,7 @@ roomSummaryButton.addEventListener("click", () => {
   isItemAttuned(DEMONIC_GRIMOIRE, null);
   // ITEM: Soothing Candle - Recover 10HP after each cleared room.
   statusEffectHandler(SOOTHING_CANDLE);
+
   updatePlayerTrackers();
   checkForLevelUp();
 });
@@ -1261,7 +1289,7 @@ startBtn.addEventListener("click", () => {
   setTimeout(() => {
     startGameModal.style.display = "none";
     heroChoiceModal.style.display = "block";
-  }, 1500);
+  }, 2000);
   newRoomAnimation();
   soundEffectHandler(whooshLowAir);
 });

@@ -9,9 +9,6 @@ const closeSettingsButton = document.getElementById("closeSettingsBtn");
 const volumeUpButton = document.getElementById("volumeUp");
 const volumeDownButton = document.getElementById("volumeDown");
 
-// let music;
-// let soundEffects;
-
 function loadAudio(src, id, loop = false) {
   const audio = new Audio();
   audio.id = id;
@@ -111,8 +108,6 @@ function soundEffectHandler(object, type) {
       sound = object;
   }
 
-  console.log(`SOUND: ${sound}`);
-
   // Check if the AudioContext and GainNode are already created
   if (!object.audioContext) {
     object.audioContext = new (window.AudioContext ||
@@ -153,7 +148,7 @@ function playMusic(music) {
     });
   } else {
     // If no music is currently playing, just start the new one
-    playNewMusic(music);
+    fadeIn(music);
   }
 
   currentMusic = music;
@@ -173,7 +168,7 @@ function fadeIn(audio) {
   audio.play();
 
   const fadeInInterval = setInterval(() => {
-    audio.volume = Math.min(1, audio.volume + 0.005);
+    audio.volume = Math.min(1, audio.volume + 0.003);
 
     if (audio.volume >= 0.05) {
       clearInterval(fadeInInterval);
@@ -183,7 +178,7 @@ function fadeIn(audio) {
 
 function fadeOut(audio, callback) {
   const fadeOutInterval = setInterval(() => {
-    audio.volume = Math.max(0, audio.volume - 0.05);
+    audio.volume = Math.max(0, audio.volume - 0.003);
 
     if (audio.volume <= 0) {
       clearInterval(fadeOutInterval);
@@ -196,6 +191,9 @@ function fadeOut(audio, callback) {
   }, 100);
 }
 
+
+
+
 // =========================================================
 //                      AUDIO VARIABLES
 // =========================================================
@@ -205,7 +203,6 @@ function fadeOut(audio, callback) {
 // ===============================
 
 // Gnawer
-
 const deepTunnels = loadAudio(
   "audio/music/Deep Tunnels.mp3",
   "deepTunnels",
@@ -213,7 +210,6 @@ const deepTunnels = loadAudio(
 );
 
 // Skeletons
-
 const edgeOfFear = loadAudio(
   "audio/music/Edge of Fear.mp3",
   "edgeOfFear",
@@ -226,8 +222,7 @@ const pileOfBones = loadAudio(
   true
 );
 
-// Boss
-
+// Flood of Bones
 const passedDanger = loadAudio(
   "audio/music/Passed Danger.mp3",
   "passedDanger",
@@ -235,35 +230,34 @@ const passedDanger = loadAudio(
 );
 
 // Spiders
-
 const spiderInvasion = loadAudio(
   "audio/music/Spider Invasion.mp3",
   "spiderInvasion",
   true
 );
 
-// Ghost
-
+// Cultists
 const fightThrough = loadAudio(
   "audio/music/Fight Through.mp3",
   "fightThrough",
   true
 );
 
+// NPCs
 const imminentDarkness = loadAudio(
   "audio/music/Imminent Darkness.mp3",
   "imminentDarkness",
   true
 );
 
+// Ghosts
 const hauntedOutpost = loadAudio(
   "audio/music/Haunted Outpost.mp3",
   "hauntedOutpost",
   true
 );
 
-// Scoundrel
-
+// Scoundrels
 const hiddenCapacity = loadAudio(
   "audio/music/Hidden Capacity.mp3",
   "hiddenCapacity",
@@ -284,7 +278,7 @@ const unfinishedBusiness = loadAudio(
   true
 );
 
-// Lost Legion Vale Event
+// Fallen Warriors` Vale Event
 const weCantStopThem = loadAudio(
   "audio/music/We Can_t Stop Them.mp3",
   "weCantStopThem",
@@ -314,8 +308,26 @@ const doorSecretPassage1 = loadAudio(
   "doorSecretPassage1"
 );
 
-// Misc. Ambiance
+// Hag's Hollow
+const creepyThoughts = loadAudio(
+  "audio/music/Creepy Thoughts.mp3",
+  "creepyThoughts",
+  true
+);
 
+// Start Game
+const mazeHeist = loadAudio("audio/music/Maze Heist.mp3", "mazeHeist", true);
+
+// Death
+const theEndOfTheWorld = loadAudio(
+  "audio/music/The End of the World.mp3",
+  "theEndOfTheWorld",
+  true
+);
+
+// const name = loadAudio("", "", true);
+
+// Misc. Ambiance
 const droneDungeon = loadAudio(
   "audio/music/Drone Dungeon.mp3",
   "droneDungeon",
@@ -335,7 +347,6 @@ const droneDarkMys24 = loadAudio(
 );
 
 // Low Health Ambiance
-
 const heartbeatFastLow = loadAudio(
   "audio/sound-effects/Heartbeat Fast Low.mp3",
   "heartbeatFastLow",

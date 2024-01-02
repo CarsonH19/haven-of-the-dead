@@ -1250,16 +1250,6 @@ function generalEventHandler(option, statModifier, attribute) {
     updateTotalStats();
   }
 
-  // Logic for Hag Curse after not trading
-  if (
-    currentRoom.roomName === "Hag's Hollow" &&
-    previousHagFavor === hagFavor
-  ) {
-    CURSED.function(7);
-    // ADD SOUND EFFECT !FIX!
-    writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "CURSE");
-  }
-
   // setTimeout(togglePlayerControls, 2000);
 }
 
@@ -1380,6 +1370,16 @@ eventButtonTwo.addEventListener("click", () => {
   // Miscellaneous
   if (event.eventType === "MISC") {
     generalEventHandler(event.optionTwo);
+  }
+
+  // Logic for Hag Curse after not trading
+  if (
+    currentRoom.roomName === "Hag's Hollow" &&
+    previousHagFavor === "HAVE NOT TRADED"
+  ) {
+    CURSED.function(7);
+    // ADD SOUND EFFECT !FIX!
+    writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "CURSE");
   }
 
   removeEventDescriptionLog();

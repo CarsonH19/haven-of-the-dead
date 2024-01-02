@@ -2580,6 +2580,7 @@ function calculateFavor(itemName, operator) {
 
     // Update global favor variable based on the current room
     if (currentRoom.roomName === "Hag's Hollow") {
+      previousHagFavor = "TRADED";
       hagFavor = favor;
     } else {
       curatorFavor = favor;
@@ -2594,6 +2595,7 @@ function calculateFavor(itemName, operator) {
   function useFavor(itemName) {
     let itemObject;
     if (currentRoom.roomName === "Hag's Hollow") {
+      previousHagFavor = "TRADED";
       itemObject = hagItems.find((inv) => inv.name === itemName);
     } else if (currentRoom.roomName === "Curator's Curio") {
       itemObject = curatorItems.find((inv) => inv.name === itemName);

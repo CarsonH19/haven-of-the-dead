@@ -702,6 +702,8 @@ function startBattle() {
     // ITEM: Warding Candle - Chance for evil spirits to flee.
     statusEffectHandler(WARDING_CANDLE);
     updatePlayerTrackers();
+
+    setControlsInterval("START");
   }, 1000);
 
   soundEffectHandler(currentRoom.contents.monsters[0], "SPAWN");
@@ -733,8 +735,9 @@ function checkForMonsters() {
     console.log("All monsters defeated");
     attackCounter = 0; // Item: Soulreaver
     setTimeout(renderRoomSummaryModal, 5000);
-    togglePlayerControls();
   }
+
+  setControlsInterval("STOP");
 }
 
 function monsterAbilityHandler(monster) {

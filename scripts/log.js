@@ -95,70 +95,77 @@ function writeToLogActions(logType, narrate, dataOne) {
     case LOG_PLAYER_CRITICAL:
       if (heroChoice === "PALADIN") {
         if (narration === 1) {
-          narration = `Your greatsword blazes with an overwhelming brilliance, obliterating the ${monsterName}'s resistance and leaving nothing but radiant aftermath.`;
+          narration = `Your greatsword radiates with an overwhelming brilliance, annihilating the ${monsterName}'s resistance and leaving nothing but the purifying aftermath of radiant light.`;
         } else if (narration === 2) {
-          narration = `With a masterful flourish, your greatsword cleaves through the ${monsterName} with unparalleled precision, leaving them utterly vanquished.`;
+          narration = `With a masterful flourish, your greatsword cleaves through the ${monsterName} with unparalleled precision, leaving them bathed in the pure radiance of vanquishing light.`;
         } else if (narration === 3) {
-          narration = `Your greatsword becomes an unstoppable force, a torrent of holy energy crashing down upon the ${monsterName}, leaving them shattered and defeated.`;
+          narration = `Your greatsword becomes an unstoppable force, a torrent of holy energy crashing down upon the ${monsterName}, leaving them shattered and defeated in the divine glow.`;
         } else if (narration === 4) {
-          narration = `Your strike reaches its zenith, a culmination of righteousness and power, leaving the ${monsterName} in awe of the unwavering force they face.`;
+          narration = `Your strike reaches its zenith, a culmination of righteousness and power, leaving the ${monsterName} in awe of the unwavering force of radiant judgment they face.`;
         } else if (narration === 5) {
-          narration = `Your greatsword's blade seems to transcend reality, creating a rift of celestial energy that consumes the ${monsterName} in a brilliant explosion of light.`;
+          narration = `Your greatsword's blade seems to transcend reality, creating a rift of celestial energy that engulfs the ${monsterName} in a brilliant explosion of cleansing light.`;
         } else if (narration === 6) {
-          narration = `Your greatsword dances through the battlefield, leaving a wake of divine devastation as it strikes true with impeccable precision.`;
+          narration = `Your greatsword dances through the battlefield, leaving a wake of divine devastation as it strikes true with impeccable precision, illuminating the path to victory.`;
         } else if (narration === 7) {
-          narration = `Your greatsword's edge becomes an extension of the heavens themselves, as it effortlessly rends through the ${monsterName}, leaving them in awe of their impending fate.`;
+          narration = `Your greatsword's edge becomes an extension of the heavens themselves, effortlessly rending through the ${monsterName} and leaving them in awe of their impending fate in the radiance of celestial light.`;
         } else if (narration === 8) {
-          narration = `Your greatsword's strike transcends mortal limitations, delivering an attack of unparalleled force and leaving the ${monsterName} broken and defeated.`;
+          narration = `With divine fury, your greatsword cleaves through the ${monsterName}, leaving a trail of searing radiance that engulfs them in a cleansing fire of celestial wrath.`;
         } else if (narration === 9) {
-          narration = `Your strike is a reckoning, a surge of purifying energy that obliterates all traces of malevolence.`;
+          narration = `Your strike is a reckoning, a surge of purifying energy that obliterates all traces of malevolence, leaving the ${monsterName} bathed in the divine glow of redemption.`;
         } else {
-          narration = `Your greatsword descends like a falling star, leaving behind a wake of divine devastation that reverberates throughout the catacomb.`;
+          narration = `Your greatsword descends like a falling star, leaving behind a wake of divine devastation that reverberates throughout the catacomb, illuminating the shadows with radiant light.`;
         }
+
+        if (narration === 8) {
+  narration = `With divine fury, your greatsword cleaves through the ${monsterName}, leaving a trail of searing radiance that engulfs them in a cleansing fire of celestial wrath.`;
+}
+
+        
       } else if (heroChoice === "ROGUE") {
         if (narration === 1) {
-          narration = `Your dagger's strike is imbued with the essence of the void, leaving behind a wound that seems to consume the very light around it.`;
+          narration = `Your dagger plunges into the ${monsterName} with an abyssal force, leaving a wound that devours the surrounding light, sowing darkness with every strike.`;
         } else if (narration === 2) {
-          narration = `Your daggers move in a rapid flurry, creating a crescendo of strikes that overwhelms the ${monsterName}'s defenses, all while bathed in the ebon glow of shadow.`;
+          narration = `Daggers dance in a relentless onslaught, a storm of shadow-infused strikes overwhelming the ${monsterName}, the ebon glow intensifying with each lethal blow.`;
         } else if (narration === 3) {
-          narration = `Each strike is a haunting note in a symphony of shadows, orchestrated with deadly precision to bring about the ${monsterName}'s demise.`;
+          narration = `Each strike is a relentless assault, a torrent of shadows that tears through the ${monsterName}'s defenses with merciless precision, ensuring its inevitable demise.`;
         } else if (narration === 4) {
-          narration = `Your movements create a blinding series of shadowy illusions, making it impossible for the ${monsterName} to anticipate the real strike.`;
+          narration = `Your movements weave a tapestry of disorienting shadows, an onslaught of illusions that blinds and confounds the ${monsterName}, leaving it defenseless.`;
         } else if (narration === 5) {
-          narration = `You seem to dissolve into the shadows, only to reappear behind the ${monsterName}, daggers poised to strike with devastating force.`;
+          narration = `You meld into the shadows, reemerging behind the ${monsterName} in an explosive surge, daggers poised to strike with brutal force, a manifestation of lethal stealth.`;
         } else if (narration === 6) {
-          narration = `Your movements are a blur of shadow and finesse, leaving behind an afterimage of their lethal artistry, each strike accompanied by a trailing veil of shadows.`;
+          narration = `A blur of shadow and finesse, your onslaught leaves a wake of chaos, afterimages of death trailing each strike, the lethal artistry overwhelming the ${monsterName} in shadows.`;
         } else if (narration === 7) {
-          narration = `Your daggers strike with a serpent's cunning, finding the ${monsterName}'s weak points with uncanny precision, shrouded in the embracing darkness of twilight.`;
+          narration = `Daggers strike with serpentine precision, exploiting the ${monsterName}'s weaknesses with ruthless cunning, shrouded in the suffocating darkness of twilight.`;
         } else if (narration === 8) {
-          narration = `Your strikes are accompanied by an ethereal play of midnight shadows, making it nearly impossible for the ${monsterName} to discern the real attack.`;
+          narration = `Strikes are accompanied by an ethereal play of midnight shadows, rendering the ${monsterName} unable to discern reality from illusion, a relentless barrage of darkness.`;
         } else if (narration === 9) {
-          narration = `Your dagger carries with it the weight of the midnight hour, striking with a darkness that seems to seep into the ${monsterName}'s soul, leaving them enveloped in a shroud of shadows.`;
+          narration = `Your dagger carries the weight of the midnight hour, each strike plunging into the ${monsterName}'s soul, a darkness that envelopes and consumes, leaving only shadows in its wake.`;
         } else {
-          narration = `You unleashes a rapid barrage of strikes, each one accompanied by a disorienting illusion, overwhelming the ${monsterName}'s senses in a torrent of shadow.`;
+          narration = `A relentless storm of strikes ensues, each blow accompanied by disorienting illusions, overwhelming the ${monsterName}'s senses in an unyielding torrent of shadow.`;
         }
+        
       } else if (heroChoice === "PRIESTESS") {
         if (narration === 1) {
-          narration = `Your magic intensifies, purging the ${monsterName} with a blinding surge of cleansing light, searing away all darkness.`;
+          narration = `Your magical flames intensify, emanating from the enchanted candle you wield, engulfing the ${monsterName} with a scorching surge of cleansing fire, searing away all shadows.`;
         } else if (narration === 2) {
-          narration = `You channel the full might of celestial power, releasing a cataclysmic explosion of divine energy upon the ${monsterName}.`;
+          narration = `You channel the full might of infernal power, unleashing a cataclysmic explosion of fiery energy from the sacred candle upon the ${monsterName}.`;
         } else if (narration === 3) {
-          narration = `Wings of light unfurl behind you as you summon a devastating strike, leaving behind a trail of radiant devastation.`;
+          narration = `Wings of fire unfurl behind you as you summon a devastating strike from the flame-infused candle, leaving behind a trail of incandescent devastation.`;
         } else if (narration === 4) {
-          narration = `You conjure a swirling vortex of concentrated light, drawing the ${monsterName} into its center before unleashing its blinding power.`;
+          narration = `You conjure a swirling vortex of concentrated flames, drawing the ${monsterName} into its center before unleashing its scorching power from the mystical candle.`;
         } else if (narration === 5) {
-          narration = `Your strike is guided by the first light of dawn, bringing with it a force that shatters the ${monsterName}'s defenses.`;
+          narration = `Your strike is guided by the first flames of dawn, emanating from the sacred candle, bringing with it a force that incinerates the ${monsterName}'s defenses.`;
         } else if (narration === 6) {
-          narration = `Your magic converges with beams of brilliant light, creating a cataclysmic explosion that consumes the ${monsterName}.`;
+          narration = `Your magic converges with beams of brilliant fire, creating a cataclysmic explosion that consumes the ${monsterName}, fueled by the sacred candle.`;
         } else if (narration === 7) {
-          narration = `You conjure the power of the solstice, unleashing a surge of radiant energy that obliterates all darkness in its path.`;
+          narration = `You conjure the power of the bonfire from your enchanted candle, unleashing a surge of radiant energy that incinerates all darkness in its path.`;
         } else if (narration === 8) {
-          narration = `You call upon the ultimate beacon of celestial power, sending forth a beam of light that scorches the ${monsterName}, leaving them consumed by its brilliance.`;
+          narration = `You call upon the ultimate forge of infernal power, sending forth a beam of fire from the sacred candle that scorches the ${monsterName}, leaving them consumed by its brilliance.`;
         } else if (narration === 9) {
-          narration = `You raise your arms, conjuring a torrent of radiant energy that surges towards the ${monsterName}, sweeping them away in a torrent of brilliance.`;
+          narration = `You raise your arms, conjuring a torrent of fiery energy from the mystical candle that surges towards the ${monsterName}, sweeping them away in a torrent of brilliance.`;
         } else {
-          narration = `A wave of pure light washes over the ${monsterName}, purging them of darkness and leaving behind a realm of untouched serenity.`;
-        }
+          narration = `A wave of pure fire, emanating from the sacred candle you wield, washes over the ${monsterName}, purging them of shadows and leaving behind a realm of untouched inferno.`;
+        }        
       }
 
       newEntry.textContent = `ATTACK: You deal ${dataOne} damage to the ${monsterName}!`;
@@ -1867,6 +1874,14 @@ function writeToNarrative(narration, pauseEvent) {
   fadeInAnimation(newNarration);
 }
 
+function clearNarrative() {
+  if (narrativeText.children.length > 0) {
+    for (let i = 0; i < narrativeText.children.length; i++) {
+      narrativeText.removeChild(narrativeText.lastElementChild);
+    }
+   }
+}
+
 function removeEventDescriptionLog() {
   let eventDescriptions = narrativeText.querySelectorAll(
     "li.event-description"
@@ -1902,6 +1917,8 @@ function checkLogSize() {
     logModalList.removeChild(logModalList.lastElementChild);
   }
 }
+
+ 
 
 // ==============================================================
 //                     LOG EVENT LISTENERS

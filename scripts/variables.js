@@ -50,9 +50,6 @@ monsterContainer.style.display = "none";
 const monsterImage = document.getElementById("monsterImage");
 monsterImage.style.display = "none";
 
-// Used to control which controls are enabled
-let controlInterval;
-
 // ===============================
 //     Catacomb Entrance Modal
 // ===============================
