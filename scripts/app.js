@@ -192,6 +192,8 @@ function dealPlayerDamage(damage) {
     HELLFIRE_CHARM.tracker += dealtDamage;
   }
 
+  isGameOver();
+  
   return dealtDamage;
 }
 
@@ -481,7 +483,7 @@ function isGameOver() {
         heartbeatFastLow.pause();
         renderGameOverModal();
       }
-    }, 1000);
+    }, 2000);
 
     function renderGameOverModal() {
       setTimeout(() => {
@@ -672,7 +674,6 @@ function setControlsInterval(command, pauseTime) {
 
 function togglePlayerControls() {
   // console.log(`Controls Toggled`);
-
   if (
     currentRoom.contents.monsters.length > 0 &&
     monsterContainer.style.display === "flex"
@@ -742,7 +743,8 @@ function togglePlayerControls() {
   // Close Action Buttons
   if (
     monsterContainer.style.display === "none" &&
-    currentRoom.contents.monsters.length <= 0
+    currentRoom.contents.monsters.length <= 0 &&
+    currentPlayerHealth > 0
   ) {
     fadeOutAnimation(controlsContainer);
     setTimeout(() => {
@@ -773,6 +775,15 @@ function togglePlayerControls() {
     fleeBtn.disabled = true;
   }
 
+  if (currentPlayerHealth <= 0) {
+    console.log("PLAYER DEAD CONTROLS OFF");
+    attackBtn.disabled = true;
+    guardBtn.disabled = true;
+    fleeBtn.disabled = true;
+    potionBtn.disabled = true;
+    specialBtn.disabled = true;
+  }
+
   addStrikeThrough(attackBtn);
   addStrikeThrough(guardBtn);
   if (specialCooldownCounter === 0) {
@@ -795,6 +806,7 @@ function turnOffControls() {
     inventoryButton.disabled = false;
     potionBtn.disabled = false;
   } else {
+    console.log('CONTROLS OFF');
     attackBtn.disabled = true;
     guardBtn.disabled = true;
     specialBtn.disabled = true;

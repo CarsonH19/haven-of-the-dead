@@ -729,7 +729,6 @@ function checkForMonsters() {
 
   // Checks for more monsters
   if (monster.length > 0) {
-    // setControlsInterval("PAUSE", 1100);
     startBattle();
   } else {
     console.log("All monsters defeated");

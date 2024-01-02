@@ -99,7 +99,7 @@ li, ul {
 
 #fadeModal {
   display: block;
-  z-index: 98;
+  z-index: 99;
   pointer-events: none;
   background-color: transparent;
 }
@@ -999,14 +999,16 @@ progress[value]::-moz-progress-bar {
   justify-content:center;
   align-items: center;
   flex-direction: column;
-  text-align: left;
+  /* text-align: left; */
+  border: 5px solid var(--accent);
   background-image: url(images/backgrounds/youHaveDied.jpg);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-position-y: 50%;
 }
 
 
@@ -1020,7 +1022,7 @@ progress[value]::-moz-progress-bar {
 }
 
 .game-over-modal-content p {
-  font-size: 2rem;
+  font-size: 1.6rem;
   text-align: center;
   margin-left: 350px;
   margin-right: 350px;
