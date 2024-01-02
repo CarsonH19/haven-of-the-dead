@@ -193,7 +193,7 @@ function dealPlayerDamage(damage) {
   }
 
   isGameOver();
-  
+
   return dealtDamage;
 }
 
@@ -562,6 +562,7 @@ heroChoiceModal.addEventListener("click", function (event) {
     setTimeout(() => {
       gameWindow.style.display = "flex";
       document.getElementById("heroChoiceModal").style.display = "none";
+      startGameModal.style.display = "none";
       document.getElementById("gameWindow").style.display = "flex";
       renderCurrentRoom(catacombEntrance);
     }, 2000);
@@ -806,7 +807,7 @@ function turnOffControls() {
     inventoryButton.disabled = false;
     potionBtn.disabled = false;
   } else {
-    console.log('CONTROLS OFF');
+    console.log("CONTROLS OFF");
     attackBtn.disabled = true;
     guardBtn.disabled = true;
     specialBtn.disabled = true;
@@ -897,7 +898,7 @@ function updatePlayerTrackers() {
 //   fade.style.animation = "fade-in 2s";
 //   setTimeout(() => {
 //     fade.style.animation = "fade-out 2s";
-    
+
 //     clearNarrative();
 //   }, 2000);
 // }
@@ -917,7 +918,6 @@ function newRoomAnimation() {
   // Additional logic, if needed
   clearNarrative();
 }
-
 
 function damageFlashAnimation(target) {
   switch (target) {
@@ -1298,10 +1298,16 @@ continueButton.addEventListener("click", () => {
 });
 
 startBtn.addEventListener("click", () => {
+  const startModalTitle = document.getElementById("startModalTitle");
+
   setTimeout(() => {
-    startGameModal.style.display = "none";
+    // startGameModal.style.display = "none";
+    startModalTitle.style.display = "none";
+    startBtn.style.display = "none";
     heroChoiceModal.style.display = "block";
   }, 2000);
+
+  // fadeIn(heroChoiceModal);
   newRoomAnimation();
   soundEffectHandler(whooshLowAir);
 });

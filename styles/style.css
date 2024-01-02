@@ -754,9 +754,11 @@ progress[value]::-moz-progress-bar {
 
 .hero-choice-modal-content h1 {
   align-self: center;
-  font-family: "garamond";
+  /* font-family: "garamond"; */
   /* font-weight: 600; */
   font-size: 2.5rem;
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .character-images {
@@ -937,7 +939,16 @@ progress[value]::-moz-progress-bar {
 #startGameModal {
   display: block;
   transition: 0.5s;
-  z-index: 10;
+  z-index: 9;
+}
+
+#background-video {
+  position: fixed;
+  top: -10%;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
 }
 
 .start-modal-content {
@@ -946,9 +957,9 @@ progress[value]::-moz-progress-bar {
   align-items: center;
   flex-direction: column;
   text-align: left;
-  background-image: url(images/backgrounds/event-rooms/skeletal-hands.jpg);
+  /* background-image: url(images/backgrounds/event-rooms/skeletal-hands.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -957,7 +968,7 @@ progress[value]::-moz-progress-bar {
 
 .start-modal-content h1 {
   font-size: 5.5rem;
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   margin-top: -10vh;
   margin-bottom: 10vh;
 }
@@ -1044,6 +1055,7 @@ progress[value]::-moz-progress-bar {
 #heroChoiceModal {
   display: none;
   overflow: hidden;
+  z-index: 10;
 }
 
 /* 

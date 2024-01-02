@@ -288,7 +288,7 @@ let catacombRooms = [
     function: () => {
       setTimeout(() => {
         soundEffectHandler(ratsSqueak);
-      }, 3000);
+      }, 1000);
     },
   },
   {
