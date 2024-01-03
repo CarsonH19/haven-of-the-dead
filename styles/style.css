@@ -125,11 +125,8 @@ li, ul {
 
 .game-window {
   aspect-ratio: 16 / 9;
-  width: 100%;
-  /* min-width: 1160px;
-  max-width: 60vw; */
+  width: auto;
   height: 100%; 
-  /* min-height: 847px;  */
   display: none;
   flex-direction: column;
   justify-content: space-between;
