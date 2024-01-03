@@ -124,8 +124,12 @@ li, ul {
 
 .game-window {
   aspect-ratio: 16 / 9;
-  width: auto;
-  height: 100%; 
+  width: 100%;
+  /* min-width: 1160px;
+  max-width: 60vw; */
+  min-height: 100vh; 
+  margin: auto;
+  /* min-height: 847px;  */
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -135,24 +139,16 @@ li, ul {
   background-size: contain;
 }
 
-/* Add these styles to ensure responsiveness */
-@media (max-width: 16 * 9vw) {
-  .game-window {
-    width: 100vw;
-    height: auto;
-  }
-}
-
-/* Background Image */
 #backgroundImage {
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .top-content {
   display: flex;
   justify-content: space-between;
