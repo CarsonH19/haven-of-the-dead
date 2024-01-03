@@ -135,6 +135,15 @@ li, ul {
   background-size: contain;
 }
 
+/* Add these styles to ensure responsiveness */
+@media (max-width: 16 * 9vw) {
+  .game-window {
+    width: 100vw;
+    height: auto;
+  }
+}
+
+/* Background Image */
 #backgroundImage {
   background-repeat: no-repeat;
   background-size: contain;
@@ -144,7 +153,6 @@ li, ul {
   flex-direction: column;
   justify-content: space-between;
 }
-
 .top-content {
   display: flex;
   justify-content: space-between;
