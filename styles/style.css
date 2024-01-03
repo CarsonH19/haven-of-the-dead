@@ -817,7 +817,7 @@ progress[value]::-moz-progress-bar {
 
 
 .character-text p {
-  font-size: 2vh;
+  font-size: calc(0.4rem + 0.5vw);
   margin: 0;
 }
 .character-text div p {
