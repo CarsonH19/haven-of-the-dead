@@ -192,8 +192,6 @@ function dealPlayerDamage(damage) {
     HELLFIRE_CHARM.tracker += dealtDamage;
   }
 
-  isGameOver();
-
   return dealtDamage;
 }
 
@@ -249,6 +247,7 @@ function damagePlayer(damage) {
   // Rogue Passive Ability
   rogueDarkenedReprisal();
   healthLowAnimation();
+  isGameOver();
 }
 
 function showDamage(damage, source, critical) {

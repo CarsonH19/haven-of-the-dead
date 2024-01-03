@@ -938,8 +938,7 @@ const JOIN_THE_BARON = {
   functionOne: () => {
     JOIN_THE_BARON.summary = `You chose to join the Baron of Bone.`;
     setTimeout(() => {
-      // playMusic(); Add final boss theme !FIX!
-      startBattle();
+      playMusic(mazeHeist); 
     }, 2000);
     // Render Ending !FIX! write a function to render an ending screen
     //writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
@@ -948,7 +947,7 @@ const JOIN_THE_BARON = {
     JOIN_THE_BARON.summary = `You chose not to join the Baron of Bone.`;
     currentRoom.contents.monsters.push(BARON_OF_BONE);
     setTimeout(() => {
-      // playMusic(); Add final boss theme !FIX!
+      playMusic(successOrDeath);
       startBattle();
     }, 2000);
     //writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
@@ -963,8 +962,11 @@ const THE_FINAL_BATTLE = {
   optionOne: "Yes",
   optionTwo: "No",
   functionOne: () => {
-    currentRoom = BARON_OF_BONE_BOSS_ROOM;
-    renderCurrentRoom(BARON_OF_BONE_BOSS_ROOM);
+    newRoomAnimation();
+    setTimeout(() => {
+      currentRoom = BARON_OF_BONE_BOSS_ROOM;
+      renderCurrentRoom(BARON_OF_BONE_BOSS_ROOM);
+    }, 2000);
   },
   functionTwo: () => {
     setTimeout(() => {

@@ -191,9 +191,6 @@ function fadeOut(audio, callback) {
   }, 100);
 }
 
-
-
-
 // =========================================================
 //                      AUDIO VARIABLES
 // =========================================================
@@ -201,6 +198,28 @@ function fadeOut(audio, callback) {
 // ===============================
 //           MUSIC
 // ===============================
+
+// Curator's Curio
+const timeToFaceThem = loadAudio(
+  "audio/music/Time to Face Them.mp3",
+  "timeToFaceThem",
+  true
+);
+ 
+const finalBrigade = loadAudio(
+  "audio/music/Final Brigade.mp3",
+  "finalBrigade",
+  true
+);
+
+// Undead Heroes
+const successOrDeath = loadAudio(
+  "audio/music/Success or Death.mp3",
+  "successOrDeath",
+  true
+);
+
+//Baron of Bone
 
 // Gnawer
 const deepTunnels = loadAudio(
