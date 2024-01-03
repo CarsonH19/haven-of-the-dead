@@ -436,7 +436,7 @@ function fleeHandler() {
     fleeAttempt += 3;
   }
 
-  if (fleeAttempt >= 10) {
+  if (fleeAttempt >= 10 && currentRoom.roomName !== "Throne of the Eternal") {
     // Log must be placed before currentRoom change
     writeToLogActions(LOG_FLEE, "YES", "SUCCESS");
     let roomToFlee = currentRoom;

@@ -44,6 +44,7 @@ body {
   margin: 0px;
   width: 100vw;
   height: 100vh;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,7 +100,7 @@ li, ul {
 
 #fadeModal {
   display: block;
-  z-index: 99;
+  z-index: 98;
   pointer-events: none;
   background-color: transparent;
 }
@@ -124,13 +125,13 @@ li, ul {
 */
 
 .game-window {
+  position: relative;
   aspect-ratio: 16 / 9;
-  width: 100%;
+  width: auto;
   /* min-width: 1160px;
   max-width: 60vw; */
-  min-height: 100vh; 
-  margin: auto;
-  /* min-height: 847px;  */
+  height: 100vh; 
+  min-height: 847px; 
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -317,7 +318,7 @@ li, ul {
 }
 
 .damage-dealt-box .damage {
-  margin-top: 7vh;
+  margin-top: 2vh;
 }
 
 .damage-received-box {
@@ -416,7 +417,7 @@ li, ul {
   font-size: 1.4rem;
   pointer-events: none;
   padding: 0;
-  z-index: 97;
+  z-index: 99;
   transition: transform 0.5s ease-in-out;
   overflow: hidden;
   height: auto;
@@ -436,14 +437,11 @@ li, ul {
 
 .bottom-content {
   width: 100%;
-  height: 25%;
-  left: 0;
+  height: 23%;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-
-  background-color: 
-  transparent;
+  background-color: transparent;
 }
 
 .controls-container,
@@ -466,7 +464,6 @@ li, ul {
 
 .player-container:hover {
   transition: 0.3s;
-  margin-top: -3vh;
 }
 
 .log-container:hover {
@@ -486,7 +483,7 @@ li, ul {
 }
 
 .player-container .show-stats {
-  margin: 10px;
+  margin: 20px;
   text-align: center;  
   opacity: 0;
 }
@@ -730,45 +727,36 @@ progress[value]::-moz-progress-bar {
 ==========================================
 */
 
-#heroChoiceModal {
-  display: none;
-  overflow: hidden;
-  z-index: 10;
-}
-
 
 .hero-choice-modal-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   text-align: left;
   gap: 50px;
   margin: 0px;
   border-radius: 10px;
   /* width: 60%;
   height: 56%; */
-  width: 100vw;
-  height: 100vh;
+  width: 1050px;
+  height: 700px;
   overflow: hidden;
   padding: 20px;
 }
 
 .hero-choice-modal-content h1 {
   align-self: center;
-  /* font-family: "garamond"; */
+  font-family: "garamond";
   /* font-weight: 600; */
   font-size: 2.5rem;
-  letter-spacing: 4px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  margin-bottom: 00px;
 }
 
 .character-images {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   height: 100%;
   width: 100%;
-  gap: 60px;
+  gap: 40px;
   margin-bottom: 10px;
 }
 
@@ -776,9 +764,8 @@ progress[value]::-moz-progress-bar {
  .character-images .character-image {
   transition: transform 0.3s ease, background-color 0.3s ease;
   padding: 10px;
-  max-width: 20vw;
-  max-height: 30vw;
-  overflow: hidden;
+  max-width: 310px;
+  max-height: 518px;
 }
 
 .character-images .character-image:hover {
@@ -813,8 +800,9 @@ progress[value]::-moz-progress-bar {
 
 .character-text p {
   font-size: 0.8rem;
-  margin: 0;
+  margin: 0px;
 }
+
 .character-text div p {
   margin: 5px;
 }
@@ -844,7 +832,7 @@ progress[value]::-moz-progress-bar {
   height: 100%;
   border: solid var(--header) 2px;
   background-repeat: no-repeat;
-  background-size: cover; 
+  background-size: 103%; 
   background-blend-mode: overlay;
   background-position: center; 
   border-radius: 10px; 
@@ -941,12 +929,12 @@ progress[value]::-moz-progress-bar {
 #startGameModal {
   display: block;
   transition: 0.5s;
-  z-index: 9;
+  z-index: 10;
 }
 
 #background-video {
   position: fixed;
-  top: -10%;
+  top: 0;
   left: 0;
   min-width: 100%;
   min-height: 100%;
@@ -959,9 +947,7 @@ progress[value]::-moz-progress-bar {
   align-items: center;
   flex-direction: column;
   text-align: left;
-  /* background-image: url(images/backgrounds/event-rooms/skeletal-hands.jpg);
-  background-repeat: no-repeat;
-  background-size: cover; */
+
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -970,7 +956,7 @@ progress[value]::-moz-progress-bar {
 
 .start-modal-content h1 {
   font-size: 5.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
   margin-top: -10vh;
   margin-bottom: 10vh;
 }
@@ -1004,7 +990,6 @@ progress[value]::-moz-progress-bar {
 
 #gameOverModal {
   display: none;
-  z-index: 98;
 }
 
 .game-over-modal-content {
@@ -1012,43 +997,27 @@ progress[value]::-moz-progress-bar {
   justify-content:center;
   align-items: center;
   flex-direction: column;
-  /* text-align: left; */
-  border: 5px solid var(--accent);
-  background-image: url(images/backgrounds/youHaveDied.jpg);
+  text-align: left;
+  background-image: url(images/backgrounds/event-rooms/skeletal-hands.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-position-y: 50%;
+  background-position-y: 30%;
 }
 
+/* 
+==========================================
+          HERO CHOICE MODAL
+==========================================
+*/
 
-
-.game-over-modal-content h1 {
-  font-size: 5rem;
-  margin-top: -20vh;
-  margin-bottom: 30px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-
+#heroChoiceModal {
+  display: none;
+  overflow: hidden;
+  z-index: 10;
 }
-
-.game-over-modal-content p {
-  font-size: 1.6rem;
-  text-align: center;
-  margin-left: 350px;
-  margin-right: 350px;
-  margin-bottom: 30px;
-  margin-top: 0px;
-  text-shadow: 1px 1px 2px rgb(0, 0, 0);
-}
-
-.game-over-modal-content button {
-  width: 150px;
-  height: 50px;
-}
-
 
 /* 
 ==========================================
@@ -1487,7 +1456,7 @@ progress[value]::-moz-progress-bar {
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
-  z-index: 3;
+  z-index: 4;
   position: absolute;
   left: 250%;
 }
@@ -1866,9 +1835,6 @@ progress[value]::-moz-progress-bar {
   0% {
     opacity: 1;
   }
-  20% {
-    opacity: 1;
-  }
   100% {
     opacity: 0;
   }
@@ -1877,9 +1843,6 @@ progress[value]::-moz-progress-bar {
 @keyframes fade-in {
   0% {
     opacity: 0;
-  }
-  80% {
-    opacity: 1;
   }
   100% {
     opacity: 1;
@@ -1900,7 +1863,6 @@ progress[value]::-moz-progress-bar {
     opacity: 0;
   }
 }
-
 
 /* Damage Flash */
 .flash {
