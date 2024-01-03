@@ -125,11 +125,11 @@ li, ul {
 
 .game-window {
   aspect-ratio: 16 / 9;
-  width: auto;
+  width: 100%;
   /* min-width: 1160px;
   max-width: 60vw; */
   height: 100vh; 
-  /* min-height: 847px;  */
+  min-height: 847px; 
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -765,6 +765,7 @@ progress[value]::-moz-progress-bar {
   font-size: 2.5rem;
   letter-spacing: 4px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin-bottom: 00px;
 }
 
 .character-images {
@@ -781,7 +782,8 @@ progress[value]::-moz-progress-bar {
   transition: transform 0.3s ease, background-color 0.3s ease;
   padding: 10px;
   max-width: 20vw;
-  max-height: 35vw;
+  max-height: 30vw;
+  overflow: hidden;
 }
 
 .character-images .character-image:hover {
@@ -815,7 +817,7 @@ progress[value]::-moz-progress-bar {
 
 
 .character-text p {
-  font-size: 0.8rem;
+  font-size: 1.0rem;
   margin: 0px;
 }
 
