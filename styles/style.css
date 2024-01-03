@@ -152,7 +152,7 @@ li, ul {
 .top-content {
   display: flex;
   justify-content: space-between;
-  height: 25%;
+  height: 20%;
   margin: 20px;
   margin-bottom: 0px;
 }
@@ -260,7 +260,7 @@ li, ul {
   display: flex;
   justify-content: center; 
   align-items: center; 
-  height: 70%;
+  height: 55%;
   width: 100%;
 }
 
@@ -435,7 +435,7 @@ li, ul {
 
 .bottom-content {
   width: 100%;
-  height: 20%;
+  height: 20;
   left: 0;
   display: flex;
   justify-content: space-between;
