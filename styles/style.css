@@ -129,7 +129,7 @@ li, ul {
   /* min-width: 1160px;
   max-width: 60vw; */
   height: 100vh; 
-  min-height: 847px; 
+  /* min-height: 847px;  */
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -735,19 +735,25 @@ progress[value]::-moz-progress-bar {
 ==========================================
 */
 
+#heroChoiceModal {
+  display: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
 
 .hero-choice-modal-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   text-align: left;
   gap: 50px;
   margin: 0px;
   border-radius: 10px;
   /* width: 60%;
   height: 56%; */
-  width: 1050px;
-  height: 700px;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   padding: 20px;
 }
@@ -763,10 +769,10 @@ progress[value]::-moz-progress-bar {
 
 .character-images {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   height: 100%;
   width: 100%;
-  gap: 40px;
+  gap: 60px;
   margin-bottom: 10px;
 }
 
@@ -774,8 +780,8 @@ progress[value]::-moz-progress-bar {
  .character-images .character-image {
   transition: transform 0.3s ease, background-color 0.3s ease;
   padding: 10px;
-  max-width: 310px;
-  max-height: 518px;
+  max-width: 20vw;
+  max-height: 35vw;
 }
 
 .character-images .character-image:hover {
@@ -842,7 +848,7 @@ progress[value]::-moz-progress-bar {
   height: 100%;
   border: solid var(--header) 2px;
   background-repeat: no-repeat;
-  background-size: 103%; 
+  background-size: cover; 
   background-blend-mode: overlay;
   background-position: center; 
   border-radius: 10px; 
@@ -1047,16 +1053,6 @@ progress[value]::-moz-progress-bar {
   height: 50px;
 }
 
-/* 
-==========================================
-          HERO CHOICE MODAL
-==========================================
-*/
-#heroChoiceModal {
-  display: none;
-  overflow: hidden;
-  z-index: 10;
-}
 
 /* 
 ==========================================
