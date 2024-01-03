@@ -745,7 +745,7 @@ progress[value]::-moz-progress-bar {
 .hero-choice-modal-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   text-align: left;
   gap: 50px;
   margin: 0px;
