@@ -131,7 +131,7 @@ li, ul {
   /* min-width: 1160px;
   max-width: 60vw; */
   height: 100vh; 
-  min-height: 847px; 
+  /* min-height: 847px;  */
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -1145,7 +1145,7 @@ progress[value]::-moz-progress-bar {
 
 .continue-btn {
   position: fixed;
-  z-index: 0;
+  z-index: 1;
   left: 50%;
   top: 65%;
   transform: translate(-50%, -50%);

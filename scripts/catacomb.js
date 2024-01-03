@@ -11,32 +11,32 @@ let catacombRooms = [
     contents: {
       monsters: [],
       items: [],
-      events: GRAVEROBBER_EARVER,
+      events: null,
     },
-    // function: () => {
-    //   let hero = heroChecker();
-    //   let room = currentRoom.contents.monsters;
+    function: () => {
+      let hero = heroChecker();
+      let room = currentRoom.contents.monsters;
 
-    //   setTimeout(() => {
-    //     switch (hero) {
-    //       case paladin:
-    //         room.push(UNDEAD_LIHETH, UNDEAD_RIVEN);
-    //         break;
+      setTimeout(() => {
+        switch (hero) {
+          case paladin:
+            room.push(UNDEAD_LIHETH, UNDEAD_RIVEN);
+            break;
 
-    //       case priestess:
-    //         room.push(UNDEAD_SIGGURD, UNDEAD_RIVEN);
-    //         break;
+          case priestess:
+            room.push(UNDEAD_SIGGURD, UNDEAD_RIVEN);
+            break;
 
-    //       case rogue:
-    //         room.push(UNDEAD_LIHETH, UNDEAD_SIGGURD);
-    //         break;
-    //     }
+          case rogue:
+            room.push(UNDEAD_LIHETH, UNDEAD_SIGGURD);
+            break;
+        }
 
-    //     startBattle();
-    //     setRoomSummary();
-    //   }, 4000);
-    //   // writeToLogOther(LOG_OTHER, "YES"); // Others have come before you... !FIX!
-    // },
+        startBattle();
+        setRoomSummary();
+      }, 4000);
+      // writeToLogOther(LOG_OTHER, "YES"); // Others have come before you... !FIX!
+    },
   },
 ];
 
