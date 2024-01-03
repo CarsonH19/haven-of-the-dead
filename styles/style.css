@@ -483,7 +483,7 @@ li, ul {
 }
 
 .player-container .show-stats {
-  margin: 20px;
+  margin: 0px;
   text-align: center;  
   opacity: 0;
 }

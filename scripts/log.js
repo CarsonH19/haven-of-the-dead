@@ -491,7 +491,7 @@ function writeToLogMonster(logType, narrate, dataOne) {
       } else if (monsterName === "Riven, Shadow of the Baron") {
         newEntry.textContent = `Riven unleashes a violent flurry of shadow and steel, striking with otherworldly precision.`;
       } else if (monsterName === "The Unholy Flame, Liheth") {
-        newEntry.textContent = `Liheth's chants resonate through the throne room and a surge of unholy fire envelops her, mending her wounds.";`;
+        newEntry.textContent = `Liheth's chants resonate through the throne room and a surge of unholy fire envelops her, mending her wounds.`;
       } else if (monsterName === "Death Knight Siggurd") {
         newEntry.textContent = `Siggurd's greatsword bursts into emerald flames, ablaze with malicious ferocity.`;
       } else if ((monsterName = `Bonevault Demon`)) {
