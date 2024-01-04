@@ -219,7 +219,17 @@ const successOrDeath = loadAudio(
   true
 );
 
+// Join the Baron
+const basementNightmare = loadAudio(
+  "audio/music/Basement Nightmares.mp3",
+  "basementNightmare"
+);
+
 //Baron of Bone
+const theEternalWar = loadAudio(
+  "audio/music/The Eternal War.mp3",
+  "theEternalWar"
+);
 
 // Gnawer
 const deepTunnels = loadAudio(

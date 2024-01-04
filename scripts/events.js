@@ -947,7 +947,7 @@ const JOIN_THE_BARON = {
     JOIN_THE_BARON.summary = `You chose not to join the Baron of Bone.`;
     currentRoom.contents.monsters.push(BARON_OF_BONE);
     setTimeout(() => {
-      playMusic(successOrDeath);
+      playMusic(theEternalWar);
       startBattle();
     }, 2000);
     //writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");

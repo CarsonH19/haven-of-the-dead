@@ -681,7 +681,7 @@ function renderMonsterStatBlock(monster) {
 
   setMonsterHealth(monsterMaxHealth);
 
-  monsterContainer.style.maxWidth = `${monsterMaxHealth + 350}px`;
+  monsterContainer.style.width = `${monsterMaxHealth + 350}px`;
 
   togglePlayerControls();
 }

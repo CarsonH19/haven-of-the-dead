@@ -489,8 +489,8 @@ function isGameOver() {
         const gameOverModal = document.getElementById("gameOverModal");
         gameOverModal.style.display = "block";
       }, 2000);
-
-      newRoomAnimation();
+      
+      fadeInAnimation(gameOverModal);
       playMusic(theEndOfTheWorld);
     }
   }

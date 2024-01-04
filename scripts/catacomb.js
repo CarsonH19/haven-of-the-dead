@@ -1264,7 +1264,7 @@ const THRONE_OF_THE_ETERNAL = {
 const BARON_OF_BONE_BOSS_ROOM = {
   roomName: "Throne of the Eternal",
   backgroundImage: "styles/images/backgrounds/event-rooms/baron-of-bone.jpg",
-  music: theEndOfTheWorld,
+  music: basementNightmare,
   contents: {
     monsters: [],
     items: [],
