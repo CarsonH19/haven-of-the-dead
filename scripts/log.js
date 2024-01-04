@@ -1526,6 +1526,8 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `As you reluctantly yield, laughter echoes among the scoundrels. Mocking grins adorn their faces as they strip you of possessions. A bitter surrender, the price paid in both treasure and pride.`;
       } else if (event === ITEM_ROBBERY && dataOne === "NOTHING") {
         newEntry.textContent = `As you offer an empty pouch, the scoundrels, enraged, scorn your deception. Their frustration erupts into a sudden assault, blades flashing in fury.`;
+      } else if (event === JOIN_THE_BARON) {
+        newEntry.textContent = `"Your mortal shackles are broken, and your destiny entwined with darkness. Rise, my servant, and revel in the eternal night that is soon to come."`
       }
 
       narration = newEntry.textContent;
@@ -1542,6 +1544,8 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `You decide not to step into the vale, and return they way you came.`;
       } else if (event === ITEM_ROBBERY && dataOne === "REFUSE") {
         newEntry.textContent = `Defiance burns in your eyes as you reject their demands. The air thickens with tension, blades poised. The scoundrels grin, relishing the impending clash between audacity and avarice.`;
+      } else if (event === JOIN_THE_BARON) {
+        newEntry.textContent = `In death, you shall serve."`;
       }
 
       narration = newEntry.textContent;
@@ -1808,6 +1812,8 @@ function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
         newEntry.textContent = `TRADE: You do not have enough favor for that item.`;
       } else if (dataTwo === "ITEMS STOLEN") {
         newEntry.textContent = `The scoundrels stole your ${dataOne}.`;
+      } else if (dataOne === "UNDEAD HEROES") {
+        narration = `"Welcome to my domain. Others, once like you, dared to defy the inevitable. Behold, my fallen champions, now bound to the darkness. The night will claim you as well."`;
       }
       break;
   }

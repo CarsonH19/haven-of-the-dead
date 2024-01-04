@@ -633,7 +633,7 @@ const ETHEREAL_CROWN = {
       currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
       currentRoom.contents.monsters[0] === GRUDGE
     ) {
-      fadeOutAnimation(monsterContainer, 0000);
+      fadeOutAnimation(monsterContainer);
       setTimeout(() => {
         monsterContainer.style.display = "none";
         checkForMonsters();
@@ -655,6 +655,7 @@ const SOUL_JAR = {
       currentPlayerHealth = calculatePlayerMaxHealth() * 0.5;
       playerHealthBar.value = calculatePlayerMaxHealth() * 0.5;
       removeItem("Soul Jar");
+      // !FIX! Add jar breaking sound effect?
       itemObject = inventoryItems.find((inv) => inv.name === "Soul Jar");
       const index = inventoryItems.indexOf(itemObject);
       inventoryItems.splice(index, 1);

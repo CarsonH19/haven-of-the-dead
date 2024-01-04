@@ -694,8 +694,6 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  /* width: 60%;
-  height: 56%; */
   width: 720px;
   height: 520px;
   overflow: auto;
@@ -709,7 +707,7 @@ progress[value]::-moz-progress-bar {
 
 .catacomb-entrance-modal-content p {
   margin: 0px;
-  font-size: 1.0rem;
+  font-size: 1.2rem;
 }
 
 .catacomb-entrance-button-container {
@@ -992,6 +990,8 @@ progress[value]::-moz-progress-bar {
 #gameOverModal {
   display: none;
   z-index: 99;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .game-over-modal-content {
@@ -1000,13 +1000,9 @@ progress[value]::-moz-progress-bar {
   align-items: center;
   flex-direction: column;
   gap: 30px;
-  /* background-image: url(images/backgrounds/event-rooms/skeletal-hands.jpg);
-  background-repeat: no-repeat;
-  background-size: cover; */
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-position-y: 30%;
 }
 
 /* 

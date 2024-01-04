@@ -244,6 +244,9 @@ function damagePlayer(damage) {
     damageFlashAnimation("PLAYER");
   }
 
+  // ITEM: Soul Jar - resurrect with half HP
+  isItemAttuned(SOUL_JAR);
+
   // Rogue Passive Ability
   rogueDarkenedReprisal();
   healthLowAnimation();
@@ -470,29 +473,28 @@ function fleeHandler() {
 //          Is Game Over?
 // ===============================
 
-function isGameOver() {
+function isGameOver(ending) {
   const monster = currentRoom.contents.monsters[0];
 
-  if (currentPlayerHealth <= 0) {
-    // ITEM: Soul Jar - resurrect with half HP
-    isItemAttuned(SOUL_JAR);
-    setTimeout(() => {
-      if (currentPlayerHealth <= 0) {
-        currentMusic.pause();
-        heartbeatFastLow.pause();
-        renderGameOverModal();
-      }
-    }, 2000);
+  switch (ending) {
+    case "GOOD ENDING":
+      renderGameOverModal("GOOD");
+      break;
 
-    function renderGameOverModal() {
-      setTimeout(() => {
-        const gameOverModal = document.getElementById("gameOverModal");
-        gameOverModal.style.display = "block";
-      }, 2000);
-      
-      fadeInAnimation(gameOverModal);
-      playMusic(theEndOfTheWorld);
-    }
+    case "BAD ENDING":
+      renderGameOverModal("BAD");
+      break;
+
+    default:
+      // check for player death
+      if (currentPlayerHealth <= 0) {
+        setTimeout(() => {
+          currentMusic.pause();
+          heartbeatFastLow.pause();
+          renderGameOverModal("DEAD");
+        }, 2000);
+      }
+      break;
   }
 
   if (
@@ -514,6 +516,46 @@ function isGameOver() {
       monsterContainer.style.display = "none";
       monsterImage.style.display = "none";
     }, 2000);
+  }
+
+  function renderGameOverModal(ending) {
+    const gameOverTitle = document.getElementById("gameOverTitle");
+    const gameOverModalText = document.getElementById('gameOverText');
+    // !FIX! Add ending text to explain story
+
+    switch (ending) {
+      case "DEAD":
+        playMusic(theEndOfTheWorld);
+        break;
+
+      case "GOOD":
+        openGameOverModal();
+        gameOverModal.style.backgroundImage = `url(styles/images/backgrounds/good-ending.jpg)`;
+        gameOverTitle.textContent = `You Defeated the Undead`;
+        // playMusic(); !FIX! add music
+        break;
+
+      case "BAD":
+        openGameOverModal();
+        gameOverModal.style.backgroundImage = `url(styles/images/backgrounds/bad-ending.jpg)`;
+        gameOverTitle.textContent = `You Join the Undead`;
+        // playMusic(); !FIX! add music  
+        break;
+
+      default:
+        console.log("No Ending Chosen");
+    }
+
+    newRoomAnimation();
+    openGameOverModal();
+  }
+
+  function openGameOverModal() {
+    setTimeout(() => {
+      const gameOverModal = document.getElementById("gameOverModal");
+      gameOverModal.style.display = "block";
+    }, 2000);
+    fadeInAnimation(gameOverModal);
   }
 }
 

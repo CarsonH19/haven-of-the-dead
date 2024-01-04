@@ -932,25 +932,25 @@ const JOIN_THE_BARON = {
   name: "The Baron's Offer",
   eventType: "MISC",
   description:
-    "The Baron of Bone offers you eternal salvation if you join him.",
+    `"Kneel before me, mortals. Embrace the eternal night. Join my legion of the undying, and together, we shall wield power beyond imagination." The Baron of Bone extends his skeletal hand; will you succumb to the allure of undeath?`,
   optionOne: "Join",
   optionTwo: "Refuse",
   functionOne: () => {
-    JOIN_THE_BARON.summary = `You chose to join the Baron of Bone.`;
+    // JOIN_THE_BARON.summary = `You chose to join the Baron of Bone.`;
     setTimeout(() => {
-      playMusic(mazeHeist); 
-    }, 2000);
-    // Render Ending !FIX! write a function to render an ending screen
-    //writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
+      isGameOver("BAD ENDING");
+    }, 5000);
+    playMusic(mazeHeist); 
+         writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
   },
   functionTwo: () => {
-    JOIN_THE_BARON.summary = `You chose not to join the Baron of Bone.`;
+    // JOIN_THE_BARON.summary = `You chose not to join the Baron of Bone.`;
     currentRoom.contents.monsters.push(BARON_OF_BONE);
     setTimeout(() => {
       playMusic(theEternalWar);
       startBattle();
     }, 2000);
-    //writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
+    writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
   },
 };
 

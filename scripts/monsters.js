@@ -348,6 +348,21 @@ function endFloodOfBonesBoss() {
     togglePlayerControls();
   }
 }
+function endBaronofBoneBoss() {
+  if (
+    currentRoom.roomName === "Throne of the Eternal" &&
+    currentRoom.contents.monsters[0] === BARON_OF_BONE &&
+    currentMonsterHealth <= 0
+  ) {
+    setTimeout(() => {
+      newRoomAnimation();
+      setTimeout(() => {
+        isGameOver("GOOD ENDING");
+      }, 2000);
+    }, 2000);
+  }
+}
+
 
 const UNDEAD_SIGGURD = {
   name: "Death Knight Siggurd",
@@ -720,6 +735,9 @@ function checkForMonsters() {
 
   // ITEM - Bone Amalgum: Adds temporary HP
   boneAmalgamAddHitPoints();
+
+  // Check Baron's Health before shift
+  endBaronofBoneBoss();
 
   // Removes Monster From Rooms Monsters Array
   monster.shift();
