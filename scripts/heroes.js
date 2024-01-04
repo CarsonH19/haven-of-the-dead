@@ -91,9 +91,8 @@ function rogueUmbralAssault() {
     }
   }, 500);
 
+  writeToLogHero(LOG_UMBRAL_ASSAULT, "YES");
   specialCooldownHandler("RESET");
-  setControlsInterval("PAUSE", 2200);
-  setTimeout(updatePlayerTrackers, 1450);
 }
 
 const DARKENED_REPRISAL = {

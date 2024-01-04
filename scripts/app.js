@@ -128,10 +128,10 @@ function monsterAttackHandler(bonus) {
   // Monster Ability Logic
   if (bonus) {
     monsterToPlayerDamage *= bonus;
-  } else if (UNDEAD_SIGGURD.tracker === 7) {
+  } else if (UNDEAD_SIGGURD.tracker === 5) {
     UNDEAD_SIGGURD.tracker = 0;
     monsterToPlayerDamage = 36;
-  } else if (BONEVAULT_DEMON.tracker === 3) {
+  } else if (BONEVAULT_DEMON.tracker === 5) {
     BONEVAULT_DEMON.tracker = 0;
     monsterToPlayerDamage = 18;
   } else if (
@@ -442,6 +442,16 @@ function fleeHandler() {
   if (fleeAttempt >= 10 && currentRoom.roomName !== "Throne of the Eternal") {
     // Log must be placed before currentRoom change
     writeToLogActions(LOG_FLEE, "YES", "SUCCESS");
+
+    // Remove Locked Room from catacombRooms
+    if (
+      currentRoom.roomName === "Bonevault" ||
+      currentRoom.roomName === "The Crematorium" ||
+      currentRoom.roomName === "The Frigid Tomb"
+    ) {
+      catacombRooms.splice(roomIndex, 1);
+    }
+    
     let roomToFlee = currentRoom;
     let newRoom = getRandomRoom(catacombRooms);
 
@@ -450,6 +460,7 @@ function fleeHandler() {
         fadeOutAnimation(monsterContainer);
         fadeOutAnimation(monsterImage);
         newRoomAnimation();
+
         setTimeout(() => {
           monsterContainer.style.display = "none";
           monsterImage.style.display = "none";
@@ -520,7 +531,7 @@ function isGameOver(ending) {
 
   function renderGameOverModal(ending) {
     const gameOverTitle = document.getElementById("gameOverTitle");
-    const gameOverModalText = document.getElementById('gameOverText');
+    const gameOverModalText = document.getElementById("gameOverText");
     // !FIX! Add ending text to explain story
 
     switch (ending) {
@@ -531,15 +542,26 @@ function isGameOver(ending) {
       case "GOOD":
         openGameOverModal();
         gameOverModal.style.backgroundImage = `url(styles/images/backgrounds/good-ending.jpg)`;
-        gameOverTitle.textContent = `You Defeated the Undead`;
+        gameOverTitle.textContent = `Evil Vanquish`;
         // playMusic(); !FIX! add music
         break;
 
       case "BAD":
         openGameOverModal();
         gameOverModal.style.backgroundImage = `url(styles/images/backgrounds/bad-ending.jpg)`;
-        gameOverTitle.textContent = `You Join the Undead`;
-        // playMusic(); !FIX! add music  
+
+        if (heroChoice === "PALADIN") {
+          gameOverTitle.textContent = `Death Knight Siggurd`;
+          // gameOverModal.style.backgroundImage = '' !FIX! add leader of army
+        } else if (heroChoice === "ROGUE") {
+          gameOverTitle.textContent = `Riven, Shadow of the Baron`;
+          // gameOverModal.style.backgroundImage = '' !FIX! add darkness falls
+        } else if (heroChoice === "PRIESTESS") {
+          gameOverTitle.textContent = `Liheth, the Unholy Flame`;
+          // gameOverModal.style.backgroundImage = '' !FIX! add burning lands
+        }
+
+        // playMusic(); !FIX! add music
         break;
 
       default:
@@ -1207,7 +1229,6 @@ specialBtn.addEventListener("click", () => {
     paladinHolySmite();
   } else if (heroChoice === "ROGUE") {
     rogueUmbralAssault();
-    writeToLogHero(LOG_UMBRAL_ASSAULT, "YES");
   } else if (heroChoice === "PRIESTESS") {
     attackCounter = 0; // Item: Soulreaver
     priestessCleansingFlame();

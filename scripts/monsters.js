@@ -294,9 +294,9 @@ const BONEVAULT_DEMON = {
   },
   tracker: 0,
   function: () => {
-    if (BONEVAULT_DEMON.tracker === 3) {
-      writeToLogMonster(LOG_MONSTER_ABILITY, "YES", BONEVAULT_DEMON);
-    }
+    // if (BONEVAULT_DEMON.tracker === 5) {
+    //   writeToLogMonster(LOG_MONSTER_ABILITY, "YES", BONEVAULT_DEMON);
+    // }
   },
 };
 
@@ -377,7 +377,9 @@ const UNDEAD_SIGGURD = {
   },
   tracker: 0,
   function: () => {
-    //
+    // if (UNDEAD_SIGGURD.tracker === 5) {
+    //   writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+    // }
   },
 };
 
@@ -389,7 +391,7 @@ const UNDEAD_LIHETH = {
   soundEffects: {
     spawn: magicGuardSounds,
     attack: magicAttackSounds,
-    death: armorMetalClanksToTheGround,
+    death: ghostShriekWhoosh,
     ability: magicAttackSounds,
   },
   tracker: 0,
@@ -886,7 +888,7 @@ function monsterAbilityHandler(monster) {
         break;
 
       case BONEVAULT_DEMON:
-        if (BONEVAULT_DEMON.tracker === 3) {
+        if (BONEVAULT_DEMON.tracker === 5) {
           console.log("Bonevault Demon Ability Called!");
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         } else {
@@ -918,10 +920,10 @@ function monsterAbilityHandler(monster) {
 
       case UNDEAD_SIGGURD:
         if (UNDEAD_SIGGURD.tracker === 5) {
-          console.log("Undead Siggurd Ability Called!");
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         } else {
           UNDEAD_SIGGURD.tracker++;
+          UNDEAD_SIGGURD.function();
         }
         break;
 
