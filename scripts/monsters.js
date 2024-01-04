@@ -106,6 +106,7 @@ const CULTIST = {
   },
   function: () => {
     CURSED.function(5);
+    soundEffectHandler(evilSpellVoice1);
   },
 };
 
@@ -116,12 +117,13 @@ const FIENDSWORN_CULTIST = {
   skulls: 5,
   soundEffects: {
     spawn: swordFromSheath3,
-    attack: lightAttackSounds,
+    attack: magicAttackSounds,
     death: fightGrunt6,
     ability: evilSpell1,
   },
   function: () => {
     CURSED.function(7);
+    soundEffectHandler(evilSpellVoice1);
   },
 };
 
@@ -435,7 +437,7 @@ const BARON_OF_BONE = {
   soundEffects: {
     spawn: evilSpell1,
     attack: magicAttackSounds,
-    death: armorMetalClanksToTheGround,
+    death: ghostlyDemonic,
   },
   function: () => {
     const conditionsArray = [POISONED, DISEASED, CHILLED, BURNED, CURSED];

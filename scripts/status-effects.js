@@ -43,6 +43,7 @@ const HAUNTED = {
 
     if (!immune) {
       startStatusEffect(HAUNTED, length);
+      soundEffectHandler(ghostlyMagic);
     } else {
       writeToLogItem(LOG_ITEM, null, GHOSTSHROUD_TALISMAN);
     }
@@ -100,6 +101,7 @@ const CURSED = {
 
     if (!immune) {
       startStatusEffect(CURSED, length);
+      soundEffectHandler(ghostEncounter);
     } else {
       writeToLogItem(LOG_ITEM, null, DARKGUARD_TRINKET);
     }

@@ -1130,6 +1130,8 @@ const HAGS_HOLLOW = {
       NECROTIC_NECTAR,
       HEXBANE_BREW,
     ];
+
+    soundEffectHandler(cauldronLargeBoil);
   },
 };
 

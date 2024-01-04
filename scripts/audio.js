@@ -205,7 +205,7 @@ const timeToFaceThem = loadAudio(
   "timeToFaceThem",
   true
 );
- 
+
 const finalBrigade = loadAudio(
   "audio/music/Final Brigade.mp3",
   "finalBrigade",
@@ -900,8 +900,70 @@ const metalSqueak21 = loadAudio(
 //           MIC
 // ===============================
 
+// const name = loadAudio("", "");
+
 // Room Transition
 const whooshLowAir = loadAudio(
   "audio/sound-effects/Whoosh Low Air.mp3",
   "whooshLowAir"
+);
+
+const cameraBag2 = loadAudio(
+  "audio/sound-effects/misc/Camera Bag 2.mp3",
+  "cameraBag2"
+);
+
+const cameraIntoBag = loadAudio(
+  "audio/sound-effects/misc/Camera Into Bag.mp3",
+  "cameraIntoBag"
+);
+
+const cauldronLargeBoil = loadAudio(
+  "audio/sound-effects/misc/Cauldron Large Boil.mp3",
+  "cauldronLargeBoil"
+);
+
+const evilSpellVoice1 = loadAudio(
+  "audio/sound-effects/misc/Evil Spell Voice 1.mp3",
+  "evilSpellVoice1"
+);
+
+const feedbackSwell4 = loadAudio(
+  "audio/sound-effects/misc/Feedback Swell 4.mp3",
+  "feedbackSwell4"
+);
+
+const ghostEncounter = loadAudio(
+  "audio/sound-effects/misc/Ghost Encounter.mp3",
+  "ghostEncounter"
+);
+
+const ghostlyDemonic = loadAudio(
+  "audio/sound-effects/misc/Ghostly Demonic.mp3",
+  "ghostlyDemonic"
+);
+
+const ghostlyMagic = loadAudio(
+  "audio/sound-effects/misc/Ghostly Magic.mp3",
+  "ghostlyMagic"
+);
+
+const hitImpactDelay2 = loadAudio(
+  "audio/sound-effects/misc/Hit Impact Delay 2.mp3",
+  "hitImpactDelay2"
+);
+
+const hitReverbDark4 = loadAudio(
+  "audio/sound-effects/misc/Hit Reverb Dark 4.mp3",
+  "hitReverbDark4"
+);
+
+const shimmerCrystal = loadAudio(
+  "audio/sound-effects/misc/Shimmer Crysta.mp3",
+  "shimmerCrystal"
+);
+
+const voiceClipMale226 = loadAudio(
+  "audio/sound-effects/misc/Voice Clip Male 226.mp3",
+  "voiceClipMale226"
 );

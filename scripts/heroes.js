@@ -398,6 +398,8 @@ function renderLevelUpModal() {
   } else {
     passiveRank.textContent = "I";
   }
+
+  soundEffectHandler(hitImpactDelay2);
 }
 
 function levelUpHandler(boon) {
@@ -761,6 +763,7 @@ function endLevelUp() {
     clearLevelUpModal();
   }, 1950);
 
+  soundEffectHandler(shimmerCrystal);
   updateTotalStats();
 }
 

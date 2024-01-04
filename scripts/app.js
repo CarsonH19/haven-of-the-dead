@@ -1087,6 +1087,7 @@ function renderRoomSummaryModal() {
   }
 
   updatePlayerTrackers();
+  soundEffectHandler(hitReverbDark4);
 }
 
 function setRoomSummary() {

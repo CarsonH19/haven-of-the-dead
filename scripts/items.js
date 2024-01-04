@@ -427,7 +427,7 @@ const REVENANTS_RAGE = {
     } else {
       REVENANTS_RAGE.stats.attack = 0;
     }
-    
+
     updateTotalStats();
   },
 };
@@ -1879,6 +1879,7 @@ function attuneItem(itemName) {
 
       clearInventory();
       renderInventory();
+      soundEffectHandler(feedbackSwell4);
       writeToLogItem(LOG_ATTUNE, "YES", itemName);
     } else {
       // Handle case where the item is already attuned
@@ -2068,11 +2069,13 @@ function lootItems(lootGroup) {
 
 function openInventoryHandler() {
   inventoryModal.style.display = "block";
+  soundEffectHandler(cameraBag2);
 }
 
 function closeInventoryHandler() {
   inventoryModal.style.display = "none";
 
+  soundEffectHandler(cameraIntoBag);
   calculatePlayerMaxHealth();
   updatePlayerTrackers();
 }
