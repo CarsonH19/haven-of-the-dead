@@ -1048,7 +1048,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
             newEntry.textContent = `With unyielding faith in your heart, you call upon higher powers. In response, a powerful force surrounds you, breaking the spider's web and setting you free.`;
           }
         }
-      } else if (event === POISON_ARROWS) {
+      } else if (event === IVANS_AMBUSH) {
         if (dataOne === "Dexterity") {
           newEntry.textContent = `Instinctively, your keen senses detect a subtle shift in the air. With a quick, agile maneuver, you sidestep the rain of arrows. Ivan's frustrated growl echoes through the shadows as approaches you. "Impressive, but it won't save you," he sneers.`;
         } else if (dataOne === "Faith") {
@@ -1247,7 +1247,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
             newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you. The door resists, but you feel a divine force supporting you. The noxious fumes make it hard to think, but with a final surge of faith, you break free, though not without taking ${dataTwo} damage being poisoned.`;
           }
         }
-      } else if (event === POISON_ARROWS) {
+      } else if (event === IVANS_AMBUSH) {
         if (dataOne === "Dexterity" || dataOne === "Faith") {
           newEntry.textContent = `The deadly arrows pierce your flesh, and the venom from their tips courses through your veins. Ivan's laughter echoes through the chamber as he rushes towards you to finally claim his revenge. "Toying with me was your last mistake, fool."`;
         }
@@ -1712,7 +1712,7 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
       } else if (dataOne === HELLFIRE_CHARM) {
         newEntry.textContent = `The Hellfire Charm ignites, flames burst forth with infernal fury, consuming the ${currentRoom.contents.monsters[0].name} in searing torment.`;
       } else if (dataOne === BONE_AMALGAM) {
-        newEntry.textContent = `The Bone Amalgam forms a barrier of bone around you, blocking the ${currentRoom.contents.monsters[0].name}'s attack.`;
+        newEntry.textContent = `The Bone Amalgam forms a barrier of bone around you, blocking the oncoming attack.`;
       }
 
       break;

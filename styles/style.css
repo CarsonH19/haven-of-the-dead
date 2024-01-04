@@ -685,7 +685,7 @@ progress[value]::-moz-progress-bar {
   flex-direction: column;
   justify-content: space-evenly;
   text-align: left;
-  gap: 0px;
+  gap: 10px;
   background-color: var(--background);
   background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
@@ -707,7 +707,7 @@ progress[value]::-moz-progress-bar {
 
 .catacomb-entrance-modal-content p {
   margin: 0px;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
 }
 
 .catacomb-entrance-button-container {

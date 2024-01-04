@@ -565,7 +565,7 @@ const GRERVIL_THE_BODILESS = {
           }, 5000);
 
           useConsumable("Grervil's Head"); // removes item from inventory
-          setControlsInterval("PAUSE", 9000);
+          setControlsInterval("STOP");
           writeToLogEvent(LOG_NPC_DIALOGUE, "YES", GRERVILS_HEAD);
           setTimeout(() => {
             renderEvent(GRERVILS_BODY_EVENT);
@@ -916,6 +916,7 @@ function gloryforgedBladeCheck() {
     BATTLEFIELD.blade = "LOOTED";
     gloryforgedTracker += 3;
     GLORYFORGED_BLADE.effect = `When attuned to this item, your Attack is increased by ${gloryforgedTracker}. This blade becomes more powerful with each victory in Fallen Warriors' Vale.`;
+    GLORYFORGED_BLADE.stats.attack = gloryforgedTracker;
     ECHOES_OF_VICTORY.function(); // activate echoes of victory
 
     // Checks if item has been obtained before narration is called
@@ -1091,7 +1092,6 @@ function lockedRoomHandler(room) {
         playMusic(passedDanger);
         setTimeout(newRoomAnimation, 3000);
         setTimeout(() => {
-          roomNameElement.textContent = `Tomb of the Demon`;
           let bonevaultDemonImage =
             "styles/images/backgrounds/event-rooms/bonevault-demon.jpg";
           renderBackground(bonevaultDemonImage);

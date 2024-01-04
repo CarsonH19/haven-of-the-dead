@@ -394,17 +394,16 @@ function guardHandler(bonus) {
 //            Potion
 // ===============================
 
-function potionHandler() {
-  let numberOfPotions = 0;
 
+function countPotions() {
   for (let i = 0; i < inventoryItems.length; i++) {
     if (inventoryItems[i] === POTION) {
-      numberOfPotions++;
+      potionCounter++;
     }
   }
+}
 
-  potionCounter = numberOfPotions;
-
+function potionHandler() {
   if (potionCounter > 0) {
     potionCounter--;
     itemObject = inventoryItems.find((inv) => inv.name === "Health Potion");
@@ -451,7 +450,7 @@ function fleeHandler() {
     ) {
       catacombRooms.splice(roomIndex, 1);
     }
-    
+
     let roomToFlee = currentRoom;
     let newRoom = getRandomRoom(catacombRooms);
 
@@ -1023,6 +1022,7 @@ function closeRoomSummaryModal() {
 
   gloryforgedBladeCheck();
   forsakenCommanderCheck();
+  countPotions();
 }
 
 function renderRoomSummaryModal() {
@@ -1319,6 +1319,8 @@ continueButton.addEventListener("click", () => {
     closeContinueButton();
   } else {
     setTimeout(() => {
+      removeCurrentRoom();
+
       // Wisp Logic
       if (GUIDING_LIGHT.tracker === "ARRIVE") {
         currentRoom = CANDLELIGHT_SHRINE;
@@ -1345,7 +1347,6 @@ continueButton.addEventListener("click", () => {
         renderCurrentRoom(HAGS_HOLLOW);
         WICKED_WISP.tracker = null;
       } else {
-        removeCurrentRoom();
         getRandomRoom(catacombRooms);
         renderCurrentRoom(currentRoom);
       }

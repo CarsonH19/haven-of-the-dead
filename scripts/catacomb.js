@@ -745,6 +745,31 @@ let tierThreeRooms = [
       events: COFFIN_EVENT,
     },
   },
+  {
+    roomName: "Hag's Hollow",
+    description: `Hag's Hollow,  hidden deep within the catacomb's bowels, glows eerily from the bubbling cauldron within. Thick fog billows from the cauldron and hangs in the air, filling the room with a nauseating smell. The hag, with her cauldron, offers her dark expertise, welcoming those who bring rare ingredients to trade.`,
+    backgroundImage: "styles/images/backgrounds/event-rooms/hags-hollow.jpg",
+    music: creepyThoughts,
+    contents: {
+      monsters: [],
+      items: [],
+      events: HAG_TRADER,
+    },
+    function: () => {
+      previousHagFavor = "HAVE NOT TRADED";
+      hagItems = [];
+      hagItems = [
+        POTION,
+        POTION,
+        POTION,
+        TROLLBLOOD_TONIC,
+        NECROTIC_NECTAR,
+        HEXBANE_BREW,
+      ];
+
+      soundEffectHandler(cauldronLargeBoil);
+    },
+  },
 ];
 
 // ===============================
@@ -830,6 +855,91 @@ let tierFourRooms = [
       monsters: [],
       items: [],
       events: LOCKED_ROOM,
+    },
+  },
+  {
+    roomName: "Curator's Curio",
+    description: `The Curator's Curio, a clandestine collection of catacomb relics and arcane artifacts. In the dim-lit reliquary, items of forgotten power gather, chosen by the curator, who is willing to make a deal for anything that catches his eye.`,
+    backgroundImage: "styles/images/backgrounds/event-rooms/curators-curio.jpg",
+    music: timeToFaceThem,
+    contents: {
+      monsters: [],
+      items: [],
+      events: CURATOR_TRADER,
+    },
+    function: () => {
+      // Add Items to Curator's Inventory the Player Doesn't Have.
+      curatorItems = [];
+      commonArray = [];
+      rareArray = [];
+      epicArray = [];
+      junkArray = [SKELETON_KEY, LAUGHING_COFFIN_COIN];
+
+      // Find Common Items
+      function findCommonItem() {
+        for (let i = 0; i < commonCuratorArray.length; i++) {
+          if (
+            !attunedItems.includes(commonCuratorArray[i]) &&
+            !inventoryItems.includes(commonCuratorArray[i]) &&
+            !curatorItems.includes(commonCuratorArray[i])
+          ) {
+            commonArray.push(commonCuratorArray[i]);
+          }
+        }
+
+        if (commonArray.length > 0) {
+          let index = Math.floor(Math.random() * commonArray.length);
+          curatorItems.push(commonArray[index]);
+        } else {
+          let index = Math.floor(Math.random() * junkArray);
+        }
+      }
+
+      // Find Rare Items
+      function findRareItem() {
+        for (let i = 0; i < rareCuratorArray.length; i++) {
+          if (
+            !attunedItems.includes(rareCuratorArray[i]) &&
+            !inventoryItems.includes(rareCuratorArray[i]) &&
+            !curatorItems.includes(rareCuratorArray[i])
+          ) {
+            rareArray.push(rareCuratorArray[i]);
+          }
+        }
+
+        if (rareArray.length > 0) {
+          let index = Math.floor(Math.random() * rareArray.length);
+          curatorItems.push(rareArray[index]);
+          rareArray.splice(index, 1);
+        } else {
+          findCommonItem();
+        }
+      }
+
+      function findEpicItem() {
+        // Find Epic Items
+        for (let i = 0; i < epicCuratorArray.length; i++) {
+          if (
+            !attunedItems.includes(epicCuratorArray[i]) &&
+            !inventoryItems.includes(epicCuratorArray[i]) &&
+            !curatorItems.includes(rareCuratorArray[i])
+          ) {
+            epicArray.push(epicCuratorArray[i]);
+          }
+        }
+
+        if (epicArray.length > 0) {
+          let index = Math.floor(Math.random() * epicArray.length);
+          curatorItems.push(epicArray[index]);
+        } else {
+          findRareItem();
+        }
+      }
+
+      findCommonItem();
+      findRareItem();
+      findRareItem();
+      findEpicItem();
     },
   },
 ];
@@ -1058,7 +1168,7 @@ const IVAN_TRAP_ROOM_THREE = {
 const IVANS_REVENGE = {
   roomName: "Rogue's Revenge",
   description: `Rogue's Revenge is a malicious room built by Ivan the Scoundrel to conceal deadly traps and hidden assassins, created to be ambush those who wander inside.`,
-  backgroundImage: "styles/images/backgrounds/event-rooms/Rogue's Revenge.jpg",
+  backgroundImage: "styles/images/backgrounds/event-rooms/rogues-revenge.jpg",
   music: claustrofobia,
   contents: {
     monsters: [],
@@ -1257,7 +1367,7 @@ const THRONE_OF_THE_ETERNAL = {
       startBattle();
       setRoomSummary();
     }, 4000);
-    writeToLogOther(LOG_OTHER, "YES", "UNDEAD HEROES"); 
+    writeToLogOther(LOG_OTHER, "YES", "UNDEAD HEROES");
   },
 };
 
@@ -1268,7 +1378,7 @@ const BARON_OF_BONE_BOSS_ROOM = {
   contents: {
     monsters: [],
     items: [],
-    events: JOIN_THE_BARON, 
+    events: JOIN_THE_BARON,
   },
 };
 
@@ -1313,7 +1423,7 @@ function checkCurrentRoom() {
   }
 
   // Adds new rooms during tier 3 & tier 4
-  if (catacombRooms.length < 20 && roomCounter >= 50) {
+  if (catacombRooms.length < 20 && roomCounter >= 50 && roomCounter <= 80) {
     createNewRoom();
   }
 
@@ -1569,7 +1679,7 @@ function createNewRoom() {
         } else if (roomDetails === 3) {
           newRoom.roomName = "Dreadbone Chamber";
           newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-two/dreadbone-chamber.jpg";
+          "styles/images/backgrounds/event-rooms/skeletal-hands.jpg";
           newRoom.music = claustrofobia;
           newRoom.contents.events = SKELETAL_HANDS;
         } else if (roomDetails === 4) {
@@ -1653,4 +1763,5 @@ function createNewRoom() {
   getRoomDetails(roomType);
   getRoomMonsters(roomType);
   catacombRooms.push(newRoom);
+  console.log(`New Room Added: ${newRoom}`);
 }

@@ -22,7 +22,7 @@ const POISONED = {
     // ITEM: Toxinweave Mask - Poison Immunity
     const immune = isItemAttuned(TOXINWEAVE_MASK, null);
 
-    if (!immune) {
+    if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(POISONED, length);
     } else {
       writeToLogItem(LOG_ITEM, null, TOXINWEAVE_MASK);
@@ -41,7 +41,7 @@ const HAUNTED = {
     // ITEM: Ghostshroud Talisman - Haunted Immunity
     const immune = isItemAttuned(GHOSTSHROUD_TALISMAN, null);
 
-    if (!immune) {
+    if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(HAUNTED, length);
       soundEffectHandler(ghostlyMagic);
     } else {
@@ -61,7 +61,7 @@ const DISEASED = {
     // ITEM: Plagueward Pendant - Disease Immunity
     const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
 
-    if (!immune) {
+    if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(DISEASED, length);
     } else {
       writeToLogItem(LOG_ITEM, null, PLAGUEWARD_PENDANT);
@@ -99,7 +99,7 @@ const CURSED = {
     // ITEM: Darkguard Trinket - Cursed Immunity
     const immune = isItemAttuned(DARKGUARD_TRINKET, null);
 
-    if (!immune) {
+    if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(CURSED, length);
       soundEffectHandler(ghostEncounter);
     } else {
@@ -161,7 +161,7 @@ const CHILLED = {
     // ITEM: Chillbreaker Band - Chilled Immunity
     const immune = isItemAttuned(CHILLBREAKER_BAND, null);
 
-    if (!immune) {
+    if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(CHILLED, length);
     } else {
       writeToLogItem(LOG_ITEM, null, CHILLBREAKER_BAND);
@@ -260,22 +260,24 @@ const WAR_TORN_BANNER_STATUS = {
   status: `The undead legion will come.`,
   duration: null,
   function: () => {
-    WAR_TORN_BANNER_STATUS.duration = `${
-      30 - legionTracker
-    } legionnaires remaining.`;
-
-    const warTornBannerInterval = setInterval(() => {
-      if (WAR_TORN_BANNER_STATUS.duration === null) {
-        clearInterval(warTornBannerInterval);
-      } else {
-        WAR_TORN_BANNER_STATUS.duration = `${
-          30 - legionTracker
-        } legionnaires remaining.`;
-      }
-    }, 3000);
-
-    statusEffectHandler(WAR_TORN_BANNER_STATUS);
-    renderStatusEffects(WAR_TORN_BANNER_STATUS);
+    if (WAR_TORN_BANNER_STATUS === null) {
+      WAR_TORN_BANNER_STATUS.duration = `${
+        30 - legionTracker
+      } legionnaires remaining.`;
+  
+      const warTornBannerInterval = setInterval(() => {
+        if (WAR_TORN_BANNER_STATUS.duration === null) {
+          clearInterval(warTornBannerInterval);
+        } else {
+          WAR_TORN_BANNER_STATUS.duration = `${
+            30 - legionTracker
+          } legionnaires remaining.`;
+        }
+      }, 3000);
+  
+      statusEffectHandler(WAR_TORN_BANNER_STATUS);
+      renderStatusEffects(WAR_TORN_BANNER_STATUS);
+    }
   },
 };
 
@@ -409,8 +411,7 @@ const setupStatusEffectInterval = (statusEffect) => {
 
     if (
       roomCounter >= statusEffect.statusDuration ||
-      statusEffect.duration === null &&
-      statusEffect !== FLICKERING_CANDLE
+      (statusEffect.duration === null && statusEffect !== FLICKERING_CANDLE)
     ) {
       endStatusEffectInterval(statusEffect, intervalId);
     } else if (statusEffect.detail === "WISP") {
@@ -419,7 +420,10 @@ const setupStatusEffectInterval = (statusEffect) => {
       statusEffect.tracker = "LIT";
     }
 
-    if (statusEffect === FLICKERING_CANDLE && statusDuration <= 0) {
+    if (
+      statusEffect === FLICKERING_CANDLE &&
+      FLICKERING_CANDLE.statusDuration <= 0
+    ) {
       endStatusEffectInterval(statusEffect, intervalId);
     }
   }, 2000);

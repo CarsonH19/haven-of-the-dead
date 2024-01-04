@@ -430,6 +430,9 @@ const REVENANTS_RAGE = {
 
     updateTotalStats();
   },
+  unequip: () => {
+    //
+  }
 };
 
 const LAUGHING_COFFIN_COIN = {
@@ -737,6 +740,12 @@ const GLORYFORGED_BLADE = {
     faith: 0,
     attack: gloryforgedTracker,
   },
+  function: () => {
+    GLORYFORGED_BLADE.stats.attack = gloryforgedTracker;
+  },
+  unequip: () => {
+    //
+  },
 };
 
 const BONE_AMALGAM = {
@@ -763,7 +772,7 @@ function boneAmalgamAddHitPoints() {
         monster !== SHADE ||
         monster !== CRYPT_CRAWLER ||
         monster !== BROODMOTHER) &&
-      BONE_AMALGAM.tracker <= 30
+      BONE_AMALGAM.tracker < 30
     ) {
       let tempHitPoints = monster.skulls * 3;
       BONE_AMALGAM.tracker += tempHitPoints;
@@ -798,7 +807,7 @@ function boneAmalgamUseHitPoints(damage) {
     } else {
       soundEffectHandler(boneBreak8);
     }
-    writeToLogItem(LOG_ITEM, "YES", BONE_AMALGAM);
+    writeToLogItem(LOG_ITEM, null, BONE_AMALGAM);
   } else {
     remainingDamage = damage;
   }
@@ -1234,6 +1243,7 @@ const WITCHFIRE_ORCHID = {
         CURSED.duration = null;
         CURSED.statusDuration = null;
 
+        console.log(`Cure Chance: ${cureChance}`);
         writeToLogItem(LOG_ITEM, "YES", WITCHFIRE_ORCHID);
       }
     }
@@ -1257,6 +1267,7 @@ const EMBERTHAW_PETAL = {
         CHILLED.duration = null;
         CHILLED.statusDuration = null;
 
+        console.log(`Cure Chance: ${cureChance}`);
         writeToLogItem(LOG_ITEM, "YES", EMBERTHAW_PETAL);
       }
     }
@@ -1280,6 +1291,7 @@ const GHOSTLIGHT_LILY = {
         HAUNTED.duration = null;
         HAUNTED.statusDuration = null;
 
+        console.log(`Cure Chance: ${cureChance}`);
         writeToLogItem(LOG_ITEM, "YES", GHOSTLIGHT_LILY);
       }
     }
@@ -1303,6 +1315,7 @@ const GRAVEBLOOM = {
         POISONED.duration = null;
         POISONED.statusDuration = null;
 
+        console.log(`Cure Chance: ${cureChance}`);
         updatePlayerTrackers();
       }
     }
@@ -1934,6 +1947,7 @@ function getItem(rarity) {
 
     case "WISP":
       const wispIndex = Math.floor(Math.random() * wispItems.length);
+      console.log(`Wisp Index: ${wispIndex}`);
       foundItem = wispItems[wispIndex];
       currentRoom.contents.items.push(foundItem);
       break;
@@ -2353,7 +2367,9 @@ inventoryModal.addEventListener("click", (event) => {
       itemName === "Guiding Light" ||
       itemName === "Rowdy Wisp" ||
       itemName === "Restless Wisp" ||
-      itemName === "Bleeding Wisp"
+      itemName === "Bleeding Wisp" ||
+      itemName === "Curious Wisp" ||
+      itemName === "Wicked Wisp"
     ) {
       return true;
     } else {
@@ -2417,6 +2433,10 @@ function renderTrade() {
           itemValue = 10;
         }
 
+        if (items[i].name === "Health Potion") {
+          itemValue = 10;
+        }
+
         tooltipTextFavor.textContent = `Favor: ${itemValue}`;
         tooltipTextFavor.style.fontWeight = 900;
 
@@ -2466,10 +2486,12 @@ function renderTrade() {
           traderName.textContent = "Curator's Items";
 
           if (
-            items === inventoryItems &&
-            items[i].type === "MAGIC" &&
-            items[i].name !== "War Torn Banner" &&
-            items[i].name !== "Grervil's Head"
+            (items === inventoryItems &&
+              items[i].type === "MAGIC" &&
+              (items[i].name !== "War Torn Banner" ||
+                items[i].name !== "Amulet of Whispers")) ||
+            items[i].name === "Laughing Coffin Coin" ||
+            items[i].name === "Skeleton Key"
           ) {
             container.appendChild(itemBox);
           }
@@ -2602,6 +2624,7 @@ function calculateFavor(itemName, operator) {
       previousHagFavor = "TRADED";
       itemObject = hagItems.find((inv) => inv.name === itemName);
     } else if (currentRoom.roomName === "Curator's Curio") {
+      soundEffectHandler(voiceClipMale226);
       itemObject = curatorItems.find((inv) => inv.name === itemName);
     }
 
