@@ -173,6 +173,7 @@ function monsterAttackHandler(bonus) {
 
   damagePlayer(monsterToPlayerDamage);
   updatePlayerTrackers();
+  setControlsInterval("START");
 }
 
 function dealPlayerDamage(damage) {
@@ -247,8 +248,6 @@ function damagePlayer(damage) {
   // ITEM: Soul Jar - resurrect with half HP
   isItemAttuned(SOUL_JAR);
 
-  // Rogue Passive Ability
-  rogueDarkenedReprisal();
   healthLowAnimation();
   isGameOver();
 }
@@ -394,8 +393,8 @@ function guardHandler(bonus) {
 //            Potion
 // ===============================
 
-
 function countPotions() {
+  potionCounter = 0;
   for (let i = 0; i < inventoryItems.length; i++) {
     if (inventoryItems[i] === POTION) {
       potionCounter++;
@@ -467,12 +466,12 @@ function fleeHandler() {
         }, 2000);
       }, 2000);
 
-      setControlsInterval("PAUSE", 4000);
+      setControlsInterval("STOP");
     } else {
       fleeHandler();
     }
   } else {
-    setControlsInterval("PAUSE", 1800);
+    setControlsInterval("STOP");
     setTimeout(monsterAttackHandler, 1200);
     setTimeout(isGameOver, 1500);
     writeToLogActions(LOG_FLEE, "YES", "FAILURE");
@@ -512,7 +511,6 @@ function isGameOver(ending) {
     currentMonsterHealth <= 0 &&
     monsterContainer.style.display === "flex"
   ) {
-    togglePlayerControls();
 
     // ITEM: Bloodstone - Recovers health when monster dies
     isItemAttuned(BLOODSTONE, null);
@@ -839,7 +837,6 @@ function togglePlayerControls() {
   }
 
   if (currentPlayerHealth <= 0) {
-    console.log("PLAYER DEAD CONTROLS OFF");
     attackBtn.disabled = true;
     guardBtn.disabled = true;
     fleeBtn.disabled = true;
@@ -869,7 +866,6 @@ function turnOffControls() {
     inventoryButton.disabled = false;
     potionBtn.disabled = false;
   } else {
-    console.log("CONTROLS OFF");
     attackBtn.disabled = true;
     guardBtn.disabled = true;
     specialBtn.disabled = true;
@@ -1207,7 +1203,7 @@ attackBtn.addEventListener("click", () => {
     }
   }
 
-  setControlsInterval("PAUSE", 1800);
+  setControlsInterval("STOP");
 });
 
 guardBtn.addEventListener("click", () => {
@@ -1215,7 +1211,7 @@ guardBtn.addEventListener("click", () => {
   attackCounter = 0; // Item: Soulreaver
 
   specialCooldownHandler();
-  setControlsInterval("PAUSE", 1800);
+  setControlsInterval("STOP");
   guardHandler();
   setTimeout(isGameOver, 500);
   updatePlayerTrackers();
@@ -1238,12 +1234,12 @@ specialBtn.addEventListener("click", () => {
     isGameOver();
   } else if (currentMonsterHealth > 0 && heroChoice !== "ROGUE") {
     setTimeout(monsterAttackHandler, 1200);
-    setControlsInterval("PAUSE", 1800);
   }
 
   soundEffectHandler(heroChecker(), "PLAYER ABILITY");
   updatePlayerTrackers();
   specialCooldownHandler();
+  setControlsInterval("STOP");
 });
 
 potionBtn.addEventListener("click", () => {
@@ -1255,7 +1251,7 @@ potionBtn.addEventListener("click", () => {
 
   if (currentRoom.contents.monsters.length > 0) {
     specialCooldownHandler();
-    setControlsInterval("PAUSE", 1800);
+    setControlsInterval("STOP");
     setTimeout(monsterAttackHandler, 1200);
     isGameOver();
   }
@@ -1310,7 +1306,7 @@ continueButton.addEventListener("click", () => {
   if (AEGIS_STATUS_EFFECT.duration !== null) {
     AEGIS_STATUS_EFFECT.duration = null;
     AEGIS_STATUS_EFFECT.statusDuration = null;
-    clearInterval(aegisInterval);
+    // clearInterval(aegisInterval);
   }
 
   if (currentRoom.roomName === "Throne of the Eternal") {
@@ -1357,7 +1353,7 @@ continueButton.addEventListener("click", () => {
     updatePlayerTrackers();
   }
 
-  setControlsInterval("PAUSE", 3000);
+  setControlsInterval("STOP");
   soundEffectHandler(whooshLowAir);
 });
 

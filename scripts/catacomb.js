@@ -361,7 +361,7 @@ let tierTwoRooms = [
     description: "",
     backgroundImage:
       "styles/images/backgrounds/tier-two/desecrated-shrine-two.jpg",
-    music: edgeOfFear,
+    music: fightThrough,
     contents: {
       monsters: [CULTIST, CULTIST, CULTIST, FIENDSWORN_CULTIST],
       items: [],
@@ -530,7 +530,6 @@ let tierTwoRooms = [
   },
   {
     roomName: "Grim Marrow Hall",
-    description: "Grim Marrow Hall.",
     backgroundImage: "styles/images/backgrounds/tier-two/grim-marrow-hall.jpg",
     music: hiddenCapacity,
     contents: {
@@ -541,8 +540,6 @@ let tierTwoRooms = [
   },
   {
     roomName: "Ghastly Gallery",
-    description: "",
-    summary: "",
     backgroundImage: "styles/images/backgrounds/tier-two/ghastly-gallery.jpg",
     music: fightThrough,
     contents: {
@@ -553,8 +550,6 @@ let tierTwoRooms = [
   },
   {
     roomName: "Haunted Hallow",
-    description:
-      "In the Haunted Hallow, haunting spirits materialize, their ghostly forms flickering in the dim light. The air is charged with otherworldly energy, as the ethereal inhabitants silently observe intruders.",
     backgroundImage: "styles/images/backgrounds/tier-two/haunted-hallow.jpg",
     music: hauntedOutpost,
     contents: {
@@ -570,8 +565,6 @@ let tierTwoRooms = [
   },
   {
     roomName: "Haunted Bloodcellar",
-    description:
-      "In the Haunted Bloodcellar, ethereal spirits drift through crimson-hued mist. Haunting whispers linger, an unsettling symphony accompanying the ghostly presence. The air itself seems to mourn the forgotten souls trapped within.",
     backgroundImage:
       "styles/images/backgrounds/tier-two/haunted-blood-cellar.jpg",
     music: hauntedOutpost,
@@ -674,11 +667,9 @@ let tierTwoRooms = [
 let tierThreeRooms = [
   {
     roomName: "Desecrated Shrine",
-    description: "",
-    summary: "",
     backgroundImage:
       "styles/images/backgrounds/tier-three/desecrated-shrine.jpg",
-    music: edgeOfFear,
+    music: fightThrough,
     contents: {
       monsters: [FIENDSWORN_CULTIST, FIENDSWORN_CULTIST, CULTIST, CULTIST],
       items: [],
@@ -779,8 +770,6 @@ let tierThreeRooms = [
 let tierFourRooms = [
   {
     roomName: "Desecrated Shrine",
-    description: "",
-    summary: "",
     backgroundImage:
       "styles/images/backgrounds/tier-two/desecrated-shrine-two.jpg",
     music: edgeOfFear,
@@ -1396,6 +1385,7 @@ function getRandomRoom(array) {
 
 function removeCurrentRoom() {
   if (currentRoom !== catacombEntrance) {
+    console.log(`${currentRoom} Removed`);
     catacombRooms.splice(roomIndex, 1);
   }
 }

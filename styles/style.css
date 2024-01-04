@@ -1197,7 +1197,7 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto;
   border: 3px solid #888;
   border-radius: 10px;
-  width: 1050px;
+  width: 720px;
   height: 520px;
 }
 
@@ -1238,12 +1238,14 @@ progress[value]::-moz-progress-bar {
 
 .inventory-header h2 {
   text-align: center; 
+  margin-left: 100px;
   grid-column: 1;
 }
 
 .inventory-header button {
   justify-self: end; 
   grid-column: 2;
+  margin: 5px;
 }
 
 .inventory-left-side {
@@ -1253,7 +1255,7 @@ progress[value]::-moz-progress-bar {
 
 .attuned-box {
   text-align: center;
-  /* border-top: 2px black solid; */
+  border-top: 2px solid var(--header);
   height: auto;
 }
 
@@ -1309,24 +1311,20 @@ progress[value]::-moz-progress-bar {
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); 
 }
 
-.magic-items div {
-  aspect-ratio: 1;
-  flex-direction: column-reverse;
-  margin: 10px;
-  box-sizing: border-box; 
-  cursor: pointer;
-}
-
 .consumables-box {
   text-align: left;
   height: 50%;
 }
 
-.consumables div {
+.consumables div, 
+.magic-items div {
   aspect-ratio: 1;
   flex-direction: column-reverse;
   margin: 10px;
   box-sizing: border-box; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .consumables {

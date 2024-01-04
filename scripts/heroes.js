@@ -91,6 +91,12 @@ function rogueUmbralAssault() {
     }
   }, 500);
 
+  setTimeout(() => {
+    if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth > 0) {
+      setControlsInterval("START");
+    }
+  }, 1800);
+
   writeToLogHero(LOG_UMBRAL_ASSAULT, "YES");
   specialCooldownHandler("RESET");
 }
@@ -219,6 +225,9 @@ function healPlayer(healValue) {
 
 function healthLowAnimation() {
   if (currentPlayerHealth <= 30) {
+    // Rogue Passive Ability
+    rogueDarkenedReprisal();
+
     playerHealthBar.classList.add("health-bar-critical");
     roomImage.classList.add("flash-low-health");
     heartbeatFastLow.volume = 0.3;

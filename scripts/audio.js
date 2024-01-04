@@ -413,7 +413,6 @@ const swordSwingWhoosh = loadAudio(
 function guardSounds() {
   let sounds = [severMetalHit2, swordImpactRock1, swordHit4, swordSwingWhoosh];
   let index = Math.floor(Math.random() * sounds.length);
-  console.log(sounds[index]);
   return sounds[index];
 }
 
@@ -474,7 +473,6 @@ function heavyAttackSounds() {
     impactFleshChop,
   ];
   let index = Math.floor(Math.random() * sounds.length);
-  console.log(sounds[index]);
   return sounds[index];
 }
 
@@ -528,7 +526,6 @@ function lightAttackSounds() {
     swordThrow,
   ];
   let index = Math.floor(Math.random() * sounds.length);
-  console.log(sounds[index]);
   return sounds[index];
 }
 
@@ -591,7 +588,6 @@ function magicAttackSounds() {
     magicSpellImpact,
   ];
   let index = Math.floor(Math.random() * sounds.length);
-  console.log(sounds[index]);
   return sounds[index];
 }
 
@@ -636,7 +632,6 @@ function magicGuardSounds() {
     magicSpellWhoosh9,
   ];
   let index = Math.floor(Math.random() * sounds.length);
-  console.log(sounds[index]);
   return sounds[index];
 }
 

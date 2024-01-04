@@ -188,7 +188,7 @@ function calculatePlayerMaxHealth() {
 let critDamageModifier;
 
 function calculateCritDamageModifier() {
-  critDamageModifier = 1.5 + totalStrength * 0.3;
+  critDamageModifier = 1.5 + totalStrength * 0.15;
   return critDamageModifier;
 }
 

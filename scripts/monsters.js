@@ -723,6 +723,7 @@ function startBattle() {
     updatePlayerTrackers();
 
     setControlsInterval("START");
+    console.log("START BATTLE START CONTROLS");
   }, 1000);
 
   soundEffectHandler(currentRoom.contents.monsters[0], "SPAWN");
@@ -759,6 +760,8 @@ function checkForMonsters() {
   }
 
   setControlsInterval("STOP");
+  console.log("CHECK STOP CONTROLS");
+
 }
 
 function monsterAbilityHandler(monster) {
