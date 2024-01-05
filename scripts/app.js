@@ -387,6 +387,10 @@ function guardHandler(bonus) {
 
   writeToLogActions(LOG_GUARD, "YES", damageBlocked);
   updatePlayerTrackers();
+  
+  setTimeout(() => {
+    setControlsInterval("START");
+  }, 1500);
 }
 
 // ===============================
