@@ -146,6 +146,7 @@ const SPIKE_PITFALL = {
   failDamage: 25,
   penalty: () => {
     DISEASED.function(5);
+    soundEffectHandler(pitchforkBody);
   },
 };
 
@@ -628,6 +629,9 @@ const HAG_TRADER = {
   },
   functionTwo: () => {
     endTrade();
+    setTimeout(() => {
+      cauldronLargeBoil.pause();
+    }, 7000);
   },
 };
 
@@ -1087,7 +1091,7 @@ function lockedRoomHandler(room) {
       if (BONEVAULT_DEMON.boss !== "DEFEATED") {
         BONEVAULT_DEMON.boss = "FIGHTING";
         monsters.push(BONEVAULT_DEMON);
-        items.push(TOMB_GUARDIAN);
+        items.push(TOMBGUARD);
         playMusic(passedDanger);
         setTimeout(newRoomAnimation, 3000);
         setTimeout(() => {

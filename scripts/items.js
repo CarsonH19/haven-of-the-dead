@@ -955,17 +955,17 @@ const SPINE_OF_THE_NECROMANCER = {
 
 // Bonevault Demon
 
-const TOMB_GUARDIAN = {
-  name: "Tomb Guardian",
+const TOMBGUARD = {
+  name: "Tombguard",
   image: "styles/images/items/tomb-guardian.jpg",
   type: "MAGIC",
   rarity: "Epic",
-  effect: "While attuned to this item your Guard Bonus is increased by 3.",
+  effect: "While attuned to this item your Guard Bonus is increased by 5.",
   tracker: 0,
   function: () => {
     // add shield soundEffect? hero.soundEffects.guard = sound;
-    // writeToLogItem(LOG_ITEM, null, TOMB_GUARDIAN); !FIX!
-    return 3;
+    // writeToLogItem(LOG_ITEM, null, TOMBGUARD); !FIX!
+    return 5;
   },
   unequip: () => {
     // removed shield soundEffect? hero.soundEffects.guard = old sound;
@@ -2608,6 +2608,7 @@ function calculateFavor(itemName, operator) {
     if (currentRoom.roomName === "Hag's Hollow") {
       previousHagFavor = "TRADED";
       hagFavor = favor;
+      soundEffectHandler(splashSubmerge2);
     } else {
       curatorFavor = favor;
     }

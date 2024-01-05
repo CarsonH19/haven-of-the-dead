@@ -203,8 +203,6 @@ li, ul {
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
-  border-radius: 0 0 0 10px; 
-
 }
 
 .monster-container {
@@ -1055,10 +1053,18 @@ progress[value]::-moz-progress-bar {
   text-align: left;
 }
 
-.room-summary-modal-content h2 {
+.room-summary-modal-content div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.room-summary-modal-content div h2 {
   align-self: center;
   margin: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .room-summary-modal-content h4 {

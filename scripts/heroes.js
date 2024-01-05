@@ -109,14 +109,14 @@ const DARKENED_REPRISAL = {
   active: null,
   function: () => {
     DARKENED_REPRISAL.duration = "Active";
-    let reprisalInterval = setInterval(() => {
+    // let reprisalInterval = setInterval(() => {
       if (DARKENED_REPRISAL.active === "NO") {
         DARKENED_REPRISAL.duration = null;
         writeToLogHero(LOG_DARKENED_REPRISAL, "YES", "DISABLE");
-        clearInterval(reprisalInterval);
+        // clearInterval(reprisalInterval);
         updateTotalStats();
       }
-    }, 3000);
+    // }, 3000);
 
     renderStatusEffects(DARKENED_REPRISAL);
     updateTotalStats();
@@ -407,7 +407,7 @@ function renderLevelUpModal() {
     passiveRank.textContent = "I";
   }
 
-  soundEffectHandler(hitImpactDelay2);
+  soundEffectHandler(magicMetallic);
 }
 
 function levelUpHandler(boon) {
@@ -483,6 +483,8 @@ function levelUpHandler(boon) {
         break;
     }
   }
+
+  soundEffectHandler(shimmerCrystal);
 }
 
 //
@@ -510,12 +512,16 @@ function renderHeroStatsModal() {
   let heroHealthMax = document.getElementById("heroHealthMax");
   heroHealthCurrent.textContent = currentPlayerHealth;
   heroHealthMax.textContent = playerMaxHealth;
+
   //ATTACK ------------------------------------------------------
   let heroCurrentAttack = document.getElementById("heroCurrentAttack");
   heroCurrentAttack.textContent = totalAttack;
+
   // STRENGTH ------------------------------------------------------
-  let heroStatsStrength = document.getElementById("heroStatsStrength");
-  heroStatsStrength.textContent = totalStrength;
+  // Rank
+  const strengthTitle = document.getElementById("strengthTitle");
+  let heroStatsStrength = totalStrength;
+  strengthTitle.textContent = `Strength (Rank ${strengthBoonRank}):  ${heroStatsStrength}`;
   // Bonus Health
   const heroBonusHealth = document.getElementById("heroBonusHealth");
   heroBonusHealth.textContent = `+${totalStrength * 10}`;
@@ -523,9 +529,12 @@ function renderHeroStatsModal() {
   const heroCritHitDamage = document.getElementById("heroCritHitDamage");
   let heroCritDamageMod = calculateCritDamageModifier() * 100;
   heroCritHitDamage.textContent = `${heroCritDamageMod}%`;
+
   // DEXTERITY ------------------------------------------------------
-  let heroStatsDexterity = document.getElementById("heroStatsDexterity");
-  heroStatsDexterity.textContent = totalDexterity;
+  // Rank
+  const dexterityTitle = document.getElementById("dexterityTitle");
+  let heroStatsDexterity = totalDexterity;
+  dexterityTitle.textContent = `Dexterity (Rank ${dexterityBoonRank}):  ${heroStatsDexterity}`;
   // Critical Hit Chance
   const heroCritHitChance = document.getElementById("heroCritHitChance");
   let critHitPercentage = ((1 + totalDexterity) / 20) * 100;
@@ -537,9 +546,12 @@ function renderHeroStatsModal() {
   const heroFleeChance = document.getElementById("heroFleeChance");
   let fleeChancePercentage = (totalFaith / 10) * 100;
   heroFleeChance.textContent = `+${fleeChancePercentage}%`;
+
   // FAITH ------------------------------------------------------
-  let heroStatsFaith = document.getElementById("heroStatsFaith");
-  heroStatsFaith.textContent = totalFaith;
+  // Rank
+  const faithTitle = document.getElementById("faithTitle");
+  let heroStatsFaith = totalFaith;
+  faithTitle.textContent = `Faith (Rank ${faithBoonRank}):  ${heroStatsFaith}`;
   // Hero Experience Modifier
   const heroExperienceModifier = document.getElementById(
     "heroExperienceModifier"
@@ -548,6 +560,7 @@ function renderHeroStatsModal() {
   // Item Find Chance
   const heroFindItemChance = document.getElementById("heroFindItemChance");
   heroFindItemChance.textContent = `+${itemFindChance}%`;
+
   // SPECIAL ----------------------------------------------------
   const heroSpecial = document.getElementById("heroSpecialName");
   const heroSpecialDetails = document.getElementById("heroSpecialDetails");
@@ -555,13 +568,13 @@ function renderHeroStatsModal() {
   if (hero === paladin) {
     heroSpecial.textContent = `Holy Smite (Rank ${specialAbilityBoonRank})`;
     let smitePercentage = holySmiteTracker * 100;
-    heroSpecialDetails.textContent = `${smitePercentage}% Damage`;
+    heroSpecialDetails.textContent = `Damage: ${smitePercentage}%`;
   } else if (hero === rogue) {
     heroSpecial.textContent = `Umbral Strike (Rank ${specialAbilityBoonRank})`;
-    heroSpecialDetails.textContent = `${umbralAssaultTracker} Attacks`;
+    heroSpecialDetails.textContent = `Attacks: ${umbralAssaultTracker}`;
   } else {
     heroSpecial.textContent = `Cleansing Flame (Rank ${specialAbilityBoonRank})`;
-    heroSpecialDetails.textContent = `Restores ${cleansingFlameTracker}HP`;
+    heroSpecialDetails.textContent = `Restore: ${cleansingFlameTracker}HP`;
   }
 
   // PASSIVE ----------------------------------------------------
@@ -570,15 +583,15 @@ function renderHeroStatsModal() {
 
   if (hero === paladin) {
     heroPassive.textContent = `Radiant Aura (Rank ${passiveAbilityBoonRank})`;
-    heroPassiveDetails.textContent = `Damage to Undead Enemies: ${radiantAuraTracker}`;
+    heroPassiveDetails.textContent = `Damage: ${radiantAuraTracker}`;
   } else if (hero === rogue) {
     heroPassive.textContent = `Darkened Reprisal (Rank ${passiveAbilityBoonRank})`;
-    heroPassiveDetails.textContent = `Dexterity Increase Below 30HP: ${
+    heroPassiveDetails.textContent = `Dexterity Increase: ${
       darkenedReprisalTracker * 100
     }%`;
   } else {
     heroPassive.textContent = `Burning Devotion (Rank ${passiveAbilityBoonRank})`;
-    heroPassiveDetails.textContent = `Minimum Attack Damage ${burningDevotionTracker}`;
+    heroPassiveDetails.textContent = `Minimum Damage: ${burningDevotionTracker}`;
   }
 
   // Check for Rank 4 Boons
@@ -771,7 +784,7 @@ function endLevelUp() {
     clearLevelUpModal();
   }, 1950);
 
-  soundEffectHandler(shimmerCrystal);
+  soundEffectHandler(magicMetallic );
   updateTotalStats();
 }
 

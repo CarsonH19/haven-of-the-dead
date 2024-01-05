@@ -394,24 +394,31 @@ const severMetalHit2 = loadAudio(
   "audio/sound-effects/guard/Sever Metal Hit 2.mp3",
   "severMetalHit2"
 );
-
 const swordImpactRock1 = loadAudio(
   "audio/sound-effects/guard/Sword Impact Rock 1.mp3",
   "swordImpactRock1"
 );
-
 const swordHit4 = loadAudio(
   "audio/sound-effects/guard/Sword Hit 4.mp3",
   "swordHit4"
 );
-
 const swordSwingWhoosh = loadAudio(
-  "audio/sound-effects/light/Sword Swing Whoosh.mp3",
+  "audio/sound-effects/guard/Sword Swing Whoosh.mp3",
   "swordSwingWhoosh"
+);
+const swordHit7 = loadAudio(
+  "audio/sound-effects/guard/Sword Hit 7.mp3",
+  "swordHit7"
 );
 
 function guardSounds() {
-  let sounds = [severMetalHit2, swordImpactRock1, swordHit4, swordSwingWhoosh];
+  let sounds = [
+    severMetalHit2,
+    swordImpactRock1,
+    swordHit4,
+    swordSwingWhoosh,
+    swordHit7,
+  ];
   let index = Math.floor(Math.random() * sounds.length);
   return sounds[index];
 }
@@ -425,37 +432,30 @@ const axeChopFlesh1 = loadAudio(
   "audio/sound-effects/heavy/Axe Chop Flesh 1.mp3",
   "axeChopFlesh1"
 );
-
 const axeChopFlesh2 = loadAudio(
   "audio/sound-effects/heavy/Axe Chop Flesh 2.mp3",
   "axeChopFlesh2"
 );
-
 const axeChopFlesh8 = loadAudio(
   "audio/sound-effects/heavy/Axe Chop Flesh 8.mp3",
   "axeChopFlesh8"
 );
-
 const axeChopFlesh10 = loadAudio(
   "audio/sound-effects/heavy/Axe Chop Flesh 10.mp3",
   "axeChopFlesh10"
 );
-
 const battleAxeStrike2 = loadAudio(
   "audio/sound-effects/heavy/Battle Axe Strike 2.mp3",
   "battleAxeStrike2"
 );
-
 const battleAxeStrike3 = loadAudio(
   "audio/sound-effects/heavy/Battle Axe Strike 3.mp3",
   "battleAxeStrike3"
 );
-
 const battleAxeThrow = loadAudio(
   "audio/sound-effects/heavy/Battle Axe Throw.mp3",
   "battleAxeThrow"
 );
-
 const impactFleshChop = loadAudio(
   "audio/sound-effects/heavy/Impact Flesh Chop.mp3",
   "impactFleshChop"
@@ -532,18 +532,8 @@ function lightAttackSounds() {
 // ===============================
 //            Magic
 // ===============================
-// Priestess / Blazing Skeleton / Baron
+// Priestess / Holy Smite / Fiendsworn / Blazing Skeleton / Baron
 
-// Attack & Ability
-
-const magicSpellBuild14 = loadAudio(
-  "audio/sound-effects/magic/Magic Spell Build 14.mp3",
-  "magicSpellBuild14"
-);
-const magicSpellBurst = loadAudio(
-  "audio/sound-effects/magic/Magic Spell Burst.mp3",
-  "magicSpellBurst"
-);
 const magicSpellFire1 = loadAudio(
   "audio/sound-effects/magic/Magic Spell Fire 1.mp3",
   "magicSpellFire1"
@@ -579,8 +569,6 @@ const magicalSpell = loadAudio(
 
 function magicAttackSounds() {
   let sounds = [
-    magicSpellBuild14,
-    magicSpellBurst,
     magicSpellFire1,
     magicSpellFire2,
     magicSpellHit2,
@@ -645,9 +633,114 @@ const ghostlyWhoosh = loadAudio(
 );
 
 // ===============================
-//        Monster Abilities
+//        Monster Sounds
 // ===============================
 
+// const name = loadAudio("", "");
+
+// Bites
+const biteFleshCrunch1 = loadAudio(
+  "audio/sound-effects/monster/Bite Flesh Crunch 1.mp3",
+  "biteFleshCrunch1"
+);
+const biteFleshCrunch2 = loadAudio(
+  "audio/sound-effects/monster/Bite Flesh Crunch 2.mp3",
+  "biteFleshCrunch2"
+);
+const biteFleshCrunch4 = loadAudio(
+  "audio/sound-effects/monster/Bite Flesh Crunch 4.mp3",
+  "biteFleshCrunch4"
+);
+const spiderBiteFang3 = loadAudio(
+  "audio/sound-effects/monster/Spider Bite Fang 3.mp3",
+  "spiderBiteFang3"
+);
+const spiderBiteFang4 = loadAudio(
+  "audio/sound-effects/monster/Spider Bite Fang 4.mp3",
+  "spiderBiteFang4"
+);
+
+function biteSounds() {
+  let sounds = [
+    biteFleshCrunch1,
+    biteFleshCrunch2,
+    biteFleshCrunch4,
+    spiderBiteFang3,
+    spiderBiteFang4,
+  ];
+  let index = Math.floor(Math.random() * sounds.length);
+  return sounds[index];
+}
+
+// Bone Breaks
+const boneBreak = loadAudio(
+  "audio/sound-effects/monster/Bone Break.mp3",
+  "boneBreak"
+);
+const boneBreak6 = loadAudio(
+  "audio/sound-effects/monster/Bone Break 6.mp3",
+  "boneBreak6"
+);
+const boneBreak7 = loadAudio(
+  "audio/sound-effects/monster/Bone Break 7.mp3",
+  "boneBreak7"
+);
+const boneBreak8 = loadAudio(
+  "audio/sound-effects/monster/Bone Break 8.mp3",
+  "boneBreak8"
+);
+const boneCrunchCrack1 = loadAudio(
+  "audio/sound-effects/monster/Bone Crunch Crack 1.mp3",
+  "boneCrunchCrack1"
+);
+const spineBoneBreak1 = loadAudio(
+  "audio/sound-effects/monster/Spine Bone Break 1.mp3",
+  "spineBoneBreak1"
+);
+const spineBoneBreak2 = loadAudio(
+  "audio/sound-effects/monster/Spine Bone Break 2.mp3",
+  "spineBoneBreak2"
+);
+
+function boneBreakSounds() {
+  let sounds = [
+    boneBreak,
+    boneBreak6,
+    boneBreak7,
+    boneBreak8,
+    boneCrunchCrack1,
+    spineBoneBreak1,
+    spineBoneBreak2,
+  ];
+  let index = Math.floor(Math.random() * sounds.length);
+  return sounds[index];
+}
+
+// Human Fight Grunts
+const fightGrunt1 = loadAudio(
+  "audio/sound-effects/monster/Fight Grunt 1.mp3",
+  "fightGrunt1"
+);
+const fightGrunt2 = loadAudio(
+  "audio/sound-effects/monster/Fight Grunt 2.mp3",
+  "fightGrunt2"
+);
+const fightGrunt3 = loadAudio(
+  "audio/sound-effects/monster/Fight Grunt 3.mp3",
+  "fightGrunt3"
+);
+const fightGrunt6 = loadAudio(
+  "audio/sound-effects/monster/Fight Grunt 6.mp3",
+  "fightGrunt6"
+);
+
+function fightgruntSounds() {
+  let sounds = [fightGrunt1, fightGrunt2, fightGrunt3, fightGrunt6];
+  let index = Math.floor(Math.random() * sounds.length);
+  return sounds[index];
+}
+
+// Misc. Abilities
 // Crypt Crawler
 const spiderWebShoot7 = loadAudio(
   "audio/sound-effects/Spider Web Shoot 7.mp3",
@@ -685,11 +778,6 @@ const ratSqueak9 = loadAudio(
   "ratSqueak9"
 );
 
-const boneCrunchCrack1 = loadAudio(
-  "audio/sound-effects/Bone Crunch Crack 1.mp3",
-  "boneCrunchCrack1"
-);
-
 const swordFromSheath3 = loadAudio(
   "audio/sound-effects/Sword From Sheath 3.mp3",
   "swordFromSheath3"
@@ -719,16 +807,6 @@ const fleshHit5 = loadAudio("audio/sound-effects/Flesh Hit 5.mp3", "fleshHit5");
 const impactPunchBody2 = loadAudio(
   "audio/sound-effects/Impact Punch Body 2.mp3",
   "impactPunchBody2"
-);
-
-const spiderBiteFang3 = loadAudio(
-  "audio/sound-effects/Spider Bite Fang 3.mp3",
-  "spiderBiteFang3"
-);
-
-const spiderBiteFang4 = loadAudio(
-  "audio/sound-effects/Spider Bite Fang 4.mp3",
-  "spiderBiteFang4"
 );
 
 const skullHitShovel = loadAudio(
@@ -765,24 +843,9 @@ const fleshStab3 = loadAudio(
 //         MONSTER DEATH
 // ===============================
 
-const boneBreak7 = loadAudio(
-  "audio/sound-effects/Bone Break 7.mp3",
-  "boneBreak7"
-);
-
-const boneBreak8 = loadAudio(
-  "audio/sound-effects/Bone Break 8.mp3",
-  "boneBreak8"
-);
-
 const armorMetalClanksToTheGround = loadAudio(
   "audio/sound-effects/Armor Metal Clanks to Ground.mp3",
   "armorMetalClanksToTheGround"
-);
-
-const fightGrunt6 = loadAudio(
-  "audio/sound-effects/Fight Grunt 6.mp3",
-  "fightGrunt6"
 );
 
 const alienSpiderWeb3 = loadAudio(
@@ -810,46 +873,38 @@ const flameLicks2 = loadAudio(
   "audio/sound-effects/Flame Licks 2.mp3",
   "flameLicks2"
 );
-
 const skeletonKeyIn2 = loadAudio(
   "audio/sound-effects/Skeleton Key In 2.mp3",
   "skeletonKeyIn2"
 );
-
 const coinFlipLand = loadAudio(
   "audio/sound-effects/Coin Flip Land.mp3",
   "coinFlipLand"
 );
-
 const crystalWhoosh = loadAudio(
   "audio/sound-effects/Whoosh Crystal.mp3",
   "crystalWhoosh"
 );
-
 // Food
 const chewCrackersMouth = loadAudio(
   "audio/sound-effects/Chew Crackers Mouth.mp3",
   "chewCrackersMouth"
 );
-
 // Drink
 const gulpingWater24 = loadAudio(
   "audio/sound-effects/Gulping Water 24.mp3",
   "gulpingWater24"
 );
-
 // Wisp
 const ghostBreathWithReverb = loadAudio(
   "audio/sound-effects/Ghostly Breath With Reverb.mp3",
   "ghostBreathWithReverb"
 );
-
 // Whispering Skulls
 const evilSpell1 = loadAudio(
   "audio/sound-effects/Evil Spell 1.mp3",
   "evilSpell1"
 );
-
 // Demonic Grimoire
 const energyPresence4 = loadAudio(
   "audio/sound-effects/Energy Presence 4.mp3",
@@ -860,7 +915,7 @@ const energyPresence4 = loadAudio(
 //           EVENTS
 // ===============================
 
-// Ivan's Traps
+// Ivan's Laugh During Traps
 const humanLaugh25 = loadAudio(
   "audio/sound-effects/Human Laugh 25.mp3",
   "humanLaugh25"
@@ -925,7 +980,8 @@ const cameraIntoBag = loadAudio(
 
 const cauldronLargeBoil = loadAudio(
   "audio/sound-effects/misc/Cauldron Large Boil.mp3",
-  "cauldronLargeBoil"
+  "cauldronLargeBoil",
+  true
 );
 
 const evilSpellVoice1 = loadAudio(
@@ -943,32 +999,55 @@ const ghostEncounter = loadAudio(
   "ghostEncounter"
 );
 
+// Baron of Bone Death
 const ghostlyDemonic = loadAudio(
   "audio/sound-effects/misc/Ghostly Demonic.mp3",
   "ghostlyDemonic"
 );
 
+// Haunted
 const ghostlyMagic = loadAudio(
   "audio/sound-effects/misc/Ghostly Magic.mp3",
   "ghostlyMagic"
 );
 
-const hitImpactDelay2 = loadAudio(
-  "audio/sound-effects/misc/Hit Impact Delay 2.mp3",
-  "hitImpactDelay2"
-);
+// const hitImpactDelay2 = loadAudio(
+//   "audio/sound-effects/misc/Hit Impact Delay 2.mp3",
+//   "hitImpactDelay2"
+// );
 
+// Render Room Summary Modal
 const hitReverbDark4 = loadAudio(
   "audio/sound-effects/misc/Hit Reverb Dark 4.mp3",
   "hitReverbDark4"
 );
 
+// Boon Choice
 const shimmerCrystal = loadAudio(
   "audio/sound-effects/misc/Shimmer Crysta.mp3",
   "shimmerCrystal"
 );
 
+// Curator "Hmm"
 const voiceClipMale226 = loadAudio(
   "audio/sound-effects/misc/Voice Clip Male 226.mp3",
   "voiceClipMale226"
+);
+
+// Level Up Modal Render
+const magicMetallic = loadAudio(
+  "audio/sound-effects/misc/Magical Metallic.mp3",
+  "magicMetallic"
+);
+
+// Pitfall Spike Stab
+const pitchforkBody = loadAudio(
+  "audio/sound-effects/Pitchfork Body.mp3",
+  "pitchforkBody"
+);
+
+// Hag's Hollow Gain Favor
+const splashSubmerge2 = loadAudio(
+  "audio/sound-effects/Splash Submerge 2.mp3",
+  "splashSubmerge2"
 );

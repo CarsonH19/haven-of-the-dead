@@ -214,8 +214,8 @@ let guardReady = "YES";
 function calculateGuardBonus() {
   guardBonus = totalDexterity;
 
-  // ITEM - Tomb Guardian: +3 Guard Bonus
-  guardBonus += isItemAttuned(TOMB_GUARDIAN, 0);
+  // ITEM - Tombguard: +3 Guard Bonus
+  guardBonus += isItemAttuned(TOMBGUARD, 0);
 
   return guardBonus;
 }

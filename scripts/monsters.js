@@ -80,7 +80,7 @@ const SCOUNDREL = {
   soundEffects: {
     spawn: swordFromSheath3,
     attack: lightAttackSounds,
-    death: fightGrunt6,
+    death: fightgruntSounds,
     ability: lightAttackSounds,
   },
   function: () => {
@@ -101,7 +101,7 @@ const CULTIST = {
   soundEffects: {
     spawn: swordFromSheath3,
     attack: lightAttackSounds,
-    death: fightGrunt6,
+    death: fightgruntSounds,
     ability: evilSpell1,
   },
   function: () => {
@@ -118,7 +118,7 @@ const FIENDSWORN_CULTIST = {
   soundEffects: {
     spawn: swordFromSheath3,
     attack: magicAttackSounds,
-    death: fightGrunt6,
+    death: fightgruntSounds,
     ability: evilSpell1,
   },
   function: () => {
@@ -137,9 +137,9 @@ const DECREPIT_SKELETON = {
   type: "UNDEAD",
   skulls: 1,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: impactPunchBody2,
-    death: boneBreak8,
+    death: boneBreakSounds,
   },
 };
 
@@ -149,9 +149,9 @@ const SKELETAL_SOLDIER = {
   type: "UNDEAD",
   skulls: 2,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: heavyAttackSounds,
-    death: boneBreak8,
+    death: boneBreakSounds,
   },
 };
 
@@ -161,7 +161,7 @@ const ARMORED_SKELETON = {
   type: "UNDEAD",
   skulls: 3,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: heavyAttackSounds,
     death: armorMetalClanksToTheGround,
   },
@@ -173,7 +173,7 @@ const LEGIONNAIRE = {
   type: "UNDEAD",
   skulls: 4,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: heavyAttackSounds,
     death: armorMetalClanksToTheGround,
   },
@@ -186,7 +186,7 @@ const UNDYING_WARBAND = {
   skulls: 9,
   attackCounter: 0,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: lightAttackSounds,
     death: armorMetalClanksToTheGround,
   },
@@ -226,9 +226,9 @@ const BLAZING_SKELETON = {
   type: "UNDEAD",
   skulls: 3,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: magicAttackSounds,
-    death: boneBreak8,
+    death: boneBreakSounds,
     ability: magicAttackSounds,
   },
   function: () => {
@@ -246,9 +246,9 @@ const DRAUGR = {
   type: "UNDEAD",
   skulls: 5,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: heavyAttackSounds,
-    death: boneBreak8,
+    death: boneBreakSounds,
     ability: iceCrackFreeze,
   },
   function: () => {
@@ -263,10 +263,10 @@ const BONE_TITAN = {
   type: "UNDEAD",
   skulls: 7,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: heavyAttackSounds,
-    death: boneBreak8,
-    ability: boneBreak7,
+    death: boneBreakSounds,
+    ability: boneBreakSounds,
   },
   function: () => {
     damageMonster(currentMonsterHealth);
@@ -287,10 +287,10 @@ const BONEVAULT_DEMON = {
   skulls: 7,
   soundEffects: {
     // !FIX! Add sound effects
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: heavyAttackSounds,
-    death: boneBreak8,
-    ability: boneBreak7,
+    death: boneBreakSounds,
+    ability: heavyAttackSounds,
   },
   tracker: 0,
   function: () => {
@@ -322,10 +322,10 @@ const FLOOD_OF_BONES = {
   type: "UNDEAD",
   skulls: 9,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: heavyAttackSounds,
     attack: fleshHit5,
-    death: boneBreak8,
-    ability: boneBreak7,
+    death: heavyAttackSounds,
+    ability: heavyAttackSounds,
   },
   function: () => {
     //writeToLog() if critical attack, spawns 2 decrepit skeletons
@@ -533,9 +533,9 @@ const GRERVILS_BODY = {
   type: "UNDEAD",
   skulls: 3,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: impactPunchBody2,
-    death: boneBreak8,
+    death: boneBreakSounds,
   },
 };
 
@@ -545,9 +545,9 @@ const HEADLESS_SKELETON = {
   type: "UNDEAD",
   skulls: 3,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: impactPunchBody2,
-    death: boneBreak8,
+    death: boneBreakSounds,
   },
 };
 
@@ -571,7 +571,7 @@ const POSSESSED_EARVER = {
   soundEffects: {
     spawn: ghostAppearance1,
     attack: skullHitShovel,
-    death: fightGrunt6,
+    death: fightgruntSounds,
   },
   function: () => {
     HAUNTED.function(7);
@@ -586,7 +586,7 @@ const IVAN_STATS = {
   soundEffects: {
     spawn: swordFromSheath3,
     attack: lightAttackSounds,
-    death: fightGrunt6,
+    death: fightgruntSounds,
   },
   abilityCounter: 0,
   function: () => {
@@ -665,6 +665,21 @@ function monsterSkullLevel(level) {
     case UNDYING_WARBAND:
       monsterMaxHealth = 260;
       monsterAttackValue = 5;
+      break;
+
+    case UNDEAD_LIHETH:
+      monsterMaxHealth = 240;
+      monsterAttackValue = 25;
+      break;
+
+    case UNDEAD_RIVEN:
+      monsterMaxHealth = 280;
+      monsterAttackValue = 20;
+      break;
+
+    case UNDEAD_SIGGURD:
+      monsterMaxHealth = 320;
+      monsterAttackValue = 20;
       break;
 
     case BARON_OF_BONE:

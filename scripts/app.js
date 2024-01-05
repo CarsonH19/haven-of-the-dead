@@ -1038,10 +1038,19 @@ function renderRoomSummaryModal() {
       roomSummaryModal.style.display = "block";
       let roomInfo = roomSummaryInformation.contents;
 
+      // Header Box 
+      let headerBox = document.createElement('div');
+      roomSummaryInfo.appendChild(headerBox);
+
       // Main Header
       mainHeader = document.createElement("h2");
       mainHeader.textContent = `${roomSummaryInformation.roomName} Cleared`;
-      roomSummaryInfo.appendChild(mainHeader);
+      headerBox.appendChild(mainHeader);
+
+      // Divider 
+      let divider = document.createElement('div');
+      divider.classList.add('character-divider');
+      headerBox.appendChild(divider);
 
       // Description
       // descriptionSummaryContainer = document.createElement("div");
