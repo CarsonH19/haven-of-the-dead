@@ -621,7 +621,7 @@ const HAG_TRADER = {
   name: "The Hag",
   eventType: "MISC",
   description: `"Welcome, lost souls, to my hollow's embrace. Longing for my cauldron's depths, are you? Bring rare tributes, and my cauldron shall brew you something special."`,
-  summary: `The hag seeks rare ingredients to brew elixirs, entwining dark magic and forbidden lore. Her cauldron's simmering concoctions grant her power, prolonging her twisted existence, and unleashing curses upon those who dare to cross her malevolent path.`,
+  summary: `Hag's Hollow,  hidden deep within the catacomb's bowels, glows eerily from the bubbling cauldron within. Thick fog billows from the cauldron and hangs in the air, filling the room with a nauseating smell. The hag, with her cauldron, offers her dark expertise, welcoming those who bring rare ingredients to trade.`,
   optionOne: "Trade",
   optionTwo: "Leave",
   functionOne: () => {
@@ -639,7 +639,7 @@ const CURATOR_TRADER = {
   name: "The Curator",
   eventType: "MISC",
   description: `"Ah, about time you stumbled in. Let's cut the formalities get to the point. What pitiful trinkets have you scrounged up, or are you here to waste my time?"`,
-  summary: `The Curator, a shrewd and condescending guardian of the catacombs, seeks to amass a collection of potent magical items. Intrigued by the esoteric and enchanted, he's open to trades but demands only the most exceptional artifacts for his coveted assortment.`,
+  summary: `The Curator's Curio, a clandestine collection of catacomb relics and arcane artifacts. In the dim-lit reliquary, items of forgotten power gather, chosen by the curator, who is willing to make a deal for anything that catches his eye.`,
   optionOne: "Trade",
   optionTwo: "Leave",
   functionOne: () => {

@@ -2,45 +2,45 @@
 //          TESTING
 // ===============================
 
-let catacombRooms = [
-  {
-    roomName: "Throne of the Eternal",
-    backgroundImage: "styles/images/backgrounds/event-rooms/eternal-throne.jpg",
-    music: finalBrigade,
-    contents: {
-      monsters: [],
-      items: [],
-      events: null,
-    },
-    function: () => {
-      let hero = heroChecker();
-      let room = currentRoom.contents.monsters;
+// let catacombRooms = [
+//   {
+//     roomName: "Throne of the Eternal",
+//     backgroundImage: "styles/images/backgrounds/event-rooms/eternal-throne.jpg",
+//     music: finalBrigade,
+//     contents: {
+//       monsters: [],
+//       items: [],
+//       events: null,
+//     },
+//     function: () => {
+//       let hero = heroChecker();
+//       let room = currentRoom.contents.monsters;
 
-      setTimeout(() => {
-        switch (hero) {
-          case paladin:
-            room.push(UNDEAD_LIHETH, UNDEAD_RIVEN);
-            break;
+//       setTimeout(() => {
+//         switch (hero) {
+//           case paladin:
+//             room.push(UNDEAD_LIHETH, UNDEAD_RIVEN);
+//             break;
 
-          case priestess:
-            room.push(UNDEAD_SIGGURD, UNDEAD_RIVEN);
-            break;
+//           case priestess:
+//             room.push(UNDEAD_SIGGURD, UNDEAD_RIVEN);
+//             break;
 
-          case rogue:
-            room.push(UNDEAD_LIHETH, UNDEAD_SIGGURD);
-            break;
-        }
+//           case rogue:
+//             room.push(UNDEAD_LIHETH, UNDEAD_SIGGURD);
+//             break;
+//         }
 
-        startBattle();
-        setRoomSummary();
-      }, 6000);
+//         startBattle();
+//         setRoomSummary();
+//       }, 6000);
 
-      setTimeout(() => {
-        writeToLogOther(LOG_OTHER, "YES", "UNDEAD HEROES");
-      }, 2000);
-    },
-  },
-];
+//       setTimeout(() => {
+//         writeToLogOther(LOG_OTHER, "YES", "UNDEAD HEROES");
+//       }, 2000);
+//     },
+//   },
+// ];
 
 // // ===============================
 // //        CATACOMB ENTRANCE
@@ -63,295 +63,286 @@ let currentRoom = catacombEntrance;
 // //         Tier One Rooms
 // // ===============================
 
-// let catacombRooms = [
-//   {
-//     roomName: "Clawed Caverns",
-//     description:
-//       "The Clawed Caverns echo with the sinister skittering of unseen claws. Jagged stalactites hang like fangs, ready to pierce the unwary.",
-//     backgroundImage: "styles/images/backgrounds/tier-one/clawed-cavern.jpg",
-//     music: deepTunnels,
-//     contents: {
-//       monsters: [GNAWER, GNAWER],
-//       items: [],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Gnawers' Nest",
-//     description:
-//       "In the Gnawers' Nest, the scent of fur and decay hangs heavy. A multitude of gnawers skulk, eyes gleaming in the darkness. The air resonates with the unsettling symphony of their hungry whispers.",
-//     backgroundImage: "styles/images/backgrounds/tier-one/gnawers-nest.jpg",
-//     music: deepTunnels,
-//     contents: {
-//       monsters: [GNAWER, GNAWER, GNAWER, GNAWER],
-//       items: [],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Sneakshade Sanctum",
-//     description:
-//       "The Sneakshade Sanctum conceals rogue figures in the shadows. Sinister scoundrels lurk, their eyes glinting with mischief. The sanctum exudes an eerie calm, belying the imminent threat of unseen daggers.",
-//     summary: "",
-//     backgroundImage:
-//       "styles/images/backgrounds/tier-one/sneakshade-sanctum.jpg",
-//     music: hiddenCapacity,
-//     contents: {
-//       monsters: [SCOUNDREL, SCOUNDREL],
-//       items: [],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Devious Alvove",
-//     description:
-//       "The Devious Alvove conceals its secrets in shadows. A lone scoundrel lurks, eyes gleaming with mischief. A tempting aroma of Blackheart Brew wafts through the air, promising both delight and danger to those who venture forth.",
-//     summary: "",
-//     backgroundImage: "styles/images/backgrounds/tier-one/devious-alcove.jpg",
-//     music: hiddenCapacity,
-//     contents: {
-//       monsters: [SCOUNDREL],
-//       items: [],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Rogue's Refuge",
-//     description:
-//       "In the Rogue's Refuge, whispers of ill intent fill the air. Multiple scoundrels, masters of deception, plot amidst the concealed corners.",
-//     summary: "",
-//     backgroundImage: "styles/images/backgrounds/tier-one/rogues-refuge.jpg",
-//     music: hiddenCapacity,
-//     contents: {
-//       monsters: [SCOUNDREL, SCOUNDREL, SCOUNDREL],
-//       items: [],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "The Hatchery",
-//     description:
-//       "The Hatchery pulsates with an eerie hum. Walls, lined with unhatched eggs, house a crawling horde of crypt crawlers. The air is thick with the anticipation of countless tiny legs skittering across the cold stone floor.",
-//     backgroundImage: "styles/images/backgrounds/tier-one/the-hatchery.jpg",
-//     music: spiderInvasion,
-//     contents: {
-//       monsters: [CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER],
-//       items: [],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Broodmother's Nest",
-//     description:
-//       "The Broodmother's Nest looms with arachnid grace. A colossal web, woven with uncanny precision, cradles the monstrous broodmother. Her presence sends shivers, and the air is thick with the scent of impending danger.",
-//     backgroundImage: "styles/images/backgrounds/tier-one/broodmothers-nest.jpg",
-//     music: spiderInvasion,
-//     contents: {
-//       monsters: [BROODMOTHER],
-//       items: [],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Skull-lined Corridor",
-//     description:
-//       "The Skull-lined Corridor echoes with the rattling steps of skeletal sentinels. Walls adorned with grimacing skulls watch as decrepit skeletons and skeletal soldiers patrol with an eerie, mechanical precision.",
-//     backgroundImage:
-//       "styles/images/backgrounds/tier-one/skull-lined-corridor.jpg",
-//     music: edgeOfFear,
-//     contents: {
-//       monsters: [DECREPIT_SKELETON, SKELETAL_SOLDIER, DECREPIT_SKELETON],
-//       items: [],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Bone-laden Tunnel",
-//     description:
-//       "The Bone-laden Tunnel exudes the stench of ancient decay. Shadows dance on walls adorned with skeletal remains. Skeletal soldiers stand guard, wielding rusty weapons, while a decrepit skeleton cradles a precious lesser soulstone.",
-//     backgroundImage:
-//       "styles/images/backgrounds/tier-one/bone-laden-passage.jpg",
-//     music: edgeOfFear,
-//     contents: {
-//       monsters: [SKELETAL_SOLDIER, DECREPIT_SKELETON],
-//       items: [ROTBANE_FERN],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Darkened Fane",
-//     description:
-//       "The Darkened Fane, a solemn sanctuary veiled in shadow, echoes with the whispers of unseen shades. The air is charged with a spectral energy as shades drift silently, haunting the sacred space with their ethereal presence.",
-//     summary: "",
-//     backgroundImage: "styles/images/backgrounds/tier-two/darkened-fane.jpg",
-//     music: hauntedOutpost,
-//     contents: {
-//       monsters: [SHADE, SHADE, SHADE, SHADE],
-//       items: [],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Skull-cluttered Path",
-//     description: "",
-//     backgroundImage: "styles/images/backgrounds/tier-one/skeletonarium.jpg",
-//     music: edgeOfFear,
-//     contents: {
-//       monsters: [SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON],
-//       items: [GHOSTLIGHT_LILY],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Skeletal Sepulcher",
-//     description:
-//       "Within the Skeletal Sepulcher, shadows dance on crumbling bone. Skeletons stir, guarding their final resting place. A chill pervades as skeletal soldiers stand sentinel.",
-//     backgroundImage:
-//       "styles/images/backgrounds/tier-one/skeletal-sepulcher.jpg",
-//     music: edgeOfFear,
-//     contents: {
-//       monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, SKELETAL_SOLDIER],
-//       items: [WHISPERING_SKULL],
-//       events: null,
-//     },
-//   },
+let catacombRooms = [
+  {
+    roomName: "Clawed Caverns",
+    backgroundImage: "styles/images/backgrounds/tier-one/clawed-cavern.jpg",
+    music: deepTunnels,
+    contents: {
+      monsters: [GNAWER, GNAWER],
+      items: [],
+      events: null,
+    },
+  },
+  {
+    roomName: "Gnawers' Nest",
+    backgroundImage: "styles/images/backgrounds/tier-one/gnawers-nest.jpg",
+    music: deepTunnels,
+    contents: {
+      monsters: [GNAWER, GNAWER, GNAWER, GNAWER],
+      items: [],
+      events: null,
+    },
+  },
+  {
+    roomName: "Sneakshade Sanctum",
+    backgroundImage:
+      "styles/images/backgrounds/tier-one/sneakshade-sanctum.jpg",
+    music: hiddenCapacity,
+    contents: {
+      monsters: [SCOUNDREL, SCOUNDREL],
+      items: [],
+      events: null,
+    },
+  },
+  {
+    roomName: "Devious Alvove",
+    
+    backgroundImage: "styles/images/backgrounds/tier-one/devious-alcove.jpg",
+    music: hiddenCapacity,
+    contents: {
+      monsters: [SCOUNDREL],
+      items: [],
+      events: null,
+    },
+  },
+  {
+    roomName: "Rogue's Refuge",
+    description:
+      "In the Rogue's Refuge, whispers of ill intent fill the air. Multiple scoundrels, masters of deception, plot amidst the concealed corners.",
+    
+    backgroundImage: "styles/images/backgrounds/tier-one/rogues-refuge.jpg",
+    music: hiddenCapacity,
+    contents: {
+      monsters: [SCOUNDREL, SCOUNDREL, SCOUNDREL],
+      items: [],
+      events: null,
+    },
+  },
+  {
+    roomName: "The Hatchery",
+    description:
+      "The Hatchery pulsates with an eerie hum. Walls, lined with unhatched eggs, house a crawling horde of crypt crawlers. The air is thick with the anticipation of countless tiny legs skittering across the cold stone floor.",
+    backgroundImage: "styles/images/backgrounds/tier-one/the-hatchery.jpg",
+    music: spiderInvasion,
+    contents: {
+      monsters: [CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER, CRYPT_CRAWLER],
+      items: [],
+      events: null,
+    },
+  },
+  {
+    roomName: "Broodmother's Nest",
+    description:
+      "The Broodmother's Nest looms with arachnid grace. A colossal web, woven with uncanny precision, cradles the monstrous broodmother. Her presence sends shivers, and the air is thick with the scent of impending danger.",
+    backgroundImage: "styles/images/backgrounds/tier-one/broodmothers-nest.jpg",
+    music: spiderInvasion,
+    contents: {
+      monsters: [BROODMOTHER],
+      items: [],
+      events: null,
+    },
+  },
+  {
+    roomName: "Skull-lined Corridor",
+    description:
+      "The Skull-lined Corridor echoes with the rattling steps of skeletal sentinels. Walls adorned with grimacing skulls watch as decrepit skeletons and skeletal soldiers patrol with an eerie, mechanical precision.",
+    backgroundImage:
+      "styles/images/backgrounds/tier-one/skull-lined-corridor.jpg",
+    music: edgeOfFear,
+    contents: {
+      monsters: [DECREPIT_SKELETON, SKELETAL_SOLDIER, DECREPIT_SKELETON],
+      items: [],
+      events: null,
+    },
+  },
+  {
+    roomName: "Bone-laden Tunnel",
+    description:
+      "The Bone-laden Tunnel exudes the stench of ancient decay. Shadows dance on walls adorned with skeletal remains. Skeletal soldiers stand guard, wielding rusty weapons, while a decrepit skeleton cradles a precious lesser soulstone.",
+    backgroundImage:
+      "styles/images/backgrounds/tier-one/bone-laden-passage.jpg",
+    music: edgeOfFear,
+    contents: {
+      monsters: [SKELETAL_SOLDIER, DECREPIT_SKELETON],
+      items: [ROTBANE_FERN],
+      events: null,
+    },
+  },
+  {
+    roomName: "Darkened Fane",
+    description:
+      "The Darkened Fane, a solemn sanctuary veiled in shadow, echoes with the whispers of unseen shades. The air is charged with a spectral energy as shades drift silently, haunting the sacred space with their ethereal presence.",
+    
+    backgroundImage: "styles/images/backgrounds/tier-two/darkened-fane.jpg",
+    music: hauntedOutpost,
+    contents: {
+      monsters: [SHADE, SHADE, SHADE, SHADE],
+      items: [],
+      events: null,
+    },
+  },
+  {
+    roomName: "Skull-cluttered Path",
+    description: "",
+    backgroundImage: "styles/images/backgrounds/tier-one/skeletonarium.jpg",
+    music: edgeOfFear,
+    contents: {
+      monsters: [SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON],
+      items: [GHOSTLIGHT_LILY],
+      events: null,
+    },
+  },
+  {
+    roomName: "Skeletal Sepulcher",
+    description:
+      "Within the Skeletal Sepulcher, shadows dance on crumbling bone. Skeletons stir, guarding their final resting place. A chill pervades as skeletal soldiers stand sentinel.",
+    backgroundImage:
+      "styles/images/backgrounds/tier-one/skeletal-sepulcher.jpg",
+    music: edgeOfFear,
+    contents: {
+      monsters: [DECREPIT_SKELETON, DECREPIT_SKELETON, SKELETAL_SOLDIER],
+      items: [WHISPERING_SKULL],
+      events: null,
+    },
+  },
 
-//   {
-//     roomName: "Haunted Hall",
-//     description:
-//       "The Haunted Hall breathes with ethereal whispers, its walls adorned with drifting specters. A chilling presence lingers, and the air shivers with the haunting melody of unseen spirits.",
-//     backgroundImage: "styles/images/backgrounds/tier-one/haunted-hall.jpg",
-//     music: hauntedOutpost,
-//     contents: {
-//       monsters: [HAUNTING_SPIRIT],
-//       items: [],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Echoing Vestibule",
-//     description:
-//       "Within the Echoing Vestibule, shadows seem to converse in ghostly murmurs. A lone haunting spirit glides through the mist, leaving echoes of melancholy. The air is heavy with the presence of lingering sorrow.",
-//     backgroundImage: "styles/images/backgrounds/tier-one/echoing-vestibule.jpg",
-//     music: hauntedOutpost,
-//     contents: {
-//       monsters: [HAUNTING_SPIRIT],
-//       items: [GHOSTLIGHT_LILY],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Forgotten Passage",
-//     description:
-//       "The Forgotten Passage is cloaked in darkness, a haven for lurking scoundrels. Their eyes gleaming with mischief.",
-//     backgroundImage: "styles/images/backgrounds/tier-one/forgotten-passage.jpg",
-//     music: hiddenCapacity,
-//     contents: {
-//       monsters: [SCOUNDREL, SCOUNDREL],
-//       items: [],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Whispering Hollow",
-//     description:
-//       "The Whispering Hollow breathes with an eerie hush. Shadows dance, concealing elusive shades. Faint whispers beckon, emanating from a lone shade guarding a mysterious whispering amulet, its power shrouded in enigma.",
-//     backgroundImage: "styles/images/backgrounds/tier-one/whispering-hollow.jpg",
-//     music: hauntedOutpost,
-//     contents: {
-//       monsters: [SHADE],
-//       items: [AMULET_OF_WHISPERS],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Flood of Bones",
-//     description:
-//       "Bones assemble in horrifying unity. An unsettling rattle permeates the air as a flood of bones, animated and vengeful, it surges towards the living like a macabre tidal wave. Brave souls may find the source of this monstrosity amidst the bone-strewn chaos.",
-//     backgroundImage: "styles/images/backgrounds/tier-one/flood-of-bones.jpg",
-//     music: passedDanger,
-//     contents: {
-//       monsters: [FLOOD_OF_BONES],
-//       items: [BONE_AMALGAM],
-//       events: null,
-//     },
-//   },
-//   {
-//     roomName: "Vermins' Vestibule",
-//     description:
-//       "The Vermins' Vestibule teems with shadowy shapes, a breeding ground for swarms of relentless vermin. The air is thick with anticipation, as unseen forces prepare to unleash their tiny terrors upon intruders.",
-//     backgroundImage: "styles/images/backgrounds/tier-one/vermin-vestibule.jpg",
-//     music: claustrofobia,
-//     contents: {
-//       monsters: [],
-//       items: [],
-//       events: SWARM_OF_VERMIN,
-//     },
-//     function: () => {
-//       setTimeout(() => {
-//         soundEffectHandler(ratsSqueak);
-//       }, 1000);
-//     },
-//   },
-//   {
-//     roomName: "Sealed Tomb",
-//     backgroundImage:
-//       "styles/images/backgrounds/event-rooms/earver-event-one.jpg",
-//     music: claustrofobia,
-//     contents: {
-//       monsters: [],
-//       items: [],
-//       events: GRAVEROBBER_EARVER,
-//     },
-//   },
-//   {
-//     roomName: "Webspun Passage",
-//     description:
-//       "The Webspun Passage, a silken maze woven by colossal spiders. Threads glisten, hinting at unseen arachnid architects. Each step stirs a web, the air pulsating with the potential of an eight-legged guardian's descent.",
-//     backgroundImage: "styles/images/backgrounds/tier-one/webspun-passage.jpg",
-//     music: claustrofobia,
-//     contents: {
-//       monsters: [],
-//       items: [],
-//       events: SPIDER_WEB,
-//     },
-//   },
-//   {
-//     roomName: "Ornate Coffin",
-//     description: "",
-//     backgroundImage: "styles/images/backgrounds/event-rooms/coffin-2.jpg",
-//     music: threeThousandYearsOld,
-//     contents: {
-//       monsters: [],
-//       items: [],
-//       events: COFFIN_EVENT,
-//     },
-//   },
-//   {
-//     roomName: "Ornate Coffin",
-//     description: "",
-//     backgroundImage: "styles/images/backgrounds/event-rooms/coffin-1.jpg",
-//     music: threeThousandYearsOld,
-//     contents: {
-//       monsters: [],
-//       items: [],
-//       events: COFFIN_EVENT,
-//     },
-//   },
-//   {
-//     roomName: "Cobwebbed Crypt",
-//     description:
-//       "The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.",
-//     summary: "",
-//     backgroundImage: "styles/images/backgrounds/tier-one/cobbwebbed-crypt.jpg",
-//     music: spiderInvasion,
-//     contents: {
-//       monsters: [],
-//       items: [],
-//       events: IVAN_THE_SCOUNDREL,
-//     },
-//   },
-// ];
+  {
+    roomName: "Haunted Hall",
+    description:
+      "The Haunted Hall breathes with ethereal whispers, its walls adorned with drifting specters. A chilling presence lingers, and the air shivers with the haunting melody of unseen spirits.",
+    backgroundImage: "styles/images/backgrounds/tier-one/haunted-hall.jpg",
+    music: hauntedOutpost,
+    contents: {
+      monsters: [HAUNTING_SPIRIT],
+      items: [],
+      events: null,
+    },
+  },
+  {
+    roomName: "Echoing Vestibule",
+    description:
+      "Within the Echoing Vestibule, shadows seem to converse in ghostly murmurs. A lone haunting spirit glides through the mist, leaving echoes of melancholy. The air is heavy with the presence of lingering sorrow.",
+    backgroundImage: "styles/images/backgrounds/tier-one/echoing-vestibule.jpg",
+    music: hauntedOutpost,
+    contents: {
+      monsters: [HAUNTING_SPIRIT],
+      items: [GHOSTLIGHT_LILY],
+      events: null,
+    },
+  },
+  {
+    roomName: "Forgotten Passage",
+    description:
+      "The Forgotten Passage is cloaked in darkness, a haven for lurking scoundrels. Their eyes gleaming with mischief.",
+    backgroundImage: "styles/images/backgrounds/tier-one/forgotten-passage.jpg",
+    music: hiddenCapacity,
+    contents: {
+      monsters: [SCOUNDREL, SCOUNDREL],
+      items: [],
+      events: null,
+    },
+  },
+  {
+    roomName: "Whispering Hollow",
+    description:
+      "The Whispering Hollow breathes with an eerie hush. Shadows dance, concealing elusive shades. Faint whispers beckon, emanating from a lone shade guarding a mysterious whispering amulet, its power shrouded in enigma.",
+    backgroundImage: "styles/images/backgrounds/tier-one/whispering-hollow.jpg",
+    music: hauntedOutpost,
+    contents: {
+      monsters: [SHADE],
+      items: [AMULET_OF_WHISPERS],
+      events: null,
+    },
+  },
+  {
+    roomName: "Flood of Bones",
+    description:
+      "Bones assemble in horrifying unity. An unsettling rattle permeates the air as a flood of bones, animated and vengeful, it surges towards the living like a macabre tidal wave. Brave souls may find the source of this monstrosity amidst the bone-strewn chaos.",
+    backgroundImage: "styles/images/backgrounds/tier-one/flood-of-bones.jpg",
+    music: passedDanger,
+    contents: {
+      monsters: [FLOOD_OF_BONES],
+      items: [BONE_AMALGAM],
+      events: null,
+    },
+  },
+  {
+    roomName: "Vermins' Vestibule",
+    description:
+      "The Vermins' Vestibule teems with shadowy shapes, a breeding ground for swarms of relentless vermin. The air is thick with anticipation, as unseen forces prepare to unleash their tiny terrors upon intruders.",
+    backgroundImage: "styles/images/backgrounds/tier-one/vermin-vestibule.jpg",
+    music: claustrofobia,
+    contents: {
+      monsters: [],
+      items: [],
+      events: SWARM_OF_VERMIN,
+    },
+    function: () => {
+      setTimeout(() => {
+        soundEffectHandler(ratsSqueak);
+      }, 1000);
+    },
+  },
+  {
+    roomName: "Sealed Tomb",
+    backgroundImage:
+      "styles/images/backgrounds/event-rooms/earver-event-one.jpg",
+    music: claustrofobia,
+    contents: {
+      monsters: [],
+      items: [],
+      events: GRAVEROBBER_EARVER,
+    },
+  },
+  {
+    roomName: "Webspun Passage",
+    description:
+      "The Webspun Passage, a silken maze woven by colossal spiders. Threads glisten, hinting at unseen arachnid architects. Each step stirs a web, the air pulsating with the potential of an eight-legged guardian's descent.",
+    backgroundImage: "styles/images/backgrounds/tier-one/webspun-passage.jpg",
+    music: claustrofobia,
+    contents: {
+      monsters: [],
+      items: [],
+      events: SPIDER_WEB,
+    },
+  },
+  {
+    roomName: "Ornate Coffin",
+    description: "",
+    backgroundImage: "styles/images/backgrounds/event-rooms/coffin-2.jpg",
+    music: threeThousandYearsOld,
+    contents: {
+      monsters: [],
+      items: [],
+      events: COFFIN_EVENT,
+    },
+  },
+  {
+    roomName: "Ornate Coffin",
+    description: "",
+    backgroundImage: "styles/images/backgrounds/event-rooms/coffin-1.jpg",
+    music: threeThousandYearsOld,
+    contents: {
+      monsters: [],
+      items: [],
+      events: COFFIN_EVENT,
+    },
+  },
+  {
+    roomName: "Cobwebbed Crypt",
+    description:
+      "The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.",
+    
+    backgroundImage: "styles/images/backgrounds/tier-one/cobbwebbed-crypt.jpg",
+    music: spiderInvasion,
+    contents: {
+      monsters: [],
+      items: [],
+      events: IVAN_THE_SCOUNDREL,
+    },
+  },
+];
 
 // ===============================
 //         Tier Two Rooms
@@ -389,7 +380,7 @@ let tierTwoRooms = [
     roomName: "Skull-wall Pass",
     description:
       "Within Skull Wall Pass, the scent of ancient bones fills the chamber. Skeletal soldiers stand sentinel, their bony fingers poised on ghostly blades. An armored skeleton, a relic of forgotten battles, awaits with an eerie stillness.",
-    summary: "",
+    
     backgroundImage: "styles/images/backgrounds/tier-two/skull-wall-pass.jpg",
     music: edgeOfFear,
     contents: {
@@ -402,7 +393,7 @@ let tierTwoRooms = [
     roomName: "Ghostlight Vale",
     description:
       "In Ghostlight Vale, spectral shades drift through a meadow of ethereal flowers. The blooms exude an otherworldly glow, casting an unsettling radiance on the lone path. The air shivers with the haunting whispers of unseen spirits.",
-    summary: "",
+    
     backgroundImage: "styles/images/backgrounds/tier-two/ghostlight-vale.jpg",
     music: hauntedOutpost,
     contents: {
@@ -415,7 +406,7 @@ let tierTwoRooms = [
     roomName: "Morbid Mausoleum",
     description:
       "Within the Morbid Mausoleum, haunting spirits linger, their mournful wails echoing through the cold, still air. The oppressive weight of the mausoleum hints at the somber tales interred within.",
-    summary: "",
+    
     backgroundImage: "styles/images/backgrounds/tier-two/morbid-mausoleum.jpg",
     music: hauntedOutpost,
     contents: {
@@ -428,7 +419,7 @@ let tierTwoRooms = [
     roomName: "Ossuary Outpost",
     description:
       "The Ossuary Outpost, a desolate haven of bone and armor, resonates with the haunting clatter of skeletal soldiers. Amidst the silent echoes, armored skeletons stand guard, their sockets gleaming with an otherworldly intent.",
-    summary: "",
+    
     backgroundImage: "styles/images/backgrounds/tier-two/ossuary-outpost.jpg",
     music: edgeOfFear,
     contents: {
@@ -441,7 +432,7 @@ let tierTwoRooms = [
     roomName: "Vile Cavern",
     description:
       "The Vile Cavern emanates an eerie green glow, casting twisted shadows. Gnawers prowl in the half-light, their hunger almost tangible in this vile expanse.",
-    summary: "",
+    
     backgroundImage: "styles/images/backgrounds/tier-two/vile-cavern.jpg",
     music: deepTunnels,
     contents: {
@@ -466,7 +457,7 @@ let tierTwoRooms = [
     roomName: "Gravemist Hall",
     description:
       "Gravemist Hall, veiled in a perpetual fog, echoes with the melancholic echoes of the deceased. Shadows dance among gravestones as a lone shade guards the entrance, its eyes gleaming with spectral vigilance.",
-    summary: "",
+    
     backgroundImage: "styles/images/backgrounds/tier-two/gravemist-hall.jpg",
     music: hauntedOutpost,
     contents: {
@@ -479,7 +470,7 @@ let tierTwoRooms = [
     roomName: "Skullshade Sanctum",
     description:
       "Skullshade Sanctum exudes an ominous aura. The clinking of bone armor create an unholy symphony. The air is thick with the whispers of the fallen, warning intruders of impending doom.",
-    summary: "",
+    
     backgroundImage:
       "styles/images/backgrounds/tier-two/skullshade-sanctum.jpg",
     music: edgeOfFear,
@@ -604,7 +595,7 @@ let tierTwoRooms = [
   //   roomName: "Bone-forged Altar",
   //   description:
   //     "The Bone-forged Altar exudes an eerie tranquility. Skeletal remains, meticulously arranged, form a macabre mosaic.",
-  //   summary: "",
+  //   
   //   backgroundImage:
   //     "styles/images/backgrounds/tier-four/malevolent-shrine.jpg",
   //   music: imminentDarkness,
@@ -792,7 +783,7 @@ let tierFourRooms = [
   {
     roomName: "Bastion of Bone",
     description: "A chamber with a large pile of skulls in the center.",
-    summary: "",
+    
     backgroundImage: "styles/images/backgrounds/tier-four/bastion-of-bone.jpg",
     music: edgeOfFear,
     contents: {
@@ -804,7 +795,7 @@ let tierFourRooms = [
   {
     roomName: "Malevolent Shrine",
     description: "A chamber with a large pile of skulls in the center.",
-    summary: "",
+    
     backgroundImage:
       "styles/images/backgrounds/tier-four/malevolent-shrine.jpg",
     music: hauntedOutpost,
@@ -992,7 +983,7 @@ const BLOOD_ALTER = {
   roomName: "The Crimson Covenant",
   description:
     "The altar, carved from the cold, black stone native to the catacombs, stands in a chamber illuminated only by the eerie glow of blood-red torches. The walls are adorned with morbid murals, depicting the Lord of Crimson, the deity of blood and life.",
-  summary: "",
+  
   backgroundImage: "styles/images/backgrounds/event-rooms/crimson-covenant.jpg",
   music: crypta,
   contents: {
@@ -1088,7 +1079,7 @@ const IVAN_TRAP_ROOM_ONE = {
   roomName: "Bloodstained Bridge",
   description:
     "The Bloodstained Bridge spans a chasm filled with bone. Crimson stains mark the way, leading to a perilous path where pendulum blades swing ominously. The unsettling creaking metal shrouds the impending danger set by Ivan the Scoundrel.",
-  summary: "",
+  
   backgroundImage:
     "styles/images/backgrounds/event-rooms/bloodstained-bridge.jpg",
   music: claustrofobia,
@@ -1113,7 +1104,6 @@ const IVAN_TRAP_ROOM_TWO = {
   roomName: "False Path",
   description:
     "Along the False Path, the ground trembles beneath heavy steps, hinting at the lurking spike-laden pitfall. Built by Ivan the Scoundrel to kill you and exact his revenge for abandoning him. ",
-  summary: "",
   backgroundImage: "styles/images/backgrounds/event-rooms/crumbling-path.jpg",
   music: claustrofobia,
   contents: {
@@ -1135,8 +1125,6 @@ const IVAN_TRAP_ROOM_TWO = {
 
 const IVAN_TRAP_ROOM_THREE = {
   roomName: "Dead End Chamber",
-  description:
-    "The Dead End Chamber, eerily open, reveals nothing but silence. Its stark walls conceal no exits or treasures.",
   backgroundImage: "styles/images/backgrounds/event-rooms/dead-end-chamber.jpg",
   music: claustrofobia,
   contents: {
@@ -1158,7 +1146,6 @@ const IVAN_TRAP_ROOM_THREE = {
 
 const IVANS_REVENGE = {
   roomName: "Rogue's Revenge",
-  description: `Rogue's Revenge is a malicious room built by Ivan the Scoundrel to conceal deadly traps and hidden assassins, created to be ambush those who wander inside.`,
   backgroundImage: "styles/images/backgrounds/event-rooms/rogues-revenge.jpg",
   music: claustrofobia,
   contents: {
@@ -1180,8 +1167,6 @@ const IVANS_REVENGE = {
 
 const SKULL_CHAMBER = {
   roomName: "Skull-filled Chamber",
-  description:
-    "A chamber draped in an unsettling aura, dominated by sprawling mounds of skulls. Each skull tells a tale of doom and demise.",
   backgroundImage: "styles/images/backgrounds/event-rooms/skull-chamber.jpg",
   music: imminentDarkness,
   contents: {
@@ -1196,9 +1181,7 @@ const SKULL_CHAMBER = {
 
 const GRIM_GARRISON = {
   roomName: "Grim Garrison",
-  description:
-    "Grim Garrison, shrouded in ominous quiet, harbors countless vacant coffins. The once valiant warriors who inhabited them have vanished from their resting place.",
-  backgroundImage: "styles/images/backgrounds/tier-two/grim-garrison.jpg",
+    backgroundImage: "styles/images/backgrounds/tier-two/grim-garrison.jpg",
   music: imminentDarkness,
   contents: {
     monsters: [],
@@ -1212,7 +1195,6 @@ const GRIM_GARRISON = {
 
 const HAGS_HOLLOW = {
   roomName: "Hag's Hollow",
-  description: `Hag's Hollow,  hidden deep within the catacomb's bowels, glows eerily from the bubbling cauldron within. Thick fog billows from the cauldron and hangs in the air, filling the room with a nauseating smell. The hag, with her cauldron, offers her dark expertise, welcoming those who bring rare ingredients to trade.`,
   backgroundImage: "styles/images/backgrounds/event-rooms/hags-hollow.jpg",
   music: creepyThoughts,
   contents: {
@@ -1238,7 +1220,6 @@ const HAGS_HOLLOW = {
 
 const CURATORS_CURIO = {
   roomName: "Curator's Curio",
-  description: `The Curator's Curio, a clandestine collection of catacomb relics and arcane artifacts. In the dim-lit reliquary, items of forgotten power gather, chosen by the curator, who is willing to make a deal for anything that catches his eye.`,
   backgroundImage: "styles/images/backgrounds/event-rooms/curators-curio.jpg",
   music: timeToFaceThem,
   contents: {
@@ -1357,8 +1338,11 @@ const THRONE_OF_THE_ETERNAL = {
 
       startBattle();
       setRoomSummary();
+    }, 6000);
+
+    setTimeout(() => {
       writeToLogOther(LOG_OTHER, "YES", "UNDEAD HEROES");
-    }, 4000);
+    }, 2000);
   },
 };
 
