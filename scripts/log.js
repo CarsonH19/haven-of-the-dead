@@ -117,10 +117,8 @@ function writeToLogActions(logType, narrate, dataOne) {
         }
 
         if (narration === 8) {
-  narration = `With divine fury, your greatsword cleaves through the ${monsterName}, leaving a trail of searing radiance that engulfs them in a cleansing fire of celestial wrath.`;
-}
-
-        
+          narration = `With divine fury, your greatsword cleaves through the ${monsterName}, leaving a trail of searing radiance that engulfs them in a cleansing fire of celestial wrath.`;
+        }
       } else if (heroChoice === "ROGUE") {
         if (narration === 1) {
           narration = `Your dagger plunges into the ${monsterName} with an abyssal force, leaving a wound that devours the surrounding light, sowing darkness with every strike.`;
@@ -143,7 +141,6 @@ function writeToLogActions(logType, narrate, dataOne) {
         } else {
           narration = `A relentless storm of strikes ensues, each blow accompanied by disorienting illusions, overwhelming the ${monsterName}'s senses in an unyielding torrent of shadow.`;
         }
-        
       } else if (heroChoice === "PRIESTESS") {
         if (narration === 1) {
           narration = `Your magical flames intensify, emanating from the enchanted candle you wield, engulfing the ${monsterName} with a scorching surge of cleansing fire, searing away all shadows.`;
@@ -165,7 +162,7 @@ function writeToLogActions(logType, narrate, dataOne) {
           narration = `You raise your arms, conjuring a torrent of fiery energy from the mystical candle that surges towards the ${monsterName}, sweeping them away in a torrent of brilliance.`;
         } else {
           narration = `A wave of pure fire, emanating from the sacred candle you wield, washes over the ${monsterName}, purging them of shadows and leaving behind a realm of untouched inferno.`;
-        }        
+        }
       }
 
       newEntry.textContent = `ATTACK: You deal ${dataOne} damage to the ${monsterName}!`;
@@ -417,7 +414,7 @@ function writeToLogActions(logType, narrate, dataOne) {
 
   if (
     (narrate === "YES" && dataOne === "SUCCESS") ||
-    (typeof narration !== 'number')
+    typeof narration !== "number"
   ) {
     writeToNarrative(narration);
   }
@@ -1466,28 +1463,40 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     // ===============================
 
     case LOG_MISC_DESCRIPTION:
-      newEntry.textContent = `${event.description}`;
-      narration = newEntry.textContent;
+      // Ending Descriptions
+      if (dataOne === "GOOD ENDING") {
+        newEntry.textContent = ``;
+      } else if (dataOne === "BAD ENDING" && heroChoice === "PALADIN") {
+        newEntry.textContent = `Siggurd, once a holy warrior devoted to righteousness, succumbs to the Baron's dark persuasion. Infused with unholy energies, he transforms into a formidable Death Knight, wielding a corrupted version of his former divine powers. Leading the undead legions, Siggurd becomes a harbinger of doom, spreading darkness across the once-vibrant lands. His once-gleaming armor now adorned with macabre motifs, Siggurd's allegiance to the Baron of Bone marks a tragic shift from a champion of light to a dread commander of the undead.`;
+      } else if (dataOne === "BAD ENDING" && heroChoice === "ROGUE") {
+        newEntry.textContent = `
+        Having yielded to the Baron's tempting offer, Shadowcloak Riven transforms into the "Shadow of the Baron." Infused with dark power, he becomes the Baron's elusive assassin, lurking within the catacomb's shadows. Riven's once-heroic essence fades as he silently dispatches intruders with ruthless efficiency, his every move veiled in the sinister dance of shadow magic. The catacomb, once a treacherous labyrinth for heroes, now echoes with the footsteps of the betrayer, ensuring the Baron's dominion prevails and darkness reigns unchallenged within the depths of the underworld.`;
+      } else if (dataOne === "BAD ENDING" && heroChoice === "PRIESTESS") {
+        newEntry.textContent = `Embracing the sinister pact, Priestess Liheth transforms into The Unholy Flame, a malevolent force fueled by dark sorcery. Her once-pure abilities now manifest as corrupted flames, leaving a trail of devastation in her wake. Manipulated by the Baron's will, she becomes an instrument of destruction, setting ablaze entire cities with her unholy powers. The radiant light she once wielded is now twisted into a fiery inferno, marking her transformation into a merciless harbinger of chaos in the Baron of Bone's unholy legion.`;
+      } else {
+        newEntry.textContent = `${event.description}`;
+        narration = newEntry.textContent;
 
-      // Question Logic
-      if (event === LOCKED_ROOM) {
-        const question = `Do you wish to unlock it?`;
-        writeToNarrative(question, "PAUSE");
-      } else if (event === COFFIN_EVENT) {
-        const question = `Do you wish to open it?`;
-        writeToNarrative(question, "PAUSE");
-      } else if (event === LAUGHING_COFFIN_EVENT) {
-        const question = `Will you pay coin to enter or risk the ire of its patrons.`;
-        writeToNarrative(question, "PAUSE");
-      } else if (event === CRIMSON_COVENANT) {
-        const question = `Will you join their ritual and offer your blood?`;
-        writeToNarrative(question, "PAUSE");
-      } else if (event === BATTLEFIELD) {
-        const question = `Do you wish to enter the battlefield?`;
-        writeToNarrative(question, "PAUSE");
-      } else if (event === ITEM_ROBBERY) {
-        const question = `Do you agree to surrender your items to the scoundrels?`;
-        writeToNarrative(question, "PAUSE");
+        // Question Logic
+        if (event === LOCKED_ROOM) {
+          const question = `Do you wish to unlock it?`;
+          writeToNarrative(question, "PAUSE");
+        } else if (event === COFFIN_EVENT) {
+          const question = `Do you wish to open it?`;
+          writeToNarrative(question, "PAUSE");
+        } else if (event === LAUGHING_COFFIN_EVENT) {
+          const question = `Will you pay coin to enter or risk the ire of its patrons.`;
+          writeToNarrative(question, "PAUSE");
+        } else if (event === CRIMSON_COVENANT) {
+          const question = `Will you join their ritual and offer your blood?`;
+          writeToNarrative(question, "PAUSE");
+        } else if (event === BATTLEFIELD) {
+          const question = `Do you wish to enter the battlefield?`;
+          writeToNarrative(question, "PAUSE");
+        } else if (event === ITEM_ROBBERY) {
+          const question = `Do you agree to surrender your items to the scoundrels?`;
+          writeToNarrative(question, "PAUSE");
+        }
       }
       break;
 
@@ -1527,7 +1536,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === ITEM_ROBBERY && dataOne === "NOTHING") {
         newEntry.textContent = `As you offer an empty pouch, the scoundrels, enraged, scorn your deception. Their frustration erupts into a sudden assault, blades flashing in fury.`;
       } else if (event === JOIN_THE_BARON) {
-        newEntry.textContent = `"Your mortal shackles are broken, and your destiny entwined with darkness. Rise, my servant, and revel in the eternal night that is soon to come."`
+        newEntry.textContent = `"Your mortal shackles are broken, and your destiny entwined with darkness. Rise, my servant, and revel in the eternal night that is soon to come."`;
       }
 
       narration = newEntry.textContent;
@@ -1771,10 +1780,6 @@ function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
   let newEntry = document.createElement("li");
   let narration = null;
 
-  console.log(dataOne);
-
-  console.log(dataTwo);
-
   switch (logType) {
     case LOG_OTHER:
       if (dataOne === "WISP") {
@@ -1885,7 +1890,7 @@ function clearNarrative() {
     for (let i = 0; i < narrativeText.children.length; i++) {
       narrativeText.removeChild(narrativeText.lastElementChild);
     }
-   }
+  }
 }
 
 function removeEventDescriptionLog() {
@@ -1923,8 +1928,6 @@ function checkLogSize() {
     logModalList.removeChild(logModalList.lastElementChild);
   }
 }
-
- 
 
 // ==============================================================
 //                     LOG EVENT LISTENERS

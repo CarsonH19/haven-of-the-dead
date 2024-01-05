@@ -511,7 +511,6 @@ function isGameOver(ending) {
     currentMonsterHealth <= 0 &&
     monsterContainer.style.display === "flex"
   ) {
-
     // ITEM: Bloodstone - Recovers health when monster dies
     isItemAttuned(BLOODSTONE, null);
     soundEffectHandler(monster, "MONSTER DEATH");
@@ -531,31 +530,51 @@ function isGameOver(ending) {
     const gameOverModalText = document.getElementById("gameOverText");
     // !FIX! Add ending text to explain story
 
+    if (ending === "DEAD") {
+      openGameOverModal();
+      playMusic(theEndOfTheWorld);
+    } else {
+      setTimeout(() => {
+        const topContent = document.querySelector('.top-content');
+        const bottomContent = document.querySelector('.bottom-content');
+        const middleLeftContent = document.querySelector('.middle-left');
+        const middleRightContent = document.querySelector('.middle-right');
+        topContent.style.display = 'none';
+        bottomContent.style.display = 'none';
+        middleLeftContent.style.display = 'none';
+        middleRightContent.style.display = 'none';
+
+        chooseEnding(ending);
+      }, 2000);
+      newRoomAnimation();
+    }
+
+  }
+
+  function chooseEnding(ending) {
     switch (ending) {
       case "DEAD":
         playMusic(theEndOfTheWorld);
         break;
 
       case "GOOD":
-        openGameOverModal();
-        gameOverModal.style.backgroundImage = `url(styles/images/backgrounds/good-ending.jpg)`;
-        gameOverTitle.textContent = `Evil Vanquish`;
+        backgroundImage.style.backgroundImage = `url(styles/images/backgrounds/good-ending.jpg)`;
+        // gameOverTitle.textContent = ``;
         // playMusic(); !FIX! add music
+        playMusic(theEndOfTheWorld);
+        writeToLogEvent(LOG_MISC_DESCRIPTION, "YES", "GOOD ENDING");
         break;
 
       case "BAD":
-        openGameOverModal();
-        gameOverModal.style.backgroundImage = `url(styles/images/backgrounds/bad-ending.jpg)`;
-
         if (heroChoice === "PALADIN") {
-          gameOverTitle.textContent = `Death Knight Siggurd`;
-          // gameOverModal.style.backgroundImage = '' !FIX! add leader of army
+          backgroundImage.style.backgroundImage = `url(styles/images/siggurd-bad-ending.jpg)`;
+          playMusic(theEndOfTheWorld);
         } else if (heroChoice === "ROGUE") {
-          gameOverTitle.textContent = `Riven, Shadow of the Baron`;
-          // gameOverModal.style.backgroundImage = '' !FIX! add darkness falls
+          writeToLogEvent(LOG_MISC_DESCRIPTION, "YES", "BAD ENDING");
+          playMusic(theEndOfTheWorld);
         } else if (heroChoice === "PRIESTESS") {
-          gameOverTitle.textContent = `Liheth, the Unholy Flame`;
-          // gameOverModal.style.backgroundImage = '' !FIX! add burning lands
+          backgroundImage.style.backgroundImage = `url(styles/images/liheth-bad-ending.jpg)`;
+          playMusic(theEndOfTheWorld);
         }
 
         // playMusic(); !FIX! add music
@@ -565,8 +584,19 @@ function isGameOver(ending) {
         console.log("No Ending Chosen");
     }
 
-    newRoomAnimation();
-    openGameOverModal();
+    darkenBackground();
+
+    function darkenBackground() {
+      setTimeout(() => {
+        fade.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        fadeInAnimation(fade);
+        setTimeout(() => {
+          fade.style.opacity = "1";
+        }, 950);
+
+        writeToLogEvent(LOG_MISC_DESCRIPTION, "YES", "BAD ENDING");
+      }, 6000);
+    }
   }
 
   function openGameOverModal() {
@@ -1038,8 +1068,8 @@ function renderRoomSummaryModal() {
       roomSummaryModal.style.display = "block";
       let roomInfo = roomSummaryInformation.contents;
 
-      // Header Box 
-      let headerBox = document.createElement('div');
+      // Header Box
+      let headerBox = document.createElement("div");
       roomSummaryInfo.appendChild(headerBox);
 
       // Main Header
@@ -1047,9 +1077,9 @@ function renderRoomSummaryModal() {
       mainHeader.textContent = `${roomSummaryInformation.roomName} Cleared`;
       headerBox.appendChild(mainHeader);
 
-      // Divider 
-      let divider = document.createElement('div');
-      divider.classList.add('character-divider');
+      // Divider
+      let divider = document.createElement("div");
+      divider.classList.add("character-divider");
       headerBox.appendChild(divider);
 
       // Description
