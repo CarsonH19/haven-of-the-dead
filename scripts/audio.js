@@ -205,148 +205,115 @@ const timeToFaceThem = loadAudio(
   "timeToFaceThem",
   true
 );
-
+// Undead Heroes Fight
 const finalBrigade = loadAudio(
   "audio/music/Final Brigade.mp3",
   "finalBrigade",
   true
 );
-
-// Undead Heroes
-const successOrDeath = loadAudio(
-  "audio/music/Success or Death.mp3",
-  "successOrDeath",
-  true
-);
-
 // Join the Baron
 const basementNightmare = loadAudio(
   "audio/music/Basement Nightmares.mp3",
   "basementNightmare"
 );
-
-//Baron of Bone
+// Baron of Bone Fight
 const theEternalWar = loadAudio(
   "audio/music/The Eternal War.mp3",
   "theEternalWar"
 );
-
 // Gnawer
 const deepTunnels = loadAudio(
   "audio/music/Deep Tunnels.mp3",
   "deepTunnels",
   true
 );
-
 // Skeletons
 const edgeOfFear = loadAudio(
   "audio/music/Edge of Fear.mp3",
   "edgeOfFear",
   true
 );
-
 const pileOfBones = loadAudio(
   "audio/music/Pile of Bones.mp3",
   "pileOfBones",
   true
 );
-
 // Flood of Bones
 const passedDanger = loadAudio(
   "audio/music/Passed Danger.mp3",
   "passedDanger",
   true
 );
-
 // Spiders
 const spiderInvasion = loadAudio(
   "audio/music/Spider Invasion.mp3",
   "spiderInvasion",
   true
 );
-
 // Cultists
 const fightThrough = loadAudio(
   "audio/music/Fight Through.mp3",
   "fightThrough",
   true
 );
-
 // NPCs
 const imminentDarkness = loadAudio(
   "audio/music/Imminent Darkness.mp3",
   "imminentDarkness",
   true
 );
-
 // Ghosts
 const hauntedOutpost = loadAudio(
   "audio/music/Haunted Outpost.mp3",
   "hauntedOutpost",
   true
 );
-
 // Scoundrels
 const hiddenCapacity = loadAudio(
   "audio/music/Hidden Capacity.mp3",
   "hiddenCapacity",
   true
 );
-
 // Candlelight Shrine Event
 const mindReading = loadAudio(
   "audio/music/Mind Reading.mp3",
   "mindReading",
   true
 );
-
 // Laughing Coffin Event
 const unfinishedBusiness = loadAudio(
   "audio/music/Unfinished Business.mp3",
   "unfinishedBusiness",
   true
 );
-
 // Fallen Warriors` Vale Event
 const weCantStopThem = loadAudio(
   "audio/music/We Can_t Stop Them.mp3",
   "weCantStopThem",
   true
 );
-
 // Coffin Event
 const threeThousandYearsOld = loadAudio(
   "audio/music/3000 Years Old.mp3",
   "threeThousandYearsOld",
   true
 );
-
 // Crimson Covenant Event
 const crypta = loadAudio("audio/music/Crypta.mp3", "crypta", true);
-
 // Trap Events
 const claustrofobia = loadAudio(
   "audio/music/Claustrofobia.mp3",
   "claustrofobia",
   true
 );
-
-// Locked Door
-const doorSecretPassage1 = loadAudio(
-  "audio/sound-effects/Door Secret Passage 1.mp3",
-  "doorSecretPassage1"
-);
-
 // Hag's Hollow
 const creepyThoughts = loadAudio(
   "audio/music/Creepy Thoughts.mp3",
   "creepyThoughts",
   true
 );
-
 // Start Game
 const mazeHeist = loadAudio("audio/music/Maze Heist.mp3", "mazeHeist", true);
-
 // Death
 const theEndOfTheWorld = loadAudio(
   "audio/music/The End of the World.mp3",
@@ -456,9 +423,13 @@ const battleAxeThrow = loadAudio(
   "audio/sound-effects/heavy/Battle Axe Throw.mp3",
   "battleAxeThrow"
 );
-const impactFleshChop = loadAudio(
-  "audio/sound-effects/heavy/Impact Flesh Chop.mp3",
-  "impactFleshChop"
+const axeThrowIntoBody2 = loadAudio(
+  "audio/sound-effects/heavy/Axe Throw Into Body 2.mp3",
+  "axeThrowIntoBody2"
+);
+const axeThrowIntoBody3 = loadAudio(
+  "audio/sound-effects/heavy/Axe Throw Into Body 3.mp3",
+  "axeThrowIntoBody3"
 );
 
 function heavyAttackSounds() {
@@ -470,7 +441,74 @@ function heavyAttackSounds() {
     battleAxeStrike2,
     battleAxeStrike3,
     battleAxeThrow,
-    impactFleshChop,
+    axeThrowIntoBody2,
+    axeThrowIntoBody3,
+  ];
+  let index = Math.floor(Math.random() * sounds.length);
+  return sounds[index];
+}
+
+// ===============================
+//           Flesh Hit
+// ===============================
+
+const fleshHit1 = loadAudio(
+  "audio/sound-effects/monster/Flesh Hit 1.mp3",
+  "fleshHit1"
+);
+const fleshHit3 = loadAudio(
+  "audio/sound-effects/monster/Flesh Hit 3.mp3",
+  "fleshHit3"
+);
+const fleshHit4 = loadAudio(
+  "audio/sound-effects/monster/Flesh Hit 4.mp3",
+  "fleshHit4"
+);
+const fleshHit5 = loadAudio(
+  "audio/sound-effects/monster/Flesh Hit 5.mp3",
+  "fleshHit5"
+);
+const fleshHit11 = loadAudio(
+  "audio/sound-effects/monster/Flesh Hit 11.mp3",
+  "fleshHit11"
+);
+
+function fleshHitSounds() {
+  let sounds = [fleshHit1, fleshHit3, fleshHit4, fleshHit5, fleshHit11];
+  let index = Math.floor(Math.random() * sounds.length);
+  return sounds[index];
+}
+
+// ===============================
+//           Punches
+// ===============================
+
+const impactPunchFace8 = loadAudio(
+  "audio/sound-effects/monster/Impact Punch Face 8.mp3",
+  "impactPunchFace8"
+);
+const impactPunchHard = loadAudio(
+  "audio/sound-effects/monster/Impact Punch Hard.mp3",
+  "impactPunchHard"
+);
+const punch1 = loadAudio("audio/sound-effects/monster/Punch 1.mp3", "punch1");
+const punchFaceMeatyFlesh = loadAudio(
+  "audio/sound-effects/monster/Punch Face Meaty Flesh 3.mp3",
+  "punchFaceMeatyFlesh"
+);
+
+const impactPunchBody2 = loadAudio(
+  "audio/sound-effects/monster/Impact Punch Body 2.mp3",
+  "impactPunchBody2"
+);
+
+function punchSounds() {
+  let sounds = [
+    impactPunchFace8,
+    impactPunchHard,
+    punch1,
+    punchFaceMeatyFlesh,
+    impactPunchBody2,
   ];
   let index = Math.floor(Math.random() * sounds.length);
   return sounds[index];
@@ -618,6 +656,35 @@ function magicGuardSounds() {
     magicSpellWhoosh22,
     magicSpellWhoosh4,
     magicSpellWhoosh9,
+  ];
+  let index = Math.floor(Math.random() * sounds.length);
+  return sounds[index];
+}
+
+// ===============================
+//        Armor Clanking
+// ===============================
+
+const armorMetalClanksToTheGround = loadAudio(
+  "audio/sound-effects/monster/Armor Metal Clanks to Ground.mp3",
+  "armorMetalClanksToTheGround"
+);
+
+const armorMetalClanksToTheGround2 = loadAudio(
+  "audio/sound-effects/monster/Armor Metal Clanks to Ground 2.mp3",
+  "armorMetalClanksToTheGround 2"
+);
+
+const armorMetalClanksToTheGround3 = loadAudio(
+  "audio/sound-effects/monster/Armor Metal Clanks to Ground 3.mp3",
+  "armorMetalClanksToTheGround3"
+);
+
+function armorSounds() {
+  let sounds = [
+    armorMetalClanksToTheGround,
+    armorMetalClanksToTheGround2,
+    armorMetalClanksToTheGround3,
   ];
   let index = Math.floor(Math.random() * sounds.length);
   return sounds[index];
@@ -797,17 +864,15 @@ const ghostAppearance1 = loadAudio(
   "audio/sound-effects/Ghost Appearance 1.mp3",
   "ghostAppearance1"
 );
+// Bonevault Demon
+const monsterSnarl4 = loadAudio(
+  "audio/sound-effects/monster/Monster Snarl 41.mp3",
+  "monsterSnarl4"
+);
 
 // ===============================
 //        Monster Attacks
 // ===============================
-
-const fleshHit5 = loadAudio("audio/sound-effects/Flesh Hit 5.mp3", "fleshHit5");
-
-const impactPunchBody2 = loadAudio(
-  "audio/sound-effects/Impact Punch Body 2.mp3",
-  "impactPunchBody2"
-);
 
 const skullHitShovel = loadAudio(
   "audio/sound-effects/Skull Hit Shovel.mp3",
@@ -843,11 +908,6 @@ const fleshStab3 = loadAudio(
 //         MONSTER DEATH
 // ===============================
 
-const armorMetalClanksToTheGround = loadAudio(
-  "audio/sound-effects/Armor Metal Clanks to Ground.mp3",
-  "armorMetalClanksToTheGround"
-);
-
 const alienSpiderWeb3 = loadAudio(
   "audio/sound-effects/Alien Spider Web 3.mp3",
   "alienSpiderWeb3"
@@ -863,6 +923,11 @@ const ghostHowl = loadAudio("audio/sound-effects/Ghost Howl.mp3", "ghostHowl");
 const ghostShriekWhoosh = loadAudio(
   "audio/sound-effects/Ghost Shriek Whoosh.mp3",
   "ghostShriekWhoosh"
+);
+// Bonevault Demon Death
+const monsterSnarl3 = loadAudio(
+  "audio/sound-effects/monster/Monster Snarl 38.mp3",
+  "monsterSnarl3"
 );
 
 // ===============================
@@ -1048,6 +1113,23 @@ const pitchforkBody = loadAudio(
 
 // Hag's Hollow Gain Favor
 const splashSubmerge2 = loadAudio(
-  "audio/sound-effects/Splash Submerge 2.mp3",
+  "audio/sound-effects/misc/Splash Submerge 2.mp3",
   "splashSubmerge2"
+);
+
+// Crimson Covenant Join Ritual
+const bloodDrips = loadAudio(
+  "audio/sound-effects/misc/Blood Drips.mp3",
+  "bloodDrips"
+);
+
+// Enter Baron of Bone Room
+const ominousPresence = loadAudio(
+  "audio/sound-effects/misc/Ominous Presence.mp3",
+  "ominousPresence"
+);
+// Locked Door
+const doorSecretPassage1 = loadAudio(
+  "audio/sound-effects/misc/Door Secret Passage 1.mp3",
+  "doorSecretPassage1"
 );

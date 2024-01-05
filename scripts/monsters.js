@@ -12,7 +12,7 @@ const GNAWER = {
   skulls: 1,
   soundEffects: {
     spawn: ratSqueak9,
-    attack: impactFleshChop,
+    attack: biteSounds,
     death: ratSqueak30,
   },
   function: () => {
@@ -31,7 +31,7 @@ const CRYPT_CRAWLER = {
   skulls: 1,
   soundEffects: {
     spawn: spiderDaddyLong1,
-    attack: spiderBiteFang3,
+    attack: biteSounds,
     death: alienSpiderWeb3,
     ability: spiderWebShoot7,
   },
@@ -48,7 +48,7 @@ const BROODMOTHER = {
   skulls: 6,
   soundEffects: {
     spawn: spiderDaddyLong2,
-    attack: spiderBiteFang4,
+    attack: biteSounds,
     death: insectsSpider3,
     ability: larvaEggHatch4,
   },
@@ -138,7 +138,7 @@ const DECREPIT_SKELETON = {
   skulls: 1,
   soundEffects: {
     spawn: boneBreakSounds,
-    attack: impactPunchBody2,
+    attack: punchSounds,
     death: boneBreakSounds,
   },
 };
@@ -163,7 +163,7 @@ const ARMORED_SKELETON = {
   soundEffects: {
     spawn: boneBreakSounds,
     attack: heavyAttackSounds,
-    death: armorMetalClanksToTheGround,
+    death: armorSounds,
   },
 };
 
@@ -175,7 +175,7 @@ const LEGIONNAIRE = {
   soundEffects: {
     spawn: boneBreakSounds,
     attack: heavyAttackSounds,
-    death: armorMetalClanksToTheGround,
+    death: armorSounds,
   },
 };
 
@@ -188,7 +188,7 @@ const UNDYING_WARBAND = {
   soundEffects: {
     spawn: boneBreakSounds,
     attack: lightAttackSounds,
-    death: armorMetalClanksToTheGround,
+    death: armorSounds,
   },
   function: (attacks) => {
     //Altered Monster Attack Handler
@@ -248,7 +248,7 @@ const DRAUGR = {
   soundEffects: {
     spawn: boneBreakSounds,
     attack: heavyAttackSounds,
-    death: boneBreakSounds,
+    death: armorSounds,
     ability: iceCrackFreeze,
   },
   function: () => {
@@ -264,7 +264,7 @@ const BONE_TITAN = {
   skulls: 7,
   soundEffects: {
     spawn: boneBreakSounds,
-    attack: heavyAttackSounds,
+    attack: fleshHitSounds,
     death: boneBreakSounds,
     ability: boneBreakSounds,
   },
@@ -287,10 +287,10 @@ const BONEVAULT_DEMON = {
   skulls: 7,
   soundEffects: {
     // !FIX! Add sound effects
-    spawn: boneBreakSounds,
-    attack: heavyAttackSounds,
+    spawn: monsterSnarl4,
+    attack: fleshHitSounds,
     death: boneBreakSounds,
-    ability: heavyAttackSounds,
+    ability: monsterSnarl3,
   },
   tracker: 0,
   function: () => {
@@ -323,7 +323,7 @@ const FLOOD_OF_BONES = {
   skulls: 9,
   soundEffects: {
     spawn: heavyAttackSounds,
-    attack: fleshHit5,
+    attack: fleshHitSounds,
     death: heavyAttackSounds,
     ability: heavyAttackSounds,
   },
@@ -370,9 +370,9 @@ const UNDEAD_SIGGURD = {
   type: "UNDEAD",
   skulls: 9,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: boneBreakSounds,
     attack: heavyAttackSounds,
-    death: armorMetalClanksToTheGround,
+    death: armorSounds,
     ability: magicAttackSounds,
   },
   tracker: 0,
@@ -534,7 +534,7 @@ const GRERVILS_BODY = {
   skulls: 3,
   soundEffects: {
     spawn: boneBreakSounds,
-    attack: impactPunchBody2,
+    attack: punchSounds,
     death: boneBreakSounds,
   },
 };
@@ -546,7 +546,7 @@ const HEADLESS_SKELETON = {
   skulls: 3,
   soundEffects: {
     spawn: boneBreakSounds,
-    attack: impactPunchBody2,
+    attack: punchSounds,
     death: boneBreakSounds,
   },
 };

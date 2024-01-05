@@ -1371,6 +1371,9 @@ const BARON_OF_BONE_BOSS_ROOM = {
     items: [],
     events: JOIN_THE_BARON,
   },
+  function: () => {
+    soundEffectHandler(ominousPresence);
+  },
 };
 
 // ===============================
