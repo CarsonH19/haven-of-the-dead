@@ -322,7 +322,7 @@ const FLOOD_OF_BONES = {
   type: "UNDEAD",
   skulls: 9,
   soundEffects: {
-    spawn: heavyAttackSounds,
+    spawn: boneBreakSounds,
     attack: fleshHitSounds,
     death: heavyAttackSounds,
     ability: heavyAttackSounds,
