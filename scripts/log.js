@@ -1283,7 +1283,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (dataOne === "IVAN" && event === SPIKE_PITFALL) {
         newEntry.textContent = `The distant sound of Ivan's the Scoundrel's mocking laughter meets your ear. "Farewell, betrayer! Enjoy the abyss!"`;
       } else if (dataOne === "IVAN" && event === GAS_CHAMBER) {
-        newEntry.textContent = `Ivan's the Scoundrel's voice taunts you from behind the sealed door, "You thought you could escape my wrath? Your demise will be as silent as your treachery."`;
+        newEntry.textContent = `Ivan's the Scoundrel's voice taunts you from behind the sealed door, "You thought you could escape my wrath?`;
       } else if (dataOne === GRERVILS_HEAD) {
         newEntry.textContent = `Ah, at last, you've stumbled upon my long-lost bones! I am whole once more, and in your debt.`;
       } else if (dataOne === "IVANS CACHE AMBUSH") {
@@ -1722,6 +1722,18 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `The Hellfire Charm ignites, flames burst forth with infernal fury, consuming the ${currentRoom.contents.monsters[0].name} in searing torment.`;
       } else if (dataOne === BONE_AMALGAM) {
         newEntry.textContent = `The Bone Amalgam forms a barrier of bone around you, blocking the oncoming attack.`;
+      } else if (dataOne === MIST_VEIL_CLOAK) {
+        newEntry.textContent = `Mist Veil Cloak shrouds you in thick fog, causing the ${currentRoom.contents.monsters[0].name}'s attack to miss.`;
+      } else if (dataOne === PLAGUEWARD_PENDANT) {
+        newEntry.textContent = `The Plagueward Pendant prevents you from being diseased.`;
+      } else if (dataOne === GHOSTSHROUD_TALISMAN) {
+        newEntry.textContent = `The Ghostshroud Talisman prevents you from being haunted.`;
+      } else if (dataOne === TOXINWEAVE_MASK) {
+        newEntry.textContent = `The Toxinweave Mask prevents you from being poisoned.`;
+      } else if (dataOne === CHILLBREAKER_BAND) {
+        newEntry.textContent = `The Chillbreaker Band prevents you from being chilled.`;
+      } else if (dataOne === DARKGUARD_TRINKET) {
+        newEntry.textContent = `The Darkguard Trinket prevents you from being cursed.`;
       }
 
       break;

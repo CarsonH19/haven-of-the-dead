@@ -24,8 +24,6 @@ const POISONED = {
 
     if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(POISONED, length);
-    } else {
-      writeToLogItem(LOG_ITEM, null, TOXINWEAVE_MASK);
     }
   },
 };
@@ -44,8 +42,6 @@ const HAUNTED = {
     if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(HAUNTED, length);
       soundEffectHandler(ghostlyMagic);
-    } else {
-      writeToLogItem(LOG_ITEM, null, GHOSTSHROUD_TALISMAN);
     }
   },
 };
@@ -63,9 +59,7 @@ const DISEASED = {
 
     if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(DISEASED, length);
-    } else {
-      writeToLogItem(LOG_ITEM, null, PLAGUEWARD_PENDANT);
-    }
+    } 
   },
 };
 
@@ -77,14 +71,7 @@ const BURNED = {
   duration: null,
   statusDuration: null,
   function: (length) => {
-    // ITEM: Fire Trinket - Burned Immunity
-    const immune = isItemAttuned(DARKGUARD_TRINKET, null);
-
-    if (!immune) {
-      startStatusEffect(BURNED, length);
-    } else {
-      writeToLogItem(LOG_ITEM, null, DARKGUARD_TRINKET);
-    }
+    startStatusEffect(BURNED, length);
   },
 };
 
@@ -102,9 +89,7 @@ const CURSED = {
     if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(CURSED, length);
       soundEffectHandler(ghostEncounter);
-    } else {
-      writeToLogItem(LOG_ITEM, null, DARKGUARD_TRINKET);
-    }
+    } 
   },
 };
 
@@ -112,7 +97,7 @@ const WEBBED = {
   name: "Webbed",
   detail: "CONDITION",
   image: "styles/images/items/webbed.jpg",
-  status: "You are caught in spider webbing. All attacks make ",
+  status: "You are caught in spider webbing.",
   duration: null,
   function: (webStrength) => {
     if (WEBBED.duration === null) {
@@ -146,7 +131,7 @@ const WEBBED = {
         togglePlayerControls();
         renderStatusEffects(WEBBED);
       }
-    }
+    } 
   },
 };
 
@@ -163,9 +148,7 @@ const CHILLED = {
 
     if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(CHILLED, length);
-    } else {
-      writeToLogItem(LOG_ITEM, null, CHILLBREAKER_BAND);
-    }
+    } 
   },
 };
 
@@ -264,7 +247,7 @@ const WAR_TORN_BANNER_STATUS = {
       WAR_TORN_BANNER_STATUS.duration = `${
         30 - legionTracker
       } legionnaires remaining.`;
-  
+
       const warTornBannerInterval = setInterval(() => {
         if (WAR_TORN_BANNER_STATUS.duration === null) {
           clearInterval(warTornBannerInterval);
@@ -274,7 +257,7 @@ const WAR_TORN_BANNER_STATUS = {
           } legionnaires remaining.`;
         }
       }, 3000);
-  
+
       statusEffectHandler(WAR_TORN_BANNER_STATUS);
       renderStatusEffects(WAR_TORN_BANNER_STATUS);
     }

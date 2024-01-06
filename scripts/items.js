@@ -267,7 +267,7 @@ const MIST_VEIL_CLOAK = {
     let randomNumber = Math.floor(Math.random() * 10) + 1;
     if (randomNumber === 10) {
       console.log(`Attack evaded with Mist Veil Cloak!`);
-      // writeToLogItem(LOG_ITEM, "YES", MIST_VEIL_CLOAK) !FIX! player dodged attack
+      writeToLogItem(LOG_ITEM, null, MIST_VEIL_CLOAK);
       return 0;
     } else {
       console.log(`Attack NOT evaded...`);
@@ -414,25 +414,15 @@ const REVENANTS_RAGE = {
   type: "MAGIC",
   rarity: "Rare",
   effect:
-    "While attuned to this item your Attack increases by 5 when below 30HP.",
-  stats: {
-    strength: 0,
-    dexterity: 0,
-    faith: 0,
-    attack: 0,
-  },
+    "While attuned to this item, your Attacks deal 5 more damage while below 30HP.",
   function: () => {
     if (currentPlayerHealth <= 30) {
-      REVENANTS_RAGE.stats.attack = 5;
+      // writeToLogItem(LOG_ITEM, null, REVENANTS_RAGE); !FIX! add log
+      return 5;
     } else {
-      REVENANTS_RAGE.stats.attack = 0;
+      return 0;
     }
-
-    updateTotalStats();
   },
-  unequip: () => {
-    //
-  }
 };
 
 const LAUGHING_COFFIN_COIN = {
@@ -457,6 +447,7 @@ const PLAGUEWARD_PENDANT = {
   rarity: "Rare",
   effect: "While attuned to this item it prevents you from being diseased.",
   function: () => {
+    writeToLogItem(LOG_ITEM, null, PLAGUEWARD_PENDANT);
     return "IMMUNE";
   },
 };
@@ -469,6 +460,7 @@ const GHOSTSHROUD_TALISMAN = {
   rarity: "Rare",
   effect: "While attuned to this item it prevents you from being haunted.",
   function: () => {
+    writeToLogItem(LOG_ITEM, null, GHOSTSHROUD_TALISMAN);
     return "IMMUNE";
   },
 };
@@ -481,6 +473,7 @@ const TOXINWEAVE_MASK = {
   rarity: "Rare",
   effect: "While attuned to this item it prevents you from being poisoned.",
   function: () => {
+    writeToLogItem(LOG_ITEM, null, TOXINWEAVE_MASK);
     return "IMMUNE";
   },
 };
@@ -493,6 +486,7 @@ const SILKSTRIDERS = {
   rarity: "Common",
   effect: "While attuned to this item you can't be webbed by spiders.",
   function: () => {
+    writeToLogItem(LOG_ITEM, null, SILKSTRIDERS);
     return "IMMUNE";
   },
 };
@@ -505,6 +499,7 @@ const CHILLBREAKER_BAND = {
   rarity: "Rare",
   effect: "While attuned to this item it prevents you from being chilled.",
   function: () => {
+    writeToLogItem(LOG_ITEM, null, CHILLBREAKER_BAND);
     return "IMMUNE";
   },
 };
@@ -692,6 +687,7 @@ const DARKGUARD_TRINKET = {
   rarity: "Epic",
   effect: "While attuned to this item it prevents you from being cursed.",
   function: () => {
+    writeToLogItem(LOG_ITEM, null, DARKGUARD_TRINKET);
     return "IMMUNE";
   },
 };

@@ -94,7 +94,7 @@ const GAS_CHAMBER = {
   name: "Gas Chamber",
   eventType: "TRAP",
   description:
-    "The chamber's atmosphere turns ominous as a noxious, green mist begins to billow forth from unseen vents. It fills the air, suffusing the space with an acrid smell. Panic sets in as you realize you're trapped.",
+    "A noxious, green mist begins to billow forth from unseen vents. It fills the air, suffusing the space with an acrid smell. Panic sets in as you realize you're trapped.",
   optionOne: "Strength",
   optionTwo: "Faith",
   passValue: 7,
@@ -139,7 +139,7 @@ const SPIKE_PITFALL = {
   name: "Spike Pitfall",
   eventType: "TRAP",
   description:
-    "The ground beneath your feet gives way suddenly, leaving you in a freefall. Your heart races as you plummet into the darkness, catching glimpses of jagged spikes gleaming below. The air rushes past you.",
+    "The ground beneath your feet gives way, leaving you in a freefall. Your heart races as you plummet into the darkness, catching glimpses of jagged spikes gleaming below.",
   optionOne: "Dexterity",
   optionTwo: "Faith",
   passValue: 6,
@@ -883,12 +883,12 @@ const BATTLEFIELD = {
 
     writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "BOSS");
     playMusic(weCantStopThem);
-    setTimeout(newRoomAnimation, 3000);
+    setTimeout(newRoomAnimation, 6000);
     setTimeout(() => {
       let undyingWarbandImage = "styles/images/monsters/undying-warband.jpg";
       renderBackground(undyingWarbandImage);
       startBattle();
-    }, 4500);
+    }, 7500);
     setRoomSummary();
   },
   functionTwo: () => {

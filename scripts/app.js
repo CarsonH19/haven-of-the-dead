@@ -441,6 +441,8 @@ function fleeHandler() {
     fleeAttempt += 3;
   }
 
+  console.log(fleeAttempt);
+
   if (fleeAttempt >= 10 && currentRoom.roomName !== "Throne of the Eternal") {
     // Log must be placed before currentRoom change
     writeToLogActions(LOG_FLEE, "YES", "SUCCESS");
@@ -467,8 +469,8 @@ function fleeHandler() {
           monsterContainer.style.display = "none";
           monsterImage.style.display = "none";
           renderCurrentRoom(currentRoom);
-        }, 2000);
-      }, 2000);
+        }, 4000);
+      }, 4000);
 
       setControlsInterval("STOP");
     } else {

@@ -179,8 +179,8 @@ li, ul {
   left: 50%; /* Center horizontally */
   top: 25%; /* Center vertically */
   transform: translate(-50%, -70%); 
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   border: 2px solid var(--header);
   border-radius: 5px;
 }
@@ -1164,7 +1164,7 @@ progress[value]::-moz-progress-bar {
   position: fixed;
   z-index: 1;
   left: 50%;
-  top: 60%;
+  top: 55%;
   transform: translate(-50%, -50%);
 }
 

@@ -550,7 +550,7 @@ function renderHeroStatsModal() {
   heroCritHitChance.textContent = `${critHitPercentage}%`;
   // Guard Bonus
   const heroGuardBonus = document.getElementById("heroGuardBonus");
-  heroGuardBonus.textContent = `-${totalDexterity} Additional Damage`;
+  heroGuardBonus.textContent = `${totalDexterity} Damage Reduction`;
   // Flee Chance
   const heroFleeChance = document.getElementById("heroFleeChance");
   let fleeChancePercentage = (totalFaith / 10) * 100;
