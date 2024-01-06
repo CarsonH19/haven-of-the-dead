@@ -435,7 +435,7 @@ const LAUGHING_COFFIN_COIN = {
   effect:
     "Carried by scoundrels, this coin grants access to the infamous Laughing Coffin Tavern.",
   function: () => {
-    writeToLogItem(LOG_ITEM, LAUGHING_COFFIN_COIN);
+    writeToLogItem(LOG_ITEM, "YES", LAUGHING_COFFIN_COIN);
   },
 };
 
@@ -713,7 +713,7 @@ const AEGIS_OF_THE_FALLEN = {
     "While attuned to this item you become immune to damage for a brief time after falling below 30HP.",
   cooldown: 0,
   function: () => {
-    if (AEGIS_OF_THE_FALLEN.cooldown === 0) {
+    if (AEGIS_OF_THE_FALLEN.cooldown === 0 && currentPlayerHealth <= 30) {
       AEGIS_STATUS_EFFECT.function();
       AEGIS_OF_THE_FALLEN.cooldown = 15;
     }
@@ -770,7 +770,7 @@ function boneAmalgamAddHitPoints() {
         monster !== BROODMOTHER) &&
       BONE_AMALGAM.tracker < 30
     ) {
-      let tempHitPoints = monster.skulls * 3;
+      let tempHitPoints = monster.skulls;
       BONE_AMALGAM.tracker += tempHitPoints;
       console.log(`Temp Hit Points added ${tempHitPoints}`);
       if (BONE_AMALGAM.tracker > 30) {
@@ -892,17 +892,18 @@ const SKULLBREAKER_HELM = {
   function: () => {
     let thirtyPercent = Math.round(monsterMaxHealth * 0.3);
     if (
-      thirtyPercent > currentMonsterHealth &&
+      thirtyPercent >= currentMonsterHealth &&
       SKULLBREAKER_HELM.tracker === null
     ) {
+      SKULLBREAKER_HELM.tracker = "ACTIVE";
       SKULLBREAKER_HELM.stats.attack = 5;
       updateTotalStats();
     } else {
       SKULLBREAKER_HELM.tracker = null;
       SKULLBREAKER_HELM.stats.attack = 0;
+      updateTotalStats();
     }
   },
-  unequip: () => {},
 };
 
 const RATTLEBONE_WHISTLE = {
@@ -1209,15 +1210,17 @@ const ROTBANE_FERN = {
   soundEffect: chewCrackersMouth,
   function: () => {
     if (DISEASED.duration !== null) {
-      let randomNumber = Math.floor(Math.random() * 3) + 1;
+      let cureChance = Math.floor(Math.random() * 3) + 1;
 
-      if (randomNumber >= 3) {
+      if (cureChance >= 3) {
         DISEASED.duration = null;
         DISEASED.statusDuration = null;
 
         updatePlayerTrackers();
         writeToLogItem(LOG_ITEM, "YES", ROTBANE_FERN);
       }
+
+      console.log(`Cure Chance: ${cureChance}`);
     }
   },
 };
@@ -1239,9 +1242,10 @@ const WITCHFIRE_ORCHID = {
         CURSED.duration = null;
         CURSED.statusDuration = null;
 
-        console.log(`Cure Chance: ${cureChance}`);
         writeToLogItem(LOG_ITEM, "YES", WITCHFIRE_ORCHID);
       }
+
+      console.log(`Cure Chance: ${cureChance}`);
     }
   },
 };
@@ -1262,10 +1266,10 @@ const EMBERTHAW_PETAL = {
       if (cureChance >= 3) {
         CHILLED.duration = null;
         CHILLED.statusDuration = null;
-
-        console.log(`Cure Chance: ${cureChance}`);
         writeToLogItem(LOG_ITEM, "YES", EMBERTHAW_PETAL);
       }
+
+      console.log(`Cure Chance: ${cureChance}`);
     }
   },
 };
@@ -1286,10 +1290,10 @@ const GHOSTLIGHT_LILY = {
       if (cureChance >= 3) {
         HAUNTED.duration = null;
         HAUNTED.statusDuration = null;
-
-        console.log(`Cure Chance: ${cureChance}`);
         writeToLogItem(LOG_ITEM, "YES", GHOSTLIGHT_LILY);
       }
+
+      console.log(`Cure Chance: ${cureChance}`);
     }
   },
 };
@@ -1310,10 +1314,10 @@ const GRAVEBLOOM = {
       if (cureChance >= 3) {
         POISONED.duration = null;
         POISONED.statusDuration = null;
-
-        console.log(`Cure Chance: ${cureChance}`);
         updatePlayerTrackers();
       }
+
+      console.log(`Cure Chance: ${cureChance}`);
     }
   },
 };
@@ -1489,7 +1493,6 @@ const WARDING_CANDLE = {
   statusDuration: null,
   function: () => {
     WARDING_CANDLE.tracker = "LIT";
-    console.log("FUNCTION");
     startStatusEffect(WARDING_CANDLE, 5);
   },
 };
@@ -1529,7 +1532,6 @@ const FLICKERING_CANDLE = {
   duration: null,
   statusDuration: null,
   function: () => {
-    console.log("CALLED?!?!?");
     FLICKERING_CANDLE.tracker = "LIT";
     startStatusEffect(FLICKERING_CANDLE, 3);
   },
@@ -1925,7 +1927,6 @@ function removeItem(itemName) {
 function getItem(rarity) {
   switch (rarity) {
     case "CONSUMABLE":
-      console.log("CONSUMABLE FOUND");
       const consumableIndex = Math.floor(
         Math.random() * consumableItems.length
       );
@@ -1936,14 +1937,11 @@ function getItem(rarity) {
     case "CANDLE":
       const candleIndex = Math.floor(Math.random() * candleItems.length);
       foundItem = candleItems[candleIndex];
-      console.log(candleIndex);
-      console.log(foundItem);
       currentRoom.contents.items.push(foundItem);
       break;
 
     case "WISP":
       const wispIndex = Math.floor(Math.random() * wispItems.length);
-      console.log(`Wisp Index: ${wispIndex}`);
       foundItem = wispItems[wispIndex];
       currentRoom.contents.items.push(foundItem);
       break;
@@ -2105,7 +2103,6 @@ function addItemToInventory(item) {
   inventoryItems.push(item);
 
   if (item === POTION) {
-    console.log("potion");
     potionCounter++;
     potions.textContent = ` x ${potionCounter}`;
   }
@@ -2572,12 +2569,10 @@ function calculateFavor(itemName, operator) {
 
   switch (operator) {
     case "ADD":
-      console.log("getFavor Called");
       getFavor(itemName);
       break;
 
     case "SUBTRACT":
-      console.log("useFavor Called");
       useFavor(itemName);
       break;
   }
@@ -2630,6 +2625,10 @@ function calculateFavor(itemName, operator) {
     } else if (itemObject.rarity === "Rare") {
       itemValue = 25;
     } else {
+      itemValue = 10;
+    }
+
+    if (itemObject === POTION) {
       itemValue = 10;
     }
 

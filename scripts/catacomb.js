@@ -97,7 +97,7 @@ let catacombRooms = [
   },
   {
     roomName: "Devious Alvove",
-    
+
     backgroundImage: "styles/images/backgrounds/tier-one/devious-alcove.jpg",
     music: hiddenCapacity,
     contents: {
@@ -110,7 +110,7 @@ let catacombRooms = [
     roomName: "Rogue's Refuge",
     description:
       "In the Rogue's Refuge, whispers of ill intent fill the air. Multiple scoundrels, masters of deception, plot amidst the concealed corners.",
-    
+
     backgroundImage: "styles/images/backgrounds/tier-one/rogues-refuge.jpg",
     music: hiddenCapacity,
     contents: {
@@ -173,7 +173,7 @@ let catacombRooms = [
     roomName: "Darkened Fane",
     description:
       "The Darkened Fane, a solemn sanctuary veiled in shadow, echoes with the whispers of unseen shades. The air is charged with a spectral energy as shades drift silently, haunting the sacred space with their ethereal presence.",
-    
+
     backgroundImage: "styles/images/backgrounds/tier-two/darkened-fane.jpg",
     music: hauntedOutpost,
     contents: {
@@ -333,7 +333,7 @@ let catacombRooms = [
     roomName: "Cobwebbed Crypt",
     description:
       "The Cobwebbed Crypt, unfolds like a silken labyrinth. Walls draped in glistening spider webs weave a treacherous path, ready to ensnare the unsuspecting. Each step risks entanglement in the sticky embrace of arachnid artistry. A chilling hush prevails as the crypt silently awaits its unwitting visitors.",
-    
+
     backgroundImage: "styles/images/backgrounds/tier-one/cobbwebbed-crypt.jpg",
     music: spiderInvasion,
     contents: {
@@ -380,7 +380,7 @@ let tierTwoRooms = [
     roomName: "Skull-wall Pass",
     description:
       "Within Skull Wall Pass, the scent of ancient bones fills the chamber. Skeletal soldiers stand sentinel, their bony fingers poised on ghostly blades. An armored skeleton, a relic of forgotten battles, awaits with an eerie stillness.",
-    
+
     backgroundImage: "styles/images/backgrounds/tier-two/skull-wall-pass.jpg",
     music: edgeOfFear,
     contents: {
@@ -393,7 +393,7 @@ let tierTwoRooms = [
     roomName: "Ghostlight Vale",
     description:
       "In Ghostlight Vale, spectral shades drift through a meadow of ethereal flowers. The blooms exude an otherworldly glow, casting an unsettling radiance on the lone path. The air shivers with the haunting whispers of unseen spirits.",
-    
+
     backgroundImage: "styles/images/backgrounds/tier-two/ghostlight-vale.jpg",
     music: hauntedOutpost,
     contents: {
@@ -406,7 +406,7 @@ let tierTwoRooms = [
     roomName: "Morbid Mausoleum",
     description:
       "Within the Morbid Mausoleum, haunting spirits linger, their mournful wails echoing through the cold, still air. The oppressive weight of the mausoleum hints at the somber tales interred within.",
-    
+
     backgroundImage: "styles/images/backgrounds/tier-two/morbid-mausoleum.jpg",
     music: hauntedOutpost,
     contents: {
@@ -419,7 +419,7 @@ let tierTwoRooms = [
     roomName: "Ossuary Outpost",
     description:
       "The Ossuary Outpost, a desolate haven of bone and armor, resonates with the haunting clatter of skeletal soldiers. Amidst the silent echoes, armored skeletons stand guard, their sockets gleaming with an otherworldly intent.",
-    
+
     backgroundImage: "styles/images/backgrounds/tier-two/ossuary-outpost.jpg",
     music: edgeOfFear,
     contents: {
@@ -432,7 +432,7 @@ let tierTwoRooms = [
     roomName: "Vile Cavern",
     description:
       "The Vile Cavern emanates an eerie green glow, casting twisted shadows. Gnawers prowl in the half-light, their hunger almost tangible in this vile expanse.",
-    
+
     backgroundImage: "styles/images/backgrounds/tier-two/vile-cavern.jpg",
     music: deepTunnels,
     contents: {
@@ -457,7 +457,7 @@ let tierTwoRooms = [
     roomName: "Gravemist Hall",
     description:
       "Gravemist Hall, veiled in a perpetual fog, echoes with the melancholic echoes of the deceased. Shadows dance among gravestones as a lone shade guards the entrance, its eyes gleaming with spectral vigilance.",
-    
+
     backgroundImage: "styles/images/backgrounds/tier-two/gravemist-hall.jpg",
     music: hauntedOutpost,
     contents: {
@@ -470,7 +470,7 @@ let tierTwoRooms = [
     roomName: "Skullshade Sanctum",
     description:
       "Skullshade Sanctum exudes an ominous aura. The clinking of bone armor create an unholy symphony. The air is thick with the whispers of the fallen, warning intruders of impending doom.",
-    
+
     backgroundImage:
       "styles/images/backgrounds/tier-two/skullshade-sanctum.jpg",
     music: edgeOfFear,
@@ -595,7 +595,7 @@ let tierTwoRooms = [
   //   roomName: "Bone-forged Altar",
   //   description:
   //     "The Bone-forged Altar exudes an eerie tranquility. Skeletal remains, meticulously arranged, form a macabre mosaic.",
-  //   
+  //
   //   backgroundImage:
   //     "styles/images/backgrounds/tier-four/malevolent-shrine.jpg",
   //   music: imminentDarkness,
@@ -729,31 +729,6 @@ let tierThreeRooms = [
       events: COFFIN_EVENT,
     },
   },
-  {
-    roomName: "Hag's Hollow",
-    description: `Hag's Hollow,  hidden deep within the catacomb's bowels, glows eerily from the bubbling cauldron within. Thick fog billows from the cauldron and hangs in the air, filling the room with a nauseating smell. The hag, with her cauldron, offers her dark expertise, welcoming those who bring rare ingredients to trade.`,
-    backgroundImage: "styles/images/backgrounds/event-rooms/hags-hollow.jpg",
-    music: creepyThoughts,
-    contents: {
-      monsters: [],
-      items: [],
-      events: HAG_TRADER,
-    },
-    function: () => {
-      previousHagFavor = "HAVE NOT TRADED";
-      hagItems = [];
-      hagItems = [
-        POTION,
-        POTION,
-        POTION,
-        TROLLBLOOD_TONIC,
-        NECROTIC_NECTAR,
-        HEXBANE_BREW,
-      ];
-
-      soundEffectHandler(cauldronLargeBoil);
-    },
-  },
 ];
 
 // ===============================
@@ -783,7 +758,7 @@ let tierFourRooms = [
   {
     roomName: "Bastion of Bone",
     description: "A chamber with a large pile of skulls in the center.",
-    
+
     backgroundImage: "styles/images/backgrounds/tier-four/bastion-of-bone.jpg",
     music: edgeOfFear,
     contents: {
@@ -795,7 +770,7 @@ let tierFourRooms = [
   {
     roomName: "Malevolent Shrine",
     description: "A chamber with a large pile of skulls in the center.",
-    
+
     backgroundImage:
       "styles/images/backgrounds/tier-four/malevolent-shrine.jpg",
     music: hauntedOutpost,
@@ -837,91 +812,6 @@ let tierFourRooms = [
       monsters: [],
       items: [],
       events: LOCKED_ROOM,
-    },
-  },
-  {
-    roomName: "Curator's Curio",
-    description: `The Curator's Curio, a clandestine collection of catacomb relics and arcane artifacts. In the dim-lit reliquary, items of forgotten power gather, chosen by the curator, who is willing to make a deal for anything that catches his eye.`,
-    backgroundImage: "styles/images/backgrounds/event-rooms/curators-curio.jpg",
-    music: timeToFaceThem,
-    contents: {
-      monsters: [],
-      items: [],
-      events: CURATOR_TRADER,
-    },
-    function: () => {
-      // Add Items to Curator's Inventory the Player Doesn't Have.
-      curatorItems = [];
-      commonArray = [];
-      rareArray = [];
-      epicArray = [];
-      junkArray = [SKELETON_KEY, LAUGHING_COFFIN_COIN];
-
-      // Find Common Items
-      function findCommonItem() {
-        for (let i = 0; i < commonCuratorArray.length; i++) {
-          if (
-            !attunedItems.includes(commonCuratorArray[i]) &&
-            !inventoryItems.includes(commonCuratorArray[i]) &&
-            !curatorItems.includes(commonCuratorArray[i])
-          ) {
-            commonArray.push(commonCuratorArray[i]);
-          }
-        }
-
-        if (commonArray.length > 0) {
-          let index = Math.floor(Math.random() * commonArray.length);
-          curatorItems.push(commonArray[index]);
-        } else {
-          let index = Math.floor(Math.random() * junkArray);
-        }
-      }
-
-      // Find Rare Items
-      function findRareItem() {
-        for (let i = 0; i < rareCuratorArray.length; i++) {
-          if (
-            !attunedItems.includes(rareCuratorArray[i]) &&
-            !inventoryItems.includes(rareCuratorArray[i]) &&
-            !curatorItems.includes(rareCuratorArray[i])
-          ) {
-            rareArray.push(rareCuratorArray[i]);
-          }
-        }
-
-        if (rareArray.length > 0) {
-          let index = Math.floor(Math.random() * rareArray.length);
-          curatorItems.push(rareArray[index]);
-          rareArray.splice(index, 1);
-        } else {
-          findCommonItem();
-        }
-      }
-
-      function findEpicItem() {
-        // Find Epic Items
-        for (let i = 0; i < epicCuratorArray.length; i++) {
-          if (
-            !attunedItems.includes(epicCuratorArray[i]) &&
-            !inventoryItems.includes(epicCuratorArray[i]) &&
-            !curatorItems.includes(rareCuratorArray[i])
-          ) {
-            epicArray.push(epicCuratorArray[i]);
-          }
-        }
-
-        if (epicArray.length > 0) {
-          let index = Math.floor(Math.random() * epicArray.length);
-          curatorItems.push(epicArray[index]);
-        } else {
-          findRareItem();
-        }
-      }
-
-      findCommonItem();
-      findRareItem();
-      findRareItem();
-      findEpicItem();
     },
   },
 ];
@@ -983,7 +873,7 @@ const BLOOD_ALTER = {
   roomName: "The Crimson Covenant",
   description:
     "The altar, carved from the cold, black stone native to the catacombs, stands in a chamber illuminated only by the eerie glow of blood-red torches. The walls are adorned with morbid murals, depicting the Lord of Crimson, the deity of blood and life.",
-  
+
   backgroundImage: "styles/images/backgrounds/event-rooms/crimson-covenant.jpg",
   music: crypta,
   contents: {
@@ -1079,7 +969,7 @@ const IVAN_TRAP_ROOM_ONE = {
   roomName: "Bloodstained Bridge",
   description:
     "The Bloodstained Bridge spans a chasm filled with bone. Crimson stains mark the way, leading to a perilous path where pendulum blades swing ominously. The unsettling creaking metal shrouds the impending danger set by Ivan the Scoundrel.",
-  
+
   backgroundImage:
     "styles/images/backgrounds/event-rooms/bloodstained-bridge.jpg",
   music: claustrofobia,
@@ -1181,7 +1071,7 @@ const SKULL_CHAMBER = {
 
 const GRIM_GARRISON = {
   roomName: "Grim Garrison",
-    backgroundImage: "styles/images/backgrounds/tier-two/grim-garrison.jpg",
+  backgroundImage: "styles/images/backgrounds/tier-two/grim-garrison.jpg",
   music: imminentDarkness,
   contents: {
     monsters: [],
@@ -1373,8 +1263,15 @@ function getRandomRoom(array) {
 }
 
 function removeCurrentRoom() {
-  if (currentRoom !== catacombEntrance) {
-    console.log(`${currentRoom} Removed`);
+  if (
+    currentRoom !== catacombEntrance &&
+    currentRoom !== CANDLELIGHT_SHRINE &&
+    currentRoom !== FALLEN_WARRIORS_VALE &&
+    currentRoom !== LAUGHING_COFFIN_ROOM &&
+    currentRoom !== HAGS_HOLLOW &&
+    currentRoom !== CURATORS_CURIO
+  ) {
+    console.log(`${currentRoom.roomName} Removed`);
     catacombRooms.splice(roomIndex, 1);
   }
 }
@@ -1449,29 +1346,25 @@ function checkCurrentRoom() {
 
 function checkForNewTier() {
   // Tier Two Rooms
-  setTimeout(() => {
-    if (roomCounter === 20) {
-      catacombRooms = catacombRooms.concat(tierTwoRooms);
-    }
-  });
+  if (roomCounter === 20 && tierTwoRoomsTracker === null) {
+    tierTwoRoomsTracker === "ADDED";
+    catacombRooms = catacombRooms.concat(tierTwoRooms);
+  }
 
   // Tier Three Rooms
-  setTimeout(() => {
-    if (roomCounter === 45) {
-      catacombRooms = catacombRooms.concat(tierThreeRooms);
-    }
-  });
+  if (roomCounter === 45 && tierThreeRoomsTracker === null) {
+    tierThreeRoomsTracker === "ADDED";
+    catacombRooms = catacombRooms.concat(tierThreeRooms);
+  }
 
   // Tier Four Rooms
-  setTimeout(() => {
-    if (roomCounter === 70) {
-      catacombRooms = catacombRooms.concat(tierFourRooms);
-    }
-  });
+  if (roomCounter === 70 && tierFourRoomsTracker === null) {
+    tierFourRoomsTracker === "ADDED";
+    catacombRooms = catacombRooms.concat(tierFourRooms);
+  }
 
   // Boss Room
-  setTimeout(() => {});
-  if (roomCounter === 80) {
+  if (catacombRooms.length === 1) {
     catacombRooms.push(THRONE_OF_THE_ETERNAL);
   }
 }
@@ -1535,7 +1428,7 @@ function createNewRoom() {
         } else if (roomDetails === 3) {
           newRoom.roomName = "Haunted Bloodcellar";
           newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-two/haunted-bloodcellar.jpg";
+            "styles/images/backgrounds/tier-two/haunted-blood-cellar.jpg";
         } else if (roomDetails === 4) {
           newRoom.roomName = "Haunted Hallow";
           newRoom.backgroundImage =
@@ -1547,7 +1440,6 @@ function createNewRoom() {
         }
 
         newRoom.music = hauntedOutpost;
-
         break;
 
       case 3:
@@ -1577,6 +1469,8 @@ function createNewRoom() {
           newRoom.backgroundImage =
             "styles/images/backgrounds/tier-two/ghastly-gallery.jpg";
         }
+
+        newRoom.music = fightThrough;
         break;
 
       case 4:

@@ -59,7 +59,7 @@ const DISEASED = {
 
     if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(DISEASED, length);
-    } 
+    }
   },
 };
 
@@ -89,7 +89,7 @@ const CURSED = {
     if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(CURSED, length);
       soundEffectHandler(ghostEncounter);
-    } 
+    }
   },
 };
 
@@ -131,7 +131,7 @@ const WEBBED = {
         togglePlayerControls();
         renderStatusEffects(WEBBED);
       }
-    } 
+    }
   },
 };
 
@@ -148,7 +148,7 @@ const CHILLED = {
 
     if (!immune || HEXBANE_BREW.duration !== null) {
       startStatusEffect(CHILLED, length);
-    } 
+    }
   },
 };
 
@@ -350,6 +350,7 @@ const startNewStatusEffect = (statusEffect, length) => {
     statusEffect.statusDuration = 3;
     const duration = statusEffect.statusDuration;
     statusEffect.duration = `Duration: ${duration}/3`;
+    console.log(`StartNewStatusEffect ${statusEffect}`);
   } else {
     statusEffect.statusDuration = roomCounter + length;
     const duration = statusEffect.statusDuration - roomCounter;
@@ -393,8 +394,9 @@ const setupStatusEffectInterval = (statusEffect) => {
     }
 
     if (
-      roomCounter >= statusEffect.statusDuration ||
-      (statusEffect.duration === null && statusEffect !== FLICKERING_CANDLE)
+      roomCounter >= statusEffect.statusDuration &&
+      statusEffect.duration === null &&
+      statusEffect !== FLICKERING_CANDLE
     ) {
       endStatusEffectInterval(statusEffect, intervalId);
     } else if (statusEffect.detail === "WISP") {

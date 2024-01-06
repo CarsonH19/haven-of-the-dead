@@ -841,6 +841,7 @@ const CRIMSON_COVENANT = {
       }
 
       damagePlayer(50);
+      soundEffectHandler(bloodDrips);
       setRoomSummary();
       CRIMSON_COVENANT.summary =
         "You participated in the ritual, spilling your blood alongside the other members of the Crimson Covenant.";

@@ -184,7 +184,6 @@ function priestessCleansingFlame() {
     let conditions = [POISONED, DISEASED, CHILLED, CURSED, BURNED, HAUNTED];
 
     let activeConditions = conditions.filter((obj) => obj.duration !== null);
-    console.log(activeConditions);
 
     if (activeConditions.length > 0) {
       let randomIndex = Math.floor(Math.random() * activeConditions.length);
@@ -192,7 +191,7 @@ function priestessCleansingFlame() {
       curedCondition.duration = null;
       curedCondition.statusDuration = null;
       updateTotalStats();
-      console.log(curedCondition);
+      console.log(curedCondition); // !FIX! add log
     }
   }
 
@@ -263,7 +262,6 @@ function gainExperience(num) {
 
   experiencePoints += num;
 
-  console.log(`Experience Gained: ${num}`);
   updatePlayerTrackers();
   checkForLevelUp();
 }
@@ -538,7 +536,7 @@ function renderHeroStatsModal() {
   heroBonusHealth.textContent = `+${totalStrength * 10}`;
   // Critical Hit Damage
   const heroCritHitDamage = document.getElementById("heroCritHitDamage");
-  let heroCritDamageMod = calculateCritDamageModifier() * 100;
+  let heroCritDamageMod = Math.round(calculateCritDamageModifier() * 100);
   heroCritHitDamage.textContent = `${heroCritDamageMod}%`;
 
   // DEXTERITY ------------------------------------------------------
@@ -624,7 +622,6 @@ function renderHeroStatsModal() {
     } else if (heroChoice === "ROGUE") {
       rankFourSpecialBoon.textContent = `Attacks Deal +${totalDexterity} Damage`;
     } else if (heroChoice === "PRIESTESS") {
-      console.log("CALLED");
       rankFourSpecialBoon.textContent = `Removes 1 Condition`;
     }
   }

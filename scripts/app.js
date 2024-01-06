@@ -96,6 +96,9 @@ function damageMonster(damage) {
     damageFlashAnimation("MONSTER");
   }
 
+  // ITEM: Skullbreaker Helm - +5 Attack below 30%HP
+  isItemAttuned(SKULLBREAKER_HELM);
+
   updatePlayerTrackers();
 }
 
@@ -156,7 +159,6 @@ function monsterAttackHandler(bonus) {
     );
     damageMonster(damageReflected);
     showDamage(damageReflected, "PLAYER");
-    console.log(`Damage Reflected: ${damageReflected}`);
   }
 
   if (monsterToPlayerDamage > 0) {
@@ -172,6 +174,12 @@ function monsterAttackHandler(bonus) {
   }
 
   damagePlayer(monsterToPlayerDamage);
+
+  // Coooldown needs to be after player is damaged
+  if (AEGIS_OF_THE_FALLEN.cooldown !== 0) {
+    AEGIS_OF_THE_FALLEN.cooldown--;
+  }
+
   updatePlayerTrackers();
   setControlsInterval("START");
 }
@@ -199,7 +207,7 @@ function dealPlayerDamage(damage) {
 function damagePlayer(damage) {
   if (currentPlayerHealth <= 30) {
     // ITEM - ACTIVIATE: Aegis of the Fallen - Immunity to all damage.
-    isItemAttuned(AEGIS_OF_THE_FALLEN, null);
+    isItemAttuned(AEGIS_OF_THE_FALLEN);
   }
 
   if (AEGIS_STATUS_EFFECT.duration !== null) {
@@ -329,11 +337,6 @@ function specialCooldownHandler(reset) {
     } else if (heroChoice === "PRIESTESS")
       special.textContent = `Cleansing Flame`;
   }
-
-  // ITEM COOLDOWNS
-  if (AEGIS_OF_THE_FALLEN.cooldown !== 0) {
-    AEGIS_OF_THE_FALLEN.cooldown--;
-  }
 }
 
 // ===============================
@@ -387,7 +390,7 @@ function guardHandler(bonus) {
 
   writeToLogActions(LOG_GUARD, "YES", damageBlocked);
   updatePlayerTrackers();
-  
+
   setTimeout(() => {
     setControlsInterval("START");
   }, 1500);
@@ -441,8 +444,6 @@ function fleeHandler() {
     fleeAttempt += 3;
   }
 
-  console.log(fleeAttempt);
-
   if (fleeAttempt >= 10 && currentRoom.roomName !== "Throne of the Eternal") {
     // Log must be placed before currentRoom change
     writeToLogActions(LOG_FLEE, "YES", "SUCCESS");
@@ -469,8 +470,8 @@ function fleeHandler() {
           monsterContainer.style.display = "none";
           monsterImage.style.display = "none";
           renderCurrentRoom(currentRoom);
-        }, 4000);
-      }, 4000);
+        }, 2000);
+      }, 5000);
 
       setControlsInterval("STOP");
     } else {
@@ -541,20 +542,19 @@ function isGameOver(ending) {
       playMusic(theEndOfTheWorld);
     } else {
       setTimeout(() => {
-        const topContent = document.querySelector('.top-content');
-        const bottomContent = document.querySelector('.bottom-content');
-        const middleLeftContent = document.querySelector('.middle-left');
-        const middleRightContent = document.querySelector('.middle-right');
-        topContent.style.display = 'none';
-        bottomContent.style.display = 'none';
-        middleLeftContent.style.display = 'none';
-        middleRightContent.style.display = 'none';
+        const topContent = document.querySelector(".top-content");
+        const bottomContent = document.querySelector(".bottom-content");
+        const middleLeftContent = document.querySelector(".middle-left");
+        const middleRightContent = document.querySelector(".middle-right");
+        topContent.style.display = "none";
+        bottomContent.style.display = "none";
+        middleLeftContent.style.display = "none";
+        middleRightContent.style.display = "none";
 
         chooseEnding(ending);
       }, 2000);
       newRoomAnimation();
     }
-
   }
 
   function chooseEnding(ending) {
@@ -587,7 +587,6 @@ function isGameOver(ending) {
         break;
 
       default:
-        console.log("No Ending Chosen");
     }
 
     darkenBackground();
@@ -720,6 +719,16 @@ function renderCurrentRoom(currentRoom) {
     }, 3000);
   }
 
+  // Check if room is empty then renders continue button
+  setTimeout(() => {
+    if (
+      currentRoom.contents.monsters.length === 0 &&
+      currentRoom.contents.events === null
+    ) {
+      renderContinueButton();
+    }
+  }, 5000);
+
   turnOffControls();
   specialCooldownHandler();
   setRoomSummary();
@@ -739,7 +748,6 @@ function setControlsInterval(command, pauseTime) {
   switch (command) {
     case "START":
       if (controlInterval === null) {
-        console.log("setControlsInterval Started!");
         controlInterval = setInterval(() => {
           togglePlayerControls();
         }, CONTROL_INTERVAL_DURATION);
@@ -747,18 +755,15 @@ function setControlsInterval(command, pauseTime) {
       break;
 
     case "PAUSE":
-      console.log("setControlsInterval Paused!");
       turnOffControls();
       setTimeout(() => {
         controlInterval = setInterval(() => {
           togglePlayerControls();
         }, CONTROL_INTERVAL_DURATION);
       }, pauseTime);
-      // console.log(`paused for: ${pauseTime}`);
       break;
 
     case "STOP":
-      console.log("setControlsInterval Stopped!");
       controlInterval = null;
       turnOffControls();
       break;
@@ -770,7 +775,6 @@ function setControlsInterval(command, pauseTime) {
 }
 
 function togglePlayerControls() {
-  // console.log(`Controls Toggled`);
   if (
     currentRoom.contents.monsters.length > 0 &&
     monsterContainer.style.display === "flex"

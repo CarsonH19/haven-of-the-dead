@@ -652,25 +652,25 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
     // Paladin Ability
     case LOG_SMITE:
       if (narration === 1) {
-        narration = `"In the name of the divine, your foe shall know the burning light!"`;
+        narration = `"In the name of the divine, you shall know the burning light!"`;
       } else if (narration === 2) {
-        narration = `"With righteous fury, the smite of holiness purges all evil."`;
+        narration = `"With righteous fury, my smite purges all evil."`;
       } else if (narration === 3) {
-        narration = `"May the heavens guide your strike, champion of the light!"`;
+        narration = `"May the heavens guide my strike!"`;
       } else if (narration === 4) {
-        narration = `"A blinding radiance erupts as your smite pierces the darkness."`;
+        narration = `A blinding radiance erupts as your smite pierces the darkness.`;
       } else if (narration === 5) {
-        narration = `"The darkness recoils in the face of your holy onslaught."`;
+        narration = `The darkness recoils in the face of your holy onslaught.`;
       } else if (narration === 6) {
         narration = `"Behold the power of the sacred, as it lays waste to the unholy!"`;
       } else if (narration === 7) {
         narration = `"With each swing, the smite of righteousness carves a path of purity."`;
       } else if (narration === 8) {
-        narration = `"The echoes of angels resonate as your smite strikes true."`;
+        narration = `The echoes of angels resonate as your smite strikes true.`;
       } else if (narration === 9) {
         narration = `"The unholy tremble as the light of righteousness descends upon them."`;
       } else {
-        narration = `"Through the strength of faith, your smite brings judgment upon the wicked."`;
+        narration = `"Through the strength of faith, my smite brings judgment upon the wicked."`;
       }
 
       newEntry.textContent = `SPECIAL: Your Holy Smite deals ${dataOne} damage to the ${currentRoom.contents.monsters[0].name}!`;
@@ -1554,7 +1554,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === ITEM_ROBBERY && dataOne === "REFUSE") {
         newEntry.textContent = `Defiance burns in your eyes as you reject their demands. The air thickens with tension, blades poised. The scoundrels grin, relishing the impending clash between audacity and avarice.`;
       } else if (event === JOIN_THE_BARON) {
-        newEntry.textContent = `In death, you shall serve."`;
+        newEntry.textContent = `"In death, you shall serve."`;
       }
 
       narration = newEntry.textContent;

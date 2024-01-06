@@ -61,7 +61,6 @@ const BROODMOTHER = {
 
 function webChance(chance) {
   let webChance = Math.round(Math.random() * chance);
-  console.log(webChance);
 
   if (webChance === chance) {
     return true;
@@ -105,7 +104,7 @@ const CULTIST = {
     ability: evilSpell1,
   },
   function: () => {
-    CURSED.function(5);
+    CURSED.function(3);
     soundEffectHandler(evilSpellVoice1);
   },
 };
@@ -122,7 +121,7 @@ const FIENDSWORN_CULTIST = {
     ability: evilSpell1,
   },
   function: () => {
-    CURSED.function(7);
+    CURSED.function(5);
     soundEffectHandler(evilSpellVoice1);
   },
 };
@@ -210,7 +209,6 @@ const UNDYING_WARBAND = {
           clearInterval(warbandInterval);
         }
 
-        console.log("ATTACK MADE");
         UNDYING_WARBAND.attackCounter++;
         soundEffectHandler(heavyAttackSounds());
         warbandAttacks();
@@ -738,7 +736,6 @@ function startBattle() {
     updatePlayerTrackers();
 
     setControlsInterval("START");
-    console.log("START BATTLE START CONTROLS");
   }, 1000);
 
   soundEffectHandler(currentRoom.contents.monsters[0], "SPAWN");
@@ -769,14 +766,11 @@ function checkForMonsters() {
   if (monster.length > 0) {
     startBattle();
   } else {
-    console.log("All monsters defeated");
     attackCounter = 0; // Item: Soulreaver
     setTimeout(renderRoomSummaryModal, 5000);
   }
 
   setControlsInterval("STOP");
-  console.log("CHECK STOP CONTROLS");
-
 }
 
 function monsterAbilityHandler(monster) {
@@ -784,7 +778,6 @@ function monsterAbilityHandler(monster) {
     switch (monster) {
       case BONE_TITAN:
         if (currentMonsterHealth <= 15) {
-          console.log("Bone Titan Ability Called!");
           BONE_TITAN.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         }
@@ -793,7 +786,6 @@ function monsterAbilityHandler(monster) {
       case FLOOD_OF_BONES:
         if (criticalHit >= 20) {
           // !FIX! add healing and change log to collecting bones and restoring health
-          console.log("Flood of Bones Ability Called!");
           FLOOD_OF_BONES.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         }
@@ -802,7 +794,6 @@ function monsterAbilityHandler(monster) {
       case HAUNTING_SPIRIT:
         let spiritHauntChance = Math.floor(Math.random() * 20) + 1;
         if (spiritHauntChance === 20) {
-          console.log("Haunting Spirit Ability Called!");
           HAUNTING_SPIRIT.function();
         }
         break;
@@ -810,7 +801,6 @@ function monsterAbilityHandler(monster) {
       case GRUDGE:
         let grudgeHauntChance = Math.floor(Math.random() * 10) + 1;
         if (grudgeHauntChance === 10) {
-          console.log("Grudge Ability Called!");
           GRUDGE.function();
         }
         break;
@@ -818,7 +808,6 @@ function monsterAbilityHandler(monster) {
       case POSSESSED_EARVER:
         let earverHauntChance = Math.floor(Math.random() * 20) + 1;
         if (earverHauntChance === 20) {
-          console.log("Earver Ability Called!");
           POSSESSED_EARVER.function();
         }
         break;
@@ -826,14 +815,12 @@ function monsterAbilityHandler(monster) {
       case GNAWER:
         let gnawerDiseaseChance = Math.floor(Math.random() * 20) + 1;
         if (gnawerDiseaseChance === 20) {
-          console.log("Gnawer Ability Called!");
           GNAWER.function();
         }
         break;
 
       case CRYPT_CRAWLER:
         if (webChance(4)) {
-          console.log("Crypt Crawler Ability Called!");
           setTimeout(CRYPT_CRAWLER.function, 300);
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         }
@@ -841,7 +828,6 @@ function monsterAbilityHandler(monster) {
 
       case BROODMOTHER:
         if (BROODMOTHER.hatchEggCounter === 3) {
-          console.log("Broodmother Ability Called!");
           BROODMOTHER.hatchEggCounter = 0;
           BROODMOTHER.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
@@ -853,7 +839,6 @@ function monsterAbilityHandler(monster) {
       case DRAUGR:
         const chilledChance = Math.floor(Math.random() * 20) + 1;
         if (chilledChance >= 20) {
-          console.log("Draugr Ability Called!");
           DRAUGR.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         }
@@ -862,7 +847,6 @@ function monsterAbilityHandler(monster) {
       case SCOUNDREL:
         const poisonedChance = Math.floor(Math.random() * 20) + 1;
         if (poisonedChance >= 20) {
-          console.log("Scoundrel Ability Called!");
           SCOUNDREL.function();
         }
         break;
@@ -870,7 +854,6 @@ function monsterAbilityHandler(monster) {
       case CULTIST:
         const cursedChance = Math.floor(Math.random() * 20) + 1;
         if (cursedChance >= 20) {
-          console.log("Cultist Ability Called!");
           CULTIST.function();
         }
         break;
@@ -880,7 +863,6 @@ function monsterAbilityHandler(monster) {
           currentMonsterHealth < 40 &&
           currentRoom.contents.monsters.length >= 2
         ) {
-          console.log("Ivan Ability Called!");
           // Log must be called before function
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
           IVAN_STATS.function();
@@ -908,7 +890,6 @@ function monsterAbilityHandler(monster) {
 
       case BONEVAULT_DEMON:
         if (BONEVAULT_DEMON.tracker === 5) {
-          console.log("Bonevault Demon Ability Called!");
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         } else {
           BONEVAULT_DEMON.tracker++;
@@ -918,7 +899,6 @@ function monsterAbilityHandler(monster) {
 
       case UNDEAD_RIVEN:
         if (UNDEAD_RIVEN.tracker === 5) {
-          console.log("Undead Riven Ability Called!");
           UNDEAD_RIVEN.attackCounter = 3;
           UNDEAD_RIVEN.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
@@ -929,7 +909,6 @@ function monsterAbilityHandler(monster) {
 
       case UNDEAD_LIHETH:
         if (UNDEAD_LIHETH.tracker === 5) {
-          console.log("Undead Liheth Ability Called!");
           UNDEAD_LIHETH.function();
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         } else {
@@ -947,7 +926,6 @@ function monsterAbilityHandler(monster) {
         break;
 
       case BARON_OF_BONE:
-        console.log("Baron of Bone Ability Called!");
         BARON_OF_BONE.function();
         writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         break;

@@ -306,7 +306,6 @@ function updateTotalStats() {
       (roguePassiveBonus *= darkenedReprisalTracker)
     );
     totalDexterity += roguePassiveBonus;
-    console.log(roguePassiveBonus);
   } else {
     totalDexterity += baseDexterity;
   }
@@ -430,8 +429,11 @@ const heroStatsModal = document.getElementById("heroStatsModal");
 // ===============================
 
 const roomNameElement = document.getElementById("catacombRoomName");
-let roomIndex; // DELETE?!
+let roomIndex; 
 let roomCounter = 0;
+let tierTwoRoomsTracker = null;
+let tierThreeRoomsTracker = null;
+let tierFourRoomsTracker = null;
 
 // ===============================
 //      Inventory Variables
