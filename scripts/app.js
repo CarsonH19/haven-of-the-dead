@@ -1064,8 +1064,8 @@ function renderRoomSummaryModal() {
   if (
     currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
-    roomSummaryModalTracker !== "ACTIVE"
-    // roomSummaryModal.style.display === "none"
+    roomSummaryModalTracker !== "ACTIVE" &&
+    currentPlayerHealth > 0
   ) {
     console.log("Rendering Room Summary");
     roomSummaryModalTracker = "ACTIVE";

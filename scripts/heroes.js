@@ -142,6 +142,8 @@ function rogueDarkenedReprisal() {
       writeToLogHero(LOG_DARKENED_REPRISAL, "YES", "ACTIVE");
       console.log("Darkened Reprisal Called");
     }
+  } else {
+    DARKENED_REPRISAL.active = "NO";
   }
 }
 
