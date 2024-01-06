@@ -341,7 +341,7 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
       soundEffectHandler(magicSpellFire1);
       damagePlayer(20);
       BURNED.function(3);
-      writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
+      writeToLogEvent(LOG_NPC_OPTION_ONE, "YES", IVAN_THE_SCOUNDREL_EVENT_TWO);
 
       setTimeout(() => {
         startBattle();
@@ -352,7 +352,7 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
   },
   functionTwo: () => {
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
-    IVAN_THE_SCOUNDREL_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
+    IVAN_THE_SCOUNDREL_EVENT_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
     useConsumable("Ivan's Cache Key");
     currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
     currentRoom.contents.items.push(LAUGHING_COFFIN_COIN, LAUGHING_COFFIN_COIN);

@@ -491,7 +491,7 @@ function writeToLogMonster(logType, narrate, dataOne) {
         newEntry.textContent = `Liheth's chants resonate through the throne room and a surge of unholy fire envelops her, mending her wounds.`;
       } else if (monsterName === "Death Knight Siggurd") {
         newEntry.textContent = `Siggurd's greatsword bursts into emerald flames, ablaze with malicious ferocity.`;
-      } else if ((monsterName = `Bonevault Demon`)) {
+      } else if (monsterName === `Bonevault Demon`) {
         newEntry.textContent = `The Bonevault Demon, a nightmarish behemoth, rises menacingly. Sinewy muscles coil, and its massive claws gleam ominously as it prepares to unleash a devastating swipe.`;
       }
       break;
@@ -1420,7 +1420,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         newEntry.textContent = `"You aid Graverobber Earver's in unsealing the ancient crypt, a wave of heat rushes forth, heralding the emergence of a long-forgotten king's spectral form. With a mournful cry, the king beckons forth flaming skeletons. Trapped in their blaze, Graverobber Earver meets his demise, leaving you to face these vengeful undead."`;
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Released from captivity, the scoundrel breathes thanks, but a looming arachnid descends, hungry eyes fixed on its newfound prey.`;
-      } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
+      } else if (dataOne === IVAN_THE_SCOUNDREL_EVENT_TWO) {
         newEntry.textContent = `As the key turns, a malevolent hiss escapes just before the chest explodes in an eruption of flames. Burned and disoriented you realize the scoundrel's gratitude was a ruse.`;
       } else if (event === FORSAKEN_COMMANDER) {
         newEntry.textContent = `The spectral commander's mournful visage brightens. 'A noble soul, break their chains and usher the forsaken into the eternal rest they deserve.`;

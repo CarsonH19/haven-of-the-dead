@@ -881,8 +881,9 @@ function monsterAbilityHandler(monster) {
           currentRoom.contents.monsters.length >= 2
         ) {
           console.log("Ivan Ability Called!");
-          IVAN_STATS.function();
+          // Log must be called before function
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+          IVAN_STATS.function();
         }
         break;
 

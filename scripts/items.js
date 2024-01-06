@@ -148,7 +148,7 @@ const GRAVEROBBERS_SPADE = {
   rarity: "Common",
   effect: "While attuned to this item you are 10% more likely to find items.",
   function: () => {
-    setTimeout(updateTotalStats, 1000);
+    // setTimeout(updateTotalStats, 1000);
     return 10;
   },
 };
