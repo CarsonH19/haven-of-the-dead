@@ -1221,7 +1221,7 @@ function renderContinueButton() {
   continueButton.textContent = "Continue...";
 
   if (
-    currentRoom !== catacombEntrance &&
+    // currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
     currentRoom.contents.events === null
   ) {
@@ -1229,6 +1229,10 @@ function renderContinueButton() {
     continueButtonModal.style.display = "block";
   } else {
     continueButtonModal.style.display = "none";
+  }
+
+  if (currentRoom === catacombEntrance) {
+    continueButton.textContent = "Enter";
   }
 }
 

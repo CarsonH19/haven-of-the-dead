@@ -1533,7 +1533,7 @@ function createNewRoom() {
     let ghostMonsters = [HAUNTING_SPIRIT, HAUNTING_SPIRIT, GRUDGE, WRAITH];
     let cultistMonsters = [CULTIST, CULTIST, FIENDSWORN_CULTIST, CRYPT_FIEND];
 
-    if (roomType !== 6) {
+    if (roomType !== 4) {
       let monsterType;
       switch (roomType) {
         case 1:
