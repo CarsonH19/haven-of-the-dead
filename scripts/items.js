@@ -2268,33 +2268,6 @@ function renderInventory() {
   });
 }
 
-// function itemSizeClass() {
-//   if (magicItemCounter > 14) {
-//     magicItemsDiv.forEach(element => {
-//       element.classList.add("small-item");
-//     });
-//     magicItemsBox.style.gap = "5px";
-//   } else {
-//     magicItemsDiv.forEach(element => {
-//       element.classList.add("big-item");
-//     });    
-//     console.log('2');
-//     magicItemsBox.style.gap = "10px";
-//   }
-
-//   if (consumableCounter > 14) {
-//     consumablesDiv.forEach(element => {
-//       element.classList.add("small-item");
-//     });
-//     console.log('3');
-//     consumablesBox.style.gap = "5px";
-//   } else {
-//     consumablesDiv.style.height = "70px";
-//     console.log('70px');
-//     consumablesBox.style.gap = "10px";
-//   }
-// }
-
 // ===============================
 //        Event Listeners
 // ===============================
@@ -2303,7 +2276,6 @@ inventoryButton.addEventListener("click", () => {
   clearInventory();
   renderInventory();
   openInventoryHandler();
-  // itemSizeClass();
 });
 
 closeInventoryButton.addEventListener("click", () => {
@@ -2588,7 +2560,6 @@ closeTradeBtn.addEventListener("click", () => {
 });
 
 function calculateFavor(itemName, operator) {
-  let trader = "name";
   let itemValue;
   let favor;
 
