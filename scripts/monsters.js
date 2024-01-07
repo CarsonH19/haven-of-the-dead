@@ -126,6 +126,23 @@ const FIENDSWORN_CULTIST = {
   },
 };
 
+const CRYPT_FIEND = {
+  name: "Crypt Fiend",
+  image: "styles/images/monsters/crypt-demon.jpg",
+  type: "DEMON",
+  skulls: 9,
+  soundEffects: {
+    spawn: monsterSnarl4,
+    attack: magicAttackSounds,
+    death: monsterSnarl3,
+    ability: magicAttackSounds,
+  },
+  function: () => {
+    BURNED.function(5);
+  },
+};
+
+
 // ===============================
 //           Skeletons
 // ===============================
@@ -255,9 +272,25 @@ const DRAUGR = {
   },
 };
 
+const DEATH_KNIGHT = {
+  name: "Death Knight",
+  image: "styles/images/monsters/death-knight.jpg",
+  type: "UNDEAD",
+  skulls: 9,
+  soundEffects: {
+    spawn: boneCrunchCrack1,
+    attack: heavyAttackSounds,
+    death: armorSounds,
+    ability: magicAttackSounds,
+  },
+  function: () => {
+    //
+  },
+};
+
 const BONE_TITAN = {
   name: "Bone Titan",
-  image: "styles/images/monsters/bone-titan.jpg",
+  image: "styles/images/monsters/bone-titan.jpg", // !FIX! change art
   type: "UNDEAD",
   skulls: 7,
   soundEffects: {
@@ -292,9 +325,7 @@ const BONEVAULT_DEMON = {
   },
   tracker: 0,
   function: () => {
-    // if (BONEVAULT_DEMON.tracker === 5) {
-    //   writeToLogMonster(LOG_MONSTER_ABILITY, "YES", BONEVAULT_DEMON);
-    // }
+    //
   },
 };
 
@@ -361,7 +392,6 @@ function endBaronofBoneBoss() {
   }
 }
 
-
 const UNDEAD_SIGGURD = {
   name: "Death Knight Siggurd",
   image: "styles/images/monsters/undead-siggurd.jpg",
@@ -375,9 +405,7 @@ const UNDEAD_SIGGURD = {
   },
   tracker: 0,
   function: () => {
-    // if (UNDEAD_SIGGURD.tracker === 5) {
-    //   writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
-    // }
+    //
   },
 };
 
@@ -490,7 +518,7 @@ const HAUNTING_SPIRIT = {
     death: ghostHowl,
   },
   function: () => {
-    HAUNTED.function(5);
+    HAUNTED.function(3);
   },
 };
 
@@ -499,6 +527,21 @@ const GRUDGE = {
   image: "styles/images/monsters/grudge.jpg",
   type: "UNDEAD",
   skulls: 5,
+  soundEffects: {
+    spawn: ghostAppearance1,
+    attack: getEvilSpiritAudio,
+    death: ghostShriekWhoosh,
+  },
+  function: () => {
+    HAUNTED.function(5);
+  },
+};
+
+const WRAITH = {
+  name: "Wraith",
+  image: "styles/images/monsters/wraith.jpg",
+  type: "UNDEAD",
+  skulls: 9,
   soundEffects: {
     spawn: ghostAppearance1,
     attack: getEvilSpiritAudio,
@@ -893,7 +936,14 @@ function monsterAbilityHandler(monster) {
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         } else {
           BONEVAULT_DEMON.tracker++;
-          BONEVAULT_DEMON.function();
+        }
+        break;
+
+      case DEATH_KNIGHT:
+        if (DEATH_KNIGHT.tracker === 5) {
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+        } else {
+          DEATH_KNIGHT.tracker++;
         }
         break;
 
@@ -921,7 +971,6 @@ function monsterAbilityHandler(monster) {
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
         } else {
           UNDEAD_SIGGURD.tracker++;
-          UNDEAD_SIGGURD.function();
         }
         break;
 

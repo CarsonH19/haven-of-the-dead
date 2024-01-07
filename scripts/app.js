@@ -137,6 +137,9 @@ function monsterAttackHandler(bonus) {
   } else if (BONEVAULT_DEMON.tracker === 5) {
     BONEVAULT_DEMON.tracker = 0;
     monsterToPlayerDamage = 18;
+  } else if (DEATH_KNIGHT.tracker === 5) {
+    DEATH_KNIGHT.tracker = 0;
+    monsterToPlayerDamage = 25;
   } else if (
     currentRoom.contents.monsters[0] === BLAZING_SKELETON &&
     currentMonsterHealth <= 7

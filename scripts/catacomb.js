@@ -1300,6 +1300,7 @@ function checkCurrentRoom() {
 
   // Adds new rooms during tier 3 & tier 4
   if (catacombRooms.length < 20 && roomCounter >= 50 && roomCounter <= 80) {
+    console.log("NEW ROOM");
     createNewRoom();
   }
 
@@ -1370,7 +1371,7 @@ function checkForNewTier() {
 }
 
 function createNewRoom() {
-  let roomType = Math.floor(Math.random() * 6) + 1;
+  let roomType = Math.floor(Math.random() * 4) + 1;
   let beastType; // to decern Gnawers or Spiders
 
   let newRoom = {
@@ -1385,7 +1386,7 @@ function createNewRoom() {
   };
 
   function getRoomDetails(roomType) {
-    let roomDetails = Math.floor(Math.random() * 5) + 1;
+    let roomDetails = Math.floor(Math.random() * 4) + 1;
 
     switch (roomType) {
       case 1:
@@ -1474,68 +1475,6 @@ function createNewRoom() {
         break;
 
       case 4:
-        // SCOUNDREL
-        if (roomDetails === 1) {
-          newRoom.roomName = "Rouge's Refuge";
-          newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-one/rogues-refuge.jpg";
-        } else if (roomDetails === 2) {
-          newRoom.roomName = "Forgotten Passage";
-          newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-one/forgotten-passage.jpg";
-        } else if (roomDetails === 3) {
-          newRoom.roomName = "Grim Marrow Hall";
-          newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-two/grim-marrow-hall.jpg";
-        } else if (roomDetails === 4) {
-          newRoom.roomName = "SneakShade Sanctum";
-          newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-one/sneakshade-sanctum.jpg";
-        } else {
-          newRoom.roomName = "Raided Tomb";
-          newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-one/marrowrest-tomb.jpg";
-        }
-
-        newRoom.music = hiddenCapacity;
-        break;
-
-      case 5:
-        // BEAST
-        if (roomDetails === 1) {
-          beastType = "GNAWER";
-          newRoom.roomName = "Gnawers' Nest";
-          newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-one/gnawers-nest.jpg";
-          newRoom.music = deepTunnels;
-        } else if (roomDetails === 2) {
-          beastType = "GNAWER";
-          newRoom.roomName = "Vile Cavern";
-          newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-two/vile-cavern.jpg";
-          newRoom.music = deepTunnels;
-        } else if (roomDetails === 3) {
-          beastType = "SPIDER";
-          newRoom.roomName = "The Hatchery";
-          newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-one/the-hatchery.jpg";
-          newRoom.music = spiderInvasion;
-        } else if (roomDetails === 4) {
-          beastType = "SPIDER";
-          newRoom.roomName = "Broodmother's Nest";
-          newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-one/broodmothers-nest.jpg";
-          newRoom.music = spiderInvasion;
-        } else {
-          beastType = "SPIDER";
-          newRoom.roomName = "Cobwebbed Crypt";
-          newRoom.backgroundImage =
-            "styles/images/backgrounds/tier-one/cobbwebbed-crypt.jpg";
-          newRoom.music = spiderInvasion;
-        }
-        break;
-
-      case 6:
         // EVENT
         if (roomDetails === 1) {
           newRoom.roomName = "Webspun Passage";
@@ -1577,26 +1516,22 @@ function createNewRoom() {
     let numberOfEnemies;
 
     // Get Threat Level
-    if (roomCounter >= 90) {
+    if (roomCounter >= 70) {
       numberOfEnemies = 6;
-    } else if (roomCounter >= 70) {
+    } else if (roomCounter >= 60) {
       numberOfEnemies = 5;
     } else if (roomCounter >= 50) {
       numberOfEnemies = 4;
     }
 
     skeletonMonsters = [
-      SKELETAL_SOLDIER,
-      SKELETAL_SOLDIER,
       ARMORED_SKELETON,
       ARMORED_SKELETON,
       BONE_TITAN,
+      DEATH_KNIGHT,
     ];
-    let ghostMonsters = [HAUNTING_SPIRIT, HAUNTING_SPIRIT, GRUDGE];
-    let cultistMonsters = [CULTIST, CULTIST, FIENDSWORN_CULTIST];
-    let scoundrelMonsters = [SCOUNDREL];
-    let gnawerMonsters = [GNAWER];
-    let spiderMonsters = [CRYPT_CRAWLER, CRYPT_CRAWLER, BROODMOTHER];
+    let ghostMonsters = [HAUNTING_SPIRIT, HAUNTING_SPIRIT, GRUDGE, WRAITH];
+    let cultistMonsters = [CULTIST, CULTIST, FIENDSWORN_CULTIST, CRYPT_FIEND];
 
     if (roomType !== 6) {
       let monsterType;
@@ -1611,18 +1546,6 @@ function createNewRoom() {
 
         case 3:
           monsterType = cultistMonsters;
-          break;
-
-        case 4:
-          monsterType = scoundrelMonsters;
-          break;
-
-        case 5:
-          if (beastType === "GNAWER") {
-            monsterType = gnawerMonsters;
-          } else if (beastType === "SPIDER") {
-            monsterType = spiderMonsters;
-          }
           break;
       }
 
