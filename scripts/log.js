@@ -495,6 +495,7 @@ function writeToLogMonster(logType, narrate, dataOne) {
         newEntry.textContent = `The Bonevault Demon, a nightmarish behemoth, rises menacingly. Sinewy muscles coil, and its massive claws gleam ominously as it prepares to unleash a devastating swipe.`;
       } else if (monsterName === "Death Knight") {
         newEntry.textContent = `The Death Knight's weapon bursts into emerald flames, ablaze with malicious ferocity.`;
+      }
       break;
   }
 
