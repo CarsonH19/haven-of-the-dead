@@ -1465,7 +1465,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
     case LOG_MISC_DESCRIPTION:
       // Ending Descriptions
       if (dataOne === "GOOD ENDING") {
-        newEntry.textContent = ``;
+        newEntry.textContent = `With the Baron of Bone vanquished, the grip of undeath relinquishes its hold on the world. Sunlight pierces through the lingering shadows, heralding a new era of hope and rebuilding. The people, liberated from the terror of the undead, unite in gratitude, forging alliances that transcend old enmities. As the catacomb's darkness retreats, a radiant dawn emerges, painting the horizon with the promise of a prosperous age where the scars of the past are healed, and the spirit of renewal prevails.`;
       } else if (dataOne === "BAD ENDING" && heroChoice === "PALADIN") {
         newEntry.textContent = `Siggurd, once a holy warrior devoted to righteousness, succumbs to the Baron's dark persuasion. Infused with unholy energies, he transforms into a formidable Death Knight, wielding a corrupted version of his former divine powers. Leading the undead legions, Siggurd becomes a harbinger of doom, spreading darkness across the once-vibrant lands. His once-gleaming armor now adorned with macabre motifs, Siggurd's allegiance to the Baron of Bone marks a tragic shift from a champion of light to a dread commander of the undead.`;
       } else if (dataOne === "BAD ENDING" && heroChoice === "ROGUE") {

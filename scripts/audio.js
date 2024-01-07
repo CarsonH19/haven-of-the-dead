@@ -199,6 +199,12 @@ function fadeOut(audio, callback) {
 //           MUSIC
 // ===============================
 
+// Good Ending
+const returnOfTheFallen = loadAudio(
+  "audio/music/Return of the Fallen.mp3",
+  "returnOfTheFallen"
+);
+
 // Curator's Curio
 const timeToFaceThem = loadAudio(
   "audio/music/Time to Face Them.mp3",
@@ -217,6 +223,12 @@ const basementNightmare = loadAudio(
   "basementNightmare"
 );
 // Baron of Bone Fight
+
+const birthOfaKnight = loadAudio(
+  "audio/music/Birth of a Knight.mp3",
+  "birthOfaKnight"
+);
+
 const theEternalWar = loadAudio(
   "audio/music/The Eternal War.mp3",
   "theEternalWar"

@@ -1201,7 +1201,7 @@ const THRONE_OF_THE_ETERNAL = {
   roomName: "Throne of the Eternal",
   description: "",
   backgroundImage: "styles/images/backgrounds/event-rooms/eternal-throne.jpg",
-  music: finalBrigade,
+  music: birthOfaKnight,
   contents: {
     monsters: [],
     items: [],

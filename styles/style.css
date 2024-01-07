@@ -1342,14 +1342,6 @@ progress[value]::-moz-progress-bar {
   gap: 5px;
 }
 
-/* .big-item {
-  height: 70px;
-}
-
-.small-item {
-  height: 58px;
-} */
-
 .consumables-box h4 {
   height: 10%;
   margin: 1vh 1vh 0vh 1vh;
@@ -1501,17 +1493,12 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  /* width: 60%;
-  height: 56%; */
   width: 720px;
   height: 520px;
-  /* overflow: auto; */
   padding: 10px;
 }
 
 .trade-modal-content button {
-  /* justify-self: end; 
-  grid-column: 2; */
   position: absolute;
   top: 0%;
   right: 0%;
@@ -1523,9 +1510,6 @@ progress[value]::-moz-progress-bar {
   bottom: 0;
   right: 0%;
   margin-right: 20px;
-  /* text-align: start; 
-  margin-left: 30px;
-  grid-column: 1; */
 }
 
 .trade-modal-bottom {
@@ -1542,7 +1526,6 @@ progress[value]::-moz-progress-bar {
 .trader-items {
   height: 100%;
   width: 30%;
-  /* border-right: 2px solid var(--header); */
 }
 
 .player-items {

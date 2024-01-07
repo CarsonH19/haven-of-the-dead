@@ -565,8 +565,7 @@ function isGameOver(ending) {
 
       case "GOOD":
         backgroundImage.style.backgroundImage = `url(styles/images/backgrounds/good-ending.jpg)`;
-        // gameOverTitle.textContent = ``;
-        // playMusic(); !FIX! add music
+        playMusic(returnOfTheFallen);
         playMusic(theEndOfTheWorld);
         writeToLogEvent(LOG_MISC_DESCRIPTION, "YES", "GOOD ENDING");
         break;
@@ -574,19 +573,14 @@ function isGameOver(ending) {
       case "BAD":
         if (heroChoice === "PALADIN") {
           backgroundImage.style.backgroundImage = `url(styles/images/siggurd-bad-ending.jpg)`;
-          playMusic(theEndOfTheWorld);
         } else if (heroChoice === "ROGUE") {
-          writeToLogEvent(LOG_MISC_DESCRIPTION, "YES", "BAD ENDING");
-          playMusic(theEndOfTheWorld);
         } else if (heroChoice === "PRIESTESS") {
           backgroundImage.style.backgroundImage = `url(styles/images/liheth-bad-ending.jpg)`;
-          playMusic(theEndOfTheWorld);
         }
 
-        // playMusic(); !FIX! add music
-        break;
+        playMusic(theEndOfTheWorld);
 
-      default:
+        break;
     }
 
     darkenBackground();
@@ -599,7 +593,11 @@ function isGameOver(ending) {
           fade.style.opacity = "1";
         }, 950);
 
-        writeToLogEvent(LOG_MISC_DESCRIPTION, "YES", "BAD ENDING");
+        if (ending === "GOOD") {
+          writeToLogEvent(LOG_MISC_DESCRIPTION, "YES", "GOOD ENDING");
+        } else if (ending === "BAD") {
+          writeToLogEvent(LOG_MISC_DESCRIPTION, "YES", "BAD ENDING");
+        }
       }, 6000);
     }
   }
