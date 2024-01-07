@@ -1311,37 +1311,53 @@ progress[value]::-moz-progress-bar {
   margin: 1vh 1vh 0vh 1vh;
 }
 
-.magic-items {
+/* .magic-items {
   margin: 0.5vh;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); 
-}
+} */
 
 .consumables-box {
   text-align: left;
   height: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 .consumables div, 
 .magic-items div {
   aspect-ratio: 1;
   flex-direction: column-reverse;
-  margin: 10px;
   box-sizing: border-box; 
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 58px;
 }
 
-.consumables {
-  margin: 0.5vh;
-  display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); /* Set the minimum column width to 150px, but allow them to grow */
+.consumables, 
+.magic-items {
+  margin: 0px;
+  margin-left: 5px;
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: center;
+  gap: 5px;
 }
 
+/* .big-item {
+  height: 70px;
+}
+
+.small-item {
+  height: 58px;
+} */
 
 .consumables-box h4 {
+  height: 10%;
   margin: 1vh 1vh 0vh 1vh;
 }
 
@@ -1357,8 +1373,8 @@ progress[value]::-moz-progress-bar {
 .consumables button,
 .magic-items button {
   aspect-ratio: 1;
-  height: 70;
-  width: 70px;
+  height: 100%;
+  width: 100%;
   font-family: monospace;
   font-size: 2rem;
   color: lightgray;
@@ -1390,6 +1406,15 @@ progress[value]::-moz-progress-bar {
   position: relative;
   cursor: pointer;
   z-index: 3;
+}
+
+.itemTooltip {
+  aspect-ratio: 1;
+  flex-direction: column-reverse;
+  box-sizing: border-box; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tooltipText {

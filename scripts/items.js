@@ -2108,15 +2108,19 @@ function addItemToInventory(item) {
   }
 }
 
-function renderInventory() {
-  const magicItemsBox = document.getElementById("magicItemsBox");
-  const consumablesBox = document.getElementById("consumablesBox");
-  const slotOne = document.getElementById("slotOne");
-  const slotTwo = document.getElementById("slotTwo");
-  const slotThree = document.getElementById("slotThree");
-  const slotFour = document.getElementById("slotFour");
-  const slotFive = document.getElementById("slotFive");
+const magicItemsBox = document.getElementById("magicItemsBox");
+let magicItemCounter = 0;
+const consumablesBox = document.getElementById("consumablesBox");
+const magicItemsDiv = document.querySelectorAll("#magicItemsBox div");
+const consumablesDiv = document.querySelectorAll("#consumablesBox div");
+let consumableCounter = 0;
+const slotOne = document.getElementById("slotOne");
+const slotTwo = document.getElementById("slotTwo");
+const slotThree = document.getElementById("slotThree");
+const slotFour = document.getElementById("slotFour");
+const slotFive = document.getElementById("slotFive");
 
+function renderInventory() {
   const renderedItems = {};
 
   for (let i = 0; i < inventoryItems.length; i++) {
@@ -2172,8 +2176,10 @@ function renderInventory() {
         inventoryItems[i].type === "MAGIC" ||
         inventoryItems[i].type === "MISC"
       ) {
+        magicItemCounter++;
         magicItemsBox.appendChild(itemBox);
       } else {
+        consumableCounter++;
         consumablesBox.appendChild(itemBox);
       }
     }
@@ -2262,6 +2268,33 @@ function renderInventory() {
   });
 }
 
+// function itemSizeClass() {
+//   if (magicItemCounter > 14) {
+//     magicItemsDiv.forEach(element => {
+//       element.classList.add("small-item");
+//     });
+//     magicItemsBox.style.gap = "5px";
+//   } else {
+//     magicItemsDiv.forEach(element => {
+//       element.classList.add("big-item");
+//     });    
+//     console.log('2');
+//     magicItemsBox.style.gap = "10px";
+//   }
+
+//   if (consumableCounter > 14) {
+//     consumablesDiv.forEach(element => {
+//       element.classList.add("small-item");
+//     });
+//     console.log('3');
+//     consumablesBox.style.gap = "5px";
+//   } else {
+//     consumablesDiv.style.height = "70px";
+//     console.log('70px');
+//     consumablesBox.style.gap = "10px";
+//   }
+// }
+
 // ===============================
 //        Event Listeners
 // ===============================
@@ -2270,6 +2303,7 @@ inventoryButton.addEventListener("click", () => {
   clearInventory();
   renderInventory();
   openInventoryHandler();
+  // itemSizeClass();
 });
 
 closeInventoryButton.addEventListener("click", () => {
