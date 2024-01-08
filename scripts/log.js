@@ -640,6 +640,16 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
           }
         }
       }
+
+      if (dataOne === "PASSIVE") {
+        if (heroChoice === "PALADIN") {
+          newEntry.textContent = `BOON: You've chosen Radiant Aura. Your Radiant Aura now deals ${radiantAuraTracker} damage to undead enemies at the start of battle.`;
+        } else if (heroChoice === "ROGUE") {
+          newEntry.textContent = `BOON: You've chosen Darkened Reprisal. Your Darkened Reprisal now increases your Dexterity to ${darkenedReprisalTracker * 100}% when below 30HP.`;
+        } else if (heroChoice === "PRIESTESS") {
+          newEntry.textContent = `BOON: You've chosen Burning Devotion. Your attacks now deal a minimum.of ${burningDevotionTracker} damage.`;
+        }
+      }
       break;
 
     case LOG_STAT_INCREASE:

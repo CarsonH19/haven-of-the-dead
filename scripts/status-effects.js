@@ -395,7 +395,7 @@ const setupStatusEffectInterval = (statusEffect) => {
 
     if (
       roomCounter >= statusEffect.statusDuration &&
-      statusEffect.duration === null &&
+      // statusEffect.duration === null && !FIX! erase?
       statusEffect !== FLICKERING_CANDLE
     ) {
       endStatusEffectInterval(statusEffect, intervalId);

@@ -96,6 +96,8 @@ function soundEffectHandler(object, type) {
       if (object === WHISPERING_SKULL) {
         // Reduces sound of evilSpell1 sound effect
         volume = 0.02;
+      } else if (object.soundEffect === ghostBreathWithReverb) {
+        volume = 0.5;
       }
 
       sound = object.soundEffect;
@@ -223,7 +225,6 @@ const basementNightmare = loadAudio(
   "basementNightmare"
 );
 // Baron of Bone Fight
-
 const birthOfaKnight = loadAudio(
   "audio/music/Birth of a Knight.mp3",
   "birthOfaKnight"

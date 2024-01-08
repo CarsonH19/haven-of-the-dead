@@ -108,7 +108,6 @@ const DARKENED_REPRISAL = {
   duration: null,
   active: null,
   intervalId: null, // new property to store the interval ID
-
   function: () => {
     DARKENED_REPRISAL.duration = "Active";
 
@@ -116,10 +115,9 @@ const DARKENED_REPRISAL = {
       DARKENED_REPRISAL.intervalId = setInterval(() => {
         if (DARKENED_REPRISAL.active === "NO") {
           DARKENED_REPRISAL.duration = null;
-          writeToLogHero(LOG_DARKENED_REPRISAL, "YES", "DISABLE");
-          clearInterval(DARKENED_REPRISAL.intervalId);
           DARKENED_REPRISAL.intervalId = null; // reset interval ID
-          updateTotalStats();
+          clearInterval(DARKENED_REPRISAL.intervalId);
+          writeToLogHero(LOG_DARKENED_REPRISAL, "YES", "DISABLE");
           console.log("Darkened Reprisal Interval");
         }
       }, 3000);
@@ -550,7 +548,7 @@ function renderHeroStatsModal() {
   heroCritHitChance.textContent = `${critHitPercentage}%`;
   // Guard Bonus
   const heroGuardBonus = document.getElementById("heroGuardBonus");
-  heroGuardBonus.textContent = `${totalDexterity} Damage Reduction`;
+  heroGuardBonus.textContent = `${guardBonus} Damage Reduction`;
   // Flee Chance
   const heroFleeChance = document.getElementById("heroFleeChance");
   let fleeChancePercentage = (totalFaith / 10) * 100;

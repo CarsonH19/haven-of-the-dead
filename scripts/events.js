@@ -229,9 +229,7 @@ const GRAVEROBBER_EARVER_EVENT_TWO = {
 
     let currentRoomCounter = roomCounter + 5;
     let earverInterval = setInterval(() => {
-      console.log(`currentRoomCounter: ${currentRoomCounter}`);
       if (roomCounter > currentRoomCounter) {
-        console.log("Room Added");
         catacombRooms.push(GRAVEROBBER_EARVER_ROOM_THREE);
         clearInterval(earverInterval);
       }
@@ -347,6 +345,7 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
         startBattle();
         soundEffectHandler(humanLaugh25);
         writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "IVANS CACHE AMBUSH");
+        playMusic(hiddenCapacity);
       }, 2000);
     }, 2000);
   },
@@ -354,10 +353,12 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
     IVAN_THE_SCOUNDREL_EVENT_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
     useConsumable("Ivan's Cache Key");
-    currentRoom.contents.monsters.push(SCOUNDREL, SCOUNDREL, IVAN_STATS);
+    currentRoom.contents.monsters.push(IVAN_STATS, SCOUNDREL, SCOUNDREL);
     currentRoom.contents.items.push(LAUGHING_COFFIN_COIN, LAUGHING_COFFIN_COIN);
     setRoomSummary();
     startBattle();
+    soundEffectHandler(humanLaugh25);
+    playMusic(hiddenCapacity);
     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
   },
 };
@@ -725,7 +726,6 @@ function itemRobberyRemoval() {
     const randomItemIndex = Math.floor(Math.random() * inventoryItems.length);
     const stolenItem = inventoryItems.splice(randomItemIndex, 1)[0];
     writeToLogOther(LOG_OTHER, null, stolenItem.name, "ITEMS STOLEN");
-    console.log(stolenItem.name);
   }
 }
 
@@ -793,7 +793,6 @@ const LAUGHING_COFFIN_EVENT = {
       setRoomSummary();
     } else {
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "LIAR");
-      console.log("NO COIN!");
       patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
       setRoomSummary();
       startBattle();
@@ -878,7 +877,6 @@ const BATTLEFIELD = {
     FALLEN_WARRIORS_VALE.contents.monsters.push(UNDYING_WARBAND);
 
     if (BATTLEFIELD.blade === null) {
-      console.log("BLADE ADDED");
       FALLEN_WARRIORS_VALE.contents.items.push(GLORYFORGED_BLADE);
     }
 
@@ -1244,7 +1242,6 @@ function generalEventHandler(option, statModifier, attribute) {
     }, 1900);
 
     if (npcImageCard.style.display === "block") {
-      console.log("BLOCK");
       fadeOutAnimation(npcImageCard);
       setTimeout(() => {
         npcImageCard.style.display = "none";

@@ -214,9 +214,10 @@ let guardReady = "YES";
 function calculateGuardBonus() {
   guardBonus = totalDexterity;
 
+  console.log(guardBonus);
   // ITEM - Tombguard: +3 Guard Bonus
   guardBonus += isItemAttuned(TOMBGUARD, 0);
-
+  console.log(guardBonus);
   return guardBonus;
 }
 
@@ -246,6 +247,7 @@ function calculateItemFindChance() {
 
 // Experience Modifier
 let experienceModifier;
+
 function calculateExperienceModifier() {
   experienceModifier = totalFaith * 0.2 + 1;
   return experienceModifier;
@@ -331,6 +333,8 @@ function updateTotalStats() {
   }
 
   updatePlayerTrackers();
+
+  console.log(`updateTotalStats Called`);
 }
 
 // ===============================

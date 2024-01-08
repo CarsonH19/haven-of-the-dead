@@ -962,10 +962,8 @@ const TOMBGUARD = {
   function: () => {
     // add shield soundEffect? hero.soundEffects.guard = sound;
     // writeToLogItem(LOG_ITEM, null, TOMBGUARD); !FIX!
+    console.log(`TOMBGUARD`)
     return 5;
-  },
-  unequip: () => {
-    // removed shield soundEffect? hero.soundEffects.guard = old sound;
   },
 };
 
@@ -1969,7 +1967,7 @@ function useConsumable(consumable) {
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
 
-    if (itemObject.type === "CONSUMABLE") {
+    if (itemObject.type === "CONSUMABLE" && itemObject.name !== "Ivan's Cache Key") {
       writeToLogItem(LOG_CONSUMABLE, "YES", itemObject);
     }
   }
@@ -2086,7 +2084,7 @@ function closeInventoryHandler() {
 
   soundEffectHandler(cameraIntoBag);
   calculatePlayerMaxHealth();
-  updatePlayerTrackers();
+  updateTotalStats();
 }
 
 function clearInventory() {

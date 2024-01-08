@@ -361,7 +361,7 @@ function guardHandler(bonus) {
   }
 
   let damageBlocked = Math.round(Math.random() * damageToGuard);
-  damageBlocked += totalDexterity;
+  damageBlocked += guardBonus;
 
   let damageTaken = damageToGuard - damageBlocked;
 
@@ -720,15 +720,15 @@ function renderCurrentRoom(currentRoom) {
     }, 3000);
   }
 
-  // Check if room is empty then renders continue button
-  setTimeout(() => {
-    if (
-      currentRoom.contents.monsters.length === 0 &&
-      currentRoom.contents.events === null
-    ) {
-      renderContinueButton();
-    }
-  }, 5000);
+  // // Check if room is empty then renders continue button
+  // setTimeout(() => {
+  //   if (
+  //     currentRoom.contents.monsters.length === 0 &&
+  //     currentRoom.contents.events === null
+  //   ) {
+  //     renderContinueButton();
+  //   }
+  // }, 5000);
 
   turnOffControls();
   specialCooldownHandler();

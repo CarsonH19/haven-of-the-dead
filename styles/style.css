@@ -414,6 +414,11 @@ li, ul {
 }
 
 .narrative-text {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  width: 70%;
   list-style-type: none;
   font-size: 1.4rem;
   pointer-events: none;
@@ -1161,10 +1166,10 @@ progress[value]::-moz-progress-bar {
 }
 
 .event {
-  position: fixed;
+  position: absolute;
   z-index: 1;
   left: 50%;
-  top: 55%;
+  top: 60%;
   transform: translate(-50%, -50%);
 }
 
@@ -1305,10 +1310,11 @@ progress[value]::-moz-progress-bar {
   border-top: 2px solid var(--header);
   border-bottom: 2px solid var(--header);
   z-index: 1;
+  padding: 5px;
 }
 
 .magic-items-box h4 {
-  margin: 1vh 1vh 0vh 1vh;
+  margin: 5px;
 }
 
 .consumables-box {
@@ -1316,6 +1322,7 @@ progress[value]::-moz-progress-bar {
   height: 50%;
   display: flex;
   flex-direction: column;
+  padding: 5px;
 }
 
 .consumables div, 
@@ -1344,7 +1351,7 @@ progress[value]::-moz-progress-bar {
 
 .consumables-box h4 {
   height: 10%;
-  margin: 1vh 1vh 0vh 1vh;
+  margin: 5px;
 }
 
 .item-counter {
