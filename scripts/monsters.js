@@ -142,7 +142,6 @@ const CRYPT_FIEND = {
   },
 };
 
-
 // ===============================
 //           Skeletons
 // ===============================
@@ -384,7 +383,6 @@ function endBaronofBoneBoss() {
     currentMonsterHealth <= 0
   ) {
     setTimeout(() => {
-      newRoomAnimation();
       setTimeout(() => {
         isGameOver("GOOD ENDING");
       }, 2000);
@@ -794,25 +792,26 @@ function checkForMonsters() {
   // ITEM - Bone Amalgum: Adds temporary HP
   boneAmalgamAddHitPoints();
 
-  // Check Baron's Health before shift
-  endBaronofBoneBoss();
-
-  // Removes Monster From Rooms Monsters Array
-  monster.shift();
-
-  // Used to change the room after defeating a boss
-  endBattlefieldEvent();
-  endBonevaultDemonBoss();
-  endFloodOfBonesBoss();
-
-  // Checks for more monsters
-  if (monster.length > 0) {
-    startBattle();
+  if (monster[0] === BARON_OF_BONE) {
+    // Check Baron's Health before shift
+    endBaronofBoneBoss();
   } else {
-    attackCounter = 0; // Item: Soulreaver
-    setTimeout(renderRoomSummaryModal, 5000);
-  }
+    // Removes Monster From Rooms Monsters Array
+    monster.shift();
 
+    // Used to change the room after defeating a boss
+    endBattlefieldEvent();
+    endBonevaultDemonBoss();
+    endFloodOfBonesBoss();
+
+    // Checks for more monsters
+    if (monster.length > 0) {
+      startBattle();
+    } else {
+      attackCounter = 0; // Item: Soulreaver
+      setTimeout(renderRoomSummaryModal, 5000);
+    }
+  }
   setControlsInterval("STOP");
 }
 
@@ -898,6 +897,13 @@ function monsterAbilityHandler(monster) {
         const cursedChance = Math.floor(Math.random() * 20) + 1;
         if (cursedChance >= 20) {
           CULTIST.function();
+        }
+        break;
+
+      case CRYPT_FIEND:
+        const fiendBurnChance = Math.floor(Math.random() * 10) + 1;
+        if (fiendBurnChance >= 10) {
+          CRYPT_FIEND.function();
         }
         break;
 

@@ -153,38 +153,6 @@ const CHILLED = {
 };
 
 // ===============================
-//    Permanent Status Effects
-// ===============================
-
-// const FIENDSWORN = {
-//   name: "Fiendsworn",
-//   image: "styles/images/items/fiendsworn.jpg",
-//   status: "You have become sworn to a demonic entity.",
-//   active: null,
-//   function: () => {
-//     if (FIENDSWORN.active === null) {
-//       FIENDSWORN.active = "Permanent";
-//       statusEffectHandler(FIENDSWORN);
-//       renderStatusEffects(FIENDSWORN);
-//     }
-//   },
-// };
-
-// const BRANDED = {
-//   name: "Branded",
-//   image: "styles/images/items/branded.jpg",
-//   status: "You have been branded by a demonic entity.",
-//   active: null,
-//   function: () => {
-//     if (BRANDED.active === null) {
-//       BRANDED.active = "Permanent";
-//       statusEffectHandler(BRANDED);
-//       renderStatusEffects(BRANDED);
-//     }
-//   },
-// };
-
-// ===============================
 //     Misc. Status Effects
 // ===============================
 
@@ -500,51 +468,6 @@ function statusEffectHandler(item) {
       } else {
         return 1;
       }
-
-    // case BLACKHEART_BREW:
-    //   break;
-
-    // case POISONED:
-    //   break;
-
-    // case HAUNTED:
-    //   break;
-
-    // case DISEASED:
-    //   break;
-
-    // case WEBBED:
-    //   break;
-
-    // case CHILLED:
-    //   break;
-
-    // case FIENDSWORN:
-    //   if (FIENDSWORN.active !== null) {
-    //     if (
-    //       currentRoom.contents.monsters[0] === CULTIST ||
-    //       currentRoom.contents.monsters[0] === FIENDSWORN_CULTIST
-    //     ) {
-    //       fadeOutAnimation(monsterContainer);
-    //       setTimeout(() => {
-    //         checkForMonsters();
-    //         monsterContainer.style.display = "none";
-    //       }, 2000);
-    //       writeToLogItem(LOG_STATUS, "YES", FIENDSWORN);
-    //     }
-    //   }
-    //   break;
-
-    // case BRANDED:
-    //   if (roomMonsters[0].length > 0 && BRANDED.active !== null) {
-    //     let randomDemon = Math.round(Math.random() * 6);
-
-    //     if (randomDemon >= 6) {
-    //       roomMonsters.unshift(DEMON);
-    //       writeToLogItem(LOG_STATUS, "YES", BRANDED);
-    //     }
-    //   }
-    //   break;
 
     default:
       break;

@@ -397,92 +397,6 @@ function ivansRevengeTracker() {
   }
 }
 
-// const SCHOLAR_HENDRA = {
-//   name: "Scholar Hendra",
-//   eventType: "NPC",
-//   description:
-//     "Upon a bone-forged altar, a desperate woman struggles to shield her grimoire from encroaching skeletal horrors. Her cries for help echo through the chamber. Will you aid her in vanquishing the undead horde or ignore her cries?",
-//   optionOne: "Help",
-//   optionTwo: "Ignore",
-//   functionOne: () => {
-//     currentRoom.contents.monsters.push(
-//       DECREPIT_SKELETON,
-//       SKELETAL_SOLDIER,
-//       SKELETAL_SOLDIER,
-//       DECREPIT_SKELETON
-//     );
-//     (currentRoom.description =
-//       "After vanquishing the skeletal horde, Hendra rewards your valor with two precious health potions, then mysteriously fades into the catacombs, her grimoire clutched tightly, leaving you with a sense of foreboding."),
-//       currentRoom.contents.items.push(POTION, POTION);
-//     setRoomSummary();
-//     startBattle();
-//     monsterAttackHandler();
-//     writeToLogEvent(LOG_NPC_OPTION_ONE, "YES");
-//   },
-//   functionTwo: () => {
-//     currentRoom.contents.monsters.push(
-//       DECREPIT_SKELETON,
-//       SKELETAL_SOLDIER,
-//       SKELETAL_SOLDIER,
-//       DECREPIT_SKELETON
-//     );
-//     (currentRoom.description =
-//       "After defeating the skeletal horde, you discover Hendra's lifeless form, her fingers tightly clasping a mysterious grimiore. With solemn determination, you claim the coveted relic as your own."),
-//       currentRoom.contents.items.push(DEMONIC_GRIMOIRE);
-//     setRoomSummary();
-//     startBattle();
-//     writeToLogEvent(LOG_NPC_OPTION_TWO, "YES");
-//   },
-// };
-
-// const SCHOLAR_HENDRA_EVENT_TWO = {
-//   name: "Scholar Hendra's Plan",
-//   eventType: "NPC",
-//   description: "",
-//   optionOne: "Help",
-//   optionTwo: "Ignore",
-//   functionOne: () => {},
-//   functionTwo: () => {},
-// };
-
-// const SUMMONING_MORGRIMM = {
-//   name: "Morgrimm the Malignant",
-//   eventType: "MISC",
-//   description:
-//     "Upon entering the summoning chamber, the grimoire hovers hovers from your possesion an opens itself on a pedistal nearby.",
-//   optionOne: "Read",
-//   optionTwo: "Refuse",
-//   functionOne: () => {
-//     SUMMONING_MORGRIMM.description =
-//       "You summon Morgrimm and become Fiendsworn.";
-//     // can no longer benefit from Candlelight Shrines
-//     FIENDSWORN_CULTIST.function();
-//     // Remove Cursed Grimoire
-//     const index = attunedItems.indexOf(DEMONIC_GRIMOIRE);
-//     inventoryItems.splice(index, 1);
-//     setRoomSummary();
-//     writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
-//   },
-//   functionTwo: () => {
-//     SUMMONING_MORGRIMM.description =
-//       "You refuse to summon Morgrimm and become Branded.";
-//     // become branded and demons begin to follow you
-//     // must fight fiendsworn_cultists
-//     // Remove Cursed Grimoire
-//     BRANDED.function();
-//     const index = attunedItems.indexOf(DEMONIC_GRIMOIRE);
-//     inventoryItems.splice(index, 1);
-//     currentRoom.contents.monsters.push(
-//       FIENDSWORN_CULTIST,
-//       FIENDSWORN_CULTIST,
-//       FIENDSWORN_CULTIST
-//     );
-//     setRoomSummary();
-//     startBattle();
-//     writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
-//   },
-// };
-
 const FORSAKEN_COMMANDER = {
   name: "Forsaken Commander",
   eventType: "NPC",
@@ -940,8 +854,7 @@ const JOIN_THE_BARON = {
   functionOne: () => {
     setTimeout(() => {
       isGameOver("BAD ENDING");
-    }, 5000);
-    // playMusic(mazeHeist);
+    }, 7000);
     writeToLogEvent(LOG_MISC_OPTION_ONE, "YES");
   },
   functionTwo: () => {

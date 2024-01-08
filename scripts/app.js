@@ -536,10 +536,6 @@ function isGameOver(ending) {
   }
 
   function renderGameOverModal(ending) {
-    const gameOverTitle = document.getElementById("gameOverTitle");
-    const gameOverModalText = document.getElementById("gameOverText");
-    // !FIX! Add ending text to explain story
-
     if (ending === "DEAD") {
       openGameOverModal();
       playMusic(theEndOfTheWorld);
@@ -564,19 +560,19 @@ function isGameOver(ending) {
     switch (ending) {
       case "DEAD":
         playMusic(theEndOfTheWorld);
+        clearNarrative();
         break;
 
       case "GOOD":
         backgroundImage.style.backgroundImage = `url(styles/images/backgrounds/good-ending.jpg)`;
         playMusic(returnOfTheFallen);
-        playMusic(theEndOfTheWorld);
-        writeToLogEvent(LOG_MISC_DESCRIPTION, "YES", "GOOD ENDING");
         break;
 
       case "BAD":
         if (heroChoice === "PALADIN") {
           backgroundImage.style.backgroundImage = `url(styles/images/siggurd-bad-ending.jpg)`;
         } else if (heroChoice === "ROGUE") {
+          backgroundImage.style.backgroundImage = `url(styles/images/riven-bad-ending.jpg)`;
         } else if (heroChoice === "PRIESTESS") {
           backgroundImage.style.backgroundImage = `url(styles/images/liheth-bad-ending.jpg)`;
         }
@@ -719,16 +715,6 @@ function renderCurrentRoom(currentRoom) {
       renderEvent(currentRoom.contents.events);
     }, 3000);
   }
-
-  // // Check if room is empty then renders continue button
-  // setTimeout(() => {
-  //   if (
-  //     currentRoom.contents.monsters.length === 0 &&
-  //     currentRoom.contents.events === null
-  //   ) {
-  //     renderContinueButton();
-  //   }
-  // }, 5000);
 
   turnOffControls();
   specialCooldownHandler();
