@@ -1941,7 +1941,7 @@ function fadeInAnimation(element) {
   }, 1000);
 }
 
-function fadeOutAnimation(element, time) {
+function fadeOutAnimation(element, time = 2000) {
   const displayTime = time + 1900;
   setTimeout(() => {
     element.style.animation = "fade-out 2s";

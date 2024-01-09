@@ -843,9 +843,6 @@ function togglePlayerControls() {
     currentPlayerHealth > 0
   ) {
     fadeOutAnimation(controlsContainer);
-    setTimeout(() => {
-      controlsContainer.style.display = "none";
-    }, 1500);
   } else {
     fadeInAnimation(controlsContainer);
     setTimeout(() => {
