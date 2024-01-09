@@ -525,14 +525,30 @@ function isGameOver(ending) {
     isItemAttuned(BLOODSTONE, null);
     soundEffectHandler(monster, "MONSTER DEATH");
     gainExperience(currentRoom.contents.monsters[0].skulls);
-    fadeOutAnimation(monsterContainer);
-    fadeOutAnimation(monsterImage);
+
+    if (monsterImageCard.style.display === "block") {
+      fadeOutAnimation(monsterImageCard);
+      monsterImageCard.style.display = "none";
+    }
+
+    if (npcImageCard.style.display === "block") {
+      fadeOutAnimation(npcImageCard);
+      npcImageCard.style.display = "none";
+    }
 
     setTimeout(() => {
       checkForMonsters();
       monsterContainer.style.display = "none";
-      monsterImage.style.display = "none";
     }, 2000);
+  }
+
+  if (
+    currentRoom.contents.monsters.length === 0 &&
+    currentMonsterHealth <= 0 &&
+    playerImageCard.style.display === "block"
+  ) {
+    fadeOutAnimation(playerImageCard);
+    console.log("Player Image Fade Out");
   }
 
   function renderGameOverModal(ending) {

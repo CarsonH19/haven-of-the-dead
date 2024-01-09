@@ -173,16 +173,61 @@ li, ul {
 
 /* NPC IMAGE CARD */
 
+/* CHANGED */
 #npcImageCard {
+  aspect-ratio: 1;
   display: none;
   position: absolute;
   left: 50%; /* Center horizontally */
   top: 25%; /* Center vertically */
-  transform: translate(-50%, -70%); 
-  width: 200px;
-  height: 200px;
+  transform: translate(-50%, -50%); 
+  height: 20vh;
   border: 2px solid var(--header);
   border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#monsterImageCard {
+  aspect-ratio: 1;
+  display: none;
+  position: absolute;
+  left: 50%; /* Center horizontally */
+  top: 140%; /* Center vertically */
+  transform: translate(-50%, -50%); 
+  height: 20vh;
+  border: 2px solid var(--header);
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#playerImageCard {
+  aspect-ratio: 1;
+  height: 20vh;
+  display: none;
+  position: absolute;
+  left: 50%; /* Center horizontally */
+  bottom: 80%; /* Center vertically */
+  transform: translate(-50%, -50%); 
+  border: 2px solid var(--header);
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#ImageCard {
+  aspect-ratio: 1;
+  display: none;
+  position: absolute;
+  right: 50%; /* Center horizontally */
+  bottom: 140%; /* Center vertically */
+  transform: translate(-50%, -50%); 
+  height: 20vh;
+  border: 2px solid var(--header);
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .top-right {
@@ -194,29 +239,17 @@ li, ul {
   max-height: 125px;
 }
 
-.monster-image {
-  aspect-ratio: 1;
-  height: 100%;
-  border: 4px solid var(--accent);
-  border-right: none;
-  /* background-image: url(images/skull-texture.jpg); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: overlay;
-}
-
 .monster-container {
   display: flex;
   flex-direction: column;
   align-self: flex-end;
   justify-content: space-between;
-  width: 100%;
   width: 350px;
-  max-width: 40vw;
+  max-width: 70%;
   height: 100%;
-  border: 4px solid var(--accent);
+  /* border: 4px solid var(--accent);
   background-color: var(--background);
-  background-image: url(images/skull-texture.jpg);
+  background-image: url(images/skull-texture.jpg); */
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
@@ -224,22 +257,23 @@ li, ul {
 }
 
 
-.monster-display {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 30%;
-}
-
-.monster-display h3,
-.monster-display h2 {
+#monsterName {
   margin: 0px;
   padding: 0px;
   font-size: 1.2rem;
 }
 
-.monster-display h2 {
-  font-size: 2.0rem;
+.monster-health-bar {
+  margin: 0px;
+  padding: 0px;
+}
+
+.monster-stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px;
+  margin-top: 10px;
+  margin-bottom: -5px;
 }
 
 .monster-container progress {
@@ -309,33 +343,13 @@ li, ul {
   transition: transform 0.3s ease-in-out;
 }
 
-.damage-dealt-box {
-  width: 20%;
-  min-width: 200px;
-  height: 1%;
-  align-self: flex-end;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.damage-dealt-box .damage {
-  margin-top: 2vh;
-}
-
+.damage-dealt-box, 
 .damage-received-box {
-  width: 33%;
-  min-width: 300px;
-  height: 1%;
-  align-self: flex-start;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction:column;
   justify-content: center;
   align-items: center;
-}
-
-.damage-received-box .damage {
-  margin-bottom: 18vh;
-  margin-right: 40px;
 }
 
 .damage {

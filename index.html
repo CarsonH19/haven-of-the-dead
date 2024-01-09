@@ -333,31 +333,32 @@
       <audio id="myAudio" src=""></audio>
       <!-- <div id="fade"></div> -->
       <div class="game-window">
+        <div id="npcImageCard"></div>
         <div id="backgroundImage">
           <div class="top-content">
             <div class="name-and-counter">
               <h2 id="catacombRoomName"></h2>
               <h4 id="roomsCleared">Rooms Cleared: 0</h4>
             </div>
-            <div id="npcImageCard"></div>
             <div id="topRight" class="top-right">
-              <div id="monsterImage" class="monster-image"></div>
               <div id="monsterContainer" class="monster-container">
-                <div class="monster-display">
-                  <h3 id="monster-name">Monster</h3>
-                  <!-- <h2 id="skull-level"></h2> -->
-                </div>
                 <div class="monster-health-bar">
-                  <p>HP: <span><span id="monsterCurrentHP">0</span> / <span
-                    id="monsterMaxHP">0</span></p>
+                  <h3 id="monsterName">Monster</h3>
+                  <div class="divider"></div>
+                  <div class="monster-stats">
+                    <p>HP: <span><span id="monsterCurrentHP">0</span> / <span
+                      id="monsterMaxHP">0</span></p>
+                    <p>Lvl: <span id="monsterLevel">0</span></p>
+                  </div>
                   <progress id="monster-health" max="100" value="100">100%</progress>
+                </div>
+                <div id="monsterImageCard">
+                  <div class="damage-dealt-box">
+                    <ul id="damageDealt" class="damage"></ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="damage-dealt-box">
-            <ul id="damageDealt" class="damage"></ul>
-          </div>
           <div class="middle-content">
             <div class="middle-left"></div>
             <div class="middle-center">
@@ -375,6 +376,11 @@
           </div>
           <div class="bottom-content">
             <div id="playerContainer" class="player-container">
+              <div id="playerImageCard">
+                <div class="damage-received-box">
+                  <ul id="damageReceived" class="damage"></ul>
+                </div>
+              </div>
               <div>
                 <h3 id="playerName"></h3>
                 <div class="divider"></div>
