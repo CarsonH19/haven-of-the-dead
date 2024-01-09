@@ -809,6 +809,7 @@ function startBattle() {
 
 function checkForMonsters() {
   const monster = currentRoom.contents.monsters;
+  
   // Checks for Legionnaire / Adds to Legion Tracker
   if (monster[0] === LEGIONNAIRE) {
     legionTracker++;
