@@ -1935,12 +1935,21 @@ function removeEventDescriptionLog() {
 
 function fadeInAnimation(element) {
   element.style.animation = "fade-in 1s";
+
+  setTimeout(() => {
+    element.style.display = "block";
+  }, 1000);
 }
 
 function fadeOutAnimation(element, time) {
+  const displayTime = time + 1900;
   setTimeout(() => {
     element.style.animation = "fade-out 2s";
   }, time);
+
+  setTimeout(() => {
+    element.style.display = "none";
+  }, displayTime);
 }
 
 function checkLogSize() {

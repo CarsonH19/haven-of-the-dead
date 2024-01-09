@@ -47,9 +47,6 @@ const npcImageCard = document.getElementById("npcImageCard");
 const monsterContainer = document.getElementById("monsterContainer");
 monsterContainer.style.display = "none";
 
-const monsterImage = document.getElementById("monsterImage");
-monsterImage.style.display = "none";
-
 // ===============================
 //     Catacomb Entrance Modal
 // ===============================

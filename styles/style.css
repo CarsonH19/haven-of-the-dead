@@ -193,7 +193,7 @@ li, ul {
   display: none;
   position: absolute;
   left: 50%; /* Center horizontally */
-  top: 140%; /* Center vertically */
+  top: 150%; /* Center vertically */
   transform: translate(-50%, -50%); 
   height: 20vh;
   border: 2px solid var(--header);
@@ -239,13 +239,24 @@ li, ul {
   max-height: 125px;
 }
 
+/* .monster-image {
+  aspect-ratio: 1;
+  height: 100%;
+  border: 4px solid var(--accent);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+} */
+
 .monster-container {
-  display: flex;
+  position: relative;
+  display: block;
   flex-direction: column;
   align-self: flex-end;
   justify-content: space-between;
+  max-width: 100%;
   width: 350px;
-  max-width: 70%;
+  /* max-width: 40vw; */
   height: 100%;
   /* border: 4px solid var(--accent);
   background-color: var(--background);
@@ -256,6 +267,13 @@ li, ul {
   padding: 10px;
 }
 
+
+/* .monster-display {
+  display: flex;
+  justify-content: space-b;
+  width: 100%;
+  height: 30%;
+} */
 
 #monsterName {
   margin: 0px;
@@ -343,8 +361,7 @@ li, ul {
   transition: transform 0.3s ease-in-out;
 }
 
-.damage-dealt-box, 
-.damage-received-box {
+.damage-dealt-box, .damage-received-box {
   width: 100%;
   height: 100%;
   display: flex;
@@ -415,10 +432,10 @@ li, ul {
   height: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
-  gap: 5px;
+  /* gap: 5px; */
   z-index: 1;
 }
 
@@ -429,10 +446,7 @@ li, ul {
 
 .narrative-text {
   position: absolute;
-  left: 50%;
-  top: 45%;
-  transform: translate(-50%, -50%);
-  width: 70%;
+  width: 50%;
   list-style-type: none;
   font-size: 1.4rem;
   pointer-events: none;
@@ -472,6 +486,7 @@ li, ul {
 }
 
 .player-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -689,8 +704,8 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  width: 720px;
-  height: 520px;
+  width: 35vw;
+  height: 65vh;
   overflow: auto;
   padding: 10px;
 }
@@ -711,8 +726,8 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  width: 720px;
-  height: 520px;
+  width: 35vw;
+  height: 65vh;
   overflow: auto;
   padding: 20px;
 }
@@ -957,9 +972,8 @@ progress[value]::-moz-progress-bar {
   position: fixed;
   top: 0;
   left: 0;
-  /* transform: translate(-50%, -50%); */
-  width: 100vw;
-  /* height: 100vh; */
+  min-width: 100%;
+  min-height: 100%;
   z-index: -1;
 }
 
@@ -969,6 +983,7 @@ progress[value]::-moz-progress-bar {
   align-items: center;
   flex-direction: column;
   text-align: left;
+
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -1058,8 +1073,8 @@ progress[value]::-moz-progress-bar {
   border-radius: 10px;
   /* width: 60%;
   height: 56%; */
-  width: 720px;
-  height: 520px;
+  width: 35vw;
+  height: 65vh;
   overflow: auto;
   padding: 20px;
 }
@@ -1180,10 +1195,10 @@ progress[value]::-moz-progress-bar {
 }
 
 .event {
-  position: absolute;
+  position: fixed;
   z-index: 1;
   left: 50%;
-  top: 60%;
+  top: 70%;
   transform: translate(-50%, -50%);
 }
 
@@ -1222,8 +1237,8 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto;
   border: 3px solid #888;
   border-radius: 10px;
-  width: 720px;
-  height: 520px;
+  width: 35vw;
+  height: 65vh;
 }
 
 .inventory-modal-content h2 {
@@ -1281,7 +1296,7 @@ progress[value]::-moz-progress-bar {
 .attuned-box {
   text-align: center;
   border-top: 2px solid var(--header);
-  height: auto;
+  height: 90%;
 }
 
 .attuned-box h4 {
@@ -1294,7 +1309,7 @@ progress[value]::-moz-progress-bar {
   justify-content: space-between;
   align-items: center;
   gap: 5px;
-  height: 90%;
+  height: 100%;
 }
 
 .slots div {
@@ -1324,48 +1339,44 @@ progress[value]::-moz-progress-bar {
   border-top: 2px solid var(--header);
   border-bottom: 2px solid var(--header);
   z-index: 1;
-  padding: 5px;
 }
 
 .magic-items-box h4 {
-  margin: 5px;
+  margin: 1vh 1vh 0vh 1vh;
+}
+
+.magic-items {
+  margin: 0.5vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); 
 }
 
 .consumables-box {
   text-align: left;
   height: 50%;
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
 }
 
 .consumables div, 
 .magic-items div {
   aspect-ratio: 1;
   flex-direction: column-reverse;
+  margin: 10px;
   box-sizing: border-box; 
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
-  height: 58px;
 }
 
-.consumables, 
-.magic-items {
-  margin: 0px;
-  margin-left: 5px;
-  height: 90%;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: flex-start;
-  gap: 5px;
+.consumables {
+  margin: 0.5vh;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); /* Set the minimum column width to 150px, but allow them to grow */
 }
+
 
 .consumables-box h4 {
-  height: 10%;
-  margin: 5px;
+  margin: 1vh 1vh 0vh 1vh;
 }
 
 .item-counter {
@@ -1380,8 +1391,8 @@ progress[value]::-moz-progress-bar {
 .consumables button,
 .magic-items button {
   aspect-ratio: 1;
-  height: 100%;
-  width: 100%;
+  height: 70;
+  width: 70px;
   font-family: monospace;
   font-size: 2rem;
   color: lightgray;
@@ -1413,15 +1424,6 @@ progress[value]::-moz-progress-bar {
   position: relative;
   cursor: pointer;
   z-index: 3;
-}
-
-.itemTooltip {
-  aspect-ratio: 1;
-  flex-direction: column-reverse;
-  box-sizing: border-box; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .tooltipText {
@@ -1501,7 +1503,6 @@ progress[value]::-moz-progress-bar {
 }
 
 .trade-modal-content {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -1514,23 +1515,25 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
+  /* width: 60%;
+  height: 56%; */
   width: 720px;
   height: 520px;
-  padding: 10px;
+  /* overflow: auto; */
+  padding: 0px;
 }
 
-.trade-modal-content button {
-  position: absolute;
-  top: 0%;
-  right: 0%;
-  margin: 5px;
+.trade-modal-top {
+  height: 15%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px
 }
 
-.trade-modal-content h2 {
-  position: absolute;
-  bottom: 0;
-  right: 0%;
-  margin-right: 20px;
+.trade-modal-top h2 {
+  margin: 0px;
+  text-align: center;
 }
 
 .trade-modal-bottom {
@@ -1547,6 +1550,7 @@ progress[value]::-moz-progress-bar {
 .trader-items {
   height: 100%;
   width: 30%;
+  /* border-right: 2px solid var(--header); */
 }
 
 .player-items {
@@ -1674,10 +1678,8 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid #888;
   border-radius: 10px;
-  /* width: 60%;
-  height: 56%; */
-  width: 720px;
-  height: 520px;
+  width: 35vw;
+  height: 65vh;
   overflow: auto;
   padding: 10px;
 }
@@ -1855,6 +1857,9 @@ progress[value]::-moz-progress-bar {
   0% {
     opacity: 1;
   }
+  90% {
+    opacity: 0;
+  }
   100% {
     opacity: 0;
   }
@@ -1863,6 +1868,9 @@ progress[value]::-moz-progress-bar {
 @keyframes fade-in {
   0% {
     opacity: 0;
+  }
+  90% {
+    opacity: 1;
   }
   100% {
     opacity: 1;

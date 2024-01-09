@@ -730,37 +730,40 @@ function monsterSkullLevel(level) {
   }
 }
 
-function renderPlayerImageCard(hero) {
-  if (hero === paladin) {
-    playerImageCard.style.backgroundImage = "url(styles/images/paladin.jpg)";
-  } else if (hero === rogue) {
-    playerImageCard.style.backgroundImage = "url(styles/images/rogue.jpg)";
+function togglePlayerImageCard(hero) {
+  if (currentRoom.contents.monsters.length > 0) {
+    if (hero === paladin) {
+      playerImageCard.style.backgroundImage = "url(styles/images/paladin.jpg)";
+    } else if (hero === rogue) {
+      playerImageCard.style.backgroundImage = "url(styles/images/rogue.jpg)";
+    } else {
+      playerImageCard.style.backgroundImage = "url(styles/images/priestess.jpg)";
+    }
+  
+    fadeInAnimation(playerImageCard);
+    // playerImageCard.style.display = "block";
   } else {
-    playerImageCard.style.backgroundImage = "url(styles/images/priestess.jpg)";
+    fadeOutAnimation(playerImageCard);
+    // playerImageCard.style.display = "block";
   }
-
-  fadeInAnimation(playerImageCard)
-  playerImageCard.style.display = "block";
-
 }
 
 function renderMonsterStatBlock(monster) {
   fadeInAnimation(monsterContainer);
 
   if (playerImageCard.style.display !== "block") {
-    renderPlayerImageCard(heroChecker());
+    togglePlayerImageCard(heroChecker());
     console.log("Player Image Render");
   }
 
   if (monster.boss) {
     //
   } else {
-    fadeInAnimation(monsterImage);
-    monsterImage.style.display = "block";
-    monsterImage.style.backgroundImage = `url(${monster.image})`;
+    fadeInAnimation(monsterImageCard);
+    // monsterImageCard.style.display = "block";
+    monsterImageCard.style.backgroundImage = `url(${monster.image})`;
   }
 
-  monsterContainer.style.display = "flex";
   monsterNameElement.textContent = monster.name;
 
   monsterSkullLevel(monster.skulls);
@@ -811,20 +814,20 @@ function checkForMonsters() {
     legionTracker++;
   }
 
-  // ITEM - Bone Amalgum: Adds temporary HP
-  boneAmalgamAddHitPoints();
-
   if (monster[0] === BARON_OF_BONE) {
-    // Check Baron's Health before shift
     endBaronofBoneBoss();
   } else {
-    // Removes Monster From Rooms Monsters Array
+    // ITEM - Bone Amalgum: Adds temporary HP
+    boneAmalgamAddHitPoints();
+
     monster.shift();
 
     // Used to change the room after defeating a boss
     endBattlefieldEvent();
     endBonevaultDemonBoss();
     endFloodOfBonesBoss();
+
+    togglePlayerImageCard(heroChecker());
 
     // Checks for more monsters
     if (monster.length > 0) {

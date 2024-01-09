@@ -72,6 +72,7 @@ function playerAttackHandler(smite) {
     writeToLogActions(LOG_PLAYER_MISS, "NO");
   }
 
+  console.log("ATTACK");
   damageMonster(totalDamage);
 }
 
@@ -466,12 +467,12 @@ function fleeHandler() {
     if (roomToFlee !== newRoom) {
       setTimeout(() => {
         fadeOutAnimation(monsterContainer);
-        fadeOutAnimation(monsterImage);
+        fadeOutAnimation(monsterImageCard);
         newRoomAnimation();
 
         setTimeout(() => {
           monsterContainer.style.display = "none";
-          monsterImage.style.display = "none";
+          monsterImageCard.style.display = "none";
           renderCurrentRoom(currentRoom);
         }, 2000);
       }, 5000);
@@ -517,29 +518,28 @@ function isGameOver(ending) {
   }
 
   if (
-    currentRoom.contents.monsters.length > 0 &&
     currentMonsterHealth <= 0 &&
-    monsterContainer.style.display === "flex"
+    monsterImageCard.style.display === "block" &&
+    monsterContainer.style.display === "block"
   ) {
+    fadeOutAnimation(monsterContainer);
+    fadeOutAnimation(monsterImageCard);
+    console.log("FADING OUT MONSTER");
+  }
+
+  if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {
     // ITEM: Bloodstone - Recovers health when monster dies
     isItemAttuned(BLOODSTONE, null);
     soundEffectHandler(monster, "MONSTER DEATH");
     gainExperience(currentRoom.contents.monsters[0].skulls);
 
-    if (monsterImageCard.style.display === "block") {
-      fadeOutAnimation(monsterImageCard);
-      monsterImageCard.style.display = "none";
-    }
-
-    if (npcImageCard.style.display === "block") {
-      fadeOutAnimation(npcImageCard);
-      npcImageCard.style.display = "none";
-    }
-
     setTimeout(() => {
       checkForMonsters();
-      monsterContainer.style.display = "none";
     }, 2000);
+  }
+
+  if (npcImageCard.style.display === "block") {
+    fadeOutAnimation(npcImageCard);
   }
 
   if (
@@ -778,10 +778,7 @@ function setControlsInterval(command, pauseTime) {
 }
 
 function togglePlayerControls() {
-  if (
-    currentRoom.contents.monsters.length > 0 &&
-    monsterContainer.style.display === "flex"
-  ) {
+  if (currentRoom.contents.monsters.length > 0) {
     attackBtn.disabled = false;
     guardBtn.disabled = false;
     fleeBtn.disabled = false;
@@ -793,11 +790,7 @@ function togglePlayerControls() {
   }
 
   // Checks for Guard Cooldown
-  if (
-    currentRoom.contents.monsters.length > 0 &&
-    guardReady === "YES" &&
-    monsterContainer.style.display === "flex"
-  ) {
+  if (currentRoom.contents.monsters.length > 0 && guardReady === "YES") {
     guardBtn.disabled = false;
   } else {
     guardBtn.disabled = true;
@@ -806,8 +799,7 @@ function togglePlayerControls() {
   // Checks for Special Ability Cooldown
   if (
     currentRoom.contents.monsters.length > 0 &&
-    specialCooldownCounter === 0 &&
-    monsterContainer.style.display === "flex"
+    specialCooldownCounter === 0
   ) {
     specialBtn.disabled = false;
   } else {
@@ -1062,6 +1054,7 @@ function closeRoomSummaryModal() {
   gloryforgedBladeCheck();
   forsakenCommanderCheck();
   countPotions();
+  togglePlayerImageCard(heroChecker());
 }
 
 function renderRoomSummaryModal() {
@@ -1243,20 +1236,18 @@ function renderContinueButton() {
 // ===============================
 
 attackBtn.addEventListener("click", () => {
-  if (monsterContainer.style.display === "flex") {
-    guardReady = "YES";
-    actionCounter++;
+  guardReady = "YES";
+  actionCounter++;
 
-    playerAttackHandler();
-    specialCooldownHandler();
+  playerAttackHandler();
+  specialCooldownHandler();
 
-    if (currentMonsterHealth <= 0) {
-      isGameOver();
-    } else {
-      setTimeout(monsterAttackHandler, 1200);
-      setTimeout(isGameOver, 1300);
-      updatePlayerTrackers();
-    }
+  if (currentMonsterHealth <= 0) {
+    isGameOver();
+  } else {
+    setTimeout(monsterAttackHandler, 1200);
+    setTimeout(isGameOver, 1300);
+    updatePlayerTrackers();
   }
 
   setControlsInterval("STOP");
