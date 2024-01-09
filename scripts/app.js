@@ -57,7 +57,8 @@ function playerAttackHandler(smite) {
     );
     showDamage(totalDamage, "PLAYER", "CRIT");
     soundEffectHandler(heroChecker(), "PLAYER ATTACK");
-    writeToLogActions(LOG_PLAYER_CRITICAL, "YES", totalDamage);
+    // writeToLogActions(LOG_PLAYER_CRITICAL, "YES", totalDamage);
+    writeToLogActions(LOG_PLAYER_ATTACK, "NO", totalDamage);
     // Normal Hit
   } else if (playerToMonsterDamage > 0) {
     totalDamage = playerToMonsterDamage;

@@ -715,7 +715,7 @@ progress[value]::-moz-progress-bar {
 .catacomb-entrance-modal-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   text-align: left;
   gap: 10px;
   background-color: var(--background);
@@ -769,7 +769,7 @@ progress[value]::-moz-progress-bar {
 .hero-choice-modal-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   text-align: left;
   gap: 50px;
   margin: 0px;
@@ -777,7 +777,7 @@ progress[value]::-moz-progress-bar {
   /* width: 1050px;
   height: 700px; */
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   overflow: hidden;
   padding: 20px;
 }
@@ -800,8 +800,8 @@ progress[value]::-moz-progress-bar {
  .character-images .character-image {
   transition: transform 0.3s ease, background-color 0.3s ease;
   padding: 10px;
-  max-width: 310px;
-  max-height: 518px;
+  width: 18%;
+  height: 90%;
 }
 
 .character-images .character-image:hover {

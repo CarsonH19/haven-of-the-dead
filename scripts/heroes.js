@@ -108,42 +108,40 @@ const DARKENED_REPRISAL = {
   duration: null,
   active: null,
   intervalId: null, // new property to store the interval ID
-  function: () => {
-    DARKENED_REPRISAL.duration = "Active";
+  // function: () => {
+  //   DARKENED_REPRISAL.duration = "Active";
 
-    if (DARKENED_REPRISAL.intervalId === null) {
-      DARKENED_REPRISAL.intervalId = setInterval(() => {
-        if (DARKENED_REPRISAL.active === "NO") {
-          DARKENED_REPRISAL.duration = null;
-          DARKENED_REPRISAL.intervalId = null; // reset interval ID
-          clearInterval(DARKENED_REPRISAL.intervalId);
-          writeToLogHero(LOG_DARKENED_REPRISAL, "YES", "DISABLE");
-          console.log("Darkened Reprisal Interval");
-        }
-      }, 3000);
+  //   if (DARKENED_REPRISAL.intervalId === null) {
+  //     DARKENED_REPRISAL.intervalId = setInterval(() => {
+  //       if (DARKENED_REPRISAL.active === "NO") {
+  //         DARKENED_REPRISAL.duration = null;
+  //         DARKENED_REPRISAL.intervalId = null; // reset interval ID
+  //         clearInterval(DARKENED_REPRISAL.intervalId);
+  //         writeToLogHero(LOG_DARKENED_REPRISAL, "YES", "DISABLE");
+  //         console.log("Darkened Reprisal Interval");
+  //       }
+  //     }, 3000);
 
-      renderStatusEffects(DARKENED_REPRISAL);
-      updateTotalStats();
-    }
-  },
+  //     renderStatusEffects(DARKENED_REPRISAL);
+  //     updateTotalStats();
+  //   }
+  // },
 };
 
 function rogueDarkenedReprisal() {
   if (currentPlayerHealth <= 30 && heroChoice === "ROGUE") {
-    DARKENED_REPRISAL.active = "YES";
-    if (
-      DARKENED_REPRISAL.duration === null &&
-      DARKENED_REPRISAL.intervalId === null
-    ) {
-      DARKENED_REPRISAL.function();
-      updateTotalStats();
+    if (DARKENED_REPRISAL.active !== "YES") {
+      DARKENED_REPRISAL.active = "YES";
       writeToLogHero(LOG_DARKENED_REPRISAL, "YES", "ACTIVE");
+      updateTotalStats();
       console.log("Darkened Reprisal Called");
     }
   } else {
     DARKENED_REPRISAL.active = "NO";
+    updateTotalStats();
   }
 }
+//
 
 // See monsterAttackHandler for Rouge Passive Ability
 
