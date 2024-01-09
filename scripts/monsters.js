@@ -1,5 +1,7 @@
-const monsterNameElement = document.getElementById("monster-name");
+const monsterNameElement = document.getElementById("monsterName");
 const monsterSkullElement = document.getElementById("skull-level");
+const monsterImageCard = document.getElementById("monsterImageCard");
+const playerImageCard = document.getElementById("playerImageCard");
 
 // ===============================
 //            Gnawers
@@ -728,8 +730,27 @@ function monsterSkullLevel(level) {
   }
 }
 
+function renderPlayerImageCard(hero) {
+  if (hero === paladin) {
+    playerImageCard.style.backgroundImage = "url(styles/images/paladin.jpg)";
+  } else if (hero === rogue) {
+    playerImageCard.style.backgroundImage = "url(styles/images/rogue.jpg)";
+  } else {
+    playerImageCard.style.backgroundImage = "url(styles/images/priestess.jpg)";
+  }
+
+  fadeInAnimation(playerImageCard)
+  playerImageCard.style.display = "block";
+
+}
+
 function renderMonsterStatBlock(monster) {
   fadeInAnimation(monsterContainer);
+
+  if (playerImageCard.style.display !== "block") {
+    renderPlayerImageCard(heroChecker());
+    console.log("Player Image Render");
+  }
 
   if (monster.boss) {
     //
@@ -741,7 +762,6 @@ function renderMonsterStatBlock(monster) {
 
   monsterContainer.style.display = "flex";
   monsterNameElement.textContent = monster.name;
-  // monsterSkullElement.textContent = monster.skulls;
 
   monsterSkullLevel(monster.skulls);
 
@@ -752,6 +772,8 @@ function renderMonsterStatBlock(monster) {
 
   setMonsterHealth(monsterMaxHealth);
 
+  const monsterLevel = document.getElementById("monsterLevel");
+  monsterLevel.text = monster.skulls;
   monsterContainer.style.width = `${monsterMaxHealth + 350}px`;
 
   togglePlayerControls();
