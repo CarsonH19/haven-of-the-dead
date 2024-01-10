@@ -16,6 +16,11 @@
     <script src="scripts/catacomb.js" defer></script>
     <script src="scripts/heroes.js" defer></script>
     <script src="scripts/app.js" defer></script>
+
+    <script
+     src="https://kit.fontawesome.com/e705cee41a.js"
+     crossorigin="anonymous"
+   ></script>
     <title>Haven of the Dead</title>
   </head>
   <body>
@@ -51,10 +56,10 @@
               <p>Siggurd, once a devout knight, watched his homeland crumbled beneath the Great Catacomb's malevolence, twisting loved ones into undead horrors. Kindling his faith, Siggurd embraced the Holy Warrior's mantle, wielding righteous might and newfound divine fury. His quest isn't just redemption; it's a personal battle against shadows that defiled all he held dear. The weight of his past propels him through the catacombs, driven to vanquish the evil that lurks in the depths.</p>
               <div class="character-divider"></div>
               <h4>Holy Smite</h4>
-              <p><span>Special Ability:</span> Siggurd unleashes a powerful attack of divine fury.</p>
+              <p>Siggurd unleashes a powerful attack of divine fury.</p>
               <div class="character-divider"></div>
               <h4>Radiant Aura</h4>
-              <p><span>Passive Ability:</span>  Undead creatures burn in Siggurd's presence.</p>
+              <p>Undead creatures burn in Siggurd's presence.</p>
               <div class="character-divider"></div>
               <div class="character-stats">
                 <h4>Base Stats</h4>
@@ -72,10 +77,10 @@
               <p>Liheth, a devout priestess of Candlelight, was raised among the flickering flames of sacred rituals. Guided by her unwavering faith, she enters the Great Catacombs, driven by the duty to quell the rising darkness. Trained to wield divine fire, her radiant zeal becomes a weapon against the necrotic horde. Scarred by the shadows she battles, Liheth seeks to restore equilibrium between life and death, her fervent flames standing as a beacon against the undead evil that threatens to engulf the world.</p>
               <div class="character-divider"></div>
               <h4>Cleansing Flame</h4>
-              <p><span>Special Ability:</span> Liheth envelopes herself with soothing flames healing her wounds.</p>
+              <p>Liheth envelopes herself with soothing flames healing her wounds.</p>
               <div class="character-divider"></div>
               <h4>Burning Devotion</h4>
-              <p><span>Passive Ability:</span>  Liheth's attacks are guided by her devotion, always hitting their target.</p>
+              <p>Liheth's attacks are guided by her devotion, always hitting their target.</p>
               <div class="character-divider"></div>
               <div class="character-stats">
                 <h4>Base Stats</h4>
@@ -93,10 +98,10 @@
               <p> Riven, a member of the infamous Shadowcloaks, was tasked to unravel the dark magic in the Great Catacombs, Riven's nimble skills and shadow-woven tactics prove indispensable against encroaching malevolence. Amidst the awakening eternal undead, Riven emerged as an unforeseen ally, steadfastly defending against the relentless forces seeking to unleash the catacomb's ancient, unending evil.</p>
               <div class="character-divider"></div>
               <h4>Umbral Assault</h4>
-              <p><span>Special Ability:</span> Riven melds with the shadows, launching a swift and devastating barrage of shadow-infused strikes.</p>
+              <p>Riven melds with the shadows, launching a swift and devastating barrage of shadow-infused strikes.</p>
               <div class="character-divider"></div>
               <h4>Darkened Reprisal</h4>
-              <p><span>Passive Ability:</span> While critically injured, Riven's shadows are empowered increasing his Dexterity.</p>
+              <p>While critically injured, Riven's shadows are empowered increasing his Dexterity.</p>
               <div class="character-divider"></div>
               <div class="character-stats">
                 <h4>Base Stats</h4>
@@ -116,10 +121,17 @@
 
     <div id="catacombEntranceModal" class="modal">
       <div class="catacomb-entrance-modal-content">
-        <h2>Fate of the World</h2>
-        <p>In a world shrouded in shadows and haunted by the echoes of a forgotten era, a malevolent force has stirred from its ancient slumber. Legends speak of an unholy evil, dormant for centuries, awakening beneath the desolate catacomb known simply as the Great Catacomb. From its depths, an ominous energy emanates, reanimating the deceased and unleashing hordes of undead abominations upon the once-peaceful lands.</p>
-        <p>You stand at the precipice of a perilous journey. The entrance to the Great Catacomb looms before you, a foreboding gateway into the Haven of the Dead. It is said that within the catacomb's twisting passages lies the source of power threatening to consume the realm. You prepare yourself to embark on a quest into the treacherous catacombs, confront the resurrected horrors, and ultimately vanquish the ancient evil orchestrating this unholy resurgence.</p>
-        <p>The fate of the world rests upon you. The Great Catacomb conceal both unspeakable horrors and untold treasures. Make your choices wisely, for within the catacomb's depths, a harrowing adventure awaits. A journey that will test your mettle, unravel the mysteries of the ancient evil, and determine the destiny of a world on the brink of oblivion.</p>
+        <div>
+          <div>
+            <h2>Fate of the World</h2>
+            <div class="character-divider"></div>
+          </div>
+          <div class="entrance-text">
+            <p>In a world shrouded in shadows and haunted by the echoes of a forgotten era, a malevolent force has stirred from its ancient slumber. Legends speak of an unholy evil, dormant for centuries, awakening beneath the desolate catacomb known simply as the Great Catacomb. From its depths, an ominous energy emanates, reanimating the deceased and unleashing hordes of undead abominations upon the once-peaceful lands.</p>
+            <p>You stand at the precipice of a perilous journey. The entrance to the Great Catacomb looms before you, a foreboding gateway into the Haven of the Dead. It is said that within the catacomb's twisting passages lies the source of power threatening to consume the realm. You prepare yourself to embark on a quest into the treacherous catacombs, confront the resurrected horrors, and ultimately vanquish the ancient evil orchestrating this unholy resurgence.</p>
+            <p>The fate of the world rests upon you. The Great Catacomb conceal both unspeakable horrors and untold treasures. Make your choices wisely, for within the catacomb's depths, a harrowing adventure awaits. A journey that will test your mettle, unravel the mysteries of the ancient evil, and determine the destiny of a world on the brink of oblivion.</p>
+          </div>
+        </div>
         <div class="catacomb-entrance-button-container">
           <button id="catacombEntranceBtn">Close</button>
         </div>
@@ -189,22 +201,23 @@
 
     <!----------------- SETTINGS MODAL  ------------------->
 
-    <div id="settingsModal" class="modal">
+    <!-- <div id="settingsModal" class="modal">
       <div class="modal-content">
         <button id="volumeUp">Volume Up</button>
         <button id="volumeDown">Volume Down</button>
         <label for="volume">Volume:</label>
         <progress id="volume" max="1" value="0.5"></progress>
       </div>
-    </div>
+    </div> -->
 
     <!----------------- LEVEL UP MODAL  ------------------->
 
     <div id="levelUpModal" class="level-up-modal">
       <div class="level-up-modal-content">
         <div class="level-up-top">
-          <h2 id="levelUpHeader"></h2>
+          <h2 id="levelUpHeader">Level Up</h2>
           <p>Choose a boon to increase your power.</p>
+          <div class="character-divider"></div>
         </div>
         <div class="level-up-bottom">
           <div class="attributes-container">
@@ -334,6 +347,11 @@
       <!-- <div id="fade"></div> -->
       <div class="game-window">
         <div id="npcImageCard"></div>
+        <div id="monsterImageCard">
+          <div class="damage-dealt-box">
+            <ul id="damageDealt" class="damage"></ul>
+          </div>
+        </div>
         <div id="backgroundImage">
           <div class="top-content">
             <div class="name-and-counter">
@@ -342,8 +360,6 @@
             </div>
             <div id="topRight" class="top-right">
               <div id="monsterContainer" class="monster-container">
-                <!-- <div class="monster-display">
-                </div> -->
                 <div class="monster-health-bar">
                   <h3 id="monsterName">Monster</h3>
                   <div class="divider"></div>
@@ -354,13 +370,7 @@
                   </div>
                   <progress id="monster-health" max="100" value="100">100%</progress>
                 </div>
-                <div id="monsterImageCard">
-                  <div class="damage-dealt-box">
-                    <ul id="damageDealt" class="damage"></ul>
-                  </div>
-                </div>
               </div>
-              <div id="monsterImage" class="monster-image"></div>
             </div>
           </div>
           <div class="middle-content">
@@ -370,36 +380,37 @@
               <div class="wisp"></div>
             </div>
             <div class="middle-right">
-              <button id="inventoryBtn" class="inventory-btn">Inventory</button>
               <!-- <button id="journalBtn" class="journal-btn">Journal</button>
               <button id="settingsBtn" class="settings-btn">Settings</button> -->
             </div>
           </div>
+          <div class="player-display">
+            <div>
+              <h3 id="playerName"></h3>
+              <div class="character-divider"></div>
+            </div>
+            <div class="health-bar">
+              <div class="health-level-experience">
+                <p>HP: <span id="currentHP">0</span> / <span id="maxHP">0</span></p>
+                <p>Exp: <span id="currentXP">0</span> / <span id="xpToNextLevel">0</span></p>
+                <p>Lvl: <span id="heroLevel">0</span></p>
+              </div>  
+              <progress id="player-health" max="100" value="100">100%</progress>
+            </div>
+          </div>
           <div class="bottom-content">
-            <div id="playerContainer" class="player-container">
+            <div class="player-container">
               <div id="playerImageCard">
                 <div class="damage-received-box">
                   <ul id="damageReceived" class="damage"></ul>
                 </div>
               </div>
-              <div>
-                <h3 id="playerName"></h3>
-                <div class="divider"></div>
-              </div>
-              <div class="health-bar">
-                <div class="health-level-experience">
-                  <p>HP: <span id="currentHP">0</span> / <span id="maxHP">0</span></p>
-                  <p>Exp: <span id="currentXP">0</span> / <span id="xpToNextLevel">0</span></p>
-                  <p>Lvl: <span id="heroLevel">0</span></p>
-                </div>  
-                <progress id="player-health" max="100" value="100">100%</progress>
-              </div>
-              <div class="player-stats">
+              <!-- <div class="player-stats">
                 <p>Strength: <span id="heroStrength">0</span></p>
                 <p>Dexterity: <span id="heroDexterity">0</span></p>
                 <p>Faith: <span id="heroFaith">0</span></p>
-              </div>
-              <p class="show-stats">Click to Show Stats</p>
+              </div> -->
+              <!-- <p class="show-stats">Click to Show Stats</p> -->
             </div>
             <div id="playerControls" class="controls-container">
               <div class="attack">
@@ -416,13 +427,23 @@
                 <button id="flee-btn" class="toggle-btn">Flee</button>
               </div>
             </div>
-            <div id="logContainer" class="log-container">
-              <div>
+            <div id="btnContainer" class="btn-container">
+              <button id="inventoryBtn" class="inventory-btn">
+                <i class="fa-solid fa-toolbox"></i>
+              </button>
+              <button id="logContainer" class="log-btn">
+                <i class="fa-solid fa-book"></i>
+              </button>
+              <button id="playerContainer" class="hero-stats-btn">
+                <i class="fa-solid fa-user"></i>
+              </button>
+              <!-- <div>
                 <h3>Log</h3>
                 <div class="divider"></div>
               </div>
               <ul id="log"></ul>
             </div>
+            <p class="show-log">Click to Expand</p> -->
           </div>
         </div>
       </div>

@@ -885,6 +885,7 @@ const THE_FINAL_BATTLE = {
     setTimeout(() => {
       renderContinueButton();
     }, 2000);
+    fadeInAnimation(inventoryButton);
   },
 };
 

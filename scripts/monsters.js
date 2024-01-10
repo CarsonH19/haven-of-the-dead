@@ -378,17 +378,20 @@ function endFloodOfBonesBoss() {
     togglePlayerControls();
   }
 }
-function endBaronofBoneBoss() {
+function endBaronOfBoneBoss() {
   if (
     currentRoom.roomName === "Throne of the Eternal" &&
     currentRoom.contents.monsters[0] === BARON_OF_BONE &&
     currentMonsterHealth <= 0
   ) {
+    currentRoom.contents.monsters = [];
     setTimeout(() => {
       setTimeout(() => {
         isGameOver("GOOD ENDING");
       }, 2000);
     }, 2000);
+
+    console.log('endBaronofBoneBoss');
   }
 }
 
@@ -730,41 +733,18 @@ function monsterSkullLevel(level) {
   }
 }
 
-function togglePlayerImageCard(hero) {
-  if (currentRoom.contents.monsters.length > 0) {
-    if (hero === paladin) {
-      playerImageCard.style.backgroundImage = "url(styles/images/paladin.jpg)";
-    } else if (hero === rogue) {
-      playerImageCard.style.backgroundImage = "url(styles/images/rogue.jpg)";
-    } else {
-      playerImageCard.style.backgroundImage = "url(styles/images/priestess.jpg)";
-    }
-  
-    fadeInAnimation(playerImageCard);
-    // playerImageCard.style.display = "block";
-  } else {
-    fadeOutAnimation(playerImageCard);
-    // playerImageCard.style.display = "block";
-  }
-}
-
 function renderMonsterStatBlock(monster) {
   fadeInAnimation(monsterContainer);
 
-  if (playerImageCard.style.display !== "block") {
-    togglePlayerImageCard(heroChecker());
-    console.log("Player Image Render");
-  }
-
   if (monster.boss) {
-    //
+    fadeInAnimation(monsterImageCard);
+    monsterImageCard.style.backgroundImage = ``;
+    monsterImageCard.style.border = "0px";
   } else {
     fadeInAnimation(monsterImageCard);
-    // monsterImageCard.style.display = "block";
     monsterImageCard.style.backgroundImage = `url(${monster.image})`;
+    monsterImageCard.style.border = "2px solid var(--header)";
   }
-
-  monsterNameElement.textContent = monster.name;
 
   monsterSkullLevel(monster.skulls);
 
@@ -775,6 +755,7 @@ function renderMonsterStatBlock(monster) {
 
   setMonsterHealth(monsterMaxHealth);
 
+  monsterNameElement.textContent = monster.name;
   const monsterLevel = document.getElementById("monsterLevel");
   monsterLevel.text = monster.skulls;
   monsterContainer.style.width = `${monsterMaxHealth + 350}px`;
@@ -816,8 +797,9 @@ function checkForMonsters() {
   }
 
   if (monster[0] === BARON_OF_BONE) {
-    endBaronofBoneBoss();
+    endBaronOfBoneBoss();
   } else {
+
     // ITEM - Bone Amalgum: Adds temporary HP
     boneAmalgamAddHitPoints();
 
@@ -827,8 +809,6 @@ function checkForMonsters() {
     endBattlefieldEvent();
     endBonevaultDemonBoss();
     endFloodOfBonesBoss();
-
-    togglePlayerImageCard(heroChecker());
 
     // Checks for more monsters
     if (monster.length > 0) {

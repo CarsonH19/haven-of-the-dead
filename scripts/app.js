@@ -268,6 +268,7 @@ function damagePlayer(damage) {
 function showDamage(damage, source, critical) {
   const damageDealtElement = document.getElementById("damageDealt");
   const damageReceivedElement = document.getElementById("damageReceived");
+
   const numbers = document.createElement("li");
 
   if (source === "PLAYER") {
@@ -495,6 +496,8 @@ function fleeHandler() {
 // ===============================
 
 function isGameOver(ending) {
+  console.log('isGameOver');
+
   const monster = currentRoom.contents.monsters[0];
 
   switch (ending) {
@@ -614,15 +617,28 @@ function isGameOver(ending) {
         } else if (ending === "BAD") {
           writeToLogEvent(LOG_MISC_DESCRIPTION, "YES", "BAD ENDING");
         }
+
+        backgroundImage.style.display = "flex";
+        backgroundImage.style.flexDirection = "column";
+        backgroundImage.style.justifyContent = "center";
+        backgroundImage.style.alignItems = "center";
       }, 6000);
+
+      eventModal.style.display = "none";
+      tradeModal.style.display = "none";
+      levelUpModal.style.display = "none";
+      heroStatsModal.style.display = "none";
+      logModal.style.display = "none";
+      roomSummaryButton.style.display = "none";
+      continueButtonModal.style.display = "none";
     }
   }
 
   function openGameOverModal() {
-    setTimeout(() => {
-      const gameOverModal = document.getElementById("gameOverModal");
-      gameOverModal.style.display = "block";
-    }, 2000);
+    // setTimeout(() => {
+    //   const gameOverModal = document.getElementById("gameOverModal");
+    //   gameOverModal.style.display = "block";
+    // }, 2000);
     fadeInAnimation(gameOverModal);
   }
 }
@@ -662,6 +678,14 @@ heroChoiceModal.addEventListener("click", function (event) {
       heroChoice = "PRIESTESS";
       playerName.textContent = priestess.name;
       setPriestessStats();
+    }
+
+    if (heroChoice === "PALADIN") {
+      playerImageCard.style.backgroundImage = "url(styles/images/paladin.jpg)";
+    } else if (heroChoice === "ROGUE") {
+      playerImageCard.style.backgroundImage = "url(styles/images/rogue.jpg)";
+    } else if (heroChoice === "PRIESTESS") {
+      playerImageCard.style.backgroundImage = "url(styles/images/priestess.jpg)";
     }
 
     totalStrength = baseStrength;
@@ -809,7 +833,6 @@ function togglePlayerControls() {
 
   // Checks for Event Modal
   if (eventModal.style.display === "block") {
-    inventoryButton.disabled = true;
     potionBtn.disabled = true;
   } else {
     inventoryButton.disabled = false;
@@ -833,7 +856,6 @@ function togglePlayerControls() {
     guardBtn.disabled = true;
     specialBtn.disabled = true;
     fleeBtn.disabled = true;
-    inventoryButton.disabled = true;
     potionBtn.disabled = true;
   }
 
@@ -856,7 +878,7 @@ function togglePlayerControls() {
     currentRoom.roomName === "Hag's Hollow" ||
     currentRoom.roomName === "Curator's Curio"
   ) {
-    inventoryButton.disabled = false;
+    fadeInAnimation(inventoryButton);
     potionBtn.disabled = false;
   }
 
@@ -903,7 +925,6 @@ function turnOffControls() {
     guardBtn.disabled = true;
     specialBtn.disabled = true;
     fleeBtn.disabled = true;
-    inventoryButton.disabled = true;
     potionBtn.disabled = true;
   }
 }
@@ -1052,7 +1073,6 @@ function closeRoomSummaryModal() {
   gloryforgedBladeCheck();
   forsakenCommanderCheck();
   countPotions();
-  togglePlayerImageCard(heroChecker());
 }
 
 function renderRoomSummaryModal() {
@@ -1191,6 +1211,8 @@ function renderRoomSummaryModal() {
 
   updatePlayerTrackers();
   soundEffectHandler(hitReverbDark4);
+  fadeOutAnimation(controlsContainer);
+  fadeOutAnimation(playerImageCard);
 }
 
 function setRoomSummary() {
@@ -1341,6 +1363,7 @@ roomSummaryButton.addEventListener("click", () => {
 
   updatePlayerTrackers();
   checkForLevelUp();
+  fadeInAnimation(inventoryButton);
 });
 
 continueButton.addEventListener("click", () => {
@@ -1393,6 +1416,9 @@ continueButton.addEventListener("click", () => {
       }
     }, 1500);
 
+    setTimeout(() => {
+      fadeInAnimation(playerImageCard);
+    }, 2000);
     newRoomAnimation();
     closeContinueButton();
     updatePlayerTrackers();
@@ -1400,6 +1426,7 @@ continueButton.addEventListener("click", () => {
 
   setControlsInterval("STOP");
   soundEffectHandler(whooshLowAir);
+  fadeOutAnimation(inventoryButton);
 });
 
 startBtn.addEventListener("click", () => {

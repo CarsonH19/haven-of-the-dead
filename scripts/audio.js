@@ -204,7 +204,8 @@ function fadeOut(audio, callback) {
 // Good Ending
 const returnOfTheFallen = loadAudio(
   "audio/music/Return of the Fallen.mp3",
-  "returnOfTheFallen"
+  "returnOfTheFallen",
+  true
 );
 
 // Curator's Curio
@@ -222,17 +223,20 @@ const finalBrigade = loadAudio(
 // Join the Baron
 const basementNightmare = loadAudio(
   "audio/music/Basement Nightmares.mp3",
-  "basementNightmare"
+  "basementNightmare",
+  true
 );
 // Baron of Bone Fight
 const birthOfaKnight = loadAudio(
   "audio/music/Birth of a Knight.mp3",
-  "birthOfaKnight"
+  "birthOfaKnight",
+  true
 );
 
 const theEternalWar = loadAudio(
   "audio/music/The Eternal War.mp3",
-  "theEternalWar"
+  "theEternalWar",
+  true
 );
 // Gnawer
 const deepTunnels = loadAudio(

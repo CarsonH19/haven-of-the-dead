@@ -419,7 +419,7 @@ function writeToLogActions(logType, narrate, dataOne) {
     writeToNarrative(narration);
   }
 
-  log.insertBefore(newEntry, log.firstChild);
+  // log.insertBefore(newEntry, log.firstChild);
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
@@ -505,7 +505,7 @@ function writeToLogMonster(logType, narrate, dataOne) {
 
   logText = newEntry.textContent;
   newEntry.textContent = `ENEMY: ${logText}`;
-  log.insertBefore(newEntry, log.firstChild);
+  // log.insertBefore(newEntry, log.firstChild);
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
@@ -645,7 +645,9 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
         if (heroChoice === "PALADIN") {
           newEntry.textContent = `BOON: You've chosen Radiant Aura. Your Radiant Aura now deals ${radiantAuraTracker} damage to undead enemies at the start of battle.`;
         } else if (heroChoice === "ROGUE") {
-          newEntry.textContent = `BOON: You've chosen Darkened Reprisal. Your Darkened Reprisal now increases your Dexterity to ${darkenedReprisalTracker * 100}% when below 30HP.`;
+          newEntry.textContent = `BOON: You've chosen Darkened Reprisal. Your Darkened Reprisal now increases your Dexterity to ${
+            darkenedReprisalTracker * 100
+          }% when below 30HP.`;
         } else if (heroChoice === "PRIESTESS") {
           newEntry.textContent = `BOON: You've chosen Burning Devotion. Your attacks now deal a minimum.of ${burningDevotionTracker} damage.`;
         }
@@ -823,7 +825,7 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
     newEntry.textContent = `PASSIVE: ${logText}`;
   }
 
-  log.insertBefore(newEntry, log.firstChild);
+  // log.insertBefore(newEntry, log.firstChild);
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
@@ -1588,7 +1590,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
 
   logText = newEntry.textContent;
   newEntry.textContent = `EVENT: ${logText}`;
-  log.insertBefore(newEntry, log.firstChild);
+  // log.insertBefore(newEntry, log.firstChild);
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
@@ -1757,7 +1759,7 @@ function writeToLogItem(logType, narrate, dataOne, dataTwo) {
 
   logText = newEntry.textContent;
   newEntry.textContent = `ITEM: ${logText}`;
-  log.insertBefore(newEntry, log.firstChild);
+  // log.insertBefore(newEntry, log.firstChild);
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
@@ -1789,7 +1791,7 @@ function writeToLogStatusEffect(logType, narrate, dataOne, dataTwo) {
 
   logText = newEntry.textContent;
   newEntry.textContent = `CONDITION: ${logText}`;
-  log.insertBefore(newEntry, log.firstChild);
+  // log.insertBefore(newEntry, log.firstChild);
   const newEntryClone = newEntry.cloneNode(true);
   logModalList.insertBefore(newEntryClone, logModalList.firstChild);
 
@@ -1851,9 +1853,11 @@ function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
     writeToNarrative(narration);
   }
 
-  log.insertBefore(newEntry, log.firstChild);
-  const newEntryClone = newEntry.cloneNode(true);
-  logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+  if (narration === null) {
+    // log.insertBefore(newEntry, log.firstChild);
+    const newEntryClone = newEntry.cloneNode(true);
+    logModalList.insertBefore(newEntryClone, logModalList.firstChild);
+  }
 
   checkLogSize();
 }
@@ -1938,13 +1942,13 @@ function fadeInAnimation(element) {
 
   setTimeout(() => {
     element.style.display = "block";
-  }, 1000);
+  }, 900);
 }
 
-function fadeOutAnimation(element, time = 2000) {
-  const displayTime = time + 1900;
+function fadeOutAnimation(element, time = 1000) {
+  const displayTime = time + 900;
   setTimeout(() => {
-    element.style.animation = "fade-out 2s";
+    element.style.animation = "fade-out 1s";
   }, time);
 
   setTimeout(() => {
@@ -1953,9 +1957,9 @@ function fadeOutAnimation(element, time = 2000) {
 }
 
 function checkLogSize() {
-  if (log.children.length >= 50) {
-    log.removeChild(log.lastElementChild);
-  }
+  // if (log.children.length >= 20) {
+  //   log.removeChild(log.lastElementChild);
+  // }
 
   if (logModalList.children.length >= 200) {
     logModalList.removeChild(logModalList.lastElementChild);

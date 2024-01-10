@@ -68,18 +68,12 @@ button {
   font-size: 1.2rem;
   border-radius: 8px;
   color: var(--accent);
-  /* font-weight: 600; */
 }
 
 button:hover {
   transition: 0.3s;
   scale: 1.1;
-  border: 1px solid var(--accent);
   cursor: pointer;
-  /* background-color: var(--background); */
-  /* color: var(--text); */
-  /* font-weight: 700; */
-  text-shadow: 2px px 8px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
 }
 
 .strikethrough-text {
@@ -192,8 +186,8 @@ li, ul {
   aspect-ratio: 1;
   display: none;
   position: absolute;
-  left: 50%; /* Center horizontally */
-  top: 150%; /* Center vertically */
+  right: -4%; 
+  top: 22%; 
   transform: translate(-50%, -50%); 
   height: 20vh;
   border: 2px solid var(--header);
@@ -205,11 +199,9 @@ li, ul {
 #playerImageCard {
   aspect-ratio: 1;
   height: 20vh;
-  display: none;
-  position: absolute;
-  left: 50%; /* Center horizontally */
-  bottom: 80%; /* Center vertically */
-  transform: translate(-50%, -50%); 
+  width: 20vh;
+  margin-left: 1vh;
+  display: block;
   border: 2px solid var(--header);
   border-radius: 5px;
   background-size: cover;
@@ -332,12 +324,13 @@ li, ul {
   flex-wrap: wrap;
   gap: 5px;
   /* z-index: 1; */
-  margin: 5px;
+  margin: 1vh;
+  margin-left: 2vh;
 }
 
 .middle-left div {
-  width: 60px;
-  height: 60px;
+  width: 6vh;
+  height: 6vh;
   border: 2px solid #252b3b;
   border-radius: 10px;
   /* z-index: 1; */
@@ -471,25 +464,24 @@ li, ul {
 
 .bottom-content {
   width: 100%;
-  height: 23%;
+  height: 25%;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   background-color: transparent;
 }
 
-.controls-container,
-.log-container {
-  /* flex: 1; */
+.controls-container {
   width: 33%;
+  height: 90%;
   padding: 10px;
+  align-self: flex-end;
 }
 
 .player-container {
-  position: relative;
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
+  align-items: flex-end;
   width: 33%;
   height: 100%;
   cursor: pointer;
@@ -497,17 +489,48 @@ li, ul {
   gap: 15px;
 }
 
-.player-container:hover {
-  transition: 0.3s;
+.player-display {
+  position: absolute;
+  left: 1%;
+  bottom: 24%;
+  width: 950px;
 }
 
-.log-container:hover {
-  transition: 0.3s;
-  margin-top: -15vh;
+.btn-container {
+  width: 33%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
 }
 
-.player-container h3,
-.log-container h3 {
+.btn-container button {
+  width: 6vh;
+  height: 6vh;
+  font-size: 4vh;
+  z-index: 1;
+  margin-bottom: 1vh;
+}
+
+/* .inventory-btn {
+  width: 5vh;
+  height: 5vh;
+  font-size: 5vh;
+  z-index: 2;
+} */
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.player-container h3 {
   margin: 0px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
   font-size: 1.2rem;
@@ -518,14 +541,22 @@ li, ul {
 }
 
 .player-container .show-stats {
-  margin: 0px;
+  margin-top: 5vh;
   text-align: center;  
-  opacity: 0;
+  opacity: 1;
+  align-self: center;
+  justify-self: flex-end;
 }
 
 .player-container:hover .show-stats {
   transition: 0.3s;
   opacity: 1;
+}
+
+.show-log {
+  position: absolute;
+  bottom: 0%;
+  right: 10%;
 }
 
 .health-bar {
@@ -564,6 +595,7 @@ li, ul {
 }
 
 .controls-container {
+  position: relative;
   transition: 0.3s;
   display: none;
   flex-direction: column;
@@ -612,6 +644,8 @@ li, ul {
 ==========================================
 */
 
+/*
+
 .log-container {
   overflow: auto;
   cursor: pointer;
@@ -621,7 +655,7 @@ li, ul {
   margin-top: 0px;
   margin-bottom: 2px;
   font-size: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow 
 }
 
 .log-container ul {
@@ -637,6 +671,13 @@ li, ul {
   padding-top: 6px;
   padding-bottom: 6px;
 }
+
+.log-container:hover {
+  transition: 0.3s;
+  margin-top: -5vh;
+}
+
+*/
 
 /* 
 ==========================================
@@ -705,7 +746,7 @@ progress[value]::-moz-progress-bar {
   border: 3px solid #888;
   border-radius: 10px;
   width: 35vw;
-  height: 65vh;
+  height: 60vh;
   overflow: auto;
   padding: 10px;
 }
@@ -727,30 +768,39 @@ progress[value]::-moz-progress-bar {
   border: 3px solid #888;
   border-radius: 10px;
   width: 35vw;
-  height: 65vh;
+  height: 60vh;
   overflow: auto;
   padding: 20px;
 }
 
-.catacomb-entrance-modal-content h2 {
-  align-self: center;
+.catacomb-entrance-modal-content div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.catacomb-entrance-modal-content div h2 {
+  text-align: center;
   margin: 0px;
 }
 
-.catacomb-entrance-modal-content p {
-  margin: 0px;
-  font-size: 1.0rem;
+.catacomb-entrance-modal-content .entrance-text p {
+  text-align: center;
+  margin: 1vh;
+  font-size: 1.8vh;
+  gap: 2vh;
 }
 
 .catacomb-entrance-button-container {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .catacomb-entrance-button-container button {
-  width: 150px;
-  height: 50px;
+  width: 8vw;
+  height: 5vh;
   margin-top: 20px;
 }
 
@@ -799,9 +849,9 @@ progress[value]::-moz-progress-bar {
 
  .character-images .character-image {
   transition: transform 0.3s ease, background-color 0.3s ease;
-  padding: 10px;
-  width: 18%;
-  height: 90%;
+  padding: 20px;
+  width: 20%;
+  height: 80%;
 }
 
 .character-images .character-image:hover {
@@ -817,10 +867,6 @@ progress[value]::-moz-progress-bar {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   color: var(--text);
   text-align: center;
 }
@@ -835,7 +881,7 @@ progress[value]::-moz-progress-bar {
 
 
 .character-text p {
-  font-size: 0.8rem;
+  font-size: 1.5vh;
   margin: 0px;
 }
 
@@ -868,7 +914,7 @@ progress[value]::-moz-progress-bar {
   height: 100%;
   border: solid var(--header) 2px;
   background-repeat: no-repeat;
-  background-size: 103%; 
+  background-size: cover;
   background-blend-mode: overlay;
   background-position: center; 
   border-radius: 10px; 
@@ -913,8 +959,8 @@ progress[value]::-moz-progress-bar {
 
 
 .modal-content button {
-  width: 150px;
-  height: 50px;
+  width: 8vw;
+  height: 5vh;
 }
 
 /* 
@@ -983,7 +1029,6 @@ progress[value]::-moz-progress-bar {
   align-items: center;
   flex-direction: column;
   text-align: left;
-
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -992,7 +1037,7 @@ progress[value]::-moz-progress-bar {
 
 .start-modal-content h1, 
 .game-over-modal-content h1 {
-  font-size: 5.5rem;
+  font-size: 10vh;
   text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
   margin-top: -10vh;
   margin-bottom: 10vh;
@@ -1000,8 +1045,8 @@ progress[value]::-moz-progress-bar {
 
 .start-modal-content button,
 .game-over-modal-content button {
-  width: 150px;
-  height: 50px;
+  width: 8vw;
+  height: 5vh;
   color: var(--accent);
   font-weight: 500;
 }
@@ -1074,7 +1119,7 @@ progress[value]::-moz-progress-bar {
   /* width: 60%;
   height: 56%; */
   width: 35vw;
-  height: 65vh;
+  height: 60vh;
   overflow: auto;
   padding: 20px;
 }
@@ -1136,14 +1181,14 @@ progress[value]::-moz-progress-bar {
 
 .room-summary-modal-content button {
   align-self: center;
-  width: 150px;
-  height: 50px;
+  width: 8vw;
+  height: 5vh;
   margin-top: 20px;
 }
 
 .room-summary-button-container button {
-  width: 150px;
-  height: 50px;
+  width: 8vw;
+  height: 5vh;
   margin-top: 20px;
 }
 
@@ -1180,8 +1225,8 @@ progress[value]::-moz-progress-bar {
 
 
 .continue-btn button {
-  width: 150px;
-  height: 50px;
+  width: 8vw;
+  height: 5vh;
 }
 
 /* 
@@ -1204,8 +1249,8 @@ progress[value]::-moz-progress-bar {
 
 .event-content button {
   transition: 0.3s;
-  width: 150px;
-  height: 50px; 
+  width: 8vw;
+  height: 5vh;
   cursor: pointer;
   margin: 20px;
 }
@@ -1237,7 +1282,7 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto;
   border: 3px solid #888;
   border-radius: 10px;
-  width: 35vw;
+  width: 40vw;
   height: 65vh;
 }
 
@@ -1254,13 +1299,6 @@ progress[value]::-moz-progress-bar {
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4);
-}
-
-#inventoryBtn {
-  width: 80%;
-  height: 12%;
-  font-size: 1.1rem;
-  z-index: 2;
 }
 
 
@@ -1517,8 +1555,8 @@ progress[value]::-moz-progress-bar {
   border-radius: 10px;
   /* width: 60%;
   height: 56%; */
-  width: 720px;
-  height: 520px;
+  width: 40vw;
+  height: 65vh;
   /* overflow: auto; */
   padding: 0px;
 }
@@ -1679,14 +1717,14 @@ progress[value]::-moz-progress-bar {
   border: 3px solid #888;
   border-radius: 10px;
   width: 35vw;
-  height: 65vh;
+  height: 60vh;
   overflow: auto;
   padding: 10px;
 }
 
 .level-up-modal-content p {
-  font-size: 1.5rem;
-  margin: 10px;
+  font-size: 2.5vh;
+  margin: 0px;
 }
 
 .level-up-top {
@@ -1694,7 +1732,7 @@ progress[value]::-moz-progress-bar {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 0px;
   height: 20%;
   width: 100%;
 }
@@ -1710,7 +1748,8 @@ progress[value]::-moz-progress-bar {
 }
 
 .level-up-modal-content h2 {
-  margin: 0px;
+  font-size: 3vh;
+  margin: 2vh;
   padding: 0px;
   text-align: center;
 }
@@ -1785,10 +1824,8 @@ progress[value]::-moz-progress-bar {
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
   border: 3px solid var(--accent);
   border-radius: 10px;
-  /* width: 46%;
-  height: 56%; */
-  width: 720px;
-  height: 520px;
+  width: 35vw;
+  height: 60vh;
   overflow: auto;
 }
 
@@ -1833,163 +1870,4 @@ progress[value]::-moz-progress-bar {
 /* 
 ==========================================
               ANIMATIONS
-==========================================
-*/
-
-/* Screen Fade */
-/* #fade {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 99;
-} */
-
-.fade-out {
-  animation: fade-out 0.5s; 
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes room-transition {
-  0% {
-    opacity: 0;
-  }
-  40% {
-    opacity: 1;
-  }
-  60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-/* Damage Flash */
-.flash {
-  box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); 
-  animation: flashAnimation 0.8s forwards; 
-}
-
-.monster-damage-flash {
-  box-shadow: inset 0 0 15px 20px rgba(255, 0, 0, 0.5); 
-  animation: flashAnimation 1.0s forwards; 
-}
-
-.flash-low-health {
-  box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); 
-  animation: flashAnimation 0.8s infinite; 
-}
-
-@keyframes flashAnimation {
-  0% {
-    box-shadow: inset 0 0 60px 20px rgba(188, 13, 13, 0.5); 
-  }
-  100% {
-    box-shadow: none; 
-  }
-}
-
- /* Health Bar Shake */
- @keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  10%, 30%, 50%, 70%, 90% {
-    transform: translateX(-1px);
-  }
-  20%, 40%, 60%, 80% {
-    transform: translateX(1px);
-  }
-}
-
-.health-bar-critical {
-  animation: shake 0.5s infinite;
-}
-
-
-.orb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 0;
-  background: radial-gradient(circle, var(--orb) 5%, rgba(255, 236, 160, 0) 100%);
-  /* transform: translateY(-50%); */
-  animation: orbAnimation 6s ease-in-out infinite, pulseAnimation 2.0s ease-in-out infinite;
-  box-shadow: 0 0 40px 10px #ffeca0; 
-  opacity: 90%;
-}
-
-@keyframes pulseAnimation {
-  0% {
-    box-shadow: 0 0 20px 00px var(--orb);
-  }
-  50% {
-    box-shadow: 0 0 40px 10px var(--orb); /* adjusted glow effect for pulsing */
-  }
-  100% {
-    box-shadow: 0 0 20px 0px var(--orb); /* adjusted glow effect for pulsing */
-  }
-}
-
-
-@keyframes orbAnimation {
-  0%, 100% {
-    left: 50%;
-    transform: translateY(-50%) translateX(0);
-  }
-  15% {
-    left: 55%;
-    transform: translateY(-55%) translateX(5%);
-  }
-  30% {
-    left: 50%;
-    transform: translateY(-50%) translateX(0);
-  }
-  45% {
-    left: 45%;
-    transform: translateY(-45%) translateX(-5%);
-  }
-  60% {
-    left: 50%;
-    transform: translateY(-50%) translateX(0);
-  }
-  75% {
-    top: 40%;
-    transform: translateY(-40%) translateX(0);
-  }
-  90% {
-    top: 60%;
-    transform: translateY(-60%) translateX(0);
-  }
-}
+=======================================
