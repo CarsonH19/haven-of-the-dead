@@ -261,7 +261,7 @@ function damagePlayer(damage) {
   // ITEM: Soul Jar - resurrect with half HP
   isItemAttuned(SOUL_JAR);
 
-  healthLowAnimation();
+  // healthLowAnimation();
   isGameOver();
 }
 
@@ -774,14 +774,14 @@ function setControlsInterval(command, pauseTime) {
       }
       break;
 
-    case "PAUSE":
-      turnOffControls();
-      setTimeout(() => {
-        controlInterval = setInterval(() => {
-          togglePlayerControls();
-        }, CONTROL_INTERVAL_DURATION);
-      }, pauseTime);
-      break;
+    // case "PAUSE":
+    //   turnOffControls();
+    //   setTimeout(() => {
+    //     controlInterval = setInterval(() => {
+    //       togglePlayerControls();
+    //     }, CONTROL_INTERVAL_DURATION);
+    //   }, pauseTime);
+    //   break;
 
     case "STOP":
       controlInterval = null;
@@ -1006,28 +1006,6 @@ function newRoomAnimation() {
   fade.style.animation = "room-transition 4s";
   console.log(`Room Animation: ${fade}`);
   clearNarrative();
-}
-
-function damageFlashAnimation(target) {
-  const targetElement =
-    target === "MONSTER" ? monsterImageCard : playerImageCard;
-
-  // Clear existing animation
-  targetElement.style.animation = "none";
-
-  // Force a reflow by accessing an offset property
-  void targetElement.offsetWidth;
-
-  // Apply the new animation
-  targetElement.style.animation = "flashAnimation 1s";
-
-  // Log for debugging
-  console.log(`Damage Flash Animation: ${target}`);
-
-  // Clear the animation after a delay
-  setTimeout(() => {
-    targetElement.style.animation = "none";
-  }, 1000);
 }
 
 // ===============================

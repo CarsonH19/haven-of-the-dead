@@ -229,18 +229,34 @@ function healPlayer(healValue) {
   healthLowAnimation();
 }
 
+function damageFlashAnimation(target) {
+  const targetElement =
+    target === "MONSTER" ? monsterImageCard : playerImageCard;
+  // Clear existing animation
+  targetElement.style.animation = "none";
+  // Force a reflow by accessing an offset property
+  void targetElement.offsetWidth;
+  targetElement.style.animation = "flashAnimation 1s";
+
+  healthLowAnimation();
+}
+
 function healthLowAnimation() {
   if (currentPlayerHealth <= 30) {
-    // Rogue Passive Ability
-    rogueDarkenedReprisal();
+    playerImageCard.style.animation = "none";
+    // Force a reflow by accessing an offset property
+    void playerImageCard.offsetWidth;
 
     playerHealthBar.classList.add("health-bar-critical");
-    roomImage.classList.add("flash-low-health");
+    playerImageCard.style.animation = "flashAnimation 0.8s infinite";
     heartbeatFastLow.volume = 0.3;
     heartbeatFastLow.play();
-  } else {
+
+    // Rogue Passive Ability
+    rogueDarkenedReprisal();
+  } else if (playerImageCard.style.animation === "flashAnimation 0.8s infinite") {
     playerHealthBar.classList.remove("health-bar-critical");
-    roomImage.classList.remove("flash-low-health");
+    playerImageCard.style.animation = "none";
     heartbeatFastLow.pause();
   }
 }

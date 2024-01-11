@@ -658,7 +658,6 @@ const SOUL_JAR = {
       const index = inventoryItems.indexOf(itemObject);
       inventoryItems.splice(index, 1);
       updatePlayerTrackers();
-      healthLowAnimation();
 
       writeToLogItem(LOG_ITEM, "YES", SOUL_JAR);
     }
