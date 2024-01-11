@@ -496,7 +496,7 @@ function fleeHandler() {
 // ===============================
 
 function isGameOver(ending) {
-  console.log('isGameOver');
+  console.log("isGameOver");
 
   const monster = currentRoom.contents.monsters[0];
 
@@ -676,7 +676,8 @@ heroChoiceModal.addEventListener("click", function (event) {
     } else if (heroChoice === "ROGUE") {
       playerImageCard.style.backgroundImage = "url(styles/images/rogue.jpg)";
     } else if (heroChoice === "PRIESTESS") {
-      playerImageCard.style.backgroundImage = "url(styles/images/priestess.jpg)";
+      playerImageCard.style.backgroundImage =
+        "url(styles/images/priestess.jpg)";
     }
 
     totalStrength = baseStrength;
@@ -878,7 +879,10 @@ function togglePlayerControls() {
   }
 
   // Baron of Bone Room
-  if (currentRoom.roomName === "Presence of the Eternal") {
+  if (
+    currentRoom.roomName === "Presence of the Eternal" &&
+    currentRoom.roomName === "Throne of the Eternal"
+  ) {
     fleeBtn.disabled = true;
   }
 
@@ -1005,7 +1009,8 @@ function newRoomAnimation() {
 }
 
 function damageFlashAnimation(target) {
-  const targetElement = (target === "MONSTER") ? monsterImageCard : playerImageCard;
+  const targetElement =
+    target === "MONSTER" ? monsterImageCard : playerImageCard;
 
   // Clear existing animation
   targetElement.style.animation = "none";
@@ -1018,13 +1023,12 @@ function damageFlashAnimation(target) {
 
   // Log for debugging
   console.log(`Damage Flash Animation: ${target}`);
-  
+
   // Clear the animation after a delay
   setTimeout(() => {
     targetElement.style.animation = "none";
   }, 1000);
 }
-
 
 // ===============================
 //        Start Game Modal
@@ -1210,12 +1214,10 @@ function renderContinueButton() {
   continueButton.textContent = "Continue...";
 
   if (
-    // currentRoom !== catacombEntrance &&
     currentRoom.contents.monsters.length === 0 &&
     currentRoom.contents.events === null
   ) {
     fadeInAnimation(continueButtonModal);
-    continueButtonModal.style.display = "block";
   } else {
     continueButtonModal.style.display = "none";
   }
@@ -1313,8 +1315,7 @@ fleeBtn.addEventListener("click", () => {
 catacombEntranceBtn.addEventListener("click", () => {
   catacombEntranceModal.style.display = "none";
   renderLevelUpModal();
-  continueButtonModal.style.display = "block";
-  continueButton.textContent = "Enter";
+  renderContinueButton();
 });
 
 roomSummaryButton.addEventListener("click", () => {
@@ -1397,7 +1398,6 @@ continueButton.addEventListener("click", () => {
 
   setControlsInterval("STOP");
   soundEffectHandler(whooshLowAir);
-  fadeOutAnimation(inventoryButton);
 });
 
 startBtn.addEventListener("click", () => {

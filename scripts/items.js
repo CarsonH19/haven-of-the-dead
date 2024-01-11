@@ -2669,7 +2669,7 @@ function calculateFavor(itemName, operator) {
         }
       }
 
-      inventoryItems.push(itemObject);
+      addItemToInventory(itemObject);
       writeToLogOther(LOG_OTHER, null, "USE FAVOR", itemObject, itemValue);
       writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "USE FAVOR");
     } else {
