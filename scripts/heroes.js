@@ -91,7 +91,8 @@ function rogueUmbralAssault() {
 
   setTimeout(() => {
     if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth > 0) {
-      setControlsInterval("START");
+      // setControlsInterval("START");
+      togglePlayerControls();
     }
   }, 1800);
 
@@ -259,12 +260,13 @@ function healthLowAnimation() {
 
     // Rogue Passive Ability
     rogueDarkenedReprisal();
-  } else if (
-    playerImageCard.style.animation === "flashAnimation 0.8s infinite"
-  ) {
+  } else {
     playerHealthBar.classList.remove("health-bar-critical");
-    playerImageCard.style.animation = "none";
     heartbeatFastLow.pause();
+
+    setTimeout(() => {
+      playerImageCard.style.animation = "none";
+    }, 1000);
   }
 }
 

@@ -342,7 +342,7 @@ function endBonevaultDemonBoss() {
       playMusic(currentRoom.music);
       renderBackground(currentRoom.backgroundImage);
     }, 2500);
-    togglePlayerControls();
+    // togglePlayerControls();
   }
 }
 
@@ -375,7 +375,7 @@ function endFloodOfBonesBoss() {
       playMusic(pileOfBones);
       renderBackground(defeatedFloodImage);
     }, 2500);
-    togglePlayerControls();
+    // togglePlayerControls();
   }
 }
 function endBaronOfBoneBoss() {
@@ -391,7 +391,7 @@ function endBaronOfBoneBoss() {
       }, 2000);
     }, 2000);
 
-    console.log('endBaronofBoneBoss');
+    console.log("endBaronofBoneBoss");
   }
 }
 
@@ -734,33 +734,34 @@ function monsterSkullLevel(level) {
 }
 
 function renderMonsterStatBlock(monster) {
-  fadeInAnimation(monsterContainer);
+  if (currentRoom.contents.monsters.length > 0) {
+    fadeInAnimation(monsterContainer);
 
-  if (!monster.hasOwnProperty('boss')) {
-    fadeInAnimation(monsterImageCard);
-    monsterImageCard.style.backgroundImage = `url(${monster.image})`;
-    monsterImageCard.style.border = "2px solid var(--header)";
-  } else {
-    monsterImageCard.style.backgroundImage = ``;
-    monsterImageCard.style.border = "0px";
+    if (!monster.hasOwnProperty("boss")) {
+      fadeInAnimation(monsterImageCard);
+      monsterImageCard.style.backgroundImage = `url(${monster.image})`;
+      monsterImageCard.style.border = "2px solid var(--header)";
+    } else {
+      monsterImageCard.style.backgroundImage = ``;
+      monsterImageCard.style.border = "0px";
+    }
+
+    monsterSkullLevel(monster.skulls);
+
+    // ITEM: Sunstone - Reduces the Attack & Max HP of Evil Spirits
+    isItemAttuned(SUNSTONE, null);
+    // ITEM: Bonechill Amulet - Reduces the Attack & Max HP of Humans & Beasts
+    isItemAttuned(BONECHILL_AMULET, null);
+
+    setMonsterHealth(monsterMaxHealth);
+
+    monsterNameElement.textContent = monster.name;
+    const monsterLevel = document.getElementById("monsterLevel");
+    monsterLevel.textContent = monster.skulls;
+    monsterContainer.style.width = `${monsterMaxHealth / 10 + 25}vw`;
+
+    console.log("Monster Rendered");
   }
-
-  monsterSkullLevel(monster.skulls);
-
-  // ITEM: Sunstone - Reduces the Attack & Max HP of Evil Spirits
-  isItemAttuned(SUNSTONE, null);
-  // ITEM: Bonechill Amulet - Reduces the Attack & Max HP of Humans & Beasts
-  isItemAttuned(BONECHILL_AMULET, null);
-
-  setMonsterHealth(monsterMaxHealth);
-
-  monsterNameElement.textContent = monster.name;
-  const monsterLevel = document.getElementById("monsterLevel");
-  monsterLevel.textContent = monster.skulls;
-  monsterContainer.style.width = `${(monsterMaxHealth / 10) + 25}vw`;
-
-  togglePlayerControls();
-  console.log('Monster Rendered');
 }
 
 function setMonsterHealth(maxLife) {
@@ -783,7 +784,8 @@ function startBattle() {
     updatePlayerTrackers();
 
     setTimeout(() => {
-      setControlsInterval("START");
+      // setControlsInterval("START");
+      togglePlayerControls();
     }, 1000);
   }, 1000);
 
@@ -792,7 +794,7 @@ function startBattle() {
 
 function checkForMonsters() {
   const monster = currentRoom.contents.monsters;
-  
+
   // Checks for Legionnaire / Adds to Legion Tracker
   if (monster[0] === LEGIONNAIRE) {
     legionTracker++;
@@ -801,7 +803,6 @@ function checkForMonsters() {
   if (monster[0] === BARON_OF_BONE) {
     endBaronOfBoneBoss();
   } else {
-
     // ITEM - Bone Amalgum: Adds temporary HP
     boneAmalgamAddHitPoints();
 
@@ -820,7 +821,8 @@ function checkForMonsters() {
       setTimeout(renderRoomSummaryModal, 5000);
     }
   }
-  setControlsInterval("STOP");
+  // setControlsInterval("STOP");
+  turnOffControls();
 }
 
 function monsterAbilityHandler(monster) {

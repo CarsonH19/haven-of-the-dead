@@ -189,7 +189,8 @@ function monsterAttackHandler(bonus) {
   }
 
   updatePlayerTrackers();
-  setControlsInterval("START");
+  // setControlsInterval("START");
+  togglePlayerControls();
 }
 
 function dealPlayerDamage(damage) {
@@ -404,7 +405,8 @@ function guardHandler(bonus) {
   updatePlayerTrackers();
 
   setTimeout(() => {
-    setControlsInterval("START");
+    // setControlsInterval("START");
+    togglePlayerControls();
   }, 1500);
 }
 
@@ -485,14 +487,15 @@ function fleeHandler() {
         }, 2000);
       }, 5000);
 
-      setControlsInterval("STOP");
+      // setControlsInterval("STOP");
+      turnOffControls();
     } else {
       fleeHandler();
     }
   } else {
-    setControlsInterval("STOP");
+    // setControlsInterval("STOP");
+    turnOffControls();
     setTimeout(monsterAttackHandler, 1200);
-    setTimeout(isGameOver, 1500);
     writeToLogActions(LOG_FLEE, "YES", "FAILURE");
   }
 }
@@ -539,13 +542,12 @@ function isGameOver(ending) {
   if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {
     // ITEM: Bloodstone - Recovers health when monster dies
     isItemAttuned(BLOODSTONE, null);
-    console.log(`"isGameOver" ${monster}`);
     soundEffectHandler(monster, "MONSTER DEATH");
     gainExperience(currentRoom.contents.monsters[0].skulls);
 
     setTimeout(() => {
       checkForMonsters();
-    }, 2000);
+    }, 1000);
   }
 
   // if (npcImageCard.style.display === "block") {
@@ -701,7 +703,8 @@ heroChoiceModal.addEventListener("click", function (event) {
     }, 3000);
 
     updateTotalStats();
-    setControlsInterval("START");
+    // setControlsInterval("START");
+    togglePlayerControls();
   }
 });
 
@@ -760,41 +763,32 @@ function renderCurrentRoom(currentRoom) {
   checkForNewTier();
 }
 
-const CONTROL_INTERVAL_DURATION = 500;
-let controlInterval = null;
+// const CONTROL_INTERVAL_DURATION = 500;
+// let controlInterval = null;
 
-function setControlsInterval(command, pauseTime) {
-  // Clear existing interval if it exists
-  clearInterval(controlInterval);
+// function setControlsInterval(command, pauseTime) {
+//   // Clear existing interval if it exists
+//   clearInterval(controlInterval);
 
-  switch (command) {
-    case "START":
-      if (controlInterval === null) {
-        controlInterval = setInterval(() => {
-          togglePlayerControls();
-        }, CONTROL_INTERVAL_DURATION);
-      }
-      break;
+//   switch (command) {
+//     case "START":
+//       if (controlInterval === null) {
+//         controlInterval = setInterval(() => {
+//           togglePlayerControls();
+//         }, CONTROL_INTERVAL_DURATION);
+//       }
+//       break;
 
-    // case "PAUSE":
-    //   turnOffControls();
-    //   setTimeout(() => {
-    //     controlInterval = setInterval(() => {
-    //       togglePlayerControls();
-    //     }, CONTROL_INTERVAL_DURATION);
-    //   }, pauseTime);
-    //   break;
+//     case "STOP":
+//       controlInterval = null;
+//       turnOffControls();
+//       break;
 
-    case "STOP":
-      controlInterval = null;
-      turnOffControls();
-      break;
-
-    default:
-      console.error("Invalid command:", command);
-      break;
-  }
-}
+//     default:
+//       console.error("Invalid command:", command);
+//       break;
+//   }
+// }
 
 function togglePlayerControls() {
   if (currentRoom.contents.monsters.length > 0) {
@@ -828,6 +822,7 @@ function togglePlayerControls() {
   // Checks for Event Modal
   if (eventModal.style.display === "block") {
     potionBtn.disabled = true;
+    inventoryButton.disabled = true;
   } else {
     inventoryButton.disabled = false;
     potionBtn.disabled = false;
@@ -872,8 +867,8 @@ function togglePlayerControls() {
     currentRoom.roomName === "Hag's Hollow" ||
     currentRoom.roomName === "Curator's Curio"
   ) {
-    fadeInAnimation(inventoryButton);
     potionBtn.disabled = false;
+    inventoryButton.disabled = false;
   }
 
   if (potionCounter <= 0) {
@@ -1218,15 +1213,13 @@ attackBtn.addEventListener("click", () => {
   playerAttackHandler();
   specialCooldownHandler();
 
-  if (currentMonsterHealth <= 0) {
-    isGameOver();
-  } else {
+  if (!(currentMonsterHealth <= 0)) {
     setTimeout(monsterAttackHandler, 1200);
-    setTimeout(isGameOver, 1300);
     updatePlayerTrackers();
   }
 
-  setControlsInterval("STOP");
+  // setControlsInterval("STOP");
+  turnOffControls();
 });
 
 guardBtn.addEventListener("click", () => {
@@ -1234,9 +1227,10 @@ guardBtn.addEventListener("click", () => {
   attackCounter = 0; // Item: Soulreaver
 
   specialCooldownHandler();
-  setControlsInterval("STOP");
+  // setControlsInterval("STOP");
+  turnOffControls();
+
   guardHandler();
-  setTimeout(isGameOver, 500);
   updatePlayerTrackers();
 });
 
@@ -1254,7 +1248,6 @@ specialBtn.addEventListener("click", () => {
   }
 
   if (currentMonsterHealth <= 0) {
-    isGameOver();
   } else if (currentMonsterHealth > 0 && heroChoice !== "ROGUE") {
     setTimeout(monsterAttackHandler, 1200);
   }
@@ -1262,7 +1255,9 @@ specialBtn.addEventListener("click", () => {
   soundEffectHandler(heroChecker(), "PLAYER ABILITY");
   updatePlayerTrackers();
   specialCooldownHandler();
-  setControlsInterval("STOP");
+  // setControlsInterval("STOP");
+  turnOffControls();
+
 });
 
 potionBtn.addEventListener("click", () => {
@@ -1274,9 +1269,9 @@ potionBtn.addEventListener("click", () => {
 
   if (currentRoom.contents.monsters.length > 0) {
     specialCooldownHandler();
-    setControlsInterval("STOP");
+    // setControlsInterval("STOP");
+    turnOffControls();
     setTimeout(monsterAttackHandler, 1200);
-    isGameOver();
   }
 
   updatePlayerTrackers();
@@ -1295,7 +1290,9 @@ fleeBtn.addEventListener("click", () => {
 catacombEntranceBtn.addEventListener("click", () => {
   catacombEntranceModal.style.display = "none";
   renderLevelUpModal();
-  renderContinueButton();
+  setTimeout(() => {
+    renderContinueButton();
+  }, 2000);
 });
 
 roomSummaryButton.addEventListener("click", () => {
@@ -1303,7 +1300,8 @@ roomSummaryButton.addEventListener("click", () => {
   renderContinueButton();
   clearRoomSummaryModal();
   updateRoomsCleared();
-  setControlsInterval("START");
+  // setControlsInterval("START");
+  togglePlayerControls();
 
   // ITEM: Trollblood Tonic - 20HP after each cleared room.
   if (TROLLBLOOD_TONIC.duration !== null) {
@@ -1318,7 +1316,6 @@ roomSummaryButton.addEventListener("click", () => {
 
   updatePlayerTrackers();
   checkForLevelUp();
-  fadeInAnimation(inventoryButton);
 });
 
 continueButton.addEventListener("click", () => {
@@ -1376,7 +1373,8 @@ continueButton.addEventListener("click", () => {
     updatePlayerTrackers();
   }
 
-  setControlsInterval("STOP");
+  // setControlsInterval("STOP");
+  turnOffControls();
   soundEffectHandler(whooshLowAir);
 });
 

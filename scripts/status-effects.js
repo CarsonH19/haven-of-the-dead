@@ -338,6 +338,7 @@ const startNewStatusEffect = (statusEffect, length) => {
 
   setupStatusEffectInterval(statusEffect);
   renderStatusEffects(statusEffect);
+  togglePlayerControls();
 };
 
 const isDurationExtended = (statusEffect, length) =>
@@ -404,6 +405,7 @@ const endStatusEffectInterval = (statusEffect, intervalId) => {
   }
 
   clearInterval(intervalId);
+  togglePlayerControls();
 };
 
 function statusEffectHandler(item) {

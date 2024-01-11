@@ -481,7 +481,8 @@ const GRERVIL_THE_BODILESS = {
           }, 5000);
 
           useConsumable("Grervil's Head"); // removes item from inventory
-          setControlsInterval("STOP");
+          // setControlsInterval("STOP");
+          turnOffControls();
           writeToLogEvent(LOG_NPC_DIALOGUE, "YES", GRERVILS_HEAD);
           setTimeout(() => {
             renderEvent(GRERVILS_BODY_EVENT);
@@ -1232,7 +1233,8 @@ function renderEvent(event) {
     }
   }, 1000);
 
-  setControlsInterval("START");
+  // setControlsInterval("START");
+  togglePlayerControls();
 }
 
 // ===============================
