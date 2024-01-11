@@ -1151,20 +1151,14 @@ function generalEventHandler(option, statModifier, attribute) {
   ) {
     currentRoom.contents.events = null;
     fadeOutAnimation(eventModal);
-    setTimeout(() => {
-      eventModal.style.display = "none";
-    }, 1900);
 
     if (npcImageCard.style.display === "block") {
       fadeOutAnimation(npcImageCard);
-      setTimeout(() => {
-        npcImageCard.style.display = "none";
-      }, 1900);
     }
+
     updateTotalStats();
   }
 
-  // setTimeout(togglePlayerControls, 2000);
 }
 
 function renderEvent(event) {

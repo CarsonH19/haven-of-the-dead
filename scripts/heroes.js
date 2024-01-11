@@ -35,16 +35,13 @@ function paladinHolySmite() {
 
 function paladinRadiantAura() {
   if (
+    heroChoice === "PALADIN" &&
     currentRoom.contents.monsters[0].type === "UNDEAD" &&
     monsterContainer.style.display === "FLEX" &&
-    heroChoice === "PALADIN" &&
     currentMonsterHealth > 0
   ) {
-    setTimeout(() => {
-      damageMonster(radiantAuraTracker);
-      isGameOver();
-      writeToLogHero(LOG_RADIANT_AURA, "NO");
-    }, 500);
+    damageMonster(radiantAuraTracker);
+    writeToLogHero(LOG_RADIANT_AURA, "NO");
   }
 }
 
@@ -232,13 +229,20 @@ function healPlayer(healValue) {
 function damageFlashAnimation(target) {
   const targetElement =
     target === "MONSTER" ? monsterImageCard : playerImageCard;
-  // Clear existing animation
-  targetElement.style.animation = "none";
-  // Force a reflow by accessing an offset property
-  void targetElement.offsetWidth;
-  targetElement.style.animation = "flashAnimation 1s";
 
-  healthLowAnimation();
+  if (
+    targetElement === monsterImageCard &&
+    currentRoom.contents.monsters[0].hasOwnProperty("boss")
+  ) {
+    targetElement.style.animation = "none";
+    void targetElement.offsetWidth;
+    targetElement.style.animation = "flashAnimation 1s";
+  } else {
+    targetElement.style.animation = "none";
+    void targetElement.offsetWidth;
+    targetElement.style.animation = "flashAnimation 1s";
+    healthLowAnimation();
+  }
 }
 
 function healthLowAnimation() {
@@ -254,7 +258,9 @@ function healthLowAnimation() {
 
     // Rogue Passive Ability
     rogueDarkenedReprisal();
-  } else if (playerImageCard.style.animation === "flashAnimation 0.8s infinite") {
+  } else if (
+    playerImageCard.style.animation === "flashAnimation 0.8s infinite"
+  ) {
     playerHealthBar.classList.remove("health-bar-critical");
     playerImageCard.style.animation = "none";
     heartbeatFastLow.pause();

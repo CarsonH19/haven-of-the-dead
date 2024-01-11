@@ -782,7 +782,9 @@ function startBattle() {
     statusEffectHandler(WARDING_CANDLE);
     updatePlayerTrackers();
 
-    setControlsInterval("START");
+    setTimeout(() => {
+      setControlsInterval("START");
+    }, 1000);
   }, 1000);
 
   soundEffectHandler(currentRoom.contents.monsters[0], "SPAWN");

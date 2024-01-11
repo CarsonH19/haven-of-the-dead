@@ -493,9 +493,8 @@ function renderStatusEffects(effect) {
     // Update the existing effect
     const existingEffect = activeEffects[existingEffectIndex];
     existingEffect.duration = effect.duration;
-    // You can update other properties as needed
 
-    return; // Exit the function since the effect is already active
+    return; 
   }
 
   // New Status Effect

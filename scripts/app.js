@@ -102,6 +102,7 @@ function damageMonster(damage) {
   isItemAttuned(SKULLBREAKER_HELM);
 
   updatePlayerTrackers();
+  isGameOver();
 }
 
 function dealMonsterDamage(damage) {
