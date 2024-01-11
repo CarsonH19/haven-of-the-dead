@@ -414,7 +414,7 @@ const REVENANTS_RAGE = {
   type: "MAGIC",
   rarity: "Rare",
   effect:
-    "While attuned to this item, your Attacks deal 5 more damage while below 30HP.",
+    "While attuned to this item, your attacks deal 5 additional damage while below 30HP.",
   function: () => {
     if (currentPlayerHealth <= 30) {
       // writeToLogItem(LOG_ITEM, null, REVENANTS_RAGE); !FIX! add log
@@ -880,27 +880,13 @@ const SKULLBREAKER_HELM = {
   type: "MAGIC",
   rarity: "Rare",
   effect:
-    "While attuned to this item your Attack increases by 5 when your enemy is below 30% their max HP.",
-  stats: {
-    strength: 0,
-    dexterity: 0,
-    faith: 0,
-    attack: 0,
-  },
-  tracker: null,
+    "While attuned to this item, your attacks deal 5 additional damage to enemies below 30% their max HP.",
   function: () => {
-    let thirtyPercent = Math.round(monsterMaxHealth * 0.3);
-    if (
-      thirtyPercent >= currentMonsterHealth &&
-      SKULLBREAKER_HELM.tracker === null
-    ) {
-      SKULLBREAKER_HELM.tracker = "ACTIVE";
-      SKULLBREAKER_HELM.stats.attack = 5;
-      updateTotalStats();
+    if (currentMonsterHealth <= 30) {
+      // writeToLogItem(LOG_ITEM, null, SKULLBREAKER_HELM); !FIX! add log
+      return 5;
     } else {
-      SKULLBREAKER_HELM.tracker = null;
-      SKULLBREAKER_HELM.stats.attack = 0;
-      updateTotalStats();
+      return 0;
     }
   },
 };

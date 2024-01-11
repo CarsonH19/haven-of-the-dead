@@ -668,13 +668,14 @@ const COFFIN_EVENT = {
       soundEffectHandler(doorSecretPassage1);
       setTimeout(() => {
         playMusic(edgeOfFear);
-        monsterAttackHandler();
         startBattle();
+        monsterAttackHandler();
       }, 1500);
 
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "DRAUGR");
     }
 
+    console.log(randomNumber);
     setRoomSummary();
   },
   functionTwo: () => {

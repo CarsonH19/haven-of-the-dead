@@ -20,6 +20,8 @@ function playerAttackHandler(smite) {
   // ATTACK MODIFIERS
   // ITEM: Revenant's Rage - Increases attack when low health
   playerToMonsterDamage += isItemAttuned(REVENANTS_RAGE, 0);
+  // ITEM: Skullbreaker Helm - +5 Attack below 30%HP
+  playerToMonsterDamage += isItemAttuned(SKULLBREAKER_HELM, 0);
   // ITEM: +3 attack against evil spirits.
   playerToMonsterDamage += isItemAttuned(WRAITHBANE, 0);
   // ITEM: +3 attack against beasts and humans.
@@ -98,11 +100,11 @@ function damageMonster(damage) {
     damageFlashAnimation("MONSTER");
   }
 
-  // ITEM: Skullbreaker Helm - +5 Attack below 30%HP
-  isItemAttuned(SKULLBREAKER_HELM);
-
   updatePlayerTrackers();
-  isGameOver();
+
+  if (currentMonsterHealth <= 0) {
+    isGameOver();
+  }
 }
 
 function dealMonsterDamage(damage) {
@@ -262,8 +264,11 @@ function damagePlayer(damage) {
   // ITEM: Soul Jar - resurrect with half HP
   isItemAttuned(SOUL_JAR);
 
-  // healthLowAnimation();
-  isGameOver();
+  healthLowAnimation();
+
+  if (currentPlayerHealth <= 0) {
+    isGameOver();
+  }
 }
 
 function showDamage(damage, source, critical) {
@@ -529,12 +534,12 @@ function isGameOver(ending) {
   ) {
     fadeOutAnimation(monsterContainer);
     fadeOutAnimation(monsterImageCard);
-    console.log("FADING OUT MONSTER");
   }
 
   if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth <= 0) {
     // ITEM: Bloodstone - Recovers health when monster dies
     isItemAttuned(BLOODSTONE, null);
+    console.log(`"isGameOver" ${monster}`);
     soundEffectHandler(monster, "MONSTER DEATH");
     gainExperience(currentRoom.contents.monsters[0].skulls);
 
@@ -543,9 +548,9 @@ function isGameOver(ending) {
     }, 2000);
   }
 
-  if (npcImageCard.style.display === "block") {
-    fadeOutAnimation(npcImageCard);
-  }
+  // if (npcImageCard.style.display === "block") {
+  //   fadeOutAnimation(npcImageCard);
+  // }
 
   function renderGameOverModal(ending) {
     if (ending === "DEAD") {
@@ -627,10 +632,6 @@ function isGameOver(ending) {
   }
 
   function openGameOverModal() {
-    // setTimeout(() => {
-    //   const gameOverModal = document.getElementById("gameOverModal");
-    //   gameOverModal.style.display = "block";
-    // }, 2000);
     fadeInAnimation(gameOverModal);
   }
 }

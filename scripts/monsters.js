@@ -736,14 +736,13 @@ function monsterSkullLevel(level) {
 function renderMonsterStatBlock(monster) {
   fadeInAnimation(monsterContainer);
 
-  if (monster.boss) {
-    fadeInAnimation(monsterImageCard);
-    monsterImageCard.style.backgroundImage = ``;
-    monsterImageCard.style.border = "0px";
-  } else {
+  if (!monster.hasOwnProperty('boss')) {
     fadeInAnimation(monsterImageCard);
     monsterImageCard.style.backgroundImage = `url(${monster.image})`;
     monsterImageCard.style.border = "2px solid var(--header)";
+  } else {
+    monsterImageCard.style.backgroundImage = ``;
+    monsterImageCard.style.border = "0px";
   }
 
   monsterSkullLevel(monster.skulls);
@@ -761,6 +760,7 @@ function renderMonsterStatBlock(monster) {
   monsterContainer.style.width = `${(monsterMaxHealth / 10) + 25}vw`;
 
   togglePlayerControls();
+  console.log('Monster Rendered');
 }
 
 function setMonsterHealth(maxLife) {

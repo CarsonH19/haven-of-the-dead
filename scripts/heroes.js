@@ -41,6 +41,7 @@ function paladinRadiantAura() {
     currentMonsterHealth > 0
   ) {
     damageMonster(radiantAuraTracker);
+    isGameOver();
     writeToLogHero(LOG_RADIANT_AURA, "NO");
   }
 }

@@ -363,7 +363,7 @@ li, ul {
   list-style-type: none;
   color: rgb(233, 233, 233);
   padding: 0px;
-  font-size: 3.0rem;
+  font-size: 6vh;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
