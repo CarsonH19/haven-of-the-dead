@@ -186,9 +186,8 @@ li, ul {
   aspect-ratio: 1;
   display: none;
   position: absolute;
-  right: -4%; 
-  top: 22%; 
-  transform: translate(-50%, -50%); 
+  right: 2.5%; 
+  top: 17%; 
   height: 20vh;
   border: 2px solid var(--header);
   border-radius: 5px;
@@ -247,7 +246,7 @@ li, ul {
   align-self: flex-end;
   justify-content: space-between;
   max-width: 100%;
-  width: 350px;
+  min-width: 25vw;
   /* max-width: 40vw; */
   height: 100%;
   /* border: 4px solid var(--accent);
@@ -481,10 +480,8 @@ li, ul {
 .player-container {
   display: flex;
   justify-content: flex-start;
-  align-items: flex-end;
   width: 33%;
   height: 100%;
-  cursor: pointer;
   padding: 10px;
   gap: 15px;
 }
@@ -495,6 +492,11 @@ li, ul {
   bottom: 24%;
   width: 950px;
 }
+
+/* .player-display div .character-divider {
+  margin: 0px;
+  margin-bottom: 5px;
+} */
 
 .btn-container {
   width: 33%;
@@ -530,7 +532,7 @@ li, ul {
   }
 }
 
-.player-container h3 {
+.player-display h3 {
   margin: 0px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
   font-size: 1.2rem;
@@ -538,19 +540,6 @@ li, ul {
 
 .player-container h4 {
   margin: 0px;
-}
-
-.player-container .show-stats {
-  margin-top: 5vh;
-  text-align: center;  
-  opacity: 1;
-  align-self: center;
-  justify-self: flex-end;
-}
-
-.player-container:hover .show-stats {
-  transition: 0.3s;
-  opacity: 1;
 }
 
 .show-log {
@@ -570,6 +559,7 @@ li, ul {
 .health-bar .health-level-experience {
   display: flex;
   justify-content: space-between;
+  margin-top: 1vh;
 }
 
 .health-bar p,
@@ -584,13 +574,15 @@ li, ul {
 
 .player-stats {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-evenly;
   width: 100%;
+  height: 100%;
   height: auto;
 }
 
 .player-stats p {
-  text-align: center;
+  text-align: left;
   margin: 0px;
 }
 
@@ -1243,7 +1235,7 @@ progress[value]::-moz-progress-bar {
   position: fixed;
   z-index: 1;
   left: 50%;
-  top: 70%;
+  top: 60%;
   transform: translate(-50%, -50%);
 }
 
@@ -1718,7 +1710,7 @@ progress[value]::-moz-progress-bar {
   border-radius: 10px;
   width: 35vw;
   height: 60vh;
-  overflow: auto;
+  overflow: none;
   padding: 10px;
 }
 
@@ -1755,6 +1747,7 @@ progress[value]::-moz-progress-bar {
 }
 
 .level-up-modal-content h3 {
+  font-size: 2.0vh;
   margin: 0px;
   padding: 0px;
   text-align: center;
@@ -1779,8 +1772,7 @@ progress[value]::-moz-progress-bar {
 .attributes-container button,
 .abilities-container button {
   aspect-ratio: 1;
-  height: 130px;
-  width: 130px;
+  height: 15vh;
   font-family: monospace;
   font-size: 2rem;
   color: lightgray;
@@ -1870,4 +1862,139 @@ progress[value]::-moz-progress-bar {
 /* 
 ==========================================
               ANIMATIONS
-=======================================
+==========================================
+*/
+
+.fade-out {
+  animation: fade-out 0.5s; 
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes room-transition {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Damage Flash */
+.damage-flash {
+  /* box-shadow: inset 0 0 5px 10px rgba(255, 0, 0, 0.5);  */
+  animation: flashAnimation 0.8s forwards; 
+}
+
+.flash-low-health {
+  box-shadow: inset 0 0 50px 20px rgba(255, 0, 0, 0.5); 
+  animation: flashAnimation 0.8s infinite; 
+}
+
+@keyframes flashAnimation {
+  0% {
+    box-shadow: inset 0 0 20px 10px rgba(188, 13, 13, 0.5); 
+  }
+  100% {
+    box-shadow: none; 
+  }
+}
+
+ /* Health Bar Shake */
+ @keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-1px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(1px);
+  }
+}
+
+.health-bar-critical {
+  animation: shake 0.5s infinite;
+}
+
+
+.orb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  background: radial-gradient(circle, var(--orb) 5%, rgba(255, 236, 160, 0) 100%);
+  /* transform: translateY(-50%); */
+  animation: orbAnimation 6s ease-in-out infinite, pulseAnimation 2.0s ease-in-out infinite;
+  box-shadow: 0 0 40px 10px #ffeca0; 
+  opacity: 90%;
+}
+
+@keyframes pulseAnimation {
+  0% {
+    box-shadow: 0 0 20px 00px var(--orb);
+  }
+  50% {
+    box-shadow: 0 0 40px 10px var(--orb); /* adjusted glow effect for pulsing */
+  }
+  100% {
+    box-shadow: 0 0 20px 0px var(--orb); /* adjusted glow effect for pulsing */
+  }
+}
+
+
+@keyframes orbAnimation {
+  0%, 100% {
+    left: 50%;
+    transform: translateY(-50%) translateX(0);
+  }
+  15% {
+    left: 55%;
+    transform: translateY(-55%) translateX(5%);
+  }
+  30% {
+    left: 50%;
+    transform: translateY(-50%) translateX(0);
+  }
+  45% {
+    left: 45%;
+    transform: translateY(-45%) translateX(-5%);
+  }
+  60% {
+    left: 50%;
+    transform: translateY(-50%) translateX(0);
+  }
+  75% {
+    top: 40%;
+    transform: translateY(-40%) translateX(0);
+  }
+  90% {
+    top: 60%;
+    transform: translateY(-60%) translateX(0);
+  }
+}

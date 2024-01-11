@@ -1939,9 +1939,10 @@ function removeEventDescriptionLog() {
 
 function fadeInAnimation(element) {
   element.style.animation = "fade-in 1s";
-
+  // console.log(`Fading In: ${element}`);
   setTimeout(() => {
     element.style.display = "block";
+    // element.style.animation = 'none';
   }, 900);
 }
 
@@ -1949,6 +1950,8 @@ function fadeOutAnimation(element, time = 1000) {
   const displayTime = time + 900;
   setTimeout(() => {
     element.style.animation = "fade-out 1s";
+    // element.style.animation = 'none';
+    // console.log(`Fading Out: ${element}`);
   }, time);
 
   setTimeout(() => {

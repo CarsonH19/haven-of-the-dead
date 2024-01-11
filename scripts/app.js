@@ -546,15 +546,6 @@ function isGameOver(ending) {
     fadeOutAnimation(npcImageCard);
   }
 
-  if (
-    currentRoom.contents.monsters.length === 0 &&
-    currentMonsterHealth <= 0 &&
-    playerImageCard.style.display === "block"
-  ) {
-    fadeOutAnimation(playerImageCard);
-    console.log("Player Image Fade Out");
-  }
-
   function renderGameOverModal(ending) {
     if (ending === "DEAD") {
       openGameOverModal();
@@ -966,7 +957,6 @@ function updatePlayerTrackers() {
   function updateHeroExperience() {
     const currentXP = document.getElementById("currentXP");
     currentXP.textContent = experiencePoints;
-    // const xpToNextLevel = document.getElementById("xpToNextLevel");
 
     if (levelCounter === 1) {
       xpToNextLevel.textContent = 300;
@@ -1005,51 +995,36 @@ function updatePlayerTrackers() {
   renderHeroStats();
 }
 
-// function newRoomAnimation() {
-//   const fade = document.getElementById("fade");
-//   fade.style.animation = "fade-in 2s";
-//   setTimeout(() => {
-//     fade.style.animation = "fade-out 2s";
-
-//     clearNarrative();
-//   }, 2000);
-// }
-
 function newRoomAnimation() {
   const fade = document.getElementById("fade");
-
-  // Remove the animation to reset it
   fade.style.animation = "none";
-
-  // Trigger reflow to apply the reset
   void fade.offsetWidth;
-
-  // Add the animation back
   fade.style.animation = "room-transition 4s";
-
-  // Additional logic, if needed
+  console.log(`Room Animation: ${fade}`);
   clearNarrative();
 }
 
 function damageFlashAnimation(target) {
-  switch (target) {
-    case "PLAYER":
-      roomImage.classList.add("flash");
+  const targetElement = (target === "MONSTER") ? monsterImageCard : playerImageCard;
 
-      setTimeout(() => {
-        roomImage.classList.remove("flash");
-      }, 1000);
-      break;
+  // Clear existing animation
+  targetElement.style.animation = "none";
 
-    case "MONSTER":
-      monsterImage.classList.add("monster-flash-damage");
+  // Force a reflow by accessing an offset property
+  void targetElement.offsetWidth;
 
-      setTimeout(() => {
-        monsterImage.classList.remove("monster-flash-damage");
-      }, 1000);
-      break;
-  }
+  // Apply the new animation
+  targetElement.style.animation = "flashAnimation 1s";
+
+  // Log for debugging
+  console.log(`Damage Flash Animation: ${target}`);
+  
+  // Clear the animation after a delay
+  setTimeout(() => {
+    targetElement.style.animation = "none";
+  }, 1000);
 }
+
 
 // ===============================
 //        Start Game Modal
@@ -1212,7 +1187,6 @@ function renderRoomSummaryModal() {
   updatePlayerTrackers();
   soundEffectHandler(hitReverbDark4);
   fadeOutAnimation(controlsContainer);
-  fadeOutAnimation(playerImageCard);
 }
 
 function setRoomSummary() {
@@ -1416,9 +1390,6 @@ continueButton.addEventListener("click", () => {
       }
     }, 1500);
 
-    setTimeout(() => {
-      fadeInAnimation(playerImageCard);
-    }, 2000);
     newRoomAnimation();
     closeContinueButton();
     updatePlayerTrackers();

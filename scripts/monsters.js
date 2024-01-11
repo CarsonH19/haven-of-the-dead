@@ -757,8 +757,8 @@ function renderMonsterStatBlock(monster) {
 
   monsterNameElement.textContent = monster.name;
   const monsterLevel = document.getElementById("monsterLevel");
-  monsterLevel.text = monster.skulls;
-  monsterContainer.style.width = `${monsterMaxHealth + 350}px`;
+  monsterLevel.textContent = monster.skulls;
+  monsterContainer.style.width = `${(monsterMaxHealth / 10) + 25}vw`;
 
   togglePlayerControls();
 }
