@@ -791,113 +791,115 @@ function renderCurrentRoom(currentRoom) {
 // }
 
 function togglePlayerControls() {
-  if (currentRoom.contents.monsters.length > 0) {
-    attackBtn.disabled = false;
-    guardBtn.disabled = false;
-    fleeBtn.disabled = false;
-    potionBtn.disabled = false;
-  } else {
-    attackBtn.disabled = true;
-    guardBtn.disabled = true;
-    fleeBtn.disabled = true;
-  }
+  setTimeout(() => {
+    if (currentRoom.contents.monsters.length > 0) {
+      attackBtn.disabled = false;
+      guardBtn.disabled = false;
+      fleeBtn.disabled = false;
+      potionBtn.disabled = false;
+    } else {
+      attackBtn.disabled = true;
+      guardBtn.disabled = true;
+      fleeBtn.disabled = true;
+    }
 
-  // Checks for Guard Cooldown
-  if (currentRoom.contents.monsters.length > 0 && guardReady === "YES") {
-    guardBtn.disabled = false;
-  } else {
-    guardBtn.disabled = true;
-  }
+    // Checks for Guard Cooldown
+    if (currentRoom.contents.monsters.length > 0 && guardReady === "YES") {
+      guardBtn.disabled = false;
+    } else {
+      guardBtn.disabled = true;
+    }
 
-  // Checks for Special Ability Cooldown
-  if (
-    currentRoom.contents.monsters.length > 0 &&
-    specialCooldownCounter === 0
-  ) {
-    specialBtn.disabled = false;
-  } else {
-    specialBtn.disabled = true;
-  }
+    // Checks for Special Ability Cooldown
+    if (
+      currentRoom.contents.monsters.length > 0 &&
+      specialCooldownCounter === 0
+    ) {
+      specialBtn.disabled = false;
+    } else {
+      specialBtn.disabled = true;
+    }
 
-  // Checks for Event Modal
-  if (eventModal.style.display === "block") {
-    potionBtn.disabled = true;
-    inventoryButton.disabled = true;
-  } else {
-    inventoryButton.disabled = false;
-    potionBtn.disabled = false;
-  }
+    // Checks for Event Modal
+    if (eventModal.style.display === "block") {
+      potionBtn.disabled = true;
+      inventoryButton.disabled = true;
+    } else {
+      inventoryButton.disabled = false;
+      potionBtn.disabled = false;
+    }
 
-  // Checks for Chilled Condition
-  if (CHILLED.duration !== null) {
-    guardBtn.disabled = true;
-    fleeBtn.disabled = true;
-  }
+    // Checks for Chilled Condition
+    if (CHILLED.duration !== null) {
+      guardBtn.disabled = true;
+      fleeBtn.disabled = true;
+    }
 
-  // Checks for Cursed Condition
-  if (CURSED.duration !== null) {
-    specialBtn.disabled = true;
-  }
+    // Checks for Cursed Condition
+    if (CURSED.duration !== null) {
+      specialBtn.disabled = true;
+    }
 
-  // Checks for Webbed Condition
-  if (WEBBED.duration !== null) {
-    attackBtn.disabled = true;
-    guardBtn.disabled = true;
-    specialBtn.disabled = true;
-    fleeBtn.disabled = true;
-    potionBtn.disabled = true;
-  }
+    // Checks for Webbed Condition
+    if (WEBBED.duration !== null) {
+      attackBtn.disabled = true;
+      guardBtn.disabled = true;
+      specialBtn.disabled = true;
+      fleeBtn.disabled = true;
+      potionBtn.disabled = true;
+    }
 
-  // Close Action Buttons
-  if (
-    monsterContainer.style.display === "none" &&
-    currentRoom.contents.monsters.length <= 0 &&
-    currentPlayerHealth > 0
-  ) {
-    fadeOutAnimation(controlsContainer);
-  } else {
-    fadeInAnimation(controlsContainer);
-    setTimeout(() => {
-      controlsContainer.style.display = "flex";
-    }, 1500);
-  }
+    // Close Action Buttons
+    if (
+      monsterContainer.style.display === "none" &&
+      currentRoom.contents.monsters.length <= 0 &&
+      currentPlayerHealth > 0
+    ) {
+      fadeOutAnimation(controlsContainer);
+    } else {
+      fadeInAnimation(controlsContainer);
+      setTimeout(() => {
+        controlsContainer.style.display = "flex";
+      }, 1500);
+    }
 
-  // Gives access to inventory while trading
-  if (
-    currentRoom.roomName === "Hag's Hollow" ||
-    currentRoom.roomName === "Curator's Curio"
-  ) {
-    potionBtn.disabled = false;
-    inventoryButton.disabled = false;
-  }
+    // Gives access to inventory while trading
+    if (
+      currentRoom.roomName === "Hag's Hollow" ||
+      currentRoom.roomName === "Curator's Curio"
+    ) {
+      potionBtn.disabled = false;
+      inventoryButton.disabled = false;
+    }
 
-  if (potionCounter <= 0) {
-    potionBtn.disabled = true;
-  }
+    if (potionCounter <= 0) {
+      potionBtn.disabled = true;
+    }
 
-  // Baron of Bone Room
-  if (
-    currentRoom.roomName === "Presence of the Eternal" &&
-    currentRoom.roomName === "Throne of the Eternal"
-  ) {
-    fleeBtn.disabled = true;
-  }
+    // Baron of Bone Room
+    if (
+      currentRoom.roomName === "Presence of the Eternal" &&
+      currentRoom.roomName === "Throne of the Eternal"
+    ) {
+      fleeBtn.disabled = true;
+    }
 
-  if (currentPlayerHealth <= 0) {
-    attackBtn.disabled = true;
-    guardBtn.disabled = true;
-    fleeBtn.disabled = true;
-    potionBtn.disabled = true;
-    specialBtn.disabled = true;
-  }
+    if (currentPlayerHealth <= 0) {
+      attackBtn.disabled = true;
+      guardBtn.disabled = true;
+      fleeBtn.disabled = true;
+      potionBtn.disabled = true;
+      specialBtn.disabled = true;
+    }
 
-  addStrikeThrough(attackBtn);
-  addStrikeThrough(guardBtn);
-  if (specialCooldownCounter === 0) {
-    addStrikeThrough(specialBtn);
-  }
-  addStrikeThrough(potionBtn);
-  addStrikeThrough(fleeBtn);
+    addStrikeThrough(attackBtn);
+    addStrikeThrough(guardBtn);
+    if (specialCooldownCounter === 0) {
+      addStrikeThrough(specialBtn);
+    }
+    addStrikeThrough(potionBtn);
+    addStrikeThrough(fleeBtn);
+  }, 500);
 
   function addStrikeThrough(button) {
     if (button.disabled === true) {
@@ -1257,7 +1259,6 @@ specialBtn.addEventListener("click", () => {
   specialCooldownHandler();
   // setControlsInterval("STOP");
   turnOffControls();
-
 });
 
 potionBtn.addEventListener("click", () => {

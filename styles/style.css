@@ -499,10 +499,12 @@ li, ul {
 } */
 
 .btn-container {
+  margin-right: 3vh;
   width: 33%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: flex-end;
+  gap: 3vh;
 }
 
 .btn-container button {
@@ -583,7 +585,7 @@ li, ul {
   margin: 0px;
   padding: 0px;
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: 2vh;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
   margin-top: 2vh;
   margin-bottom: 2vh;
@@ -1152,14 +1154,14 @@ progress[value]::-moz-progress-bar {
   font-size: 1.2rem;
 }
 
-.room-summary-modal-content .itemTooltip {
+/* .room-summary-modal-content .itemTooltip {
   border: 1px solid red;
   margin: 0vh 1vh 1vh 1vh;
   height: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 80px)); 
   gap: 0px;
-}
+} */
 
 .room-summary-modal-content .item-summary-container {
    display: flex;
@@ -1462,18 +1464,18 @@ progress[value]::-moz-progress-bar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 5px;
+  gap: 1vh;
   visibility: hidden;
-  min-width: 130px; /* Set a minimum width */
-  width: auto; /* Allow the width to adjust based on content */
-  min-height: 80px; /* Set a minimum height */
+  width: auto; 
+  min-width: 15vh;
+  min-height: 6vh;
   background-color: var(--accent);
   color: lightgray;
   text-align: left;
-  font-size: 0.8rem;
+  font-size: 1.2vh;
   border-radius: 6px;
   padding: 5px;
-  margin-left: -60px;
+  /* margin-left: -60px; */
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 3;
