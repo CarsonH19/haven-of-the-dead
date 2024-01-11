@@ -155,6 +155,7 @@ let baseHealth;
 let playerMaxHealth;
 
 function calculatePlayerMaxHealth() {
+  const playerDisplay = document.querySelector(".player-display");
   let strengthBonusHealth = totalStrength * 10;
   playerMaxHealth = baseHealth + strengthBonusHealth;
   playerMaxHealth += crimsonCovenantBoon;
@@ -177,6 +178,8 @@ function calculatePlayerMaxHealth() {
   } else {
     playerHealthBar.max = playerMaxHealth;
   }
+
+  playerDisplay.style.width = `${Math.round(playerMaxHealth / 10) + 20}vw`;
 
   return playerMaxHealth;
 }

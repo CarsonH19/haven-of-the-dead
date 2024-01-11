@@ -489,8 +489,9 @@ li, ul {
 .player-display {
   position: absolute;
   left: 1%;
-  bottom: 24%;
-  width: 950px;
+  bottom: 25%;
+  min-width: 20vw;
+  max-width: 95vw;
 }
 
 /* .player-display div .character-divider {
