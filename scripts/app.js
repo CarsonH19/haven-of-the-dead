@@ -13,7 +13,11 @@ function playerAttackHandler(smite) {
   }
 
   // Checks for Rank 4 Umbral Assault - additional damage !FIX! Balance?!
-  if (heroChoice === "ROGUE" && specialAbilityBoonRank === 4) {
+  if (
+    heroChoice === "ROGUE" &&
+    specialAbilityBoonRank === 4 &&
+    smite === "UMBRAL ASSAULT"
+  ) {
     playerToMonsterDamage += totalDexterity;
   }
 
@@ -39,7 +43,12 @@ function playerAttackHandler(smite) {
   isItemAttuned(UNHOLY_EFFIGY);
 
   // Smite Critical Hit
-  if (criticalHit >= 20 && smite > 1 && playerToMonsterDamage > 0) {
+  if (
+    criticalHit >= 20 &&
+    smite > 1 &&
+    playerToMonsterDamage > 0 &&
+    heroChoice === "PALADIN"
+  ) {
     totalDamage = Math.round(
       smite * (playerToMonsterDamage * calculateCritDamageModifier())
     );
@@ -47,7 +56,7 @@ function playerAttackHandler(smite) {
     soundEffectHandler(heroChecker(), "PLAYER ABILITY");
     writeToLogHero(LOG_SMITE_CRITICAL, "YES", totalDamage);
     // Smite Hit
-  } else if (smite > 1) {
+  } else if (smite > 1 && heroChoice === "PALADIN") {
     totalDamage = Math.round(playerToMonsterDamage * smite);
     showDamage(totalDamage, "PLAYER");
     soundEffectHandler(heroChecker(), "PLAYER ABILITY");
@@ -623,6 +632,7 @@ function isGameOver(ending) {
         backgroundImage.style.alignItems = "center";
       }, 6000);
 
+      const playerDisplay = document.querySelector(".player-display");
       eventModal.style.display = "none";
       tradeModal.style.display = "none";
       levelUpModal.style.display = "none";
@@ -630,6 +640,8 @@ function isGameOver(ending) {
       logModal.style.display = "none";
       roomSummaryButton.style.display = "none";
       continueButtonModal.style.display = "none";
+      monsterContainer.style.display = "none";
+      playerDisplay.style.display = "none";
     }
   }
 

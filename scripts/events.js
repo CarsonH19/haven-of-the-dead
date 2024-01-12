@@ -290,13 +290,13 @@ const IVAN_THE_SCOUNDREL = {
     IVAN_THE_SCOUNDREL.summary = `Amidst the severed limbs of the defeated arachnid, the scoundrel, grateful yet wary, hands over a cryptic key. "Treasures await within my hidden cache," he smirks. "Take what's yours."`;
     currentRoom.contents.items.push(CACHE_KEY);
     currentRoom.contents.monsters.push(BROODMOTHER);
-    // let addRoom = roomCounter + 5;
-    // let ivanInterval = setInterval(() => {
-    // if (roomCounter > addRoom) {
-    catacombRooms.push(IVANS_CACHE);
-    //   clearInterval(ivanInterval);
-    // }
-    // }, 60000);
+    let addRoom = roomCounter + 5;
+    let ivanInterval = setInterval(() => {
+      if (roomCounter > addRoom) {
+        catacombRooms.push(IVANS_CACHE);
+        clearInterval(ivanInterval);
+      }
+    }, 60000);
 
     setRoomSummary();
     startBattle();
@@ -433,7 +433,7 @@ const FORSAKEN_COMMANDER = {
 
 function forsakenCommanderCheck() {
   // Checks if Forsaken Commander's Quest is Complete
-  if (legionTracker >= 30 && FORSAKEN_COMMANDER.tracker === "ACTIVE") {
+  if (legionTracker >= 20 && FORSAKEN_COMMANDER.tracker === "ACTIVE") {
     FORSAKEN_COMMANDER.tracker = "FINSIHED";
     WAR_TORN_BANNER_STATUS.duration = null;
     inventoryItems.push(AEGIS_OF_THE_FALLEN);
@@ -472,7 +472,8 @@ const GRERVIL_THE_BODILESS = {
 
           setTimeout(() => {
             fadeOutAnimation(monsterContainer);
-            fadeOutAnimation(monsterImage);
+            fadeOutAnimation(monsterImageCard);
+            fadeOutAnimation(controlsContainer);
 
             setTimeout(() => {
               monsterContainer.style.display = "none";
@@ -688,7 +689,7 @@ const COFFIN_EVENT = {
 };
 
 const LAUGHING_COFFIN_EVENT = {
-  name: "The Laughing Coffin",
+  name: "Laughing Coffin",
   eventType: "MISC",
   description: `The Laughing Coffin tavern, sanctuary for underworld denizens. Amid dim-lit haze, dubious characters eye you.`,
   summary: "",
@@ -708,6 +709,7 @@ const LAUGHING_COFFIN_EVENT = {
       setTimeout(renderRoomSummaryModal, 11000);
       setRoomSummary();
     } else {
+      LAUGHING_COFFIN_EVENT.summary = `Caught in a lie, and unable to pay coin as you said you would, several scoundrels attacked you.`;
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "LIAR");
       patrons.push(SCOUNDREL, SCOUNDREL, SCOUNDREL);
       setRoomSummary();
@@ -715,10 +717,11 @@ const LAUGHING_COFFIN_EVENT = {
     }
   },
   functionTwo: () => {
+    LAUGHING_COFFIN_EVENT.summary = `With no coin, you were unable to enter the Laughing Coffin.`;
     setTimeout(() => {
       writeToLogEvent(LOG_MISC_OPTION_TWO, "YES");
     }, 2000);
-
+    setRoomSummary();
     setTimeout(renderRoomSummaryModal, 7000);
   },
 };
@@ -1127,7 +1130,10 @@ function generalEventHandler(option, statModifier, attribute) {
     }
 
     setRoomSummary();
-    setTimeout(renderRoomSummaryModal, 5000);
+
+    if (currentRoom.roomName !== "Webspun Passage") {
+      setTimeout(renderRoomSummaryModal, 5000);
+    }
   }
 
   // Logic for non-trap events
@@ -1160,7 +1166,6 @@ function generalEventHandler(option, statModifier, attribute) {
 
     updateTotalStats();
   }
-
 }
 
 function renderEvent(event) {

@@ -186,8 +186,8 @@ li, ul {
   aspect-ratio: 1;
   display: none;
   position: absolute;
-  right: 2%; 
-  top: 11%; 
+  right: 0%; 
+  top: 80%; 
   height: 20vh;
   border: 2px solid var(--header);
   border-radius: 5px;
@@ -491,6 +491,7 @@ li, ul {
   bottom: 25%;
   min-width: 20vw;
   max-width: 95vw;
+  z-index: 1;
 }
 
 /* .player-display div .character-divider {

@@ -22,7 +22,7 @@ const POISONED = {
     // ITEM: Toxinweave Mask - Poison Immunity
     const immune = isItemAttuned(TOXINWEAVE_MASK, null);
 
-    if (!immune || HEXBANE_BREW.duration !== null) {
+    if (!immune && HEXBANE_BREW.duration !== null) {
       startStatusEffect(POISONED, length);
     }
   },
@@ -39,7 +39,7 @@ const HAUNTED = {
     // ITEM: Ghostshroud Talisman - Haunted Immunity
     const immune = isItemAttuned(GHOSTSHROUD_TALISMAN, null);
 
-    if (!immune || HEXBANE_BREW.duration !== null) {
+    if (!immune && HEXBANE_BREW.duration !== null) {
       startStatusEffect(HAUNTED, length);
       soundEffectHandler(ghostlyMagic);
     }
@@ -57,7 +57,7 @@ const DISEASED = {
     // ITEM: Plagueward Pendant - Disease Immunity
     const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
 
-    if (!immune || HEXBANE_BREW.duration !== null) {
+    if (!immune && HEXBANE_BREW.duration !== null) {
       startStatusEffect(DISEASED, length);
     }
   },
@@ -86,7 +86,7 @@ const CURSED = {
     // ITEM: Darkguard Trinket - Cursed Immunity
     const immune = isItemAttuned(DARKGUARD_TRINKET, null);
 
-    if (!immune || HEXBANE_BREW.duration !== null) {
+    if (!immune && HEXBANE_BREW.duration !== null) {
       startStatusEffect(CURSED, length);
       soundEffectHandler(ghostEncounter);
     }
@@ -139,14 +139,14 @@ const CHILLED = {
   name: "Chilled",
   detail: "CONDITION",
   image: "styles/images/items/chilled.jpg",
-  status: "You are unable to use your special ability or flee.",
+  status: "You are unable to guard or flee.",
   duration: null,
   statusDuration: null,
   function: (length) => {
     // ITEM: Chillbreaker Band - Chilled Immunity
     const immune = isItemAttuned(CHILLBREAKER_BAND, null);
 
-    if (!immune || HEXBANE_BREW.duration !== null) {
+    if (!immune && HEXBANE_BREW.duration !== null) {
       startStatusEffect(CHILLED, length);
     }
   },
@@ -213,7 +213,7 @@ const WAR_TORN_BANNER_STATUS = {
   function: () => {
     if (WAR_TORN_BANNER_STATUS === null) {
       WAR_TORN_BANNER_STATUS.duration = `${
-        30 - legionTracker
+        20 - legionTracker
       } legionnaires remaining.`;
 
       const warTornBannerInterval = setInterval(() => {
@@ -221,7 +221,7 @@ const WAR_TORN_BANNER_STATUS = {
           clearInterval(warTornBannerInterval);
         } else {
           WAR_TORN_BANNER_STATUS.duration = `${
-            30 - legionTracker
+            20 - legionTracker
           } legionnaires remaining.`;
         }
       }, 3000);
@@ -419,9 +419,9 @@ function statusEffectHandler(item) {
           let randomNumber = Math.round(Math.random() * 10);
 
           if (randomNumber >= 5) {
-            setControlsInterval("PAUSE", 3000);
+            turnOffControls();
             fadeOutAnimation(monsterContainer);
-            fadeOutAnimation(monsterImage);
+            fadeOutAnimation(monsterImageCard);
             setTimeout(() => {
               checkForMonsters();
               monsterContainer.style.display = "none";
@@ -496,7 +496,7 @@ function renderStatusEffects(effect) {
     const existingEffect = activeEffects[existingEffectIndex];
     existingEffect.duration = effect.duration;
 
-    return; 
+    return;
   }
 
   // New Status Effect

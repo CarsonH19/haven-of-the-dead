@@ -114,7 +114,7 @@ let radiantAuraTracker = 5;
 
 // Rogue
 let umbralAssaultTracker = 2;
-let darkenedReprisalTracker = 2;
+let darkenedReprisalTracker = 1.5;
 
 // Priestess
 let cleansingFlameTracker = 10;
@@ -240,7 +240,7 @@ let totalFaith = baseFaith;
 let itemFindChance;
 
 function calculateItemFindChance() {
-  itemFindChance = totalFaith * 5;
+  itemFindChance = (totalFaith + 1) * 5;
   itemFindChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
   return Math.round(itemFindChance);
 }
@@ -401,7 +401,6 @@ const LOG_OTHER = "OTHER";
 
 // Legion's Grace
 let legionTracker = 0;
-let legionAttackBoost = Math.floor(legionTracker / 30);
 
 // Crimson Covenant
 let crimsonCovenantBoon = 0;

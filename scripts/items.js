@@ -673,7 +673,6 @@ const CRIMSON_OFFERING = {
     "While attuned to this item you sacrifice 5HP after each of your attacks, but you deal an additional 10 damage.",
   function: () => {
     damagePlayer(5);
-    isGameOver();
     writeToLogItem(LOG_ITEM, "YES", CRIMSON_OFFERING);
     return 10;
   },
@@ -765,6 +764,7 @@ function boneAmalgamAddHitPoints() {
       (monster !== GRUDGE ||
         monster !== HAUNTING_SPIRIT ||
         monster !== SHADE ||
+        monster !== WRAITH ||
         monster !== CRYPT_CRAWLER ||
         monster !== BROODMOTHER) &&
       BONE_AMALGAM.tracker < 30
@@ -947,7 +947,7 @@ const TOMBGUARD = {
   function: () => {
     // add shield soundEffect? hero.soundEffects.guard = sound;
     // writeToLogItem(LOG_ITEM, null, TOMBGUARD); !FIX!
-    console.log(`TOMBGUARD`)
+    console.log(`TOMBGUARD`);
     return 5;
   },
 };
@@ -1549,13 +1549,13 @@ const SOULFLAME_CANDLE = {
   detail: "CANDLE",
   tracker: null,
   effect:
-    "While this candle is lit all experience gained is doubled. The candle burns out after clearing 10 rooms.",
+    "While this candle is lit all experience gained is doubled. The candle burns out after clearing 5 rooms.",
   status: "All experience gained is doubled.",
   duration: null,
   statusDuration: null,
   function: () => {
     SOULFLAME_CANDLE.tracker = "LIT";
-    startStatusEffect(SOULFLAME_CANDLE, 10);
+    startStatusEffect(SOULFLAME_CANDLE, 5);
   },
 };
 
@@ -1952,7 +1952,10 @@ function useConsumable(consumable) {
     const index = inventoryItems.indexOf(itemObject);
     inventoryItems.splice(index, 1);
 
-    if (itemObject.type === "CONSUMABLE" && itemObject.name !== "Ivan's Cache Key") {
+    if (
+      itemObject.type === "CONSUMABLE" &&
+      itemObject.name !== "Ivan's Cache Key"
+    ) {
       writeToLogItem(LOG_CONSUMABLE, "YES", itemObject);
     }
   }
@@ -1996,7 +1999,10 @@ function lootItems(lootGroup) {
         commonLoot = humanoidCommonLoot;
         rareLoot = humanoidRareLoot;
 
-        if (lootSpecialChance > 95) {
+        if (
+          lootSpecialChance > 95 &&
+          currentRoom.contents.monsters[0] === SCOUNDREL
+        ) {
           room.push(LAUGHING_COFFIN_COIN);
         }
 

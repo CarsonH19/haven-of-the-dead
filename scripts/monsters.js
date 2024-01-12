@@ -375,7 +375,6 @@ function endFloodOfBonesBoss() {
       playMusic(pileOfBones);
       renderBackground(defeatedFloodImage);
     }, 2500);
-    // togglePlayerControls();
   }
 }
 function endBaronOfBoneBoss() {
@@ -465,7 +464,6 @@ const UNDEAD_RIVEN = {
         UNDEAD_RIVEN.attackCounter--;
 
         undeadRivenAttacks();
-        isGameOver();
       } else {
         clearInterval(undeadRivenInterval);
       }
@@ -736,15 +734,17 @@ function monsterSkullLevel(level) {
 function renderMonsterStatBlock(monster) {
   if (currentRoom.contents.monsters.length > 0) {
     fadeInAnimation(monsterContainer);
+    fadeInAnimation(monsterImageCard);
 
     if (!monster.hasOwnProperty("boss")) {
-      fadeInAnimation(monsterImageCard);
       monsterImageCard.style.backgroundImage = `url(${monster.image})`;
       monsterImageCard.style.border = "2px solid var(--header)";
     } else {
       monsterImageCard.style.backgroundImage = ``;
       monsterImageCard.style.border = "0px";
     }
+
+
 
     monsterSkullLevel(monster.skulls);
 

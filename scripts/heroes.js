@@ -41,7 +41,6 @@ function paladinRadiantAura() {
     currentMonsterHealth > 0
   ) {
     damageMonster(radiantAuraTracker);
-    isGameOver();
     writeToLogHero(LOG_RADIANT_AURA, "NO");
   }
 }
@@ -82,12 +81,11 @@ function rogueUmbralAssault() {
     attacksMade++;
 
     playerAttackHandler();
-    isGameOver();
 
     if (attacksMade === umbralAssaultTracker || currentMonsterHealth <= 0) {
       clearInterval(umbralAssaultInterval);
     }
-  }, 500);
+  }, 400);
 
   setTimeout(() => {
     if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth > 0) {
@@ -238,7 +236,7 @@ function damageFlashAnimation(target) {
   ) {
     targetElement.style.animation = "none";
     void targetElement.offsetWidth;
-    targetElement.style.animation = "flashAnimation 1s";
+    // targetElement.style.animation = "flashAnimation 1s";
   } else {
     targetElement.style.animation = "none";
     void targetElement.offsetWidth;
@@ -465,7 +463,7 @@ function levelUpHandler(boon) {
 
     if (faithBoonRank === 4) {
       SOULFLAME_CANDLE.effect =
-        "While this candle is lit all experience gained is doubled. The candle burns out after 20 rooms.";
+        "While this candle is lit all experience gained is doubled. The candle burns out after 10 rooms.";
       BLAZING_CANDLE.effect =
         "While this candle is lit all attack you make become critical hits. The candle burns out after clearing two rooms.";
       FLICKERING_CANDLE.effect =
@@ -509,7 +507,7 @@ function levelUpHandler(boon) {
         darkenedReprisalTracker += 0.5;
         break;
       case priestess:
-        burningDevotionTracker += 2;
+        burningDevotionTracker += 3;
         break;
     }
   }
