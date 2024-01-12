@@ -477,23 +477,23 @@ function writeToLogMonster(logType, narrate, dataOne) {
         newEntry.textContent = `The Draugr's icy touch envelops you in an otherworldly frost. Leaving you shivering in the wake of its dark magic.`;
       } else if (monsterName === "Flood of Bones") {
         newEntry.textContent = `As the undead tide cascades, skeletal remnants reanimate in the wake of the bone-laden deluge.`;
-      } else if (monsterName === "Baron of Bone") {
+      } else if (dataOne === BARON_OF_BONE) {
         newEntry.textContent = `The Baron of Bone's dark magic withers your body and soul.`;
       } else if (dataOne === "WARBAND BROKEN") {
         newEntry.textContent = `The Undying Warband's formation is broken.`;
-      } else if (monsterName === "Undying Warband") {
+      } else if (dataOne === UNDYING_WARBAND) {
         newEntry.textContent = `The warband unleash a flurry of thrusts and slashes.`;
-      } else if (monsterName === "Ivan the Scoundrel") {
+      } else if (dataOne === IVAN_STATS) {
         newEntry.textContent = `Ivan stumbles back, shoving one of his henchmen towards you. With a sly grin, he swiftly consumes a potion, mending his wounds.`;
-      } else if (monsterName === "Riven, Shadow of the Baron") {
+      } else if (dataOne === UNDEAD_RIVEN) {
         newEntry.textContent = `Riven unleashes a violent flurry of shadow and steel, striking with otherworldly precision.`;
-      } else if (monsterName === "The Unholy Flame, Liheth") {
+      } else if (dataOne === UNDEAD_LIHETH) {
         newEntry.textContent = `Liheth's chants resonate through the throne room and a surge of unholy fire envelops her, mending her wounds.`;
-      } else if (monsterName === "Death Knight Siggurd") {
+      } else if (dataOne === UNDEAD_SIGGURD) {
         newEntry.textContent = `Siggurd's greatsword bursts into emerald flames, ablaze with malicious ferocity.`;
-      } else if (monsterName === `Bonevault Demon`) {
+      } else if (dataOne === BONEVAULT_DEMON) {
         newEntry.textContent = `The Bonevault Demon, a nightmarish behemoth, rises menacingly. Sinewy muscles coil, and its massive claws gleam ominously as it prepares to unleash a devastating swipe.`;
-      } else if (monsterName === "Death Knight") {
+      } else if (dataOne === DEATH_KNIGHT) {
         newEntry.textContent = `The Death Knight's weapon bursts into emerald flames, ablaze with malicious ferocity.`;
       }
       break;

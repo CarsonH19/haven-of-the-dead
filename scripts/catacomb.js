@@ -1272,7 +1272,7 @@ function checkCurrentRoom() {
   }
 
   // Adds new rooms during tier 3 & tier 4
-  if (catacombRooms.length < 20 && roomCounter >= 50 && roomCounter <= 80) {
+  if (catacombRooms.length < 20 && roomCounter < 50) {
     console.log("NEW ROOM");
     createNewRoom();
   }
@@ -1326,13 +1326,13 @@ function checkForNewTier() {
   }
 
   // Tier Three Rooms
-  if (roomCounter === 45 && tierThreeRoomsTracker === null) {
+  if (roomCounter === 40 && tierThreeRoomsTracker === null) {
     tierThreeRoomsTracker === "ADDED";
     catacombRooms = catacombRooms.concat(tierThreeRooms);
   }
 
   // Tier Four Rooms
-  if (roomCounter === 70 && tierFourRoomsTracker === null) {
+  if (roomCounter === 60 && tierFourRoomsTracker === null) {
     tierFourRoomsTracker === "ADDED";
     catacombRooms = catacombRooms.concat(tierFourRooms);
   }

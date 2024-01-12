@@ -284,6 +284,7 @@ const DEATH_KNIGHT = {
     death: armorSounds,
     ability: magicAttackSounds,
   },
+  tracker: 1,
   function: () => {
     //
   },
@@ -295,10 +296,10 @@ const BONE_TITAN = {
   type: "UNDEAD",
   skulls: 7,
   soundEffects: {
-    spawn: boneCrunchCrack1,
+    spawn: monsterSnarl4,
     attack: fleshHitSounds,
     death: boneBreakSounds,
-    ability: boneBreakSounds,
+    ability: monsterSnarl3,
   },
   function: () => {
     damageMonster(currentMonsterHealth);
@@ -318,13 +319,12 @@ const BONEVAULT_DEMON = {
   type: "UNDEAD",
   skulls: 7,
   soundEffects: {
-    // !FIX! Add sound effects
     spawn: monsterSnarl4,
     attack: fleshHitSounds,
-    death: boneBreakSounds,
-    ability: monsterSnarl3,
+    death: monsterSnarl3,
+    ability: fleshHitSounds,
   },
-  tracker: 0,
+  tracker: 1,
   function: () => {
     //
   },
@@ -405,7 +405,7 @@ const UNDEAD_SIGGURD = {
     death: armorSounds,
     ability: magicAttackSounds,
   },
-  tracker: 0,
+  tracker: 1,
   function: () => {
     //
   },
@@ -744,8 +744,6 @@ function renderMonsterStatBlock(monster) {
       monsterImageCard.style.border = "0px";
     }
 
-
-
     monsterSkullLevel(monster.skulls);
 
     // ITEM: Sunstone - Reduces the Attack & Max HP of Evil Spirits
@@ -936,11 +934,11 @@ function monsterAbilityHandler(monster) {
         } else if (currentMonsterHealth > 180) {
           UNDYING_WARBAND.function(4);
           UNDYING_WARBAND.attackCounter = 0;
-          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES", UNDYING_WARBAND);
         } else if (currentMonsterHealth > 110) {
           UNDYING_WARBAND.function(3);
           UNDYING_WARBAND.attackCounter = 0;
-          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES", UNDYING_WARBAND);
         } else if (currentMonsterHealth <= 110) {
           UNDYING_WARBAND.function(0);
           writeToLogMonster(LOG_MONSTER_ABILITY, "YES", "WARBAND BROKEN");
@@ -948,26 +946,26 @@ function monsterAbilityHandler(monster) {
         break;
 
       case BONEVAULT_DEMON:
-        if (BONEVAULT_DEMON.tracker === 5) {
-          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
-        } else {
-          BONEVAULT_DEMON.tracker++;
+        if (BONEVAULT_DEMON.tracker === 4) {
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES", BONEVAULT_DEMON);
         }
+
+        BONEVAULT_DEMON.tracker++;
         break;
 
       case DEATH_KNIGHT:
-        if (DEATH_KNIGHT.tracker === 5) {
-          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
-        } else {
-          DEATH_KNIGHT.tracker++;
+        if (DEATH_KNIGHT.tracker === 4) {
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES", DEATH_KNIGHT);
         }
+
+        DEATH_KNIGHT.tracker++;
         break;
 
       case UNDEAD_RIVEN:
         if (UNDEAD_RIVEN.tracker === 5) {
           UNDEAD_RIVEN.attackCounter = 3;
           UNDEAD_RIVEN.function();
-          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES", UNDEAD_RIVEN);
         } else {
           UNDEAD_RIVEN.tracker++;
         }
@@ -976,23 +974,23 @@ function monsterAbilityHandler(monster) {
       case UNDEAD_LIHETH:
         if (UNDEAD_LIHETH.tracker === 5) {
           UNDEAD_LIHETH.function();
-          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES", UNDEAD_LIHETH);
         } else {
           UNDEAD_LIHETH.tracker++;
         }
         break;
 
       case UNDEAD_SIGGURD:
-        if (UNDEAD_SIGGURD.tracker === 5) {
-          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
-        } else {
-          UNDEAD_SIGGURD.tracker++;
+        if (UNDEAD_SIGGURD.tracker === 4) {
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES", UNDEAD_SIGGURD);
         }
+        UNDEAD_SIGGURD.tracker++;
+
         break;
 
       case BARON_OF_BONE:
         BARON_OF_BONE.function();
-        writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+        writeToLogMonster(LOG_MONSTER_ABILITY, null, BARON_OF_BONE);
         break;
 
       default:

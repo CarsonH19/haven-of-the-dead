@@ -22,7 +22,7 @@ const POISONED = {
     // ITEM: Toxinweave Mask - Poison Immunity
     const immune = isItemAttuned(TOXINWEAVE_MASK, null);
 
-    if (!immune && HEXBANE_BREW.duration !== null) {
+    if (!immune && HEXBANE_BREW.statusDuration <= 0) {
       startStatusEffect(POISONED, length);
     }
   },
@@ -39,7 +39,7 @@ const HAUNTED = {
     // ITEM: Ghostshroud Talisman - Haunted Immunity
     const immune = isItemAttuned(GHOSTSHROUD_TALISMAN, null);
 
-    if (!immune && HEXBANE_BREW.duration !== null) {
+    if (!immune && HEXBANE_BREW.statusDuration <= 0) {
       startStatusEffect(HAUNTED, length);
       soundEffectHandler(ghostlyMagic);
     }
@@ -57,7 +57,7 @@ const DISEASED = {
     // ITEM: Plagueward Pendant - Disease Immunity
     const immune = isItemAttuned(PLAGUEWARD_PENDANT, null);
 
-    if (!immune && HEXBANE_BREW.duration !== null) {
+    if (!immune && HEXBANE_BREW.statusDuration <= 0) {
       startStatusEffect(DISEASED, length);
     }
   },
@@ -86,7 +86,7 @@ const CURSED = {
     // ITEM: Darkguard Trinket - Cursed Immunity
     const immune = isItemAttuned(DARKGUARD_TRINKET, null);
 
-    if (!immune && HEXBANE_BREW.duration !== null) {
+    if (!immune && HEXBANE_BREW.statusDuration <= 0) {
       startStatusEffect(CURSED, length);
       soundEffectHandler(ghostEncounter);
     }
@@ -146,7 +146,7 @@ const CHILLED = {
     // ITEM: Chillbreaker Band - Chilled Immunity
     const immune = isItemAttuned(CHILLBREAKER_BAND, null);
 
-    if (!immune && HEXBANE_BREW.duration !== null) {
+    if (!immune && HEXBANE_BREW.statusDuration <= 0) {
       startStatusEffect(CHILLED, length);
     }
   },

@@ -259,8 +259,13 @@ function damagePlayer(damage) {
 
   // Boss Critical Hit
   if (
-    currentRoom.contents.monsters[0] === BONEVAULT_DEMON &&
-    BONEVAULT_DEMON.tracker === 3
+    (currentRoom.contents.monsters[0] === BONEVAULT_DEMON &&
+      BONEVAULT_DEMON.tracker === 1) ||
+    (currentRoom.contents.monsters[0] === DEATH_KNIGHT &&
+      DEATH_KNIGHT.tracker === 1) ||
+    (currentRoom.contents.monsters[0] === UNDEAD_SIGGURD &&
+      UNDEAD_SIGGURD.tracker === 1) ||
+    currentRoom.contents.monsters[0] === BARON_OF_BONE
   ) {
     showDamage(damage, "MONSTER", "CRIT");
   } else {
@@ -371,12 +376,15 @@ function guardHandler(bonus) {
 
   if (bonus) {
     damageToGuard *= bonus;
-  } else if (UNDEAD_SIGGURD.tracker === 7) {
+  } else if (UNDEAD_SIGGURD.tracker === 5) {
     UNDEAD_SIGGURD.tracker = 0;
     damageToGuard = 36;
-  } else if (BONEVAULT_DEMON.tracker === 3) {
+  } else if (BONEVAULT_DEMON.tracker === 5) {
     BONEVAULT_DEMON.tracker = 0;
     damageToGuard = 18;
+  } else if (DEATH_KNIGHT.tracker === 5) {
+    DEATH_KNIGHT.tracker = 0;
+    damageToGuard = 25;
   }
 
   let damageBlocked = Math.round(Math.random() * damageToGuard);
