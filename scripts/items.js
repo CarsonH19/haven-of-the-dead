@@ -629,7 +629,8 @@ const ETHEREAL_CROWN = {
     if (
       currentRoom.contents.monsters[0] === SHADE ||
       currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
-      currentRoom.contents.monsters[0] === GRUDGE
+      currentRoom.contents.monsters[0] === GRUDGE ||
+      currentRoom.contents.monsters[0] === WRAITH
     ) {
       fadeOutAnimation(monsterContainer);
       setTimeout(() => {

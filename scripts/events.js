@@ -290,7 +290,7 @@ const IVAN_THE_SCOUNDREL = {
     IVAN_THE_SCOUNDREL.summary = `Amidst the severed limbs of the defeated arachnid, the scoundrel, grateful yet wary, hands over a cryptic key. "Treasures await within my hidden cache," he smirks. "Take what's yours."`;
     currentRoom.contents.items.push(CACHE_KEY);
     currentRoom.contents.monsters.push(BROODMOTHER);
-    let addRoom = roomCounter + 0;
+    let addRoom = roomCounter + 5;
     let ivanInterval = setInterval(() => {
       if (roomCounter > addRoom) {
         catacombRooms.push(IVANS_CACHE);
@@ -304,7 +304,7 @@ const IVAN_THE_SCOUNDREL = {
   },
   functionTwo: () => {
     IVAN_THE_SCOUNDREL.summary = `Ivan's spiteful gaze follows your retreating figure as you press on, his vow of revenge echoing through the catacomb. The air thickens with malice as you leave him dangling in the shadows, the taste of impending retribution lingering in the abyss.`;
-    let addRoom = roomCounter + 0;
+    let addRoom = roomCounter + 5;
     let ivanInterval = setInterval(() => {
       if (roomCounter > addRoom) {
         catacombRooms.push(

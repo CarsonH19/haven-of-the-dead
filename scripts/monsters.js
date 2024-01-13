@@ -694,18 +694,18 @@ function monsterSkullLevel(level) {
   // Logic for bosses & specific case monsters
   switch (monster) {
     case FLOOD_OF_BONES:
-      monsterMaxHealth = 400;
+      monsterMaxHealth = 500;
       monsterAttackValue = 10;
       break;
 
     case BONEVAULT_DEMON:
-      monsterMaxHealth = 180;
+      monsterMaxHealth = 210;
       monsterAttackValue = 12;
       break;
 
     case UNDYING_WARBAND:
-      monsterMaxHealth = 260;
-      monsterAttackValue = 5;
+      monsterMaxHealth = 240;
+      monsterAttackValue = 6;
       break;
 
     case UNDEAD_LIHETH:
@@ -757,15 +757,10 @@ function renderMonsterStatBlock(monster) {
 
     }
 
-
-
     // ITEM: Sunstone - Reduces the Attack & Max HP of Evil Spirits
     isItemAttuned(SUNSTONE, null);
     // ITEM: Bonechill Amulet - Reduces the Attack & Max HP of Humans & Beasts
     isItemAttuned(BONECHILL_AMULET, null);
-
-
-
 
     console.log("Monster Rendered");
   }
