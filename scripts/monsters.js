@@ -389,8 +389,6 @@ function endBaronOfBoneBoss() {
         isGameOver("GOOD ENDING");
       }, 2000);
     }, 2000);
-
-    console.log("endBaronofBoneBoss");
   }
 }
 
@@ -761,8 +759,6 @@ function renderMonsterStatBlock(monster) {
     isItemAttuned(SUNSTONE, null);
     // ITEM: Bonechill Amulet - Reduces the Attack & Max HP of Humans & Beasts
     isItemAttuned(BONECHILL_AMULET, null);
-
-    console.log("Monster Rendered");
   }
 }
 

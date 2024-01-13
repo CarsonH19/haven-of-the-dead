@@ -1496,14 +1496,18 @@ progress[value]::-moz-progress-bar {
 
 .common-item {
   color: var(--header);
+  margin-top: -1vh;
 }
 
 .rare-item {
   color: rgb(107, 127, 255);
+  margin-top: -1vh;
+
 }
 
 .epic-item {
   color: rgb(187, 120, 255);
+  margin-top: -1vh;
 }
 
 .statusTooltipText {

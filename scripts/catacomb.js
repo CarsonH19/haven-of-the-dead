@@ -1248,7 +1248,7 @@ function checkCurrentRoom() {
   }
 
   // Adds new rooms during tier 3 & tier 4
-  if (catacombRooms.length < 20 && roomCounter < 50) {
+  if (catacombRooms.length < 20 && roomCounter > 50) {
     console.log("NEW ROOM");
     createNewRoom();
   }

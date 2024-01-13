@@ -682,7 +682,6 @@ const COFFIN_EVENT = {
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "DRAUGR");
     }
 
-    console.log(randomNumber);
     setRoomSummary();
   },
   functionTwo: () => {
@@ -939,7 +938,6 @@ function lockedRoomHandler(room) {
 
   if (currentRoom.roomName === "Bonevault") {
     lockedDoor = Math.floor(Math.random() * 5) + 1;
-    console.log(`Bonevault Room: ${lockedDoor}`);
   } else {
     lockedDoor = room;
   }
@@ -1136,7 +1134,6 @@ function generalEventHandler(option, statModifier, attribute) {
         currentRoom.roomName !== "Webspun Passage" &&
         currentRoom.roomName !== "Rogue's Revenge"
       ) {
-        console.log("CALLED")
         setTimeout(renderRoomSummaryModal, 5000);
       }
 

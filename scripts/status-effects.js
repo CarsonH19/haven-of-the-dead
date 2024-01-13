@@ -291,7 +291,6 @@ const AEGIS_STATUS_EFFECT = {
 
 const startStatusEffect = (statusEffect, length) => {
   if (statusEffect.detail === "WISP" && faithBoonRank === 4) {
-    console.log(`Old Length: ${length}`);
     length = Math.floor(length / 2);
 
     if (length <= 0) {
@@ -300,13 +299,10 @@ const startStatusEffect = (statusEffect, length) => {
   }
 
   if (statusEffect.detail === "CANDLE" && faithBoonRank === 4) {
-    console.log(`Old Length: ${length}`);
     length = Math.ceil(length * 2);
-    console.log(`New Length: ${length}`);
   }
 
   if (statusEffect.duration === null && statusEffect.statusDuration === null) {
-    console.log("CANDLE");
     startNewStatusEffect(statusEffect, length);
   } else if (isDurationExtended(statusEffect, length)) {
     extendStatusEffectDuration(statusEffect, length);
@@ -318,7 +314,6 @@ const startNewStatusEffect = (statusEffect, length) => {
     statusEffect.statusDuration = 3;
     const duration = statusEffect.statusDuration;
     statusEffect.duration = `Duration: ${duration}/3`;
-    console.log(`StartNewStatusEffect ${statusEffect}`);
   } else {
     statusEffect.statusDuration = roomCounter + length;
     const duration = statusEffect.statusDuration - roomCounter;

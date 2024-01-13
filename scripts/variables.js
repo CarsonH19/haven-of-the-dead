@@ -214,10 +214,8 @@ let guardReady = "YES";
 function calculateGuardBonus() {
   guardBonus = totalDexterity;
 
-  console.log(guardBonus);
   // ITEM - Tombguard: +3 Guard Bonus
   guardBonus += isItemAttuned(TOMBGUARD, 0);
-  console.log(guardBonus);
   return guardBonus;
 }
 
@@ -240,7 +238,7 @@ let totalFaith = baseFaith;
 let itemFindChance;
 
 function calculateItemFindChance() {
-  itemFindChance = (totalFaith + 1) * 5;
+  itemFindChance = (totalFaith + 1) * 3;
   itemFindChance += isItemAttuned(GRAVEROBBERS_SPADE, 0);
   return Math.round(itemFindChance);
 }
@@ -333,8 +331,6 @@ function updateTotalStats() {
   }
 
   updatePlayerTrackers();
-
-  console.log(`updateTotalStats Called`);
 }
 
 // ===============================

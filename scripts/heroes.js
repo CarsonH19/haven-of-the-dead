@@ -131,7 +131,6 @@ function rogueDarkenedReprisal() {
       DARKENED_REPRISAL.active = "YES";
       writeToLogHero(LOG_DARKENED_REPRISAL, "YES", "ACTIVE");
       updateTotalStats();
-      console.log("Darkened Reprisal Called");
     }
   } else {
     DARKENED_REPRISAL.active = "NO";
@@ -184,7 +183,6 @@ function priestessCleansingFlame() {
       curedCondition.duration = null;
       curedCondition.statusDuration = null;
       updateTotalStats();
-      console.log(curedCondition); // !FIX! add log
     }
   }
 

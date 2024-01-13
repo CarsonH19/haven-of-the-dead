@@ -629,6 +629,8 @@ function magicAttackSounds() {
     magicSpellHit2,
     magicSpellHit4,
     magicSpellImpact,
+    magicSpellWhoosh4,
+    magicSpellWhoosh9
   ];
   let index = Math.floor(Math.random() * sounds.length);
   return sounds[index];

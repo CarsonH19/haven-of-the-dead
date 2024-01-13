@@ -266,11 +266,10 @@ const MIST_VEIL_CLOAK = {
   function: () => {
     let randomNumber = Math.floor(Math.random() * 10) + 1;
     if (randomNumber === 10) {
-      console.log(`Attack evaded with Mist Veil Cloak!`);
-      writeToLogItem(LOG_ITEM, null, MIST_VEIL_CLOAK);
+      writeToLogItem(LOG_ITEM, "YES", MIST_VEIL_CLOAK);
+      soundEffectHandler(ghostlyWhoosh);
       return 0;
     } else {
-      console.log(`Attack NOT evaded...`);
       return 1;
     }
   },
@@ -341,7 +340,6 @@ const WRAITHBANE = {
       currentRoom.contents.monsters[0] === HAUNTING_SPIRIT ||
       currentRoom.contents.monsters[0] === GRUDGE
     ) {
-      console.log(`+3 Damage to ghosts!`);
       return 3;
     } else {
       return 0;
@@ -591,7 +589,6 @@ const SOULREAVER = {
   effect:
     "While attuned to this item your damage increases by +1 for each consecutive attack up to a max of 5",
   function: () => {
-    console.log("Soulreaver Counter: " + attackCounter);
     if (attackCounter === 0) {
       attackCounter++;
       return 0;
@@ -772,7 +769,6 @@ function boneAmalgamAddHitPoints() {
     ) {
       let tempHitPoints = monster.skulls;
       BONE_AMALGAM.tracker += tempHitPoints;
-      console.log(`Temp Hit Points added ${tempHitPoints}`);
       if (BONE_AMALGAM.tracker > 30) {
         BONE_AMALGAM.tracker = 30;
       }
@@ -944,7 +940,6 @@ const TOMBGUARD = {
   function: () => {
     // add shield soundEffect? hero.soundEffects.guard = sound;
     // writeToLogItem(LOG_ITEM, null, TOMBGUARD); !FIX!
-    console.log(`TOMBGUARD`);
     return 5;
   },
 };

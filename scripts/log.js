@@ -1901,9 +1901,9 @@ function writeToNarrative(narration, pauseEvent) {
       if (notPaused) {
         notPaused.remove();
       }
-    }, 6950);
+    }, 7950);
 
-    fadeOutAnimation(newNarration, 5000);
+    fadeOutAnimation(newNarration, 6000);
   }
 
   if (narrativeText.children.length >= 4) {
@@ -1920,7 +1920,6 @@ function writeToNarrative(narration, pauseEvent) {
 
   function codeGenerator() {
     const randomCode = Math.round(Math.random() * 9999);
-    console.log(randomCode);
     return randomCode;
   }
 
@@ -1953,10 +1952,8 @@ function removeEventDescriptionLog() {
 
 function fadeInAnimation(element) {
   element.style.animation = "fade-in 1s";
-  // console.log(`Fading In: ${element}`);
   setTimeout(() => {
     element.style.display = "block";
-    // element.style.animation = 'none';
   }, 900);
 }
 
@@ -1964,8 +1961,6 @@ function fadeOutAnimation(element, time = 1000) {
   const displayTime = time + 900;
   setTimeout(() => {
     element.style.animation = "fade-out 1s";
-    // element.style.animation = 'none';
-    // console.log(`Fading Out: ${element}`);
   }, time);
 
   setTimeout(() => {
@@ -1974,10 +1969,6 @@ function fadeOutAnimation(element, time = 1000) {
 }
 
 function checkLogSize() {
-  // if (log.children.length >= 20) {
-  //   log.removeChild(log.lastElementChild);
-  // }
-
   if (logModalList.children.length >= 200) {
     logModalList.removeChild(logModalList.lastElementChild);
   }
