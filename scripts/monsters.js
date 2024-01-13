@@ -732,6 +732,15 @@ function monsterSkullLevel(level) {
 }
 
 function renderMonsterStatBlock(monster) {
+  const monsterLevel = document.getElementById("monsterLevel");
+  const skullIcon = document.getElementById("skullIcon");
+
+  monsterSkullLevel(monster.skulls);
+  setMonsterHealth(monsterMaxHealth);
+
+  monsterNameElement.textContent = monster.name;
+  monsterContainer.style.width = `${monsterMaxHealth / 10 + 25}vw`;
+
   if (currentRoom.contents.monsters.length > 0) {
     fadeInAnimation(monsterContainer);
     fadeInAnimation(monsterImageCard);
@@ -739,24 +748,25 @@ function renderMonsterStatBlock(monster) {
     if (!monster.hasOwnProperty("boss")) {
       monsterImageCard.style.backgroundImage = `url(${monster.image})`;
       monsterImageCard.style.border = "2px solid var(--header)";
+      monsterLevel.textContent = monster.skulls;
+      skullIcon.style.display = 'none';
     } else {
       monsterImageCard.style.backgroundImage = ``;
       monsterImageCard.style.border = "0px";
+      monsterLevel.style.visibility = 'hidden';
+      skullIcon.style.display = 'inline-block';
+
     }
 
-    monsterSkullLevel(monster.skulls);
+
 
     // ITEM: Sunstone - Reduces the Attack & Max HP of Evil Spirits
     isItemAttuned(SUNSTONE, null);
     // ITEM: Bonechill Amulet - Reduces the Attack & Max HP of Humans & Beasts
     isItemAttuned(BONECHILL_AMULET, null);
 
-    setMonsterHealth(monsterMaxHealth);
 
-    monsterNameElement.textContent = monster.name;
-    const monsterLevel = document.getElementById("monsterLevel");
-    monsterLevel.textContent = monster.skulls;
-    monsterContainer.style.width = `${monsterMaxHealth / 10 + 25}vw`;
+
 
     console.log("Monster Rendered");
   }

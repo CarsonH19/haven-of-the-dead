@@ -258,6 +258,14 @@ li, ul {
   padding: 10px;
 }
 
+.monster-level {
+  white-space: nowrap;
+}
+
+#skullIcon {
+  /* color: #ad0505; */
+  margin-left: -0.5vh;
+}
 
 /* .monster-display {
   display: flex;

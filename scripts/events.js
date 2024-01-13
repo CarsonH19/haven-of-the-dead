@@ -1113,6 +1113,7 @@ function generalEventHandler(option, statModifier, attribute) {
         event.functionOne();
       }
 
+      setTimeout(renderRoomSummaryModal, 5000);
       writeToLogEvent(LOG_TRAP_PASS, "YES", attribute);
     } else {
       event.summary = `You failed to overcome the ${event.name} and suffered ${event.failDamage} damage for your incompitence.`;
@@ -1129,14 +1130,14 @@ function generalEventHandler(option, statModifier, attribute) {
         event.penalty();
       }
 
+      if (currentRoom.roomName !== "Webspun Passage") {
+        setTimeout(renderRoomSummaryModal, 5000);
+      }
+
       writeToLogEvent(LOG_TRAP_FAIL, "YES", attribute, event.failDamage);
     }
 
     setRoomSummary();
-
-    if (currentRoom.roomName !== "Webspun Passage") {
-      setTimeout(renderRoomSummaryModal, 5000);
-    }
   }
 
   // Logic for non-trap events
