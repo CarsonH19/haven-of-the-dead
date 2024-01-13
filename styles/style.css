@@ -1110,6 +1110,7 @@ progress[value]::-moz-progress-bar {
 
 #roomSummaryModal {
   display: none;
+  z-index: 10;
 }
 
 .room-summary-modal-content {

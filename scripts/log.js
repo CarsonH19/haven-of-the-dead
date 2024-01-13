@@ -1470,7 +1470,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === IVAN_THE_SCOUNDREL) {
         newEntry.textContent = `Refusing the scoundrel's plea, he hisses, "You'll rue this day. My revenge will echo through these cursed catacombs." The shadows deepen, foretelling the ominous path ahead.`;
       } else if (event === IVAN_THE_SCOUNDREL_EVENT_TWO) {
-        newEntry.textContent = `Discovering the concealed cache, caution grips you as Ivan's offer of kindness grows suspicious. Suddenly, shadows and an ambush unfolds. With weapons unsheathed, Ivan and his cohorts emerge, revealing your instincts not to trust him were right all along.`;
+        newEntry.textContent = `Caution grips you as Ivan's offer of kindness grows suspicious. Suddenly, with weapons unsheathed, Ivan and his cohorts emerge, revealing your instincts not to trust him were right all along.`;
       } else if (event === FORSAKEN_COMMANDER) {
         newEntry.textContent = `The spectral commander's eyes flare with anguish. 'Your defiance condemns my legion to eternal torment. The wrath of the forsaken will fall upon you!`;
       } else if (event === GRERVIL_THE_BODILESS) {

@@ -1030,7 +1030,7 @@ const CACHE_KEY = {
   type: "MISC",
   rarity: "Rare",
   effect:
-    "Given to you by Ivan the Scoundrel, he said it unlocks a chamber within the catacombs were his hidden cache is kept.",
+    "Given to you by Ivan the Scoundrel, he said it unlocks a chest within the catacombs were his hidden cache is kept.",
   function: () => {
     // Unlocks a trapped vault.
     writeToLogItem(LOG_ITEM, "YES", CACHE_KEY);

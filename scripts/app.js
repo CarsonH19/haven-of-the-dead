@@ -1047,6 +1047,7 @@ function closeRoomSummaryModal() {
   // Baron of Bone Dialogue
   if (
     roomCounter % 10 === 0 &&
+    roomCounter !== 0 &&
     roomCounter < 61
   ) {
     if (roomCounter === 10) {

@@ -635,12 +635,11 @@ const IVAN_STATS = {
     // Ivan attacks and moves back behind another scoundrel to treat his wounds
     let room = currentRoom.contents.monsters;
     if (room.length > 0) {
-      // must be called before the monsters swap
       let temp = room[0];
       room[0] = room[1];
       room[1] = temp;
       currentRoom.contents.monsters = room;
-      renderMonsterStatBlock(room[0]); // Needed to load swapped monster
+      renderMonsterStatBlock(room[0]);
       soundEffectHandler(bodyShove);
       soundEffectHandler(humanLaugh25);
     }
@@ -931,7 +930,7 @@ function monsterAbilityHandler(monster) {
           currentRoom.contents.monsters.length >= 2
         ) {
           // Log must be called before function
-          writeToLogMonster(LOG_MONSTER_ABILITY, "YES");
+          writeToLogMonster(LOG_MONSTER_ABILITY, "YES", IVAN_STATS);
           IVAN_STATS.function();
         }
         break;
