@@ -419,8 +419,6 @@ function statusEffectHandler(item) {
             fadeOutAnimation(monsterImageCard);
             setTimeout(() => {
               checkForMonsters();
-              monsterContainer.style.display = "none";
-              monsterImage.style.display = "none";
             }, 2000);
 
             writeToLogItem(LOG_ITEM, "YES", WARDING_CANDLE);

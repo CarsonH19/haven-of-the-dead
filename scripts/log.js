@@ -1901,9 +1901,9 @@ function writeToNarrative(narration, pauseEvent) {
       if (notPaused) {
         notPaused.remove();
       }
-    }, 7950);
+    }, 9950);
 
-    fadeOutAnimation(newNarration, 6000);
+    fadeOutAnimation(newNarration, 8000);
   }
 
   if (narrativeText.children.length >= 4) {

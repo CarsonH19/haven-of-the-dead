@@ -65,6 +65,9 @@ const SPIKE_WALLS = {
   optionTwo: "Dexterity",
   passValue: 7,
   failDamage: 30,
+  penalty: () => {
+    soundEffectHandler(pitchforkBody);
+  },
 };
 
 const SPIDER_WEB = {
@@ -121,6 +124,7 @@ const SWARM_OF_VERMIN = {
   failDamage: 20,
   penalty: () => {
     DISEASED.function(5);
+    soundEffectHandler(fleshHitSounds);
   },
 };
 
@@ -133,6 +137,9 @@ const SKELETAL_HANDS = {
   optionTwo: "Dexterity",
   passValue: 7,
   failDamage: 25,
+  penalty: () => {
+    soundEffectHandler(fleshHitSounds);
+  },
 };
 
 const SPIKE_PITFALL = {
@@ -159,6 +166,9 @@ const PENDULUM_BLADES = {
   optionTwo: "Faith",
   passValue: 6,
   failDamage: 30,
+  penalty: () => {
+    soundEffectHandler(pitchforkBody);
+  },
 };
 
 // ===============================
@@ -476,11 +486,7 @@ const GRERVIL_THE_BODILESS = {
             fadeOutAnimation(monsterContainer);
             fadeOutAnimation(monsterImageCard);
             fadeOutAnimation(controlsContainer);
-
-            setTimeout(() => {
-              monsterContainer.style.display = "none";
-              monsterImage.style.display = "none";
-            }, 2000);
+            turnOffControls();
           }, 5000);
 
           useConsumable("Grervil's Head"); // removes item from inventory

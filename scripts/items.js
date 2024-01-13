@@ -2427,13 +2427,13 @@ function renderTrade() {
 
         if (items[i].rarity === "Epic") {
           tooltipTextRarity.classList.add("epic-item");
-          itemValue = 50;
+          itemValue = (currentRoom.roomName === "Curator's Curio") ? 100 : 50;
         } else if (items[i].rarity === "Rare") {
           tooltipTextRarity.classList.add("rare-item");
-          itemValue = 25;
+          itemValue = (currentRoom.roomName === "Curator's Curio") ? 50 : 25;
         } else {
           tooltipTextRarity.classList.add("common-item");
-          itemValue = 10;
+          itemValue = (currentRoom.roomName === "Curator's Curio") ? 20 : 10;
         }
 
         if (items[i].name === "Health Potion") {
@@ -2480,7 +2480,7 @@ function renderTrade() {
             items[i].name !== "Flickering Candle" &&
             items[i].name !== "Blazing Candle" &&
             items[i].name !== "Soulflame Candle" &&
-            item[i].name !== "Soulflame Candle"
+            item[i].name !== "Unholy Wisp"
           ) {
             container.appendChild(itemBox);
           }

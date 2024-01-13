@@ -84,7 +84,6 @@ function playerAttackHandler(smite) {
     writeToLogActions(LOG_PLAYER_MISS, "NO");
   }
 
-  console.log("ATTACK");
   damageMonster(totalDamage);
 }
 
@@ -1021,7 +1020,6 @@ function newRoomAnimation() {
   fade.style.animation = "none";
   void fade.offsetWidth;
   fade.style.animation = "room-transition 4s";
-  console.log(`Room Animation: ${fade}`);
   clearNarrative();
 }
 

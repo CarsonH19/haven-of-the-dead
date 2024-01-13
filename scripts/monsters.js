@@ -746,11 +746,12 @@ function renderMonsterStatBlock(monster) {
       monsterImageCard.style.backgroundImage = `url(${monster.image})`;
       monsterImageCard.style.border = "2px solid var(--header)";
       monsterLevel.textContent = monster.skulls;
+      monsterLevel.style.display = 'block';
       skullIcon.style.display = 'none';
     } else {
       monsterImageCard.style.backgroundImage = ``;
       monsterImageCard.style.border = "0px";
-      monsterLevel.style.visibility = 'hidden';
+      monsterLevel.style.display = 'none';
       skullIcon.style.display = 'inline-block';
 
     }
