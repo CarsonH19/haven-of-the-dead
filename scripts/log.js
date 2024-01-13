@@ -1421,7 +1421,19 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
         } else if (narration === 6) {
           newEntry.textContent = `"Nice try, but you haven't earned the right to touch that just yet."`;
         }
-      }
+      } else if (dataOne === "BARON ONE") {
+        newEntry.textContent = `A voice echoes in your head. "Ah, mortals, you venture deeper into my realm, unaware that each step brings you closer to your doom. The catacombs echo with the whispers of your demise."`;
+      } else if (dataOne === "BARON TWO") {
+        newEntry.textContent = `A voice echoes in your head. "The catacomb breathes with the essence of death, and you, intruders, unwittingly feed its hunger."`;
+      } else if (dataOne === "BARON THREE") {
+        newEntry.textContent = `A voice echoes in your head. "Do you feel it, mortal? The weight of the dead pressing down upon you, their bones yearning to join the legion that shall lay waste to your world."`;
+      } else if (dataOne === "BARON FOUR") {
+        newEntry.textContent = `A voice echoes in your head. "Your efforts amuse me, like insects scurrying in the dark. However, your endeavors only hasten your descent into the abyss."`;
+      } else if (dataOne === "BARON FIVE") {
+        newEntry.textContent = `A voice echoes in your head. "You tread upon the bones of those who dared to challenge me before you. Their futile struggles only served to amuse me. Will you fare any better, I wonder?"`;
+      } else if (dataOne === "BARON SIX") {
+        newEntry.textContent = `A voice echoes in your head. "Do you hear the whispers of the fallen? They beckon you towards your final reckoning. Come to my throne, and meet your fate."`;
+      } 
       break;
 
     case LOG_NPC_OPTION_ONE:
@@ -1845,6 +1857,8 @@ function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
         newEntry.textContent = `The scoundrels stole your ${dataOne}.`;
       } else if (dataOne === "UNDEAD HEROES") {
         narration = `"Welcome to my domain. Others, once like you, dared to defy the inevitable. Behold, my fallen champions, now bound to the darkness. The night will claim you as well."`;
+      } else if (dataOne === UNHOLY_WISP) {
+        narration = `An unholy wisp joins you, ready to guide you to the Throne of the Eternal when you are ready to confront the evil within this catacomb.`;
       }
       break;
   }

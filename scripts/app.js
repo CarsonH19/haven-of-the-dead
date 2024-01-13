@@ -119,11 +119,6 @@ function damageMonster(damage) {
 function dealMonsterDamage(damage) {
   let damageDealt = Math.round(Math.random() * damage);
 
-  // ITEM: Relic of Retribution - +25% damage against undead
-  damageDealt = Math.round(
-    (damageDealt *= isItemAttuned(RELIC_OF_RETRIBUTION, 1))
-  );
-
   // Checks for Echoes of Victory - +20% damage
   if (ECHOES_OF_VICTORY.duration !== null) {
     damageDealt = Math.round(damageDealt * 1.2);
@@ -241,6 +236,9 @@ function damagePlayer(damage) {
   if (BURNED.duration !== null) {
     damage = Math.round(damage * 1.25);
   }
+
+  // ITEM: Divine Artifact - 20% damage reduction
+  damageDealt = Math.round((damageDealt *= isItemAttuned(DIVINE_ARTIFACT, 1)));
 
   // Subtract from Health
   if (currentPlayerHealth - damage <= 0) {
@@ -1046,6 +1044,31 @@ function closeRoomSummaryModal() {
   roomSummaryModalTracker = null;
   roomSummaryModal.style.display = "none";
 
+  // Baron of Bone Dialogue
+  if (
+    roomCounter % 10 === 0 &&
+    roomCounter < 61
+  ) {
+    if (roomCounter === 10) {
+      writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "BARON ONE");
+    } else if (roomCounter === 20) {
+      writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "BARON TWO");
+    } else if (roomCounter === 30) {
+      writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "BARON THREE");
+    } else if (roomCounter === 40) {
+      writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "BARON FOUR");
+    } else if (roomCounter === 50) {
+      writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "BARON FIVE");
+    } else if (roomCounter === 60) {
+      writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "BARON SIX");
+      setTimeout(() => {
+        addItemToInventory(UNHOLY_WISP);
+        writeToLogEvent(LOG_OTHER, "YES", UNHOLY_WISP);
+      }, 3000);
+    }
+    soundEffectHandler(ominousPresence);
+  }
+
   gloryforgedBladeCheck();
   forsakenCommanderCheck();
   countPotions();
@@ -1363,6 +1386,10 @@ continueButton.addEventListener("click", () => {
         currentRoom = CANDLELIGHT_SHRINE;
         renderCurrentRoom(CANDLELIGHT_SHRINE);
         GUIDING_LIGHT.tracker = null;
+      } else if (UNHOLY_WISP.tracker === "ARRIVE") {
+        currentRoom = THRONE_OF_THE_ETERNAL;
+        renderCurrentRoom(THRONE_OF_THE_ETERNAL);
+        ROWDY_WISP.tracker = null;
       } else if (ROWDY_WISP.tracker === "ARRIVE") {
         currentRoom = LAUGHING_COFFIN_ROOM;
         renderCurrentRoom(LAUGHING_COFFIN_ROOM);

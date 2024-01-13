@@ -821,19 +821,15 @@ const GEM_OF_ANGUISH = {
   },
 };
 
-const RELIC_OF_RETRIBUTION = {
-  name: "Relic of Retribution",
+const DIVINE_ARTIFACT = {
+  name: "Divine Artifact",
   image: "styles/images/items/relic-of-retribution.jpg",
   type: "MAGIC",
   rarity: "Epic",
-  effect: `While attuned to this item, your Attack damage is increased by 25% against undead enemies.`,
+  effect: `While attuned to this item, all damage you take is reduced by 20%.`,
   tracker: 0,
   function: () => {
-    if (currentRoom.contents.monsters[0].type === "UNDEAD") {
-      return 1.25;
-    } else {
-      return 1;
-    }
+      return 0.8;
   },
 };
 
@@ -1616,7 +1612,7 @@ const ROWDY_WISP = {
 const BLEEDING_WISP = {
   name: "Bleeding Wisp",
   color: "#bf3637",
-  image: "styles/images/items/unholy-wisp.jpg",
+  image: "styles/images/items/bleeding-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
   rarity: "Rare",
@@ -1709,6 +1705,28 @@ const RESTLESS_WISP = {
   },
 };
 
+const UNHOLY_WISP = {
+  name: "Unholy Wisp",
+  color: "#ebebeb",
+  image: "styles/images/items/unholy-wisp.jpg",
+  soundEffect: ghostBreathWithReverb,
+  type: "CONSUMABLE",
+  rarity: "Rare",
+  detail: "WISP",
+  tracker: null,
+  effect:
+    "When this item is used, a wisp will guide you to the Throne of the Eternal.",
+  status: "Guiding you to the Throne of the Eternal.",
+  duration: null,
+  statusDuration: null,
+  function: () => {
+    let randomWispDuration = Math.round(Math.random() * 5) + 1;
+    wispActive = "ACTIVE";
+    renderWisp(UNHOLY_WISP);
+    startStatusEffect(UNHOLY_WISP, randomWispDuration);
+  },
+};
+
 function renderWisp(wispObject) {
   const wispColor = wispObject.color;
   const root = document.documentElement;
@@ -1748,7 +1766,7 @@ let rareCuratorArray = [
   FANGWEAVE_ARMOR,
 ];
 
-let epicCuratorArray = [RELIC_OF_RETRIBUTION, GEM_OF_ANGUISH, UNHOLY_EFFIGY];
+let epicCuratorArray = [DIVINE_ARTIFACT, GEM_OF_ANGUISH, UNHOLY_EFFIGY];
 
 let candleItems = [
   SOOTHING_CANDLE,
@@ -2357,7 +2375,8 @@ inventoryModal.addEventListener("click", (event) => {
       itemName === "Restless Wisp" ||
       itemName === "Bleeding Wisp" ||
       itemName === "Curious Wisp" ||
-      itemName === "Wicked Wisp"
+      itemName === "Wicked Wisp" ||
+      itemName === "Unholy Wisp"
     ) {
       return true;
     } else {
@@ -2464,7 +2483,8 @@ function renderTrade() {
             items[i].name !== "Soothing Candle" &&
             items[i].name !== "Flickering Candle" &&
             items[i].name !== "Blazing Candle" &&
-            items[i].name !== "Soulflame Candle"
+            items[i].name !== "Soulflame Candle" &&
+            item[i].name !== "Soulflame Candle"
           ) {
             container.appendChild(itemBox);
           }
@@ -2615,11 +2635,11 @@ function calculateFavor(itemName, operator) {
     }
 
     if (itemObject.rarity === "Epic") {
-      itemValue = 50;
+      itemValue = 100;
     } else if (itemObject.rarity === "Rare") {
-      itemValue = 25;
+      itemValue = 50;
     } else {
-      itemValue = 10;
+      itemValue = 20;
     }
 
     if (itemObject === POTION) {

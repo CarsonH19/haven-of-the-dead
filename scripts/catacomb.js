@@ -105,18 +105,6 @@ let catacombRooms = [
     },
   },
   {
-    roomName: "Broodmother's Nest",
-    description:
-      "The Broodmother's Nest looms with arachnid grace. A colossal web, woven with uncanny precision, cradles the monstrous broodmother. Her presence sends shivers, and the air is thick with the scent of impending danger.",
-    backgroundImage: "styles/images/backgrounds/tier-one/broodmothers-nest.jpg",
-    music: spiderInvasion,
-    contents: {
-      monsters: [BROODMOTHER],
-      items: [],
-      events: null,
-    },
-  },
-  {
     roomName: "Skull-lined Corridor",
     description:
       "The Skull-lined Corridor echoes with the rattling steps of skeletal sentinels. Walls adorned with grimacing skulls watch as decrepit skeletons and skeletal soldiers patrol with an eerie, mechanical precision.",
@@ -138,7 +126,7 @@ let catacombRooms = [
     music: edgeOfFear,
     contents: {
       monsters: [SKELETAL_SOLDIER, DECREPIT_SKELETON],
-      items: [ROTBANE_FERN],
+      items: [],
       events: null,
     },
   },
@@ -162,7 +150,7 @@ let catacombRooms = [
     music: edgeOfFear,
     contents: {
       monsters: [SKELETAL_SOLDIER, SKELETAL_SOLDIER, ARMORED_SKELETON],
-      items: [GHOSTLIGHT_LILY],
+      items: [],
       events: null,
     },
   },
@@ -199,8 +187,8 @@ let catacombRooms = [
     backgroundImage: "styles/images/backgrounds/tier-one/echoing-vestibule.jpg",
     music: hauntedOutpost,
     contents: {
-      monsters: [HAUNTING_SPIRIT],
-      items: [GHOSTLIGHT_LILY],
+      monsters: [HAUNTING_SPIRIT, SHADE],
+      items: [],
       events: null,
     },
   },
@@ -323,6 +311,18 @@ let catacombRooms = [
 
 let tierTwoRooms = [
   {
+    roomName: "Broodmother's Nest",
+    description:
+      "The Broodmother's Nest looms with arachnid grace. A colossal web, woven with uncanny precision, cradles the monstrous broodmother. Her presence sends shivers, and the air is thick with the scent of impending danger.",
+    backgroundImage: "styles/images/backgrounds/tier-one/broodmothers-nest.jpg",
+    music: spiderInvasion,
+    contents: {
+      monsters: [BROODMOTHER],
+      items: [],
+      events: null,
+    },
+  },
+  {
     roomName: "Desecrated Shrine",
     description: "",
     backgroundImage:
@@ -397,7 +397,7 @@ let tierTwoRooms = [
     music: edgeOfFear,
     contents: {
       monsters: [SKELETAL_SOLDIER, ARMORED_SKELETON],
-      items: [ROTBANE_FERN],
+      items: [],
       events: null,
     },
   },
@@ -1241,6 +1241,7 @@ function removeCurrentRoom() {
     currentRoom !== CANDLELIGHT_SHRINE &&
     currentRoom !== FALLEN_WARRIORS_VALE &&
     currentRoom !== LAUGHING_COFFIN_ROOM &&
+    currentRoom !== BLOOD_ALTER &&
     currentRoom !== HAGS_HOLLOW &&
     currentRoom !== CURATORS_CURIO
   ) {
@@ -1276,8 +1277,6 @@ function checkCurrentRoom() {
     console.log("NEW ROOM");
     createNewRoom();
   }
-
-  // NPCS
 
   // ITEMS
   // Check if War Torn Banner is Attuned
@@ -1337,10 +1336,10 @@ function checkForNewTier() {
     catacombRooms = catacombRooms.concat(tierFourRooms);
   }
 
-  // Boss Room
-  if (catacombRooms.length === 1) {
-    catacombRooms.push(THRONE_OF_THE_ETERNAL);
-  }
+  // // Boss Room
+  // if (catacombRooms.length === 1) {
+  //   catacombRooms.push(THRONE_OF_THE_ETERNAL);
+  // }
 }
 
 function createNewRoom() {

@@ -640,8 +640,11 @@ const ITEM_ROBBERY = {
 function itemRobberyRemoval() {
   for (let i = 0; i < 3; i++) {
     const randomItemIndex = Math.floor(Math.random() * inventoryItems.length);
-    const stolenItem = inventoryItems.splice(randomItemIndex, 1)[0];
-    writeToLogOther(LOG_OTHER, null, stolenItem.name, "ITEMS STOLEN");
+
+    if (inventoryItems[randomItemIndex] !== UNHOLY_WISP) {
+      const stolenItem = inventoryItems.splice(randomItemIndex, 1)[0];
+      writeToLogOther(LOG_OTHER, null, stolenItem.name, "ITEMS STOLEN");
+    }
   }
 }
 
