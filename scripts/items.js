@@ -826,7 +826,7 @@ const DIVINE_ARTIFACT = {
   effect: `While attuned to this item, all damage you take is reduced by 20%.`,
   tracker: 0,
   function: () => {
-      return 0.8;
+    return 0.8;
   },
 };
 
@@ -1084,7 +1084,7 @@ const CRYPTBREAD = {
   type: "CONSUMABLE",
   rarity: "Common",
   detail: "EAT",
-  effect: "Restores 10 health points when eaten.",
+  effect: "Restores 15HP when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
     healPlayer(15);
@@ -1098,7 +1098,7 @@ const BONE_MARROW_SOUP = {
   type: "CONSUMABLE",
   rarity: "Common",
   detail: "DRINK",
-  effect: "Restores 15 health points when eaten.",
+  effect: "Restores 15HP when eaten.",
   soundEffect: gulpingWater24,
   function: () => {
     healPlayer(15);
@@ -1112,7 +1112,7 @@ const MARROWSTONE_CHEESE = {
   type: "CONSUMABLE",
   rarity: "Rare",
   detail: "EAT",
-  effect: "Restores 20 health points when eaten.",
+  effect: "Restores 25HP when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
     healPlayer(25);
@@ -1126,7 +1126,7 @@ const TOMBSTONE_TRUFFLE = {
   type: "CONSUMABLE",
   rarity: "Rare",
   detail: "EAT",
-  effect: "Restores 10 health points when eaten.",
+  effect: "Restores 25HP when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
     healPlayer(25);
@@ -2296,16 +2296,6 @@ inventoryModal.addEventListener("click", (event) => {
   for (let i = 0; i < buttons.length; i++) {
     let itemObject = inventoryItems.find((inv) => inv.name === buttons[i].id);
 
-    // Monster attack if using inventory during combat
-    if (
-      currentRoom.contents.monsters.length > 0 &&
-      event.target === buttons[i] &&
-      buttons[i].id !== "Health Potion"
-    ) {
-      monsterAttackHandler(2);
-      writeToLogOther(LOG_OTHER, "YES", "DISTRACTED");
-    }
-
     // Magic Items Logic
     if (
       magicItemsBox.contains(event.target) &&
@@ -2361,6 +2351,16 @@ inventoryModal.addEventListener("click", (event) => {
       } else {
         writeToLogItem(LOG_ITEM, "YES", GRERVILS_HEAD, "WHISPERS");
       }
+    }
+
+    // Monster attack if using inventory during combat
+    if (
+      currentRoom.contents.monsters.length > 0 &&
+      event.target === buttons[i] &&
+      buttons[i].id !== "Health Potion"
+    ) {
+      monsterAttackHandler(2);
+      writeToLogOther(LOG_OTHER, "YES", "DISTRACTED");
     }
   }
 
@@ -2427,13 +2427,13 @@ function renderTrade() {
 
         if (items[i].rarity === "Epic") {
           tooltipTextRarity.classList.add("epic-item");
-          itemValue = (currentRoom.roomName === "Curator's Curio") ? 100 : 50;
+          itemValue = currentRoom.roomName === "Curator's Curio" ? 100 : 50;
         } else if (items[i].rarity === "Rare") {
           tooltipTextRarity.classList.add("rare-item");
-          itemValue = (currentRoom.roomName === "Curator's Curio") ? 50 : 25;
+          itemValue = currentRoom.roomName === "Curator's Curio" ? 50 : 25;
         } else {
           tooltipTextRarity.classList.add("common-item");
-          itemValue = (currentRoom.roomName === "Curator's Curio") ? 20 : 10;
+          itemValue = currentRoom.roomName === "Curator's Curio" ? 20 : 10;
         }
 
         if (items[i].name === "Health Potion") {
@@ -2630,11 +2630,11 @@ function calculateFavor(itemName, operator) {
     }
 
     if (itemObject.rarity === "Epic") {
-      itemValue = 100;
+      itemValue = currentRoom.roomName === "Curator's Curio" ? 100 : 50;
     } else if (itemObject.rarity === "Rare") {
-      itemValue = 50;
+      itemValue = currentRoom.roomName === "Curator's Curio" ? 100 : 50;
     } else {
-      itemValue = 20;
+      itemValue = currentRoom.roomName === "Curator's Curio" ? 100 : 50;
     }
 
     if (itemObject === POTION) {

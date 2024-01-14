@@ -709,22 +709,22 @@ function monsterSkullLevel(level) {
       break;
 
     case UNDEAD_LIHETH:
-      monsterMaxHealth = 240;
-      monsterAttackValue = 25;
+      monsterMaxHealth = 210;
+      monsterAttackValue = 20;
       break;
 
     case UNDEAD_RIVEN:
+      monsterMaxHealth = 240;
+      monsterAttackValue = 18;
+      break;
+
+    case UNDEAD_SIGGURD:
       monsterMaxHealth = 280;
       monsterAttackValue = 20;
       break;
 
-    case UNDEAD_SIGGURD:
-      monsterMaxHealth = 320;
-      monsterAttackValue = 20;
-      break;
-
     case BARON_OF_BONE:
-      monsterMaxHealth = 800;
+      monsterMaxHealth = 700;
       monsterAttackValue = 25;
       break;
   }

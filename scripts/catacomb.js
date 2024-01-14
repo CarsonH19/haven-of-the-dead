@@ -560,7 +560,7 @@ let tierTwoRooms = [
     music: pileOfBones,
     contents: {
       monsters: [],
-      items: [],
+      items: [TOMBSTONE_TRUFFLE],
       events: LOCKED_ROOM,
     },
   },
@@ -594,7 +594,7 @@ let tierTwoRooms = [
     music: unfinishedBusiness,
     contents: {
       monsters: [],
-      items: [],
+      items: [BLACKHEART_BREW, CRYPTBREAD],
       events: ITEM_ROBBERY,
     },
   },
@@ -988,7 +988,7 @@ const IVANS_REVENGE = {
   music: claustrofobia,
   contents: {
     monsters: [],
-    items: [LAUGHING_COFFIN_COIN, LAUGHING_COFFIN_COIN],
+    items: [LAUGHING_COFFIN_COIN, BLACKHEART_BREW],
     events: IVANS_AMBUSH,
   },
   function: () => {
@@ -1052,6 +1052,7 @@ const HAGS_HOLLOW = {
       HEXBANE_BREW,
     ];
 
+    HAGS_HOLLOW.contents.items.push(BONE_MARROW_SOUP);
     soundEffectHandler(cauldronLargeBoil);
   },
 };
@@ -1217,9 +1218,10 @@ function removeCurrentRoom() {
     currentRoom !== FALLEN_WARRIORS_VALE &&
     currentRoom !== LAUGHING_COFFIN_ROOM &&
     currentRoom !== BLOOD_ALTER &&
-    currentRoom !== HAGS_HOLLOW &&
+    currentRoom !== HAGS_HOLLOW && 
     currentRoom !== CURATORS_CURIO
   ) {
+    roomIndex = catacombRooms.indexOf(currentRoom);
     console.log(`${currentRoom.roomName} Removed`);
     catacombRooms.splice(roomIndex, 1);
   }

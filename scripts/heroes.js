@@ -547,7 +547,7 @@ function renderHeroStatsModal() {
   // Rank
   const strengthTitle = document.getElementById("strengthTitle");
   let heroStatsStrength = totalStrength;
-  strengthTitle.textContent = `Strength (Rank ${strengthBoonRank}):  ${heroStatsStrength}`;
+  strengthTitle.textContent = `Strength Rank ${strengthBoonRank}:  ${heroStatsStrength}`;
   // Bonus Health
   const heroBonusHealth = document.getElementById("heroBonusHealth");
   heroBonusHealth.textContent = `+${totalStrength * 10}`;
@@ -560,7 +560,7 @@ function renderHeroStatsModal() {
   // Rank
   const dexterityTitle = document.getElementById("dexterityTitle");
   let heroStatsDexterity = totalDexterity;
-  dexterityTitle.textContent = `Dexterity (Rank ${dexterityBoonRank}):  ${heroStatsDexterity}`;
+  dexterityTitle.textContent = `Dexterity Rank ${dexterityBoonRank}:  ${heroStatsDexterity}`;
   // Critical Hit Chance
   const heroCritHitChance = document.getElementById("heroCritHitChance");
   let critHitPercentage = ((1 + totalDexterity) / 20) * 100;
@@ -577,7 +577,7 @@ function renderHeroStatsModal() {
   // Rank
   const faithTitle = document.getElementById("faithTitle");
   let heroStatsFaith = totalFaith;
-  faithTitle.textContent = `Faith (Rank ${faithBoonRank}):  ${heroStatsFaith}`;
+  faithTitle.textContent = `Faith Rank ${faithBoonRank}:  ${heroStatsFaith}`;
   // Hero Experience Modifier
   const heroExperienceModifier = document.getElementById(
     "heroExperienceModifier"
@@ -592,14 +592,14 @@ function renderHeroStatsModal() {
   const heroSpecialDetails = document.getElementById("heroSpecialDetails");
 
   if (hero === paladin) {
-    heroSpecial.textContent = `Holy Smite (Rank ${specialAbilityBoonRank})`;
+    heroSpecial.textContent = `Holy Smite Rank ${specialAbilityBoonRank}`;
     let smitePercentage = holySmiteTracker * 100;
     heroSpecialDetails.textContent = `Damage: ${smitePercentage}%`;
   } else if (hero === rogue) {
-    heroSpecial.textContent = `Umbral Strike (Rank ${specialAbilityBoonRank})`;
+    heroSpecial.textContent = `Umbral Strike Rank ${specialAbilityBoonRank}`;
     heroSpecialDetails.textContent = `Attacks: ${umbralAssaultTracker}`;
   } else {
-    heroSpecial.textContent = `Cleansing Flame (Rank ${specialAbilityBoonRank})`;
+    heroSpecial.textContent = `Cleansing Flame Rank ${specialAbilityBoonRank}`;
     heroSpecialDetails.textContent = `Restore: ${cleansingFlameTracker}HP`;
   }
 
@@ -608,15 +608,15 @@ function renderHeroStatsModal() {
   const heroPassiveDetails = document.getElementById("heroPassiveDetails");
 
   if (hero === paladin) {
-    heroPassive.textContent = `Radiant Aura (Rank ${passiveAbilityBoonRank})`;
+    heroPassive.textContent = `Radiant Aura Rank ${passiveAbilityBoonRank}`;
     heroPassiveDetails.textContent = `Damage: ${radiantAuraTracker}`;
   } else if (hero === rogue) {
-    heroPassive.textContent = `Darkened Reprisal (Rank ${passiveAbilityBoonRank})`;
+    heroPassive.textContent = `Darkened Reprisal Rank ${passiveAbilityBoonRank}`;
     heroPassiveDetails.textContent = `Dexterity Increase: ${
       darkenedReprisalTracker * 100
     }%`;
   } else {
-    heroPassive.textContent = `Burning Devotion (Rank ${passiveAbilityBoonRank})`;
+    heroPassive.textContent = `Burning Devotion Rank ${passiveAbilityBoonRank}`;
     heroPassiveDetails.textContent = `Minimum Damage: ${burningDevotionTracker}`;
   }
 

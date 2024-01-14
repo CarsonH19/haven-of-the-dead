@@ -739,7 +739,7 @@ progress[value]::-moz-progress-bar {
   border-radius: 10px;
   width: 35vw;
   height: 60vh;
-  overflow: hidden;
+  overflow: auto;
   padding: 2vh;
 }
 
@@ -1522,7 +1522,8 @@ progress[value]::-moz-progress-bar {
 .statusTooltipText {
   display: flex;
   flex-direction: column;
-  gap: 1vh;
+  justify-content: flex-start;
+  gap: 0.3vh;
   visibility: hidden;
   min-width: 15vh; /* Set a minimum width */
   height: auto;
@@ -1640,7 +1641,7 @@ bottom: 0%;
 .player-items {
   height: 100%;
   width: 70%;
-  margin-left: 4vh;
+  margin-left: 4.5vh;
 }
 
 .trade-title-divider {
@@ -1655,7 +1656,7 @@ bottom: 0%;
 #playerItemsBox div {
   aspect-ratio: 1;
   flex-direction: column-reverse;
-  margin: 2vh;
+  margin: 1vh;
   box-sizing: border-box; 
   padding: 0px;
 }
@@ -1876,7 +1877,7 @@ bottom: 0%;
 
 .hero-stats-img {
   height: 100%;
-  width: 80%;
+  width: 60%;
   background-repeat: no-repeat;
   background-size: cover;
   border-left: 0.5vh solid var(--accent);
@@ -1903,7 +1904,7 @@ bottom: 0%;
 
 .hero-stats-modal-content div h4 {
   margin: 0px;
-  font-size: 2.0vh;
+  font-size: 1.8vh;
 }
 
 .hero-stats-modal-content div p {
