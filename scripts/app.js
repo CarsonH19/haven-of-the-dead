@@ -461,8 +461,10 @@ function potionHandler() {
 //             Flee
 // ===============================
 function fleeHandler() {
-  let fleeAttempt = Math.floor(Math.random() * 10) + totalDexterity;
+  let fleeAttempt = (Math.floor(Math.random() * 20) + totalDexterity) + 1;
 
+  // Base Flee Chance %20
+  fleeAttempt += 3;
   // ITEM: Ring of Skittering - Increased flee chance
   fleeAttempt += isItemAttuned(RING_OF_SKITTERING, 0);
   // ITEM: FLickering Candle - 100% flee chance
@@ -473,7 +475,7 @@ function fleeHandler() {
     fleeAttempt += 3;
   }
 
-  if (fleeAttempt >= 10 && currentRoom.roomName !== "Throne of the Eternal") {
+  if (fleeAttempt >= 20 && currentRoom.roomName !== "Throne of the Eternal") {
     // Log must be placed before currentRoom change
     writeToLogActions(LOG_FLEE, "YES", "SUCCESS");
 

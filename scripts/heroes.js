@@ -570,8 +570,8 @@ function renderHeroStatsModal() {
   heroGuardBonus.textContent = `${guardBonus} Damage Reduction`;
   // Flee Chance
   const heroFleeChance = document.getElementById("heroFleeChance");
-  let fleeChancePercentage = (totalFaith / 10) * 100;
-  heroFleeChance.textContent = `+${fleeChancePercentage}%`;
+  let fleeChancePercentage = (fleeChance * 5);
+  heroFleeChance.textContent = `${fleeChancePercentage}%`;
 
   // FAITH ------------------------------------------------------
   // Rank

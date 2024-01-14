@@ -223,8 +223,8 @@ function calculateGuardBonus() {
 let fleeChance;
 
 function calculateFleeChance() {
-  // 10% Base Chance
-  fleeChance = totalDexterity + 1;
+  // 20% Base Chance
+  fleeChance = totalDexterity + 4;
   return Math.round(fleeChance);
 }
 
