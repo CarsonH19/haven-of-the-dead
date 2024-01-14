@@ -270,6 +270,7 @@ function damagePlayer(damage) {
   }
 
   if (damage > 0) {
+    soundEffectHandler(punchSounds());
     damageFlashAnimation("PLAYER");
   }
 

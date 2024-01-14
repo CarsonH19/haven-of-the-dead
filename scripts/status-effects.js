@@ -340,10 +340,15 @@ const isDurationExtended = (statusEffect, length) =>
   length > statusEffect.statusDuration - roomCounter;
 
 const extendStatusEffectDuration = (statusEffect, length) => {
-  statusEffect.statusDuration = roomCounter + length;
-  statusEffect.duration = `Duration: ${
-    statusEffect.statusDuration - roomCounter
-  } Rooms`;
+  if (statusEffect === FLICKERING_CANDLE) {
+    statusEffect.statusDuration = 3;
+    statusEffect.duration = `Duration: ${duration}/3`;
+  } else {
+    statusEffect.statusDuration = roomCounter + length;
+    statusEffect.duration = `Duration: ${
+      statusEffect.statusDuration - roomCounter
+    } Rooms`;
+  }
 };
 
 const setupStatusEffectInterval = (statusEffect) => {
@@ -522,13 +527,14 @@ function renderStatusEffects(effect) {
   // Updates & Check Effect Duration
   let newEffectInterval = setInterval(() => {
     tooltipNoteDuration.textContent = effect.duration;
-    if (effect.duration === null) {
+    if (effect.duration === null || effect.statusDuration === null) {
       // Removes Element when duration ends
       middleLeft.removeChild(newEffect);
-      clearInterval(newEffectInterval);
-
       // Remove the effect from the activeEffects list
       activeEffects.splice(existingEffectIndex, 1);
+      effect.duration = null;
+      effect.statusDuration = null;
+      clearInterval(newEffectInterval);
     }
   }, 3000);
 

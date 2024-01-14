@@ -582,10 +582,10 @@ function renderHeroStatsModal() {
   const heroExperienceModifier = document.getElementById(
     "heroExperienceModifier"
   );
-  heroExperienceModifier.textContent = `${(experienceModifier - 1) * 10}%`;
+  heroExperienceModifier.textContent = `${Math.round((experienceModifier - 1) * 10)}%`;
   // Item Find Chance
   const heroFindItemChance = document.getElementById("heroFindItemChance");
-  heroFindItemChance.textContent = `+${itemFindChance}%`;
+  heroFindItemChance.textContent = `${itemFindChance}%`;
 
   // SPECIAL ----------------------------------------------------
   const heroSpecial = document.getElementById("heroSpecialName");

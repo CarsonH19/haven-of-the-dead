@@ -751,7 +751,7 @@ function renderMonsterStatBlock(monster) {
       monsterLevel.style.display = `inline-block`;
       skullIcon.style.display = 'none';
     } else {
-      monsterImageCard.style.backgroundImage = `block`;
+      monsterImageCard.style.backgroundImage = ``;
       monsterImageCard.style.border = "0px";
       monsterLevel.style.display = 'none';
       skullIcon.style.display = `inline-block`;

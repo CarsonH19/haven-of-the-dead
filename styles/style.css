@@ -186,8 +186,8 @@ li, ul {
   aspect-ratio: 1;
   display: none;
   position: absolute;
-  right: 2%; 
-  top: 60%; 
+  right: 0%; 
+  top: 44%; 
   height: 20vh;
   border: 2px solid var(--header);
   border-radius: 5px;
@@ -243,7 +243,7 @@ li, ul {
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
-  padding: 2vh;
+  /* padding: 2vh; */
 }
 
 .monster-level {
@@ -252,7 +252,7 @@ li, ul {
 
 #skullIcon {
   /* color: #ad0505; */
-  margin-left: -0.5vh;
+  margin-left: 0.5vh;
 }
 
 #monsterName {
@@ -280,8 +280,10 @@ li, ul {
 
 .monster-health-bar p {
   margin: 0px;
+  margin-bottom: 0.3vh;
+  margin-top: -1vh;
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: 1.5vh;
 }
 
 
@@ -1064,7 +1066,7 @@ progress[value]::-moz-progress-bar {
 
 #gameOverModal {
   display: none;
-  z-index: 99;
+  z-index: 100;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -1905,7 +1907,7 @@ bottom: 0%;
 }
 
 .hero-stats-modal-content div p {
-  margin-top: 1vh;
+  margin-top: 0.5vh;
   margin-bottom: 0px;
   font-size: 1.5vh;
   

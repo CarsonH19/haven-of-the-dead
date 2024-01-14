@@ -1424,7 +1424,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (dataOne === "BARON ONE") {
         newEntry.textContent = `A voice echoes in your head. "Ah, mortals, you venture deeper into my realm, unaware that each step brings you closer to your doom. The catacombs echo with the whispers of your demise."`;
       } else if (dataOne === "BARON TWO") {
-        newEntry.textContent = `A voice echoes in your head. "The catacomb breathes with the essence of death, and you, intruders, unwittingly feed its hunger."`;
+        newEntry.textContent = `A voice echoes in your head. "The catacomb breathes with the essence of death, and you, intruder, unwittingly feed its hunger."`;
       } else if (dataOne === "BARON THREE") {
         newEntry.textContent = `A voice echoes in your head. "Do you feel it, mortal? The weight of the dead pressing down upon you, their bones yearning to join the legion that shall lay waste to your world."`;
       } else if (dataOne === "BARON FOUR") {
@@ -1517,7 +1517,7 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
           const question = `Will you join their ritual and offer your blood?`;
           writeToNarrative(question, "PAUSE");
         } else if (event === BATTLEFIELD) {
-          const question = `Do you wish to enter the battlefield?`;
+          const question = `There will be danger ahead. Do you wish to enter the battlefield?`;
           writeToNarrative(question, "PAUSE");
         } else if (event === ITEM_ROBBERY) {
           const question = `Do you agree to surrender your items to the scoundrels?`;

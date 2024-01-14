@@ -1087,7 +1087,7 @@ const CRYPTBREAD = {
   effect: "Restores 10 health points when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
-    healPlayer(10);
+    healPlayer(15);
   },
 };
 
@@ -1129,7 +1129,7 @@ const TOMBSTONE_TRUFFLE = {
   effect: "Restores 10 health points when eaten.",
   soundEffect: chewCrackersMouth,
   function: () => {
-    healPlayer(10);
+    healPlayer(25);
   },
 };
 
@@ -1343,7 +1343,7 @@ const BLACKHEART_BREW = {
     attack: 0,
   },
   function: () => {
-    startStatusEffect(BLACKHEART_BREW, 5);
+    startStatusEffect(BLACKHEART_BREW, 6);
   },
 };
 

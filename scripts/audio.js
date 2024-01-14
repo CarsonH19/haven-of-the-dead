@@ -629,6 +629,11 @@ function magicAttackSounds() {
     magicSpellHit2,
     magicSpellHit4,
     magicSpellImpact,
+    magicSpellPassBy28,
+    magicSpellWhoosh14,
+    magicSpellWhoosh2,
+    magicSpellWhoosh20,
+    magicSpellWhoosh22,
     magicSpellWhoosh4,
     magicSpellWhoosh9
   ];

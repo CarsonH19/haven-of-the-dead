@@ -364,7 +364,7 @@ const IVAN_THE_SCOUNDREL_EVENT_TWO = {
     IVAN_THE_SCOUNDREL_EVENT_TWO.summary = `Unveiling Ivan's cache revealed a deceitful ruse. Ambushed, survival demanded a fierce struggle against Ivan and his scoundrels. In the aftermath, amidst the fallen, a mocking gold coin with a laughing skull emerged from Ivan's pocket.`;
     useConsumable("Ivan's Cache Key");
     currentRoom.contents.monsters.push(IVAN_STATS, SCOUNDREL, SCOUNDREL);
-    currentRoom.contents.items.push(LAUGHING_COFFIN_COIN, LAUGHING_COFFIN_COIN);
+    currentRoom.contents.items.push(LAUGHING_COFFIN_COIN);
     setRoomSummary();
     startBattle();
     soundEffectHandler(humanLaugh25);

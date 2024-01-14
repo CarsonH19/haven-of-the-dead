@@ -64,7 +64,7 @@ let catacombRooms = [
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL],
-      items: [],
+      items: [CRYPTBREAD],
       events: null,
     },
   },
@@ -88,7 +88,7 @@ let catacombRooms = [
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL, SCOUNDREL],
-      items: [],
+      items: [CRYPTBREAD],
       events: null,
     },
   },
@@ -200,7 +200,7 @@ let catacombRooms = [
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL],
-      items: [],
+      items: [CRYPTBREAD],
       events: null,
     },
   },
@@ -500,7 +500,7 @@ let tierTwoRooms = [
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL],
-      items: [],
+      items: [MARROWSTONE_CHEESE],
       events: null,
     },
   },
@@ -625,7 +625,7 @@ let tierThreeRooms = [
     music: hiddenCapacity,
     contents: {
       monsters: [SCOUNDREL, SCOUNDREL, SCOUNDREL, SCOUNDREL],
-      items: [],
+      items: [MARROWSTONE_CHEESE],
       events: null,
     },
   },
