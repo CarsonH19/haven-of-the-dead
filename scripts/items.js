@@ -1703,7 +1703,7 @@ const RESTLESS_WISP = {
 
 const UNHOLY_WISP = {
   name: "Unholy Wisp",
-  color: "#ebebeb",
+  color: "#575757",
   image: "styles/images/items/unholy-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
@@ -2480,7 +2480,7 @@ function renderTrade() {
             items[i].name !== "Flickering Candle" &&
             items[i].name !== "Blazing Candle" &&
             items[i].name !== "Soulflame Candle" &&
-            item[i].name !== "Unholy Wisp"
+            items[i].name !== "Unholy Wisp"
           ) {
             container.appendChild(itemBox);
           }
@@ -2559,7 +2559,7 @@ tradeModal.addEventListener("click", (event) => {
   }
 });
 
-closeTradeBtn.addEventListener("click", () => {
+closeBtn.addEventListener("click", () => {
   tradeModal.style.display = "none";
   clearTrade();
 });
@@ -2623,7 +2623,6 @@ function calculateFavor(itemName, operator) {
   function useFavor(itemName) {
     let itemObject;
     if (currentRoom.roomName === "Hag's Hollow") {
-      previousHagFavor = "TRADED";
       itemObject = hagItems.find((inv) => inv.name === itemName);
     } else if (currentRoom.roomName === "Curator's Curio") {
       soundEffectHandler(voiceClipMale226);
@@ -2647,8 +2646,8 @@ function calculateFavor(itemName, operator) {
       // Delete Item from Trader's Inventory
       const index = traderItems.indexOf(itemObject);
       traderItems.splice(index, 1);
-
       favor -= itemValue;
+      previousHagFavor = "TRADED";
       // Update global favor variable based on the current room
       if (currentRoom.roomName === "Hag's Hollow") {
         hagFavor = favor;

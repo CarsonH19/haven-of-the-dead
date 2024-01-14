@@ -462,7 +462,9 @@ const UNDEAD_RIVEN = {
         UNDEAD_RIVEN.attackCounter--;
 
         undeadRivenAttacks();
+        soundEffectHandler(lightAttackSounds());
       } else {
+        UNDEAD_RIVEN.tracker = 0;
         clearInterval(undeadRivenInterval);
       }
     }, 500);
@@ -746,13 +748,13 @@ function renderMonsterStatBlock(monster) {
       monsterImageCard.style.backgroundImage = `url(${monster.image})`;
       monsterImageCard.style.border = "2px solid var(--header)";
       monsterLevel.textContent = monster.skulls;
-      monsterLevel.style.display = 'block';
+      monsterLevel.style.display = `inline-block`;
       skullIcon.style.display = 'none';
     } else {
-      monsterImageCard.style.backgroundImage = ``;
+      monsterImageCard.style.backgroundImage = `block`;
       monsterImageCard.style.border = "0px";
       monsterLevel.style.display = 'none';
-      skullIcon.style.display = 'inline-block';
+      skullIcon.style.display = `inline-block`;
 
     }
 

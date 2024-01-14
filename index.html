@@ -74,7 +74,7 @@
           <div id="liheth" class="character-image liheth-image">
             <div class="character-text">
               <h3>Priestess Liheth</h3>
-              <p>Liheth, a devout priestess of Candlelight, was raised among the flickering flames of sacred rituals. Guided by her unwavering faith, she enters the Great Catacombs, driven by the duty to quell the rising darkness. Trained to wield divine fire, her radiant zeal becomes a weapon against the necrotic horde. Scarred by the shadows she battles, Liheth seeks to restore equilibrium between life and death, her fervent flames standing as a beacon against the undead evil that threatens to engulf the world.</p>
+              <p>Liheth, a devout priestess of Candlelight, was raised among the flickering flames of sacred rituals. Guided by her unwavering faith, she enters the Great Catacombs, driven by the duty to quell the rising darkness. Trained to wield divine fire, her radiant zeal becomes a weapon against the necrotic horde. Liheth seeks to restore equilibrium between life and death, her fervent flames standing as a beacon against evil that threatens to engulf the world.</p>
               <div class="character-divider"></div>
               <h4>Cleansing Flame</h4>
               <p>Liheth envelopes herself with soothing flames healing her wounds.</p>
@@ -188,10 +188,12 @@
           <div class="inventory-right-side">
             <div class="magic-items-box">
               <h4>Items</h4>
+              <div class="divider"></div>
               <div id="magicItemsBox" class="magic-items"></div>
             </div>
             <div class="consumables-box">
               <h4>Consumables</h4>
+              <div class="divider"></div>
               <div id="consumablesBox" class="consumables"></div>
             </div>
           </div>
@@ -265,7 +267,7 @@
     <div id="tradeModal" class="modal">
       <div class="trade-modal-content">
         <h2 id="playerFavor">Favor: <span id="favorTracker">0</span></h2>
-        <button id="closeTradeBtn">X</button>
+        <button id="closeBtn">X</button>
         <div class="trade-modal-bottom">
           <div class="trader-items">
             <div class="trade-title-divider">
@@ -312,8 +314,8 @@
           </div>
           <div id="faithStats">
             <h4 id="faithTitle">Faith: <span id="heroStatsFaith">0</span></h4>
-            <p>Experience Modifier: <span id="heroExperienceModifier">0</span></p>
-            <p>Find Item Chance: <span id="heroFindItemChance">0</span></p>
+            <p>Experience Gain: +<span id="heroExperienceModifier">0</span></p>
+            <p>Find Item Chance: +<span id="heroFindItemChance">0</span></p>
             <p id="rankFourFaith"></p>
           </div>
           <div id="specialStats">

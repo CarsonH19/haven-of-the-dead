@@ -124,7 +124,7 @@ const SWARM_OF_VERMIN = {
   failDamage: 20,
   penalty: () => {
     DISEASED.function(5);
-    soundEffectHandler(fleshHitSounds);
+    soundEffectHandler(fleshHitSounds());
   },
 };
 
@@ -138,7 +138,7 @@ const SKELETAL_HANDS = {
   passValue: 7,
   failDamage: 25,
   penalty: () => {
-    soundEffectHandler(fleshHitSounds);
+    soundEffectHandler(fleshHitSounds());
   },
 };
 

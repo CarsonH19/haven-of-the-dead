@@ -45,7 +45,7 @@ body {
   margin: 0px;
   width: 100vw;
   height: 100vh;
-  padding: 20px;
+  padding: 3vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,7 +65,7 @@ p {
 
 button {
   font-family: 'garamond';
-  font-size: 1.2rem;
+  font-size: 2vh;
   border-radius: 8px;
   color: var(--accent);
 }
@@ -131,7 +131,7 @@ li, ul {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  border: 5px solid var(--accent);
+  border: 0.5vh solid var(--accent);
   background-image: url();
   background-repeat: no-repeat;
   background-size: contain;
@@ -151,29 +151,29 @@ li, ul {
   display: flex;
   justify-content: space-between;
   height: 20%;
-  margin: 20px;
+  margin: 3vh;
   margin-bottom: 0px;
 }
 
 .name-and-counter h2 {
   margin: 0px;
+  font-size: 2.5vh;
 }
 
 .name-and-counter h4 {
   margin: 10px;
   margin-left: 5px;
-  font-size: 1.2rem;
+  font-size: 1.5vh;
 }
 
-/* NPC IMAGE CARD */
+/* IMAGE CARDS */
 
-/* CHANGED */
 #npcImageCard {
   aspect-ratio: 1;
   display: none;
   position: absolute;
-  left: 50%; /* Center horizontally */
-  top: 25%; /* Center vertically */
+  left: 50%; 
+  top: 25%;
   transform: translate(-50%, -50%); 
   height: 20vh;
   border: 2px solid var(--header);
@@ -186,8 +186,8 @@ li, ul {
   aspect-ratio: 1;
   display: none;
   position: absolute;
-  right: 0%; 
-  top: 80%; 
+  right: 2%; 
+  top: 60%; 
   height: 20vh;
   border: 2px solid var(--header);
   border-radius: 5px;
@@ -211,8 +211,8 @@ li, ul {
   aspect-ratio: 1;
   display: none;
   position: absolute;
-  right: 50%; /* Center horizontally */
-  bottom: 140%; /* Center vertically */
+  right: 50%; 
+  bottom: 140%; 
   transform: translate(-50%, -50%); 
   height: 20vh;
   border: 2px solid var(--header);
@@ -223,21 +223,13 @@ li, ul {
 
 .top-right {
   display: flex;
-  width: 60%;
+  width: 75%;
   justify-content: flex-end;
   height: 100%;
-  min-height: 100px;
-  max-height: 125px;
+  /* min-height: 100px;
+  max-height: 125px; */
 }
 
-/* .monster-image {
-  aspect-ratio: 1;
-  height: 100%;
-  border: 4px solid var(--accent);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: overlay;
-} */
 
 .monster-container {
   position: relative;
@@ -247,32 +239,21 @@ li, ul {
   justify-content: space-between;
   max-width: 100%;
   min-width: 25vw;
-  /* max-width: 40vw; */
   height: 100%;
-  /* border: 4px solid var(--accent);
-  background-color: var(--background);
-  background-image: url(images/skull-texture.jpg); */
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
-  padding: 10px;
+  padding: 2vh;
 }
 
 .monster-level {
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 
 #skullIcon {
   /* color: #ad0505; */
   margin-left: -0.5vh;
 }
-
-/* .monster-display {
-  display: flex;
-  justify-content: space-b;
-  width: 100%;
-  height: 30%;
-} */
 
 #monsterName {
   margin: 0px;
@@ -289,8 +270,8 @@ li, ul {
   display: flex;
   justify-content: space-between;
   margin: 0px;
-  margin-top: 10px;
-  margin-bottom: -5px;
+  margin-top: 2vh;
+  margin-bottom: -1vh;
 }
 
 .monster-container progress {
@@ -336,7 +317,7 @@ li, ul {
 .middle-left div {
   width: 6vh;
   height: 6vh;
-  border: 2px solid #252b3b;
+  border: 0.3vh solid var(--accent);
   border-radius: 10px;
   /* z-index: 1; */
 }
@@ -352,9 +333,9 @@ li, ul {
   align-items: center;
   width: 90%;
   height: 100%;
-  padding: 20px 40px 20px 40px;
-  margin-bottom: 100px;
-  font-size: 1.5rem;
+  padding: 4vh 8vh 4vh 8vh;
+  /* margin-bottom: 0px; */
+  font-size: 2vh;
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
 }
@@ -444,6 +425,9 @@ li, ul {
 
 .narrative-text {
   position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
   width: 50%;
   list-style-type: none;
   font-size: 1.4rem;
@@ -696,7 +680,7 @@ progress {
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  height: 10px; 
+  height: 1vh; 
   color: #ff0062;
   border: 1px solid #ad0505;
   border-radius: 10px;
@@ -736,25 +720,25 @@ progress[value]::-moz-progress-bar {
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4);
+  z-index: 5;
 }
 
 .modal-content {
   display: flex;
   flex-direction: column;
   text-align: left;
-  gap: 0px;
   background-color: var(--background);
   background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
-  border: 3px solid #888;
+  border: 0.5vh solid var(--accent);
   border-radius: 10px;
   width: 35vw;
   height: 60vh;
-  overflow: auto;
-  padding: 10px;
+  overflow: hidden;
+  padding: 2vh;
 }
 
 
@@ -764,19 +748,19 @@ progress[value]::-moz-progress-bar {
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
-  gap: 10px;
+  gap: 2vh;
   background-color: var(--background);
   background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
-  border: 3px solid #888;
+  border: 0.5vh solid var(--accent);
   border-radius: 10px;
   width: 35vw;
   height: 60vh;
-  overflow: auto;
-  padding: 20px;
+  overflow: hidden;
+  padding: 3vh;
 }
 
 .catacomb-entrance-modal-content div {
@@ -807,7 +791,7 @@ progress[value]::-moz-progress-bar {
 .catacomb-entrance-button-container button {
   width: 8vw;
   height: 5vh;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 /* 
@@ -903,7 +887,7 @@ progress[value]::-moz-progress-bar {
 }
 
 .character-divider {
-  height: 2px;
+  height: 1px;
   width: 80%;
   background-color: var(--header);
   border-radius: 10px;
@@ -960,17 +944,20 @@ progress[value]::-moz-progress-bar {
   display: flex;
   justify-content: space-evenly;
   align-self: flex-end; 
-  gap: 100px;
+  gap: 10vh;
 }
 
 .hero-choice-buttons button {
   cursor: pointer;
 }
 
-
 .modal-content button {
   width: 8vw;
   height: 5vh;
+}
+
+.character-stats p {
+  margin: 0.5vh;
 }
 
 /* 
@@ -981,6 +968,7 @@ progress[value]::-moz-progress-bar {
 
 #logModal {
   display: none;
+  z-index: 5;
 }
 
 .log-modal-list {
@@ -992,17 +980,17 @@ progress[value]::-moz-progress-bar {
 
 .log-container-modal h3 {
   margin: 0px;
-  padding: 0px 0px 5px 0px;
+  font-size: 3vh;
 }
 
 .log-container-modal {
-  padding: 5px;
+  padding: 1vh;
 }
 
 .log-modal-list li {
   border-bottom: 1px dashed var(--header);
-  padding: 10px 0px 10px 0px;
-  font-size: 1.0rem;
+  padding: 1vh 0px 1vh 0px;
+  font-size: 2vh;
 }
 
 .divider {
@@ -1114,25 +1102,25 @@ progress[value]::-moz-progress-bar {
 }
 
 .room-summary-modal-content {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
-  gap: 0px;
   background-color: var(--background);
   background-image: url(images/skull-texture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
-  border: 3px solid #888;
+  border: 0.5vh solid var(--accent);
   border-radius: 10px;
   /* width: 60%;
   height: 56%; */
   width: 35vw;
   height: 60vh;
   overflow: auto;
-  padding: 20px;
+  padding: 3vh;
 }
 
 #roomSummaryInfo {
@@ -1160,7 +1148,7 @@ progress[value]::-moz-progress-bar {
 .room-summary-modal-content h4 {
   margin: 0px;
   margin-top: 20px;
-  margin-bottom: 3px;
+  margin-bottom: 0.5vh;
   font-size: 1.2rem;
 }
 
@@ -1282,6 +1270,7 @@ progress[value]::-moz-progress-bar {
 }
 
 .inventory-modal-content {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -1291,7 +1280,7 @@ progress[value]::-moz-progress-bar {
   background-size: cover;
   background-blend-mode: overlay;  
   margin: 12vh auto;
-  border: 3px solid #888;
+  border: 0.5vh solid var(--accent);
   border-radius: 10px;
   width: 40vw;
   height: 65vh;
@@ -1323,50 +1312,64 @@ progress[value]::-moz-progress-bar {
   display: grid;
   grid-template-columns: 1fr auto; 
   align-items: center;
+  width: 100%;
+  height: 10%;
 }
 
 .inventory-header h2 {
-  text-align: center; 
-  margin-left: 100px;
-  grid-column: 1;
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  font-size: 3vh;
 }
 
 .inventory-header button {
-  justify-self: end; 
-  grid-column: 2;
-  margin: 5px;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  margin: 1vh;
+  width: 3vh;
+  height: 3vh;
 }
 
 .inventory-left-side {
   width: 20%;
-  border-right: 2px solid var(--header);
+  /* border-right: 2px solid var(--header); */
 }
 
 .attuned-box {
   text-align: center;
-  border-top: 2px solid var(--header);
+  /* border-top: 2px solid var(--header); */
   height: 90%;
 }
 
 .attuned-box h4 {
-  margin: 8px;
+  margin: 1vh;
 }
 
+.attuned-box h4,
+.magic-items-box h4,
+.consumables-box h4 {
+  font-size: 2vh;
+}
 .slots {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 5px;
+  gap: 1vh;
   height: 100%;
 }
 
 .slots div {
   border: 1px solid var(--header);
-  height: 80px;
-  width: 80px;
+  height: 8vh;
+  width: 8vh;
   border-radius: 5px;
 }
+
+
 
 .slots button {
   height: 100%;
@@ -1385,13 +1388,14 @@ progress[value]::-moz-progress-bar {
 .magic-items-box {
   text-align: left;
   height: 50%;
-  border-top: 2px solid var(--header);
-  border-bottom: 2px solid var(--header);
+  /* border-top: 2px solid var(--header);
+  border-bottom: 2px solid var(--header); */
   z-index: 1;
 }
 
 .magic-items-box h4 {
   margin: 1vh 1vh 0vh 1vh;
+
 }
 
 .consumables-box {
@@ -1418,6 +1422,10 @@ progress[value]::-moz-progress-bar {
   grid-template-columns: repeat(auto-fill, minmax(7vh, 7vh));
 }
 
+.magic-items-box .divider,
+.consumables-box .divider {
+  width: 90%;
+}
 
 .consumables-box h4 {
   margin: 1vh 1vh 0vh 1vh;
@@ -1427,7 +1435,7 @@ progress[value]::-moz-progress-bar {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 2px 5px; 
+  padding: 0.3vh 0.5vh; 
   font-size: 0.7rem;
 }
 
@@ -1438,9 +1446,9 @@ progress[value]::-moz-progress-bar {
   height: 6vh;
   width: 6vh;
   font-family: monospace;
-  font-size: 2rem;
+  font-size: 2vh;
   color: lightgray;
-  box-shadow: inset 3px 3px 20px rgba(0, 0, 0, 3.8);
+  box-shadow: inset 0.5vh 0.5vh 3vh rgba(0, 0, 0, 1.8);
   border-radius: 50px;
 }
 
@@ -1450,8 +1458,8 @@ progress[value]::-moz-progress-bar {
   transition: 0.3s;
   aspect-ratio: 1;
   font-family: monospace;
-  font-size: 3rem;
-  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 4.8);
+  font-size: 3vh;
+  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0);
   border-radius: 50px;
   cursor: pointer;
   scale: 1.2;
@@ -1482,10 +1490,9 @@ progress[value]::-moz-progress-bar {
   background-color: var(--accent);
   color: lightgray;
   text-align: left;
-  font-size: 1.2vh;
+  font-size: 1.4vh;
   border-radius: 6px;
-  padding: 5px;
-  /* margin-left: -60px; */
+  padding: 1vh;
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 3;
@@ -1513,19 +1520,19 @@ progress[value]::-moz-progress-bar {
 .statusTooltipText {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 1vh;
   visibility: hidden;
-  min-width: 130px; /* Set a minimum width */
+  min-width: 15vh; /* Set a minimum width */
   height: auto;
   width: auto; /* Allow the width to adjust based on content */
-  min-height: 80px; /* Set a minimum height */
+  min-height: 6vh; /* Set a minimum height */
   background-color: var(--accent);
   color: lightgray;
   text-align: left;
-  font-size: 0.8rem;
+  font-size: 1.4vh;
   border-radius: 6px;
-  padding: 5px;
-  margin-left: -60px;
+  padding: 1vh;
+  margin-left: -5vh;
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 4;
@@ -1562,7 +1569,7 @@ progress[value]::-moz-progress-bar {
   background-size: cover;
   background-blend-mode: overlay;
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
-  border: 3px solid #888;
+  border: 0.5vh solid var(--accent);
   border-radius: 10px;
   width: 40vw;
   height: 65vh;
@@ -1575,10 +1582,13 @@ right: 5%;
 bottom: 0%;
 }
 
-#closeTradeBtn {
+#closeBtn {
   position: absolute;
-  right: 1%;
-  top: 1%
+  top: 0%;
+  right: 0%;
+  margin: 1vh;
+  width: 3vh;
+  height: 3vh;
 }
 
 /* .trade-modal-top {
@@ -1628,7 +1638,7 @@ bottom: 0%;
 .player-items {
   height: 100%;
   width: 70%;
-  margin-left: 25px;
+  margin-left: 4vh;
 }
 
 .trade-title-divider {
@@ -1636,15 +1646,14 @@ bottom: 0%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 5vh;
   width: 90%;
 }
 
 #playerItemsBox div {
   aspect-ratio: 1;
   flex-direction: column-reverse;
-  margin: 10px;
-  /* border: 1px solid var(--header); */
+  margin: 2vh;
   box-sizing: border-box; 
   padding: 0px;
 }
@@ -1655,8 +1664,6 @@ bottom: 0%;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  /* gap: 10px; */
-  /* overflow: hidden; */
 }
 
 .player-items h3,
@@ -1669,14 +1676,14 @@ bottom: 0%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 4vh;
   border-right: 2px solid var(--header);
 }
 
 #playerItemsBox div,
 #traderItemsBox div {
- height: 70px;
- width: 70px;
+ height: 7vh;
+ width: 7vh;
 }
 
 #playerItemsBox button,
@@ -1693,12 +1700,12 @@ bottom: 0%;
 #playerItemsBox button,
 #traderItemsBox button {
   aspect-ratio: 1;
-  height: 70;
-  width: 70px;
+  height: 6vh;
+  width: 6vh;
   font-family: monospace;
-  font-size: 2rem;
+  font-size: 2vh;
   color: lightgray;
-  box-shadow: inset 3px 3px 20px rgba(0, 0, 0, 3.8);
+  box-shadow: inset 0.3vh 0.3vh 3vh rgba(0, 0, 0, 3.8);
   border-radius: 50px;
 }
 
@@ -1708,7 +1715,7 @@ bottom: 0%;
   transition: 0.3s;
   aspect-ratio: 1;
   font-family: monospace;
-  font-size: 3rem;
+  font-size: 3vh;
   box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 4.8);
   border-radius: 50px;
   cursor: pointer;
@@ -1733,14 +1740,13 @@ bottom: 0%;
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4);
-  z-index: 3;
+  z-index: 9;
 }
 
 .level-up-modal-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
-  gap: 0px;
   align-items:flex-start;
   background-color: var(--background);
   background-image: url(images/skull-texture.jpg);
@@ -1748,12 +1754,12 @@ bottom: 0%;
   background-size: cover;
   background-blend-mode: overlay;
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
-  border: 3px solid #888;
+  border: 0.5vh solid var(--accent);
   border-radius: 10px;
   width: 35vw;
   height: 60vh;
   overflow: none;
-  padding: 10px;
+  padding: 2vh;
 }
 
 .level-up-modal-content p {
@@ -1775,8 +1781,8 @@ bottom: 0%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin-top: -40px;
-  gap: 10px;
+  margin-top: -8vh;
+  gap: 2vh;
   height: 80%;
   width: 100%;
 }
@@ -1808,7 +1814,7 @@ bottom: 0%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 2vh;
 }
 
 .attributes-container button,
@@ -1816,7 +1822,7 @@ bottom: 0%;
   aspect-ratio: 1;
   height: 15vh;
   font-family: monospace;
-  font-size: 2rem;
+  font-size: 3.0vh;
   color: lightgray;
   box-shadow: inset 5px 5px 40px rgba(0, 0, 0, 4.8);
   border-radius: 100px;
@@ -1828,7 +1834,7 @@ bottom: 0%;
   transition: 0.3s;
   aspect-ratio: 1;
   font-family: monospace;
-  font-size: 3rem;
+  font-size: 4vh;
   box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 4.8);
   border-radius: 100px;
   cursor: pointer;
@@ -1843,9 +1849,11 @@ bottom: 0%;
 #heroStatsModal {
   display: none;
   transition: 0.5s;
+  z-index: 5;
 }
 
 .stats-card {
+  position: relative;
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-start; 
@@ -1856,7 +1864,7 @@ bottom: 0%;
   background-size: cover;
   background-blend-mode: overlay;
   margin: 12vh auto; /*?!ADJUST FOR MOBILE?!*/
-  border: 3px solid var(--accent);
+  border: 0.5vh solid var(--accent);
   border-radius: 10px;
   width: 35vw;
   height: 60vh;
@@ -1869,7 +1877,7 @@ bottom: 0%;
   width: 80%;
   background-repeat: no-repeat;
   background-size: cover;
-  border-left: 3px solid var(--accent);
+  border-left: 0.5vh solid var(--accent);
 }
 
 .hero-stats-modal-content {
@@ -1877,10 +1885,9 @@ bottom: 0%;
   flex-direction: column;
   justify-content: space-between; 
   align-items:flex-start;
-  /* gap: 15px; */
   width: 50%;
   height: 100%;
-  padding: 10px;
+  padding: 2vh;
 }
 
 .hero-stats-modal-content {
@@ -1889,15 +1896,18 @@ bottom: 0%;
 
 .hero-stats-modal-content h3 {
   margin: 0px;
+  font-size: 2.0vh;
 }
 
 .hero-stats-modal-content div h4 {
   margin: 0px;
+  font-size: 2.0vh;
 }
 
 .hero-stats-modal-content div p {
-  margin-top: 5px;
+  margin-top: 1vh;
   margin-bottom: 0px;
+  font-size: 1.5vh;
   
 }
 
@@ -1983,8 +1993,8 @@ bottom: 0%;
 
 
 .orb {
-  width: 20px;
-  height: 20px;
+  width: 2vh;
+  height: 2vh;
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -1993,19 +2003,19 @@ bottom: 0%;
   background: radial-gradient(circle, var(--orb) 5%, rgba(255, 236, 160, 0) 100%);
   /* transform: translateY(-50%); */
   animation: orbAnimation 6s ease-in-out infinite, pulseAnimation 2.0s ease-in-out infinite;
-  box-shadow: 0 0 40px 10px #ffeca0; 
-  opacity: 90%;
+  box-shadow: 0 0 8vh 2vh #ffeca0; 
+  opacity: 70%;
 }
 
 @keyframes pulseAnimation {
   0% {
-    box-shadow: 0 0 20px 00px var(--orb);
+    box-shadow: 0 0 3vh 00px var(--orb);
   }
   50% {
-    box-shadow: 0 0 40px 10px var(--orb); /* adjusted glow effect for pulsing */
+    box-shadow: 0 0 4vh 2vh var(--orb); /* adjusted glow effect for pulsing */
   }
   100% {
-    box-shadow: 0 0 20px 0px var(--orb); /* adjusted glow effect for pulsing */
+    box-shadow: 0 0 3vh 0px var(--orb); /* adjusted glow effect for pulsing */
   }
 }
 

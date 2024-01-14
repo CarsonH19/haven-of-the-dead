@@ -86,7 +86,7 @@ const eventButtonOne = document.getElementById("eventButtonOne");
 const eventButtonTwo = document.getElementById("eventButtonTwo");
 
 const tradeModal = document.getElementById("tradeModal");
-const closeTradeBtn = document.getElementById("closeTradeBtn");
+const closeBtn = document.getElementById("closeBtn");
 
 // ===============================
 //        Choose Hero Modal
