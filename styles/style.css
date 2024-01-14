@@ -187,7 +187,7 @@ li, ul {
   display: none;
   position: absolute;
   right: 0%; 
-  top: 44%; 
+  top: 50%; 
   height: 20vh;
   border: 2px solid var(--header);
   border-radius: 5px;
@@ -258,7 +258,7 @@ li, ul {
 #monsterName {
   margin: 0px;
   padding: 0px;
-  font-size: 1.2rem;
+  font-size: 2.5vh;
 }
 
 .monster-health-bar {
@@ -283,7 +283,7 @@ li, ul {
   margin-bottom: 0.3vh;
   margin-top: -1vh;
   font-weight: 900;
-  font-size: 1.5vh;
+  font-size: 2vh;
 }
 
 
@@ -465,7 +465,7 @@ li, ul {
 .controls-container {
   width: 33%;
   height: 90%;
-  padding: 10px;
+  padding: 2vh;
   align-self: flex-end;
 }
 
@@ -476,7 +476,7 @@ li, ul {
   width: 33%;
   height: 100%;
   padding: 10px;
-  gap: 15px;
+  gap: 3vh;
 }
 
 .player-display {
@@ -532,7 +532,7 @@ li, ul {
 .player-display h3 {
   margin: 0px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
-  font-size: 1.2rem;
+  font-size: 2.5vh;
 }
 
 .player-container h4 {
@@ -563,7 +563,7 @@ li, ul {
   margin: 0px;
   padding: 0px;
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: 2vh;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
 }
 

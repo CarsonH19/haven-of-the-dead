@@ -632,7 +632,6 @@ function magicAttackSounds() {
     magicSpellPassBy28,
     magicSpellWhoosh14,
     magicSpellWhoosh2,
-    magicSpellWhoosh20,
     magicSpellWhoosh22,
     magicSpellWhoosh4,
     magicSpellWhoosh9
@@ -662,10 +661,6 @@ const magicSpellWhoosh14 = loadAudio(
   "audio/sound-effects/magic/Magic Spell Whoosh 14.mp3",
   "magicSpellWhoosh14"
 );
-const magicSpellWhoosh20 = loadAudio(
-  "audio/sound-effects/magic/Magic Spell Whoosh 20.mp3",
-  "magicSpellWhoosh20"
-);
 const magicSpellWhoosh22 = loadAudio(
   "audio/sound-effects/magic/Magic Spell Whoosh 22.mp3",
   "magicSpellWhoosh22"
@@ -676,7 +671,6 @@ function magicGuardSounds() {
     magicSpellPassBy28,
     magicSpellWhoosh14,
     magicSpellWhoosh2,
-    magicSpellWhoosh20,
     magicSpellWhoosh22,
     magicSpellWhoosh4,
     magicSpellWhoosh9,
