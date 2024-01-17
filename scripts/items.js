@@ -839,7 +839,7 @@ const UNHOLY_EFFIGY = {
   tracker: 0,
   function: () => {
     if (criticalHit >= 20) {
-      specialCooldownCounter--;
+      // specialCooldownCounter--;
       specialCooldownHandler();
     }
   },

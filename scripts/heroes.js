@@ -567,13 +567,13 @@ function renderHeroStatsModal() {
   // Critical Hit Chance
   const heroCritHitChance = document.getElementById("heroCritHitChance");
   let critHitPercentage = ((1 + totalDexterity) / 20) * 100;
-  heroCritHitChance.textContent = `${critHitPercentage}%`;
+  heroCritHitChance.textContent = `${Math.round(critHitPercentage)}%`;
   // Guard Bonus
   const heroGuardBonus = document.getElementById("heroGuardBonus");
   heroGuardBonus.textContent = `${guardBonus} Damage Reduction`;
   // Flee Chance
   const heroFleeChance = document.getElementById("heroFleeChance");
-  let fleeChancePercentage = (fleeChance * 5);
+  let fleeChancePercentage = fleeChance * 5 + 20;
   heroFleeChance.textContent = `${fleeChancePercentage}%`;
 
   // FAITH ------------------------------------------------------
@@ -585,13 +585,17 @@ function renderHeroStatsModal() {
   const heroExperienceModifier = document.getElementById(
     "heroExperienceModifier"
   );
-  heroExperienceModifier.textContent = `${Math.round((experienceModifier - 1) * 100)}%`;
+  heroExperienceModifier.textContent = `${Math.round(
+    (experienceModifier - 1) * 100
+  )}%`;
   // Item Find Chance
   const heroFindItemChance = document.getElementById("heroFindItemChance");
   heroFindItemChance.textContent = `${itemFindChance}%`;
   // Cooldown Reduction
-  const heroCooldownReduction = document.getElementById("heroCooldownReduction");
-  heroCooldownReduction.textContent = `${cooldownReduction * 100}%`;
+  const heroCooldownReduction = document.getElementById(
+    "heroCooldownReduction"
+  );
+  heroCooldownReduction.textContent = `${Math.round(cooldownReduction * 100)}%`;
 
   // SPECIAL ----------------------------------------------------
   const heroSpecial = document.getElementById("heroSpecialName");

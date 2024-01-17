@@ -206,6 +206,8 @@ function dealPlayerDamage(damage) {
 
     if (evadeChance > dealtDamage + monsterLevel) {
       dealtDamage = 0;
+      //writeToLog(Attack Evaded) !FIX!
+      console.log('Attack Evaded');
     }
   }
 
@@ -229,7 +231,7 @@ function damagePlayer(damage) {
 
   // Strength damage mitigation
   damageMitigatedModifier = 1 - damageMitigation;
-  damage = damage * damageMitigatedModifier;
+  damage = Math.round(damage * damageMitigatedModifier);
 
   // Bone Amalgam Use Temp HP
   if (attunedItems.includes(BONE_AMALGAM)) {
@@ -1082,6 +1084,8 @@ function closeRoomSummaryModal() {
   // Strength Rank 4 Boon
   if (strengthBoonRank === 4) {
     healPlayer(totalStrength * 3);
+    //writeToLog(Health Regained) !FIX!
+    console.log("Health Regained");
   }
 
   gloryforgedBladeCheck();
