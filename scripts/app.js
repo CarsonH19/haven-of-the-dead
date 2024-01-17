@@ -199,13 +199,14 @@ function monsterAttackHandler(bonus) {
 function dealPlayerDamage(damage) {
   let dealtDamage = Math.round(Math.random() * damage);
 
-  // Rank 4 Dexterity damage reduction
+  // Rank 4 Dexterity evade chance
   if (dexterityBoonRank === 4) {
-    dealtDamage -= totalDexterity;
-  }
+    const evadeChance = Math.floor(Math.random() * 20) + 1 + totalDexterity;
+    const monsterLevel = currentRoom.contents.monsters[0].skulls;
 
-  if (dealtDamage <= 0) {
-    dealtDamage = 0;
+    if (evadeChance > dealtDamage + monsterLevel) {
+      dealtDamage = 0;
+    }
   }
 
   // ITEM - Hellfire Charm - Accumulates damage received
@@ -225,6 +226,10 @@ function damagePlayer(damage) {
   if (AEGIS_STATUS_EFFECT.duration !== null) {
     damage = 0;
   }
+
+  // Strength damage mitigation
+  damageMitigatedModifier = 1 - damageMitigation;
+  damage = damage * damageMitigatedModifier;
 
   // Bone Amalgam Use Temp HP
   if (attunedItems.includes(BONE_AMALGAM)) {
@@ -345,6 +350,12 @@ function specialCooldownHandler(reset) {
       specialCooldownCounter = 21;
     }
 
+    // Faith - Cooldown Reduction
+    cooldownReductionModifier = 1 - cooldownReduction;
+    specialCooldownCounter = Math.round(
+      specialCooldownCounter * cooldownReductionModifier
+    );
+
     // ITEM: HALLOWED HOURGLASS - Reduces Cooldown by 2
     specialCooldownCounter -= isItemAttuned(HALLOWED_HOURGLASS, 0);
   }
@@ -461,7 +472,7 @@ function potionHandler() {
 //             Flee
 // ===============================
 function fleeHandler() {
-  let fleeAttempt = (Math.floor(Math.random() * 20) + totalDexterity) + 1;
+  let fleeAttempt = Math.floor(Math.random() * 20) + totalDexterity + 1;
 
   // Base Flee Chance %20
   fleeAttempt += 3;
@@ -561,6 +572,7 @@ function isGameOver(ending) {
     isItemAttuned(BLOODSTONE, null);
     soundEffectHandler(monster, "MONSTER DEATH");
     gainExperience(currentRoom.contents.monsters[0].skulls);
+    turnOffControls();
 
     setTimeout(() => {
       checkForMonsters();
@@ -812,7 +824,7 @@ function renderCurrentRoom(currentRoom) {
 
 function togglePlayerControls() {
   setTimeout(() => {
-    if (currentRoom.contents.monsters.length > 0) {
+    if (currentRoom.contents.monsters.length > 0 && currentMonsterHealth > 0) {
       attackBtn.disabled = false;
       guardBtn.disabled = false;
       fleeBtn.disabled = false;
@@ -1046,11 +1058,7 @@ function closeRoomSummaryModal() {
   roomSummaryModal.style.display = "none";
 
   // Baron of Bone Dialogue
-  if (
-    roomCounter % 10 === 0 &&
-    roomCounter !== 0 &&
-    roomCounter < 61
-  ) {
+  if (roomCounter % 10 === 0 && roomCounter !== 0 && roomCounter < 61) {
     if (roomCounter === 10) {
       writeToLogEvent(LOG_NPC_DIALOGUE, "YES", "BARON ONE");
     } else if (roomCounter === 20) {
@@ -1069,6 +1077,11 @@ function closeRoomSummaryModal() {
       }, 3000);
     }
     soundEffectHandler(ominousPresence);
+  }
+
+  // Strength Rank 4 Boon
+  if (strengthBoonRank === 4) {
+    healPlayer(totalStrength * 3);
   }
 
   gloryforgedBladeCheck();

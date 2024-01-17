@@ -260,7 +260,7 @@ const AEGIS_STATUS_EFFECT = {
   statusDuration: null,
   function: () => {
     if (AEGIS_STATUS_EFFECT.duration === null) {
-      AEGIS_STATUS_EFFECT.statusDuration = actionCounter + 3;
+      AEGIS_STATUS_EFFECT.statusDuration = actionCounter + 5;
       AEGIS_STATUS_EFFECT.duration = `Duration: ${
         AEGIS_STATUS_EFFECT.statusDuration - actionCounter
       } Actions`;

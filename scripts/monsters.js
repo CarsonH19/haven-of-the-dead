@@ -775,7 +775,7 @@ function startBattle() {
   setTimeout(() => {
     renderMonsterStatBlock(currentRoom.contents.monsters[0]);
     // Checks for Paladin Passive
-    setTimeout(paladinRadiantAura, 1500);
+    setTimeout(paladinRadiantAura, 1000);
     // ITEM: Rattlebone Whistle - Chance for humanoids to flee.
     isItemAttuned(RATTLEBONE_WHISTLE);
     // ITEM: Fallen King's Crown - Evil spirits don't attack you.
@@ -787,7 +787,7 @@ function startBattle() {
     setTimeout(() => {
       // setControlsInterval("START");
       togglePlayerControls();
-    }, 1000);
+    }, 1100);
   }, 1000);
 
   soundEffectHandler(currentRoom.contents.monsters[0], "SPAWN");

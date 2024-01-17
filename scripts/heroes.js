@@ -36,8 +36,8 @@ function paladinHolySmite() {
 function paladinRadiantAura() {
   if (
     heroChoice === "PALADIN" &&
+    currentRoom.contents.monsters.length > 0 &&
     currentRoom.contents.monsters[0].type === "UNDEAD" &&
-    monsterContainer.style.display === "FLEX" &&
     currentMonsterHealth > 0
   ) {
     damageMonster(radiantAuraTracker);
@@ -555,6 +555,9 @@ function renderHeroStatsModal() {
   const heroCritHitDamage = document.getElementById("heroCritHitDamage");
   let heroCritDamageMod = Math.round(calculateCritDamageModifier() * 100);
   heroCritHitDamage.textContent = `${heroCritDamageMod}%`;
+  // Damage Mitigation
+  const heroDamageMitigation = document.getElementById("heroDamageMitigation");
+  heroDamageMitigation.textContent = `${damageMitigation * 100}%`;
 
   // DEXTERITY ------------------------------------------------------
   // Rank
@@ -586,6 +589,9 @@ function renderHeroStatsModal() {
   // Item Find Chance
   const heroFindItemChance = document.getElementById("heroFindItemChance");
   heroFindItemChance.textContent = `${itemFindChance}%`;
+  // Cooldown Reduction
+  const heroCooldownReduction = document.getElementById("heroCooldownReduction");
+  heroCooldownReduction.textContent = `${cooldownReduction * 100}%`;
 
   // SPECIAL ----------------------------------------------------
   const heroSpecial = document.getElementById("heroSpecialName");
@@ -628,16 +634,16 @@ function renderHeroStatsModal() {
   // const rankFourPassiveBoon = document.getElementById("rankFourPassive");
 
   if (strengthBoonRank === 4) {
-    rankFourStrengthBoon.textContent = `+${totalStrength} Attack Damage`;
+    rankFourStrengthBoon.textContent = `Regain HP after clearing a room`;
   } else if (dexterityBoonRank === 4) {
-    rankFourDexterityBoon.textContent = `Reduce Damage Taken by ${totalDexterity}`;
+    rankFourDexterityBoon.textContent = `Chance to evade attacks`;
   } else if (faithBoonRank === 4) {
-    rankFourFaithBoon.textContent = `Candles Burn Longer / Wisps Guide Faster.`;
+    rankFourFaithBoon.textContent = `Candles burn twice as long and  Wisps guide you faster`;
   } else if (specialAbilityBoonRank === 4) {
     if (heroChoice === "PALADIN") {
       rankFourSpecialBoon.textContent = `Deals ${totalAttack * 2.5} Damage`;
     } else if (heroChoice === "ROGUE") {
-      rankFourSpecialBoon.textContent = `Attacks Deal +${totalDexterity} Damage`;
+      rankFourSpecialBoon.textContent = `Attacks Deal ${totalDexterity} Extra Damage.`;
     } else if (heroChoice === "PRIESTESS") {
       rankFourSpecialBoon.textContent = `Removes 1 Condition`;
     }

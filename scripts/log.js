@@ -599,13 +599,13 @@ function writeToLogHero(logType, narrate, dataOne, dataTwo) {
 
       if (dataOne === "STRENGTH") {
         if (strengthBoonRank === 4) {
-          newEntry.textContent = `BOON: You've chosen the Boon of Strength. Your base Strength has increased to ${baseStrength}. Additionally, your Attack is increased by an amount equal to your Strength.`;
+          newEntry.textContent = `BOON: You've chosen the Boon of Strength. Your base Strength has increased to ${baseStrength}. Additionally, you now regain HP after each room cleared. The greater your Strength the more HP you regain.`;
         } else {
           newEntry.textContent = `BOON: You've chosen the Boon of Strength. Your base Strength has increased to ${baseStrength}.`;
         }
       } else if (dataOne === "DEXTERITY") {
         if (dexterityBoonRank === 4) {
-          newEntry.textContent = `BOON: You've chosen the Boon of Dexterity. Your base Dexterity has increased to ${baseDexterity}. Additionally, damage received from enemies is reduced by an amount equal to your Dexterity.`;
+          newEntry.textContent = `BOON: You've chosen the Boon of Dexterity. Your base Dexterity has increased to ${baseDexterity}. Additionally, you know have a chance to evade attacks made against you. The greater your Dexterity the more likely you are to evade.`;
         } else {
           newEntry.textContent = `BOON: You've chosen the Boon of Dexterity. Your base Dexterity has increased to ${baseDexterity}.`;
         }

@@ -192,6 +192,14 @@ function calculateCritDamageModifier() {
   return critDamageModifier;
 }
 
+// Damage Mitigation
+let damageMitigation;
+
+function calculateDamageMitigation() {
+  damageMitigation = (0.03 * totalStrength);
+  return damageMitigation;
+}
+
 // ===============================
 //           DEXTERITY
 // ===============================
@@ -251,6 +259,16 @@ function calculateExperienceModifier() {
   return experienceModifier;
 }
 
+// Special Cooldown Reduction
+let cooldownReduction;
+
+function calculateCooldownReduction() {
+  cooldownReduction = (0.05 * totalFaith);
+
+  return cooldownReduction;
+}
+
+
 // ===============================
 //            ATTACK
 // ===============================
@@ -297,6 +315,7 @@ function updateTotalStats() {
 
   playerMaxHealth = calculatePlayerMaxHealth();
   critDamageModifier = calculateCritDamageModifier();
+  damageMitigation = calculateDamageMitigation();
 
   // Dexterity
   // Check for rogue passive ability
@@ -322,13 +341,14 @@ function updateTotalStats() {
 
   findItemChance = calculateItemFindChance();
   experienceModifier = calculateExperienceModifier();
+  cooldownReduction = calculateCooldownReduction();
 
   // Attack
   totalAttack += baseAttack;
 
-  if (strengthBoonRank === 4) {
-    totalAttack += totalStrength;
-  }
+  // if (strengthBoonRank === 4) {
+  //   totalAttack += totalStrength;
+  // }
 
   updatePlayerTrackers();
 }
