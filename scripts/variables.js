@@ -196,7 +196,7 @@ function calculateCritDamageModifier() {
 let damageMitigation;
 
 function calculateDamageMitigation() {
-  damageMitigation = (0.03 * totalStrength);
+  damageMitigation = (0.05 * totalStrength);
   return damageMitigation;
 }
 

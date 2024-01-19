@@ -1403,13 +1403,14 @@ progress[value]::-moz-progress-bar {
 .consumables-box {
   text-align: left;
   height: 50%;
+  z-index: 1;
 }
 
 .consumables div, 
 .magic-items div {
   aspect-ratio: 1;
   flex-direction: column-reverse;
-  margin: 10px;
+  margin: 1vh;
   box-sizing: border-box; 
   display: flex;
   justify-content: center;

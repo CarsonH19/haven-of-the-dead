@@ -655,14 +655,6 @@ function isGameOver(ending) {
       }, 6000);
 
       const playerDisplay = document.querySelector(".player-display");
-      eventModal.style.display = "none";
-      tradeModal.style.display = "none";
-      levelUpModal.style.display = "none";
-      heroStatsModal.style.display = "none";
-      logModal.style.display = "none";
-      roomSummaryButton.style.display = "none";
-      continueButtonModal.style.display = "none";
-      monsterContainer.style.display = "none";
       playerDisplay.style.display = "none";
     }
   }
@@ -670,6 +662,17 @@ function isGameOver(ending) {
   function openGameOverModal() {
     fadeInAnimation(gameOverModal);
   }
+}
+
+function closeModals() {
+  eventModal.style.display = "none";
+  tradeModal.style.display = "none";
+  levelUpModal.style.display = "none";
+  heroStatsModal.style.display = "none";
+  logModal.style.display = "none";
+  roomSummaryModal.style.display = "none";
+  continueButtonModal.style.display = "none";
+  monsterContainer.style.display = "none";
 }
 
 // ===============================
@@ -1037,7 +1040,10 @@ function newRoomAnimation() {
   fade.style.animation = "none";
   void fade.offsetWidth;
   fade.style.animation = "room-transition 4s";
-  clearNarrative();
+  setTimeout(() => {
+    clearNarrative();
+    closeModals();
+  }, 2000);
 }
 
 // ===============================
@@ -1124,16 +1130,6 @@ function renderRoomSummaryModal() {
       divider.classList.add("character-divider");
       headerBox.appendChild(divider);
 
-      // Description
-      // descriptionSummaryContainer = document.createElement("div");
-      // descriptionHeader = document.createElement("h4");
-      // descriptionHeader.textContent = `${roomSummaryInformation.roomName}`;
-      // descriptionSummaryContainer.appendChild(descriptionHeader);
-      // descriptionText = document.createElement("p");
-      // descriptionText.textContent = `${roomSummaryInformation.description}`;
-      // descriptionSummaryContainer.appendChild(descriptionText);
-      // roomSummaryInfo.appendChild(descriptionSummaryContainer);
-
       // Events
       if (roomInfo.events) {
         eventSummaryContainer = document.createElement("div");
@@ -1197,6 +1193,9 @@ function renderRoomSummaryModal() {
           itemsList.appendChild(addItemToList);
         }
       }
+
+      clearNarrative();
+      soundEffectHandler(hitReverbDark4);
     }, 2000);
 
     document.querySelectorAll(".itemTooltip").forEach(function (element) {
@@ -1228,7 +1227,6 @@ function renderRoomSummaryModal() {
   }
 
   updatePlayerTrackers();
-  soundEffectHandler(hitReverbDark4);
   fadeOutAnimation(controlsContainer);
 }
 

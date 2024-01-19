@@ -1079,27 +1079,27 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       if (event === SPIKE_WALLS) {
         if (dataOne === "Strength") {
           if (narration === 1) {
-            newEntry.textContent = `Despite your best efforts, the spike walls continue to close in, and you are unable to summon the strength needed to push them back. The trap inflicts its painful toll upon you. You take ${dataTwo} damage.`;
+            newEntry.textContent = `Despite your best efforts, the spike walls continue to close in, and you are unable to summon the strength needed to push them back. The trap inflicts its painful toll upon you.`;
           } else if (narration === 2) {
-            newEntry.textContent = `The walls of spikes continue their inexorable advance, and despite your determination, you are unable to halt their progress. The trap inflicts a painful, pinching injury. You take ${dataTwo} damage.`;
+            newEntry.textContent = `The walls of spikes continue their inexorable advance, and despite your determination, you are unable to halt their progress. The trap inflicts a painful, pinching injury.`;
           } else if (narration === 3) {
-            newEntry.textContent = `The spikes close in, finding their mark, piercing through your defenses. Pain flares through your body." You take ${dataTwo} damage.`;
+            newEntry.textContent = `The spikes close in, finding their mark, piercing through your defenses. Pain flares through your body."`;
           } else if (narration === 4) {
-            newEntry.textContent = `Despite your efforts, the spikes find their mark, leaving you wounded and breathless." You take ${dataTwo} damage.`;
+            newEntry.textContent = `Despite your efforts, the spikes find their mark, leaving you wounded and breathless."`;
           } else {
-            newEntry.textContent = `The relentless spikes break through, leaving you with deep, painful wounds." You take ${dataTwo} damage`;
+            newEntry.textContent = `The relentless spikes break through, leaving you with deep, painful wounds."`;
           }
         } else if (dataOne === "Dexterity") {
           if (narration === 1) {
-            newEntry.textContent = `Despite your agile attempts, the spikes find their mark, leaving you wounded and breathless.” You take ${dataTwo} damage.`;
+            newEntry.textContent = `Despite your agile attempts, the spikes find their mark, leaving you wounded and breathless.”`;
           } else if (narration === 2) {
-            newEntry.textContent = `You navigate the narrowing space with impressive agility, but the spikes outmatch even your lightning-fast reflexes. They strike, leaving you wounded. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You navigate the narrowing space with impressive agility, but the spikes outmatch even your lightning-fast reflexes. They strike, leaving you wounded.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You come agonizingly close to evading the spikes, but they catch you at the last moment, leaving you with a series of painful scratches. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You come agonizingly close to evading the spikes, but they catch you at the last moment, leaving you with a series of painful scratches.`;
           } else if (narration === 4) {
-            newEntry.textContent = `You execute a series of deft maneuvers, but the spikes catch you on the edge of your escape. They graze you, leaving shallow wounds in their wake. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You execute a series of deft maneuvers, but the spikes catch you on the edge of your escape. They graze you, leaving shallow wounds in their wake. You take ${dataTwo} `;
           } else {
-            newEntry.textContent = `Your movements are precise and calculated, but the spikes prove too swift. They strike, leaving you with painful wounds. You take ${dataTwo} damage`;
+            newEntry.textContent = `Your movements are precise and calculated, but the spikes prove too swift. They strike, leaving you with painful wounds. `;
           }
         }
       } else if (event === SPIDER_WEB) {
@@ -1131,131 +1131,131 @@ function writeToLogEvent(logType, narrate, dataOne, dataTwo) {
       } else if (event === SWARM_OF_VERMIN) {
         if (dataOne === "Strength") {
           if (narration === 1) {
-            newEntry.textContent = `You summon all your strength to fight off the relentless tide of rats, but they overwhelm you, leaving you battered and bitten. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You summon all your strength to fight off the relentless tide of rats, but they overwhelm you, leaving you battered and bitten. \.`;
           } else if (narration === 2) {
-            newEntry.textContent = `You put up a valiant effort, using your strength to fend off the onslaught of rats. However, their sheer numbers prove too much. They manage to sink their teeth into you, causing ${dataTwo} damage.`;
+            newEntry.textContent = `You put up a valiant effort, using your strength to fend off the onslaught of rats. However, their sheer numbers prove too much. They manage to sink their teeth into you.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You push back against the sea of rats with all your might, but they manage to break through your defenses. Their sharp bites inflict ${dataTwo} damage.`;
+            newEntry.textContent = `You push back against the sea of rats with all your might, but they manage to break through your defenses.`;
           } else if (narration === 4) {
-            newEntry.textContent = `You try to use your strength to create some breathing room, but the rats are unrelenting. They swarm over you, leaving you with painful bites. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You try to use your strength to create some breathing room, but the rats are unrelenting. They swarm over you, leaving you with painful bites.`;
           } else {
-            newEntry.textContent = `Despite your best efforts, the rats swarm over you, sinking their teeth in. You take ${dataTwo} damage.`;
+            newEntry.textContent = `Despite your best efforts, the rats swarm over you, sinking their teeth in.`;
           }
         } else if (dataOne === "Faith") {
           if (narration === 1) {
-            newEntry.textContent = `You call upon your faith for protection, but the rats manage to find their way through. They bite and scratch, causing ${dataTwo} damage.`;
+            newEntry.textContent = `You call upon your faith for protection, but the rats manage to find their way through. They bite and scratch you.`;
           } else if (narration === 2) {
-            newEntry.textContent = `With unwavering faith, you try to repel the rats, but they prove too numerous. They manage to get to you, causing ${dataTwo} damage.`;
+            newEntry.textContent = `With unwavering faith, you try to repel the rats, but they prove too numerous. They manage to get to you.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You pray for divine intervention, but the rats persist. They bite and scratch, inflicting ${dataTwo} damage.`;
+            newEntry.textContent = `You pray for divine intervention, but the rats persist. They bite and scratch you.`;
           } else if (narration === 4) {
-            newEntry.textContent = `You trust in your faith to protect you, but the rats find their way through. Their bites and scratches leave you with ${dataTwo} damage.`;
+            newEntry.textContent = `You trust in your faith to protect you, but the rats find their way through. They bite and scratch you.`;
           } else {
-            newEntry.textContent = `Despite your faith, the rats manage to get to you. Their bites and scratches result in ${dataTwo} damage.`;
+            newEntry.textContent = `Despite your faith, the rats manage to get to you. They bite and scratch you.`;
           }
         }
       } else if (event === SKELETAL_HANDS) {
         if (dataOne === "Strength") {
           if (narration === 1) {
-            newEntry.textContent = `You summon all your strength and manage to break free from the skeletal hands' grasp, but not before they tighten their grip. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You summon all your strength and manage to break free from the skeletal hands' grasp, but not before they tighten their grip.`;
           } else if (narration === 2) {
-            newEntry.textContent = `With a powerful surge of strength, you force the skeletal hands away, but not without suffering some damage. You take ${dataTwo} damage.`;
+            newEntry.textContent = `With a powerful surge of strength, you force the skeletal hands away, but not without suffering some damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You strain against the skeletal hands, eventually breaking free, but not without paying the price. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You strain against the skeletal hands, eventually breaking free, but not without paying the price.`;
           } else if (narration === 4) {
-            newEntry.textContent = `Your muscles bulge as you wrench yourself free from the skeletal hands' grasp, but not without a cost. You take ${dataTwo} damage.`;
+            newEntry.textContent = `Your muscles bulge as you wrench yourself free from the skeletal hands' grasp, but not without a cost.`;
           } else {
-            newEntry.textContent = `With a mighty effort, you free yourself from the skeletal hands, though not without suffering some damage. You take ${dataTwo} damage.`;
+            newEntry.textContent = `With a mighty effort, you free yourself from the skeletal hands, though not without suffering some damage.`;
           }
         } else if (dataOne === "Dexterity") {
           if (narration === 1) {
-            newEntry.textContent = `You twist and contort your body with remarkable dexterity, slipping free from the skeletal hands' grasp. However, they manage to graze you. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You twist and contort your body with remarkable dexterity, slipping free from the skeletal hands' grasp. However, they manage to graze you.`;
           } else if (narration === 2) {
-            newEntry.textContent = `With astonishing agility, you wriggle out of the skeletal hands' clutches, though not without sustaining some damage. You take ${dataTwo} damage.`;
+            newEntry.textContent = `With astonishing agility, you wriggle out of the skeletal hands' clutches, though not without sustaining some damage.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You move with incredible precision, evading the skeletal hands' grasp. They scrape against you, causing damage. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You move with incredible precision, evading the skeletal hands' grasp. They scrape against you, causing damage.`;
           } else if (narration === 4) {
-            newEntry.textContent = `Your swift movements allow you to slip free from the skeletal hands' clutches, but not without a slight cost. You take ${dataTwo} damage.`;
+            newEntry.textContent = `Your swift movements allow you to slip free from the skeletal hands' clutches, but not without a slight cost.`;
           } else {
-            newEntry.textContent = `With a display of remarkable dexterity, you manage to free yourself from the skeletal hands, though not without suffering some damage. You take ${dataTwo} damage.`;
+            newEntry.textContent = `With a display of remarkable dexterity, you manage to free yourself from the skeletal hands, though not without suffering some damage.`;
           }
         }
       } else if (event === SPIKE_PITFALL) {
         if (dataOne === "Dexterity") {
           if (narration === 1) {
-            newEntry.textContent = `You react swiftly, attempting to evade the spikes below. However, they still manage to graze you, leaving you with painful wounds. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You react swiftly, attempting to evade the spikes below. However, they still manage to graze you, leaving you with painful wounds.`;
           } else if (narration === 2) {
-            newEntry.textContent = `You muster your agility and make a desperate attempt to avoid the spikes. Despite your efforts, you still suffer wounds. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You muster your agility and make a desperate attempt to avoid the spikes. Despite your efforts, you still suffer wounds.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You execute a series of nimble movements, narrowly escaping the worst of the spikes' wrath. Unfortunately, they still find their mark. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You execute a series of nimble movements, narrowly escaping the worst of the spikes' wrath. Unfortunately, they still find their mark.`;
           } else if (narration === 4) {
-            newEntry.textContent = `With impressive dexterity, you manage to evade some of the spikes. However, a few still catch you, leaving you wounded. You take ${dataTwo} damage.`;
+            newEntry.textContent = `With impressive dexterity, you manage to evade some of the spikes. However, a few still catch you, leaving you wounded.`;
           } else {
-            newEntry.textContent = `Your agile instincts kick in, allowing you to avoid the worst of the spikes. Nonetheless, you're not entirely unscathed. You take ${dataTwo} damage.`;
+            newEntry.textContent = `Your agile instincts kick in, allowing you to avoid the worst of the spikes. Nonetheless, you're not entirely unscathed.`;
           }
         } else if (dataOne === "Faith") {
           if (narration === 1) {
-            newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you to safety. While you manage to avoid the worst of the spikes, some still find their mark. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you to safety. While you manage to avoid the worst of the spikes, some still find their mark.`;
           } else if (narration === 2) {
-            newEntry.textContent = `With unwavering faith, you believe you can escape unscathed. However, the spikes still leave their mark. You take ${dataTwo} damage.`;
+            newEntry.textContent = `With unwavering faith, you believe you can escape unscathed. However, the spikes still leave their mark.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You place your trust in your faith and make a leap of faith, hoping for the best. While you avoid the worst of the spikes, you're not entirely unharmed. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You place your trust in your faith and make a leap of faith, hoping for the best. While you avoid the worst of the spikes, you're not entirely unharmed.`;
           } else if (narration === 4) {
-            newEntry.textContent = `With a prayer on your lips, you take a leap of faith, believing in a miraculous escape. Some spikes still graze you, leaving you wounded. You take ${dataTwo} damage.`;
+            newEntry.textContent = `With a prayer on your lips, you take a leap of faith, believing in a miraculous escape. Some spikes still graze you, leaving you wounded.`;
           } else {
-            newEntry.textContent = `Your unshakable faith carries you through, allowing you to avoid the worst of the spikes. However, you're not entirely unscathed. You take ${dataTwo} damage.`;
+            newEntry.textContent = `Your unshakable faith carries you through, allowing you to avoid the worst of the spikes. However, you're not entirely unscathed.`;
           }
         }
       } else if (event === PENDULUM_BLADES) {
         if (dataOne === "Dexterity") {
           if (narration === 1) {
-            newEntry.textContent = `You gracefully maneuver through the swinging blades, but one catches you off guard, leaving you with a deep gash. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You gracefully maneuver through the swinging blades, but one catches you off guard, leaving you with a deep gash.`;
           } else if (narration === 2) {
-            newEntry.textContent = `Your agile movements serve you well, but a misstep leaves you vulnerable to a glancing blow. You take ${dataTwo} damage.`;
+            newEntry.textContent = `Your agile movements serve you well, but a misstep leaves you vulnerable to a glancing blow.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You expertly time your movements, but a sudden change in the blades' pattern catches you off balance. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You expertly time your movements, but a sudden change in the blades' pattern catches you off balance.`;
           } else if (narration === 4) {
-            newEntry.textContent = `Your dexterity allows you to navigate through the swinging blades with finesse, but a momentary lapse in focus results in a shallow cut. You take ${dataTwo} damage.`;
+            newEntry.textContent = `Your dexterity allows you to navigate through the swinging blades with finesse, but a momentary lapse in focus results in a shallow cut.`;
           } else {
-            newEntry.textContent = `You skillfully evade most of the swinging blades, but one scrapes against your side, leaving you with a painful wound. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You skillfully evade most of the swinging blades, but one scrapes against your side, leaving you with a painful wound.`;
           }
         } else if (dataOne === "Faith") {
           if (narration === 1) {
-            newEntry.textContent = `With unwavering faith, you trust in a higher power to guide you through the perilous blades. However, a moment of doubt leads to a glancing blow. You take ${dataTwo} damage.`;
+            newEntry.textContent = `With unwavering faith, you trust in a higher power to guide you through the perilous blades. However, a moment of doubt leads to a glancing blow.`;
           } else if (narration === 2) {
-            newEntry.textContent = `Your faith shields you from the worst of the swinging blades, but a brief lapse in concentration leaves you vulnerable. You take ${dataTwo} damage.`;
+            newEntry.textContent = `Your faith shields you from the worst of the swinging blades, but a brief lapse in concentration leaves you vulnerable.`;
           } else if (narration === 3) {
-            newEntry.textContent = `You put your trust in divine protection, but a sudden change in the blades' pattern catches you off guard. You take ${dataTwo} damage.`;
+            newEntry.textContent = `You put your trust in divine protection, but a sudden change in the blades' pattern catches you off guard.`;
           } else if (narration === 4) {
-            newEntry.textContent = `Your unwavering faith guides you through the trap, but a momentary lapse in focus results in a shallow cut. You take ${dataTwo} damage.`;
+            newEntry.textContent = `Your unwavering faith guides you through the trap, but a momentary lapse in focus results in a shallow cut.`;
           } else {
-            newEntry.textContent = `With steadfast faith, you navigate through the swinging blades, but one scrapes against your side, leaving you with a painful wound. You take ${dataTwo} damage.`;
+            newEntry.textContent = `With steadfast faith, you navigate through the swinging blades, but one scrapes against your side, leaving you with a painful wound.`;
           }
         }
       } else if (event === GAS_CHAMBER) {
         if (dataOne === "Strength") {
           if (narration === 0) {
-            newEntry.textContent = `You muster all your strength and push against the heavy door, but it only budges slightly. The poison smoke seeps in, making you cough and choke. You manage to escape, but you take ${dataTwo} damage and are poisoned.`;
+            newEntry.textContent = `You muster all your strength and push against the heavy door, but it only budges slightly. The poison smoke seeps in, making you cough and choke. You manage to escape, but you are poisoned.`;
           } else if (narration === 1) {
-            newEntry.textContent = `You strain every muscle, but the door remains stubbornly shut. The toxic fumes fill the chamber, leaving you gasping for air. With one final burst of effort, you break free, but you take ${dataTwo} damage and are poisoned.`;
+            newEntry.textContent = `You strain every muscle, but the door remains stubbornly shut. The toxic fumes fill the chamber, leaving you gasping for air. With one final burst of effort, you break free, but you are poisoned.`;
           } else if (narration === 2) {
-            newEntry.textContent = `You put all your might into forcing the door open, but it barely moves. The poison smoke clouds your vision, causing you to stumble. You eventually break free, but you take ${dataTwo} damage and are poisoned.`;
+            newEntry.textContent = `You put all your might into forcing the door open, but it barely moves. The poison smoke clouds your vision, causing you to stumble. You eventually break free, but you are are poisoned.`;
           } else if (narration === 3) {
-            newEntry.textContent = `With a tremendous effort, you manage to make some progress against the door. The room fills with noxious fumes, leaving you disoriented. Finally, you burst through, but you take ${dataTwo} damage and are poisoned.`;
+            newEntry.textContent = `With a tremendous effort, you manage to make some progress against the door. The room fills with noxious fumes, leaving you disoriented. Finally, you burst through, but you are poisoned.`;
           } else {
-            newEntry.textContent = `You throw your weight against the door, but it holds fast. The poisonous gas envelops you, making it hard to breathe. With one last, desperate push, you break free, but you take ${dataTwo} damage and are poisoned.`;
+            newEntry.textContent = `You throw your weight against the door, but it holds fast. The poisonous gas envelops you, making it hard to breathe. With one last, desperate push, you break free, but you are poisoned.`;
           }
         } else if (dataOne === "Faith") {
           if (narration === 0) {
-            newEntry.textContent = `You close your eyes, focus your faith, and pray for strength. With a surge of determination, you push against the door, but it only gives way slightly. The poison smoke makes you dizzy, and you escape, but not without taking ${dataTwo} damage and being poisoned.`;
+            newEntry.textContent = `You close your eyes, focus your faith, and pray for strength. With a surge of determination, you push against the door, but it only gives way slightly. The poison smoke makes you dizzy, and you escape, but you are poisoned.`;
           } else if (narration === 1) {
-            newEntry.textContent = `You channel your faith and call upon divine strength. The door resists, but you feel a glimmer of progress. The toxic fumes cloud your senses, and with a final burst of resolve, you break free, though not without taking ${dataTwo} damage and being poisoned.`;
+            newEntry.textContent = `You channel your faith and call upon divine strength. The door resists, but you feel a glimmer of progress. The toxic fumes cloud your senses, and with a final burst of resolve, you break free, but you are poisoned.`;
           } else if (narration === 2) {
-            newEntry.textContent = `You close your eyes, place your trust in your faith, and push with all your might. The door moves only slightly, but you feel a surge of divine energy. The poison smoke disorients you, but you manage to escape, albeit with ${dataTwo} damage and being poisoned.`;
+            newEntry.textContent = `You close your eyes, place your trust in your faith, and push with all your might. The door moves only slightly, but you feel a surge of divine energy. The poison smoke disorients you, you manage to escape, but you are poisoned.`;
           } else if (narration === 3) {
-            newEntry.textContent = `With unwavering faith, you summon inner strength and push against the door. It gives way just a bit, but you feel a divine presence guiding you. The room fills with poisonous fumes, leaving you struggling. Eventually, you break free, though you take ${dataTwo} damage and are poisoned.`;
+            newEntry.textContent = `With unwavering faith, you summon inner strength and push against the door. It gives way just a bit, but you feel a divine presence guiding you. The room fills with poisonous fumes, leaving you struggling. Eventually, you break free, though you are poisoned.`;
           } else {
-            newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you. The door resists, but you feel a divine force supporting you. The noxious fumes make it hard to think, but with a final surge of faith, you break free, though not without taking ${dataTwo} damage being poisoned.`;
+            newEntry.textContent = `You call upon your faith, trusting in a higher power to guide you. The door resists, but you feel a divine force supporting you. The noxious fumes make it hard to think, but with a final surge of faith, you break free, though you are poisoned.`;
           }
         }
       } else if (event === IVANS_AMBUSH) {
@@ -1821,7 +1821,7 @@ function writeToLogOther(logType, narrate, dataOne, dataTwo, dataThree) {
   switch (logType) {
     case LOG_OTHER:
       if (dataOne === "WISP") {
-        newEntry.textContent = `You are already following a wisp.`;
+        narration = `You are already following a wisp.`;
       } else if (dataOne === "DISTRACTED") {
         narration = `The ${currentRoom.contents.monsters[0].name} takes the opportunity to attack you while you are distracted.`;
       } else if (dataOne === AEGIS_OF_THE_FALLEN) {

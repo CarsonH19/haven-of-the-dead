@@ -668,17 +668,11 @@ const COFFIN_EVENT = {
     if (randomNumber >= 7) {
       COFFIN_EVENT.summary =
         "You decided to open the coffin. Thankfully nothing dangerous was waiting inside.";
-      getItem("COFFIN");
-      getItem("WISP");
-      setTimeout(soundEffectHandler(doorSecretPassage1), 1500);
       setTimeout(renderRoomSummaryModal, 5000);
     } else {
       COFFIN_EVENT.summary =
         "You decided to open the coffin, disturbing the eternal rest of a Draugr within.";
       currentRoom.contents.monsters.push(DRAUGR);
-      getItem("COFFIN");
-      getItem("WISP");
-      soundEffectHandler(doorSecretPassage1);
       setTimeout(() => {
         playMusic(edgeOfFear);
         startBattle();
@@ -688,6 +682,9 @@ const COFFIN_EVENT = {
       writeToLogEvent(LOG_MISC_OPTION_ONE, "YES", "DRAUGR");
     }
 
+    soundEffectHandler(doorSecretPassage1);
+    getItem("COFFIN");
+    getItem("WISP");
     setRoomSummary();
   },
   functionTwo: () => {

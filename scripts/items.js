@@ -747,11 +747,15 @@ const BONE_AMALGAM = {
   rarity: "Epic",
   effect: `While attuned to this item, you gain temporary HP after defeating a creature with bones. You can accumulate up to 30 temporary HP.`,
   tracker: 0,
+  statusDuration: null,
   function: () => {
     BONE_AMALGAM_STATUS_EFFECT.function();
+    BONE_AMALGAM_STATUS_EFFECT.statusDuration = "ACTIVE";
   },
   unequip: () => {
     BONE_AMALGAM_STATUS_EFFECT.duration = null;
+    BONE_AMALGAM_STATUS_EFFECT.statusDuration = null;
+
   },
 };
 
@@ -1332,8 +1336,9 @@ const BLACKHEART_BREW = {
   type: "CONSUMABLE",
   rarity: "Rare",
   detail: "DRINK",
-  effect: null,
-  status: "You are drunk. Strength increased by 2 & Dexterity decreased by 1.",
+  effect:
+    "The favored drink of scoundrels. Can be used to increase Strength by 2 and reduce Dexterity by 1.",
+  status: "Strength increased by 2 and Dexterity reduced by 1.",
   duration: null,
   statusDuration: null,
   stats: {
@@ -1707,7 +1712,7 @@ const UNHOLY_WISP = {
   image: "styles/images/items/unholy-wisp.jpg",
   soundEffect: ghostBreathWithReverb,
   type: "CONSUMABLE",
-  rarity: "Rare",
+  rarity: "Epic",
   detail: "WISP",
   tracker: null,
   effect:
@@ -2427,13 +2432,13 @@ function renderTrade() {
 
         if (items[i].rarity === "Epic") {
           tooltipTextRarity.classList.add("epic-item");
-          itemValue = currentRoom.roomName === "Curator's Curio" ? 100 : 50;
+          itemValue = 50;
         } else if (items[i].rarity === "Rare") {
           tooltipTextRarity.classList.add("rare-item");
-          itemValue = currentRoom.roomName === "Curator's Curio" ? 50 : 25;
+          itemValue = 25;
         } else {
           tooltipTextRarity.classList.add("common-item");
-          itemValue = currentRoom.roomName === "Curator's Curio" ? 20 : 10;
+          itemValue = 10;
         }
 
         if (items[i].name === "Health Potion") {
@@ -2461,6 +2466,20 @@ function renderTrade() {
         itemBox.appendChild(itemButton);
 
         if (items === traderItems) {
+          if (items[i].rarity === "Epic") {
+            tooltipTextRarity.classList.add("epic-item");
+            itemValue = currentRoom.roomName === "Curator's Curio" ? 100 : 50;
+          } else if (items[i].rarity === "Rare") {
+            tooltipTextRarity.classList.add("rare-item");
+            itemValue = currentRoom.roomName === "Curator's Curio" ? 50 : 25;
+          } else {
+            tooltipTextRarity.classList.add("common-item");
+            itemValue = currentRoom.roomName === "Curator's Curio" ? 20 : 10;
+          }
+
+          if (items[i].name === "Health Potion") {
+            itemValue = 10;
+          }
           container.appendChild(itemBox);
         }
 
