@@ -132,13 +132,13 @@ const CRYPT_FIEND = {
   name: "Crypt Fiend",
   image: "styles/images/monsters/crypt-demon.jpg",
   type: "DEMON",
-  skulls: 9,
+  skulls: 8,
   soundEffects: {
     spawn: monsterSnarl4,
     attack: magicAttackSounds,
     death: monsterSnarl3,
     ability: magicAttackSounds,
-  },
+  }, 
   function: () => {
     BURNED.function(5);
   },
@@ -277,7 +277,7 @@ const DEATH_KNIGHT = {
   name: "Death Knight",
   image: "styles/images/monsters/death-knight.jpg",
   type: "UNDEAD",
-  skulls: 9,
+  skulls: 8,
   soundEffects: {
     spawn: boneCrunchCrack1,
     attack: heavyAttackSounds,
@@ -542,7 +542,7 @@ const WRAITH = {
   name: "Wraith",
   image: "styles/images/monsters/wraith.jpg",
   type: "UNDEAD",
-  skulls: 9,
+  skulls: 8,
   soundEffects: {
     spawn: ghostAppearance1,
     attack: getEvilSpiritAudio,
