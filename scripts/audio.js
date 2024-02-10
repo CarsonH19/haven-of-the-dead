@@ -617,10 +617,6 @@ const magicWandCast14 = loadAudio(
   "audio/sound-effects/magic/Magic Wand Cast 14.mp3",
   "magicWandCast14"
 );
-const magicalSpell = loadAudio(
-  "audio/sound-effects/magic/Magical Spell.mp3",
-  "magicalSpell"
-);
 
 function magicAttackSounds() {
   let sounds = [
